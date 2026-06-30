@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-lang="en"> 
+<html lang="zh-CN" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +65,18 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .nav-item.active .nav-dot{background:var(--vermillion);}
 .nav-placeholder{padding:6px 16px;font-size:12px;color:var(--ink-faint);opacity:.5;}
 .nav-group-label{padding:4px 16px 2px;font-size:10px;font-weight:600;color:var(--ink-faint);letter-spacing:.06em;}
-.sidebar-footer{margin-top:auto;padding:12px 16px;border-top:1px solid var(--rule);font-size:11px;color:var(--ink-faint);line-height:1.5;}
+.sidebar-pricing{padding:12px 16px 8px;}
+.sp-rule{height:1px;background:var(--rule);margin-bottom:10px;}
+.sp-title{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;}
+.sp-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.sp-price{font-size:15px;font-weight:800;color:var(--vermillion);min-width:36px;}
+.sp-price-jade{color:var(--jade);}
+.sp-desc{font-size:11px;color:var(--ink-muted);line-height:1.4;}
+.sp-btn{display:block;width:100%;margin-top:10px;padding:8px;background:var(--vermillion);color:#fff;border:none;border-radius:var(--radius);font-size:11px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center;}
+.sp-btn-jade{background:var(--jade);margin-top:4px;}
+.sp-signin{display:block;width:100%;margin-top:10px;padding:8px;background:var(--paper-warm);color:var(--vermillion);border:1px solid var(--vermillion);border-radius:var(--radius);font-size:11px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center;}
+
+.sidebar-footer{margin-top:auto;padding:8px 16px;border-top:1px solid var(--rule);font-size:11px;color:var(--ink-faint);line-height:1.5;}
 
 /* Main */
 .main{flex:1;overflow-y:auto;display:flex;flex-direction:column;}
@@ -298,6 +309,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .lock-msg span{display:block;font-size:13px;font-weight:400;color:var(--ink-muted);margin-top:6px;}
 .lock-btn{padding:12px 24px;background:var(--vermillion);color:#fff;border:none;border-radius:var(--radius);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;width:100%;max-width:280px;}
 .disease-page{position:relative;}
+.disease-page{position:relative;}
 
 /* === Disclaimer bar (sticky, dismissible) === */
 .disclaimer-bar{position:fixed;bottom:0;left:0;right:0;z-index:250;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.5;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 -2px 10px rgba(0,0,0,0.15);}
@@ -457,6 +469,19 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="nav-section">
     <div class="nav-section-label"><span class="en">Special Conditions</span><span class="zh">特殊病症</span></div>
     <div class="nav-item" onclick="showPage('gout',this)"><span class="nav-dot"></span><span class="en">Gout / Bi Syndrome</span><span class="zh">痛风·痹证</span></div>
+  </div>
+  <div class="sidebar-pricing" id="sidebar-pricing">
+    <div class="sp-rule"></div>
+    <div class="sp-title"><span class="en">Access Modules</span><span class="zh">解锁模块</span></div>
+    <div class="sp-row">
+      <div class="sp-price">$29</div>
+      <div class="sp-desc"><span class="en">Single module</span><span class="zh">单个模块</span></div>
+    </div>
+    <div class="sp-row sp-row-full">
+      <div class="sp-price sp-price-jade">$149</div>
+      <div class="sp-desc"><span class="en">All 13 modules — best value</span><span class="zh">全套13模块 — 最划算</span></div>
+    </div>
+    <div id="sidebar-pricing-cta"></div>
   </div>
   <div class="sidebar-footer">Pain CRS v1.0<br><span class="en">16 modules</span><span class="zh">16模块</span></div>
 </nav>
@@ -3606,51 +3631,67 @@ function canAccessModule(moduleId){
   return FREE_MODULES.has(moduleId) || userPurchases.has(moduleId);
 }
 
-// ---- Lock overlay rendering ----
+// ---- Single global lock overlay ----
+function getOrCreateGlobalLock(){
+  let lock = document.getElementById('global-lock');
+  if(!lock){
+    lock = document.createElement('div');
+    lock.id = 'global-lock';
+    lock.className = 'module-lock';
+    document.body.appendChild(lock);
+  }
+  return lock;
+}
+
 function applyLockOverlays(){
-  document.querySelectorAll('.disease-page[id^="page-"]').forEach(page => {
-    const moduleId = page.id.replace('page-','');
-    if(moduleId === 'home' || moduleId === 'pain-overview') return;
-    let lock = page.querySelector('.module-lock');
-    if(!lock){
-      lock = document.createElement('div');
-      lock.className = 'module-lock';
-      lock.id = 'lock-'+moduleId;
-      page.appendChild(lock);
+  // Find currently active page
+  const activePage = document.querySelector('.disease-page.active');
+  if(!activePage) return;
+  const moduleId = activePage.id.replace('page-','');
+  updateLockForModule(moduleId);
+}
+
+function updateLockForModule(moduleId){
+  const lock = getOrCreateGlobalLock();
+  if(moduleId === 'home' || moduleId === 'pain-overview'){
+    lock.classList.remove('visible');
+    return;
+  }
+  const accessible = canAccessModule(moduleId);
+  if(!accessible){
+    const page = document.getElementById('page-'+moduleId);
+    const nameEn = page?.querySelector('.page-title .en')?.textContent || moduleId;
+    const nameZh = page?.querySelector('.page-title .zh')?.textContent || moduleId;
+    if(!currentUser){
+      lock.innerHTML = `
+        <div class="lock-icon">🔒</div>
+        <div class="lock-msg">
+          <span class="en">Sign in to access this module</span><span class="zh">请登录后访问此模块</span>
+          <span><span class="en">Free account — then purchase to unlock</span><span class="zh">免费注册账号，购买后解锁</span></span>
+        </div>
+        <button class="lock-btn" onclick="openAuthModal()">
+          <span class="en">🔑 Sign In / Register</span><span class="zh">🔑 登录 / 注册</span>
+        </button>`;
+    } else {
+      lock.innerHTML = `
+        <div class="lock-icon">🔒</div>
+        <div class="lock-msg">
+          <span class="en">${nameEn}</span><span class="zh">${nameZh}</span>
+          <span><span class="en">Purchase to unlock full content</span><span class="zh">购买后解锁完整内容</span></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:4px;">
+          <button class="lock-btn" onclick="startCheckout('${moduleId}','${PRICE_SINGLE}')">
+            <span class="en">🔓 This module — $29 CAD</span><span class="zh">🔓 本模块 — $29加元</span>
+          </button>
+          <button class="lock-btn" style="background:var(--jade);" onclick="startCheckout('all','${PRICE_FULL}')">
+            <span class="en">⭐ All 13 modules — $149 CAD</span><span class="zh">⭐ 全部13模块 — $149加元</span>
+          </button>
+        </div>`;
     }
-    const accessible = canAccessModule(moduleId);
-    lock.classList.toggle('visible', !accessible);
-    if(!accessible){
-      if(!currentUser){
-        lock.innerHTML = `
-          <div class="lock-icon">🔒</div>
-          <div class="lock-msg">
-            <span class="en">Sign in to access this module</span><span class="zh">请登录后访问此模块</span>
-            <span><span class="en">Free account — then purchase to unlock</span><span class="zh">免费注册账号，购买后解锁</span></span>
-          </div>
-          <button class="lock-btn" onclick="openAuthModal()">
-            <span class="en">🔑 Sign In / Register</span><span class="zh">🔑 登录 / 注册</span>
-          </button>`;
-      } else {
-        const nameEn = page.querySelector('.page-title .en')?.textContent || moduleId;
-        const nameZh = page.querySelector('.page-title .zh')?.textContent || moduleId;
-        lock.innerHTML = `
-          <div class="lock-icon">🔒</div>
-          <div class="lock-msg">
-            <span class="en">${nameEn}</span><span class="zh">${nameZh}</span>
-            <span><span class="en">Purchase to unlock full content</span><span class="zh">购买后解锁完整内容</span></span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:4px;">
-            <button class="lock-btn" onclick="startCheckout('${moduleId}','${PRICE_SINGLE}')">
-              <span class="en">🔓 This module — $29 CAD</span><span class="zh">🔓 本模块 — $29加元</span>
-            </button>
-            <button class="lock-btn" style="background:var(--jade);" onclick="startCheckout('all','${PRICE_FULL}')">
-              <span class="en">⭐ All 13 modules — $149 CAD</span><span class="zh">⭐ 全部13模块 — $149加元</span>
-            </button>
-          </div>`;
-      }
-    }
-  });
+    lock.classList.add('visible');
+  } else {
+    lock.classList.remove('visible');
+  }
 }
 
 async function startCheckout(moduleId, priceId){
@@ -3705,7 +3746,20 @@ sb.auth.onAuthStateChange(async (event, session) => {
   await loadProfile(currentUser ? currentUser.id : null);
   applyLockOverlays();
   updateHomePricingCTA();
+  updateSidebarPricingCTA();
 });
+
+function updateSidebarPricingCTA(){
+  const cta = document.getElementById('sidebar-pricing-cta');
+  if(!cta) return;
+  if(!currentUser){
+    cta.innerHTML = `<button class="sp-signin" onclick="openAuthModal()"><span class="en">🔑 Sign In to Purchase</span><span class="zh">🔑 登录后购买</span></button>`;
+  } else {
+    cta.innerHTML = `
+      <button class="sp-btn" onclick="openModulePicker()"><span class="en">🔓 Buy a Module — $29</span><span class="zh">🔓 单模块 — $29</span></button>
+      <button class="sp-btn sp-btn-jade" onclick="startCheckout('all','${PRICE_FULL}')"><span class="en">⭐ Full Access — $149</span><span class="zh">⭐ 全套 — $149</span></button>`;
+  }
+}
 
 function updateHomePricingCTA(){
   const cta = document.getElementById('home-pricing-cta');
@@ -3786,6 +3840,7 @@ function showPage(id, el){
     page.querySelectorAll('.phase-tab').forEach((t,i)=>t.classList.toggle('active',i===0));
     page.querySelectorAll('.phase-panel').forEach((p,i)=>p.classList.toggle('active',i===0));
   }
+  updateLockForModule(id);
 }
 
 // Keep backward compat with showDisease
