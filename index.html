@@ -302,7 +302,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .user-chip{font-size:11px;font-weight:600;color:var(--jade);background:var(--jade-bg);border:1px solid var(--jade-light);border-radius:10px;padding:4px 10px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .user-signout{font-size:11px;font-weight:600;color:var(--ink-muted);background:var(--paper-warm);border:1px solid var(--rule);border-radius:10px;padding:4px 10px;cursor:pointer;font-family:inherit;}
 .signin-btn{font-size:11px;font-weight:600;color:var(--vermillion);background:var(--verm-bg);border:1px solid var(--vermillion);border-radius:10px;padding:4px 10px;cursor:pointer;font-family:inherit;}
-.module-lock{display:none;position:fixed;inset:0;background:rgba(247,244,238,0.97);z-index:50;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px);padding:32px;}
+.module-lock{display:none;position:fixed;inset:0;background:rgba(247,244,238,0.97);z-index:50;align-items:center;justify-content:center;flex-direction:column;gap:14px;backdrop-filter:blur(4px);padding:32px;position:fixed;}
 .module-lock.visible{display:flex;}
 .lock-icon{font-size:36px;}
 .lock-msg{font-size:15px;font-weight:600;color:var(--ink);text-align:center;padding:0 20px;}
@@ -3662,8 +3662,9 @@ function updateLockForModule(moduleId){
     const page = document.getElementById('page-'+moduleId);
     const nameEn = page?.querySelector('.page-title .en')?.textContent || moduleId;
     const nameZh = page?.querySelector('.page-title .zh')?.textContent || moduleId;
+    const closeBtn = `<button onclick="document.getElementById('global-lock').classList.remove('visible')" style="position:absolute;top:16px;right:18px;font-size:22px;color:var(--ink-faint);background:none;border:none;cursor:pointer;font-family:inherit;line-height:1;">×</button>`;
     if(!currentUser){
-      lock.innerHTML = `
+      lock.innerHTML = `${closeBtn}
         <div class="lock-icon">🔒</div>
         <div class="lock-msg">
           <span class="en">Sign in to access this module</span><span class="zh">请登录后访问此模块</span>
@@ -3673,7 +3674,7 @@ function updateLockForModule(moduleId){
           <span class="en">🔑 Sign In / Register</span><span class="zh">🔑 登录 / 注册</span>
         </button>`;
     } else {
-      lock.innerHTML = `
+      lock.innerHTML = `${closeBtn}
         <div class="lock-icon">🔒</div>
         <div class="lock-msg">
           <span class="en">${nameEn}</span><span class="zh">${nameZh}</span>
