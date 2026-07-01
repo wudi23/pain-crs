@@ -16,16 +16,7 @@
   --rule:rgba(26,26,24,0.12);--rule-mid:rgba(26,26,24,0.07);
   --radius:8px;--radius-lg:14px;--shadow:0 1px 4px rgba(0,0,0,0.06);
 }
-@media(prefers-color-scheme:dark){:root{
-  --ink:#e8e5de;--ink-mid:#c2bfb8;--ink-muted:#8a8880;--ink-faint:#5a5a54;
-  --paper:#1c1c1a;--paper-warm:#242420;--paper-mid:#2c2c28;
-  --vermillion:#e06050;--verm-bg:#2a1a18;
-  --jade:#4aab94;--jade-light:#2a6058;--jade-bg:#0e2420;
-  --indigo:#7aa0d0;--indigo-light:#2a4068;--indigo-bg:#0e1a2e;
-  --amber:#c89040;--amber-bg:#221800;
-  --plum:#c080c0;--plum-bg:#1e0e1e;--plum-light:#6a3a6a;
-  --rule:rgba(232,229,222,0.1);--rule-mid:rgba(232,229,222,0.06);
-}}
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang SC',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7;}
 .app{display:flex;height:100vh;overflow:hidden;}
@@ -368,6 +359,9 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .quiz-result .qr-score{font-size:36px;font-weight:800;color:var(--vermillion);margin-bottom:8px;}
 .quiz-result .qr-label{font-size:13px;color:var(--ink-muted);margin-bottom:20px;}
 .quiz-result button{padding:10px 20px;border-radius:var(--radius);border:1px solid var(--rule);background:var(--paper-warm);font-family:inherit;font-weight:600;cursor:pointer;margin:0 6px;}
+.pc-row{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;gap:10px;align-items:flex-start;}
+.pc-label{font-size:13px;font-weight:600;color:var(--ink);min-width:160px;flex-shrink:0;}
+.pc-val{font-size:13px;color:var(--ink-mid);line-height:1.7;flex:1;}
 </style>
 <!-- Supabase JS client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -508,7 +502,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <button onclick="document.getElementById('crs-search').value='';crsSearch('')">✕</button>
     </div>
     <div id="search-results" class="search-results"></div>
-    <div id="search-hint" class="search-hint"><span class="en">Try: masseter · piriformis · plantar fascia · gout · BL32 · prolotherapy · Du Huo Ji Sheng Wan · hot bi</span><span class="zh">试试：咬肌 · 梨状肌 · 足底筋膜 · 痛风 · BL32 · 增生疗法 · 独活寄生丸 · 热痹</span></div>
+    <div id="search-hint" class="search-hint"><span class="en">Try: masseter · piriformis · plantar fascia · gout · BL32 · prolotherapy · Du Huo Ji Sheng Wan · hot bi</span><span class="zh">试试：咬肌 · 梨状肌 · 足底筋膜 · 痛风 · 次髎（BL32） · 增生疗法 · 独活寄生丸 · 热痹</span></div>
   </div>
 
   <!-- Pricing block -->
@@ -737,7 +731,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">/,-</span><span class="zh">气机不能自由流动→压力积聚→胀痛/游走痛，与情绪相关</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">主要特征</span></span><span class="pc-val"><span class="en">-</span><span class="zh">胀痛或游走痛；不能精确定位；情志压力明显加重；叹气可缓解；胀满感；严重程度波动；脉弦</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,,.,,..,.</span><span class="zh">行气疏肝，开通经络。LV3、LI4、PC6。浮针对气滞证型特别有效——皮下针刺层直接处理气滞表现为筋膜张力和滑动受限的筋膜平面。方药：柴胡疏肝散、逍遥散。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,,.,,..,.</span><span class="zh">行气疏肝，开通经络。太冲（LV3）、合谷（LI4）、内关（PC6）。浮针对气滞证型特别有效——皮下针刺层直接处理气滞表现为筋膜张力和滑动受限的筋膜平面。方药：柴胡疏肝散、逍遥散。</span></span></div>
       </div>
     </div>
 
@@ -761,7 +755,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">-,,</span><span class="zh">痰湿积聚于关节和经络→沉重、麻木、固定疼痛伴活动受限</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">主要特征</span></span><span class="pc-val"><span class="en">,()-</span><span class="zh">沉重麻木疼痛；关节肿胀但无明显热感；潮湿天气加重；运动后好转（运动散湿）；油腻食物加重；体型偏胖；苔腻；脉滑濡</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">-,.,,...,.</span><span class="zh">化痰祛湿，开通经络。SP9、ST40、SP6为核心穴位。艾灸以温化湿邪。浮针对筋膜湿邪层非常有效——扫散动作机械开通湿邪使之变得僵硬受限的筋膜平面。方药：二陈汤、薏苡仁汤。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">-,.,,...,.</span><span class="zh">化痰祛湿，开通经络。阴陵泉（SP9）、丰隆（ST40）、SP6为核心穴位。艾灸以温化湿邪。浮针对筋膜湿邪层非常有效——扫散动作机械开通湿邪使之变得僵硬受限的筋膜平面。方药：二陈汤、薏苡仁汤。</span></span></div>
       </div>
     </div>
 
@@ -773,7 +767,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">,</span><span class="zh">经络空虚失养→隐隐持续疼痛，喜按、休息后缓解</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">主要特征</span></span><span class="pc-val"><span class="en">,-(,,,),-</span><span class="zh">隐隐持续作痛；喜按喜温；劳累明显加重；休息好转；伴全身气血两虚征象（疲乏、面白、心悸、睡眠差）；舌淡苔薄；脉弱细</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,.,,,,.+.,.,..</span><span class="zh">补气养血，充盈经络。ST36、BL17、SP6、CV4、BL20。补法+灸。方药：八珍汤、补中益气汤。注意：虚证时激痛点干针必须谨慎——经络已经空虚；积极针刺进一步耗竭。浮针优选于此证型，因其刺激组织而无深层干针的耗竭风险。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,.,,,,.+.,.,..</span><span class="zh">补气养血，充盈经络。足三里（ST36）、膈俞（BL17）、三阴交（SP6）、关元（CV4）、脾俞（BL20）。补法+灸。方药：八珍汤、补中益气汤。注意：虚证时激痛点干针必须谨慎——经络已经空虚；积极针刺进一步耗竭。浮针优选于此证型，因其刺激组织而无深层干针的耗竭风险。</span></span></div>
       </div>
     </div>
 
@@ -785,7 +779,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">-,</span><span class="zh">肾虚无以滋养骨骼和筋腱→慢性深在骨骼层次疼痛，常为慢性脊柱和关节退变的根本</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">主要特征</span></span><span class="pc-val"><span class="en">,-(,,),,,,,-,,-</span><span class="zh">深在、骨骼层次疼痛（尤其腰椎、膝关节、足跟）；疲劳和寒冷加重；伴腰酸、头晕、耳鸣、尿频；肾阳虚：畏寒、舌淡、脉沉迟；肾阴虚：盗汗、舌红、脉细数</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,.,,(+)..'.(+).</span><span class="zh">补肾强筋骨。KI3、BL23、GV4（阳虚：加灸；阴虚：禁灸）。肾虚导致的结构退变是增生疗法的主要适应区——衰老性韧带和软骨退变是"肾主骨生髓"衰竭的结构性表现。增生疗法的增殖性作用处理草药和针刺无法完成的事：重建物理性胶原蛋白结构。方药：独活寄生汤（肾虚+痹症的经典复合方）。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en"></span><span class="zh">治则</span></span><span class="pc-val"><span class="en">,.,,(+)..'.(+).</span><span class="zh">补肾强筋骨。太溪（KI3）、肾俞（BL23）、命门（GV4）（阳虚：加灸；阴虚：禁灸）。肾虚导致的结构退变是增生疗法的主要适应区——衰老性韧带和软骨退变是"肾主骨生髓"衰竭的结构性表现。增生疗法的增殖性作用处理草药和针刺无法完成的事：重建物理性胶原蛋白结构。方药：独活寄生汤（肾虚+痹症的经典复合方）。</span></span></div>
       </div>
     </div>
 
@@ -844,7 +838,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
           4. 在MTrP区域3–5cm处皮下层插入浮针<br>
           5. 患者进行再灌注活动的同时扫散<br>
           6. 浮针留置20–30分钟，定期扫散<br>
-          7. 最终重新评估：ROM、疼痛评分、组织质地
+          7. 最终重新评估：活动范围、疼痛评分、组织质地
         </span>
       </div>
     </div>
@@ -884,11 +878,11 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
           慢性疼痛（慢性期）：2–4Hz（低频）→刺激脑啡肽+β-内啡肽→持续镇痛+组织修复<br>
           功能康复（功能恢复）：2/100Hz密疏波→兼顾两者效果→对慢性骨骼肌肉疼痛最通用<br><br>
           <strong>各证型的体质根本治疗：</strong><br>
-          寒凝→GV4（灸）、BL23、ST36、SP6：温肾阳之根<br>
-          血瘀→BL17、SP10、LV3：全身活血<br>
-          痰湿→ST40、SP9、CV12：从源头化湿<br>
-          气血两虚→ST36、BL17、BL20、CV4：培补根本<br>
-          肾虚→KI3、BL23、GV4（阳虚）或KI6（阴虚）：滋养结构根基
+          寒凝→命门（GV4）（灸）、肾俞（BL23）、足三里（ST36）、三阴交（SP6）：温肾阳之根<br>
+          血瘀→膈俞（BL17）、血海（SP10）、太冲（LV3）：全身活血<br>
+          痰湿→丰隆（ST40）、阴陵泉（SP9）、中脘（CV12）：从源头化湿<br>
+          气血两虚→足三里（ST36）、膈俞（BL17）、脾俞（BL20）、关元（CV4）：培补根本<br>
+          肾虚→太溪（KI3）、肾俞（BL23）、命门（GV4）（阳虚）或KI6（阴虚）：滋养结构根基
         </span>
       </div>
     </div>
@@ -968,7 +962,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <span class="zh">
       颈部是全身经络最密集的区域——每条主要阳经均上行经过颈部和颈椎。疼痛位置直接识别受累经络：<br><br>
       <strong>后正中线（督脉）：</strong>项部疼痛，沿棘突僵硬，枕部头痛。督脉统领诸阳——阻滞于此影响整个阳气轴。<br>
-      <strong>后旁椎区（膀胱经）：</strong>沿竖脊肌、棘突外侧疼痛。BL10、BL11、BL12为关键穴位。这是颈椎病最常见的模式。<br>
+      <strong>后旁椎区（膀胱经）：</strong>沿竖脊肌、棘突外侧疼痛。天柱（BL10）、大杼（BL11）、BL12为关键穴位。这是颈椎病最常见的模式。<br>
       <strong>颈侧/胸锁乳突肌区（胆经/三焦/小肠）：</strong>颈侧疼痛，放射至颞区（胆），至肩和上臂（小肠、三焦）。单侧僵硬伴旋转受限。<br>
       <strong>颈前/胸锁乳突肌（胃经）：</strong>颈前疼痛，咽喉紧张，锁骨疼痛。纯骨骼肌肉表现中较少见。<br><br>
       <strong>临床规律：</strong>旋转时痛→胆/小肠/三焦经（侧面）。后伸时痛→膀胱经（后面）。前屈时痛→很少为原发颈部；考虑前部椎间盘或内脏牵涉。皮节分布疼痛→神经根压迫（评估C4–C8节段）。
@@ -1014,7 +1008,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="q-why-detail">
         <span class="en"><strong>Whiplash / acute trauma:</strong> Blood stasis as the primary pattern. The force disrupts local Qi-Blood flow → stasis forms in the damaged tissue → fixed pain, may have delayed onset (Blood stasis builds over hours after trauma). Treatment: move stasis first. Trigger point needling + FSN are highly effective for acute post-traumatic muscle stiffness.<br><br> <strong>Woke up with stiff neck (, wryneck):</strong> Wind-Cold invasion during sleep (windows open, draft, air conditioning) + sustained awkward position → Cold contracts the SCM or upper trapezius → acute torticollis. Dramatic and sudden. Treatment: dispel Wind-Cold + release the contracted muscle. LI4, TE5, SI3, GB21 + trigger point. Usually resolves in 1–3 treatments.<br><br> <strong>Chronic desk/screen posture (forward head posture):</strong> The "text neck" pattern. Sustained forward head position creates chronic eccentric loading on the posterior cervical muscles (BL channel territory) → progressive Phlegm-stasis accumulation in the channel. The muscles are not acutely injured — they are chronically overloaded. This requires FSN (fascial release) + postural correction, not just local needling.<br><br> <strong>Chronic gradual onset in middle-aged/elderly:</strong> Cervical spondylosis — Kidney deficiency (bone degeneration) + Phlegm-stasis (osteophyte formation in TCM framework = Phlegm hardening in the channels). This is the Prolotherapy zone for the facet joint ligaments and disc annulus.</span>
         <span class="zh"><strong>挥鞭伤/急性外伤：</strong>血瘀为主要证型。外力破坏局部气血流动→损伤组织中形成瘀血→固定疼痛，可能延迟发作（外伤后数小时内血瘀积聚）。治疗：先化瘀。激痛点干针+浮针对急性外伤后肌肉僵硬非常有效。<br><br>
-        <strong>睡醒后颈僵（落枕）：</strong>睡眠期间风寒侵袭（开窗、穿堂风、空调）+长时间不良体位→寒邪收缩胸锁乳突肌或上斜方肌→急性斜颈。起病戏剧化且突然。治疗：祛风散寒+松解挛缩肌肉。LI4、TE5、SI3、GB21+激痛点。通常1–3次治疗即可缓解。<br><br>
+        <strong>睡醒后颈僵（落枕）：</strong>睡眠期间风寒侵袭（开窗、穿堂风、空调）+长时间不良体位→寒邪收缩胸锁乳突肌或上斜方肌→急性斜颈。起病戏剧化且突然。治疗：祛风散寒+松解挛缩肌肉。合谷（LI4）、外关（TE5）、后溪（SI3）、肩井（GB21）+激痛点。通常1–3次治疗即可缓解。<br><br>
         <strong>慢性桌面/屏幕姿势（头前移）：</strong>"低头族"模式。持续头前移体位对颈后肌（膀胱经走行区）造成慢性离心负荷→经络中痰瘀进行性积聚。肌肉不是急性损伤——而是慢性过载。需要浮针（筋膜松解）+姿势矫正，不只是局部针刺。<br><br>
         <strong>中老年慢性渐进性起病：</strong>颈椎病——肾虚（骨骼退变）+痰瘀（骨质增生在中医框架=痰邪在经络中硬化）。这是关节突关节韧带和椎间盘纤维环的增生疗法适应区。</span>
       </div>
@@ -1053,7 +1047,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-row"><span class="pc-label"><span class="en">Upper Trapezius</span><span class="zh">上斜方肌</span></span><span class="pc-val"><span class="en">Location: mid-belly of the upper trapezius, between C7 and the acromion. Palpate as a pincer grip or flat palpation. Active MTrP refers: up the lateral neck, over the ear, to the temporal region and eye (mimics tension headache or migraine). This single MTrP accounts for a significant proportion of "headaches" that are actually cervicogenic. The "carrying tension in your shoulders" sensation is this MTrP. In TCM: upper trapezius is the primary Shaoyang channel (GB/SJ) muscle — stagnation here reflects Liver Qi stagnation creating channel blockage at the GB21 territory.</span><span class="zh">位置：上斜方肌腹部中点，C7与肩峰之间。钳形抓握或平面触诊。活跃MTrP牵涉：向上至颈侧，经过耳部，至颞区和眼（模仿紧张性头痛或偏头痛）。这个单一MTrP占"头痛"中相当大比例，实际上是颈源性的。"肩部紧绷"感就是这个MTrP。中医：上斜方肌是主要的少阳经（胆/三焦）肌肉——此处瘀滞反映肝气郁滞在GB21区域造成经络阻塞。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Levator Scapulae</span><span class="zh">肩胛提肌</span></span><span class="pc-val"><span class="en">Location: lateral neck between C1–C4 transverse processes and the superior angle of the scapula. Palpate laterally with the patient's hand behind their back (unlocks the superior scapular angle). Active MTrP refers: stiff neck, ipsilateral posterior neck pain, and medial scapular border pain — the classic "can't turn my head" pattern. In TCM: this muscle runs along the BL and SI channel territory. MTrP here is the palpable expression of the channel blockage producing cervical rotation restriction.</span><span class="zh">位置：C1–C4横突和肩胛骨上角之间的颈侧。患者手置于背后（解锁肩胛上角）时侧向触诊。活跃MTrP牵涉：颈部僵硬，同侧颈后疼痛，肩胛骨内侧缘疼痛——经典"头无法转动"模式。中医：该肌沿膀胱经和小肠经走行区域。此处MTrP是经络阻塞产生颈椎旋转受限的可触及表现。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">SCM — Sternocleidomastoid</span><span class="zh">胸锁乳突肌（SCM）</span></span><span class="pc-val"><span class="en">Location: Palpate as a pincer grip along the length of the SCM. Has two heads (sternal and clavicular) each with different referral patterns. Sternal head MTrP: refers to the ipsilateral occiput, across the vertex, to the supra-orbital area (eye pain, "eye headache"), and cheek — classic headache referral. Clavicular head MTrP: refers to the forehead and ear, producing "earache" without pathology and frontal headache. Also: spatial disorientation and dizziness (SCM proprioceptors are critical for postural balance). In TCM: SCM lies along the Stomach channel (ST9 area) — chronic SCM tension reflects Phlegm-stasis in the ST channel affecting the neck-throat-face axis.</span><span class="zh">位置：沿SCM全长行钳形抓握触诊。有两个头（胸骨头和锁骨头），各有不同牵涉模式。胸骨头MTrP：牵涉至同侧枕部，越过头顶，至眶上区域（眼痛，"眼头痛"），和面颊——经典头痛牵涉。锁骨头MTrP：牵涉至前额和耳部，产生无病理基础的"耳痛"和前额头痛。也可产生空间定向障碍和头晕（SCM本体感受器对姿势平衡至关重要）。中医：SCM沿胃经走行（ST9区域）——慢性SCM紧张反映痰瘀在胃经影响颈-喉-面轴线。</span></span></div>
-    <div class="pc-row"><span class="pc-label"><span class="en">Suboccipital Muscles</span><span class="zh">枕下肌群</span></span><span class="pc-val"><span class="en">Location: just below the occiput, between the mastoid process and the C2 spinous process. Palpate with the patient supine and head slightly flexed. Four small muscles (rectus capitis posterior major/minor, obliquus capitis superior/inferior). MTrP refers: deep, behind-the-eye headache, "headache inside the skull," visual disturbance (eye-tracking difficulty). In TCM: suboccipital region is the entry point of the Du Mai and GB channel — stagnation here is one of the most common sources of chronic "internal headache." GB20 (Feng Chi — Wind Pool) is located precisely at the lateral edge of this muscle group.</span><span class="zh">位置：枕骨正下方，乳突与C2棘突之间。患者仰卧头部轻度前屈时触诊。四块小肌肉（头后直肌大/小，头斜肌上/下）。MTrP牵涉：眼后深部头痛，"颅骨内头痛"，视觉障碍（眼球追踪困难）。中医：枕下区是督脉和胆经的进入点——此处瘀滞是慢性"内部头痛"最常见的来源之一。GB20（风池）精确位于这组肌肉的外侧缘。</span></span></div>
+    <div class="pc-row"><span class="pc-label"><span class="en">Suboccipital Muscles</span><span class="zh">枕下肌群</span></span><span class="pc-val"><span class="en">Location: just below the occiput, between the mastoid process and the C2 spinous process. Palpate with the patient supine and head slightly flexed. Four small muscles (rectus capitis posterior major/minor, obliquus capitis superior/inferior). MTrP refers: deep, behind-the-eye headache, "headache inside the skull," visual disturbance (eye-tracking difficulty). In TCM: suboccipital region is the entry point of the Du Mai and GB channel — stagnation here is one of the most common sources of chronic "internal headache." GB20 (Feng Chi — Wind Pool) is located precisely at the lateral edge of this muscle group.</span><span class="zh">位置：枕骨正下方，乳突与C2棘突之间。患者仰卧头部轻度前屈时触诊。四块小肌肉（头后直肌大/小，头斜肌上/下）。MTrP牵涉：眼后深部头痛，"颅骨内头痛"，视觉障碍（眼球追踪困难）。中医：枕下区是督脉和胆经的进入点——此处瘀滞是慢性"内部头痛"最常见的来源之一。风池（GB20）（风池）精确位于这组肌肉的外侧缘。</span></span></div>
 
     <div class="pp-title" style="margin-top:16px"><span class="en">Step 4 — Special Tests</span><span class="zh">第四步——特殊试验</span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Spurling Test</span><span class="zh">Spurling试验（椎间孔压缩试验）</span></div><span class="pc-val"><span class="en"><strong>Procedure:</strong> Lateral flexion + rotation to the painful side + gentle downward axial compression on the head.<br><strong>Positive:</strong> Reproduction of the patient's arm/hand symptoms (radicular pain or numbness) — not just neck pain.<br><strong>Meaning:</strong> Cervical nerve root compression (radiculopathy). Positive Spurling = nerve root is involved. Sensitivity ~50%, Specificity ~90% — a positive test is highly significant.<br><strong>TCM significance:</strong> A positive Spurling identifies the neurological layer — the channel blockage has reached the point where it is compressing the nerve root itself (the channel's deepest layer). Treatment must decompress this level.</span><span class="zh"><strong>操作：</strong>向痛侧侧屈+旋转+轻柔向下轴向压迫头部。<br><strong>阳性：</strong>重现患者手臂/手部症状（根性痛或麻木）——不只是颈痛。<br><strong>意义：</strong>颈神经根压迫（根性病变）。Spurling阳性=神经根受累。灵敏度约50%，特异性约90%——阳性结果高度提示。<br><strong>中医意义：</strong>阳性Spurling识别神经层——经络阻塞已达到压迫神经根本身的程度（经络的最深层）。治疗必须在此层面减压。</span></span></div>
@@ -1093,7 +1087,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Trauma disrupts Qi-Blood flow in the cervical channels → Blood stasis forms → fixed pain, muscle guarding, possible delayed onset</span><span class="zh">外伤破坏颈部经络气血流动→血瘀形成→固定疼痛，肌肉防御，可能延迟发作</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Whiplash or direct trauma history; fixed, localised pain (pinpoint tender on palpation); delayed onset possible (12–48 hours post-trauma as stasis consolidates); worse at night; muscle guarding and spasm; possible ecchymosis; dark or purple tongue; choppy pulse</span><span class="zh">挥鞭伤或直接外伤史；固定、局部疼痛（触诊点状压痛）；可能延迟发作（外伤后12–48小时随瘀血固化）；夜间加重；肌肉防御和痉挛；可能有瘀斑；舌暗紫；脉涩</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic</span><span class="zh">气机</span></span><span class="pc-val"><span class="en">(Stasis in the traumatised channel): Physical trauma directly disrupts the channel — Qi and Blood are forced out of their normal pathways → stasis accumulates at the injury site. The delay between injury and maximum pain is because Blood stasis consolidates over time (like a bruise deepening). The active MTrPs are the palpable loci of this Blood stasis. Treatment sequence: trigger point dry needling (disrupt the stasis nodule) → FSN (restore fascial circulation) → traditional acupuncture with BL17, SP10.</span><span class="zh">出不畅（外伤经络中的瘀血）：物理创伤直接破坏经络——气血被迫离开正常路径→瘀血积聚于损伤部位。损伤与最大疼痛之间的延迟是因为血瘀随时间固化（如瘀青加深）。活跃MTrP是此血瘀的可触及聚焦点。治疗序列：激痛点干针（破坏瘀血结节）→浮针（恢复筋膜循环）→传统针灸配BL17、SP10。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic</span><span class="zh">气机</span></span><span class="pc-val"><span class="en">(Stasis in the traumatised channel): Physical trauma directly disrupts the channel — Qi and Blood are forced out of their normal pathways → stasis accumulates at the injury site. The delay between injury and maximum pain is because Blood stasis consolidates over time (like a bruise deepening). The active MTrPs are the palpable loci of this Blood stasis. Treatment sequence: trigger point dry needling (disrupt the stasis nodule) → FSN (restore fascial circulation) → traditional acupuncture with BL17, SP10.</span><span class="zh">出不畅（外伤经络中的瘀血）：物理创伤直接破坏经络——气血被迫离开正常路径→瘀血积聚于损伤部位。损伤与最大疼痛之间的延迟是因为血瘀随时间固化（如瘀青加深）。活跃MTrP是此血瘀的可触及聚焦点。治疗序列：激痛点干针（破坏瘀血结节）→浮针（恢复筋膜循环）→传统针灸配BL17、血海（SP10）。</span></span></div>
       </div>
     </div>
 
@@ -1117,7 +1111,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Kidney fails to nourish bones → disc and facet joint degeneration → Phlegm-stasis consolidates in the degenerated space → chronic deep ache + radiculopathy</span><span class="zh">肾虚不能滋养骨骼→椎间盘和关节突关节退变→痰瘀在退变空间固化→慢性深部酸痛+根性病变</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Middle-aged or elderly; chronic progressive neck pain and stiffness; possible arm/hand numbness (radiculopathy) or dizziness (vertebral artery); low back soreness concurrent; fatigue; positive Spurling or Jackson; imaging: disc degeneration, osteophytes; pale or slightly red tongue; deep-weak pulse at chi position</span><span class="zh">中老年；慢性进行性颈痛和僵硬；可能伴手臂/手部麻木（根性病变）或头晕（椎动脉）；同时伴腰酸；疲乏；Spurling或Jackson阳性；影像：椎间盘退变，骨质增生；舌淡或略红；尺脉沉弱</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic</span><span class="zh">气机</span></span><span class="pc-val"><span class="en">(Kidney Xu) + (Phlegm-stasis): "Kidney governs bones". As Kidney Jing declines, the discs and facet joints lose their Jing nourishment → structural degeneration. Osteophytes = Phlegm hardening in the degenerating bony channels. This is the multi-layer treatment zone: traditional acupuncture for the Kidney root (KI3, BL23, GV4); trigger points for the myofascial component; Prolotherapy for the facet joint capsule and posterior longitudinal ligament laxity; herbal with Du Huo Ji Sheng Tang.</span><span class="zh">入不足（肾虚）+出不畅（痰瘀）："肾主骨"。随肾精衰减，椎间盘和关节突关节失去精的濡养→结构退变。骨质增生=痰邪在退变骨性经络中的硬化。这是多层治疗区：传统针灸处理肾虚根本（KI3、BL23、GV4）；激痛点处理肌筋膜成分；增生疗法处理关节突关节囊和后纵韧带松弛；方药独活寄生汤。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic</span><span class="zh">气机</span></span><span class="pc-val"><span class="en">(Kidney Xu) + (Phlegm-stasis): "Kidney governs bones". As Kidney Jing declines, the discs and facet joints lose their Jing nourishment → structural degeneration. Osteophytes = Phlegm hardening in the degenerating bony channels. This is the multi-layer treatment zone: traditional acupuncture for the Kidney root (KI3, BL23, GV4); trigger points for the myofascial component; Prolotherapy for the facet joint capsule and posterior longitudinal ligament laxity; herbal with Du Huo Ji Sheng Tang.</span><span class="zh">入不足（肾虚）+出不畅（痰瘀）："肾主骨"。随肾精衰减，椎间盘和关节突关节失去精的濡养→结构退变。骨质增生=痰邪在退变骨性经络中的硬化。这是多层治疗区：传统针灸处理肾虚根本（KI3、肾俞（BL23）、GV4）；激痛点处理肌筋膜成分；增生疗法处理关节突关节囊和后纵韧带松弛；方药独活寄生汤。</span></span></div>
       </div>
     </div>
 
@@ -1186,8 +1180,8 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
           <em>颈侧和上斜方肌：</em>在三角肌-斜方肌交界处插入浮针，朝向颈部和枕部扫散。患者进行同侧肩部主动下压（主动下压肩部时进行扫散）作为再灌注活动。此组合——肩部下压对抗向上痉挛的斜方肌+筋膜扫散——产生戏剧性的即时上斜方肌松解。<br><br>
           <em>胸锁乳突肌和颈前紧张：</em>在锁骨水平皮下插入浮针，扫散朝向颅侧。再灌注：患者向对侧旋转头部，同时临床医师进行扫散。<br><br>
           <strong>急性落枕的激痛点+浮针序列：</strong><br>
-          1. SI3（远端，立即开通经络）——针刺同时要求患者缓慢旋转颈部<br>
-          2. GB39（患侧对侧）——立即松解胸锁乳突肌/斜方肌<br>
+          1. 后溪（SI3）（远端，立即开通经络）——针刺同时要求患者缓慢旋转颈部<br>
+          2. 悬钟（GB39）（患侧对侧）——立即松解胸锁乳突肌/斜方肌<br>
           3. 挛缩肌肉激痛点干针（肩胛提肌或胸锁乳突肌）<br>
           4. 上胸椎水平浮针→朝向颈部扫散→患者旋转同时扫散<br>
           5. 最终重新评估：大多数急性落枕在单次治疗中缓解80–100%
@@ -1232,7 +1226,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
           TE5外关：阳维脉主穴——统领颈侧和颞区。对涉及胆/三焦经走行区的颈侧痛必不可少。<br><br>
           <strong>颈痛电针：</strong><br>
           急性肌肉痉挛：双侧BL10-BL10或GV14-BL10连续波80Hz，15分钟<br>
-          慢性肌筋膜痛：局部-远端配对密疏波2/100Hz（GB20-GB39，BL10-SI3）<br>
+          慢性肌筋膜痛：局部-远端配对密疏波2/100Hz（GB20-悬钟（GB39），天柱（BL10）-SI3）<br>
           神经根压迫（根性病变）：受累皮节路径低频2Hz
         </span>
       </div>
@@ -1285,7 +1279,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       第3步：激痛点——右侧肩胛提肌MTrP——获得LTR（可见颈部跳动）。重新评估：右旋50°。<br>
       第4步：激痛点——右侧胸锁乳突肌MTrP——获得LTR。重新评估：右旋60°。<br>
       第5步：浮针——右侧T1–T2水平皮下插针，朝向右侧颈部向颅侧扫散。再灌注活动：临床医师扫散时患者缓慢向右旋转。最终：右旋70°（接近正常），疼痛1/10（原8/10）。<br>
-      第6步：GV14（灸）+GB20双侧（朝向对侧眼角方向针刺）。<br><br>
+      第6步：大椎（GV14）（灸）+GB20双侧（朝向对侧眼角方向针刺）。<br><br>
       处方：葛根汤3天，避免颈部受寒。</span></div>
       <div class="case-outcome"><span class="en"><strong>Teaching point:</strong> The distal points SI3 and GB39 are the most powerful and fastest-acting points for acute wry neck — far more effective than starting with local needling. The sequence matters: distal points first (open the channel), then trigger points (release the specific contracted muscles), then FSN (maintain the fascial release). Starting with strong local needling on a fully contracted SCM or levator scapulae can worsen spasm before it gets better. Always start distally for acute patterns.</span><span class="zh"><strong>教学要点：</strong>远端穴SI3和GB39是急性落枕最有力且起效最快的穴位——远比直接开始局部针刺有效。顺序很重要：首先远端穴（开通经络），然后激痛点（松解特定挛缩肌肉），然后浮针（维持筋膜松解）。从强烈局部针刺完全挛缩的胸锁乳突肌或肩胛提肌开始，可能在好转前先加重痉挛。急性证型始终先从远端开始。</span></div>
     </div>
@@ -1297,8 +1291,8 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <span class="zh"><strong>推理链：</strong>12年"偏头痛"持续表现为：单侧右侧、枕部+颞区、电脑工作后加重、无先兆、无恶心、曲坦类部分有效——此特征与颈源性头痛的一致性远大于偏头痛。决定性发现：按压右上斜方肌MTrP精确重现其"偏头痛"。这是诊断时刻——头痛起源于斜方肌MTrP和枕下肌群，而非三叉神经血管系统。头前移姿势（原因）+案头工作（维持因素）+压力（肝气郁滞加重斜方肌张力）=胆/膀胱经慢性痰瘀产生牵涉性头痛。<br><br>
       <strong>证型：</strong>痰瘀阻络+肝气郁滞（胆/膀胱经痰瘀+肝气郁滞）<br><br>
       <strong>治疗计划（6周8次）：</strong><br>
-      第1–3次：激痛点（右上斜方肌+枕下肌群）+浮针（上胸椎朝向颈部扫散）+GB20、GB21、BL10（局部），SI3（远端）。第3次结束时头痛频率从每月3–4次降至1次。<br>
-      第4–6次：继续上述+加LV3、PC6（处理肝气郁滞成分）。评估姿势——处方颏部回缩练习。<br>
+      第1–3次：激痛点（右上斜方肌+枕下肌群）+浮针（上胸椎朝向颈部扫散）+风池（GB20）、肩井（GB21）、天柱（BL10）（局部），后溪（SI3）（远端）。第3次结束时头痛频率从每月3–4次降至1次。<br>
+      第4–6次：继续上述+加LV3、内关（PC6）（处理肝气郁滞成分）。评估姿势——处方颏部回缩练习。<br>
       第7–8次：维持+开始延长至双周间隔。<br>
       方药：蠲痹汤（加减）+葛根+柴胡（针对肝气郁滞成分）。<br>
       结局：8次治疗后——过去一月头痛0次。患者能通过颏部回缩练习和姿势意识自我处理。</span></div>
@@ -1343,7 +1337,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       — 肺经：桡侧腕部——LU9太渊，LU10鱼际。桡神经感觉支。<br><br>
       <strong>背/桡侧面（阳经——大肠、三焦、小肠）：</strong><br>
       — 大肠经：背桡侧面——鼻烟壶（LI5区域）。De Quervain腱鞘炎：拇长展肌（APL）和拇短伸肌（EPB）肌腱在桡骨茎突的共同腱鞘中发炎——经典"妈妈手"。<br>
-      — 三焦经：背侧中线——SJ4、SJ5。伸肌腱和背侧骨间肌。<br><br>
+      — 三焦经：背侧中线——阳池（SJ4）、外关（SJ5）。伸肌腱和背侧骨间肌。<br><br>
       <strong>临床规律：</strong>掌面麻木刺痛=阴经（心包/心/肺）压迫。桡侧拇指疼痛和肿胀=大肠经/De Quervain。腕背痛=三焦经/TFCC或韧带。弥漫性腕痛，负重加重=腕部不稳（增生疗法适应区）。
     </span>
   </div>
@@ -1477,7 +1471,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Blood deficiency fails to nourish the PC channel sinews → the channel is undernourished and more vulnerable to compression</span><span class="zh">血虚不能濡养心包经之筋→经络失养，更易受压迫</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">CTS symptoms in context of Blood deficiency: post-partum (Blood depleted by childbirth and breastfeeding), elderly women, anaemia. Pale, dry skin on hands; concurrent fatigue, palpitations, insomnia; pale tongue; thin-weak pulse. The CTS is "emptiness-type" — the channel is empty and undernourished, making it more vulnerable to even mild external compression.</span><span class="zh">血虚背景下的CTS症状：产后（分娩和哺乳耗竭血液），老年女性，贫血。手部皮肤苍白干燥；同时伴疲乏、心悸、失眠；舌淡；脉细弱。此为"虚证型"CTS——经络空虚失养，使其对轻微外部压迫更易感。</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment direction</span><span class="zh">治疗方向</span></span><span class="pc-val"><span class="en">Nourish Blood + open PC channel. ST36, SP6, BL17, HT7. Herbal: Ba Zhen Tang + (warms the channels and nourishes Blood in the extremities — specifically indicated for hand numbness from Blood deficiency in the channels).</span><span class="zh">养血+开通心包经。ST36、SP6、BL17、HT7。方药：八珍汤+黄芪桂枝五物汤（温经络并养四肢血液——专门适用于经络血虚引起的手部麻木）。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment direction</span><span class="zh">治疗方向</span></span><span class="pc-val"><span class="en">Nourish Blood + open PC channel. ST36, SP6, BL17, HT7. Herbal: Ba Zhen Tang + (warms the channels and nourishes Blood in the extremities — specifically indicated for hand numbness from Blood deficiency in the channels).</span><span class="zh">养血+开通心包经。足三里（ST36）、三阴交（SP6）、膈俞（BL17）、神门（HT7）。方药：八珍汤+黄芪桂枝五物汤（温经络并养四肢血液——专门适用于经络血虚引起的手部麻木）。</span></span></div>
       </div>
     </div>
 
@@ -1536,7 +1530,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         <span class="en"><strong>Acute phase — local acupuncture:</strong><br> LI5 (directly at the anatomical snuffbox — the LI channel point at the tendon sheath). Needle gently with reducing method. LI4 (source of LI — opens the entire LI channel from the hand). TE5 + LI5 (pair — balances the dorsoradial channel tension).<br><br> <strong>Trigger point in the APL/EPB muscle belly:</strong> The most effective acute intervention. The APL and EPB muscles are in the dorso-radial forearm. Palpate the muscle belly 5–8cm proximal to the radial styloid — find the taut band and active MTrP. Needling the MTrP releases the proximal muscle tension → reduces the load on the distal tendon sheath → reduces sheath irritation. This is far more effective than needling the sheath itself (which is too sensitive to needle directly in acute inflammation).<br><br> <strong>FSN for De Quervain's:</strong> Insert at the mid-dorsal forearm, sweeping toward the radial wrist. Reperfusion: patient performs gentle thumb opposition (touch thumb to each finger sequentially) while clinician sweeps. The combined fascial sweep + gentle thumb movement pumps Blood through the ischaemic sheath tissue.<br><br> <strong>Prolotherapy for chronic De Quervain's:</strong> Target: the APL and EPB tendon-sheath interface at the radial styloid (the enthesis — tendon-bone junction is the most vascular point of the sheath). Solution: 15–20% dextrose, 0.5–1ml per injection point. 2–3 sessions at 3–4 week intervals. Ultrasound guidance recommended. This stimulates tendon-sheath collagen repair and reduces the fibrotic thickening that restricts gliding in chronic cases.</span>
         <span class="zh">
           <strong>急性期——局部针灸：</strong><br>
-          LI5阳溪（直接位于鼻烟壶处——腱鞘处大肠经穴位）。轻柔泻法针刺。LI4合谷（大肠经原穴——从手部开通整条大肠经）。TE5外关+LI5（配对——平衡背桡侧经络张力）。<br><br>
+          LI5阳溪（直接位于鼻烟壶处——腱鞘处大肠经穴位）。轻柔泻法针刺。LI4合谷（大肠经原穴——从手部开通整条大肠经）。TE5外关+阳溪（LI5）（配对——平衡背桡侧经络张力）。<br><br>
           <strong>APL/EPB肌腹激痛点：</strong>最有效的急性期干预。APL和EPB肌肉位于前臂背桡侧。在桡骨茎突近端5–8cm处触诊肌腹——找到紧张带和活跃MTrP。针刺MTrP松解近端肌肉张力→减少对远端腱鞘的负荷→减少腱鞘刺激。这远比直接针刺腱鞘本身有效（急性炎症期腱鞘过于敏感，不宜直接针刺）。<br><br>
           <strong>De Quervain浮针：</strong>在前臂背侧中段插针，朝向桡侧腕部扫散。再灌注：临床医师扫散时患者进行轻柔拇指对指（拇指依次轻触每个手指）。筋膜扫散+轻柔拇指运动的组合将血液泵入缺血的腱鞘组织。<br><br>
           <strong>慢性De Quervain增生疗法：</strong>靶点：桡骨茎突处APL和EPB肌腱-腱鞘界面（止点——肌腱-骨连接处是腱鞘最有血管的点）。溶液：15–20%葡萄糖，每个注射点0.5–1ml。每次2–3个注射点，间隔3–4周2–3次治疗。建议超声引导。这刺激肌腱-腱鞘胶原修复并减少慢性病例中限制滑动的纤维性增厚。
@@ -1555,7 +1549,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
           <strong>TFCC增生疗法：</strong><br>
           TFCC周边（尺骨附着处外侧15–20%）有血液供应，可在增殖性刺激下愈合。中央乏血管区不能——中央撕裂若有症状需手术清创。靶点：尺骨茎突基底TFCC的尺骨附着处。注射：超声确认下在尺腕间隙注射1ml 20%葡萄糖或PRP。3–4次治疗。<br><br>
           <strong>增生疗法同步传统针灸：</strong><br>
-          SJ4阳池（三焦经原穴——整体统领腕关节），SJ5外关，PC7（轻柔针刺），GB41足临泣（带脉主穴——全身统领侧方关节松弛）。这些提供全身经络调节，同时增生疗法重建结构性组织。
+          SJ4阳池（三焦经原穴——整体统领腕关节），SJ5外关，大陵（PC7）（轻柔针刺），GB41足临泣（带脉主穴——全身统领侧方关节松弛）。这些提供全身经络调节，同时增生疗法重建结构性组织。
         </span>
       </div>
     </div>
@@ -1602,7 +1596,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <span class="zh"><strong>推理链：</strong>甲状腺功能减退（阳虚→湿邪潴留→腕管组织水肿）+每日8小时键盘使用（持续腕关节屈曲→心包经在大陵处慢性压迫）+超重（全身痰湿背景）=三个生湿因素汇聚于腕管。夜间为主症状确认静脉淤血机制。无运动受累（无大鱼际萎缩）=无需手术的良好预后。苔腻+脉滑=痰湿证型确证。<br><br>
       <strong>证型：</strong>痰湿阻络（痰湿阻滞心包经于大陵处）<br><br>
       <strong>治疗计划（8周10次）：</strong><br>
-      每次针灸：PC7（轻柔，0.3寸），PC6，PC3，LU9。浮针：前臂中段向远端扫散。电针：PC6-PC7，2Hz，20分钟。<br>
+      每次针灸：大陵（PC7）（轻柔，0.3寸），内关（PC6），曲泽（PC3），太渊（LU9）。浮针：前臂中段向远端扫散。电针：内关（PC6）-大陵（PC7），2Hz，20分钟。<br>
       生活方式：夜间腕部中立位托（第1天即处方）。键盘人体工学评估。增加体力活动（改善全身湿邪循环）。<br>
       方药：蠲痹汤加减+海桐皮+丝瓜络+苍术（加强燥湿）。同时协调全科医师优化甲状腺药物。<br>
       8周结果：Phalen右侧现55秒（原25秒）。夜间醒来：0–1次/晚（原3–4次）。患者满意，拒绝手术会诊。</span></div>
@@ -1620,7 +1614,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <strong>8 weeks total — outcome:</strong> Pain 0/10. Finkelstein's negative. Fully returned to baby lifting. Herbal: Ba Zhen Tang (post-partum Blood nourishment) to address the constitutional root.</span>
       <span class="zh"><strong>推理链：</strong>重复性桡侧偏斜抱婴儿+产后血虚→APL和EPB肌肉慢性过载→APL肌腹产生MTrP→增加对桡骨茎突腱鞘的张力→腱鞘发炎→De Quervain腱鞘炎。产后血虚使腱鞘更易感（大肠经之筋血液濡养不足）。APL中的活跃MTrP是近端驱动因素——治疗MTrP减少对腱鞘的负荷。<br><br>
       <strong>第1次治疗：</strong><br>
-      激痛点：右侧APL MTrP——获得LTR。Finkelstein征立即减轻（50%）。浮针：前臂桡侧中段→向桡侧腕部远端扫散。再灌注：轻柔拇指对指。LI4，LI5（轻柔），TE5。局部敷金黄散于桡骨茎突。<br><br>
+      激痛点：右侧APL MTrP——获得LTR。Finkelstein征立即减轻（50%）。浮针：前臂桡侧中段→向桡侧腕部远端扫散。再灌注：轻柔拇指对指。合谷（LI4），阳溪（LI5）（轻柔），外关（TE5）。局部敷金黄散于桡骨茎突。<br><br>
       <strong>3次治疗后（3周）：</strong>疼痛3/10（原8/10）。Finkelstein阳性但明显减轻。直接触诊腱鞘仍压痛——局部组织尚未完全愈合。<br><br>
       <strong>第4次——增生疗法决策：</strong>尽管显著改善，但仍有腱鞘压痛和Finkelstein阳性=肌腱鞘组织本身需要增殖性刺激。超声引导下在桡骨茎突APL/EPB腱鞘注射15%葡萄糖（1ml）。共2次治疗。<br><br>
       <strong>总计8周——结果：</strong>疼痛0/10。Finkelstein阴性。完全恢复抱婴儿。方药：八珍汤（产后养血）以处理体质根本。</span></div>
@@ -1720,7 +1714,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Wind-Cold blocks the Taiyang channel → BL channel at the occiput contracts → posterior headache + neck stiffness</span><span class="zh">风寒阻滞太阳经→膀胱经在枕部收缩→后头痛+颈项强直</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Occipital headache with neck stiffness; cold drafts or weather trigger; aversion to cold; possible mild fever; no nausea; white tongue coat; floating-tight pulse</span><span class="zh">枕部头痛伴颈项强直；寒风或寒冷天气触发；恶寒；可有轻度发热；无恶心；苔白；脉浮紧</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic + treatment</span><span class="zh">气机+治疗</span></span><span class="pc-val"><span class="en">: Cold contracts the Taiyang channel sinews at the occiput. GB20, BL10, GV16 locally + GV14, BL12 to dispel Wind-Cold from the surface. SI3 distally to open Du Mai. Ge Gen Tang herbal formula. Cupping on BL channel of upper back draws Wind-Cold out. Usually resolves within 1–3 treatments.</span><span class="zh">出不畅：寒邪收缩枕部太阳经之筋。局部GB20、BL10、GV16+GV14、BL12从表面祛风散寒。远端SI3开通督脉。葛根汤。上背部膀胱经拔罐驱出风寒。通常1–3次治疗即可缓解。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic + treatment</span><span class="zh">气机+治疗</span></span><span class="pc-val"><span class="en">: Cold contracts the Taiyang channel sinews at the occiput. GB20, BL10, GV16 locally + GV14, BL12 to dispel Wind-Cold from the surface. SI3 distally to open Du Mai. Ge Gen Tang herbal formula. Cupping on BL channel of upper back draws Wind-Cold out. Usually resolves within 1–3 treatments.</span><span class="zh">出不畅：寒邪收缩枕部太阳经之筋。局部GB20、天柱（BL10）、风府（GV16）+大椎（GV14）、BL12从表面祛风散寒。远端SI3开通督脉。葛根汤。上背部膀胱经拔罐驱出风寒。通常1–3次治疗即可缓解。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -1728,7 +1722,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Phlegm-Damp accumulates in the head → blocks the clear Yang from ascending → heavy, foggy, pressure headache</span><span class="zh">痰湿积聚于头部→阻碍清阳上升→头部沉重、昏蒙、压迫性头痛</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Heavy, pressing, foggy headache; bilateral; worse in the morning and in humid weather; nausea and dizziness; foggy thinking; greasy food worsens; overweight constitution; greasy tongue coat; slippery-soggy pulse</span><span class="zh">头部沉重、压迫、昏蒙；双侧；晨起和潮湿天气加重；恶心和头晕；思维迷糊；油腻食物加重；体型偏胖；苔腻；脉滑濡</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic + treatment</span><span class="zh">气机+治疗</span></span><span class="pc-val"><span class="en">: Spleen Qi fails to ascend clear Yang — Phlegm-Damp sinks downward and fills the space that clear Yang should occupy in the head. GV20 (lifting), ST36 + SP9 (resolve Damp from middle), ST40 (master Phlegm point). Herbal: Ban Xia Bai Zhu Tian Ma Tang — the definitive formula for Phlegm-Damp headache with dizziness.</span><span class="zh">升不及：脾气不能升清阳——痰湿下陷并占据清阳应在头部占据的空间。GV20（升提），ST36+SP9（从中焦化湿），ST40（化痰主穴）。方药：半夏白术天麻汤——痰湿头痛伴头晕的确定性方剂。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic + treatment</span><span class="zh">气机+治疗</span></span><span class="pc-val"><span class="en">: Spleen Qi fails to ascend clear Yang — Phlegm-Damp sinks downward and fills the space that clear Yang should occupy in the head. GV20 (lifting), ST36 + SP9 (resolve Damp from middle), ST40 (master Phlegm point). Herbal: Ban Xia Bai Zhu Tian Ma Tang — the definitive formula for Phlegm-Damp headache with dizziness.</span><span class="zh">升不及：脾气不能升清阳——痰湿下陷并占据清阳应在头部占据的空间。百会（GV20）（升提），足三里（ST36）+阴陵泉（SP9）（从中焦化湿），丰隆（ST40）（化痰主穴）。方药：半夏白术天麻汤——痰湿头痛伴头晕的确定性方剂。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -1736,7 +1730,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Insufficient Qi-Blood fails to nourish the brain → chronic empty headache, worse after exertion</span><span class="zh">气血不足，不能滋养脑髓→慢性空虚性头痛，劳累后加重</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Dull, continuous headache; worse after exertion or menstruation; relieved by rest and lying down; pallor; fatigue; palpitations; poor sleep; pale tongue; thin-weak pulse</span><span class="zh">隐隐持续头痛；劳累或月经后加重；休息和平卧后缓解；面色苍白；疲乏；心悸；睡眠差；舌淡；脉细弱</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">ST36, SP6, BL17, BL20, GV20 (tonifying — lifts Qi to nourish the brain). Moxa on ST36 and GV20. Herbal: Ba Zhen Tang for Blood deficiency; Bu Zhong Yi Qi Tang if Qi deficiency predominates with prolapse sensation.</span><span class="zh">ST36、SP6、BL17、BL20、GV20（补法——升气以滋养脑髓）。ST36和GV20艾灸。方药：血虚为主用八珍汤；气虚为主伴下坠感用补中益气汤。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">ST36, SP6, BL17, BL20, GV20 (tonifying — lifts Qi to nourish the brain). Moxa on ST36 and GV20. Herbal: Ba Zhen Tang for Blood deficiency; Bu Zhong Yi Qi Tang if Qi deficiency predominates with prolapse sensation.</span><span class="zh">足三里（ST36）、三阴交（SP6）、膈俞（BL17）、脾俞（BL20）、百会（GV20）（补法——升气以滋养脑髓）。ST36和GV20艾灸。方药：血虚为主用八珍汤；气虚为主伴下坠感用补中益气汤。</span></span></div>
       </div>
     </div>
   </div>
@@ -1750,13 +1744,13 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-why"><span class="en"><strong>Acute attack — immediate intervention:</strong><br> GB20 (strong reducing, needle toward contralateral eye — opens the Shaoyang channel at the Wind Pool), SJ5 (master of Yang Wei Mai — governs the lateral head and temporal region), GB43 (ying-spring of GB — clears GB channel Heat directly at the source), LV3 (calms Liver Yang). During an attack, needle with strong reducing method — the patient should feel strong needle sensation (de qi) propagating toward the head.<br><br> <strong>Trigger point for cervicogenic migraine:</strong><br> Upper trapezius MTrP (reproducing temporal headache) + suboccipital MTrPs (reproducing occipital component). Release these first — the migraine often aborts when the cervicogenic trigger is removed. This works because the trigeminocervical nucleus (C1–C3) receives input from both the trigeminal nerve and the upper cervical nerves — cervical trigger points sensitise this nucleus, lowering the threshold for migraine attacks.<br><br> <strong>Inter-ictal prevention (between attacks):</strong><br> GV20 (reducing — anchors rising Yang), PC6 (calms Liver Qi through the Heart-Liver axis), KI3 (nourishes Kidney Yin — the root that anchors Liver Yang). Weekly treatment for 8–12 weeks reduces attack frequency by 50–70% in most patients.<br><br> <strong>EA for migraine prevention:</strong><br> GB20-GB20 bilateral at 2Hz low frequency, 30 minutes per session. Low-frequency EA raises serotonin (5-HT) levels — the same mechanism as triptans, but sustained rather than acute.</span>
       <span class="zh">
         <strong>急性发作——即时干预：</strong><br>
-        GB20（强泻法，朝向对侧眼角针刺——在风池开通少阳经），SJ5外关（阳维脉主穴——统领头侧和颞区），GB43侠溪（胆经荥穴——直接从来源清胆经热），LV3太冲（平息肝阳）。发作时强泻法针刺——患者应感受到朝向头部传导的强烈针感（得气）。<br><br>
+        风池（GB20）（强泻法，朝向对侧眼角针刺——在风池开通少阳经），SJ5外关（阳维脉主穴——统领头侧和颞区），GB43侠溪（胆经荥穴——直接从来源清胆经热），LV3太冲（平息肝阳）。发作时强泻法针刺——患者应感受到朝向头部传导的强烈针感（得气）。<br><br>
         <strong>颈源性偏头痛的激痛点：</strong><br>
         上斜方肌MTrP（重现颞部头痛）+枕下MTrP（重现枕部成分）。首先松解这些——颈源性触发器被移除时偏头痛常中止发作。这有效是因为三叉颈核（C1–C3）同时接受三叉神经和上颈椎神经的输入——颈椎激痛点使此核敏化，降低偏头痛发作阈值。<br><br>
         <strong>发作间期预防：</strong><br>
-        GV20（泻法——锚固上升的阳气），PC6内关（通过心肝轴平息肝气），KI3太溪（滋养肾阴——锚固肝阳之根）。每周治疗8–12周，大多数患者发作频率减少50–70%。<br><br>
+        百会（GV20）（泻法——锚固上升的阳气），PC6内关（通过心肝轴平息肝气），KI3太溪（滋养肾阴——锚固肝阳之根）。每周治疗8–12周，大多数患者发作频率减少50–70%。<br><br>
         <strong>偏头痛预防电针：</strong><br>
-        双侧GB20-GB20，2Hz低频，每次30分钟。低频电针提高血清素（5-HT）水平——与曲坦类机制相同，但持续而非急性。
+        双侧GB20-风池（GB20），2Hz低频，每次30分钟。低频电针提高血清素（5-HT）水平——与曲坦类机制相同，但持续而非急性。
       </span></div>
     </div>
     <div class="formula-card">
@@ -1764,10 +1758,10 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-indication"><span class="en">Channel-specific points by headache location. Always combine with distal points for systemic regulation.</span><span class="zh">按头痛位置的经络特定穴位。始终与远端穴位联合以全身调节。</span></div>
       <div class="formula-why"><span class="en"><strong>Temporal (GB channel — migraine):</strong> GB20, GB8 , GB5 , SJ5, GB43. Reducing method. No moxa.<br> <strong>Occipital (BL/Du channel):</strong> GB20, BL10, GV16 , GV15, SI3 (distal). For Wind-Cold: moxa on GV14, cupping on BL channel upper back.<br> <strong>Vertex (GV/Liver channel):</strong> GV20, LV3 (distal, reducing). EX-HN1 (4 points around GV20 — calms Shen and anchors Yang). For Liver Yang: reducing GV20 strongly draws down rising Yang.<br> <strong>Frontal (ST/LI channel):</strong> ST8 , EX-HN3 , LI4 (distal). For Stomach Fire: ST44 (reducing). For deficiency: ST36 (reinforcing).<br> <strong>For all headaches — essential distal points:</strong><br> LI4 : "face and mouth, seek Hegu" — commands the entire head. GB39: hui-meeting of Marrow — nourishes the brain directly. Always include one or both.</span>
       <span class="zh">
-        <strong>颞部（胆经——偏头痛）：</strong>GB20、GB8率谷、GB5悬颅、SJ5、GB43。泻法。禁灸。<br>
-        <strong>枕部（膀胱/督脉）：</strong>GB20、BL10、GV16风府、GV15、SI3（远端）。风寒：GV14灸，上背膀胱经拔罐。<br>
-        <strong>巅顶（督脉/肝经）：</strong>GV20、LV3（远端，泻法）。EX-HN1四神聪（GV20周围4点——安神锚阳）。肝阳：强泻GV20引降上升的阳气。<br>
-        <strong>前额（胃/大肠经）：</strong>ST8头维、EX-HN3印堂、LI4（远端）。胃火：ST44内庭（泻法）。虚证：ST36（补法）。<br>
+        <strong>颞部（胆经——偏头痛）：</strong>风池（GB20）、GB8率谷、GB5悬颅、外关（SJ5）、侠溪（GB43）。泻法。禁灸。<br>
+        <strong>枕部（膀胱/督脉）：</strong>风池（GB20）、天柱（BL10）、GV16风府、哑门（GV15）、后溪（SI3）（远端）。风寒：GV14灸，上背膀胱经拔罐。<br>
+        <strong>巅顶（督脉/肝经）：</strong>百会（GV20）、太冲（LV3）（远端，泻法）。EX-HN1四神聪（GV20周围4点——安神锚阳）。肝阳：强泻GV20引降上升的阳气。<br>
+        <strong>前额（胃/大肠经）：</strong>ST8头维、EX-HN3印堂、合谷（LI4）（远端）。胃火：ST44内庭（泻法）。虚证：足三里（ST36）（补法）。<br>
         <strong>所有头痛的必要远端穴：</strong><br>
         LI4合谷："面口合谷收"——统领整个头部。GB39绝骨：髓之会穴——直接滋养脑髓。始终包含其中一个或两者。
       </span></div>
@@ -1805,7 +1799,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="case-intake"><span class="en"><strong>Patient:</strong> 44F, graphic designer. 8 years of right temporal headaches diagnosed as migraine, 2–3 per month, lasting 12–24 hours. Mild nausea but no vomiting, no aura. Sumatriptan partially effective. Also has chronic right neck stiffness. Headaches worse on heavy deadline weeks. On examination: Right upper trapezius MTrP — pressing reproduces her exact "migraine" at the right temple. Right suboccipital MTrP — reproduces the occipital component. Right cervical rotation restricted to 55°. Spurling's negative. Wiry pulse, greasy tongue coat.</span><span class="zh"><strong>患者：</strong>女，44岁，平面设计师。诊断为偏头痛8年，每月2–3次，持续12–24小时。轻度恶心但不呕吐，无先兆。舒马曲坦部分有效。同时有慢性右侧颈部僵硬。繁忙截止日期周头痛加重。检查：右上斜方肌MTrP——按压精确重现右颞"偏头痛"。右枕下MTrP——重现枕部成分。右颈椎旋转受限至55°。Spurling阴性。脉弦，苔腻。</span></div>
       <div class="case-reasoning"><span class="en"><strong>The diagnostic moment:</strong> Pressing the right upper trapezius MTrP exactly reproduces her "migraine." This is the decisive finding — this headache is cervicogenic, not migrainous. The "mild nausea" without vomiting is from the SCM MTrP (SCM triggers nausea through its proprioceptive connections to the vagus). No aura = no cortical spreading depression = not classic migraine. Deadline worsening = Liver Qi stagnation intensifying the upper trapezius tension (stress → Liver Qi → GB channel tension → MTrP sensitisation → headache).<br><br> <strong>Treatment (6 sessions over 5 weeks):</strong> Trigger point right upper trapezius + suboccipitals each session. FSN upper thoracic → cervical. GB20 (strong reducing), SI3, TE5. After session 3: zero headaches in the past 2 weeks. After session 6: patient reports one mild headache in the past month, resolved without medication. She can now self-treat by stretching the upper trapezius when she feels the familiar "pre-headache shoulder tension."<br><br> <strong>Herbal:</strong> Juan Bi Tang modified (Phlegm-stasis in GB channel) + + . 4 weeks.</span>
       <span class="zh"><strong>诊断时刻：</strong>按压右上斜方肌MTrP精确重现其"偏头痛"。这是决定性发现——此头痛为颈源性，而非偏头痛性。"轻度恶心"无呕吐来自胸锁乳突肌MTrP（SCM通过其本体感受器与迷走神经的联系触发恶心）。无先兆=无皮质扩散性抑制=非经典偏头痛。截止日期加重=肝气郁滞加重上斜方肌张力（压力→肝气→胆经张力→MTrP敏化→头痛）。<br><br>
-      <strong>治疗（5周6次）：</strong>每次激痛点——右上斜方肌+枕下肌群。浮针——上胸椎→颈部。GB20（强泻法），SI3，TE5。第3次后：过去2周无头痛。第6次后：患者报告过去一个月只有一次轻微头痛，无需药物自行缓解。她现在能通过拉伸上斜方肌自我处理，当感受到熟悉的"头痛前肩部紧张"时。<br><br>
+      <strong>治疗（5周6次）：</strong>每次激痛点——右上斜方肌+枕下肌群。浮针——上胸椎→颈部。风池（GB20）（强泻法），后溪（SI3），外关（TE5）。第3次后：过去2周无头痛。第6次后：患者报告过去一个月只有一次轻微头痛，无需药物自行缓解。她现在能通过拉伸上斜方肌自我处理，当感受到熟悉的"头痛前肩部紧张"时。<br><br>
       <strong>方药：</strong>蠲痹汤加减（胆经痰瘀）+葛根+柴胡。4周。</span></div>
       <div class="case-outcome"><span class="en"><strong>Teaching point — the most important clinical message of this module:</strong> The MTrP palpation test is the single most valuable examination for differentiating cervicogenic from migrainous headache. If you press a cervical MTrP and it reproduces the headache exactly, treat the neck — not the head. This simple examination skill can transform a patient who has been managing their headaches with medication for years into one who is cured in 6 sessions.</span><span class="zh"><strong>教学要点——本模块最重要的临床信息：</strong>MTrP触诊试验是区分颈源性与偏头痛性头痛最有价值的单一检查。若按压颈部MTrP精确重现头痛，治疗颈部——而非头部。这个简单的检查技能能将一个多年靠药物管理头痛的患者，转变为6次治疗痊愈的患者。</span></div>
     </div>
@@ -1839,7 +1833,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <span class="zh">
     <strong>三角肌外侧（大肠经——LI15肩髃）：</strong>冈上肌腱和肩峰下滑囊区域。肩关节外展60–120°时疼痛（痛弧）。大肠经统领肩外侧和上臂。最常见的肩袖撞击部位。<br>
     <strong>肩前部（肺/心包经——LU1中府，LU2云门）：</strong>肱二头肌长头腱和关节囊前部。前屈和内旋时疼痛。肩胛下肌腱撕裂和肱二头肌腱病。<br>
-    <strong>肩后部（小肠/三焦经——SI9，SI10，TE14）：</strong>冈下肌和小圆肌区域。外旋和向后触及时疼痛。后关节囊紧张和后肩袖病变。<br>
+    <strong>肩后部（小肠/三焦经——肩贞（SI9），臑俞（SI10），TE14）：</strong>冈下肌和小圆肌区域。外旋和向后触及时疼痛。后关节囊紧张和后肩袖病变。<br>
     <strong>肩锁关节（胆/三焦经——GB21肩井区域）：</strong>肩部顶端的肩锁关节。疼痛特定于肩锁关节线，水平内收和过头动作加重。
   </span></div>
 </div>
@@ -1862,7 +1856,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     </div>
   </div>
   <div class="interpret-grid">
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Lateral + painful arc 60–120° + LI channel</span><span class="zh">外侧+痛弧60–120°+大肠经</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Supraspinatus — LI15</span><span class="zh">冈上肌——LI15</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Lateral + painful arc 60–120° + LI channel</span><span class="zh">外侧+痛弧60–120°+大肠经</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Supraspinatus — LI15</span><span class="zh">冈上肌——肩髃（LI15）</span></span></div></div>
     <div class="interpret-row"><span class="interpret-label"><span class="en">All directions restricted + severe night pain</span><span class="zh">各方向受限+剧烈夜间痛</span></span><div class="chips"><span class="chip chip-indigo"><span class="en">Frozen Shoulder — capsule</span><span class="zh">冻结肩——关节囊</span></span></div></div>
     <div class="interpret-row"><span class="interpret-label"><span class="en">Anterior + resisted flexion pain + LU channel</span><span class="zh">前方+抗阻屈曲痛+肺经</span></span><div class="chips"><span class="chip chip-mid"><span class="en">Bicipital tendon — LU</span><span class="zh">肱二头肌腱——肺经</span></span></div></div>
     <div class="interpret-row"><span class="interpret-label"><span class="en">Posterior + external rotation limited + SI/SJ</span><span class="zh">后方+外旋受限+小肠/三焦</span></span><div class="chips"><span class="chip chip-mid"><span class="en">Infraspinatus — SI/SJ</span><span class="zh">冈下肌——小肠/三焦</span></span></div></div>
@@ -1886,7 +1880,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
     <div class="pp-title" style="margin-top:16px"><span class="en">Key MTrP Locations — Shoulder Region</span><span class="zh">肩部关键MTrP位置</span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Infraspinatus</span><span class="zh">冈下肌</span></span><span class="pc-val"><span class="en">Location: mid-belly of the infraspinatus, below the spine of the scapula, medial to SI9–SI10. Palpate with patient prone, arm by side. Active MTrP refers: anteriorly to the front of the shoulder (mimicking anterior rotator cuff pain) and down the anterolateral arm. This is the single most commonly missed MTrP in shoulder pain — patients feel anterior shoulder pain but the generator is in the posterior infraspinatus. Always palpate the posterior shoulder when evaluating anterior shoulder pain.</span>
-    <span class="zh">位置：冈下肌腹部，肩胛冈下方，SI9–SI10内侧。患者俯卧，手臂置于体侧时触诊。活跃MTrP牵涉：向前至肩前方（模拟前肩袖疼痛）和向下至前外侧手臂。这是肩痛中最常被遗漏的单一MTrP——患者感受到肩前疼痛，但产生源在后方冈下肌。评估肩前疼痛时始终触诊肩后部。</span></span></div>
+    <span class="zh">位置：冈下肌腹部，肩胛冈下方，肩贞（SI9）–SI10内侧。患者俯卧，手臂置于体侧时触诊。活跃MTrP牵涉：向前至肩前方（模拟前肩袖疼痛）和向下至前外侧手臂。这是肩痛中最常被遗漏的单一MTrP——患者感受到肩前疼痛，但产生源在后方冈下肌。评估肩前疼痛时始终触诊肩后部。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Subscapularis</span><span class="zh">肩胛下肌</span></span><span class="pc-val"><span class="en">Location: anterior surface of the scapula (between scapula and rib cage). Access by lifting the lateral border of the scapula with the patient's hand behind their back. Active MTrP refers: posterior shoulder and posterior upper arm ("back of the shoulder" pain). Also produces wrist pain on the dorsal aspect — a referred pain pattern that puzzles patients and clinicians when wrist pain follows a shoulder injury. Classic in frozen shoulder — subscapularis is the primary contracted muscle.</span>
     <span class="zh">位置：肩胛骨前面（肩胛骨和肋骨笼之间）。患者手置于背后时，通过抬起肩胛外侧缘进入触诊。活跃MTrP牵涉：肩后方和上臂后方（"肩背痛"）。也产生腕背疼痛——一种令患者和临床医师困惑的牵涉痛模式，当腕痛跟随肩部损伤时。在冻结肩中经典——肩胛下肌是主要的挛缩肌肉。</span></span></div>
   </div>
@@ -1909,7 +1903,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">All planes of ROM restricted; severe night pain waking from sleep; cannot dress, wash hair; middle-aged onset; gradual progression over months; may be triggered by minor injury or immobilisation; thick-dry tongue; wiry-tight pulse</span><span class="zh">各方向ROM受限；剧烈夜间疼痛从睡眠中痛醒；不能穿衣、洗头；中年起病；数月内逐渐进展；可能由轻微损伤或制动触发；苔厚干；脉弦紧</span></span></div>
         <div class="pc-row"><span class="pc-label"><span class="en">Qi dynamic + treatment priority</span><span class="zh">气机+治疗优先</span></span><span class="pc-val"><span class="en">(capsular Phlegm-stasis — all channels blocked simultaneously): The entire glenohumeral capsule has contracted and filled with fibrotic Phlegm-stasis — this is why ALL movements are restricted (not just one). Treatment priority by phase:<br> Freezing phase (increasing pain): strong reducing method, BL17+SP10 (Blood stasis), ST40 (Phlegm). Prolotherapy to the capsule to break the fibrotic cycle.<br> Frozen phase (maximum stiffness): aggressive ROM — needling + passive mobilisation during needling. Subscapularis MTrP release is critical.<br> Thawing phase: support the recovery — reinforcing + moxa, Huang Qi Gui Zhi Wu Wu Tang.</span>
         <span class="zh">出不畅（关节囊痰瘀——所有经络同时被阻塞）：整个盂肱关节囊已收缩并充满纤维性痰瘀——这就是为何所有方向均受限（不只是一个方向）。按阶段的治疗优先顺序：<br>
-        冻结期（疼痛增加）：强泻法，BL17+SP10（血瘀），ST40（痰）。关节囊增生疗法以打破纤维化循环。<br>
+        冻结期（疼痛增加）：强泻法，膈俞（BL17）+血海（SP10）（血瘀），丰隆（ST40）（痰）。关节囊增生疗法以打破纤维化循环。<br>
         冻结期（最大僵硬）：积极ROM——针刺期间被动活动关节。肩胛下肌MTrP松解至关重要。<br>
         解冻期：支持恢复——补法+灸，黄芪桂枝五物汤。</span></span></div>
       </div>
@@ -1970,7 +1964,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         GB34阳陵泉：筋之会穴——用于所有肩部肌腱和肌肉病症。患者缓慢抬臂时针刺（运动+针刺协同用于冻结肩）。<br>
         SJ5外关：开通阳维脉——统领肩外侧和臂后方。<br><br>
         <strong>冻结肩"平衡技术"：</strong><br>
-        在健侧针刺镜像穴位（如冻结左肩：在右侧针刺LI15、TE14、SI9）。健侧针刺被操作时要求患者缓慢活动冻结肩。这使用对侧经络刺激来开通冻结的经络——常产生显著的即时ROM改善。
+        在健侧针刺镜像穴位（如冻结左肩：在右侧针刺LI15、肩髎（TE14）、SI9）。健侧针刺被操作时要求患者缓慢活动冻结肩。这使用对侧经络刺激来开通冻结的经络——常产生显著的即时ROM改善。
       </span></div>
     </div>
   </div>
@@ -1997,7 +1991,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="ref-cases">
     <div class="case-card">
       <div class="case-header"><span class="en">Case — Frozen Shoulder: 3-Month Resolution with Capsule Prolotherapy + Needling</span><span class="zh">病案——冻结肩：关节囊增生疗法+针灸，3个月缓解</span></div>
-      <div class="case-intake"><span class="en"><strong>Patient:</strong> 54F, teacher. Right shoulder pain and stiffness progressing for 7 months. Cannot wash hair, dress, or reach behind. Night pain waking her 3–4 times. ROM: Forward flexion 70° (normal 180°), external rotation 10° (normal 60°), internal rotation — hand can only reach the back of the thigh (normal: T7 level). Positive impingement signs but also severe restriction in ALL planes. Active MTrP found in subscapularis (accessed through axilla). Wiry-tight pulse, dark-pale tongue. Diagnosed as frozen shoulder, freezing → frozen transition phase.</span><span class="zh"><strong>患者：</strong>女，54岁，教师。右肩疼痛和僵硬进行性加重7个月。不能洗头、穿衣或向后触及。夜间疼痛每晚醒来3–4次。ROM：前屈70°（正常180°），外旋10°（正常60°），内旋——手只能触及大腿后方（正常：T7水平）。阳性撞击征，但各平面均严重受限。在肩胛下肌发现活跃MTrP（通过腋窝触及）。脉弦紧，舌淡暗。诊断为冻结肩，从冻结期→冻结阶段过渡。</span></div>
+      <div class="case-intake"><span class="en"><strong>Patient:</strong> 54F, teacher. Right shoulder pain and stiffness progressing for 7 months. Cannot wash hair, dress, or reach behind. Night pain waking her 3–4 times. ROM: Forward flexion 70° (normal 180°), external rotation 10° (normal 60°), internal rotation — hand can only reach the back of the thigh (normal: T7 level). Positive impingement signs but also severe restriction in ALL planes. Active MTrP found in subscapularis (accessed through axilla). Wiry-tight pulse, dark-pale tongue. Diagnosed as frozen shoulder, freezing → frozen transition phase.</span><span class="zh"><strong>患者：</strong>女，54岁，教师。右肩疼痛和僵硬进行性加重7个月。不能洗头、穿衣或向后触及。夜间疼痛每晚醒来3–4次。活动范围：前屈70°（正常180°），外旋10°（正常60°），内旋——手只能触及大腿后方（正常：T7水平）。阳性撞击征，但各平面均严重受限。在肩胛下肌发现活跃MTrP（通过腋窝触及）。脉弦紧，舌淡暗。诊断为冻结肩，从冻结期→冻结阶段过渡。</span></div>
       <div class="case-reasoning"><span class="en"><strong>Treatment plan — 12 weeks:</strong><br>
       Week 1–4 (Acupuncture + MTrP, 2×/week):<br>
       Session 1: Subscapularis MTrP (LTR achieved) → external rotation immediately improves to 25°. LI15 (triple-needle), TE14, SI9, GB34 (patient slowly raises arm during needle manipulation). Healthy-side balancing technique.<br>
@@ -2010,7 +2004,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       Herbal throughout: Shu Jing Huo Xue Tang (warming, stasis-moving).</span>
       <span class="zh"><strong>治疗计划——12周：</strong><br>
       第1–4周（针灸+MTrP，每周2次）：<br>
-      第1次：肩胛下肌MTrP（获得LTR）→外旋立即改善至25°。LI15（三向刺），TE14，SI9，GB34（针刺操作时患者缓慢抬臂）。健侧平衡技术。<br>
+      第1次：肩胛下肌MTrP（获得LTR）→外旋立即改善至25°。肩髃（LI15）（三向刺），肩髎（TE14），肩贞（SI9），阳陵泉（GB34）（针刺操作时患者缓慢抬臂）。健侧平衡技术。<br>
       第3周：加浮针于上臂外侧，钟摆再灌注。<br>
       第4周评估：前屈100°，外旋35°。患者报告夜间疼痛减至每晚1次。<br><br>
       第5周——增生疗法：盂肱关节液压扩张，20%葡萄糖7ml+1%利多卡因1ml。注射后立即被动ROM（临床医师带动手臂通过各方向，患者放松）。术后外旋立即达45°。<br><br>
@@ -2055,7 +2049,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     素问曰："腰者肾之府，转摇不能，肾将惫矣"——腰为肾之外候；转动不能，则肾气耗竭。这是基础原则：所有慢性腰痛均以肾虚为根本。急性和实证成分（寒邪、血瘀、湿邪）是当肾虚的腰部对外邪或外伤劳损变得易感时出现的标证。<br><br>
     <strong>经络解剖：</strong><br>
     — 督脉：脊柱中线，棘突，棘间韧带<br>
-    — 膀胱经：双侧椎旁，L1–L5 BL23–BL25水平<br>
+    — 膀胱经：双侧椎旁，L1–L5 肾俞（BL23）–BL25水平<br>
     — 肾经：深层，从前方进入腰椎——肾虚疼痛深沉且与体位相关（长时间站立加重）<br>
     — 胆经：侧髋和髂嵴——常参与实际上是侧髋或骶髂关节的"腰痛"<br><br>
     <strong>临床规律：</strong>中线疼痛=督脉/椎间盘。椎旁疼痛=膀胱经/关节突关节/多裂肌。侧髋至腰部=胆/骶髂关节。深部酸痛伴头晕/耳鸣=肾经。下肢放射痛=参见坐骨神经痛模块。
@@ -2092,9 +2086,9 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   </div>
   <div class="interpret-grid">
     <div class="interpret-row"><span class="interpret-label"><span class="en">Sudden + paravertebral + lifting</span><span class="zh">突然+椎旁+搬重物</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Acute strain — Blood stasis</span><span class="zh">急性扭伤——血瘀</span></span></div></div>
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Cold + warmth relieves + worse in winter</span><span class="zh">冷痛+热敷缓解+冬季加重</span></span><div class="chips"><span class="chip chip-indigo"><span class="en">Cold-Damp Bi — GV4+BL23</span><span class="zh">寒湿痹——GV4+BL23</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Cold + warmth relieves + worse in winter</span><span class="zh">冷痛+热敷缓解+冬季加重</span></span><div class="chips"><span class="chip chip-indigo"><span class="en">Cold-Damp Bi — GV4+BL23</span><span class="zh">寒湿痹——命门（GV4）+肾俞（BL23）</span></span></div></div>
     <div class="interpret-row"><span class="interpret-label"><span class="en">Chronic + exertion worse + dizziness + tinnitus</span><span class="zh">慢性+劳累加重+头晕+耳鸣</span></span><div class="chips"><span class="chip chip-mid"><span class="en">Kidney Xu — root pattern</span><span class="zh">肾虚——根本证型</span></span></div></div>
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Heavy + humid worse + obese + greasy coat</span><span class="zh">重着+潮湿加重+肥胖+苔腻</span></span><div class="chips"><span class="chip chip-amber"><span class="en">Damp-Cold Bi — BL23+SP9</span><span class="zh">寒湿痹——BL23+SP9</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Heavy + humid worse + obese + greasy coat</span><span class="zh">重着+潮湿加重+肥胖+苔腻</span></span><div class="chips"><span class="chip chip-amber"><span class="en">Damp-Cold Bi — BL23+SP9</span><span class="zh">寒湿痹——肾俞（BL23）+阴陵泉（SP9）</span></span></div></div>
   </div>
 </div>
 
@@ -2130,7 +2124,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Trauma/strain disrupts Qi-Blood flow in the BL channel → Blood stasis → fixed, severe, sharp low back pain</span><span class="zh">外伤/扭伤破坏膀胱经气血流动→血瘀→固定、剧烈、锐性腰痛</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Acute onset with clear trauma event; fixed, localised, severe; worse at night; cannot rotate or bend; spasm visible; palpable, exquisitely tender MTrPs; dark tongue; choppy or wiry pulse</span><span class="zh">有明确外伤事件的急性起病；固定、局部、剧烈；夜间加重；不能旋转或弯腰；可见痉挛；可触及极度压痛的MTrP；舌暗；脉涩或弦</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment priority</span><span class="zh">治疗优先顺序</span></span><span class="pc-val"><span class="en">Trigger point first (QL + multifidus MTrPs — the stasis nodules). Then FSN at the thoracolumbar junction, sweeping toward lumbar. BL40 (he-sea of BL — the classical "back-back, seek Weizhong" distant point; for acute lumbar pain, strong stimulation or prick-to-bleed BL40 produces dramatic relief). GV26 (strong stimulation while patient slowly attempts to move — the "moving needle" technique for acute lumbar strain). Herbal: Shen Tong Zhu Yu Tang.</span><span class="zh">首先激痛点（QL+多裂肌MTrP——瘀血结节）。然后在胸腰交界处浮针，朝向腰部扫散。BL40委中（膀胱经合穴——经典"腰背委中求"远端穴；急性腰痛强刺激或点刺放血BL40产生显著缓解）。GV26（患者缓慢尝试活动时强刺激——急性腰扭伤的"运动针刺"技术）。方药：身痛逐瘀汤。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment priority</span><span class="zh">治疗优先顺序</span></span><span class="pc-val"><span class="en">Trigger point first (QL + multifidus MTrPs — the stasis nodules). Then FSN at the thoracolumbar junction, sweeping toward lumbar. BL40 (he-sea of BL — the classical "back-back, seek Weizhong" distant point; for acute lumbar pain, strong stimulation or prick-to-bleed BL40 produces dramatic relief). GV26 (strong stimulation while patient slowly attempts to move — the "moving needle" technique for acute lumbar strain). Herbal: Shen Tong Zhu Yu Tang.</span><span class="zh">首先激痛点（QL+多裂肌MTrP——瘀血结节）。然后在胸腰交界处浮针，朝向腰部扫散。BL40委中（膀胱经合穴——经典"腰背委中求"远端穴；急性腰痛强刺激或点刺放血BL40产生显著缓解）。水沟（GV26）（患者缓慢尝试活动时强刺激——急性腰扭伤的"运动针刺"技术）。方药：身痛逐瘀汤。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -2160,7 +2154,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <span class="zh">
         <strong>所有腰痛的四个必要远端穴：</strong><br>
         BL40委中：膀胱经合穴——"腰背委中求"。急性扭伤强刺激或点刺放血。膀胱经贯穿整个背部——BL40从一个远端穴调节整条经络。急性腰痛最有力的单一穴位。<br>
-        GV26（人中/水沟）：配合"运动针刺"技术使用——强刺激GV26同时患者缓慢活动疼痛区域。此组合通过督脉对所有阳经的控制打破急性肌肉痉挛。急性腰扭伤导致运动障碍的经典穴。<br>
+        水沟（GV26）（人中/水沟）：配合"运动针刺"技术使用——强刺激GV26同时患者缓慢活动疼痛区域。此组合通过督脉对所有阳经的控制打破急性肌肉痉挛。急性腰扭伤导致运动障碍的经典穴。<br>
         KI3太溪：肾之原穴——慢性或肾虚证型始终包括。肾阳虚：补法+灸。<br>
         SP6三阴交：同时调节肝脾肾——滋养防止复发的阴血根基。<br><br>
         <strong>局部穴：</strong><br>
@@ -2170,7 +2164,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         BL25大肠俞+BL26关元俞：L4/L5水平——针对特定椎间盘节段。<br>
         阿是穴：始终包含最压痛的椎旁点（MTrP位置=阿是穴=精确的血瘀部位）。<br><br>
         <strong>腰痛电针：</strong><br>
-        双侧BL23-BL23（或GV4-BL23），密疏波2/100Hz，30分钟。此组合同时产生肌肉放松（高频成分）和抗炎内啡肽释放（低频成分）。
+        双侧BL23-肾俞（BL23）（或GV4-BL23），密疏波2/100Hz，30分钟。此组合同时产生肌肉放松（高频成分）和抗炎内啡肽释放（低频成分）。
       </span></div>
     </div>
   </div>
@@ -2206,15 +2200,15 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="case-intake"><span class="en"><strong>Patient:</strong> 38M, warehouse worker. Acute severe right-sided low back pain after lifting a heavy box 2 days ago — heard a "pop." Cannot bend or rotate right. Pain 9/10 at rest. Active right paravertebral spasm visible. Palpation: exquisitely tender QL MTrP right side (reproduces main pain), multifidus MTrP at L4 right (reproduces deep aching). SLR negative bilaterally. No leg symptoms. Dark tongue, choppy pulse.</span><span class="zh"><strong>患者：</strong>男，38岁，仓库工人。2天前搬重箱子后急性严重右侧腰痛——听到"啪"声。不能弯腰或向右旋转。静止痛9/10。可见右侧椎旁活动性肌痉挛。触诊：右侧QL MTrP极度压痛（重现主要疼痛），右L4多裂肌MTrP（重现深部酸痛）。双侧SLR阴性。无下肢症状。舌暗，脉涩。</span></div>
       <div class="case-reasoning"><span class="en"><strong>Treatment Session 1:</strong><br> GV26 (strong stimulation — patient slowly attempts left rotation while needle is manipulated). Pain drops from 9 to 6/10, rotation improves to 20°.<br> BL40 left (strong stimulation, prick-to-bleed 3 drops — the "" technique). Pain drops to 4/10.<br> Right QL MTrP — LTR achieved. Pain drops to 2/10. Patient can now rotate 30°.<br> Right multifidus L4 MTrP — LTR achieved. Deep aching resolves.<br> FSN: thoracolumbar junction, sweeping toward right lumbar. Reperfusion: slow lumbar rotation. Pain 1/10. Full ROM restored.<br> GV4 (moxa — warms the Du Mai, prevents Cold from setting into the strained channel).<br><br> <strong>Session 2 (3 days later):</strong> Patient pain 2/10 (residual). Repeat QL + multifidus. FSN. BL23 bilateral (reinforcing + moxa — begin nourishing the Kidney root). Pain 0/10.<br> Herbal: Shen Tong Zhu Yu Tang 5 days + Du Huo Ji Sheng Tang 2 weeks (transition to root treatment).</span>
       <span class="zh"><strong>第1次治疗：</strong><br>
-      GV26（强刺激——针刺操作时患者缓慢尝试向左旋转）。疼痛从9降至6/10，旋转改善至20°。<br>
+      水沟（GV26）（强刺激——针刺操作时患者缓慢尝试向左旋转）。疼痛从9降至6/10，旋转改善至20°。<br>
       左BL40（强刺激，点刺放血3滴——"腰背委中求"技术）。疼痛降至4/10。<br>
       右侧QL MTrP——获得LTR。疼痛降至2/10。患者现在能旋转30°。<br>
       右侧多裂肌L4 MTrP——获得LTR。深部酸痛消除。<br>
       浮针：胸腰交界处，朝向右侧腰部扫散。再灌注：缓慢腰部旋转。疼痛1/10。全ROM恢复。<br>
-      GV4（灸——温督脉，防止寒邪进入扭伤的经络）。<br><br>
+      命门（GV4）（灸——温督脉，防止寒邪进入扭伤的经络）。<br><br>
       <strong>第2次（3天后）：</strong>患者疼痛2/10（残余）。重复QL+多裂肌。浮针。双侧BL23（补法+灸——开始滋养肾之根本）。疼痛0/10。<br>
       方药：身痛逐瘀汤5天+独活寄生汤2周（过渡至根本治疗）。</span></div>
-      <div class="case-outcome"><span class="en"><strong>Teaching point — the GV26 + BL40 opening sequence:</strong> For acute lumbar pain with severe spasm, starting with GV26 (Du Mai control of all Yang) + BL40 (BL channel distant point) BEFORE touching the lumbar area allows the channel to relax from a distance before local needling. This sequence reduces the pain and spasm significantly before the clinician approaches the acutely sensitive lumbar region — making the local trigger point work faster and more comfortable for the patient. Always start distally for acute pain, then work locally.</span><span class="zh"><strong>教学要点——GV26+BL40开通序列：</strong>对于伴严重痉挛的急性腰痛，在触及腰部区域之前先从GV26（督脉统控所有阳经）+BL40（膀胱经远端穴）开始，允许经络从远处放松后再进行局部针刺。此序列在临床医师接近急性敏感腰区之前显著减轻疼痛和痉挛——使局部激痛点工作更快速且对患者更舒适。急性疼痛始终先从远端开始，然后再局部。</span></div>
+      <div class="case-outcome"><span class="en"><strong>Teaching point — the GV26 + BL40 opening sequence:</strong> For acute lumbar pain with severe spasm, starting with GV26 (Du Mai control of all Yang) + BL40 (BL channel distant point) BEFORE touching the lumbar area allows the channel to relax from a distance before local needling. This sequence reduces the pain and spasm significantly before the clinician approaches the acutely sensitive lumbar region — making the local trigger point work faster and more comfortable for the patient. Always start distally for acute pain, then work locally.</span><span class="zh"><strong>教学要点——水沟（GV26）+BL40开通序列：</strong>对于伴严重痉挛的急性腰痛，在触及腰部区域之前先从GV26（督脉统控所有阳经）+委中（BL40）（膀胱经远端穴）开始，允许经络从远处放松后再进行局部针刺。此序列在临床医师接近急性敏感腰区之前显著减轻疼痛和痉挛——使局部激痛点工作更快速且对患者更舒适。急性疼痛始终先从远端开始，然后再局部。</span></div>
     </div>
   </div>
 </div>
@@ -2266,7 +2260,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       </span>
       <span class="zh">
         <strong>从臀部沿腿后方/外侧至足部的电击/锐痛，沿特定路径，延伸至膝下：</strong>真性根性病变。L5：腿外侧至足背和大拇指。S1：小腿后方至足跟和足外侧（小趾）。膝关节以下的皮节精确性是确诊征象。SLR将阳性。经络：膀胱经（S1=腿部膀胱经）或胆经（L5=腿部胆经）。<br><br>
-        <strong>臀部、大腿后方深部酸痛，但膝关节以下模糊或缺失：</strong>梨状肌综合征或骶髂关节牵涉痛。无特定皮节模式。坐着加重（髋关节屈曲牵伸梨状肌）。FABER可能阳性（骶髂关节）或FAIR试验阳性（梨状肌）。经络：GB30（梨状肌）或膀胱/胆经交汇（骶髂关节）。<br><br>
+        <strong>臀部、大腿后方深部酸痛，但膝关节以下模糊或缺失：</strong>梨状肌综合征或骶髂关节牵涉痛。无特定皮节模式。坐着加重（髋关节屈曲牵伸梨状肌）。FABER可能阳性（骶髂关节）或FAIR试验阳性（梨状肌）。经络：环跳（GB30）（梨状肌）或膀胱/胆经交汇（骶髂关节）。<br><br>
         <strong>坐着加重，尤其在硬表面上：</strong>梨状肌——坐着压迫梨状肌并刺激坐骨神经对抗坐骨。<br><br>
         <strong>上坡行走或长时间行走加重：</strong>侧方椎管狭窄——椎管在后伸时变窄（上坡行走伸展腰椎）。患者特征性弯腰向前行走（屈曲开放椎管）。中医：肾虚+痰瘀使脊髓通道变窄。
       </span></div>
@@ -2274,7 +2268,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   </div>
   <div class="interpret-grid">
     <div class="interpret-row"><span class="interpret-label"><span class="en">Electric below knee + dermatomal + SLR+</span><span class="zh">膝下电击+皮节分布+SLR+</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Radiculopathy L4-S1</span><span class="zh">根性病变L4-S1</span></span></div></div>
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Buttock deep ache + sitting worse + FAIR+</span><span class="zh">臀部深部酸痛+坐着加重+FAIR+</span></span><div class="chips"><span class="chip chip-amber"><span class="en">Piriformis — GB30 MTrP</span><span class="zh">梨状肌——GB30 MTrP</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Buttock deep ache + sitting worse + FAIR+</span><span class="zh">臀部深部酸痛+坐着加重+FAIR+</span></span><div class="chips"><span class="chip chip-amber"><span class="en">Piriformis — GB30 MTrP</span><span class="zh">梨状肌——环跳（GB30） MTrP</span></span></div></div>
     <div class="interpret-row"><span class="interpret-label"><span class="en">Posterior thigh ache + FABER+ + no neuro</span><span class="zh">大腿后方酸痛+FABER++无神经征</span></span><div class="chips"><span class="chip chip-mid"><span class="en">SIJ referral — Prolotherapy</span><span class="zh">骶髂关节牵涉——增生疗法</span></span></div></div>
   </div>
 </div>
@@ -2289,7 +2283,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-row"><span class="pc-label"><span class="en">Straight Leg Raise (SLR)</span><span class="zh">直腿抬高试验（SLR）</span></span><span class="pc-val"><span class="en"><strong>Procedure:</strong> Patient supine. Passively raise the straightened leg. At the angle where leg pain reproduces (not just hamstring tightness), dorsiflex the ankle (Bragard's modification).<br><strong>Positive:</strong> Reproduction of leg pain (below knee, in dermatomal distribution) with ankle dorsiflexion at less than 70°.<br><strong>Sensitivity 91%, Specificity 26%.</strong> Highly sensitive for L4/5 or L5/S1 disc herniation with nerve root involvement. Low specificity means many positives are not true disc — always combine with neurological screen.<br><strong>TCM:</strong> SLR stretches the BL channel — a positive SLR at low angle confirms BL channel compression at the lumbar level (L5/S1 = BL root). The ankle dorsiflexion addition is the "channel tension test" — it adds tension to the entire BL channel simultaneously.</span>
     <span class="zh"><strong>操作：</strong>患者仰卧。被动抬高伸直的腿。在重现腿痛的角度（不只是腘绳肌紧张），背屈踝关节（Bragard修改版）。<br><strong>阳性：</strong>在小于70°时踝背屈重现腿痛（膝关节以下，皮节分布）。<br><strong>灵敏度91%，特异性26%。</strong>对L4/5或L5/S1椎间盘突出伴神经根受累高度敏感。低特异性意味着许多阳性结果不是真正的椎间盘——始终与神经学筛查联合。<br><strong>中医：</strong>SLR牵伸膀胱经——低角度阳性SLR确认腰部水平的膀胱经压迫（L5/S1=膀胱经根）。踝背屈补充是"经络张力试验"——同时对整条膀胱经增加张力。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">FAIR Test (Piriformis)</span><span class="zh">FAIR试验（梨状肌）</span></span><span class="pc-val"><span class="en"><strong>Procedure:</strong> Patient lateral decubitus (painful side up), hip flexed 60°, knee flexed 60°. Examiner applies downward pressure on the knee (internal rotation + adduction).<br><strong>Positive:</strong> Buttock and leg pain reproduced — piriformis is stretched over the sciatic nerve.<br><strong>Meaning:</strong> Piriformis syndrome. Treatment target: GB30 (piriformis MTrP), not BL23 (nerve root). SLR will typically be negative or only mildly positive in piriformis syndrome.<br><strong>TCM:</strong> GB30 is directly at the sciatic notch where the piriformis passes. The FAIR test positively stretches the GB channel at GB30 — confirming that the obstruction is at the GB30 level, not at the lumbar BL root level.</span>
-    <span class="zh"><strong>操作：</strong>患者侧卧（患侧朝上），髋关节屈曲60°，膝关节屈曲60°。检查者对膝关节施加向下压力（内旋+内收）。<br><strong>阳性：</strong>臀部和腿部疼痛重现——梨状肌在坐骨神经上被牵伸。<br><strong>意义：</strong>梨状肌综合征。治疗靶点：GB30（梨状肌MTrP），而非BL23（神经根）。梨状肌综合征中SLR通常阴性或仅轻度阳性。<br><strong>中医：</strong>GB30直接位于梨状肌穿过的坐骨切迹处。FAIR试验阳性牵伸了GB30处的胆经——确认阻塞在GB30水平，而非腰部膀胱经根水平。</span></span></div>
+    <span class="zh"><strong>操作：</strong>患者侧卧（患侧朝上），髋关节屈曲60°，膝关节屈曲60°。检查者对膝关节施加向下压力（内旋+内收）。<br><strong>阳性：</strong>臀部和腿部疼痛重现——梨状肌在坐骨神经上被牵伸。<br><strong>意义：</strong>梨状肌综合征。治疗靶点：环跳（GB30）（梨状肌MTrP），而非BL23（神经根）。梨状肌综合征中SLR通常阴性或仅轻度阳性。<br><strong>中医：</strong>GB30直接位于梨状肌穿过的坐骨切迹处。FAIR试验阳性牵伸了GB30处的胆经——确认阻塞在GB30水平，而非腰部膀胱经根水平。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Neurological Screen L4–S1</span><span class="zh">神经学筛查L4–S1</span></span><span class="pc-val"><span class="en">L4: medial shin sensory + quadriceps strength + patellar reflex. L5: dorsum of foot + first web space + EHL (big toe extension strength). S1: lateral foot + little toe + Achilles reflex. Asymmetric findings confirm nerve root level. Reduced Achilles reflex (S1) combined with lateral foot numbness + SLR positive = classic L5/S1 disc herniation with S1 root compression = BL channel root blockage. Weakness below 4/5 = urgent imaging referral.</span>
     <span class="zh">L4：小腿内侧感觉+股四头肌肌力+膝反射。L5：足背+第一趾蹼间隙+拇长伸肌（大拇指伸展肌力）。S1：足外侧+小趾+跟腱反射。不对称发现确认神经根水平。跟腱反射减弱（S1）结合足外侧麻木+SLR阳性=经典L5/S1椎间盘突出伴S1根压迫=膀胱经根阻塞。肌力低于4/5=紧急影像转诊。</span></span></div>
     <div class="pc-row"><span class="pc-label"><span class="en">Piriformis Palpation (the most direct test)</span><span class="zh">梨状肌触诊（最直接的试验）</span></span><span class="pc-val"><span class="en">Patient prone. Palpate the muscle belly of the piriformis — from the lateral border of the sacrum (lateral to GV2) to the greater trochanter (GB30). Palpate diagonally across the buttock. Active piriformis MTrP: exquisitely tender nodule in the belly, pressing it reproduces the buttock pain and may send electricity down the posterior leg (directly compresses the sciatic nerve). This positive finding (MTrP that reproduces sciatica) is diagnostic of piriformis syndrome and treatment immediately targets this MTrP.</span>
@@ -2304,7 +2298,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Cold-Damp obstructs the BL channel at the lumbar root → dermatomal leg pain with cold, heavy character</span><span class="zh">寒湿阻滞腰部膀胱经根→皮节下肢疼痛伴冷重性质</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Radiating leg pain with cold and heavy quality; worsened by cold and damp; cold sensation in the leg; positive SLR; possible mild neurological deficit; white greasy coat; deep-tight pulse</span><span class="zh">放射性下肢疼痛伴冷重性质；寒湿加重；腿部冷感；SLR阳性；可能有轻微神经系统缺损；苔白腻；脉沉紧</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">GV4 + BL23 (moxa), GB30 (strong stimulation — the master point for hip and leg pain via the GB channel), BL40, BL57 (for calf symptoms), BL60 (for ankle and lateral foot). Along the BL channel of the affected leg — needle following the dermatomal path. Moxa along the channel for Cold type. Du Huo Ji Sheng Tang + added.</span><span class="zh">GV4+BL23（灸），GB30（强刺激——通过胆经处理髋和下肢疼痛的主穴），BL40，BL57承山（小腿症状），BL60昆仑（踝和足外侧）。沿患侧膀胱经——沿皮节路径针刺。寒型沿经络灸。独活寄生汤+加附子。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">GV4 + BL23 (moxa), GB30 (strong stimulation — the master point for hip and leg pain via the GB channel), BL40, BL57 (for calf symptoms), BL60 (for ankle and lateral foot). Along the BL channel of the affected leg — needle following the dermatomal path. Moxa along the channel for Cold type. Du Huo Ji Sheng Tang + added.</span><span class="zh">命门（GV4）+肾俞（BL23）（灸），环跳（GB30）（强刺激——通过胆经处理髋和下肢疼痛的主穴），委中（BL40），BL57承山（小腿症状），BL60昆仑（踝和足外侧）。沿患侧膀胱经——沿皮节路径针刺。寒型沿经络灸。独活寄生汤+加附子。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -2312,7 +2306,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Piriformis MTrP obstructs the GB channel at GB30 → pseudo-sciatica — buttock and leg pain without true nerve root compression</span><span class="zh">梨状肌MTrP阻滞胆经于GB30→假性坐骨神经痛——无真正神经根压迫的臀部和腿部疼痛</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Deep buttock ache; sitting worsens; pain into posterior thigh and sometimes calf; FAIR test positive; SLR negative or mildly positive; NO dermatomal specificity below knee; NO reflex changes; palpable piriformis MTrP reproduces main pain</span><span class="zh">臀部深部酸痛；坐着加重；疼痛延伸至大腿后方有时至小腿；FAIR试验阳性；SLR阴性或轻度阳性；膝关节以下无皮节特异性；无反射改变；可触及的梨状肌MTrP重现主要疼痛</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">GB30 piriformis MTrP (the definitive treatment — needle directly into the piriformis belly through the GB30 point, seeking LTR of the entire piriformis). Depth: 4–6cm (piriformis is deep). After LTR: immediate FAIR test improvement. FSN in the gluteal area post-MTrP release. GB34, GB39 distally. BL40 for the posterior leg component. Herbal: Juan Bi Tang + + .</span><span class="zh">GB30梨状肌MTrP（确定性治疗——通过GB30穴直接针入梨状肌腹，寻求整块梨状肌LTR）。深度：4–6cm（梨状肌位于深层）。LTR后：FAIR试验立即改善。MTrP松解后在臀部区域浮针。远端GB34、GB39。BL40用于腿后部成分。方药：蠲痹汤+牛膝+木瓜。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">GB30 piriformis MTrP (the definitive treatment — needle directly into the piriformis belly through the GB30 point, seeking LTR of the entire piriformis). Depth: 4–6cm (piriformis is deep). After LTR: immediate FAIR test improvement. FSN in the gluteal area post-MTrP release. GB34, GB39 distally. BL40 for the posterior leg component. Herbal: Juan Bi Tang + + .</span><span class="zh">GB30梨状肌MTrP（确定性治疗——通过GB30穴直接针入梨状肌腹，寻求整块梨状肌LTR）。深度：4–6cm（梨状肌位于深层）。LTR后：FAIR试验立即改善。MTrP松解后在臀部区域浮针。远端GB34、悬钟（GB39）。BL40用于腿后部成分。方药：蠲痹汤+牛膝+木瓜。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -2337,7 +2331,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         <strong>臀部坐骨神经痛浮针：</strong><br>
         在大腿后外侧（臀横纹下方）插入浮针，朝向梨状肌区域扫散。再灌注：临床医师扫散时患者进行髋关节内旋（牵伸梨状肌的动作）。此组合对在活跃MTrP松解后持续梨状肌综合征的筋膜粘连成分非常有效。<br><br>
         <strong>根性病变针灸——膀胱经方案：</strong><br>
-        沿精确经络：BL23（根）→BL40（关键——"腰背委中求"）→BL57承山→BL60昆仑→BL67至阴。患侧所有穴位针刺。BL23-BL40和BL40-BL60配对电针2Hz。这直接刺激受压神经根的轴突再生——低频电针有记录的神经修复效果（上调受压神经根的BDNF和NGF）。
+        沿精确经络：肾俞（BL23）（根）→委中（BL40）（关键——"腰背委中求"）→BL57承山→BL60昆仑→BL67至阴。患侧所有穴位针刺。肾俞（BL23）-BL40和BL40-BL60配对电针2Hz。这直接刺激受压神经根的轴突再生——低频电针有记录的神经修复效果（上调受压神经根的BDNF和NGF）。
       </span></div>
     </div>
     <div class="formula-card">
@@ -2375,7 +2369,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <strong>治疗：</strong><br>
       第1次：GB30深刺（获得LTR——戏剧性腿部抽搐）。FAIR立即改善。疼痛3/10（原7/10）。<br>
       第2次：重复GB30 MTrP+臀部→大腿后方浮针。疼痛1/10。<br>
-      第3–4次：维持+GB34、GB39、BL40。疼痛0/10。FAIR阴性。<br>
+      第3–4次：维持+阳陵泉（GB34）、悬钟（GB39）、委中（BL40）。疼痛0/10。FAIR阴性。<br>
       建议：驾驶姿势矫正（升高座椅，腰部支撑以减少髋关节屈曲）。拉伸：每日数字4拉伸（梨状肌拉伸）。患者停用加巴喷丁。</span></div>
       <div class="case-outcome"><span class="en"><strong>Teaching point — the most important message in sciatica management:</strong> A positive MRI finding does not equal the clinical diagnosis. "Mild disc bulge" is present in the majority of people over 40 with NO back pain — it is the background noise of ageing. The clinical examination (SLR, FAIR, palpation) determines the actual pain generator. When the FAIR test reproduces the exact symptoms and the piriformis MTrP sends electricity down the leg, that is the diagnosis and the treatment target — regardless of what the MRI shows. Thousands of patients are unnecessarily medicated for "disc sciatica" when they actually have piriformis syndrome treatable in 4 sessions.</span><span class="zh"><strong>教学要点——坐骨神经痛处理中最重要的信息：</strong>MRI阳性发现不等于临床诊断。"轻度椎间盘膨出"在40岁以上无腰痛的大多数人中存在——这是衰老的背景噪音。临床检查（SLR、FAIR、触诊）决定实际疼痛产生源。当FAIR试验精确重现症状，梨状肌MTrP向腿部发送电感时，那就是诊断和治疗靶点——无论MRI显示什么。数千名患者被不必要地用"椎间盘坐骨神经痛"的药物治疗，而他们实际上有梨状肌综合征，4次治疗即可缓解。</span></div>
     </div>
@@ -2432,7 +2426,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         <strong>膝内侧关节线痛+下楼加重+McMurray阳性：</strong>内侧半月板撕裂——膝内侧关节线处脾/肝经。半月板撕裂常产生"卡锁"感（碎片嵌入关节）和局部关节线压痛。<br><br>
         <strong>膝前疼痛+上楼加重+年轻活跃患者：</strong>髌股综合征（跑步膝）——髌骨处胃经。髌骨在负重时向外侧偏移，产生膝前疼痛。上楼加重（髌股压力在上楼时显著增加）。<br><br>
         <strong>膝外侧疼痛+跑步+"带状"紧绷：</strong>髂胫束（ITB）综合征——胆经膝外侧。髂胫束在约30°屈曲时（正好是每次跑步着地的角度）摩擦股骨外侧髁。Gerdy结节处点状压痛（GB34区域）。<br><br>
-        <strong>弥漫性膝痛+摩擦感+晨僵不足30分钟+老年：</strong>膝关节骨关节炎——主要为肾虚（骨骼退变）+痰瘀（骨质增生）。磨擦感（摩擦音）是软骨丢失的结构性表现。SP9（内侧关节）和GB34（外侧关节）均受累。<br><br>
+        <strong>弥漫性膝痛+摩擦感+晨僵不足30分钟+老年：</strong>膝关节骨关节炎——主要为肾虚（骨骼退变）+痰瘀（骨质增生）。磨擦感（摩擦音）是软骨丢失的结构性表现。阴陵泉（SP9）（内侧关节）和GB34（外侧关节）均受累。<br><br>
         <strong>打软腿+扭转损伤后：</strong>韧带松弛——ACL（前交叉韧带，向内扭转）或MCL（内侧打击）。ACL和半月板撕裂是部分撕裂的增生疗法区；完全ACL断裂为手术适应症。
       </span></div>
     </div>
@@ -2469,7 +2463,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-qi"><span class="en">Kidney Xu → cartilage degeneration → Phlegm-stasis fills the joint space → chronic knee pain with crepitus and stiffness</span><span class="zh">肾虚→软骨退变→痰瘀充填关节间隙→慢性膝痛伴摩擦感和僵硬</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Key symptoms</span><span class="zh">主要症状</span></span><span class="pc-val"><span class="en">Bilateral (or unilateral) knee pain; crepitus; morning stiffness under 30 min; worsened by prolonged activity, cold, and damp; bony enlargement; may have effusion; elderly; concurrent low back soreness; pale tongue; deep-weak pulse at chi</span><span class="zh">双侧（或单侧）膝痛；摩擦感；晨僵不足30分钟；长时间活动、寒冷和潮湿加重；骨性增大；可有积液；老年；同时伴腰酸；舌淡；尺脉沉弱</span></span></div>
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment layers</span><span class="zh">治疗层次</span></span><span class="pc-val"><span class="en">VMO MTrP release (reduces medial knee load) + FSN at mid-thigh level + traditional acupuncture SP9/GB34/ST35/EX-LE5 (the two knee eyes) with moxa + Prolotherapy to the joint capsule and collateral ligaments for instability (dextrose or PRP intra-articular). Du Huo Ji Sheng Tang long-term. Intra-articular PRP: 2–3ml directly into the joint space — the most evidence-supported Prolotherapy application for knee OA, with documented cartilage-protective and symptom-reducing effects.</span><span class="zh">VMO MTrP松解（减少膝内侧负荷）+大腿中段浮针+传统针灸SP9/GB34/ST35/EX-LE5（两膝眼）加灸+关节囊和侧副韧带不稳的增生疗法（葡萄糖或PRP关节内注射）。独活寄生汤长期服用。关节内PRP：2–3ml直接注射入关节间隙——膝关节骨关节炎增生疗法中证据最充分的应用，有记录的软骨保护和症状缓解效果。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment layers</span><span class="zh">治疗层次</span></span><span class="pc-val"><span class="en">VMO MTrP release (reduces medial knee load) + FSN at mid-thigh level + traditional acupuncture SP9/GB34/ST35/EX-LE5 (the two knee eyes) with moxa + Prolotherapy to the joint capsule and collateral ligaments for instability (dextrose or PRP intra-articular). Du Huo Ji Sheng Tang long-term. Intra-articular PRP: 2–3ml directly into the joint space — the most evidence-supported Prolotherapy application for knee OA, with documented cartilage-protective and symptom-reducing effects.</span><span class="zh">VMO MTrP松解（减少膝内侧负荷）+大腿中段浮针+传统针灸SP9/阳陵泉（GB34）/犊鼻（ST35）/EX-LE5（两膝眼）加灸+关节囊和侧副韧带不稳的增生疗法（葡萄糖或PRP关节内注射）。独活寄生汤长期服用。关节内PRP：2–3ml直接注射入关节间隙——膝关节骨关节炎增生疗法中证据最充分的应用，有记录的软骨保护和症状缓解效果。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
@@ -2495,11 +2489,11 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         GB34阳陵泉：胆经合穴+筋之会穴——统领所有筋腱病症。膝外侧疼痛、髂胫束综合征和膝部所有肌腱/韧带病症最重要的穴位。患者缓慢屈伸膝关节时针刺。<br><br>
         <strong>证型加减：</strong><br>
         膝内侧（脾经）：SP10血海，LV8曲泉。寒湿加灸。湿热泻法。<br>
-        膝外侧（胆经）：GB33，远端GB41足临泣。实证泻法；虚证平补平泻。<br>
-        膝前部（胃经）：ST34梁丘（胃经郄穴——急性膝前痛），ST36，ST40。<br>
-        骨关节炎肾虚根本：KI3、BL23、GV4（灸）——滋养体质肾虚基础。<br><br>
+        膝外侧（胆经）：膝阳关（GB33），远端GB41足临泣。实证泻法；虚证平补平泻。<br>
+        膝前部（胃经）：ST34梁丘（胃经郄穴——急性膝前痛），足三里（ST36），丰隆（ST40）。<br>
+        骨关节炎肾虚根本：太溪（KI3）、肾俞（BL23）、命门（GV4）（灸）——滋养体质肾虚基础。<br><br>
         <strong>膝关节骨关节炎电针：</strong><br>
-        SP9-SP10内侧对+GB34-ST35外侧对，密疏波2/100Hz，30分钟。此组合通过内啡肽介导的抗炎途径减轻滑膜炎症并促进软骨细胞保护。
+        阴陵泉（SP9）-SP10内侧对+阳陵泉（GB34）-ST35外侧对，密疏波2/100Hz，30分钟。此组合通过内啡肽介导的抗炎途径减轻滑膜炎症并促进软骨细胞保护。
       </span></div>
     </div>
   </div>
@@ -2523,9 +2517,9 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="case-intake"><span class="en"><strong>Patient:</strong> 67F. Bilateral knee OA, right worse than left. Right knee pain 7/10 daily, swelling, crepitus. Cannot climb stairs. Orthopedic surgeon recommended total knee replacement. Wants to try TCM first. X-ray: Kellgren-Lawrence grade 3 (moderate-severe OA). Palpation: VMO MTrP bilateral (reproduces anterior knee pain). SP9 and GB34 both markedly tender. No effusion currently. Pale tongue, deep-weak pulse.</span><span class="zh"><strong>患者：</strong>女，67岁。双侧膝关节骨关节炎，右侧重于左侧。右膝疼痛7/10每日，肿胀，摩擦感。不能爬楼梯。骨科医师建议全膝关节置换。想先尝试中医。X线：Kellgren-Lawrence 3级（中至重度骨关节炎）。触诊：双侧VMO MTrP（重现膝前疼痛）。SP9和GB34均明显压痛。目前无积液。舌淡，脉沉弱。</span></div>
       <div class="case-reasoning"><span class="en"><strong>Treatment plan (16 weeks):</strong><br> Weeks 1–4 (acupuncture 2×/week): VMO MTrP bilateral + FSN mid-thigh → knee. EA: SP9-ST35 + GB34-EX-LE5, 2/100Hz. Moxa knee eyes. Pain drops from 7 to 4/10 by week 4. Can now climb 5 stairs.<br> Week 5 — PRP: right knee intra-articular PRP 3ml under ultrasound. Also periarticular injections at MCL and LCL attachments (15% dextrose, 1ml each).<br> Weeks 6–10 (acupuncture 1×/week): Continue above. KI3, BL23, GV4 moxa added (Kidney root treatment). Pain 2/10 by week 10. Stairs tolerated fully.<br> Week 12 — second PRP (right knee). Week 16 assessment: Pain 1/10. Patient declines knee replacement.<br> Herbal throughout: Du Huo Ji Sheng Tang (with , , modifications).</span>
       <span class="zh"><strong>治疗计划（16周）：</strong><br>
-      第1–4周（针灸每周2次）：双侧VMO MTrP+大腿中段→膝部浮针。电针：SP9-ST35+GB34-EX-LE5，密疏波2/100Hz。膝眼灸。第4周疼痛从7降至4/10。现在能爬5级楼梯。<br>
+      第1–4周（针灸每周2次）：双侧VMO MTrP+大腿中段→膝部浮针。电针：阴陵泉（SP9）-犊鼻（ST35）+阳陵泉（GB34）-EX-LE5，密疏波2/100Hz。膝眼灸。第4周疼痛从7降至4/10。现在能爬5级楼梯。<br>
       第5周——PRP：右膝超声引导下关节内PRP 3ml。同时在MCL和LCL附着处关节周围注射（15%葡萄糖，每处1ml）。<br>
-      第6–10周（针灸每周1次）：继续上述。加KI3、BL23、GV4灸（肾虚根本治疗）。第10周疼痛2/10。完全耐受爬楼梯。<br>
+      第6–10周（针灸每周1次）：继续上述。加KI3、肾俞（BL23）、GV4灸（肾虚根本治疗）。第10周疼痛2/10。完全耐受爬楼梯。<br>
       第12周——第二次PRP（右膝）。第16周评估：疼痛1/10。患者拒绝膝关节置换。<br>
       全程方药：独活寄生汤（加牛膝、木瓜、薏苡仁加减）。</span></div>
       <div class="case-outcome"><span class="en"><strong>Teaching point:</strong> Intra-articular PRP for knee OA has Level 1 evidence — multiple RCTs demonstrate superior outcomes to corticosteroid injection and hyaluronic acid, with effects lasting 12–24 months. It is now a mainstream regenerative medicine intervention. The combination of intra-articular PRP (structural) + acupuncture (channel regulation + endorphin-mediated anti-inflammation) + herbal (Kidney-Liver constitutional root) represents the full integrative approach for knee OA — addressing the structure, the channel, and the constitutional root simultaneously.</span><span class="zh"><strong>教学要点：</strong>膝关节骨关节炎关节内PRP已有1级证据——多项随机对照试验证明优于皮质类固醇注射和透明质酸，效果持续12–24个月。它现在是主流再生医学干预措施。关节内PRP（结构）+针灸（经络调节+内啡肽介导的抗炎）+中药（肾肝体质根本）的组合代表膝关节骨关节炎的完整整合方法——同时处理结构、经络和体质根本。</span></div>
@@ -2580,8 +2574,8 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     </div>
   </div>
   <div class="interpret-grid">
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Lateral epicondyle + wrist extension + LI11</span><span class="zh">外上髁+腕伸展抗阻+LI11</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Tennis elbow — LI channel</span><span class="zh">网球肘——大肠经</span></span></div></div>
-    <div class="interpret-row"><span class="interpret-label"><span class="en">Medial epicondyle + wrist flexion + HT3</span><span class="zh">内上髁+腕屈曲抗阻+HT3</span></span><div class="chips"><span class="chip chip-mid"><span class="en">Golfer's elbow — HT/PC channel</span><span class="zh">高尔夫球肘——心/心包经</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Lateral epicondyle + wrist extension + LI11</span><span class="zh">外上髁+腕伸展抗阻+曲池（LI11）</span></span><div class="chips"><span class="chip chip-verm"><span class="en">Tennis elbow — LI channel</span><span class="zh">网球肘——大肠经</span></span></div></div>
+    <div class="interpret-row"><span class="interpret-label"><span class="en">Medial epicondyle + wrist flexion + HT3</span><span class="zh">内上髁+腕屈曲抗阻+少海（HT3）</span></span><div class="chips"><span class="chip chip-mid"><span class="en">Golfer's elbow — HT/PC channel</span><span class="zh">高尔夫球肘——心/心包经</span></span></div></div>
   </div>
 </div>
 
@@ -2608,12 +2602,12 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-header"><div class="pc-name"><span class="en">LI Channel Stasis — Lateral Epicondylitis</span><span class="zh">大肠经瘀阻证——网球肘</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Excess</span><span class="zh">实证</span></span></div></div>
       <div class="pc-qi"><span class="en">Repetitive extensor loading → Blood stasis accumulates at LI11 enthesis → tendinopathy → enthesopathy → chronic pain on gripping</span><span class="zh">反复伸肌负荷→LI11止点处血瘀积聚→肌腱病→止点病→握持时慢性疼痛</span></div>
       <div class="pc-body">
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment layers</span><span class="zh">治疗层次</span></span><span class="pc-val"><span class="en">Layer 1: Forearm extensor MTrP (releases the upstream tension). Layer 2: FSN at the mid-forearm, sweeping toward LI11. Layer 3: Prolotherapy at the ECRB enthesis at the lateral epicondyle — 15–20% dextrose or PRP, 0.5–1ml, 2–3 sessions at 3-week intervals. Layer 4: LI11 (reducing), LI4, TE5, LU7 (opens the LI channel from the source). Herbal: Juan Bi Tang + + (unblocks the channels and sinews of the elbow).</span><span class="zh">第一层：前臂伸肌MTrP（松解上游张力）。第二层：前臂中段浮针，朝向LI11扫散。第三层：外上髁ECRB止点增生疗法——15–20%葡萄糖或PRP，0.5–1ml，间隔3周2–3次。第四层：LI11（泻法），LI4，TE5，LU7（从来源开通大肠经）。方药：蠲痹汤+姜黄+络石藤（疏通肘部经络和筋腱）。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment layers</span><span class="zh">治疗层次</span></span><span class="pc-val"><span class="en">Layer 1: Forearm extensor MTrP (releases the upstream tension). Layer 2: FSN at the mid-forearm, sweeping toward LI11. Layer 3: Prolotherapy at the ECRB enthesis at the lateral epicondyle — 15–20% dextrose or PRP, 0.5–1ml, 2–3 sessions at 3-week intervals. Layer 4: LI11 (reducing), LI4, TE5, LU7 (opens the LI channel from the source). Herbal: Juan Bi Tang + + (unblocks the channels and sinews of the elbow).</span><span class="zh">第一层：前臂伸肌MTrP（松解上游张力）。第二层：前臂中段浮针，朝向LI11扫散。第三层：外上髁ECRB止点增生疗法——15–20%葡萄糖或PRP，0.5–1ml，间隔3周2–3次。第四层：曲池（LI11）（泻法），合谷（LI4），外关（TE5），列缺（LU7）（从来源开通大肠经）。方药：蠲痹汤+姜黄+络石藤（疏通肘部经络和筋腱）。</span></span></div>
       </div>
     </div>
     <div class="pattern-card" onclick="toggleCard(this)">
       <div class="pc-header"><div class="pc-name"><span class="en">HT/PC Channel Stasis — Medial Epicondylitis</span><span class="zh">心包经瘀阻证——高尔夫球肘</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Excess</span><span class="zh">实证</span></span></div></div>
-      <div class="pc-qi"><span class="en">Repetitive flexor/pronator loading → Blood stasis at HT3/PC3 medial epicondyle enthesis → medial elbow pain</span><span class="zh">反复屈肌/旋前肌负荷→HT3/PC3内上髁止点血瘀→肘内侧疼痛</span></div>
+      <div class="pc-qi"><span class="en">Repetitive flexor/pronator loading → Blood stasis at HT3/PC3 medial epicondyle enthesis → medial elbow pain</span><span class="zh">反复屈肌/旋前肌负荷→少海（HT3）/PC3内上髁止点血瘀→肘内侧疼痛</span></div>
       <div class="pc-body">
         <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Forearm flexor MTrP (medial forearm, 4–6cm distal to medial epicondyle). HT3 (the he-sea of HT, directly at the medial epicondyle — reducing method or gentle stimulation; avoid aggressive needling near the ulnar nerve). Prolotherapy at the medial epicondyle common flexor-pronator enthesis — 15% dextrose, 0.5ml, with ultrasound to avoid the ulnar nerve. CAUTION: medial elbow Prolotherapy requires care to stay anterior to the ulnar nerve groove.</span><span class="zh">前臂屈肌MTrP（前臂内侧，内上髁远端4–6cm）。HT3少海（心经合穴，直接位于内上髁处——泻法或轻柔刺激；避免在尺神经旁积极针刺）。内上髁屈肌-旋前肌总腱止点增生疗法——15%葡萄糖，0.5ml，超声引导避开尺神经。注意：肘内侧增生疗法需要注意保持在尺神经沟的前方。</span></span></div>
       </div>
@@ -2638,7 +2632,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
         <strong>慢性网球肘的治疗序列：</strong><br>
         第1步：前臂伸肌MTrP（LI11远端3–4cm）——获得LTR。Cozen试验疼痛强度立即减轻。<br>
         第2步：前臂中段浮针→LI11方向。再灌注：临床医师扫散时患者缓慢对抗重力伸腕。<br>
-        第3步：传统针灸——LI11（泻法，0.5寸），LI4，TE5。LI11-LI4密疏波2/100Hz电针。<br>
+        第3步：传统针灸——曲池（LI11）（泻法，0.5寸），合谷（LI4），外关（TE5）。曲池（LI11）-LI4密疏波2/100Hz电针。<br>
         第4步（以上3次治疗后疼痛持续）：增生疗法——外上髁ECRB止点。患者仰卧，肘关节伸展。确定外上髁最压痛点（止点）。针切线方向插入至骨。每注射点注射15%葡萄糖0.5ml×3个点。预期注射后24–48小时酸痛。禁止非甾体类消炎药。<br>
         预期结果：大多数慢性网球肘在第1–3层4–6次治疗后有反应。若第8次后止点残余压痛持续，增生疗法在85–90%的病例中产生缓解。
       </span></div>
@@ -2665,7 +2659,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="case-reasoning"><span class="en"><strong>Why previous treatments failed:</strong> Corticosteroid injections suppress inflammation temporarily but weaken the tendon collagen (steroid-induced tendon weakening is well-documented) — the underlying tendinopathy and MTrP remain untreated. Physiotherapy eccentric exercises are appropriate but insufficient when the upstream MTrP is perpetuating the enthesis overload. The complete treatment must address both the MTrP driver AND the tendon structural repair.<br><br> <strong>Treatment (6 sessions over 8 weeks):</strong><br> Sessions 1–3: Extensor MTrP (LTR achieved each time) + FSN → LI11 + LI11 acupuncture reducing + EA LI11-LI4. Cozen's pain reduces from 9 to 4/10 by session 3.<br> Session 4 — Prolotherapy: ECRB enthesis × 3 injection points (15% dextrose 0.5ml each). Soreness for 2 days post-injection.<br> Sessions 5–6: Continue MTrP + FSN. Cozen's 1/10. Grip strength fully restored.<br> Session 8 (week 12) follow-up: Pain 0/10. Returns to full carpentry. Herbal: Juan Bi Tang + 6 weeks.</span>
       <span class="zh"><strong>之前治疗失败原因：</strong>皮质类固醇注射暂时抑制炎症但削弱肌腱胶原（类固醇诱导的肌腱弱化有充分记录）——潜在的肌腱病和MTrP仍未被处理。物理治疗离心运动是合适的，但当上游MTrP持续使止点过载时效果不足。完整治疗必须同时处理MTrP驱动因素和肌腱结构修复。<br><br>
       <strong>治疗（8周6次）：</strong><br>
-      第1–3次：伸肌MTrP（每次获得LTR）+浮针→LI11+LI11针灸泻法+LI11-LI4电针。Cozen疼痛从9降至4/10（第3次）。<br>
+      第1–3次：伸肌MTrP（每次获得LTR）+浮针→曲池（LI11）+LI11针灸泻法+曲池（LI11）-LI4电针。Cozen疼痛从9降至4/10（第3次）。<br>
       第4次——增生疗法：ECRB止点×3个注射点（每点15%葡萄糖0.5ml）。注射后2天酸痛。<br>
       第5–6次：继续MTrP+浮针。Cozen 1/10。握力完全恢复。<br>
       第8次（第12周）随访：疼痛0/10。恢复全面木工工作。方药：蠲痹汤+姜黄6周。</span></div>
@@ -2701,7 +2695,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <strong>踝内侧（肾/脾经）：</strong>三角韧带，胫骨后肌腱。KI3太溪和SP6三阴交位于此区域。踝内侧扭伤（罕见，更严重）和胫骨后肌腱病（平足痛）。<br>
     <strong>踝外侧（胆/膀胱经）：</strong>距腓前韧带（ATFL）和跟腓韧带（CFL）。GB40丘墟和BL60昆仑是踝外侧穴位。最常见的踝关节扭伤（所有踝扭伤的85%）是外侧内翻——直接靶向GB40处的胆经。<br>
     <strong>足底面（肾经——KI1涌泉）：</strong>跖筋膜，足内在肌。KI1是最远端的肾经穴位——跖筋膜连接肾经最远端的达到点。足底筋膜炎=肾虚+跖侧肾经中的血瘀。<br>
-    <strong>足跟后方（膀胱经——BL60，BL61）：</strong>跟腱及其在跟骨的止点。BL60昆仑和BL61僕參邻近跟腱止点。跟腱病=膀胱经在其最远端筋腱附着处的阻塞。
+    <strong>足跟后方（膀胱经——昆仑（BL60），BL61）：</strong>跟腱及其在跟骨的止点。BL60昆仑和BL61僕參邻近跟腱止点。跟腱病=膀胱经在其最远端筋腱附着处的阻塞。
   </span></div>
 </div>
 <div id="ankle-intake" class="phase-panel active">
@@ -2761,7 +2755,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-header"><div class="pc-name"><span class="en">Blood Stasis — Lateral Ankle Instability</span><span class="zh">血瘀证——踝外侧不稳</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Excess + Structural</span><span class="zh">实证+结构性</span></span></div></div>
       <div class="pc-qi"><span class="en">Acute sprain → Blood stasis in ATFL/CFL → if incompletely healed → ligament laxity → chronic instability and recurrent sprains</span><span class="zh">急性扭伤→ATFL/CFL血瘀→若未完全愈合→韧带松弛→慢性不稳定和反复扭伤</span></div>
       <div class="pc-body">
-        <div class="pc-row"><span class="pc-label"><span class="en">Acute sprain treatment (first 48 hours)</span><span class="zh">急性扭伤治疗（前48小时）</span></span><span class="pc-val"><span class="en">RICE protocol first. GB40 (directly at the ATFL — reduces swelling and stasis), BL60 (lateral ankle), SP6 (activates Blood). DO NOT use heavy needle manipulation on acutely swollen ankle — the tissues are too irritable. Gentle needling + moxa adjacent (NOT directly over the swollen area). SP4 (master of Chong Mai) + PC6 (opening pair) — reduces acute ankle swelling through channel regulation.</span><span class="zh">首先RICE方案。GB40丘墟（直接位于ATFL处——减轻肿胀和血瘀），BL60（踝外侧），SP6（活血）。不要对急性肿胀踝关节进行重手法针刺——组织过于激惹。轻柔针刺+邻近灸（不直接在肿胀区域）。SP4公孙（冲脉主穴）+PC6（配对）——通过经络调节减轻急性踝关节肿胀。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Acute sprain treatment (first 48 hours)</span><span class="zh">急性扭伤治疗（前48小时）</span></span><span class="pc-val"><span class="en">RICE protocol first. GB40 (directly at the ATFL — reduces swelling and stasis), BL60 (lateral ankle), SP6 (activates Blood). DO NOT use heavy needle manipulation on acutely swollen ankle — the tissues are too irritable. Gentle needling + moxa adjacent (NOT directly over the swollen area). SP4 (master of Chong Mai) + PC6 (opening pair) — reduces acute ankle swelling through channel regulation.</span><span class="zh">首先RICE方案。GB40丘墟（直接位于ATFL处——减轻肿胀和血瘀），昆仑（BL60）（踝外侧），三阴交（SP6）（活血）。不要对急性肿胀踝关节进行重手法针刺——组织过于激惹。轻柔针刺+邻近灸（不直接在肿胀区域）。SP4公孙（冲脉主穴）+内关（PC6）（配对）——通过经络调节减轻急性踝关节肿胀。</span></span></div>
         <div class="pc-row"><span class="pc-label"><span class="en">Chronic instability — Prolotherapy (the definitive treatment)</span><span class="zh">慢性不稳定——增生疗法（确定性治疗）</span></span><span class="pc-val"><span class="en">ATFL: inject at the fibular and talar attachments (the two ends of the ligament) — 15% dextrose, 1ml per attachment, ultrasound-guided. CFL: inject at the fibular attachment (just inferior to the lateral malleolus). 3 sessions at 3-week intervals. Begin proprioceptive training (balance board) at week 2. Clinical experience: 90%+ of chronic ankle instability cases respond significantly. Most patients who were recommended ankle stabilisation surgery avoid it after Prolotherapy.</span><span class="zh">ATFL：在腓骨和距骨附着处（韧带两端）注射——15%葡萄糖，每个附着处1ml，超声引导。CFL：在腓骨附着处注射（外踝正下方）。间隔3周3次治疗。第2周开始本体感受训练（平衡板）。临床经验：90%以上的慢性踝关节不稳定病例显著响应。大多数被建议踝关节稳定手术的患者在增生疗法后避免了手术。</span></span></div>
       </div>
     </div>
@@ -2769,7 +2763,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="pc-header"><div class="pc-name"><span class="en">BL Channel Stasis — Achilles Tendinopathy</span><span class="zh">膀胱经瘀阻证——跟腱病</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Excess + Structural</span><span class="zh">实证+结构性</span></span></div></div>
       <div class="pc-qi"><span class="en">Repetitive BL channel loading → Blood stasis in the critical zone (2–6cm above calcaneus) → tendinopathy → morning stiffness and activity pain</span><span class="zh">反复膀胱经负荷→关键区（跟骨上方2–6cm）血瘀→肌腱病→晨僵和活动时疼痛</span></div>
       <div class="pc-body">
-        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Gastrocnemius + soleus MTrP release (reduces calf tension driving the Achilles load). FSN at proximal calf → Achilles. BL57 (master point for Achilles and calf — the he-sea level of the posterior calf BL channel), BL60, BL61. EA BL57-BL60 at 2Hz. Prolotherapy for mid-portion Achilles tendinopathy: 15% dextrose, 0.5ml at 3–4 points along the critical zone, US-guided intratendinous injection. CAUTION: Never inject at the Achilles insertion (risk of rupture). PRP is preferred for significant tendon degeneration. 3 sessions minimum. Combined with eccentric calf exercises (Alfredson protocol) from week 2.</span><span class="zh">腓肠肌+比目鱼肌MTrP松解（减少驱动跟腱负荷的小腿张力）。小腿近端浮针→跟腱。BL57承山（跟腱和小腿主穴——小腿后方膀胱经的合穴水平），BL60，BL61。BL57-BL60，2Hz电针。跟腱中段病增生疗法：超声引导下沿关键区3–4个点肌腱内注射15%葡萄糖0.5ml。注意：切勿在跟腱止点注射（断裂风险）。显著肌腱退变者首选PRP。至少3次治疗。从第2周开始结合离心腓肠肌练习（Alfredson方案）。</span></span></div>
+        <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Gastrocnemius + soleus MTrP release (reduces calf tension driving the Achilles load). FSN at proximal calf → Achilles. BL57 (master point for Achilles and calf — the he-sea level of the posterior calf BL channel), BL60, BL61. EA BL57-BL60 at 2Hz. Prolotherapy for mid-portion Achilles tendinopathy: 15% dextrose, 0.5ml at 3–4 points along the critical zone, US-guided intratendinous injection. CAUTION: Never inject at the Achilles insertion (risk of rupture). PRP is preferred for significant tendon degeneration. 3 sessions minimum. Combined with eccentric calf exercises (Alfredson protocol) from week 2.</span><span class="zh">腓肠肌+比目鱼肌MTrP松解（减少驱动跟腱负荷的小腿张力）。小腿近端浮针→跟腱。BL57承山（跟腱和小腿主穴——小腿后方膀胱经的合穴水平），昆仑（BL60），仆参（BL61）。承山（BL57）-昆仑（BL60），2Hz电针。跟腱中段病增生疗法：超声引导下沿关键区3–4个点肌腱内注射15%葡萄糖0.5ml。注意：切勿在跟腱止点注射（断裂风险）。显著肌腱退变者首选PRP。至少3次治疗。从第2周开始结合离心腓肠肌练习（Alfredson方案）。</span></span></div>
       </div>
     </div>
   </div>
@@ -2801,7 +2795,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="case-intake"><span class="en"><strong>Patient:</strong> 52F, retail worker (on feet 8 hours/day). Right heel pain 2 years — worst in the morning, first 5 steps excruciating. MRI: plantar fasciitis with partial tearing at the calcaneal enthesis. Had 3 corticosteroid injections (each helped 3–4 weeks). Palpation: medial calcaneal tuberosity maximal tenderness. Also found: active gastrocnemius MTrP in the right calf (reproduces heel and arch pain). Windlass test positive. KI3 and BL60 both tender. Deep-weak pulse at chi.</span><span class="zh"><strong>患者：</strong>女，52岁，零售工作者（每天站立8小时）。右足跟痛2年——晨起最剧，最初5步极度疼痛。MRI：足底筋膜炎伴跟骨止点部分撕裂。曾接受3次皮质类固醇注射（每次缓解3–4周）。触诊：跟骨内侧结节最大压痛。同时发现：右侧小腿活跃腓肠肌MTrP（重现足跟和足弓疼痛）。绞盘测试阳性。KI3和BL60均压痛。尺脉沉弱。</span></div>
       <div class="case-reasoning"><span class="en"><strong>Treatment:</strong><br> Session 1: Right gastrocnemius MTrP (LTR achieved) — heel pain immediately reduces from 8 to 3/10 (the calf MTrP was the upstream driver). FSN distal calf → heel direction. KI3, BL60, BL57 (reinforcing + moxa — Kidney root treatment).<br> Sessions 2–3: Maintain + add soleus MTrP release.<br> Session 4 — Prolotherapy: medial calcaneal enthesis, PRP 1ml (US-guided to the periosteal attachment of the plantar fascia). MRI showed partial tearing → PRP preferred over dextrose for structural repair of a partial tear. 2 sessions PRP total (session 4 and 8).<br> Outcome at 12 weeks: morning pain 0/10. First steps pain-free. Returns to full work. Advised: supportive footwear, calf stretching program, orthotic insole.<br> Herbal: Du Huo Ji Sheng Tang + + throughout.</span>
       <span class="zh"><strong>治疗：</strong><br>
-      第1次：右侧腓肠肌MTrP（获得LTR）——足跟疼痛立即从8降至3/10（小腿MTrP是上游驱动因素）。浮针小腿远端→足跟方向。KI3、BL60、BL57（补法+灸——肾虚根本治疗）。<br>
+      第1次：右侧腓肠肌MTrP（获得LTR）——足跟疼痛立即从8降至3/10（小腿MTrP是上游驱动因素）。浮针小腿远端→足跟方向。太溪（KI3）、昆仑（BL60）、承山（BL57）（补法+灸——肾虚根本治疗）。<br>
       第2–3次：维持+加比目鱼肌MTrP松解。<br>
       第4次——增生疗法：跟骨内侧止点，PRP 1ml（超声引导至跖筋膜骨膜附着处）。MRI显示部分撕裂→PRP优于葡萄糖用于部分撕裂的结构修复。共2次PRP（第4次和第8次）。<br>
       12周结果：晨起疼痛0/10。第一步无痛。恢复全面工作。建议：支撑性鞋类，小腿拉伸方案，矫形鞋垫。<br>
@@ -2857,7 +2851,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-qi"><span class="en">Stress → Liver Qi stagnates → overflows into adjacent Stomach → Stomach Qi rebelliously rises → distension, belching, pain worse with stress</span><span class="zh">压力→肝气郁滞→横逆犯胃→胃气上逆→胀气、嗳气、情绪诱发疼痛</span></div>
     <div class="pc-body">
       <div class="pc-row"><span class="pc-label"><span class="en">Symptoms</span><span class="zh">症状</span></span><span class="pc-val"><span class="en">Epigastric and hypochondriac distension-pain; belching relieves temporarily; pain worse with emotional stress; acid reflux; nausea; wiry pulse; thin white or slightly greasy coat</span><span class="zh">胃脘和胁肋胀痛；嗳气暂时缓解；情绪压力加重；泛酸；恶心；脉弦；苔薄白或略腻</span></span></div>
-      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">PC6 (calms Stomach rebellious Qi — the master point for all epigastric disorders) + CV12 (front-mu of Stomach) + ST36 + LV3 (smooth Liver Qi) + ST34 (xi-cleft — acute Stomach pain). Herbal: Chai Hu Shu Gan San — the definitive formula: ++++++. Smooth Liver + harmonise Stomach.</span><span class="zh">PC6内关（平降胃气上逆——所有胃脘病症的主穴）+CV12中脘（胃募穴）+ST36+LV3太冲（疏肝气）+ST34梁丘（郄穴——急性胃痛）。方药：柴胡疏肝散——确定性方剂：柴胡+白芍+枳壳+陈皮+川芎+香附+甘草。疏肝+和胃。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">PC6 (calms Stomach rebellious Qi — the master point for all epigastric disorders) + CV12 (front-mu of Stomach) + ST36 + LV3 (smooth Liver Qi) + ST34 (xi-cleft — acute Stomach pain). Herbal: Chai Hu Shu Gan San — the definitive formula: ++++++. Smooth Liver + harmonise Stomach.</span><span class="zh">PC6内关（平降胃气上逆——所有胃脘病症的主穴）+CV12中脘（胃募穴）+足三里（ST36）+LV3太冲（疏肝气）+ST34梁丘（郄穴——急性胃痛）。方药：柴胡疏肝散——确定性方剂：柴胡+白芍+枳壳+陈皮+川芎+香附+甘草。疏肝+和胃。</span></span></div>
     </div>
   </div>
 
@@ -2865,7 +2859,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Cold Constricting Stomach</span><span class="zh">寒邪凝滞胃腑证</span></div><div class="pc-badges"><span class="badge badge-mid"><span class="en">Cold</span><span class="zh">寒证</span></span></div></div>
     <div class="pc-qi"><span class="en">Cold (food, weather, exposure) contracts the Stomach channel → sudden severe cramping pain → relieved by warmth</span><span class="zh">寒邪（饮食、天气、暴露）收缩胃经→突发剧烈绞痛→得温痛减</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">CV12 moxa (direct warming of the Stomach) + ST36 moxa + PC6 + SP4 (Chong Mai master — powerfully calms the Stomach). Warm needle technique on CV12 and ST36 is the most effective immediate treatment for acute Cold stomach pain. Herbal: Liang Fu Wan (+— the simplest and most targeted Cold-Qi stomach pain formula: warms Stomach Cold, moves Stomach Qi).</span><span class="zh">CV12灸（直接温暖胃）+ST36灸+PC6+SP4公孙（冲脉主穴——有力平降胃气）。CV12和ST36温针灸是急性寒性胃痛最有效的即时治疗。方药：良附丸（高良姜+香附——最简洁最有针对性的寒气胃痛方：高良姜温胃寒，香附行胃气）。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">CV12 moxa (direct warming of the Stomach) + ST36 moxa + PC6 + SP4 (Chong Mai master — powerfully calms the Stomach). Warm needle technique on CV12 and ST36 is the most effective immediate treatment for acute Cold stomach pain. Herbal: Liang Fu Wan (+— the simplest and most targeted Cold-Qi stomach pain formula: warms Stomach Cold, moves Stomach Qi).</span><span class="zh">CV12灸（直接温暖胃）+ST36灸+内关（PC6）+SP4公孙（冲脉主穴——有力平降胃气）。CV12和ST36温针灸是急性寒性胃痛最有效的即时治疗。方药：良附丸（高良姜+香附——最简洁最有针对性的寒气胃痛方：高良姜温胃寒，香附行胃气）。</span></span></div>
     </div>
   </div>
 
@@ -2873,7 +2867,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Stomach Yin Deficiency</span><span class="zh">胃阴虚证</span></div><div class="pc-badges"><span class="badge badge-jade"><span class="en">Deficiency</span><span class="zh">虚证</span></span></div></div>
     <div class="pc-qi"><span class="en">Stomach Yin depleted (chronic illness, spicy diet, Stomach Fire consuming Yin) → Stomach loses moistening and descending → dull constant ache, hunger without appetite</span><span class="zh">胃阴耗竭（慢性病、辛辣饮食、胃火消耗阴液）→胃失濡润和通降→隐隐持续痛，饥不欲食</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">ST36 (tonification, no moxa) + SP6 + KI3 + CV12 (gentle) + ST44 (cool Stomach Heat). No moxa, no warming herbs. Herbal: Sha Shen Mai Dong Tang (nourish Stomach Yin — ++++++). For the dull persistent epigastric ache: add 30g+15g (Shao Yao Gan Cao Tang — the classical antispasmodic pair, also nourishes Yin). NEVER use warm, drying, or Phlegm-resolving herbs — they worsen Stomach Yin deficiency.</span><span class="zh">ST36（补法，不灸）+SP6+KI3+CV12（轻柔）+ST44（清胃热）。不灸，不用温热草药。方药：沙参麦冬汤（滋养胃阴——沙参+麦冬+玉竹+天花粉+桑叶+扁豆+甘草）。隐隐持续上腹痛：加白芍30g+甘草15g（芍药甘草汤——经典解痉对药，也滋养阴液）。绝不用温燥或化痰草药——会加重胃阴虚。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">ST36 (tonification, no moxa) + SP6 + KI3 + CV12 (gentle) + ST44 (cool Stomach Heat). No moxa, no warming herbs. Herbal: Sha Shen Mai Dong Tang (nourish Stomach Yin — ++++++). For the dull persistent epigastric ache: add 30g+15g (Shao Yao Gan Cao Tang — the classical antispasmodic pair, also nourishes Yin). NEVER use warm, drying, or Phlegm-resolving herbs — they worsen Stomach Yin deficiency.</span><span class="zh">足三里（ST36）（补法，不灸）+三阴交（SP6）+太溪（KI3）+中脘（CV12）（轻柔）+内庭（ST44）（清胃热）。不灸，不用温热草药。方药：沙参麦冬汤（滋养胃阴——沙参+麦冬+玉竹+天花粉+桑叶+扁豆+甘草）。隐隐持续上腹痛：加白芍30g+甘草15g（芍药甘草汤——经典解痉对药，也滋养阴液）。绝不用温燥或化痰草药——会加重胃阴虚。</span></span></div>
     </div>
   </div>
 </div>
@@ -2910,7 +2904,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Liver Qi Stagnation — Functional Hypochondriac Pain</span><span class="zh">肝气郁滞证——功能性胁肋痛</span></div><div class="pc-badges"><span class="badge badge-amber"><span class="en">Qi Stagnation</span><span class="zh">气滞</span></span></div></div>
     <div class="pc-qi"><span class="en">Liver Qi blocked in its channel → distension and tightness in the flanks → sighing partially relieves it (opens the Qi momentarily)</span><span class="zh">肝气在其经络中受阻→侧腹胀满和紧张→叹息暂时缓解（瞬间开通气机）</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Key points</span><span class="zh">关键穴位</span></span><span class="pc-val"><span class="en">LV14 (front-mu of Liver — directly on the costal margin at the flank, disperses Liver Qi stagnation at the source) + GB34 (he-sea of GB — the sinew point, releases tension in the costal muscles and GB channel) + LV3 (source of Liver — smooth Liver Qi) + PC6 (calms the Liver-Heart connection that drives emotional pain). Local: GB24 (front-mu of GB) for right-sided hypochondriac pain. Herbal: Xiao Yao San (smooth Liver + strengthen Spleen — the most commonly used formula for Liver Qi stagnation).</span><span class="zh">LV14期门（肝募穴——在侧腹肋缘处直接化解肝气郁滞）+GB34阳陵泉（胆经合穴——筋会，松解肋间肌和胆经张力）+LV3太冲（肝原穴——疏肝气）+PC6（平息驱动情志痛的肝心联系）。局部：GB24日月（胆募穴）用于右侧胁肋痛。方药：逍遥散（疏肝+健脾——肝气郁滞最常用方）。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Key points</span><span class="zh">关键穴位</span></span><span class="pc-val"><span class="en">LV14 (front-mu of Liver — directly on the costal margin at the flank, disperses Liver Qi stagnation at the source) + GB34 (he-sea of GB — the sinew point, releases tension in the costal muscles and GB channel) + LV3 (source of Liver — smooth Liver Qi) + PC6 (calms the Liver-Heart connection that drives emotional pain). Local: GB24 (front-mu of GB) for right-sided hypochondriac pain. Herbal: Xiao Yao San (smooth Liver + strengthen Spleen — the most commonly used formula for Liver Qi stagnation).</span><span class="zh">LV14期门（肝募穴——在侧腹肋缘处直接化解肝气郁滞）+GB34阳陵泉（胆经合穴——筋会，松解肋间肌和胆经张力）+LV3太冲（肝原穴——疏肝气）+内关（PC6）（平息驱动情志痛的肝心联系）。局部：GB24日月（胆募穴）用于右侧胁肋痛。方药：逍遥散（疏肝+健脾——肝气郁滞最常用方）。</span></span></div>
     </div>
   </div>
 
@@ -2918,7 +2912,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Liver-GB Damp-Heat</span><span class="zh">肝胆湿热证</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Damp-Heat</span><span class="zh">湿热</span></span></div></div>
     <div class="pc-qi"><span class="en">Damp-Heat accumulates in Liver-GB → obstructs bile flow → right hypochondriac burning pain; bile cannot flow normally → jaundice</span><span class="zh">湿热积聚于肝胆→阻塞胆汁流动→右侧胁肋灼热痛；胆汁不能正常流动→黄疸</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Safety note</span><span class="zh">安全注意</span></span><span class="pc-val"><span class="en">Acute cholecystitis, gallstones, or hepatitis must be excluded. Right hypochondriac pain with fever and jaundice = refer urgently. Chronic Damp-Heat (chronic cholecystitis, elevated bilirubin, fatty liver) is appropriate for TCM treatment. Points: GB34 + GB24 + LV14 + SP9 (drain Damp) + GB40 (source of GB — clear Damp-Heat from channel). Herbal: Long Dan Xie Gan Tang (clear Liver-GB Damp-Heat — the definitive formula. Add 30g for jaundice).</span><span class="zh">必须排除急性胆囊炎、胆结石或肝炎。右侧胁肋痛伴发热和黄疸=紧急转诊。慢性湿热（慢性胆囊炎、胆红素升高、脂肪肝）适合中医治疗。穴位：GB34+GB24+LV14+SP9（利湿）+GB40（胆原穴——清经络湿热）。方药：龙胆泻肝汤（清肝胆湿热——确定性方剂。黄疸加茵陈30g）。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Safety note</span><span class="zh">安全注意</span></span><span class="pc-val"><span class="en">Acute cholecystitis, gallstones, or hepatitis must be excluded. Right hypochondriac pain with fever and jaundice = refer urgently. Chronic Damp-Heat (chronic cholecystitis, elevated bilirubin, fatty liver) is appropriate for TCM treatment. Points: GB34 + GB24 + LV14 + SP9 (drain Damp) + GB40 (source of GB — clear Damp-Heat from channel). Herbal: Long Dan Xie Gan Tang (clear Liver-GB Damp-Heat — the definitive formula. Add 30g for jaundice).</span><span class="zh">必须排除急性胆囊炎、胆结石或肝炎。右侧胁肋痛伴发热和黄疸=紧急转诊。慢性湿热（慢性胆囊炎、胆红素升高、脂肪肝）适合中医治疗。穴位：阳陵泉（GB34）+日月（GB24）+期门（LV14）+阴陵泉（SP9）（利湿）+丘墟（GB40）（胆原穴——清经络湿热）。方药：龙胆泻肝汤（清肝胆湿热——确定性方剂。黄疸加茵陈30g）。</span></span></div>
     </div>
   </div>
 </div>
@@ -2962,7 +2956,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Heart Yang Xu + Cold Constriction</span><span class="zh">心阳虚+寒凝证</span></div><div class="pc-badges"><span class="badge badge-mid"><span class="en">Deficiency + Cold</span><span class="zh">虚+寒</span></span></div></div>
     <div class="pc-qi"><span class="en">Aging or chronic illness depletes Heart Yang → Cold easily constricts the Heart channel → vasospasm-type angina, worse in cold weather</span><span class="zh">衰老或慢性病耗竭心阳→寒邪易凝滞心经→血管痉挛型心绞痛，寒冷天气加重</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">GV14 (warm the Yang of all channels) + BL15 (moxa — warm the Heart Yang from its back-shu) + CV17 (moxa) + PC6 + HT5 (luo-connecting — connects Heart to Small Intestine, opens the Heart channel). Herbal: Gua Lou Xie Bai Ban Xia Tang + 10g + 12g (warm Heart Yang and open the channels). The base opens the chest; +warm the Heart Yang and expel Cold.</span><span class="zh">GV14大椎（温通所有经脉的阳气）+BL15心俞（灸——从背俞穴温补心阳）+CV17（灸）+PC6+HT5通里（络穴——连通心与小肠，开通心经）。方药：瓜蒌薤白半夏汤+附子10g（先煎）+桂枝12g（温心阳，开通经络）。瓜蒌薤白基础开胸；附子+桂枝温心阳驱寒。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Points + Herbs</span><span class="zh">穴位+方药</span></span><span class="pc-val"><span class="en">GV14 (warm the Yang of all channels) + BL15 (moxa — warm the Heart Yang from its back-shu) + CV17 (moxa) + PC6 + HT5 (luo-connecting — connects Heart to Small Intestine, opens the Heart channel). Herbal: Gua Lou Xie Bai Ban Xia Tang + 10g + 12g (warm Heart Yang and open the channels). The base opens the chest; +warm the Heart Yang and expel Cold.</span><span class="zh">GV14大椎（温通所有经脉的阳气）+BL15心俞（灸——从背俞穴温补心阳）+膻中（CV17）（灸）+内关（PC6）+HT5通里（络穴——连通心与小肠，开通心经）。方药：瓜蒌薤白半夏汤+附子10g（先煎）+桂枝12g（温心阳，开通经络）。瓜蒌薤白基础开胸；附子+桂枝温心阳驱寒。</span></span></div>
     </div>
   </div>
 </div>
@@ -2976,7 +2970,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
   <div class="pc-row"><span class="pc-label"><span class="en">CV12 + CV17</span><span class="zh">CV12中脘+CV17膻中</span></span><span class="pc-val"><span class="en">The two Ren Mai points for visceral pain. CV12 is the front-mu of the Stomach and the hui-meeting of the Fu organs — regulates all digestive organ Qi. CV17 is the front-mu of the Pericardium and the hui-meeting of Qi — opens the chest, descends rebellious Qi, and is the local point for all chest conditions. Together they cover the Middle Jiao (CV12 — digestive) and Upper Jiao (CV17 — cardiac/pulmonary). Moxa on CV12 for Cold Stomach patterns; no moxa on CV17 (too close to Heart — use gentle needle only).</span><span class="zh">内脏痛的两个任脉穴。CV12是胃募穴和腑之会穴——调节所有消化器官气机。CV17是心包募穴和气之会穴——开胸，降逆气，是所有胸部病症的局部穴。合用覆盖中焦（CV12——消化）和上焦（CV17——心脏/肺）。寒性胃证在CV12艾灸；CV17不灸（太靠近心脏——只用轻柔针刺）。</span></span></div>
 
-  <div class="pc-row"><span class="pc-label"><span class="en">LV14 + GB24</span><span class="zh">LV14期门+GB24日月</span></span><span class="pc-val"><span class="en">The two front-mu points for the Liver and Gallbladder, located on the costal margin in the hypochondriac region. LV14 (6th intercostal space, directly below the nipple) is on the Liver channel at its terminal point — the most direct access to Liver Qi stagnation causing flank pain. GB24 (7th intercostal space, just below LV14) targets the Gallbladder. Both are used for right hypochondriac pain, flank pain, and intercostal neuralgia. Needle: obliquely along the intercostal space, 0.5–0.8 cun — never straight in (pneumothorax risk). De Qi = local soreness and distension in the intercostal space.</span><span class="zh">肝胆两个募穴，位于胁肋区域肋缘。LV14（第6肋间，乳头直下）在肝经终末穴——最直接到达引起侧腹痛的肝气郁滞。GB24（第7肋间，LV14正下方）靶向胆腑。两穴均用于右侧胁肋痛、侧腹痛和肋间神经痛。进针：沿肋间斜刺0.5–0.8寸——绝不直刺（气胸风险）。得气=肋间局部酸胀感。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">LV14 + GB24</span><span class="zh">LV14期门+GB24日月</span></span><span class="pc-val"><span class="en">The two front-mu points for the Liver and Gallbladder, located on the costal margin in the hypochondriac region. LV14 (6th intercostal space, directly below the nipple) is on the Liver channel at its terminal point — the most direct access to Liver Qi stagnation causing flank pain. GB24 (7th intercostal space, just below LV14) targets the Gallbladder. Both are used for right hypochondriac pain, flank pain, and intercostal neuralgia. Needle: obliquely along the intercostal space, 0.5–0.8 cun — never straight in (pneumothorax risk). De Qi = local soreness and distension in the intercostal space.</span><span class="zh">肝胆两个募穴，位于胁肋区域肋缘。期门（LV14）（第6肋间，乳头直下）在肝经终末穴——最直接到达引起侧腹痛的肝气郁滞。日月（GB24）（第7肋间，LV14正下方）靶向胆腑。两穴均用于右侧胁肋痛、侧腹痛和肋间神经痛。进针：沿肋间斜刺0.5–0.8寸——绝不直刺（气胸风险）。得气=肋间局部酸胀感。</span></span></div>
 
   <div class="pc-row"><span class="pc-label"><span class="en">ST34 — Xi-Cleft for Acute Stomach Pain</span><span class="zh">ST34梁丘——胃的郄穴，急性胃痛用</span></span><span class="pc-val"><span class="en">Xi-cleft points are specifically indicated for acute pain of their respective organs. ST34 is the xi-cleft of the Stomach channel — used for acute Stomach pain, acute gastritis, and sudden epigastric spasm. Located 2 cun above the patella on the lateral aspect of the quadriceps. Strong perpendicular needling with vigorous manipulation provides rapid relief of acute epigastric pain within minutes. This is one of the fastest-acting distal points for acute Stomach pain — more effective than needling only local points.</span><span class="zh">郄穴专门适用于各自脏腑的急性疼痛。ST34是胃经郄穴——用于急性胃痛、急性胃炎和突发胃脘痉挛。位于髌骨上2寸股四头肌外侧面。强力垂直进针配合有力手法在数分钟内提供急性胃脘痛的快速缓解。这是急性胃痛最速效的远端穴位之一——比仅针刺局部穴位更有效。</span></span></div>
 </div>
@@ -2990,7 +2984,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="case-reasoning"><span class="en"><strong>Pattern:</strong> Liver Qi invading Stomach — confirmed by: wiry pulse (Liver), stress correlation, belching relief, flank distension, sighing, and red tongue edges (Liver Heat beginning). The omeprazole suppresses acid (the branch symptom) but does not address the Liver-Stomach Qi dynamic (the root).<br><br> <strong>Treatment (8 sessions, weekly):</strong><br> PC6 (bilateral, reducing) + LV3 (reducing) + CV12 + ST36 (tonification) + LV14 + GB34.<br> Herbal: Chai Hu Shu Gan San (modified: 10g 15g 12g 10g 10g 12g 6g + 15g for acid).<br> Week 3: Distension 60% reduced. Acid reflux less frequent. Week 6: Pain-free between work episodes. Week 8: Omeprazole discontinued with physician agreement. Only episodic mild distension during major stressful periods.<br><br> <strong>Teaching point:</strong> "Functional" gastritis with negative H. pylori and stress correlation is almost always Liver invading Stomach in TCM. Proton pump inhibitors suppress the acid (branch) but do nothing about the Liver Qi stagnation (root). Treating the Liver-Stomach axis resolves both the pain and the acid in most cases.</span>
     <span class="zh"><strong>证型：</strong>肝气犯胃——确认：脉弦（肝），压力相关，嗳气缓解，胁肋胀满，叹息，舌边略红（肝热初起）。奥美拉唑抑制胃酸（标证症状）但不处理肝胃气机（根本）。<br><br>
     <strong>治疗（8次，每周）：</strong><br>
-    PC6（双侧，泻法）+LV3（泻法）+CV12+ST36（补法）+LV14+GB34。<br>
+    内关（PC6）（双侧，泻法）+太冲（LV3）（泻法）+中脘（CV12）+足三里（ST36）（补法）+期门（LV14）+阳陵泉（GB34）。<br>
     方药：柴胡疏肝散（加减：柴胡10g 白芍15g 枳壳12g 陈皮10g 川芎10g 香附12g 甘草6g +瓦楞子15g制酸）。<br>
     第3周：腹胀减轻60%。泛酸次数减少。第6周：工作压力发作期间无痛。第8周：在医生同意下停用奥美拉唑。仅在重大压力时期有间歇性轻度腹胀。<br><br>
     <strong>教学要点：</strong>幽门螺旋杆菌阴性且与压力相关的"功能性"胃炎在中医几乎总是肝气犯胃。质子泵抑制剂抑制胃酸（标证）但对肝气郁滞（根本）无任何作用。治疗肝胃轴线在大多数病例中同时消除疼痛和泛酸。</span></div>
@@ -3002,7 +2996,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="case-reasoning"><span class="en"><strong>Pattern:</strong> Phlegm-stasis obstructing Heart with Heart Yang deficiency — dark purple tongue (Blood stasis) + thick greasy coat (Phlegm) + slippery-wiry pulse (Phlegm + Qi stagnation) + cold extremities (Yang deficiency failing to circulate Blood to periphery).<br><br> <strong>Treatment (12 weeks, 2×/week initially):</strong><br> PC6 + CV17 + HT7 + ST40 + SP10 + BL15 (moxa) + GV14.<br> Herbal: Gua Lou Xie Bai Ban Xia Tang + 30g + 3g + 12g.<br> Week 6: Exercise tolerance increased — now 5+ blocks without angina. Nitrate use: 2× in 6 weeks (previously 2×/week). Week 12: LDL re-tested 2.6 (↓0.6). Exercise tolerance: 15+ minutes moderate walking. Cold extremities improved. Tongue: less dark, greasy coat reduced.<br><br> <strong>Teaching point:</strong> Chest Bi treatment requires the Gua Lou Xie Bai formula as its backbone — this is one of the most precisely targeted classical formulas in TCM. specifically opens the chest Yang (not just moves Qi generally). is the single most documented anti-anginal TCM herb (multiple RCTs). activates Blood and stops pain (used in cardiac contexts for millennia). The formula combination acts at multiple levels simultaneously — opening the channel (Qi), dissolving the obstruction (Phlegm-stasis), and warming the root (Yang deficiency).</span>
     <span class="zh"><strong>证型：</strong>痰瘀阻心伴心阳虚——舌暗紫（血瘀）+苔厚腻（痰）+脉滑弦（痰+气滞）+肢冷（阳虚不能推动血液至末梢）。<br><br>
     <strong>治疗（12周，起初每周2次）：</strong><br>
-    PC6+CV17+HT7+ST40+SP10+BL15（灸）+GV14。<br>
+    内关（PC6）+膻中（CV17）+神门（HT7）+丰隆（ST40）+血海（SP10）+心俞（BL15）（灸）+大椎（GV14）。<br>
     方药：瓜蒌薤白半夏汤+丹参30g+三七粉3g（冲服）+桂枝12g。<br>
     第6周：运动耐量提高——现步行5+街区无心绞痛。硝酸酯类使用：6周内2次（之前每周2次）。第12周：LDL复查2.6（↓0.6）。运动耐量：中等强度步行15+分钟。肢冷改善。舌：较前不暗，苔腻减轻。<br><br>
     <strong>教学要点：</strong>胸痹治疗需要以瓜蒌薤白方为骨架——这是中医最精准靶向的经典方之一。薤白专门开通胸阳（不只是一般行气）。丹参是记录最充分的抗心绞痛中药（多项随机对照试验）。三七活血止痛（千年来用于心脏病症）。方药组合同时在多个层次起效——开通经络（气），化解阻塞（痰瘀），温暖根本（阳虚）。</span></div>
@@ -3101,7 +3095,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <strong>Qi-Blood stasis in the local channel:</strong> Chronic TMJ with structural changes, reduced joint space, clicking. Fixed pain, worse with pressure. Dark or purple tongue.
   </span>
   <span class="zh">
-    下颌和面部主要在阳明经（大肠+胃）范围内。ST6、ST7、ST8和LI4（远端）构成所有下颌病症的经典针灸方案：<br><br>
+    下颌和面部主要在阳明经（大肠+胃）范围内。颊车（ST6）、下关（ST7）、ST8和LI4（远端）构成所有下颌病症的经典针灸方案：<br><br>
     <strong>肝气郁滞+胃经紧张：</strong>应激相关颞颌关节病最常见证型（磨牙症，咬紧）。肝不能疏通气机导致咀嚼肌持续紧张。舌正常或边略红。脉弦。<br><br>
     <strong>肝风+血虚：</strong>解释夜间磨牙的不自主性质（血虚不能在睡眠中滋养和锚固肌肉时，风邪扰动肌肉）。舌淡，脉细。<br><br>
     <strong>局部经络气血瘀滞：</strong>慢性颞颌关节病伴结构改变、关节间隙减小、弹响。固定疼痛，按压加重。舌暗或紫。
@@ -3112,7 +3106,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Liver Qi Stagnation — Stress TMJ / Bruxism</span><span class="zh">肝气郁滞证——应激性颞颌关节病/磨牙症</span></div><div class="pc-badges"><span class="badge badge-amber"><span class="en">Most Common</span><span class="zh">最常见</span></span></div></div>
     <div class="pc-qi"><span class="en">Stress → Liver Qi stagnates → overflows into Yangming (Stomach/face channel) → masticatory muscles hold chronic tension → bruxism, clenching, TMJ pain</span><span class="zh">压力→肝气郁滞→横犯阳明（胃/面部经络）→咀嚼肌持续紧张→磨牙症，咬紧，颞颌关节痛</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Dry needle masseter + temporalis MTrPs (local). Acupuncture: ST6 + ST7 + LI4 (distal — the primary distal point for all face/jaw pain) + LV3 (smooth Liver Qi) + PC6 (calms stress-Liver connection). For bruxism: add HT7 + SP6 (calm the Shen that is unsettled at night). Herbal: Xiao Yao San if Liver Qi stagnation is the predominant systemic pattern.</span><span class="zh">干针咬肌+颞肌触发点（局部）。针灸：ST6+ST7+LI4（远端——所有面部/下颌痛的主要远端穴）+LV3（疏肝气）+PC6（平息应激-肝联系）。磨牙症：加HT7+SP6（安定夜间不安的心神）。方药：若肝气郁滞是主要全身证型，用逍遥散。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Dry needle masseter + temporalis MTrPs (local). Acupuncture: ST6 + ST7 + LI4 (distal — the primary distal point for all face/jaw pain) + LV3 (smooth Liver Qi) + PC6 (calms stress-Liver connection). For bruxism: add HT7 + SP6 (calm the Shen that is unsettled at night). Herbal: Xiao Yao San if Liver Qi stagnation is the predominant systemic pattern.</span><span class="zh">干针咬肌+颞肌触发点（局部）。针灸：颊车（ST6）+下关（ST7）+合谷（LI4）（远端——所有面部/下颌痛的主要远端穴）+太冲（LV3）（疏肝气）+内关（PC6）（平息应激-肝联系）。磨牙症：加HT7+三阴交（SP6）（安定夜间不安的心神）。方药：若肝气郁滞是主要全身证型，用逍遥散。</span></span></div>
     </div>
   </div>
 </div>
@@ -3123,8 +3117,8 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="pp-title"><span class="en">TMJ Needling Protocol — Layer by Layer</span><span class="zh">颞颌关节针刺方案——层次进行</span></div>
   <div class="pc-row"><span class="pc-label"><span class="en">Layer 1: Masseter dry needling</span><span class="zh">第一层：咬肌干针</span></span><span class="pc-val"><span class="en">Patient supine, head rotated away. Identify the angle of the jaw (mandibular angle) — the primary MTrP site in 80% of TMJ cases. Needle: 25–30mm, insert perpendicular to the superficial masseter. Fan from the angle toward the zygomatic arch. 3–4 needle passes per session. LTR = deep jaw ache or tooth referral. Post-needling: jaw should feel lighter and open wider immediately. Measure opening before and after — expect 3–8mm improvement in limited-opening cases.</span><span class="zh">患者仰卧，头转向对侧。识别下颌角——80%颞颌关节病例的主要触发点部位。针：25–30mm，垂直插入咬肌浅层。从下颌角向颧弓方向扇形针刺。每次3–4针。局部抽搐反应=深部下颌酸痛或牙齿放射痛。针刺后：下颌应立即感到轻松，开口度增大。测量针刺前后开口度——开口受限病例预期改善3–8mm。</span></span></div>
   <div class="pc-row"><span class="pc-label"><span class="en">Layer 2: Temporalis dry needling</span><span class="zh">第二层：颞肌干针</span></span><span class="pc-val"><span class="en">Palpate the temporal fossa — the temporalis fills the entire fossa and is easily accessible. Needle: 25mm, insert tangentially along the temporal bone surface. The muscle is thin (5–10mm) — do not needle perpendicular (risks penetrating to the temporal bone periosteum, which is very painful). Three zones: anterior (ST8 area, upper teeth referral), middle (temple headache referral), posterior (occipital referral). Fan within each zone. LTR = characteristic headache or tooth referral.</span><span class="zh">触诊颞窝——颞肌充满整个颞窝，易于入路。针：25mm，沿颞骨表面斜向插入。肌肉薄（5–10mm）——不要垂直进针（有穿透至颞骨骨膜的风险，非常疼痛）。三个区域：前部（ST8区，上牙投射），中部（颞部头痛投射），后部（枕部投射）。在每个区域内扇形针刺。局部抽搐反应=特征性头痛或牙齿投射。</span></span></div>
-  <div class="pc-row"><span class="pc-label"><span class="en">Layer 3: Joint acupuncture (ST7, GB3)</span><span class="zh">第三层：关节针灸（ST7，GB3）</span></span><span class="pc-val"><span class="en">ST7 : Located in the depression below the zygomatic arch, anterior to the condyle. Needle perpendicular 0.5–1.0 cun — enters the preauricular space adjacent to the joint capsule. Strong De Qi = ear fullness sensation or jaw ache. This point directly contacts the lateral joint capsule and stimulates capsular mechanoreceptors, improving joint proprioception and reducing joint pain. GB3 : Just above the zygomatic arch, directly above ST7. Needles into the superior temporal space. For upper joint space pain and clicking.</span><span class="zh">ST7下关：位于颧弓下方凹陷处，髁突前方。垂直进针0.5–1.0寸——进入关节囊旁的耳前间隙。强烈得气=耳部胀满感或下颌酸痛。此穴直接接触外侧关节囊，刺激关节囊机械感受器，改善关节本体感觉，减轻关节疼痛。GB3上关：颧弓上方，ST7正上方。针刺进入颞上间隙。用于关节上间隙疼痛和弹响。</span></span></div>
-  <div class="pc-row"><span class="pc-label"><span class="en">Layer 4: Distal points</span><span class="zh">第四层：远端穴位</span></span><span class="pc-val"><span class="en">LI4 (the most important distal point for all head and jaw pain — strong reducing stimulation). SJ5 (for TE channel component — ear, jaw, temporal area). LV3 (if stress/bruxism component). SP6 (if Blood deficiency component — nighttime bruxism). EA: ST6–ST7 ipsilateral, 2Hz, 20 minutes — gentle EA on the local points after dry needling significantly prolongs treatment effect for chronic TMJ.</span><span class="zh">LI4合谷（所有头面下颌痛最重要的远端穴——强泻法刺激）。SJ5外关（针对三焦经成分——耳部、下颌、颞部区域）。LV3太冲（若有压力/磨牙症成分）。SP6（若有血虚成分——夜间磨牙症）。电针：同侧ST6–ST7，2Hz，20分钟——干针后在局部穴位施轻柔电针显著延长慢性颞颌关节病的治疗效果。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">Layer 3: Joint acupuncture (ST7, GB3)</span><span class="zh">第三层：关节针灸（ST7，上关（GB3））</span></span><span class="pc-val"><span class="en">ST7 : Located in the depression below the zygomatic arch, anterior to the condyle. Needle perpendicular 0.5–1.0 cun — enters the preauricular space adjacent to the joint capsule. Strong De Qi = ear fullness sensation or jaw ache. This point directly contacts the lateral joint capsule and stimulates capsular mechanoreceptors, improving joint proprioception and reducing joint pain. GB3 : Just above the zygomatic arch, directly above ST7. Needles into the superior temporal space. For upper joint space pain and clicking.</span><span class="zh">ST7下关：位于颧弓下方凹陷处，髁突前方。垂直进针0.5–1.0寸——进入关节囊旁的耳前间隙。强烈得气=耳部胀满感或下颌酸痛。此穴直接接触外侧关节囊，刺激关节囊机械感受器，改善关节本体感觉，减轻关节疼痛。GB3上关：颧弓上方，ST7正上方。针刺进入颞上间隙。用于关节上间隙疼痛和弹响。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">Layer 4: Distal points</span><span class="zh">第四层：远端穴位</span></span><span class="pc-val"><span class="en">LI4 (the most important distal point for all head and jaw pain — strong reducing stimulation). SJ5 (for TE channel component — ear, jaw, temporal area). LV3 (if stress/bruxism component). SP6 (if Blood deficiency component — nighttime bruxism). EA: ST6–ST7 ipsilateral, 2Hz, 20 minutes — gentle EA on the local points after dry needling significantly prolongs treatment effect for chronic TMJ.</span><span class="zh">LI4合谷（所有头面下颌痛最重要的远端穴——强泻法刺激）。SJ5外关（针对三焦经成分——耳部、下颌、颞部区域）。LV3太冲（若有压力/磨牙症成分）。三阴交（SP6）（若有血虚成分——夜间磨牙症）。电针：同侧ST6–下关（ST7），2Hz，20分钟——干针后在局部穴位施轻柔电针显著延长慢性颞颌关节病的治疗效果。</span></span></div>
 </div>
 </div>
 
@@ -3138,7 +3132,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <strong>Sessions 5–8:</strong> Added left masseter (compensatory tension developing). Added EA ST6–ST7 2Hz 20min. Opening: 35 → 37 → 39 → 41mm. Clicking resolved at session 6. Deviation resolved at session 7.<br>
     <strong>Final:</strong> 41mm opening (within normal). Pain-free. Maintained splint at night for bruxism prevention. Instructed in self-massage of masseter and temporalis.</span>
     <span class="zh"><strong>评估：</strong>主要：右侧咬肌触发点（可触及索状硬结，按压时局部抽搐，下颌向紧张的翼外肌侧偏斜）。次要：右侧颞肌前区触发点。夹板处理了磨牙症（标证），但没有处理触发点（开口受限的结构性原因）。<br><br>
-    <strong>第1–4次（每周）：</strong>右侧咬肌干针（下颌角+肌腹中部，每次4针，强烈局部抽搐反应）。右侧颞肌前区。ST6，ST7，LI4，LV3。每次测量开口度：22→27→31→35mm。<br>
+    <strong>第1–4次（每周）：</strong>右侧咬肌干针（下颌角+肌腹中部，每次4针，强烈局部抽搐反应）。右侧颞肌前区。颊车（ST6），下关（ST7），合谷（LI4），太冲（LV3）。每次测量开口度：22→27→31→35mm。<br>
     <strong>第5–8次：</strong>加左侧咬肌（代偿性紧张正在发展）。加ST6–ST7电针2Hz 20分钟。开口度：35→37→39→41mm。第6次弹响消失。第7次偏斜消失。<br>
     <strong>最终：</strong>开口度41mm（在正常范围内）。无痛。继续夜间佩戴夹板预防磨牙症。指导咬肌和颞肌自我按摩。</span></div>
     <div class="case-outcome"><span class="en"><strong>Teaching point:</strong> Measuring maximum mouth opening (MMO) before and after each session is mandatory for TMJ cases — it is the objective functional outcome that demonstrates treatment efficacy. A 5mm improvement per session in limited-opening TMJ is a realistic expectation with dry needling. The dental splint and dry needling are complementary: the splint prevents reactivation (bruxism at night), dry needling resolves the existing trigger points. Using either alone gives partial results.</span><span class="zh"><strong>教学要点：</strong>每次治疗前后测量最大开口度对颞颌关节病例是强制要求——这是证明治疗有效性的客观功能结果。开口受限型颞颌关节病干针治疗每次改善5mm是现实的预期。牙科夹板和干针是互补的：夹板防止重新激活（夜间磨牙症），干针消除现有触发点。单独使用任一方法效果均不完整。</span></div>
@@ -3224,14 +3218,14 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Kidney Deficiency — Bone-Level Degeneration (older patients)</span><span class="zh">肾虚证——骨级退变（老年患者）</span></div><div class="pc-badges"><span class="badge badge-jade"><span class="en">Deficiency</span><span class="zh">虚证</span></span></div></div>
     <div class="pc-qi"><span class="en">Kidney governs bones and the marrow. In older patients, Kidney Jing depletion weakens the calcaneal bone-fascia interface → degenerative change. The heel spur is the TCM — bone Bi from Kidney deficiency. Treat the Kidney root alongside the local fascial treatment.</span><span class="zh">肾主骨生髓。在老年患者中，肾精耗竭削弱跟骨-筋膜界面→退行性改变。跟骨骨刺是中医"骨痹"——肾虚导致的骨痹。在局部筋膜治疗的同时处理肾的根本。</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Treatment additions</span><span class="zh">治疗附加</span></span><span class="pc-val"><span class="en">KI3 (nourish Kidney, strengthen bone) + BL23 (Kidney back-shu, moxa for Yang deficiency type) + KI6 (Yin Qiao Mai — connects to heel specifically; the KI6 point is anatomically at the level of the medial calcaneus, directly relevant to heel pain). These systemic points complement the local fascial and MTrP treatment.</span><span class="zh">KI3太溪（滋肾，强骨）+BL23（肾俞，阳虚型艾灸）+KI6照海（阴跷脉——专门连接至足跟；KI6穴位解剖上位于内侧跟骨水平，直接与足跟痛相关）。这些全身性穴位补充局部筋膜和触发点治疗。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Treatment additions</span><span class="zh">治疗附加</span></span><span class="pc-val"><span class="en">KI3 (nourish Kidney, strengthen bone) + BL23 (Kidney back-shu, moxa for Yang deficiency type) + KI6 (Yin Qiao Mai — connects to heel specifically; the KI6 point is anatomically at the level of the medial calcaneus, directly relevant to heel pain). These systemic points complement the local fascial and MTrP treatment.</span><span class="zh">KI3太溪（滋肾，强骨）+肾俞（BL23）（肾俞，阳虚型艾灸）+KI6照海（阴跷脉——专门连接至足跟；KI6穴位解剖上位于内侧跟骨水平，直接与足跟痛相关）。这些全身性穴位补充局部筋膜和触发点治疗。</span></span></div>
     </div>
   </div>
   <div class="pattern-card" onclick="toggleCard(this)">
     <div class="pc-header"><div class="pc-name"><span class="en">Damp-Heat in Sinews (younger, active patients)</span><span class="zh">湿热阻络证（年轻活跃患者）</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Excess</span><span class="zh">实证</span></span></div></div>
     <div class="pc-qi"><span class="en">Overuse + Damp accumulation in the sinew channels → local inflammation-like picture with swelling, heat, and tenderness. More common in runners and athletes.</span><span class="zh">过度使用+湿邪积聚于筋经→局部类炎症表现伴肿胀、热感和压痛。在跑步者和运动员中更常见。</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">SP9 + SP6 (drain Damp) + BL60 (posterior heel point — the classical distal point for heel pain from the Bladder sinew channel) + GB34 (sinew meeting point — resolves sinew channel Bi). Reduce loading while treating — active runners must reduce mileage by 50–70% during treatment course.</span><span class="zh">SP9+SP6（利湿）+BL60昆仑（足跟后方穴——膀胱筋经足跟痛的经典远端穴）+GB34（筋之会穴——化解筋经痹阻）。治疗期间减少负荷——活跃跑步者必须在疗程期间减少跑量50–70%。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">SP9 + SP6 (drain Damp) + BL60 (posterior heel point — the classical distal point for heel pain from the Bladder sinew channel) + GB34 (sinew meeting point — resolves sinew channel Bi). Reduce loading while treating — active runners must reduce mileage by 50–70% during treatment course.</span><span class="zh">阴陵泉（SP9）+三阴交（SP6）（利湿）+BL60昆仑（足跟后方穴——膀胱筋经足跟痛的经典远端穴）+阳陵泉（GB34）（筋之会穴——化解筋经痹阻）。治疗期间减少负荷——活跃跑步者必须在疗程期间减少跑量50–70%。</span></span></div>
     </div>
   </div>
 </div>
@@ -3243,7 +3237,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="pc-row"><span class="pc-label"><span class="en">Step 1: Gastrocnemius + Soleus (always first)</span><span class="zh">第一步：腓肠肌+比目鱼肌（始终第一步）</span></span><span class="pc-val"><span class="en">Patient prone. Palpate medial gastrocnemius MTrP (mid-belly, medial head — usually 10–15cm below popliteal crease). Needle 40–50mm, perpendicular. Fan 3–4 passes, seek LTR (calf cramp or heel referral). Then needle deeper into soleus (same entry point, angle slightly toward tibia, 5–10mm deeper). The BL57 acupuncture point is anatomically located at this primary MTrP zone — needling BL57 deeply reaches both gastrocnemius and soleus. Bilateral if bilateral symptoms.</span><span class="zh">患者俯卧。触诊腓肠肌内侧头触发点（肌腹中部，内侧头——通常位于腘横纹下10–15cm）。针40–50mm，垂直进针。扇形针刺3–4针，寻找局部抽搐反应（小腿痉挛或足跟放射痛）。然后进入更深的比目鱼肌（同一进针点，角度略向胫骨倾斜，再深5–10mm）。BL57承山针灸穴位在解剖上位于此主要触发点区域——深刺BL57可同时到达腓肠肌和比目鱼肌。双侧症状则双侧治疗。</span></span></div>
   <div class="pc-row"><span class="pc-label"><span class="en">Step 2: Abductor hallucis</span><span class="zh">第二步：拇展肌</span></span><span class="pc-val"><span class="en">Patient supine or sidelying. Palpate the medial plantar border of the foot — abductor hallucis runs from calcaneus to the base of the great toe along the medial plantar edge. Needle from the medial surface of the foot, angling slightly plantarward. 25–30mm needle. LTR = foot cramp + great toe referral. This is often the most painful part of the treatment — warn the patient. The immediate relief of heel pain after abductor hallucis needling is often dramatic.</span><span class="zh">患者仰卧或侧卧。触诊足内侧足底缘——拇展肌沿内侧足底缘从跟骨延伸至拇趾基底。从足内侧面进针，角度略向足底方向。25–30mm针。局部抽搐反应=足部痉挛+拇趾放射。这通常是治疗中最疼痛的部分——提前告知患者。拇展肌针刺后足跟痛的即时缓解常常非常显著。</span></span></div>
   <div class="pc-row"><span class="pc-label"><span class="en">Step 3: Fascial insertion needling</span><span class="zh">第三步：筋膜止点针刺</span></span><span class="pc-val"><span class="en">Identify the point of maximum tenderness at the medial calcaneal tubercle (where the fascia inserts). Needle directly into this point at the bone-fascia interface. 40mm needle, approach from the medial side, angled to contact the calcaneal surface. 2–3 passes. This stimulates the healing response (neovascularisation, collagen remodelling) at the site of degeneration. Significant post-treatment soreness (24–48h) is expected and indicates therapeutic response. This step is equivalent to the needling in prolotherapy — mechanical stimulus to the insertion zone.</span><span class="zh">识别内侧跟骨结节（筋膜止点）处的最大压痛点。直接在骨-筋膜界面针刺此点。40mm针，从内侧面入路，倾斜角度以接触跟骨面。2–3针。这在退变部位刺激愈合反应（新生血管形成，胶原蛋白重塑）。预期针后显著酸痛（24–48小时），表明有治疗反应。此步骤等同于增生疗法中的针刺——对止点区的机械刺激。</span></span></div>
-  <div class="pc-row"><span class="pc-label"><span class="en">Acupuncture points (integrate with dry needling)</span><span class="zh">针灸穴位（与干针整合）</span></span><span class="pc-val"><span class="en">KI1 (sole of foot — activates Kidney channel at the plantar surface, improves local circulation) + KI6 (medial heel, Yin Qiao Mai — specific for heel pain) + BL60 (posterior heel, Bladder channel — the classical point for heel pain from the sinew channel) + BL57 (gastrocnemius-soleus zone). EA: BL57–KI1 or BL57–BL60 at 2/100Hz, 20 minutes. This combination provides both neural stimulation and direct channel activation for the heel.</span><span class="zh">KI1涌泉（足底——在足底面激活肾经，改善局部循环）+KI6照海（内侧足跟，阴跷脉——足跟痛的专穴）+BL60昆仑（足跟后方，膀胱经——筋经足跟痛的经典穴）+BL57承山（腓肠肌-比目鱼肌区）。电针：BL57–KI1或BL57–BL60，2/100Hz，20分钟。此组合为足跟提供神经刺激和直接经络激活。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">Acupuncture points (integrate with dry needling)</span><span class="zh">针灸穴位（与干针整合）</span></span><span class="pc-val"><span class="en">KI1 (sole of foot — activates Kidney channel at the plantar surface, improves local circulation) + KI6 (medial heel, Yin Qiao Mai — specific for heel pain) + BL60 (posterior heel, Bladder channel — the classical point for heel pain from the sinew channel) + BL57 (gastrocnemius-soleus zone). EA: BL57–KI1 or BL57–BL60 at 2/100Hz, 20 minutes. This combination provides both neural stimulation and direct channel activation for the heel.</span><span class="zh">KI1涌泉（足底——在足底面激活肾经，改善局部循环）+KI6照海（内侧足跟，阴跷脉——足跟痛的专穴）+BL60昆仑（足跟后方，膀胱经——筋经足跟痛的经典穴）+BL57承山（腓肠肌-比目鱼肌区）。电针：承山（BL57）–KI1或BL57–昆仑（BL60），2/100Hz，20分钟。此组合为足跟提供神经刺激和直接经络激活。</span></span></div>
 </div>
 </div>
 
@@ -3259,7 +3253,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     Patient continued orthotics and began calf stretching program (compliance improved when pain reduced). No recurrence at 6-month follow-up (orthotics + stretching maintenance).</span>
     <span class="zh"><strong>之前治疗失败原因：</strong>矫形器减少负荷但不处理触发点或筋膜退变。类固醇注射减轻疼痛但加速止点处胶原蛋白退变（增加复发风险）。冲击波：证据参差不齐；与触发点治疗联合时效果最好。<br><br>
     <strong>治疗（10次，每周2次×5周）：</strong><br>
-    每次：双侧腓肠肌+比目鱼肌干针（BL57区，每侧4针）→双侧拇展肌→左足跟筋膜止点针刺（右侧：每隔一次）。针灸：KI6，BL60，KI3，BL57。双侧BL57–KI1电针2/100Hz 20分钟。<br><br>
+    每次：双侧腓肠肌+比目鱼肌干针（BL57区，每侧4针）→双侧拇展肌→左足跟筋膜止点针刺（右侧：每隔一次）。针灸：照海（KI6），昆仑（BL60），太溪（KI3），承山（BL57）。双侧BL57–KI1电针2/100Hz 20分钟。<br><br>
     第2周：第一步痛L 5/10，R 3/10。第4周：L 3/10，R 1/10。第5周末：L 1/10，R 0/10。6周超声：L筋膜4.0mm（↓1.2mm），R筋膜3.5mm（↓0.9mm）。<br><br>
     患者继续使用矫形器并开始小腿拉伸计划（疼痛减轻后依从性改善）。6个月随访无复发（矫形器+拉伸维持）。</span></div>
     <div class="case-outcome"><span class="en"><strong>Teaching points:</strong> (1) Always treat the gastrocnemius-soleus first — it is the primary perpetuating factor in virtually all PF cases. (2) Ultrasound thickness is the objective measurement for PF research and outcome tracking — measure before and after treatment series. (3) The combination of dry needling (MTrP resolution + fascial stimulation) + acupuncture (channel activation) + continued orthotics (load management) addresses all three components simultaneously, which is why it succeeds where any single modality fails.</span><span class="zh"><strong>教学要点：</strong>(1)始终先治疗腓肠肌-比目鱼肌——在几乎所有足底筋膜炎病例中都是主要的维持因素。(2)超声厚度是足底筋膜炎科研和结果追踪的客观测量——在治疗疗程前后测量。(3)干针（触发点消除+筋膜刺激）+针灸（经络激活）+持续矫形器（负荷管理）的组合同时处理三个成分，这就是为什么在任何单一治疗方式失败的情况下它能成功。</span></div>
@@ -3391,7 +3385,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <strong>Treatment (6 sessions):</strong> Right piriformis dry needling (100mm needle, BL54 approach, 4 passes, LTR positive session 1). Right gluteus medius + minimus (GB30 approach). BL40 (distal, releases Bladder channel tension). Sessions 1–3 weekly, sessions 4–6 every 2 weeks.<br>
     After session 1: Sitting tolerance doubled (from 20 to 45 minutes). After session 3: Buttock pain 2/10. After session 6: 0/10 at rest, 1/10 after prolonged sitting. Patient: "this is the first time I have been pain-free since before the surgery."</span>
     <span class="zh"><strong>分析：</strong>这是术前被遗漏的梨状肌综合征的经典表现（它与椎间盘病变共存）。椎间盘手术正确地消除了椎间盘源性坐骨神经痛，但梨状肌触发点——患者报告的与腿痛同时存在的"深部臀部疼痛"的来源——从未被处理。<br><br>
-    <strong>治疗（6次）：</strong>右侧梨状肌干针（100mm针，BL54入路，4针，第1次局部抽搐反应阳性）。右侧臀中肌+臀小肌（GB30入路）。BL40（远端，松解膀胱经紧张）。第1–3次每周，第4–6次每2周。<br>
+    <strong>治疗（6次）：</strong>右侧梨状肌干针（100mm针，BL54入路，4针，第1次局部抽搐反应阳性）。右侧臀中肌+臀小肌（GB30入路）。委中（BL40）（远端，松解膀胱经紧张）。第1–3次每周，第4–6次每2周。<br>
     第1次后：坐位耐受性翻倍（从20分钟到45分钟）。第3次后：臀部疼痛2/10。第6次后：静息0/10，长时间坐位后1/10。患者："这是我手术前以来第一次无痛。"</span></div>
     <div class="case-outcome"><span class="en"><strong>Teaching point:</strong> In any patient with "persistent sciatica after disc surgery," always assess for piriformis syndrome as the residual pain source. The differential: if the pain is primarily buttock-based, sitting-worsened, FAIR-positive, and SLR-negative post-operatively, piriformis is the source until proven otherwise. This pattern is extremely common and almost always untreated because it is not visible on MRI and does not respond to further spinal surgery.</span><span class="zh"><strong>教学要点：</strong>在任何"椎间盘手术后持续坐骨神经痛"的患者中，始终评估梨状肌综合征作为残余疼痛来源。鉴别要点：如果疼痛主要在臀部，坐位加重，FAIR阳性，术后直腿抬高阴性，梨状肌是来源，直到被证明不是为止。此模式极为常见，几乎总是未得到治疗，因为它在MRI上不可见，也不对进一步的脊柱手术有反应。</span></div>
   </div>
@@ -3445,14 +3439,14 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="pc-header"><div class="pc-name"><span class="en">Damp-Heat Bi — Acute Gout</span><span class="zh">湿热痹证——急性痛风</span></div><div class="pc-badges"><span class="badge badge-verm"><span class="en">Hot Excess</span><span class="zh">热实证</span></span></div></div>
     <div class="pc-qi"><span class="en">Damp-Heat accumulates in the joint channel → crystallises (uric acid = Damp-Heat precipitate) → intense inflammation → red, hot, swollen, exquisitely painful joint</span><span class="zh">湿热积聚于关节经络→结晶（尿酸=湿热沉淀）→剧烈炎症→关节红、热、肿、剧痛</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Clear Heat, drain Damp, open the joint channel. Local points with reducing method: SP9 (drain Damp) + LI11 (clear Heat) + local joint points (reducing). Bloodletting at local area (— prick 2–3 times around the inflamed joint and express 5–10 drops) produces dramatic acute relief by releasing the Damp-Heat. Herbal: Xuan Bi Tang (the specific formula for Hot Bi: ++++++++).</span><span class="zh">清热，利湿，开通关节经络。局部穴位泻法：SP9（利湿）+LI11（清热）+局部关节穴位（泻法）。局部刺血（三棱针点刺——在炎症关节周围点刺2–3处，出血5–10滴）通过释放湿热产生显著的急性缓解。方药：宣痹汤（热痹专方：防己+杏仁+滑石+连翘+山栀子+薏苡仁+半夏+晚蚕沙+赤小豆）。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Clear Heat, drain Damp, open the joint channel. Local points with reducing method: SP9 (drain Damp) + LI11 (clear Heat) + local joint points (reducing). Bloodletting at local area (— prick 2–3 times around the inflamed joint and express 5–10 drops) produces dramatic acute relief by releasing the Damp-Heat. Herbal: Xuan Bi Tang (the specific formula for Hot Bi: ++++++++).</span><span class="zh">清热，利湿，开通关节经络。局部穴位泻法：阴陵泉（SP9）（利湿）+曲池（LI11）（清热）+局部关节穴位（泻法）。局部刺血（三棱针点刺——在炎症关节周围点刺2–3处，出血5–10滴）通过释放湿热产生显著的急性缓解。方药：宣痹汤（热痹专方：防己+杏仁+滑石+连翘+山栀子+薏苡仁+半夏+晚蚕沙+赤小豆）。</span></span></div>
     </div>
   </div>
   <div class="pattern-card" onclick="toggleCard(this)">
     <div class="pc-header"><div class="pc-name"><span class="en">Wind-Cold-Damp Bi — Chronic Joint Pain</span><span class="zh">风寒湿痹证——慢性关节痛</span></div><div class="pc-badges"><span class="badge badge-mid"><span class="en">Cold Obstruction</span><span class="zh">寒凝</span></span></div></div>
     <div class="pc-qi"><span class="en">Cold and Damp obstruct the sinew channels → chronic joint pain, stiffness, worse in cold/damp weather, relieved by warmth</span><span class="zh">寒湿阻滞筋经→慢性关节痛，僵硬，寒冷/潮湿天气加重，得温减轻</span></div>
     <div class="pc-body">
-      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Warm the channels, dispel Cold-Damp, activate Blood. Local joint points + moxa. GV14 (warm all Yang channels) + SP9 (drain Damp). Herbal: Juan Bi Tang or Du Huo Ji Sheng Wan (the classical chronic Bi formula — ++++++++++++++: dispels Wind-Cold-Damp + nourishes Liver-Kidney + activates Blood).</span><span class="zh">温经，散寒湿，活血。局部关节穴位+艾灸。GV14（温通所有阳经）+SP9（利湿）。方药：蠲痹汤或独活寄生丸（慢性痹证经典方——独活+桑寄生+杜仲+牛膝+细辛+秦艽+茯苓+肉桂+防风+川芎+人参+甘草+当归+白芍+干地黄：祛风寒湿+滋肝肾+活血）。</span></span></div>
+      <div class="pc-row"><span class="pc-label"><span class="en">Treatment</span><span class="zh">治疗</span></span><span class="pc-val"><span class="en">Warm the channels, dispel Cold-Damp, activate Blood. Local joint points + moxa. GV14 (warm all Yang channels) + SP9 (drain Damp). Herbal: Juan Bi Tang or Du Huo Ji Sheng Wan (the classical chronic Bi formula — ++++++++++++++: dispels Wind-Cold-Damp + nourishes Liver-Kidney + activates Blood).</span><span class="zh">温经，散寒湿，活血。局部关节穴位+艾灸。大椎（GV14）（温通所有阳经）+阴陵泉（SP9）（利湿）。方药：蠲痹汤或独活寄生丸（慢性痹证经典方——独活+桑寄生+杜仲+牛膝+细辛+秦艽+茯苓+肉桂+防风+川芎+人参+甘草+当归+白芍+干地黄：祛风寒湿+滋肝肾+活血）。</span></span></div>
     </div>
   </div>
 </div>
@@ -3461,8 +3455,8 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div id="gout-acu" class="phase-panel">
 <div class="point-prescription">
   <div class="pp-title"><span class="en">Bi Syndrome Acupuncture Principles</span><span class="zh">痹证针灸原则</span></div>
-  <div class="pc-row"><span class="pc-label"><span class="en">Hot Bi (acute gout): cool and drain</span><span class="zh">热痹（急性痛风）：清热利湿</span></span><span class="pc-val"><span class="en">Reducing method on all points. LI11 (clear Heat from all Yang channels) + SP9 (drain Damp from Lower Jiao) + local joint points reducing. The 1st MTP (great toe base) = ST44 area + local ashi. No moxa in acute Hot Bi. Bloodletting around the inflamed joint: the most powerful acute intervention — produces immediate local Heat release. Three pricks, 3–5 drops each, cupping optional. Contraindicated if anticoagulated.</span><span class="zh">所有穴位泻法。LI11大椎（清所有阳经热）+SP9（利下焦湿）+局部关节穴位泻法。第一跖趾关节（拇趾基底）=ST44区域+局部阿是穴。急性热痹不灸。局部刺血（三棱针）在炎症关节周围：最有力的急性干预——产生即时的局部热邪释放。三针，每处3–5滴，可选拔罐。使用抗凝药物者禁忌。</span></span></div>
-  <div class="pc-row"><span class="pc-label"><span class="en">Cold-Damp Bi: warm and move</span><span class="zh">寒湿痹：温通</span></span><span class="pc-val"><span class="en">Moxa is essential. Warm needling on local joint points — needle the joint, then add moxa cone to needle handle. This simultaneously needles the joint and warms the Cold-Damp from within. GV14 + BL23 (warming the Root Yang) + local ashi (warm needle). EA: 2Hz on local points — activates endorphin-mediated analgesia for chronic Bi pain. This combination — warm needle + low-frequency EA — is the most effective protocol for chronic Cold-type Bi syndrome.</span><span class="zh">艾灸必不可少。局部关节穴位温针灸——在关节进针，然后在针柄上加艾炷。这同时针刺关节并从内部温化寒湿。GV14+BL23（温根本阳气）+局部阿是穴（温针）。电针：局部穴位2Hz——激活慢性痹痛的内啡肽介导镇痛。温针+低频电针的组合——是慢性寒性痹证最有效的方案。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">Hot Bi (acute gout): cool and drain</span><span class="zh">热痹（急性痛风）：清热利湿</span></span><span class="pc-val"><span class="en">Reducing method on all points. LI11 (clear Heat from all Yang channels) + SP9 (drain Damp from Lower Jiao) + local joint points reducing. The 1st MTP (great toe base) = ST44 area + local ashi. No moxa in acute Hot Bi. Bloodletting around the inflamed joint: the most powerful acute intervention — produces immediate local Heat release. Three pricks, 3–5 drops each, cupping optional. Contraindicated if anticoagulated.</span><span class="zh">所有穴位泻法。LI11大椎（清所有阳经热）+阴陵泉（SP9）（利下焦湿）+局部关节穴位泻法。第一跖趾关节（拇趾基底）=ST44区域+局部阿是穴。急性热痹不灸。局部刺血（三棱针）在炎症关节周围：最有力的急性干预——产生即时的局部热邪释放。三针，每处3–5滴，可选拔罐。使用抗凝药物者禁忌。</span></span></div>
+  <div class="pc-row"><span class="pc-label"><span class="en">Cold-Damp Bi: warm and move</span><span class="zh">寒湿痹：温通</span></span><span class="pc-val"><span class="en">Moxa is essential. Warm needling on local joint points — needle the joint, then add moxa cone to needle handle. This simultaneously needles the joint and warms the Cold-Damp from within. GV14 + BL23 (warming the Root Yang) + local ashi (warm needle). EA: 2Hz on local points — activates endorphin-mediated analgesia for chronic Bi pain. This combination — warm needle + low-frequency EA — is the most effective protocol for chronic Cold-type Bi syndrome.</span><span class="zh">艾灸必不可少。局部关节穴位温针灸——在关节进针，然后在针柄上加艾炷。这同时针刺关节并从内部温化寒湿。大椎（GV14）+肾俞（BL23）（温根本阳气）+局部阿是穴（温针）。电针：局部穴位2Hz——激活慢性痹痛的内啡肽介导镇痛。温针+低频电针的组合——是慢性寒性痹证最有效的方案。</span></span></div>
 </div>
 </div>
 
@@ -3491,7 +3485,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="case-reasoning"><span class="en"><strong>Pattern:</strong> Damp-Heat Bi (chronic background) with episodic Hot Bi flares. The allopurinol reduces production but doesn't address the accumulated Damp-Heat substrate or improve uric acid excretion.<br><br> <strong>Treatment (3-month protocol):</strong><br> Acupuncture 2×/week: SP9 + SP6 + LI11 + ST36 (metabolic base) + local right MTP (ST44 area, reducing). No moxa.<br> Herbal: Xuan Bi Tang modified for chronic use (reduced , added 30g — the single most important herb for gout, specifically drains uric acid-equivalent Damp from the joints; 15g — drains turbid Damp from Lower Jiao; 30g — Damp-draining + anti-inflammatory in modern research).<br> Dietary counselling: reduce beer (the most powerful dietary trigger), organ meats, shellfish.<br> Month 1: 1 attack (mild). Month 2: 0 attacks. Month 3: 0 attacks. Uric acid at 3 months: 340 mmol/L. BMI: 30 (−2kg).<br> At 6 months: 0 attacks in 5 months. Patient continues herbs 3×/week maintenance dose.</span>
     <span class="zh"><strong>证型：</strong>慢性背景湿热痹伴间歇性热痹发作。别嘌醇减少产生但不处理积聚的湿热基础或改善尿酸排泄。<br><br>
     <strong>治疗（3个月方案）：</strong><br>
-    每周2次针灸：SP9+SP6+LI11+ST36（代谢基础）+局部右侧跖趾关节（ST44区域，泻法）。不灸。<br>
+    每周2次针灸：阴陵泉（SP9）+三阴交（SP6）+曲池（LI11）+足三里（ST36）（代谢基础）+局部右侧跖趾关节（ST44区域，泻法）。不灸。<br>
     方药：宣痹汤加减用于慢性（减少滑石，加土茯苓30g——痛风最重要的单味草药，专门从关节排出尿酸对应的湿邪；萆薢15g——从下焦排出浊湿；薏苡仁30g——现代研究中的利湿+抗炎）。<br>
     饮食指导：减少啤酒（最强的饮食触发因素），内脏，贝类。<br>
     第1个月：1次发作（轻微）。第2个月：0次。第3个月：0次。3个月时尿酸：340 mmol/L。BMI：30（−2kg）。<br>
