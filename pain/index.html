@@ -23,6 +23,9 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 /* Top bar */
 .topbar{position:fixed;top:12px;right:16px;z-index:200;display:flex;align-items:center;gap:6px;}
+.home-back-btn{font-size:11px;font-weight:600;color:var(--ink-muted);text-decoration:none;padding:4px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--paper-warm);transition:all .15s;white-space:nowrap;}
+.home-back-btn:hover{border-color:var(--vermillion);color:var(--vermillion);}
+@media(max-width:768px){.home-back-btn{font-size:10px;padding:3px 7px;}}
 .lang-btn{display:flex;gap:4px;}
 .lang-btn button{padding:4px 10px;font-size:11px;font-weight:600;border:1px solid var(--rule);border-radius:10px;background:var(--paper-warm);color:var(--ink-muted);cursor:pointer;font-family:inherit;transition:all .15s;}
 .lang-btn button.active{background:var(--vermillion);color:#fff;border-color:var(--vermillion);}
@@ -383,27 +386,42 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .sidebar-overlay.open{display:block;}
 
 @media(max-width:768px){
-  /* Hamburger visible */
-  .hamburger{display:flex;position:fixed;top:8px;left:12px;z-index:302;}
+  /* Let body handle scrolling on mobile */
+  html,body{height:auto;overflow-y:auto;}
 
-  /* Sidebar hidden off-screen by default */
+  /* App: remove height/overflow constraints */
+  .app{display:block;height:auto;overflow:visible;}
+
+  /* Main: full width, padding for fixed topbar, body scrolls */
+  .main{
+    margin-left:0;width:100%;
+    height:auto;overflow-y:visible;
+    padding-top:52px;
+  }
+
+  /* Hamburger button */
+  .hamburger{
+    display:flex;
+    position:fixed;top:10px;left:12px;
+    z-index:400;
+  }
+
+  /* Sidebar slides in from left */
   .sidebar{
-    position:fixed;top:0;left:-260px;bottom:0;width:260px;
-    z-index:300;transition:left .25s ease;
-    box-shadow:4px 0 20px rgba(0,0,0,0.15);
+    position:fixed;top:0;left:-270px;bottom:0;width:270px;
+    z-index:350;
+    transition:left .25s ease;
+    box-shadow:4px 0 20px rgba(0,0,0,0.2);
+    overflow-y:auto;
   }
   .sidebar.mobile-open{left:0;}
 
-  /* Main content full width */
-  .app{display:block;}
-  .main{margin-left:0;width:100%;padding-top:52px;}
-
-  /* Topbar repositioned for mobile */
+  /* Topbar: full width fixed at top */
   .topbar{
     position:fixed;top:0;left:0;right:0;
     background:var(--paper-warm);
     border-bottom:1px solid var(--rule);
-    padding:8px 12px 8px 52px;
+    padding:10px 12px 10px 52px;
     display:flex;align-items:center;gap:6px;
     z-index:200;height:52px;
   }
@@ -453,6 +471,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 
 <div class="topbar">
+  <a href="/" class="home-back-btn"><span class="en">← SinoMed</span><span class="zh">← 首页</span></a>
   <div class="lang-btn">
     <button class="active" onclick="setLang('en')">EN</button>
     <button onclick="setLang('zh')">中文</button>
