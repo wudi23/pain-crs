@@ -1288,11 +1288,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var body = h.nextElementSibling;
     if (body) body.classList.add('open');
   });
-  // Apply starting language state (Chinese)
-  isEn = false;
+  // Sync language from sinomed.ca homepage
+  var savedLang = localStorage.getItem('sinomed-lang');
+  isEn = (savedLang === 'en') || !savedLang;
   applyLang();
 });
 </script>
 </body>
 </html>
-
