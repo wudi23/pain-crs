@@ -3953,6 +3953,10 @@ function setLang(lang){
 }
 
 function showPage(id, el){
+  // Close mobile sidebar (uncheck CSS toggle)
+  const navToggle = document.getElementById('nav-toggle');
+  if(navToggle) navToggle.checked = false;
+
   document.querySelectorAll('.disease-page').forEach(p=>p.classList.remove('active'));
   let page = document.getElementById('page-'+id);
   if(!page){ page = document.getElementById('page-home'); id = 'home'; }
