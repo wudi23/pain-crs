@@ -454,6 +454,16 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   .module-lock{padding:24px 16px;}
   .lock-msg{font-size:13px;}
 }
+
+/* === CSS Checkbox Sidebar (pure CSS, no JS required) === */
+#nav-toggle:checked ~ .topbar .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+#nav-toggle:checked ~ .topbar .hamburger span:nth-child(2){opacity:0;}
+#nav-toggle:checked ~ .topbar .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#nav-toggle:checked ~ .sidebar-overlay{display:block;cursor:pointer;}
+#nav-toggle:checked ~ .app nav.sidebar{left:0 !important;}
+/* Make overlay a label to close sidebar when tapped */
+label.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:299;cursor:pointer;}
+label.sidebar-overlay[for="nav-toggle"]{pointer-events:auto;}
 </style>
 <!-- Supabase JS client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -472,8 +482,9 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 
 
+<input type="checkbox" id="nav-toggle" style="position:fixed;left:-9999px;opacity:0;width:0;height:0;pointer-events:none;">
 <div class="topbar">
-  <button class="hamburger" id="hamburger" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
+  <label class="hamburger" id="hamburger" for="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></label>
   <a href="/" class="home-back-btn"><span class="en">← SinoMed</span><span class="zh">← 首页</span></a>
   <div class="lang-btn">
     <button class="active" onclick="setLang('en')">EN</button>
@@ -521,6 +532,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 
 <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<label class="sidebar-overlay" id="sidebar-overlay" for="nav-toggle"></label>
 <div class="app">
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
@@ -3861,19 +3873,7 @@ window.addEventListener('DOMContentLoaded', () => {
     updateSidebarPricingCTA();
   }, 800);
 
-  // Hamburger: bind both touch and click for reliable mobile response
-  const ham = document.getElementById('hamburger');
-  if(ham){
-    ham.addEventListener('touchend', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      toggleSidebar();
-    }, {passive: false});
-    ham.addEventListener('click', function(e){
-      e.stopPropagation();
-      toggleSidebar();
-    });
-  }
+  // Hamburger: controlled by CSS checkbox #nav-toggle (no JS needed)
 });
 
 function updateSidebarPricingCTA(){
