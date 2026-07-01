@@ -309,7 +309,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .disclaimer-bar.collapsed .dc-text{display:none;}
 .disclaimer-bar .dc-toggle{font-size:11px;font-weight:700;color:var(--paper);background:rgba(255,255,255,0.12);border:none;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit;white-space:nowrap;}
 .disclaimer-bar .dc-toggle:hover{background:rgba(255,255,255,0.22);}
-.main{padding-bottom:48px;}
+.main{padding-bottom:80px;}
 
 /* === Alternative Clinical Perspective block === */
 .altview-box{border:1px solid var(--plum-light);background:var(--plum-bg);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:16px;}
@@ -362,9 +362,17 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 .pc-row{padding:14px 0;border-bottom:1px solid var(--rule);display:flex;gap:10px;align-items:flex-start;}
 .pc-label{font-size:13px;font-weight:600;color:var(--ink);min-width:160px;flex-shrink:0;}
 .pc-val{font-size:13px;color:var(--ink-mid);line-height:1.7;flex:1;}
+
+.concept-box{border:1px solid var(--rule);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden;}
+.concept-title{font-size:13px;font-weight:700;color:var(--vermillion);padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:var(--paper-warm);}
+.concept-title::after{content:'▸';font-size:12px;color:var(--ink-faint);transition:transform .2s;}
+.concept-box.open .concept-title::after{content:'▾';}
+.concept-body{display:none;padding:14px 16px;font-size:13px;line-height:1.8;color:var(--ink-mid);border-top:1px solid var(--rule);}
+.concept-box.open .concept-body{display:block;}
 </style>
 <!-- Supabase JS client -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238B1A1A'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='serif' fill='white'>针</text></svg>">
 </head>
 <body>
 
@@ -548,7 +556,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 
 <div class="concept-box">
-  <div class="concept-title"><span class="en">,</span><span class="zh">疼痛的普遍规律：两根一框</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">,</span><span class="zh">疼痛的普遍规律：两根一框</span></div>
   <div class="concept-body">
     <span class="en">,,()/,.,,,-,/'.()/,.,,//./,,(),,,,(),,,(),(,,)..</span>
     <span class="zh">
@@ -643,7 +651,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div id="pain-overview-exam" class="phase-panel">
 
   <div class="concept-box">
-    <div class="concept-title"><span class="en">","</span><span class="zh">临床理念："寻找来源，而非仅治疗部位"</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">","</span><span class="zh">临床理念："寻找来源，而非仅治疗部位"</span></div>
     <div class="concept-body">
       <span class="en">,.//././(..,,/)./()(..,)./,,./,,.</span>
       <span class="zh">
@@ -790,7 +798,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div id="pain-overview-treatment" class="phase-panel">
 
   <div class="concept-box">
-    <div class="concept-title"><span class="en">-</span><span class="zh">四层治疗体系——决策框架</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">-</span><span class="zh">四层治疗体系——决策框架</span></div>
     <div class="concept-body">
       <span class="en">,.,,./()()()+()</span>
       <span class="zh">
@@ -905,21 +913,21 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en"></span><span class="zh">独活寄生汤</span></div>
       <div class="formula-indication"><span class="en">--/,,,,..</span><span class="zh">慢性痹证兼肾肝虚损——长期关节/腰痛，无力，四肢冷，疲乏，虚证背景。慢性骨骼肌肉疼痛兼体质虚证的金标准方。</span></div>
       <div class="formula-why"><span class="en">/.()+++--.()+++()++()++(-,)..</span><span class="zh"><strong>机理：</strong>一方两层。第一层（驱除病邪）：独活+桑寄生+防风+秦艽从经络驱散风寒湿。第二层（滋养根本）：熟地黄+当归+白芍+川芎（四物汤基础——养血）；人参+茯苓+甘草（四君子基础——补气）；杜仲+牛膝+桑寄生（补肾肝，强筋骨）。此为慢性骨骼肌肉疼痛作为痹证与体质虚证交叉的经典方——正是40岁以上大多数慢性疼痛患者的临床情况。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en"></span><span class="zh">身痛逐瘀汤</span></div>
       <div class="formula-indication"><span class="en">-,,,.-,.</span><span class="zh">全身血瘀疼痛——全身骨骼肌肉固定刺痛，夜间加重，舌紫有瘀点，脉涩。外伤后疼痛，慢性损伤瘀血。</span></div>
       <div class="formula-why"><span class="en">/'.++++()+(-)++()..</span><span class="zh"><strong>机理：</strong>王清任以血瘀为全身主导疼痛机制的方剂。桃仁+红花+当归+川芎活血；五灵脂+蒲黄（失笑散）化解经络中顽固瘀血；没药+乳香开通经络止痛（中医经典止痛对药）；羌活+秦艽+地龙开通经络并祛散残余风邪；黄芪补气以推动血液（与补阳还五汤相同原则——气推血行）。此方同时覆盖血瘀机制和允许瘀血持续存在的气虚。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Qin Jiao 3g, Chuan Xiong 6g, Tao Ren 9g, Hong Hua 9g, Gan Cao 6g, Qiang Huo 3g, Mo Yao 6g, Dang Gui 9g, Wu Ling Zhi 6g (fried), Xiang Fu 3g, Niu Xi 9g, Di Long 6g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>秦艽3g、川芎6g、桃仁9g、红花9g、甘草6g、羌活3g、没药6g、当归9g、五灵脂6g（炒）、香附3g、牛膝9g、地龙6g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Qin Jiao 3g, Chuan Xiong 6g, Tao Ren 9g, Hong Hua 9g, Gan Cao 6g, Qiang Huo 3g, Mo Yao 6g, Dang Gui 9g, Wu Ling Zhi 6g (fried), Xiang Fu 3g, Niu Xi 9g, Di Long 6g.</span><span class="zh"><strong>组成：</strong>秦艽3g、川芎6g、桃仁9g、红花9g、甘草6g、羌活3g、没药6g、当归9g、五灵脂6g（炒）、香附3g、牛膝9g、地龙6g。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en"></span><span class="zh">宣痹汤</span></div>
       <div class="formula-indication"><span class="en">(),,.,,.</span><span class="zh">热痹——关节红热肿胀；灼热疼痛；温热加重；冰冷缓解；脉数；舌红苔黄。急性炎症性关节炎，痛风，反应性关节炎。</span></div>
       <div class="formula-why"><span class="en">/++-()++-(-).(),-..</span><span class="zh"><strong>机理：</strong>防己+蚕沙+薏苡仁清经络湿热（热痹的湿邪成分）；连翘+赤小豆清血分热；滑石+通草通过利尿向下排出湿热（给湿热提供出路）。与寒痹（需要温热）不同，热痹需要清凉和引流——本方积极为关节中积聚的热湿创造向下的出路。不使用温热药。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Fang Ji 15g, Xing Ren 15g, Hua Shi 15g, Lian Qiao 9g, Shan Zhi Zi 9g, Yi Yi Ren 15g, Ban Xia 9g (vinegar-fried), Wan Can Sha 9g, Chi Xiao Dou Pi 9g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>防己15g、杏仁15g、滑石15g、连翘9g、山栀9g、薏苡仁15g、半夏9g（醋炒）、晚蚕沙9g、赤小豆皮9g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Fang Ji 15g, Xing Ren 15g, Hua Shi 15g, Lian Qiao 9g, Shan Zhi Zi 9g, Yi Yi Ren 15g, Ban Xia 9g (vinegar-fried), Wan Can Sha 9g, Chi Xiao Dou Pi 9g.</span><span class="zh"><strong>组成：</strong>防己15g、杏仁15g、滑石15g、连翘9g、山栀9g、薏苡仁15g、半夏9g（醋炒）、晚蚕沙9g、赤小豆皮9g。</span></div>
     </div>
 
   </div>
@@ -949,7 +957,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Neck — Which Channel Hurts?</span><span class="zh">颈部经络解剖——哪条经络受阻？</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Neck — Which Channel Hurts?</span><span class="zh">颈部经络解剖——哪条经络受阻？</span></div>
   <div class="concept-body">
     <span class="en">
       The neck is the most channel-dense region of the body — every primary Yang channel ascends through the neck and cervical spine. Pain location directly identifies the involved channel:<br><br>
@@ -1029,7 +1037,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div id="neckpain-exam" class="phase-panel">
 
   <div class="concept-box">
-    <div class="concept-title"><span class="en">Examination Sequence: Observation → ROM → Palpation → Special Tests → Neuro Screen</span><span class="zh">检查顺序：视诊→活动度→触诊→特殊试验→神经筛查</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Examination Sequence: Observation → ROM → Palpation → Special Tests → Neuro Screen</span><span class="zh">检查顺序：视诊→活动度→触诊→特殊试验→神经筛查</span></div>
     <div class="concept-body"><span class="en">Always examine before treating. Palpation findings directly guide the trigger point and FSN needle placement. The special tests determine whether this is a pure myofascial problem, a joint problem, a disc problem, or a radiculopathy — each requires a different treatment approach.</span>
     <span class="zh">始终在治疗前检查。触诊发现直接指导激痛点和浮针的进针位置。特殊试验决定这是纯肌筋膜问题、关节问题、椎间盘问题还是根性病变——每种需要不同的治疗方法。</span></div>
   </div>
@@ -1122,7 +1130,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div id="neckpain-treatment" class="phase-panel">
 
   <div class="concept-box">
-    <div class="concept-title"><span class="en">Treatment Decision: Which Layers for This Patient?</span><span class="zh">治疗决策：这位患者需要哪些层次？</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Treatment Decision: Which Layers for This Patient?</span><span class="zh">治疗决策：这位患者需要哪些层次？</span></div>
     <div class="concept-body">
       <span class="en">After palpation and special tests, apply this decision tree:<br>
       <strong>Active MTrP found → reproduces chief complaint?</strong> YES → Trigger Point first<br>
@@ -1243,21 +1251,21 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Ge Gen Tang</span><span class="zh">葛根汤</span></div>
       <div class="formula-indication"><span class="en">Acute Wind-Cold neck pain / wry neck — sudden stiff neck, aversion to cold, no sweating, tight pulse. The definitive formula for Wind-Cold invasion of the Taiyang + Yangming channels at the neck.</span><span class="zh">急性风寒颈痛/落枕——突然颈项强直，恶寒，无汗，脉紧。风寒侵袭颈部太阳+阳明经的确定性方剂。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> Zhang Zhongjing's formula for Taiyang Wind-Cold with prominent neck stiffness. (the chief herb) specifically relaxes the posterior cervical muscles — it is the only single herb in the pharmacopoeia with a specific affinity for the posterior cervical region. It opens the Taiyang channel, promotes fluid production in the contracted muscles (Wind-Cold dehydrates the channel sinews), and resolves the spasm. +open the surface and dispel Wind-Cold; ++protect the middle jiao and harmonise. This formula can be prescribed alongside trigger point and FSN treatment for acute wry neck — the combination produces faster resolution than either alone.</span><span class="zh"><strong>机理：</strong>张仲景治疗太阳风寒伴明显颈项强直的方剂。葛根（君药）专门松弛颈后肌肉（项背强几几）——这是本草中唯一对颈后区域有专一亲和性的单味药。它开通太阳经，促进挛缩肌肉的津液生成（风寒使经络之筋脱水），并缓解痉挛。麻黄+桂枝开表驱风散寒；生姜+大枣+甘草保护中焦并调和。此方可与激痛点和浮针治疗同步用于急性落枕——联合产生比任何单一疗法更快的缓解。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Ge Gen 12g, Ma Huang 9g, Gui Zhi 6g, Bai Shao 6g, Sheng Jiang 9g, Da Zao 4 pcs, Zhi Gan Cao 6g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>葛根12g、麻黄9g、桂枝6g、白芍6g、生姜9g、大枣4枚、炙甘草6g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Ge Gen 12g, Ma Huang 9g, Gui Zhi 6g, Bai Shao 6g, Sheng Jiang 9g, Da Zao 4 pcs, Zhi Gan Cao 6g.</span><span class="zh"><strong>组成：</strong>葛根12g、麻黄9g、桂枝6g、白芍6g、生姜9g、大枣4枚、炙甘草6g。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en">Juan Bi Tang (modified for neck)</span><span class="zh">蠲痹汤（颈部加减）</span></div>
       <div class="formula-indication"><span class="en">Chronic Wind-Cold-Damp neck pain — stiff, heavy, worse in cold and damp weather, multiple MTrPs, white greasy coat</span><span class="zh">慢性风寒湿颈痛——僵硬沉重，寒湿天气加重，多发MTrP，苔白腻</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> The foundational chronic cervical Bi formula. Add (for its specific cervical affinity), (strong Wind-Damp dispelling in the channels), (directs the formula to the shoulder-neck region —). Modification for cervical radiculopathy: add +(insect medicinals — penetrate the compressed nerve root channel to relieve neuropathic pain). These insect medicinals access the deepest level of channel blockage, reaching where plant herbs cannot.</span><span class="zh"><strong>机理：</strong>颈部慢性Bi综合征基础方。加葛根（其特定颈部亲和性），威灵仙（经络中强力祛风湿），姜黄（引方向肩颈区域——行气活血上肩颈）。颈椎根性病变加减：加全蝎+蜈蚣（虫类药——穿透受压神经根经络以缓解神经性疼痛）。这些虫类药进入最深层的经络阻塞，到达植物草药无法到达的地方。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base: Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g (decoct first), Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Zhi Gan Cao 6g — PLUS Ge Gen 15g, Bai Zhi 9g (neck-guiding pair).</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>蠲痹汤基础：羌活9g、独活9g、桂枝9g、制附子6g（先煎）、秦艽12g、海风藤15g、川芎9g、当归12g、炙甘草6g——加葛根15g、白芷9g（颈部引经对药）。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base: Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g (decoct first), Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Zhi Gan Cao 6g — PLUS Ge Gen 15g, Bai Zhi 9g (neck-guiding pair).</span><span class="zh"><strong>组成：</strong>蠲痹汤基础：羌活9g、独活9g、桂枝9g、制附子6g（先煎）、秦艽12g、海风藤15g、川芎9g、当归12g、炙甘草6g——加葛根15g、白芷9g（颈部引经对药）。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en">Du Huo Ji Sheng Tang</span><span class="zh">独活寄生汤</span></div>
       <div class="formula-indication"><span class="en">Chronic cervical spondylosis with Kidney-Liver deficiency — elderly, progressive, fatigue, low back concurrent, radiculopathy, deep-weak chi pulse</span><span class="zh">慢性颈椎病伴肾肝虚损——老年，进行性，疲乏，同时伴腰痛，根性病变，尺脉沉弱</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> As discussed in the Pain Overview — the gold standard for chronic pain with constitutional deficiency. The Bi-dispelling layer (, ,) addresses the pathogen; the nourishing layer (, , , , , ,) addresses the root deficiency; ++specifically nourish the Kidney-Liver to restore bone and sinew integrity. Add to direct the formula to the cervical spine specifically. This formula combined with Prolotherapy represents the TCM-integrative approach to cervical spondylosis: Prolotherapy rebuilds the structural collagen while Du Huo Ji Sheng Tang nourishes the constitutional Kidney-Liver root.</span><span class="zh"><strong>机理：</strong>如疼痛总论所述——伴体质虚证的慢性痛的金标准。祛邪层（独活、防风、秦艽）处理病邪；滋养层（熟地黄、当归、白芍、川芎、人参、茯苓、甘草）处理根本虚证；杜仲+牛膝+桑寄生专门滋养肾肝以恢复骨骼和筋腱完整性。加葛根以引方药专向颈椎。此方与增生疗法联合代表颈椎病的中医整合方法：增生疗法重建结构性胶原蛋白，而独活寄生汤滋养体质肾肝根本。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
     </div>
 
   </div>
@@ -1326,7 +1334,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Wrist — Three Axes, Three Syndromes</span><span class="zh">腕部经络解剖——三轴三综合征</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Wrist — Three Axes, Three Syndromes</span><span class="zh">腕部经络解剖——三轴三综合征</span></div>
   <div class="concept-body">
     <span class="en">The wrist concentrates six primary channels (three Yin on the palmar surface, three Yang on the dorsal surface) into a narrow passage — making it one of the most channel-dense and compression-vulnerable regions in the body.<br><br> <strong>Palmar surface (Yin channels — PC, HT, LU):</strong><br> — PC channel: the carpal tunnel — median nerve and flexor tendons travel beneath PC7 . Compression here = Carpal Tunnel Syndrome.<br> — HT channel: medial wrist, hypothenar area — HT7 . Ulnar nerve territory.<br> — LU channel: radial wrist — LU9 , LU10 . Radial nerve sensory branch.<br><br> <strong>Dorsal / radial surface (Yang channels — LI, SJ, SI):</strong><br> — LI channel: dorso-radial surface — the anatomical snuffbox (LI5 area). De Quervain's tenosynovitis: the abductor pollicis longus (APL) and extensor pollicis brevis (EPB) tendons inflame in their shared sheath at the radial styloid — classic "" (Mother's thumb).<br> — SJ channel: dorsal midline — SJ4, SJ5. Extensor tendons and dorsal interosseous.<br><br> <strong>Clinical rule:</strong> Palmar numbness and tingling = Yin channel (PC/HT/LU) compression. Radial-side thumb pain and swelling = LI channel / De Quervain's. Dorsal wrist pain = SJ channel / TFCC or ligament. Diffuse wrist pain worsened by loading = wrist instability (Prolotherapy zone).</span>
     <span class="zh">
@@ -1565,21 +1573,21 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Huang Qi Gui Zhi Wu Wu Tang</span><span class="zh">黄芪桂枝五物汤</span></div>
       <div class="formula-indication"><span class="en">Blood deficiency CTS — hand and finger numbness from channel deficiency; worse in cold; pale tongue; weak pulse. The classical formula for blood-deficiency channel numbness in the extremities.</span><span class="zh">血虚型CTS——经络虚引起的手和手指麻木；寒冷加重；舌淡；脉弱。经典的四肢经络血虚麻木方。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> builds Wei Qi and warms the channel surface, driving Blood into the extremities; warms and opens the Yang channels of the arm (traversing the carpal region); nourishes the Yin-Blood within the channels; +warm and protect the middle jiao. The formula specifically warms and fills the peripheral channel — restoring the Blood nourishment that reduces nerve vulnerability to compression. Excellent for cold-aggravated CTS in elderly patients and post-partum women. Add +to strengthen the Blood-nourishing and channel-opening effect.</span><span class="zh"><strong>机理：</strong>黄芪补卫气并温经表，推动血液进入四肢；桂枝温通手臂阳经（经过腕管区域）；白芍养经络中的阴血；生姜+大枣温暖保护中焦。本方专门温补周围经络——恢复减少神经对压迫易感性的血液濡养。对老年患者和产后女性的寒冷加重型CTS效果极好。加当归+川芎以加强养血通络效果。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Huang Qi 9g, Gui Zhi 9g, Bai Shao 9g, Sheng Jiang 18g, Da Zao 4 pcs.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>黄芪9g、桂枝9g、白芍9g、生姜18g、大枣4枚。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Huang Qi 9g, Gui Zhi 9g, Bai Shao 9g, Sheng Jiang 18g, Da Zao 4 pcs.</span><span class="zh"><strong>组成：</strong>黄芪9g、桂枝9g、白芍9g、生姜18g、大枣4枚。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en">Juan Bi Tang + Hai Tong Pi</span><span class="zh">蠲痹汤 + 海桐皮</span></div>
       <div class="formula-indication"><span class="en">Phlegm-Damp or Wind-Cold-Damp CTS — numbness with systemic Damp signs, cold exposure worsens, greasy coat, slippery pulse</span><span class="zh">痰湿或风寒湿型CTS——麻木伴全身湿象，受寒加重，苔腻，脉滑</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> is the foundational Bi syndrome formula (Wind-Cold-Damp dispelling + Blood activation). Add — specifically indicated for numbness and Bi syndrome in the upper limbs and hands. Add — its tube-like structure has a traditional affinity for opening the channel lumen in the wrist and finger channels. The combination: dispel Wind-Cold-Damp from the upper limb channels + activate Blood + open the channel at the wrist's narrow passages.</span><span class="zh"><strong>机理：</strong>蠲痹汤是Bi综合征基础方（祛风寒湿+活血）。加海桐皮——专门适用于上肢和手部的麻木和Bi综合征（上肢痹证专药）。加丝瓜络——其管状结构对开通腕和手指经络管腔有传统亲和性（通络）。合用：祛上肢经络风寒湿+活血+开通腕部狭窄通道的经络。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base Juan Bi Tang (Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g先煎, Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Zhi Gan Cao 6g) + Hai Tong Pi 12g (wrist/forearm channel-guiding herb).</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>蠲痹汤基础（羌活9g、独活9g、桂枝9g、制附子6g先煎、秦艽12g、海风藤15g、川芎9g、当归12g、炙甘草6g）+海桐皮12g（腕及前臂引经药）。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base Juan Bi Tang (Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g先煎, Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Zhi Gan Cao 6g) + Hai Tong Pi 12g (wrist/forearm channel-guiding herb).</span><span class="zh"><strong>组成：</strong>蠲痹汤基础（羌活9g、独活9g、桂枝9g、制附子6g先煎、秦艽12g、海风藤15g、川芎9g、当归12g、炙甘草6g）+海桐皮12g（腕及前臂引经药）。</span></div>
     </div>
 
     <div class="formula-card">
       <div class="formula-name"><span class="en">Jin Huang San (external) — De Quervain's Acute Phase</span><span class="zh">金黄散（外用）——De Quervain急性期</span></div>
       <div class="formula-indication"><span class="en">Acute Damp-Heat tenosynovitis — hot, red, swollen radial styloid area. External application to rapidly reduce the local Damp-Heat inflammation.</span><span class="zh">急性湿热腱鞘炎——桡骨茎突区域红热肿胀。外用以快速减轻局部湿热炎症。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> Jin Huang San is the classical TCM external formula for Damp-Heat inflammation. +clear Heat and resolve Damp-Heat topically (direct anti-inflammatory action through the skin); +resolve Phlegm and reduce swelling; activates Blood in the LI channel (specifically directs to the shoulder-arm-wrist region). Mix with water or honey to a paste, apply over the radial styloid, cover with gauze. Change twice daily. Reduces local heat and swelling within 2–3 days in acute cases. Do not use on broken skin.</span><span class="zh"><strong>机理：</strong>金黄散是湿热炎症的经典中医外用方。大黄+黄柏外用清热化湿（直接通过皮肤发挥消炎作用）；天花粉+陈皮化痰消肿；姜黄活化大肠经中的血液（姜黄专门作用于肩-臂-腕区域）。与水或蜂蜜调为糊状，敷于桡骨茎突处，纱布覆盖。每日换药两次。急性病例2–3天内减轻局部热感和肿胀。不用于破损皮肤。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> EXTERNAL topical powder (proportion by parts, mix with honey or vinegar to a paste): Da Huang 10, Huang Bai 10, Jiang Huang 10, Bai Zhi 10, Tian Hua Fen 20, Cang Zhu 4, Hou Po 4, Chen Pi 4, Gan Cao 4, Tian Nan Xing 4. Apply as a paste over the affected sheath, change daily.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>外用散剂（按份配比，蜜或醋调糊外敷）：大黄10、黄柏10、姜黄10、白芷10、天花粉20、苍术4、厚朴4、陈皮4、甘草4、天南星4。调糊外敷患处，每日一换。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> EXTERNAL topical powder (proportion by parts, mix with honey or vinegar to a paste): Da Huang 10, Huang Bai 10, Jiang Huang 10, Bai Zhi 10, Tian Hua Fen 20, Cang Zhu 4, Hou Po 4, Chen Pi 4, Gan Cao 4, Tian Nan Xing 4. Apply as a paste over the affected sheath, change daily.</span><span class="zh"><strong>组成：</strong>外用散剂（按份配比，蜜或醋调糊外敷）：大黄10、黄柏10、姜黄10、白芷10、天花粉20、苍术4、厚朴4、陈皮4、甘草4、天南星4。调糊外敷患处，每日一换。</span></div>
     </div>
 
   </div>
@@ -1646,7 +1654,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Distribution — Location Tells You the Channel</span><span class="zh">经络分布——位置告知经络</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Distribution — Location Tells You the Channel</span><span class="zh">经络分布——位置告知经络</span></div>
   <div class="concept-body"><span class="en">The head is the meeting place of all Yang channels. Pain location directly identifies the affected channel and shapes the entire treatment strategy:<br><br> <strong>Vertex (GV) → Jueyin (Liver channel):</strong> Top of the head, vertex headache. The Liver channel reaches the vertex via GV20. Liver Yang rising or Liver Blood deficiency.<br> <strong>Occiput + nape (BL/GV) → Taiyang:</strong> Posterior headache, neck stiffness. BL channel runs up the occiput. Wind-Cold invasion of Taiyang; also cervicogenic from suboccipital MTrPs.<br> <strong>Temporal/lateral (GB) → Shaoyang:</strong> Unilateral pounding or throbbing temporal headache — classic migraine territory. GB channel traverses the temple. Liver-GB Fire or Wind-Heat in Shaoyang.<br> <strong>Frontal (ST/LI) → Yangming:</strong> Forehead and supra-orbital headache. ST channel traverses the forehead. Stomach Fire, Wind-Heat, or Yang deficiency headache.<br> <strong>Whole head, diffuse:</strong> Multiple channels involved; usually Qi-Blood deficiency or Phlegm-Damp clouding the clear Yang.</span>
   <span class="zh">
     头部是六阳皆会之处。疼痛位置直接识别受累经络，形成整体治疗策略：<br><br>
@@ -1775,19 +1783,19 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Chuan Xiong Cha Tiao San</span><span class="zh">川芎茶调散</span></div>
       <div class="formula-indication"><span class="en">Wind-Cold headache — occipital, temporal, or frontal; cold exposure trigger; floating-tight pulse; white coat. The first-line formula for Wind-invasion headache regardless of location.</span><span class="zh">风寒头痛——枕部、颞部或前额；受寒触发；脉浮紧；苔白。无论位置，风邪侵袭头痛的一线方剂。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> is the chief herb — it is the most important single herb for headache in TCM. It activates Blood in the head, opens the GB/BL channels, and disperses Wind. ++++dispel Wind-Cold from all three Yang channels of the head simultaneously (→ Taiyang; → Yangming; → Shaoyang). adds cooling to prevent over-warming. Take dissolved in green tea — the tea's rising nature carries the formula to the head.</span><span class="zh"><strong>机理：</strong>川芎为君药——是中医最重要的单味头痛药。在头部活血（头痛必用川芎），开通胆/膀胱经，散风邪。荆芥+防风+白芷+羌活+细辛同时从头部三条阳经祛除风寒（羌活→太阳；白芷→阳明；川芎→少阳）。薄荷增加清凉以防过度温热。用绿茶调服——茶的升腾之性携带方药至头部。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Chuan Xiong 12g, Jing Jie 12g, Bai Zhi 6g, Qiang Huo 6g, Gan Cao 6g, Xi Xin 3g, Fang Feng 4.5g, Bo He 24g (add last). Traditionally taken washed down with green tea.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>川芎12g、荆芥12g、白芷6g、羌活6g、甘草6g、细辛3g、防风4.5g、薄荷24g（后下）。传统以清茶调服。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Chuan Xiong 12g, Jing Jie 12g, Bai Zhi 6g, Qiang Huo 6g, Gan Cao 6g, Xi Xin 3g, Fang Feng 4.5g, Bo He 24g (add last). Traditionally taken washed down with green tea.</span><span class="zh"><strong>组成：</strong>川芎12g、荆芥12g、白芷6g、羌活6g、甘草6g、细辛3g、防风4.5g、薄荷24g（后下）。传统以清茶调服。</span></div>
     </div>
     <div class="formula-card">
       <div class="formula-name"><span class="en">Tian Ma Gou Teng Yin</span><span class="zh">天麻钩藤饮</span></div>
       <div class="formula-indication"><span class="en">Liver Yang migraine — unilateral pulsating, stress-triggered, hypertension, red face, wiry-rapid pulse. Preventive treatment taken between attacks.</span><span class="zh">肝阳上亢偏头痛——单侧搏动，压力触发，高血压，面红，脉弦数。发作间期预防性服用。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> See Stroke module — same root pattern, same formula. +extinguish Wind; +anchor Yang downward (draws Blood and Yang energy downward from the head — directly antagonises the rising mechanism of migraine); +clear the Heat; ++nourish the Kidney-Liver Yin root. Take daily between attacks for 4–8 weeks for sustained migraine prevention.</span><span class="zh"><strong>机理：</strong>参见中风模块——证型相同，方剂相同。天麻+钩藤息风；石决明+牛膝向下潜阳（牛膝将血液和阳气从头部向下引导——直接拮抗偏头痛的上升机制）；黄芩+栀子清热；杜仲+桑寄生+夜交藤滋养肾肝阴根。发作间期每日服用4–8周以持续预防偏头痛。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Tian Ma 9g, Gou Teng 12g (add last), Shi Jue Ming 18g (decoct first), Zhi Zi 9g, Huang Qin 9g, Chuan Niu Xi 12g, Du Zhong 9g, Yi Mu Cao 9g, Sang Ji Sheng 9g, Ye Jiao Teng 9g, Fu Shen 9g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>天麻9g、钩藤12g（后下）、石决明18g（先煎）、栀子9g、黄芩9g、川牛膝12g、杜仲9g、益母草9g、桑寄生9g、夜交藤9g、茯神9g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Tian Ma 9g, Gou Teng 12g (add last), Shi Jue Ming 18g (decoct first), Zhi Zi 9g, Huang Qin 9g, Chuan Niu Xi 12g, Du Zhong 9g, Yi Mu Cao 9g, Sang Ji Sheng 9g, Ye Jiao Teng 9g, Fu Shen 9g.</span><span class="zh"><strong>组成：</strong>天麻9g、钩藤12g（后下）、石决明18g（先煎）、栀子9g、黄芩9g、川牛膝12g、杜仲9g、益母草9g、桑寄生9g、夜交藤9g、茯神9g。</span></div>
     </div>
     <div class="formula-card">
       <div class="formula-name"><span class="en">Ban Xia Bai Zhu Tian Ma Tang</span><span class="zh">半夏白术天麻汤</span></div>
       <div class="formula-indication"><span class="en">Phlegm-Damp headache — heavy foggy bilateral headache with dizziness, nausea, greasy coat, slippery pulse. Also effective for Phlegm-type migraine with prominent nausea.</span><span class="zh">痰湿头痛——沉重昏蒙双侧头痛伴头晕、恶心、苔腻、脉滑。对伴明显恶心的痰型偏头痛也有效。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> extinguishes Wind specifically from the head and channels — the most important single herb for wind-type headache and dizziness. resolves Phlegm; +strengthen Spleen to prevent Phlegm regeneration; moves Qi to prevent Phlegm stagnation. The combination addresses both the Wind-headache and the Phlegm source (+herbs). The formula is classically indicated when headache is accompanied by dizziness — the twin symptoms of Phlegm-Wind in the head.</span><span class="zh"><strong>机理：</strong>天麻专门熄灭头部和经络中的风邪——风型头痛和头晕最重要的单味药。半夏化痰；白术+茯苓健脾以防痰再生；陈皮行气以防痰停滞。合用同时处理风头痛（天麻）和痰的来源（半夏+健脾药）。当头痛伴头晕时经典适用——头部风痰的两大症状。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Ban Xia 9g, Bai Zhu 15g, Tian Ma 9g, Fu Ling 9g, Ju Hong 6g, Gan Cao 3g, Sheng Jiang 2 slices, Da Zao 2 pcs.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>半夏9g、白术15g、天麻9g、茯苓9g、橘红6g、甘草3g、生姜2片、大枣2枚。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Ban Xia 9g, Bai Zhu 15g, Tian Ma 9g, Fu Ling 9g, Ju Hong 6g, Gan Cao 3g, Sheng Jiang 2 slices, Da Zao 2 pcs.</span><span class="zh"><strong>组成：</strong>半夏9g、白术15g、天麻9g、茯苓9g、橘红6g、甘草3g、生姜2片、大枣2枚。</span></div>
     </div>
   </div>
 </div>
@@ -1828,7 +1836,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Shoulder — Three Zones, Three Channels</span><span class="zh">肩部经络解剖——三区三经</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Shoulder — Three Zones, Three Channels</span><span class="zh">肩部经络解剖——三区三经</span></div>
   <div class="concept-body"><span class="en"><strong>Lateral deltoid (LI channel — LI15):</strong> Supraspinatus tendon and subacromial bursa territory. Pain on shoulder abduction 60–120° (painful arc). LI channel governs the lateral shoulder and upper arm. Most common rotator cuff impingement location.<br> <strong>Anterior shoulder (LU/PC channel — LU1 , LU2):</strong> Biceps long head tendon and anterior capsule. Pain on forward flexion and internal rotation. Subscapularis tendon tears and bicipital tendinopathy.<br> <strong>Posterior shoulder (SI/SJ channel — SI9, SI10, TE14):</strong> Infraspinatus and teres minor territory. Pain on external rotation and reaching behind. Posterior capsule tightness and posterior rotator cuff pathology.<br> <strong>AC joint (GB/SJ channel — GB21 territory):</strong> Acromioclavicular joint at the top of the shoulder. Pain specifically at the AC joint line, worse with cross-body movements and overhead.</span>
   <span class="zh">
     <strong>三角肌外侧（大肠经——LI15肩髃）：</strong>冈上肌腱和肩峰下滑囊区域。肩关节外展60–120°时疼痛（痛弧）。大肠经统领肩外侧和上臂。最常见的肩袖撞击部位。<br>
@@ -1976,13 +1984,13 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Juan Bi Tang + Jiang Huang</span><span class="zh">蠲痹汤 + 姜黄</span></div>
       <div class="formula-indication"><span class="en">Wind-Cold-Damp shoulder Bi — rotator cuff impingement, cold-damp weather worse, white greasy coat</span><span class="zh">风寒湿肩痹——肩袖撞击，寒湿天气加重，苔白腻</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> base + (Turmeric — directs the formula specifically to the shoulder region. is a dual-action herb: it moves Qi and Blood in the shoulder and upper limb (— the guiding herb for the upper limb), and it has strong anti-inflammatory properties through curcumin content). Add for stubborn Wind-Damp in the shoulder channels. The formula with is the classical combination for shoulder Bi syndrome — is to the shoulder what is to the knee (guiding the formula to the target region).</span><span class="zh"><strong>机理：</strong>蠲痹汤基础+姜黄（姜黄——引方专向肩部区域。姜黄是双作用草药：在肩部和上肢行气活血（上肢引经药），并通过姜黄素含量发挥强力抗炎作用）。加威灵仙用于肩部经络顽固风湿。含姜黄的本方是肩痹的经典组合——姜黄之于肩部如同牛膝之于膝关节（引方至靶区域）。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g (decoct first), Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Jiang Huang 9g (shoulder guiding herb), Wei Ling Xian 12g, Zhi Gan Cao 6g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>羌活9g、独活9g、桂枝9g、制附子6g（先煎）、秦艽12g、海风藤15g、川芎9g、当归12g、姜黄9g（肩部引经）、威灵仙12g、炙甘草6g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Qiang Huo 9g, Du Huo 9g, Gui Zhi 9g, Zhi Fu Zi 6g (decoct first), Qin Jiao 12g, Hai Feng Teng 15g, Chuan Xiong 9g, Dang Gui 12g, Jiang Huang 9g (shoulder guiding herb), Wei Ling Xian 12g, Zhi Gan Cao 6g.</span><span class="zh"><strong>组成：</strong>羌活9g、独活9g、桂枝9g、制附子6g（先煎）、秦艽12g、海风藤15g、川芎9g、当归12g、姜黄9g（肩部引经）、威灵仙12g、炙甘草6g。</span></div>
     </div>
     <div class="formula-card">
       <div class="formula-name"><span class="en">Shu Jing Huo Xue Tang</span><span class="zh">舒筋活血汤</span></div>
       <div class="formula-indication"><span class="en">Frozen shoulder (Phlegm-stasis phase) — severe restriction, chronic stiffness, dark-pale tongue, wiry-tight pulse</span><span class="zh">冻结肩（痰瘀阶段）——严重受限，慢性僵硬，舌淡暗，脉弦紧</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> Specifically designed for shoulder and arm sinew stiffness with Blood stasis. ++activate Blood; +dispel Wind from the sinews; opens the surface and channels; +strengthen the sinews and tendons (Kidney-Liver root support); (pine node) specifically softens and opens contracted joint channels. The formula both moves stasis (frozen phase mechanism) and nourishes the sinews (to prevent post-thaw weakness). Take warm, twice daily.</span><span class="zh"><strong>机理：</strong>专为肩臂筋腱僵硬伴血瘀而设计。当归+川芎+红花活血；威灵仙+防风从筋腱祛风；荆芥开表开络；续断+五加皮强筋腱（肾肝根本支持）；松节专门软化和开通挛缩的关节经络。本方既化瘀（冻结阶段机制）又养筋（防止解冻后虚弱）。温服，每日两次。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Dang Gui 9g, Chuan Xiong 6g, Hong Hua 6g, Wei Ling Xian 9g, Fang Feng 9g, Jing Jie 6g, Xu Duan 12g, Wu Jia Pi 9g, Song Jie 9g, Mo Yao 6g, Zhi Gan Cao 3g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>当归9g、川芎6g、红花6g、威灵仙9g、防风9g、荆芥6g、续断12g、五加皮9g、松节9g、没药6g、炙甘草3g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Dang Gui 9g, Chuan Xiong 6g, Hong Hua 6g, Wei Ling Xian 9g, Fang Feng 9g, Jing Jie 6g, Xu Duan 12g, Wu Jia Pi 9g, Song Jie 9g, Mo Yao 6g, Zhi Gan Cao 3g.</span><span class="zh"><strong>组成：</strong>当归9g、川芎6g、红花6g、威灵仙9g、防风9g、荆芥6g、续断12g、五加皮9g、松节9g、没药6g、炙甘草3g。</span></div>
     </div>
   </div>
 </div>
@@ -2043,7 +2051,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">— The Low Back is the Kidney's Palace</span><span class="zh">腰为肾之府——腰为肾之外候</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">— The Low Back is the Kidney's Palace</span><span class="zh">腰为肾之府——腰为肾之外候</span></div>
   <div class="concept-body"><span class="en">The Suwen states: "" — the low back is the residence of the Kidney; when it cannot rotate and move, the Kidney is exhausted. This is the foundational principle: ALL chronic low back pain has Kidney deficiency as the root. The acute and excess components (Cold, stasis, Damp) are branches that arise when the Kidney-deficient low back becomes vulnerable to external pathogens or traumatic strain.<br><br> <strong>Channel anatomy:</strong><br> — Du Mai (GV): central spine, spinous processes, interspinous ligaments<br> — Bladder channel (BL): bilateral paravertebral, L1–L5 BL23–BL25 level<br> — Kidney channel (KI): deep, enters the lumbar spine from the front — Kidney deficiency pain is deep and positional (worse on prolonged standing)<br> — GB channel: lateral hip and iliac crest — often contributes to "low back pain" that is actually lateral hip or SIJ<br><br> <strong>Clinical rule:</strong> Midline pain = Du Mai/disc. Paravertebral pain = BL channel/facet joints/multifidus. Lateral hip-to-back pain = GB/SIJ. Deep aching with dizziness/tinnitus = Kidney channel. Radiating leg pain = see Sciatica module.</span>
   <span class="zh">
     素问曰："腰者肾之府，转摇不能，肾将惫矣"——腰为肾之外候；转动不能，则肾气耗竭。这是基础原则：所有慢性腰痛均以肾虚为根本。急性和实证成分（寒邪、血瘀、湿邪）是当肾虚的腰部对外邪或外伤劳损变得易感时出现的标证。<br><br>
@@ -2176,19 +2184,19 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Du Huo Ji Sheng Tang</span><span class="zh">独活寄生汤</span></div>
       <div class="formula-indication"><span class="en">Chronic low back pain with Kidney-Liver deficiency — the gold standard formula for chronic lumbar Bi syndrome in middle-aged and elderly patients</span><span class="zh">慢性腰痛伴肾肝虚损——中老年患者慢性腰部Bi综合征的金标准方剂</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> See Pain Overview and Neck Pain modules — the same formula that addresses the Kidney-Liver deficiency root across all chronic musculoskeletal pain. For low back: specifically targets the lumbar region and lower limbs (— the guiding herb for the lower body). nourishes Kidney-Liver and strengthens bones and sinews. +specifically nourish the lumbar spine (both herbs have strong affinity for the lumbar-kidney region). This formula takes 4–8 weeks to show significant effect — not appropriate as an acute treatment.</span><span class="zh"><strong>机理：</strong>参见疼痛总论和颈痛模块——处理所有慢性骨骼肌肉痛肾肝虚损根本的相同方剂。腰部：独活专门靶向腰部和下肢（下部引经药——下部身体的引导药）。桑寄生滋养肾肝并强筋骨。杜仲+牛膝专门滋养腰椎（两者对腰肾区域有强亲和性）。此方需4–8周才能显示显著效果——不适合作为急性治疗。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Du Huo 9g, Sang Ji Sheng 12g, Du Zhong 9g, Niu Xi 9g, Xi Xin 3g, Qin Jiao 9g, Fu Ling 12g, Rou Gui 3g (add near end), Fang Feng 9g, Chuan Xiong 6g, Ren Shen 6g, Zhi Gan Cao 6g, Dang Gui 9g, Bai Shao 9g, Gan Di Huang 12g.</span><span class="zh"><strong>组成：</strong>独活9g、桑寄生12g、杜仲9g、牛膝9g、细辛3g、秦艽9g、茯苓12g、肉桂3g（后下）、防风9g、川芎6g、人参6g、炙甘草6g、当归9g、白芍9g、干地黄12g。</span></div>
     </div>
     <div class="formula-card">
       <div class="formula-name"><span class="en">Shen Tong Zhu Yu Tang</span><span class="zh">身痛逐瘀汤</span></div>
       <div class="formula-indication"><span class="en">Acute Blood stasis low back pain — trauma, fixed severe pain, dark tongue, choppy pulse</span><span class="zh">急性血瘀腰痛——外伤，固定剧痛，舌暗，脉涩</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> As described in Pain Overview — +++activate Blood; +(Shi Xiao San) break stubborn lumbar stasis; +stop pain; penetrates the channels. For acute lumbar strain: add (strengthens the lumbar sinews) and reduce the dosage of (the acute phase is excess, not deficiency). Take for 5–10 days acute phase only.</span><span class="zh"><strong>机理：</strong>如疼痛总论所述——桃仁+红花+当归+川芎活血；五灵脂+蒲黄（失笑散）化解顽固腰部瘀血；没药+乳香止痛；地龙通络。急性腰扭伤：加续断（强腰部筋腱），减少黄芪剂量（急性期为实证，非虚证）。仅在急性期服用5–10天。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Qin Jiao 3g, Chuan Xiong 6g, Tao Ren 9g, Hong Hua 9g, Gan Cao 6g, Qiang Huo 3g, Mo Yao 6g, Dang Gui 9g, Wu Ling Zhi 6g (fried), Xiang Fu 3g, Niu Xi 9g, Di Long 6g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>秦艽3g、川芎6g、桃仁9g、红花9g、甘草6g、羌活3g、没药6g、当归9g、五灵脂6g（炒）、香附3g、牛膝9g、地龙6g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Qin Jiao 3g, Chuan Xiong 6g, Tao Ren 9g, Hong Hua 9g, Gan Cao 6g, Qiang Huo 3g, Mo Yao 6g, Dang Gui 9g, Wu Ling Zhi 6g (fried), Xiang Fu 3g, Niu Xi 9g, Di Long 6g.</span><span class="zh"><strong>组成：</strong>秦艽3g、川芎6g、桃仁9g、红花9g、甘草6g、羌活3g、没药6g、当归9g、五灵脂6g（炒）、香附3g、牛膝9g、地龙6g。</span></div>
     </div>
     <div class="formula-card">
       <div class="formula-name"><span class="en">You Gui Wan</span><span class="zh">右归丸</span></div>
       <div class="formula-indication"><span class="en">Kidney Yang deficiency low back — chronic dull aching with cold sensation, cold extremities, pale tongue, deep-slow pulse</span><span class="zh">肾阳虚腰痛——慢性隐痛伴冷感，四肢冷，舌淡，脉沉迟</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> Zhang Jingyue's formula for Kidney Yang restoration. (Deer Antler Gelatin) nourishes the Du Mai and warms Kidney Yang — the single most targeted herb for the "" connection. +warm Kidney Yang fire. ++nourish the Yin root so Yang has a foundation. ++strengthen the lumbar bones and sinews. This formula rebuilds the constitutional Kidney Yang that underlies all chronic low back pain — it is the herbal equivalent of the GV4 moxa treatment.</span><span class="zh"><strong>机理：</strong>张景岳肾阳恢复方。鹿角胶滋养督脉并温肾阳——针对"腰为肾之府"联系单一最有针对性的草药。附子+肉桂温肾阳之火。熟地黄+山茱萸+山药滋养阴液之根使阳有根基。杜仲+菟丝子+枸杞子强腰部骨骼和筋腱。此方重建所有慢性腰痛潜在的体质肾阳——是GV4灸治的草药等效物。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Shu Di Huang 24g, Shan Yao 12g, Shan Zhu Yu 9g, Gou Qi Zi 12g, Lu Jiao Jiao 12g (melt in), Tu Si Zi 12g, Du Zhong 12g, Dang Gui 9g, Rou Gui 6g, Zhi Fu Zi 6g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>熟地黄24g、山药12g、山茱萸9g、枸杞子12g、鹿角胶12g（烊化）、菟丝子12g、杜仲12g、当归9g、肉桂6g、制附子6g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Shu Di Huang 24g, Shan Yao 12g, Shan Zhu Yu 9g, Gou Qi Zi 12g, Lu Jiao Jiao 12g (melt in), Tu Si Zi 12g, Du Zhong 12g, Dang Gui 9g, Rou Gui 6g, Zhi Fu Zi 6g.</span><span class="zh"><strong>组成：</strong>熟地黄24g、山药12g、山茱萸9g、枸杞子12g、鹿角胶12g（烊化）、菟丝子12g、杜仲12g、当归9g、肉桂6g、制附子6g。</span></div>
     </div>
   </div>
 </div>
@@ -2235,7 +2243,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Three Sources of "Sciatica" — Only One is True Sciatica</span><span class="zh">三种"坐骨神经痛"来源——只有一种是真性坐骨神经痛</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Three Sources of "Sciatica" — Only One is True Sciatica</span><span class="zh">三种"坐骨神经痛"来源——只有一种是真性坐骨神经痛</span></div>
   <div class="concept-body"><span class="en">What patients call "sciatica" (and what is often misdiagnosed as sciatica) has three distinct sources:<br><br> <strong>1. True radiculopathy:</strong> Disc herniation at L4/5 or L5/S1 compresses the nerve root → dermatomal leg pain, numbness, and possible weakness. SLR positive. Pain is electric, sharp, follows a specific dermatomal path. Channel: BL channel (L5/S1 = BL channel in the leg).<br><br> <strong>2. Piriformis syndrome:</strong> Piriformis muscle MTrP compresses the sciatic nerve as it exits the greater sciatic foramen → "pseudo-sciatica." Pain in the buttock and posterior leg, but NO dermatomal specificity and SLR may be negative. Channel: GB channel (GB30 is directly at the piriformis). The MTrP is the treatment target, not the nerve root.<br><br> <strong>3. SIJ referral:</strong> The SIJ refers pain into the posterior thigh and sometimes into the calf — mimicking sciatica without nerve root compression. FABER test positive. No neurological signs. Channel: BL/GB junction at the SIJ level. Prolotherapy to the posterior SIJ ligaments is the most effective long-term treatment.</span>
   <span class="zh">
     患者所称的"坐骨神经痛"（以及常被误诊为坐骨神经痛的情况）有三种不同来源：<br><br>
@@ -2275,7 +2283,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="sciatica-exam" class="phase-panel">
   <div name="concept-box" class="concept-box">
-    <div class="concept-title"><span class="en">The Three-Test Battery for Sciatica Differentiation</span><span class="zh">坐骨神经痛鉴别的三试验组合</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">The Three-Test Battery for Sciatica Differentiation</span><span class="zh">坐骨神经痛鉴别的三试验组合</span></div>
     <div class="concept-body"><span class="en">Perform all three tests on every "sciatica" patient before treatment. The combination identifies the source and changes the treatment target.</span>
     <span class="zh">对每位"坐骨神经痛"患者在治疗前进行所有三项试验。组合识别来源并改变治疗靶点。</span></div>
   </div>
@@ -2349,7 +2357,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Du Huo Ji Sheng Tang + Quan Xie + Wu Gong</span><span class="zh">独活寄生汤 + 全蝎 + 蜈蚣</span></div>
       <div class="formula-indication"><span class="en">Chronic radiculopathy with Kidney-Liver deficiency — radiating leg pain, weakness, deep-weak pulse, elderly or post-surgical</span><span class="zh">慢性根性病变伴肾肝虚损——放射性腿痛，无力，脉沉弱，老年或术后</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> The base formula nourishes Kidney-Liver and dispels Wind-Cold-Damp — the constitutional and pathogenic root. The critical additions: +(insect medicinals — penetrate the channel at the level of the nerve root itself, accessing the compressed channel where plant herbs cannot reach). They have both antispasmodic (reduce nerve root irritation) and channel-opening properties that are essential for neuropathic pain in compressed roots. Start at half dose and monitor for allergy. guides the formula downward to the leg channels. opens the sinews of the leg.</span><span class="zh"><strong>机理：</strong>基础方（独活寄生汤）滋养肾肝并祛除风寒湿——体质和病邪根本。关键加味：全蝎+蜈蚣（虫类药——在神经根本身的层次穿透经络，进入植物草药无法到达的受压经络）。它们具有抗痉挛（减轻神经根刺激）和通络特性，对受压根的神经性疼痛至关重要。从半剂量开始，监测过敏。牛膝引方向下至腿部经络。木瓜开通腿部筋腱。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base Du Huo Ji Sheng Tang (see Low Back module) + Quan Xie 3g (powder, swallow separately), Wu Gong 2 pcs (powder, swallow separately) — wind-extinguishing, channel-penetrating pair for radiating sciatic pain.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活寄生汤基础方（同腰痛模块）+全蝎3g（研末冲服）、蜈蚣2条（研末冲服）——熄风通络对药，针对放射性坐骨神经痛。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base Du Huo Ji Sheng Tang (see Low Back module) + Quan Xie 3g (powder, swallow separately), Wu Gong 2 pcs (powder, swallow separately) — wind-extinguishing, channel-penetrating pair for radiating sciatic pain.</span><span class="zh"><strong>组成：</strong>独活寄生汤基础方（同腰痛模块）+全蝎3g（研末冲服）、蜈蚣2条（研末冲服）——熄风通络对药，针对放射性坐骨神经痛。</span></div>
     </div>
   </div>
 </div>
@@ -2398,7 +2406,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Knee</span><span class="zh">膝部经络解剖</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Knee</span><span class="zh">膝部经络解剖</span></div>
   <div class="concept-body"><span class="en"><strong>Medial knee (SP/LV/KI channels):</strong> Medial collateral ligament (MCL), medial meniscus, pes anserine bursa. SP9 is the key point — master for all medial knee conditions. Medial knee pain = Spleen-Liver channel obstruction.<br> <strong>Lateral knee (GB/BL channels):</strong> Lateral collateral ligament (LCL), iliotibial band (ITB), lateral meniscus. GB34 governs this territory — hui-meeting of sinews AND he-sea of GB. Lateral knee pain = GB channel obstruction; ITB syndrome = classic GB channel lateral knee presentation.<br> <strong>Anterior knee (ST channel):</strong> Patellofemoral joint, patellar tendon. ST35 (lateral knee eye) + EX-LE5 (medial knee eye) — the two "knee eyes." Patellar tendinopathy and patellofemoral syndrome = ST channel.<br> <strong>Posterior knee (BL channel):</strong> Popliteal fossa, BL40 . Baker's cyst, posterior capsule, hamstring tendons.</span>
   <span class="zh">
     <strong>膝内侧（脾/肝/肾经）：</strong>内侧副韧带（MCL），内侧半月板，鹅足滑囊。SP9阴陵泉是关键穴位——所有膝内侧病症的主穴。膝内侧疼痛=脾肝经阻塞。<br>
@@ -2505,7 +2513,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Du Huo Ji Sheng Tang + Niu Xi</span><span class="zh">独活寄生汤 + 牛膝</span></div>
       <div class="formula-indication"><span class="en">Chronic knee OA with Kidney-Liver deficiency — the foundational formula. is the guiding herb for the knee (like for the neck, for the shoulder).</span><span class="zh">慢性膝关节骨关节炎伴肾肝虚损——基础方剂。牛膝是膝关节引经药（如葛根引颈，姜黄引肩）。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> has two critical properties for knee conditions: (1) it guides the formula downward to the knee joint specifically; (2) it activates Blood in the knee channel and strengthens the knee sinews. Add (Chaenomeles — opens the sinews and resolves Damp in the knee and lower limb), (resolves Damp-Heat, specifically reduces joint inflammation and effusion). This combination forms the "knee-specific modification" of Du Huo Ji Sheng Tang — addressing both the Kidney-Liver root and the local knee Damp-Phlegm obstruction.</span><span class="zh"><strong>机理：</strong>牛膝对膝关节病症有两个关键特性：(1)引方专向膝关节；(2)活化膝关节经络中的血液并强化膝关节筋腱。加木瓜（皱皮木瓜——开通筋腱并化解膝和下肢的湿邪），薏苡仁（化湿热，专门减轻关节炎症和积液）。此组合形成独活寄生汤的"膝关节专属加减"——同时处理肾肝虚证根本和局部膝关节湿痰阻滞。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base Du Huo Ji Sheng Tang, with Niu Xi increased to 15g (knee-guiding dose) — Niu Xi specifically directs the formula downward to the knee joint.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活寄生汤基础方，牛膝加量至15g（膝部引经剂量）——牛膝专引方力下达膝关节。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base Du Huo Ji Sheng Tang, with Niu Xi increased to 15g (knee-guiding dose) — Niu Xi specifically directs the formula downward to the knee joint.</span><span class="zh"><strong>组成：</strong>独活寄生汤基础方，牛膝加量至15g（膝部引经剂量）——牛膝专引方力下达膝关节。</span></div>
     </div>
   </div>
 </div>
@@ -2548,7 +2556,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Elbow</span><span class="zh">肘部经络解剖</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Elbow</span><span class="zh">肘部经络解剖</span></div>
   <div class="concept-body"><span class="en"><strong>Lateral elbow (LI channel — LI11):</strong> Common extensor origin at the lateral epicondyle — the attachment of all finger/wrist extensor muscles. Lateral epicondylitis (tennis elbow) = LI channel obstruction at LI11.<br> <strong>Medial elbow (HT/PC channel — HT3):</strong> Common flexor origin at the medial epicondyle — the attachment of all finger/wrist flexors and pronators. Medial epicondylitis (golfer's elbow) = HT/PC channel obstruction at HT3.<br> <strong>Posterior elbow (SJ/SI channel — SJ10):</strong> Olecranon and triceps tendon. Olecranon bursitis and triceps tendinopathy.<br> <strong>Anterior elbow (PC/LU channel — PC3 , LU5):</strong> Biceps and brachialis tendons, cubital fossa.</span>
   <span class="zh">
     <strong>肘外侧（大肠经——LI11曲池）：</strong>外上髁处的伸肌总腱——所有手指/腕关节伸肌的附着点。网球肘=LI11处大肠经阻塞。<br>
@@ -2581,7 +2589,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="elbow-exam" class="phase-panel">
   <div name="concept-box" class="concept-box">
-    <div class="concept-title"><span class="en">Two Tests, Two Channels</span><span class="zh">两试验，两经络</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Two Tests, Two Channels</span><span class="zh">两试验，两经络</span></div>
     <div class="concept-body"><span class="en">Each epicondylitis has one defining provocation test. Always check the forearm MTrPs after the provocation test — they are the upstream generators of enthesis overload.</span>
     <span class="zh">每种上髁炎有一个确定性诱发试验。诱发试验后始终检查前臂MTrP——它们是止点过载的上游驱动因素。</span></div>
   </div>
@@ -2646,7 +2654,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Juan Bi Tang + Jiang Huang + Luo Shi Teng</span><span class="zh">蠲痹汤 + 姜黄 + 络石藤</span></div>
       <div class="formula-indication"><span class="en">Wind-Cold-Damp channel obstruction at the elbow — stiffness, cold-weather worse, reduced grip strength, white greasy coat</span><span class="zh">肘部风寒湿经络阻塞——僵硬，寒冷天气加重，握力减弱，苔白腻</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> base + (directs to the shoulder-elbow region — the same guiding herb used for shoulder Bi, but equally effective for elbow as it governs the entire LI channel in the upper limb) + (specifically opens the channel sinews of the elbow and forearm — it has a particular affinity for the tendons and sinews of the upper limb). Add (extends the sinews — directly addresses tendon tightness). This combination targets the LI channel at the elbow with channel-opening, sinew-relaxing, and Blood-activating actions simultaneously.</span><span class="zh"><strong>机理：</strong>蠲痹汤基础+姜黄（引向肩肘区域——与肩痹使用相同的引经药，但同样有效于肘部，因为它统领上肢整条大肠经）+络石藤（专门开通肘部和前臂的经络筋腱——对上肢肌腱和筋腱有特定亲和性）。加伸筋草（伸展筋腱——直接处理肌腱紧张）。此组合同时以通经、舒筋和活血作用靶向肘部大肠经。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base Juan Bi Tang (see Shoulder module) + Jiang Huang 9g, Luo Shi Teng 15g — this pair channels the formula to the elbow/forearm and clears Heat-Damp from the sinew channels (useful when tendinopathy has a low-grade inflammatory component).</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>蠲痹汤基础方（同肩痛模块）+姜黄9g、络石藤15g——此对药引方至肘部/前臂，并清筋络湿热（适用于肌腱病伴轻度炎性反应者）。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base Juan Bi Tang (see Shoulder module) + Jiang Huang 9g, Luo Shi Teng 15g — this pair channels the formula to the elbow/forearm and clears Heat-Damp from the sinew channels (useful when tendinopathy has a low-grade inflammatory component).</span><span class="zh"><strong>组成：</strong>蠲痹汤基础方（同肩痛模块）+姜黄9g、络石藤15g——此对药引方至肘部/前臂，并清筋络湿热（适用于肌腱病伴轻度炎性反应者）。</span></div>
     </div>
   </div>
 </div>
@@ -2689,7 +2697,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 </div>
 <div class="content-area">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Channel Anatomy of the Ankle and Foot</span><span class="zh">踝足部经络解剖</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Channel Anatomy of the Ankle and Foot</span><span class="zh">踝足部经络解剖</span></div>
   <div class="concept-body"><span class="en"><strong>Medial ankle (KI/SP channels):</strong> Deltoid ligament, posterior tibial tendon. KI3 and SP6 are in this territory. Medial ankle sprains (rare, more severe) and posterior tibialis tendinopathy (flat foot pain).<br> <strong>Lateral ankle (GB/BL channels):</strong> ATFL (anterior talofibular ligament) and CFL (calcaneofibular ligament). GB40 and BL60 are the lateral ankle points. The most common ankle sprain (85% of all ankle sprains) is lateral inversion — directly targeting the GB channel at GB40.<br> <strong>Plantar surface (KI channel — KI1):</strong> The plantar fascia, intrinsic foot muscles. KI1 is the most distal Kidney point — the plantar fascia connects to the Kidney channel's lowest reaching point. Plantar fasciitis = Kidney Xu + Blood stasis in the plantar KI channel.<br> <strong>Posterior heel (BL channel — BL60, BL61):</strong> Achilles tendon and its enthesis at the calcaneus. BL60 and BL61 are adjacent to the Achilles insertion. Achilles tendinopathy = BL channel obstruction at its most distal sinew attachment.</span>
   <span class="zh">
     <strong>踝内侧（肾/脾经）：</strong>三角韧带，胫骨后肌腱。KI3太溪和SP6三阴交位于此区域。踝内侧扭伤（罕见，更严重）和胫骨后肌腱病（平足痛）。<br>
@@ -2727,7 +2735,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="ankle-exam" class="phase-panel">
   <div name="concept-box" class="concept-box">
-    <div class="concept-title"><span class="en">Palpation is the Primary Tool for Ankle and Foot</span><span class="zh">触诊是踝足部的首要工具</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Palpation is the Primary Tool for Ankle and Foot</span><span class="zh">触诊是踝足部的首要工具</span></div>
     <div class="concept-body"><span class="en">Most ankle and foot conditions are diagnosed by careful palpation — finding the exact point of maximum tenderness identifies the structure and confirms the channel. Special tests add confirmation but palpation leads.</span>
     <span class="zh">大多数踝足部病症通过仔细触诊诊断——找到最大压痛的确切点识别结构并确认经络。特殊试验增加确认，但触诊是主导。</span></div>
   </div>
@@ -2771,7 +2779,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="ankle-treatment" class="phase-panel">
   <div name="concept-box" class="concept-box">
-    <div class="concept-title"><span class="en">The Gastrocnemius-Soleus MTrP: Always the First Step for Any Heel or Ankle Pain</span><span class="zh">腓肠肌-比目鱼肌MTrP：任何足跟或踝关节疼痛的第一步</span></div>
+    <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">The Gastrocnemius-Soleus MTrP: Always the First Step for Any Heel or Ankle Pain</span><span class="zh">腓肠肌-比目鱼肌MTrP：任何足跟或踝关节疼痛的第一步</span></div>
     <div class="concept-body"><span class="en">Before any treatment of the foot itself, palpate and release the gastrocnemius and soleus MTrPs. A significant proportion of "plantar fasciitis," "Achilles pain," and "heel spur" presentations have the calf MTrP as the primary pain generator — treating the foot while the calf MTrP persists will produce incomplete and short-lived results. The calf muscles are the upstream drivers of all plantar and posterior heel conditions through their mechanical connection via the Achilles to the heel and plantar fascia.</span>
     <span class="zh">在任何足部本身的治疗之前，触诊并松解腓肠肌和比目鱼肌MTrP。相当大比例的"足底筋膜炎"、"跟腱痛"和"跟骨刺"表现以小腿MTrP为主要疼痛产生源——当小腿MTrP持续存在时治疗足部会产生不完全和短暂的效果。小腿肌肉通过跟腱至足跟和跖筋膜的机械连接，是所有跖侧和足跟后方病症的上游驱动因素。</span></div>
   </div>
@@ -2783,7 +2791,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
       <div class="formula-name"><span class="en">Du Huo Ji Sheng Tang + Mu Gua</span><span class="zh">独活寄生汤 + 木瓜</span></div>
       <div class="formula-indication"><span class="en">Chronic ankle and foot pain with Kidney-Liver deficiency — plantar fasciitis, Achilles tendinopathy, chronic ankle arthritis. is the guiding herb for the ankle and lower limb sinews.</span><span class="zh">慢性踝足痛伴肾肝虚损——足底筋膜炎，跟腱病，慢性踝关节炎。木瓜是踝关节和下肢筋腱的引经药。</span></div>
       <div class="formula-why"><span class="en"><strong>Mechanism:</strong> (Chaenomeles) is the classical guiding herb for the lower limb sinews and specifically for the ankle region. It relaxes contracted sinews, resolves Damp (especially in the lower limb), and directs the formula to the ankle and foot channel level. Combined with Du Huo Ji Sheng Tang: the targets the lower body (lower limb) and the guides Blood downward to the ankle. Add (activates Blood in the lower limb sinews — especially effective for the Achilles and plantar fascia). This combination addresses Kidney-Liver root + Blood activation + channel-directing simultaneously.</span><span class="zh"><strong>机理：</strong>木瓜是下肢筋腱尤其踝关节区域的经典引经药。它放松挛缩的筋腱（舒筋活络），化解湿邪（尤其下肢），并引方至踝足经络水平。与独活寄生汤联合：独活靶向下体（下肢引经药），牛膝引血下行至踝关节。加鸡血藤（活化下肢筋腱中的血液——对跟腱和跖筋膜特别有效）。此组合同时处理肾肝根本+活血+引经。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Base Du Huo Ji Sheng Tang + Mu Gua 12g — Mu Gua relaxes sinews and harmonises the stomach, classically the guiding herb for ankle/foot Bi with tendon involvement.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活寄生汤基础方+木瓜12g——木瓜舒筋和胃，是踝足部痹证兼筋伤的经典引经药。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Base Du Huo Ji Sheng Tang + Mu Gua 12g — Mu Gua relaxes sinews and harmonises the stomach, classically the guiding herb for ankle/foot Bi with tendon involvement.</span><span class="zh"><strong>组成：</strong>独活寄生汤基础方+木瓜12g——木瓜舒筋和胃，是踝足部痹证兼筋伤的经典引经药。</span></div>
     </div>
   </div>
 </div>
@@ -2826,7 +2834,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="visceral-stomach" class="phase-panel active">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Visceral Pain vs Musculoskeletal Pain — The Fundamental Difference</span><span class="zh">内脏痛与肌骨痛的根本区别</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Visceral Pain vs Musculoskeletal Pain — The Fundamental Difference</span><span class="zh">内脏痛与肌骨痛的根本区别</span></div>
   <div class="concept-body"><span class="en">Musculoskeletal pain = blocked Qi and Blood in the channels, muscles, and sinews. Trigger points, FSN, and local needling are appropriate.<br><br> Visceral pain = dysfunction of an internal Zang-Fu organ, expressed through its channel. The pain is a signal of organ Qi stagnation — treating only the pain site without addressing the organ is like treating the symptom without the cause.<br><br> <strong>The key principle:</strong> Every visceral pain has a specific organ-channel assignment. Stomach pain = Stomach channel dysfunction. Hypochondriac pain = Liver-GB channel. Chest pain = Heart or Lung channel. Treatment always addresses the organ's Qi dynamic, not just the pain location.<br><br> <strong>Qi dynamic for all visceral pain:</strong> — "When there is no free flow, there is pain." But the blockage mechanism differs: Cold constriction, Qi stagnation, Blood stasis, or Yin deficiency causing dryness and friction. Each requires a different approach.</span>
   <span class="zh">
     肌骨痛=经络、肌肉和筋腱中的气血阻滞。触发点、浮针和局部针刺是合适的。<br><br>
@@ -2875,7 +2883,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="visceral-hypochondriac" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">— Hypochondriac Pain: The Liver-GB Channel Domain</span><span class="zh">胁肋痛——肝胆经络领域</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">— Hypochondriac Pain: The Liver-GB Channel Domain</span><span class="zh">胁肋痛——肝胆经络领域</span></div>
   <div class="concept-body"><span class="en">
     The hypochondriac region (ribs, flanks, below the chest laterally) is entirely within the Liver and Gallbladder channel territory. The Liver channel ascends through the flanks; the GB channel runs along the lateral chest and ribs. Any pain in this region first suspects Liver-GB pathology.<br><br>
     <strong>Three mechanisms:</strong><br>
@@ -2924,7 +2932,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="safety-body"><span class="en">Acute chest pain radiating to the left arm or jaw, with sweating, nausea, and shortness of breath = cardiac emergency — call 911 immediately. TCM chest Bi treatment is for chronic stable angina and non-cardiac chest pain (after cardiac causes have been excluded by medical investigation). Never treat acute chest pain with acupuncture as the sole intervention.</span><span class="zh">急性胸痛向左臂或下颌放射，伴出汗、恶心和气短=心脏急症——立即呼叫急救。中医胸痹治疗针对慢性稳定型心绞痛和非心源性胸痛（医学检查排除心源性原因后）。绝不将针灸作为急性胸痛的唯一干预手段。</span></div>
 </div>
 <div class="concept-box">
-  <div class="concept-title"><span class="en">— Chest Bi: Heart Channel Obstruction</span><span class="zh">胸痹——心经痹阻</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">— Chest Bi: Heart Channel Obstruction</span><span class="zh">胸痹——心经痹阻</span></div>
   <div class="concept-body"><span class="en">(Chest Bi) literally means "obstruction of the chest" — the classical TCM description of angina pectoris and coronary artery disease. The name reveals the mechanism: Bi = obstruction, chest = the Heart's territory.<br><br> <strong>The two layers:</strong><br> <strong>Root:</strong> Yang Qi deficiency of the Heart (Heart Yang fails to circulate Blood vigorously) — this is the constitutional background that makes the Heart vulnerable to obstruction.<br> <strong>Branch:</strong> Phlegm-stasis or Cold constricting the Heart channel — the actual obstruction causing the pain. This is what modern cardiology calls atherosclerosis + vasospasm.<br><br> <strong>Qi dynamic:</strong> — Heart Yang insufficient to push Blood through the coronary vessels. Combined with Cold constriction or Phlegm-stasis (the material obstruction), Blood flow is critically impaired.</span>
   <span class="zh">
     胸痹字面意思是"胸部痹阻"——心绞痛和冠状动脉疾病的经典中医描述。名称揭示了机制：痹=阻滞，胸=心的领域。<br><br>
@@ -3026,7 +3034,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 <div id="tmj-intake" class="phase-panel active">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">TMJ — The Four Tissue Sources of Pain</span><span class="zh">颞颌关节痛的四个组织来源</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">TMJ — The Four Tissue Sources of Pain</span><span class="zh">颞颌关节痛的四个组织来源</span></div>
   <div class="concept-body"><span class="en">
     TMJ pain arises from four overlapping sources — identifying which predominates determines treatment:<br><br>
     <strong>1. Masseter MTrP (most common):</strong> The masseter is the primary pain generator in most TMJ cases. MTrPs in the superficial masseter refer pain to the lower molars, jaw, and ear. Bruxism (teeth grinding) perpetually reactivates these trigger points.<br><br>
@@ -3059,7 +3067,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="tmj-anatomy" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Masticatory Muscle Anatomy — The Needling Map</span><span class="zh">咀嚼肌解剖——针刺地图</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Masticatory Muscle Anatomy — The Needling Map</span><span class="zh">咀嚼肌解剖——针刺地图</span></div>
   <div class="concept-body"><span class="en"><strong>Masseter:</strong><br> Origin: zygomatic arch. Insertion: lateral surface of mandible ramus and angle.<br> Superficial layer: runs obliquely downward-posteriorly. Trigger points: at the angle of the jaw (the most common site), mid-belly (refers to ear and molar), superior portion (refers to eye and eyebrow).<br> Deep layer: runs more vertically. Trigger points here cause tinnitus and ear fullness.<br> Palpation: have patient clench teeth — masseter becomes visible and palpable at the angle of the jaw.<br><br> <strong>Temporalis:</strong><br> Fan-shaped. Fills the temporal fossa from the superior temporal line to the zygomatic arch.<br> Anterior fibres: vertical, elevate mandible. MTrP zone 1 (anterior, above temple) → refers to upper incisor/canine pain.<br> Posterior fibres: horizontal, retract mandible. MTrP zone 4 (posterior) → refers to occiput and retro-orbital pain.<br> Key point ST8 is at the anterior superior corner of temporalis — needling here releases the anterior temporal MTrP.<br><br> <strong>Lateral Pterygoid:</strong><br> Two heads. Superior head: sphenoid greater wing → pterygoid fovea of condyle (controls disc-condyle complex). Inferior head: lateral pterygoid plate → condyle neck.<br> Dysfunction → forward displacement of disc (clicking, deviation). Extraoral approach: needle just anterior to the condyle with mouth open; aim superiorly and medially into the infratemporal fossa.<br><br> <strong>Key acupuncture local points that align with anatomy:</strong><br> ST6 = masseter motor point (greatest LTR response)<br> ST7 = between condyle and zygomatic arch (joint capsule access)<br> GB3 = above ST7, superior joint space<br> TE21 / SI19 = preauricular, lateral pterygoid region<br> ST8 = anterior temporalis MTrP zone 1</span>
   <span class="zh">
     <strong>咬肌：</strong><br>
@@ -3087,7 +3095,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="tmj-pattern" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">TCM Framework — Yangming Channel and Stomach-Jaw Connection</span><span class="zh">中医框架——阳明经与胃-颌关系</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">TCM Framework — Yangming Channel and Stomach-Jaw Connection</span><span class="zh">中医框架——阳明经与胃-颌关系</span></div>
   <div class="concept-body"><span class="en">
     The jaw and face are primarily in the Yangming (Large Intestine + Stomach) channel territory. ST6, ST7, ST8, and LI4 (distal) form the classical acupuncture protocol for all jaw conditions:<br><br>
     <strong>Liver Qi stagnation + Stomach channel tension:</strong> The most common pattern in stress-related TMJ (bruxism, clenching). The Liver's inability to smooth Qi flow causes the masticatory muscles to hold chronic tension. Tongue: normal or slightly red edges. Pulse: wiry.<br><br>
@@ -3158,7 +3166,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 <div id="plantar-intake" class="phase-panel active">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Plantar Fasciitis — Why "Fasciitis" Is a Misnomer</span><span class="zh">足底筋膜炎——为什么"筋膜炎"这个名称是误导性的</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Plantar Fasciitis — Why "Fasciitis" Is a Misnomer</span><span class="zh">足底筋膜炎——为什么"筋膜炎"这个名称是误导性的</span></div>
   <div class="concept-body"><span class="en">
     Modern histological studies show that plantar fasciitis is almost always a <strong>degenerative fasciosis</strong>, not an acute inflammatory condition. The characteristic finding is collagen disorganisation, myxoid degeneration, and angiofibroblastic hyperplasia at the calcaneal insertion — the same pathology as tennis elbow (lateral epicondylosis). There is no significant inflammatory infiltrate in chronic cases.<br><br>
     <strong>Clinical implication:</strong> Anti-inflammatory treatments (NSAIDs, corticosteroid injection) target a pathological process that is not primarily inflammatory. They may temporarily reduce pain but do not address the degenerative change or restore tissue integrity. This explains why short-term steroid relief is followed by recurrence.<br><br>
@@ -3196,7 +3204,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="plantar-anatomy" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Treatment Anatomy — The Three-Muscle Approach</span><span class="zh">治疗解剖——三肌入路</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Treatment Anatomy — The Three-Muscle Approach</span><span class="zh">治疗解剖——三肌入路</span></div>
   <div class="concept-body"><span class="en">Effective PF treatment requires addressing three anatomical layers:<br><br> <strong>1. Gastrocnemius MTrPs:</strong><br> The gastrocnemius is consistently tight in PF patients — its tightness reduces ankle dorsiflexion, increasing fascial tension with each step. MTrPs in the medial gastrocnemius head refer pain to the posterior heel and arch — they can exactly mimic PF. Always treat gastrocnemius regardless of where the heel pain is. Primary MTrP: mid-belly medial head (BL57 area).<br><br> <strong>2. Soleus MTrPs:</strong><br> Deeper than gastrocnemius, harder to palpate. MTrPs in the soleus refer to the heel, sacrum, and posterior jaw (unique referral pattern). Often overlooked — responsible for residual heel pain after gastrocnemius treatment.<br><br> <strong>3. Intrinsic foot muscles — abductor hallucis:</strong><br> Located on the medial plantar surface, directly adjacent to the fascial insertion. Trigger points here refer to the heel and great toe. In PF, the abductor hallucis is almost always hypertonic. Needling: approach from the medial plantar surface, 1–2cm superior to the plantar surface, angled plantarward. The LTR produces a characteristic foot cramp sensation.<br><br> <strong>4. Direct fascial needling:</strong><br> Fascial needling at the calcaneal insertion stimulates collagen remodelling (the equivalent of needling into a tendinopathy — same mechanism as prolotherapy but with needles alone). Approach: insert at the medial calcaneal attachment, angle toward the calcaneal bone surface. 2–3 passes. Expect significant soreness for 24–48 hours.</span>
   <span class="zh">
     有效的足底筋膜炎治疗需要处理三个解剖层次：<br><br>
@@ -3279,7 +3287,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 <div class="content-area">
 <div id="piriformis-intake" class="phase-panel active">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Piriformis vs Disc Sciatica — The Critical Differential</span><span class="zh">梨状肌综合征与椎间盘坐骨神经痛——关键鉴别</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Piriformis vs Disc Sciatica — The Critical Differential</span><span class="zh">梨状肌综合征与椎间盘坐骨神经痛——关键鉴别</span></div>
   <div class="concept-body"><span class="en">
     <strong>Piriformis Syndrome (PS):</strong><br>
     — Deep buttock pain as the primary complaint (the MTrP itself)<br>
@@ -3325,7 +3333,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="piriformis-anatomy" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">Piriformis Anatomy and Sciatic Nerve Relationship</span><span class="zh">梨状肌解剖与坐骨神经关系</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Piriformis Anatomy and Sciatic Nerve Relationship</span><span class="zh">梨状肌解剖与坐骨神经关系</span></div>
   <div class="concept-body"><span class="en">
     <strong>Location:</strong> Piriformis runs from the anterior sacrum (S2-S4 segments) through the greater sciatic foramen to insert on the greater trochanter. It externally rotates and abducts the hip.<br><br>
     <strong>Sciatic nerve relationship (Beaton classification):</strong><br>
@@ -3359,7 +3367,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 <div id="piriformis-pattern" class="phase-panel">
 <div class="concept-box">
-  <div class="concept-title"><span class="en">TCM — Bladder Channel and Hip Bi Syndrome</span><span class="zh">中医——膀胱经与髋部痹证</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">TCM — Bladder Channel and Hip Bi Syndrome</span><span class="zh">中医——膀胱经与髋部痹证</span></div>
   <div class="concept-body"><span class="en">The piriformis region corresponds to the Bladder channel pathway (BL) through the posterior hip and thigh. BL54 is the primary local point — located at the level of the 4th sacral foramen, it is anatomically positioned at the piriformis origin.<br><br> <strong>Pattern:</strong> Cold-Damp Bi in the Bladder channel — most piriformis syndrome has a Cold component (worse in cold/damp weather, sitting on cold surfaces). Combined with chronic overuse → Blood stasis. Treatment: warm the channel, dissolve stasis, release the sinew.</span>
   <span class="zh">
     梨状肌区域对应膀胱经（BL）通过髋后部和大腿的路径。BL54秩边是主要局部穴位——位于第4骶后孔水平，解剖上正好在梨状肌起点处。<br><br>
@@ -3415,7 +3423,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
   <div class="safety-body"><span class="en">Acute gout with severe joint inflammation (red, hot, swollen, exquisitely tender) benefits from TCM adjunct but may require colchicine or NSAIDs for rapid pain control. Septic arthritis must be excluded if fever is present. TCM herbs are most effective for chronic urate management and reducing attack frequency. Allopurinol or febuxostat for urate-lowering should continue alongside TCM in established gout.</span><span class="zh">急性痛风伴严重关节炎症（红、热、肿、极度压痛）可受益于中医辅助，但可能需要秋水仙素或NSAIDs快速止痛。若有发热必须排除化脓性关节炎。中医草药对慢性尿酸管理和减少发作频率最有效。确诊痛风患者在接受中医治疗的同时应继续使用别嘌醇或非布司他降尿酸。</span></div>
 </div>
 <div class="concept-box">
-  <div class="concept-title"><span class="en">The Bi Syndrome Framework — Three Types</span><span class="zh">痹证框架——三种类型</span></div>
+  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">The Bi Syndrome Framework — Three Types</span><span class="zh">痹证框架——三种类型</span></div>
   <div class="concept-body"><span class="en">(Bi) means obstruction. The three classical Bi types reflect which external pathogen predominates:<br><br> <strong>Wind Bi:</strong> Migratory joint pain — Wind is the mobile pathogen. Pain moves from joint to joint. Corresponds to early/mild rheumatoid or viral arthralgia.<br><br> <strong>Cold Bi:</strong> Severe, fixed, intense joint pain. Cold causes intense contraction → intense pain. Better with warmth. Corresponds to cold-triggered gout, degenerative joint disease exacerbations.<br><br> <strong>Damp Bi:</strong> Heavy, numb, fixed joint swelling. Damp is heavy and sticky — it lodges and doesn't move. Corresponds to chronic joint effusion, fibromyalgia tender points.<br><br> <strong>Hot Bi — the gout pattern:</strong> Damp-Heat crystallising in the joint → red, hot, swollen, excruciating. Uric acid monohydrate crystals = the material precipitate of Damp-Heat in the joint channel. Modern insight: crystals activate the NLRP3 inflammasome → IL-1β cascade = the "Fire" aspect of the Hot Bi mechanism.<br><br> <strong>Stubborn Bi:</strong> Chronic, with joint deformity. Phlegm-stasis has entered the bone level. Corresponds to tophaceous gout and advanced rheumatoid.</span>
   <span class="zh">
     "痹"意为阻滞。三种经典痹证类型反映哪种外邪为主：<br><br>
@@ -3466,13 +3474,13 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
     <div class="formula-name"><span class="en">Xuan Bi Tang</span><span class="zh">宣痹汤</span></div>
     <div class="formula-indication"><span class="en">Hot Bi — acute gout, rheumatoid arthritis flare with heat. Red, hot, swollen joints. Yellow greasy coat. Rapid-slippery pulse.</span><span class="zh">热痹——急性痛风，类风湿关节炎热证发作。关节红热肿。苔黄腻。脉数滑。</span></div>
     <div class="formula-why"><span class="en"><strong>Mechanism:</strong> +drain Damp-Heat specifically from the joint channels (the joint-specific Damp drainers). +clear the Heat component. drains Damp-Heat via urination. (late silkworm droppings) — a unique herb that transforms Damp in the sinew channels, specifically indicated for Hot Bi joint pain. clears Heat and drains Damp. Together: drain Damp-Heat from the joint channel while clearing the inflammatory Fire. Modern research: several herbs in this formula have documented uricosuric effects (promote uric acid excretion) — mechanism aligned with TCM Damp-draining action.</span><span class="zh"><strong>机理：</strong>防己+薏苡仁专门从关节经络排出湿热（关节特异性利湿药）。连翘+山栀子清热邪成分。滑石通过利尿排出湿热。晚蚕沙——一种独特草药，化解筋经中的湿邪，专用于热痹关节痛。赤小豆清热利湿。合用：从关节经络排出湿热同时清炎症之火。现代研究：本方中几味草药有记录的促尿酸排泄效果——机制与中医利湿相符。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Fang Ji 15g, Xing Ren 15g, Hua Shi 15g, Lian Qiao 9g, Shan Zhi Zi 9g, Yi Yi Ren 15g, Ban Xia 9g (vinegar-fried), Wan Can Sha 9g, Chi Xiao Dou Pi 9g.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>防己15g、杏仁15g、滑石15g、连翘9g、山栀9g、薏苡仁15g、半夏9g（醋炒）、晚蚕沙9g、赤小豆皮9g。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Fang Ji 15g, Xing Ren 15g, Hua Shi 15g, Lian Qiao 9g, Shan Zhi Zi 9g, Yi Yi Ren 15g, Ban Xia 9g (vinegar-fried), Wan Can Sha 9g, Chi Xiao Dou Pi 9g.</span><span class="zh"><strong>组成：</strong>防己15g、杏仁15g、滑石15g、连翘9g、山栀9g、薏苡仁15g、半夏9g（醋炒）、晚蚕沙9g、赤小豆皮9g。</span></div>
   </div>
   <div class="formula-card">
     <div class="formula-name"><span class="en">Du Huo Ji Sheng Wan</span><span class="zh">独活寄生丸</span></div>
     <div class="formula-indication"><span class="en">Chronic Wind-Cold-Damp Bi with Liver-Kidney deficiency — chronic joint pain, stiffness, worse in cold/damp, with low back soreness, fatigue, pale tongue, deep-slow pulse</span><span class="zh">慢性风寒湿痹伴肝肾虚——慢性关节痛，僵硬，寒冷/潮湿加重，伴腰酸，疲乏，舌淡，脉沉迟</span></div>
     <div class="formula-why"><span class="en"><strong>Mechanism:</strong> The 15-herb formula addresses three levels simultaneously: (1) +++— dispel Wind-Cold-Damp from the sinew channels; (2) ++— strengthen Liver-Kidney (the constitutional root of chronic Bi, where Jing depletion makes the sinews vulnerable); (3) ++++++— activate Blood + tonify Qi-Blood (remove the stasis that has accumulated in chronic Bi + rebuild the deficient substrate). This formula is the gold standard for elderly patients with osteoarthritis, chronic gout, or chronic RA with a Cold-Deficiency pattern.</span><span class="zh"><strong>机理：</strong>15味药方同时处理三个层次：(1)独活+防风+细辛+秦艽——祛除筋经风寒湿；(2)杜仲+牛膝+桑寄生——补肝肾（慢性痹证的体质根本，精气耗竭使筋膜易受侵害）；(3)当归+川芎+白芍+地黄+人参+茯苓+甘草——活血+补气血（清除慢性痹证中积聚的瘀滞+重建虚损的物质基础）。本方是老年骨关节炎、慢性痛风或寒虚证型慢性类风湿关节炎患者的金标准方。</span></div>
-      <div class="formula-dose"><span class="en"><strong>Composition (draft — verify against your preferred source):</strong> Pill form of Du Huo Ji Sheng Tang (see Low Back module for the decoction composition) — same herb set, concentrated and bound into pills for long-term maintenance dosing in chronic Bi with Kidney-Liver deficiency.</span><span class="zh"><strong>组成（草拟版——请按你的标准教材核对）：</strong>独活寄生汤的丸剂版本（药味组成同腰痛模块所列煎剂），浓缩为丸剂，用于肝肾虚损型慢性痹证的长期调理服用。</span></div>
+      <div class="formula-dose"><span class="en"><strong>Composition:</strong> Pill form of Du Huo Ji Sheng Tang (see Low Back module for the decoction composition) — same herb set, concentrated and bound into pills for long-term maintenance dosing in chronic Bi with Kidney-Liver deficiency.</span><span class="zh"><strong>组成：</strong>独活寄生汤的丸剂版本（药味组成同腰痛模块所列煎剂），浓缩为丸剂，用于肝肾虚损型慢性痹证的长期调理服用。</span></div>
   </div>
 </div>
 </div>
