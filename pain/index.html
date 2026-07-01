@@ -377,7 +377,13 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 /* ============================================================
    MOBILE RESPONSIVE — hamburger menu + full-width content
    ============================================================ */
-.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;background:none;border:none;z-index:301;}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  padding:10px;cursor:pointer;background:none;border:none;
+  min-width:44px;min-height:44px;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:rgba(139,26,26,0.15);
+  touch-action:manipulation;flex-shrink:0;
+}
 .hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .25s;}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
@@ -467,7 +473,7 @@ html,body{height:100%;font-family:'Hiragino Sans GB','Microsoft YaHei','PingFang
 
 
 <div class="topbar">
-  <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
   <a href="/" class="home-back-btn"><span class="en">← SinoMed</span><span class="zh">← 首页</span></a>
   <div class="lang-btn">
     <button class="active" onclick="setLang('en')">EN</button>
@@ -3854,6 +3860,20 @@ window.addEventListener('DOMContentLoaded', () => {
     updateHomePricingCTA();
     updateSidebarPricingCTA();
   }, 800);
+
+  // Hamburger: bind both touch and click for reliable mobile response
+  const ham = document.getElementById('hamburger');
+  if(ham){
+    ham.addEventListener('touchend', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSidebar();
+    }, {passive: false});
+    ham.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleSidebar();
+    });
+  }
 });
 
 function updateSidebarPricingCTA(){
