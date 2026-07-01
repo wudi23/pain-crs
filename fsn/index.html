@@ -149,12 +149,63 @@ body.lang-en .en-inline{display:inline}
 li.zh{display:list-item}.li.en{display:none}
 body.lang-en li.zh{display:none}
 body.lang-en li.en{display:list-item}
+
+/* === FSN Quiz & Certificate Styles === */
+.quiz-wrap{max-width:700px;margin:0 auto;padding:20px;}
+.quiz-hero{background:linear-gradient(135deg,#0D3B45,#1A5568);color:#fff;border-radius:16px;padding:28px;margin-bottom:24px;text-align:center;}
+.quiz-hero h2{font-size:22px;margin-bottom:8px;}
+.quiz-hero p{font-size:13px;opacity:.85;line-height:1.6;}
+.quiz-start-btn{margin-top:16px;padding:12px 28px;background:#fff;color:#0D3B45;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;}
+.quiz-start-btn:hover{background:#F0F8F5;}
+.quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.quiz-bar{flex:1;height:6px;background:#E0DDD6;border-radius:3px;overflow:hidden;}
+.quiz-bar-fill{height:100%;background:#0D3B45;border-radius:3px;transition:width .3s;}
+.quiz-prog-txt{font-size:12px;color:#6B6B64;font-weight:600;white-space:nowrap;}
+.quiz-q-card{background:#FAF8F4;border:1px solid #E0DDD6;border-radius:16px;padding:24px;margin-bottom:16px;}
+.quiz-cat{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0D3B45;background:#E8F4F0;padding:3px 10px;border-radius:10px;margin-bottom:12px;display:inline-block;}
+.quiz-question{font-size:15px;font-weight:600;color:#1a1a18;line-height:1.6;margin-bottom:16px;}
+.quiz-opts{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{padding:11px 14px;border-radius:10px;border:1px solid #E0DDD6;background:#fff;cursor:pointer;font-size:13px;text-align:left;font-family:inherit;color:#3D3D38;transition:all .15s;}
+.quiz-opt:hover:not(:disabled){border-color:#0D3B45;background:#F0F8F5;}
+.quiz-opt.correct{border-color:#1A6B5A;background:#F0F8F5;color:#1A6B5A;font-weight:700;}
+.quiz-opt.wrong{border-color:#8B1A1A;background:#FDF4F4;color:#8B1A1A;font-weight:700;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-exp{margin-top:14px;padding:12px 14px;border-radius:10px;background:#F5F2EC;border-left:3px solid #0D3B45;font-size:13px;line-height:1.7;color:#3D3D38;display:none;}
+.quiz-next-btn{margin-top:16px;padding:10px 20px;background:#0D3B45;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;display:none;}
+.quiz-result{text-align:center;padding:32px 20px;}
+.quiz-result .score-big{font-size:56px;font-weight:800;color:#0D3B45;line-height:1;}
+.quiz-result .score-pct{font-size:18px;color:#1A6B5A;font-weight:700;margin:8px 0;}
+.quiz-result .pass-msg{font-size:14px;color:#3D3D38;margin:16px 0;}
+.quiz-result .pass-msg.fail{color:#8B1A1A;}
+.cert-form{background:#F5F2EC;border-radius:12px;padding:20px;margin-top:16px;text-align:left;}
+.cert-form label{display:block;font-size:12px;font-weight:600;color:#6B6B64;margin-bottom:6px;}
+.cert-form input{width:100%;padding:9px 12px;border:1px solid #E0DDD6;border-radius:8px;font-size:14px;font-family:inherit;margin-bottom:12px;}
+.cert-dl-btn{padding:12px 24px;background:#1A6B5A;color:#fff;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;width:100%;}
+.quiz-retry-btn{margin-top:12px;padding:10px 20px;background:#FAF8F4;color:#0D3B45;border:1px solid #0D3B45;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;}
+
+
+.quiz-opt.selected-multi{border-color:#1A6B5A;background:#F0F8F5;}
+.opt-check{font-size:14px;margin-right:4px;}
+.quiz-opt.correct .opt-check{content:"✓";}
+
+/* === SinoMed Back Button (unified style) === */
+.home-back-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:700;letter-spacing:.02em;
+  color:#1A6B5A;text-decoration:none;
+  padding:5px 12px;border:1.5px solid #1A6B5A;
+  border-radius:20px;background:#F0F8F5;
+  transition:all .15s;white-space:nowrap;
+  margin-right:8px;
+}
+.home-back-btn:hover{background:#1A6B5A;color:#fff;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div id="topbar">
   <div class="logo" id="topbar-logo">浮针<span>FSN</span>知识库</div>
-  <a href="/" style="font-size:12px;font-weight:600;color:rgba(245,240,232,0.7);text-decoration:none;padding:5px 10px;border:1px solid rgba(255,255,255,0.2);border-radius:7px;margin-right:8px;">← SinoMed</a>
+  <a href="/" class="home-back-btn">← SinoMed</a>
   <div class="spacer"></div>
   <button id="lang-toggle" onclick="toggleLang()">English</button>
 </div>
@@ -190,7 +241,7 @@ body.lang-en li.en{display:list-item}
           <dl class="def-grid">
             <dt>发明人 / Inventor</dt><dd>符仲华 Fu Zhonghua</dd>
             <dt>发明时间 / Year</dt><dd>1996年6月，中国南京 / June 1996, Nanjing, China</dd>
-            <dt>核心操作 / Core Technique</dt><dd><span class="zh">皮下扫散 + 再灌注运动</span><span class="en">Subcutaneous sweeping + reperfusion movement</span></dd>
+            <dt>核心操作 / Core Technique</dt><dd><span class="zh">皮下扫散 + 再灌注活动</span><span class="en">Subcutaneous sweeping + reperfusion movement</span></dd>
             <dt>治疗靶点 / Target</dt><dd><span class="zh">患肌（病理性紧张的肌肉）</span><span class="en">Tightened muscle (pathological tension)</span></dd>
             <dt>不刺入 / Does NOT</dt><dd><span class="zh">肌肉；不使用传统穴位；不追求得气</span><span class="en">Penetrate muscle; use classical acupoints; seek deqi</span></dd>
           </dl>
@@ -343,7 +394,7 @@ body.lang-en li.en{display:list-item}
         <div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><span class="zh">ATP再生 → 钙泵恢复 → 肌节放松 → 线粒体密度和功能恢复正常</span><span class="en">ATP regenerated → calcium pump restored → sarcomeres relax → mitochondrial density and function normalized</span></div></div>
       </div>
       <div class="callout callout-note" style="margin-top:12px"><strong>关键证据 / Key Evidence</strong>Li等 (Mol Pain. 2022)：浮针保留CCI大鼠去神经肌肉中的线粒体密度。Fu等 (Front Physiol. 2025)：调节PI3K-Akt和MAPK信号通路，正常化能量代谢和肌肉修复。</div>
-      <div class="callout callout-warn" style="margin-top:8px"><strong>⚠️ 再灌注是必要步骤，不是可选项 / Reperfusion is Mandatory</strong><span class="zh">扫散创造再灌注窗口，但血液需要"泵"才能进入缺血区。没有再灌注运动，能量危机循环无法被彻底打破。</span><span class="en">Sweeping opens the window, but blood needs a pump to enter. Without reperfusion movement, the energy crisis cycle cannot be truly broken.</span></div>
+      <div class="callout callout-warn" style="margin-top:8px"><strong>⚠️ 再灌注是必要步骤，不是可选项 / Reperfusion is Mandatory</strong><span class="zh">扫散创造再灌注窗口，但血液需要"泵"才能进入缺血区。没有再灌注活动，能量危机循环无法被彻底打破。</span><span class="en">Sweeping opens the window, but blood needs a pump to enter. Without reperfusion movement, the energy crisis cycle cannot be truly broken.</span></div>
     </div>
   </div>
   <div class="card">
@@ -462,7 +513,7 @@ body.lang-en li.en{display:list-item}
         <li><strong class="zh">进针（15-25°浅角）</strong><strong class="en">Needle insertion (15-25° shallow angle)</strong> — <span class="zh">针座置于拇指与前两指之间，斜面朝上，<strong>15-25°浅角</strong>进针。角度过大将穿越深筋膜。进入皮肤后稍降低角度，沿皮下层向患肌推进。感觉顺滑无阻力；皮肤随针走行处微隆（帐篷征）确认在正确层次。如有酸胀或阻力，退针调浅角度重新进针。</span><span class="en">Hold needle between thumb and first two fingers, bevel up, at <strong>15-25° angle</strong>. Steeper angle risks crossing deep fascia. After skin penetration, reduce angle slightly and advance subcutaneously. Smooth, free, low-resistance feel + skin tenting = correct layer. Aching or resistance → too deep; withdraw and redirect shallower.</span></li>
         <li><strong class="zh">针芯回缩（3-5mm）</strong><strong class="en">Partial retraction of inner needle (3-5mm)</strong> — <span class="zh">非优势手固定套管针座；优势手将针芯手柄向后滑动约3-5mm。针芯<strong>仍在套管内</strong>——仅使锐利针尖退至套管开口内部。目视确认：针尖不再从套管末端伸出。</span><span class="en">Non-dominant hand holds cannula base; dominant hand slides inner needle handle backward ~3-5mm. Inner needle <strong>remains inside cannula</strong> — only sharp tip retreats into cannula opening. Visual confirm: tip no longer visible protruding beyond cannula end.</span></li>
         <li><strong class="zh">扫散运动</strong><strong class="en">Sweeping movement</strong> — <span class="zh">以针座为轴心，在皮下层内进行左右横向扫弧运动。每侧约30-45°。速度：约每分钟20-30个完整来回弧。患者应几乎感觉不到扫散过程。如患者感到酸胀或抽搐，说明进针过深。持续约2分钟。</span><span class="en">With needle hub as pivot, perform lateral oscillating arc — smooth, even, rhythmic. Arc ~30-45° each side. Pace: ~20-30 full arcs per minute. Patient should feel virtually nothing. Aching or twitching = needle too deep. Duration: ~2 minutes.</span></li>
-        <li><strong class="zh">再灌注运动（扫散后立即进行，不拔针）</strong><strong class="en">Reperfusion movement (immediately after sweeping, needle in place)</strong> — <span class="zh">执行特异性针对患肌的主动或被动运动，10-15次/组，慢速控制。</span><span class="en">Perform specific active or passive movement targeting the primary scene muscle, 10-15 reps/set, slow and controlled.</span></li>
+        <li><strong class="zh">再灌注活动（扫散后立即进行，不拔针）</strong><strong class="en">Reperfusion movement (immediately after sweeping, needle in place)</strong> — <span class="zh">执行特异性针对患肌的主动或被动运动，每次维持抵抗10-15秒，重复2-3次，慢速控制（次数过多易造成治疗性损伤）。</span><span class="en">Perform specific active or passive movement targeting the primary scene muscle, 10-15 reps/set, slow and controlled.</span></li>
         <li><strong class="zh">即时评估</strong><strong class="en">Immediate reassessment</strong> — <span class="zh">再灌注后：触诊患肌紧张度变化；患者执行功能评估动作。改善确认治疗方向正确；无改善提示原发肌识别可能有误。</span><span class="en">After reperfusion: palpate tension change; patient performs functional assessment movement. Improvement confirms correct primary scene; no improvement → reassess primary scene identification.</span></li>
         <li><strong class="zh">留针（可选，20-30分钟）</strong><strong class="en">Needle retention (optional, 20-30 min)</strong> — <span class="zh">主动治疗阶段结束后留置于皮下层。留针期间不进行扫散；患者休息。</span><span class="en">After active treatment phase, needle may be retained in subcutaneous layer. No sweeping during retention; patient rests.</span></li>
         <li><strong class="zh">拔针</strong><strong class="en">Needle withdrawal</strong> — <span class="zh">沿进针角度顺滑拔出，不旋转。进针点轻压30秒；抗凝患者压迫2-3分钟。</span><span class="en">Smooth withdrawal along insertion angle, no rotation. Apply pressure 30 seconds; 2-3 minutes for anticoagulant patients.</span></li>
@@ -503,7 +554,7 @@ body.lang-en li.en{display:list-item}
   <div class="page-header"><h1>再灌注手法<br><span style="font-size:14px;font-weight:500;color:var(--steel)">Reperfusion Approach — The Second Half of Every FSN Treatment</span></h1></div>
   <div class="callout callout-warn" style="margin-bottom:20px">
     <strong>核心原则：再灌注不是可选项 / Reperfusion is Non-Optional</strong>
-    <span class="zh">扫散创造再灌注条件，但血液需要"泵"才能进入缺血区。没有再灌注运动，能量危机循环无法被彻底打破，治疗效果短暂且不完整。</span>
+    <span class="zh">扫散创造再灌注条件，但血液需要"泵"才能进入缺血区。没有再灌注活动，能量危机循环无法被彻底打破，治疗效果短暂且不完整。</span>
     <span class="en">Sweeping creates conditions for reperfusion, but blood needs a pump to enter the ischemic zone. Without reperfusion movement, the energy crisis cycle cannot be truly broken — effects are transient and incomplete.</span>
   </div>
   <div class="card">
@@ -525,10 +576,10 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">📊 各肌肉再灌注动作对照表 / Reperfusion Movement Reference Table <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)">📊 各肌肉再灌注动作对照表 / Reperfusion Approach Reference Table <span class="chevron">▼</span></div>
     <div class="card-body open">
       <table>
-        <tr><th class="zh">患肌</th><th class="en">Primary Muscle</th><th class="zh">再灌注动作</th><th class="en">Reperfusion Movement</th><th class="zh">要点</th><th class="en">Notes</th></tr>
+        <tr><th class="zh">患肌</th><th class="en">Primary Muscle</th><th class="zh">再灌注动作</th><th class="en">Reperfusion Approach</th><th class="zh">要点</th><th class="en">Notes</th></tr>
         <tr><td class="zh">枕下肌群</td><td class="en">Suboccipitals</td><td class="zh">颅颈屈曲（收下巴，轻缓点头）</td><td class="en">Cranio-cervical flexion (chin tuck, gentle nodding)</td><td>10-15 reps</td></tr>
         <tr><td class="zh">胸锁乳突肌 SCM</td><td class="en">SCM</td><td class="zh">对侧头旋转轻阻抗</td><td class="en">Contralateral head rotation against light resistance</td><td>10 reps/set</td></tr>
         <tr><td class="zh">斜方肌上部</td><td class="en">Upper trapezius</td><td class="zh">肩胛下沉抗阻 + 对侧颈侧屈</td><td class="en">Shoulder depression against resistance + contralateral lateral flexion</td><td></td></tr>
@@ -616,7 +667,7 @@ body.lang-en li.en{display:list-item}
       <div class="ic-label">症状模式</div><div class="zh"><strong>颈源性头痛</strong>：枕部基底→额部/眶部放射；视物模糊、眼痛、畏光、眩晕（椎动脉受压或肌梭传入紊乱）</div><div class="en"><strong>Cervicogenic headache</strong>: base of skull→forehead/orbit radiation; blurred vision, eye pain, photophobia, dizziness (vertebral artery or dysfunctional spindle afferents)</div>
       <div class="ic-label">触诊</div><div class="zh">仰卧，头充分支撑。指尖置枕外粗隆下方，横向移动，向上向前按入C1枕骨之间凹陷。阳性：明显硬实，按压复制额部/眶部头痛。</div><div class="en">Supine, head fully supported. Fingertips below occipital protuberance, walked laterally, pressing upward and anteriorly into concavity between occiput and C1. Positive: marked firmness, pressure reproduces frontal/orbital headache.</div>
       <div class="ic-label">进针</div><div class="zh">C3-C4后正中线进针，指向上方枕骨</div><div class="en">Insert at C3-C4 posterior midline, directing superiorly toward occiput</div>
-      <div class="ic-label">再灌注</div><div class="zh">颅颈屈曲（收下巴）：轻缓点头使下颌向喉部靠近，10-15次</div><div class="en">Cranio-cervical flexion (chin tuck): slight nodding — chin toward throat while lower cervical neutral, 10-15 reps</div>
+      <div class="ic-label">再灌注</div><div class="zh">颅颈屈曲（收下巴）：轻缓点头使下颌向喉部靠近，维持10-15秒，重复2-3次</div><div class="en">Cranio-cervical flexion (chin tuck): slight nodding — chin toward throat while lower cervical neutral, 10-15 reps</div>
     </div>
     <div class="callout callout-note" style="margin-top:10px"><span class="zh">颈源性头痛常同时涉及枕下肌群、上斜方肌、头夹肌和SCM。评估全部，先处理最紧张者。</span><span class="en">Cervicogenic headache commonly co-involves suboccipitals, upper trapezius, splenius capitis, and SCM. Assess all; treat most tightened first.</span></div>
   </div></div>
@@ -1117,7 +1168,7 @@ body.lang-en li.en{display:list-item}
       <li><strong>选择进针点 / Select insertion site</strong> — <span class="zh">患肌近端或相邻皮下层，针尖指向患肌</span><span class="en">subcutaneous layer proximal to/adjacent to primary muscle, needle directed toward it</span></li>
       <li><strong>进针（15-25°）→ 皮下推进</strong></li>
       <li><strong>针芯回缩3-5mm → 扫散2分钟 / Retract inner needle 3-5mm → sweep 2 minutes</strong></li>
-      <li><strong>再灌注（特异性激活患肌，10-15次）/ Reperfusion (specifically engage primary muscle, 10-15 reps)</strong></li>
+      <li><strong>再灌注（特异性激活患肌，维持10-15秒×2-3次）/ Reperfusion (specifically engage primary muscle, 10-15 reps)</strong></li>
       <li><strong>即时评估 → 调整或继续 / Immediate reassessment → adjust or continue</strong></li>
       <li><strong>留针20-30分钟 → 拔针 → 最终评估记录 / Retain 20-30 min → withdraw → final assessment and documentation</strong></li>
     </ol>
@@ -1293,6 +1344,379 @@ document.addEventListener('DOMContentLoaded', function() {
   isEn = (savedLang === 'en') || !savedLang;
   applyLang();
 });
+
+/* ================================================================
+   FSN QUIZ ENGINE v2 — Multi-select + FSNAC Certificate
+   ================================================================ */
+const FSN_QUESTIONS = [{"id": 1, "category": "患肌理论", "q_zh": "浮针理论中，患肌最准确的定义是？", "q_en": "In FSN theory, which best defines a tightened muscle?", "opts_zh": ["含有激痛点的肌肉", "持续处于病理性紧张状态、缺血缺氧的肌肉", "产生牵涉痛的肌肉", "肌力下降的无力肌肉"], "opts_en": ["A muscle containing trigger points", "A muscle in persistent pathological tension with ischaemia and hypoxia", "A muscle producing referred pain", "A weak muscle with reduced strength"], "correct": [1], "exp_zh": "患肌是持续处于病理性紧张状态、导致局部缺血缺氧的肌肉，是浮针治疗的核心靶点。", "exp_en": "A tightened muscle is in persistent pathological contraction causing local ischaemia and hypoxia — the primary FSN treatment target.", "multi": false}, {"id": 2, "category": "再灌注活动", "q_zh": "浮针再灌注活动中，每次抵抗应维持多长时间？", "q_en": "During FSN reperfusion approach, how long should each resistance be held?", "opts_zh": ["3-5秒", "10-15秒", "30秒", "1-2分钟"], "opts_en": ["3-5 seconds", "10-15 seconds", "30 seconds", "1-2 minutes"], "correct": [1], "exp_zh": "每次再灌注活动维持抵抗10-15秒，重复2-3次。次数过多容易造成治疗性损伤。", "exp_en": "Each reperfusion hold lasts 10-15 seconds, repeated 2-3 times. Excessive repetitions risk therapeutic injury.", "multi": false}, {"id": 3, "category": "再灌注活动", "q_zh": "标准浮针再灌注活动应重复几次？", "q_en": "How many times should FSN reperfusion approach be repeated per session?", "opts_zh": ["1次即可", "2-3次", "5-8次", "10-15次"], "opts_en": ["Once only", "2-3 times", "5-8 times", "10-15 times"], "correct": [1], "exp_zh": "再灌注活动重复2-3次即可。过多重复容易引起治疗性损伤。", "exp_en": "Reperfusion approach should be repeated 2-3 times only. More repetitions cause therapeutic injury.", "multi": false}, {"id": 4, "category": "操作技术", "q_zh": "浮针扫散操作的标准时长是？", "q_en": "What is the standard duration for FSN sweeping manoeuvre?", "opts_zh": ["30秒", "1分钟", "2-3分钟", "5-10分钟"], "opts_en": ["30 seconds", "1 minute", "2-3 minutes", "5-10 minutes"], "correct": [2], "exp_zh": "标准扫散时间为2-3分钟，之后进行再灌注活动。", "exp_en": "Standard sweeping duration is 2-3 minutes, followed by reperfusion approach.", "multi": false}, {"id": 5, "category": "操作技术", "q_zh": "浮针进针后，针芯回缩多少毫米进行扫散？", "q_en": "After FSN insertion, how far should the inner needle be retracted before sweeping?", "opts_zh": ["1-2mm", "3-5mm", "8-10mm", "15mm"], "opts_en": ["1-2mm", "3-5mm", "8-10mm", "15mm"], "correct": [1], "exp_zh": "针芯回缩3-5mm后进行扫散动作。", "exp_en": "The inner needle is retracted 3-5mm before the sweeping manoeuvre.", "multi": false}, {"id": 6, "category": "患肌理论", "q_zh": "再灌注活动的主要生理目的是？", "q_en": "What is the primary physiological aim of the reperfusion approach?", "opts_zh": ["拉伸肌肉纤维", "通过肌肉收缩放松改善局部血液循环", "刺激神经末梢", "增加肌肉力量"], "opts_en": ["Stretch muscle fibres", "Improve local blood flow via muscle contraction and relaxation", "Stimulate nerve endings", "Increase muscle strength"], "correct": [1], "exp_zh": "再灌注活动通过肌肉收缩与放松，促进缺血区域的血液再灌注。", "exp_en": "Reperfusion approach uses contraction and relaxation to restore blood flow to the ischaemic tightened muscle.", "multi": false}, {"id": 7, "category": "禁忌证", "q_zh": "以下哪种情况是浮针治疗的绝对禁忌？", "q_en": "Which is an absolute contraindication to FSN treatment?", "opts_zh": ["轻度高血压（已控制）", "进针部位皮肤感染或破损", "患者对针灸有轻度焦虑", "糖尿病（血糖已控制）"], "opts_en": ["Mild controlled hypertension", "Infection or open wound at insertion site", "Mild patient anxiety", "Controlled diabetes mellitus"], "correct": [1], "exp_zh": "进针部位皮肤感染或破损是浮针的绝对禁忌，可引起感染扩散。", "exp_en": "Skin infection or open wound at the insertion site is an absolute contraindication — risk of spreading infection.", "multi": false}, {"id": 8, "category": "禁忌证", "q_zh": "凝血功能障碍患者，浮针治疗应如何处理？", "q_en": "In patients with coagulation disorders, FSN treatment should be:", "opts_zh": ["完全禁止", "正常进行", "谨慎进行，告知患者瘀伤风险，选择血管稀少区域", "仅限于手足部"], "opts_en": ["Absolutely contraindicated", "Performed normally", "Performed cautiously — inform patient of bruising risk, avoid vascular areas", "Limited to hands and feet"], "correct": [2], "exp_zh": "抗凝治疗患者需谨慎操作，告知瘀伤风险，选择血管稀少区域，不作为绝对禁忌。", "exp_en": "Anticoagulant therapy requires caution — inform patient of bruising risk and choose avascular areas. Not an absolute contraindication.", "multi": false}, {"id": 9, "category": "适应症", "q_zh": "浮针治疗最主要的适应症是？", "q_en": "FSN treatment is most effective for:", "opts_zh": ["骨折愈合", "肌源性疼痛（患肌相关的肌筋膜疼痛）", "神经系统退行性疾病", "感染性关节炎"], "opts_en": ["Fracture healing", "Myogenic pain from tightened muscles", "Neurodegenerative disease", "Septic arthritis"], "correct": [1], "exp_zh": "浮针的核心适应症是由患肌引发的肌源性疼痛（肌筋膜疼痛综合征）。", "exp_en": "FSN's primary indication is myogenic pain arising from tightened muscles (myofascial pain syndrome).", "multi": false}, {"id": 10, "category": "针具知识", "q_zh": "浮针针具的独特结构特点是？", "q_en": "The unique structural feature of the FSN needle is:", "opts_zh": ["比普通针灸针更长", "由外层软套管和内层针芯构成", "针身为实心银制", "针尖有特殊涂层"], "opts_en": ["Longer than conventional needles", "Consists of an outer soft cannula and inner solid needle", "Solid silver shaft", "Specially coated tip"], "correct": [1], "exp_zh": "浮针由外层软性套管（扫散用）和内层针芯（引导进针后回缩）构成。", "exp_en": "FSN has an outer soft cannula (for sweeping) and inner needle (for insertion guidance, then retracted).", "multi": false}, {"id": 11, "category": "操作技术", "q_zh": "浮针进针的目标层次是？", "q_en": "FSN needle insertion targets which tissue layer?", "opts_zh": ["表皮层", "皮下疏松结缔组织（浮针层）", "肌肉层", "骨膜"], "opts_en": ["Epidermis", "Subcutaneous loose connective tissue (the FSN layer)", "Muscle layer", "Periosteum"], "correct": [1], "exp_zh": "浮针进针层次是皮下疏松结缔组织（浮针层），不穿透肌肉。", "exp_en": "FSN targets the subcutaneous loose connective tissue (FSN layer) and does not penetrate muscle.", "multi": false}, {"id": 12, "category": "患肌理论", "q_zh": "患肌的主要病理改变是？", "q_en": "The primary pathological change in a tightened muscle is:", "opts_zh": ["肌纤维撕裂", "肌肉持续收缩导致局部缺血缺氧和代谢废物积聚", "钙化沉积", "肌肉萎缩"], "opts_en": ["Muscle fibre tears", "Persistent contraction causing local ischaemia, hypoxia and metabolic waste accumulation", "Calcification", "Muscle atrophy"], "correct": [1], "exp_zh": "患肌持续收缩引起局部血流减少、缺血缺氧，代谢废物积聚，形成恶性循环。", "exp_en": "Persistent contraction reduces local blood flow, causing ischaemia, hypoxia, and metabolic waste accumulation — a vicious cycle.", "multi": false}, {"id": 13, "category": "再灌注活动", "q_zh": "再灌注活动重复次数过多的后果是？", "q_en": "What is the consequence of excessive reperfusion approach repetitions?", "opts_zh": ["治疗效果翻倍", "患者感到更放松", "可能造成治疗性损伤，加重疼痛", "加速患肌恢复"], "opts_en": ["Doubles therapeutic effect", "Patient feels more relaxed", "May cause therapeutic injury and worsen pain", "Accelerates recovery"], "correct": [2], "exp_zh": "再灌注活动重复过多（超过2-3次）可能造成治疗性损伤，加重疼痛。", "exp_en": "Excessive repetitions (beyond 2-3) risk therapeutic injury, potentially worsening the patient's pain.", "multi": false}, {"id": 14, "category": "操作技术", "q_zh": "浮针进针角度通常为？", "q_en": "FSN needle insertion angle is typically:", "opts_zh": ["垂直90°", "45°斜角", "15-25°浅角（几乎平行皮肤）", "60°角"], "opts_en": ["Vertical 90 degrees", "45 degrees", "15-25 degrees shallow (nearly parallel to skin)", "60 degrees"], "correct": [2], "exp_zh": "浮针以15-25°的浅角进针，使针管位于皮下疏松组织层。", "exp_en": "FSN is inserted at a shallow 15-25 degree angle so the cannula lies in the subcutaneous layer.", "multi": false}, {"id": 15, "category": "适应症", "q_zh": "以下哪种情况浮针治疗效果最好？", "q_en": "Which pain condition responds best to FSN treatment?", "opts_zh": ["痛风急性发作", "无明确患肌的内脏痛", "患肌明确的颈肩腰腿痛", "带状疱疹后神经痛"], "opts_en": ["Acute gout attack", "Visceral pain with no tightened muscle", "Neck/shoulder/back/leg pain with identifiable tightened muscle", "Post-herpetic neuralgia"], "correct": [2], "exp_zh": "患肌明确的颈肩腰腿痛是浮针的最佳适应症。", "exp_en": "Musculoskeletal pain with an identifiable tightened muscle is FSN's optimal indication.", "multi": false}, {"id": 16, "category": "操作技术", "q_zh": "浮针扫散方向是以什么为轴心？", "q_en": "The FSN sweeping motion pivots around which point?", "opts_zh": ["针尖为轴心", "进针点为轴心", "皮肤表面为轴心", "针管中点为轴心"], "opts_en": ["The needle tip as pivot", "The insertion point as pivot", "The skin surface as pivot", "The cannula midpoint as pivot"], "correct": [0], "exp_zh": "扫散以针尖为轴心，针管在皮下左右摆动约30-45°。", "exp_en": "Sweeping pivots around the needle tip, with the cannula moving 30-45 degrees left-right in the subcutaneous layer.", "multi": false}, {"id": 17, "category": "患肌理论", "q_zh": "继发疼痛部位（第二现场）与患肌（第一现场）的关系是？", "q_en": "What is the relationship between the secondary pain site and the tightened muscle (primary scene)?", "opts_zh": ["两者在同一位置", "患肌通常距离疼痛部位有一定距离", "疼痛总是在患肌正上方", "关系不确定"], "opts_en": ["They are at the same location", "The tightened muscle is typically at a distance from the pain site", "Pain is always directly over the tightened muscle", "The relationship is uncertain"], "correct": [1], "exp_zh": "患肌（第一现场）与继发疼痛部位（第二现场）通常不在同一位置，这是浮针诊断的核心概念。", "exp_en": "The tightened muscle (primary scene) and pain site (secondary scene) are typically separate — a core FSN diagnostic concept.", "multi": false}, {"id": 18, "category": "操作技术", "q_zh": "浮针治疗结束时，软套管如何处理？", "q_en": "At the end of FSN treatment, how is the soft cannula managed?", "opts_zh": ["立即拔出", "将针芯插回后留置数小时", "仅留套管留置8-12小时，取出针芯", "留置直至自行脱落"], "opts_en": ["Remove immediately", "Re-insert inner needle and leave for hours", "Leave only cannula 8-12 hours after removing inner needle", "Leave until it falls out naturally"], "correct": [2], "exp_zh": "取出针芯后，软套管可留置8-12小时，用医用胶带固定，延长治疗效果。", "exp_en": "After withdrawing the inner needle, the soft cannula may be left in place 8-12 hours, secured with medical tape.", "multi": false}, {"id": 19, "category": "安全", "q_zh": "浮针进针时误穿入血管，正确处理是？", "q_en": "If FSN needle accidentally enters a blood vessel, the correct response is:", "opts_zh": ["继续操作", "立即拔针，按压止血，重新选择进针点", "加大进针角度", "轻柔扫散仍可继续"], "opts_en": ["Continue treatment", "Withdraw immediately, apply pressure, choose a new insertion point", "Increase angle to avoid the vessel", "Continue with gentle sweeping"], "correct": [1], "exp_zh": "误穿血管应立即拔针并局部按压止血，重新评估进针位置。", "exp_en": "Accidental vessel puncture requires immediate needle withdrawal, local pressure, and reassessment of the insertion site.", "multi": false}, {"id": 20, "category": "患肌理论", "q_zh": "以下哪种检查方法最能帮助定位患肌？", "q_en": "Which examination method best helps locate the tightened muscle?", "opts_zh": ["X光检查", "触诊找到紧张、压痛的肌腹", "肌电图检查", "超声波扫描"], "opts_en": ["X-ray imaging", "Palpation to find tense, tender muscle belly", "Electromyography", "Ultrasound scan"], "correct": [1], "exp_zh": "触诊是定位患肌最直接有效的方法——紧张、有压痛的肌腹即为患肌。", "exp_en": "Palpation is the most direct method — a tense, tender muscle belly with resistance indicates a tightened muscle.", "multi": false}, {"id": 21, "category": "操作技术", "multi": false, "q_zh": "浮针疗法的操作手法是？", "q_en": "What is the core operative technique of FSN therapy?", "opts_zh": ["青龙摆尾", "提插", "扫散", "捻转"], "opts_en": ["Green dragon waving tail", "Lifting and thrusting", "Sweeping (saosan)", "Rotating"], "correct": [2], "exp_zh": "扫散是浮针疗法的核心手法，针管在皮下左右摆动。", "exp_en": "Sweeping (saosan) is the core FSN technique — the cannula oscillates left-right in the subcutaneous layer."}, {"id": 22, "category": "临床效果", "multi": false, "q_zh": "下列哪个因素不影响浮针疗法当场效果？", "q_en": "Which factor does NOT affect immediate FSN treatment outcome?", "opts_zh": ["血环境不良", "诊断不正确", "进针点太少", "扫散不规范", "体位不合适"], "opts_en": ["Poor blood environment", "Incorrect diagnosis", "Too few insertion points", "Non-standard sweeping", "Inappropriate patient positioning"], "correct": [2], "exp_zh": "进针点数量在一定范围内不是即时疗效的决定性因素；诊断、手法规范性和血环境影响更大。", "exp_en": "The number of insertion points within a reasonable range is not the determining factor for immediate results; diagnosis, technique, and blood environment matter more."}, {"id": 23, "category": "解剖", "multi": true, "q_zh": "连接到喙突的肌肉有？（多选）", "q_en": "Which muscles attach to the coracoid process? (Select all that apply)", "opts_zh": ["喙肱肌", "肱二头肌", "肱三头肌", "胸小肌"], "opts_en": ["Coracobrachialis", "Biceps brachii", "Triceps brachii", "Pectoralis minor"], "correct": [0, 1, 3], "exp_zh": "喙突附着肌肉：喙肱肌、肱二头肌短头、胸小肌。肱三头肌不附着于喙突。", "exp_en": "Coracoid process attachments: coracobrachialis, short head of biceps brachii, pectoralis minor. Triceps does NOT attach here."}, {"id": 24, "category": "患肌理论", "multi": false, "q_zh": "浮针疗法所治疗的病痛，大部分都是和下列哪项有关？", "q_en": "Most conditions treated by FSN are primarily related to which of the following?", "opts_zh": ["脂肪", "神经", "血管", "肌肉"], "opts_en": ["Adipose tissue", "Nerves", "Blood vessels", "Muscles"], "correct": [3], "exp_zh": "浮针治疗的绝大多数病痛与肌肉（患肌）有关，这是浮针患肌理论的核心。", "exp_en": "The vast majority of FSN-treated conditions are muscle-related (tightened muscles) — the core of FSN tightened muscle theory."}, {"id": 25, "category": "再灌注活动", "multi": false, "q_zh": "下列关于再灌注活动的要求，哪个不正确？", "q_en": "Which of the following requirements for reperfusion approach is INCORRECT?", "opts_zh": ["幅度大", "速度快", "次数少", "间隔长", "变化多"], "opts_en": ["Large range of motion", "Fast speed", "Few repetitions", "Longer intervals", "Varied movements"], "correct": [1], "exp_zh": "再灌注活动要求：幅度大、速度慢（不是快）、次数少（2-3次）、间隔长。速度快会增加损伤风险。", "exp_en": "Reperfusion approach requirements: large range, slow speed (NOT fast), few repetitions (2-3), longer intervals. Fast speed increases injury risk."}, {"id": 26, "category": "解剖", "multi": false, "q_zh": "网球肘可能的患肌不包括？", "q_en": "Which muscle is NOT a likely tightened muscle in tennis elbow?", "opts_zh": ["肱桡肌", "桡侧腕屈肌", "指伸肌", "桡侧腕伸肌"], "opts_en": ["Brachioradialis", "Flexor carpi radialis", "Extensor digitorum", "Extensor carpi radialis"], "correct": [1], "exp_zh": "网球肘（外上髁炎）主要涉及伸肌群，桡侧腕屈肌是屈肌，通常不是网球肘的患肌。", "exp_en": "Tennis elbow (lateral epicondylitis) involves extensor muscles. Flexor carpi radialis is a flexor and is NOT typically a tightened muscle in tennis elbow."}, {"id": 27, "category": "优势", "multi": true, "q_zh": "浮针疗法的优势是？（多选）", "q_en": "What are the advantages of FSN therapy? (Select all that apply)", "opts_zh": ["疼痛小", "疗效快", "无晕针", "无副作用"], "opts_en": ["Minimal pain", "Fast therapeutic effect", "No needle fainting", "No side effects"], "correct": [0, 1, 3], "exp_zh": "浮针优势：疼痛小、疗效快、无副作用。但不能说完全无晕针，极少数情况仍可能发生。", "exp_en": "FSN advantages: minimal pain, fast effect, no side effects. Needle fainting cannot be claimed as completely impossible, though extremely rare."}, {"id": 28, "category": "解剖", "multi": true, "q_zh": "连接到坐骨结节的肌肉有？（多选）", "q_en": "Which muscles attach to the ischial tuberosity? (Select all that apply)", "opts_zh": ["长收肌", "股二头肌", "大收肌", "股四头肌", "半腱肌"], "opts_en": ["Adductor longus", "Biceps femoris (long head)", "Adductor magnus", "Quadriceps femoris", "Semitendinosus"], "correct": [1, 2, 4], "exp_zh": "坐骨结节附着肌肉：股二头肌长头、大收肌、半腱肌（腘绳肌群）。长收肌和股四头肌不附着于坐骨结节。", "exp_en": "Ischial tuberosity attachments: long head of biceps femoris, adductor magnus, semitendinosus (hamstring group). Adductor longus and quadriceps do NOT attach here."}, {"id": 29, "category": "解剖", "multi": false, "q_zh": "关于竖脊肌的描述，正确的是？", "q_en": "Which statement about the erector spinae is correct?", "opts_zh": ["为背部一块单一肌肉", "起自骶骨的前面", "收缩时可使脊柱后伸", "收缩时可使脊柱旋转"], "opts_en": ["It is a single back muscle", "It originates from the anterior sacrum", "Contraction extends the spine", "Contraction rotates the spine"], "correct": [2], "exp_zh": "竖脊肌是肌群（非单一肌肉），起自骶骨后面，双侧收缩使脊柱后伸，单侧收缩使脊柱侧屈。", "exp_en": "Erector spinae is a muscle group (not single), originates from the posterior sacrum, bilateral contraction extends the spine, unilateral action causes lateral flexion."}, {"id": 30, "category": "患肌理论", "multi": true, "q_zh": "哪些属于浮针疗法特有理论？（多选）", "q_en": "Which are theories unique to FSN therapy? (Select all that apply)", "opts_zh": ["患肌理论", "激痛点理论", "第二现场理论", "再灌注理论", "筋膜理论"], "opts_en": ["Tightened muscle theory", "Trigger point theory", "Secondary scene theory", "Reperfusion theory", "Fascia theory"], "correct": [0, 2, 3], "exp_zh": "浮针特有理论：患肌理论、第二现场理论、再灌注理论。激痛点理论和筋膜理论不是浮针特有的。", "exp_en": "FSN-unique theories: tightened muscle theory, secondary scene theory, reperfusion theory. Trigger point and fascia theories are not FSN-specific."}, {"id": 31, "category": "适应症", "multi": false, "q_zh": "下列哪类疾病不属于浮针适应症里的肌肉后病痛？", "q_en": "Which condition is NOT classified as a secondary muscle-related condition in FSN indications?", "opts_zh": ["局部麻木", "冷症", "局部水肿", "网球肘"], "opts_en": ["Local numbness", "Cold sensation", "Local oedema", "Tennis elbow"], "correct": [3], "exp_zh": "网球肘是直接的肌源性疼痛，不是肌肉导致的继发性症状（后病痛）。麻木、冷症、水肿可以是患肌压迫神经/血管导致的继发症状。", "exp_en": "Tennis elbow is a direct myogenic pain condition, not a secondary symptom caused by tightened muscles. Numbness, cold sensation, and oedema can be secondary effects of muscle pressure on nerves/vessels."}, {"id": 32, "category": "操作技术", "multi": false, "q_zh": "关于浮针的进针点，正确的说法是？", "q_en": "Which statement about FSN insertion point selection is correct?", "opts_zh": ["进针点必须扎在十二经脉上", "进针点针尖必须指向患肌", "进针点必须在病痛的附近", "进针点针尖必须平行于肌纤维"], "opts_en": ["Insertion point must be on the 12 meridians", "The needle tip must point toward the tightened muscle", "Insertion point must be near the pain site", "Needle tip must be parallel to muscle fibres"], "correct": [1], "exp_zh": "浮针进针点最关键的原则：针尖指向患肌。进针点可以离痛点有一定距离，不需要在经脉上。", "exp_en": "The key FSN insertion principle: the needle tip must point toward the tightened muscle. The insertion point can be at a distance from the pain site and need not be on meridians."}, {"id": 33, "category": "解剖", "multi": true, "q_zh": "胫骨前肌最常用的再灌注动作是？（多选）", "q_en": "Which are the most common reperfusion movements for tibialis anterior? (Select all that apply)", "opts_zh": ["足跖屈", "足背屈", "足内翻", "足外翻"], "opts_en": ["Plantarflexion", "Dorsiflexion", "Foot inversion", "Foot eversion"], "correct": [1, 2], "exp_zh": "胫骨前肌功能：足背屈+足内翻，再灌注活动选择对应动作：足背屈和足内翻。", "exp_en": "Tibialis anterior function: dorsiflexion and foot inversion. Reperfusion movements use the corresponding actions: dorsiflexion and inversion."}, {"id": 34, "category": "针具知识", "multi": false, "q_zh": "浮针疗法的英文名称正确的是？", "q_en": "What is the correct English name for FSN therapy?", "opts_zh": ["floating needle", "Fu's acupuncture", "modern acupuncture", "Fu's subcutaneous needling"], "opts_en": ["floating needle", "Fu's acupuncture", "modern acupuncture", "Fu's subcutaneous needling"], "correct": [3], "exp_zh": "浮针正式英文名称是Fu's Subcutaneous Needling（符氏皮下针刺），简称FSN。", "exp_en": "The official English name is Fu's Subcutaneous Needling (FSN), named after its inventor Dr. Fu Zhonghua."}, {"id": 35, "category": "解剖", "multi": false, "q_zh": "哪一个不属于对全身血循环有影响的重要肌肉？", "q_en": "Which muscle does NOT significantly impact systemic blood circulation when tightened?", "opts_zh": ["胸锁乳突肌", "胸大肌", "腹直肌", "背阔肌"], "opts_en": ["Sternocleidomastoid", "Pectoralis major", "Rectus abdominis", "Latissimus dorsi"], "correct": [3], "exp_zh": "胸锁乳突肌、胸大肌、腹直肌均位于循环重要部位，可影响颈部/胸腔/腹腔血流。背阔肌位置对全身循环影响相对较小。", "exp_en": "SCM, pectoralis major, and rectus abdominis are near major circulatory structures. Latissimus dorsi has relatively less impact on systemic circulation."}, {"id": 36, "category": "适应症", "multi": true, "q_zh": "下列哪个疾病不是浮针适应症？（多选）", "q_en": "Which conditions are NOT indications for FSN treatment? (Select all that apply)", "opts_zh": ["肺结核", "坐骨神经痛", "慢性胃炎", "糖尿病"], "opts_en": ["Pulmonary tuberculosis", "Sciatica", "Chronic gastritis", "Diabetes mellitus"], "correct": [0, 3], "exp_zh": "肺结核（感染性疾病）和糖尿病（代谢性疾病）不属于浮针适应症。坐骨神经痛和慢性胃炎（如与患肌有关）可以是适应症。", "exp_en": "Tuberculosis (infectious disease) and diabetes mellitus (metabolic disease) are not FSN indications. Sciatica and chronic gastritis (if muscle-related) can be treated with FSN."}, {"id": 37, "category": "针具知识", "multi": false, "q_zh": "浮针针具目前使用的是第几代产品？", "q_en": "Which generation of FSN needle is currently in use?", "opts_zh": ["第五代", "第六代", "第八代", "第十代"], "opts_en": ["Fifth generation", "Sixth generation", "Eighth generation", "Tenth generation"], "correct": [0], "exp_zh": "目前使用的浮针针具为第五代产品。", "exp_en": "The current FSN needle in use is the fifth-generation device."}, {"id": 38, "category": "操作技术", "multi": false, "q_zh": "引起浮针进针时疼痛的原因，哪个不正确？", "q_en": "Which is NOT a correct cause of pain during FSN needle insertion?", "opts_zh": ["刺破微血管", "进针过深", "进针过慢", "刺破淋巴管"], "opts_en": ["Puncturing a microvessel", "Inserting too deeply", "Inserting too slowly", "Puncturing a lymphatic vessel"], "correct": [2], "exp_zh": "进针过慢不是引起疼痛的原因——实际上快速进针可减少疼痛。进针痛常见原因：刺破微血管/淋巴管、进针过深穿入肌肉层。", "exp_en": "Slow insertion speed does NOT cause pain — in fact, faster insertion reduces pain. Common causes of insertion pain: puncturing microvessels/lymphatics, or inserting too deeply into muscle."}, {"id": 39, "category": "历史", "multi": false, "q_zh": "浮针发明于哪一年？", "q_en": "In which year was FSN invented?", "opts_zh": ["1994", "1995", "1996", "1997"], "opts_en": ["1994", "1995", "1996", "1997"], "correct": [2], "exp_zh": "浮针由符仲华博士发明于1996年。", "exp_en": "FSN was invented by Dr. Fu Zhonghua in 1996."}];
+
+let quizState = { questions:[], current:0, score:0, answered:false, selected:new Set() };
+
+function shuffle(arr){ return arr.slice().sort(()=>Math.random()-.5); }
+
+
+/* === Quiz Attempt Control (3 attempts + 24h cooldown) === */
+const QUIZ_STORAGE_KEY = 'fsn_quiz_state';
+const MAX_ATTEMPTS = 3;
+const COOLDOWN_HOURS = 24;
+const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000;
+
+function getQuizRecord() {
+  try {
+    const raw = localStorage.getItem(QUIZ_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : { attempts: 0, passed: false, passDate: null, lastAttempt: null, cooldownUntil: null };
+  } catch(e) { return { attempts: 0, passed: false, passDate: null, lastAttempt: null, cooldownUntil: null }; }
+}
+
+function saveQuizRecord(rec) {
+  localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(rec));
+}
+
+function checkAndStartQuiz() {
+  const rec = getQuizRecord();
+  const isZh = !document.body.classList.contains('lang-en');
+  const now = Date.now();
+
+  if (rec.passed) {
+    const msg = isZh ? '您已通过认证。再次测验将以练习模式进行（不重新颁证）。是否继续？' : 'You have already passed. Retaking will be in Practice Mode — no new certificate. Continue?';
+    if (window.confirm(msg)) startFSNQuiz(true);
+    return;
+  }
+
+  if (rec.cooldownUntil && now < rec.cooldownUntil) {
+    const hoursLeft = Math.ceil((rec.cooldownUntil - now) / 3600000);
+    const msg = isZh ? ('已使用 ' + rec.attempts + '/' + MAX_ATTEMPTS + ' 次机会。请在 ' + hoursLeft + ' 小时后再试。建议复习相关章节。') : ('You have used ' + rec.attempts + '/' + MAX_ATTEMPTS + ' attempts. Please retry in ' + hoursLeft + ' hour(s). Use this time to review the modules.');
+    alert(msg);
+    return;
+  }
+
+  if (rec.attempts >= MAX_ATTEMPTS && (!rec.cooldownUntil || now >= rec.cooldownUntil)) {
+    rec.attempts = 0; rec.cooldownUntil = null;
+    saveQuizRecord(rec);
+  }
+
+  if (rec.attempts === 0) {
+    const warn = isZh
+      ? ('⚠ 认证测验须知\n\n• 共 ' + MAX_ATTEMPTS + ' 次官方机会\n• 失败后冷却 ' + COOLDOWN_HOURS + ' 小时\n• 通过后可随时重新下载证书\n• 知识库和练习随时可用\n\n建议完整阅读所有章节后再开始。\n\n是否现在开始？')
+      : ('⚠ Assessment Notice\n\n• ' + MAX_ATTEMPTS + ' official attempts\n• ' + COOLDOWN_HOURS + '-hour cooldown after failure\n• Certificate re-downloadable after passing\n• Knowledge base always available\n\nReview all modules before starting.\n\nStart now?');
+    if (!window.confirm(warn)) return;
+  }
+
+  startFSNQuiz(false);
+}
+
+function updateAttemptDisplay() {
+  const rec = getQuizRecord();
+  const info = document.getElementById('quiz-attempt-info');
+  const startBtn = document.getElementById('quiz-start-btn');
+  if (!info) return;
+  const isZh = !document.body.classList.contains('lang-en');
+  const now = Date.now();
+
+  if (rec.passed) {
+    info.innerHTML = isZh ? '✓ 已通过认证 · 证书可随时重新下载' : '✓ Certified — certificate available for re-download';
+    startBtn.innerHTML = isZh ? '<span>↺ 练习模式（不重新颁证）</span>' : '<span>↺ Practice Mode (no new certificate)</span>';
+    startBtn.style.background = '#1A5568';
+  } else if (rec.cooldownUntil && now < rec.cooldownUntil) {
+    const hoursLeft = Math.ceil((rec.cooldownUntil - now) / 3600000);
+    info.innerHTML = isZh ? `已使用 ${rec.attempts}/${MAX_ATTEMPTS} 次 · 冷却中，${hoursLeft}小时后可重考` : `${rec.attempts}/${MAX_ATTEMPTS} attempts used · Cooldown: retry in ${hoursLeft}h`;
+    startBtn.disabled = true;
+    startBtn.style.opacity = '.45';
+    startBtn.style.cursor = 'not-allowed';
+  } else {
+    const remaining = MAX_ATTEMPTS - (rec.attempts || 0);
+    info.innerHTML = rec.attempts > 0
+      ? (isZh ? `剩余 ${remaining}/${MAX_ATTEMPTS} 次机会` : `${remaining}/${MAX_ATTEMPTS} attempts remaining`)
+      : (isZh ? `共 ${MAX_ATTEMPTS} 次官方机会` : `${MAX_ATTEMPTS} official attempts`);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateAttemptDisplay);
+
+function startFSNQuiz(practiceMode){
+  quizState.questions = shuffle(FSN_QUESTIONS).slice(0,20);
+  quizState.current = 0; quizState.score = 0;
+  document.querySelector('.quiz-hero').style.display='none';
+  document.getElementById('quiz-area').style.display='block';
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  const area = document.getElementById('quiz-area');
+  const isZh = !document.body.classList.contains('lang-en');
+  const q = quizState.questions[quizState.current];
+  const opts = isZh ? q.opts_zh : q.opts_en;
+  const total = quizState.questions.length;
+  const pct = Math.round((quizState.current/total)*100);
+  const isMulti = q.multi;
+  quizState.selected = new Set(); quizState.answered = false;
+  const shuffledIdx = shuffle([...Array(opts.length).keys()]);
+  const typeBadge = isMulti
+    ? `<span style="font-size:10px;padding:2px 8px;border-radius:8px;background:#FDF4F4;color:#8B1A1A;font-weight:700;">${isZh?'多选题':'Multiple select — choose ALL correct'}</span>`
+    : `<span style="font-size:10px;padding:2px 8px;border-radius:8px;background:#F0F8F5;color:#1A6B5A;font-weight:700;">${isZh?'单选题':'Single choice'}</span>`;
+  area.innerHTML = `
+    <div class="quiz-progress">
+      <div class="quiz-bar"><div class="quiz-bar-fill" style="width:${pct}%"></div></div>
+      <span class="quiz-prog-txt">${quizState.current+1} / ${total}</span>
+    </div>
+    <div class="quiz-q-card">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+        <span class="quiz-cat">${q.category}</span>${typeBadge}
+      </div>
+      <div class="quiz-question">${isZh?q.q_zh:q.q_en}</div>
+      <div class="quiz-opts" id="quiz-opts">
+        ${shuffledIdx.map((origIdx,pos)=>`
+          <button class="quiz-opt" data-orig="${origIdx}" onclick="selectFSNOpt(this,${isMulti})">
+            ${isMulti?'<span class=\"opt-check\">☐</span> ':''}${opts[origIdx]}
+          </button>`).join('')}
+      </div>
+      ${isMulti?`<button class="quiz-next-btn" id="quiz-submit" onclick="submitMultiFSN()" style="display:block;background:#8B1A1A;margin-top:12px;">${isZh?'确认提交':'Submit Answer'}</button>`:''}
+      <div class="quiz-exp" id="quiz-exp"></div>
+      <button class="quiz-next-btn" id="quiz-next" onclick="nextFSNQuestion()">
+        ${quizState.current<total-1?(isZh?'下一题 →':'Next →'):(isZh?'查看结果 →':'See Results →')}
+      </button>
+    </div>`;
+}
+
+function selectFSNOpt(btn, isMulti){
+  if(quizState.answered) return;
+  const orig = parseInt(btn.getAttribute('data-orig'));
+  if(isMulti){
+    if(quizState.selected.has(orig)){
+      quizState.selected.delete(orig);
+      btn.classList.remove('selected-multi');
+      const chk = btn.querySelector('.opt-check');
+      if(chk) chk.textContent='☐';
+    } else {
+      quizState.selected.add(orig);
+      btn.classList.add('selected-multi');
+      const chk = btn.querySelector('.opt-check');
+      if(chk) chk.textContent='☑';
+    }
+  } else {
+    answerFSN(btn, false);
+  }
+}
+
+function submitMultiFSN(){
+  if(quizState.answered) return;
+  answerFSN(null, true);
+}
+
+function answerFSN(clickedBtn, isMulti){
+  if(quizState.answered) return;
+  quizState.answered = true;
+  const isZh = !document.body.classList.contains('lang-en');
+  const q = quizState.questions[quizState.current];
+  const correctSet = new Set(q.correct);
+  let isCorrect = false;
+  if(isMulti){
+    isCorrect = quizState.selected.size===correctSet.size && [...quizState.selected].every(v=>correctSet.has(v));
+  } else {
+    const orig = parseInt(clickedBtn.getAttribute('data-orig'));
+    isCorrect = correctSet.has(orig);
+    quizState.selected.add(orig);
+  }
+  if(isCorrect) quizState.score++;
+  document.querySelectorAll('.quiz-opt').forEach(o=>{
+    o.disabled=true;
+    const orig=parseInt(o.getAttribute('data-orig'));
+    if(correctSet.has(orig)) o.classList.add('correct');
+    else if(quizState.selected.has(orig)&&!correctSet.has(orig)) o.classList.add('wrong');
+    const chk=o.querySelector('.opt-check');
+    if(chk&&correctSet.has(orig)) chk.textContent='✓';
+  });
+  const sub=document.getElementById('quiz-submit');
+  if(sub) sub.style.display='none';
+  const exp=document.getElementById('quiz-exp');
+  exp.style.display='block';
+  exp.innerHTML=(isCorrect?'✓ ':'✗ ')+(isZh?q.exp_zh:q.exp_en);
+  exp.style.borderLeftColor=isCorrect?'#1A6B5A':'#8B1A1A';
+  document.getElementById('quiz-next').style.display='block';
+}
+
+function nextFSNQuestion(){
+  quizState.current++;
+  if(quizState.current>=quizState.questions.length) showFSNResult();
+  else renderQuizQuestion();
+}
+
+function retryFSNQuiz(){
+  document.querySelector('.quiz-hero').style.display='block';
+  document.getElementById('quiz-area').style.display='none';
+  document.getElementById('quiz-area').innerHTML='';
+}
+
+function showFSNResult(){
+  // Record result
+  const rec = getQuizRecord();
+  const score = quizState.score;
+  const total = quizState.questions.length;
+  const pct = Math.round((score/total)*100);
+  const passed = pct >= 70;
+  if (!quizState.practiceMode) {
+    if (passed) {
+      rec.passed = true;
+      rec.passDate = new Date().toISOString();
+      rec.cooldownUntil = null;
+    } else if (rec.attempts >= MAX_ATTEMPTS) {
+      rec.cooldownUntil = Date.now() + COOLDOWN_MS;
+    }
+    saveQuizRecord(rec);
+  }
+  const area=document.getElementById('quiz-area');
+  const isZh=!document.body.classList.contains('lang-en');
+  const certNo='FSN-'+new Date().getFullYear()+'-'+Math.random().toString(36).substr(2,8).toUpperCase();
+  area.innerHTML=`
+    <div class="quiz-result">
+      <div class="score-big">${score}/${total}</div>
+      <div class="score-pct">${pct}% ${passed?(isZh?'✓ 通过':'✓ PASS'):(isZh?'✗ 未通过':'✗ NOT PASSED')}</div>
+      <div class="pass-msg ${passed?'':'fail'}">
+        ${passed?(isZh?'恭喜通过！请填写姓名生成FSNAC认证证书。':'Congratulations! Enter your name to generate your FSNAC certificate.')
+                 :(isZh?`未达到70%通过线（${score}/${total}），建议复习后重新测验。`:`Score below 70% (${score}/${total}). Please review and retake.`)}
+      </div>
+      ${passed?`<div class="cert-form">
+        <label><span class="en">Full name for certificate</span><span class="zh">证书上的姓名</span></label>
+        <input type="text" id="cert-name" placeholder="e.g. Jane Smith">
+        <button class="cert-dl-btn" onclick="generateFSNCertificate('${certNo}',${score},${total},${pct})">
+          <span class="en">⬇ Download FSNAC Certificate (PDF)</span>
+          <span class="zh">⬇ 下载加拿大浮针医学会认证证书（PDF）</span>
+        </button>
+      </div>`:''}
+      <button class="quiz-retry-btn" onclick="retryFSNQuiz()">
+        <span class="en">↺ Retake</span><span class="zh">↺ 重新测验</span>
+      </button>
+    </div>`;
+}
+
+function generateFSNCertificate(certNo,score,total,pct){
+  const name=(document.getElementById('cert-name').value||'').trim();
+  if(!name){alert('Please enter your name / 请输入姓名');return;}
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const W=297,H=210;
+
+  // White background
+  doc.setFillColor(255,255,255); doc.rect(0,0,W,H,'F');
+
+  // Top & bottom decorative bands
+  doc.setFillColor(245,242,236); doc.rect(0,0,W,20,'F'); doc.rect(0,H-20,W,20,'F');
+  doc.setFillColor(139,26,26); doc.rect(0,0,W,6,'F'); doc.rect(0,H-6,W,6,'F');
+
+  // Inner border
+  doc.setDrawColor(139,26,26); doc.setLineWidth(1); doc.rect(14,24,W-28,H-48,'S');
+  doc.setLineWidth(0.3); doc.rect(17,27,W-34,H-54,'S');
+
+  // Red ribbon top-right corner
+  doc.setFillColor(139,26,26);
+  doc.triangle(W-44,24,W-14,24,W-14,68,'F');
+  doc.setTextColor(255,255,255); doc.setFontSize(6); doc.setFont('helvetica','bold');
+
+  // Certificate No.
+  doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(150,150,140);
+  doc.text(certNo,W/2,34,{align:'center',charSpace:0.8});
+
+  // Maple leaf
+  doc.setFontSize(22); doc.setTextColor(185,30,30);
+  doc.text('\u2764',W/2,46,{align:'center'});
+
+  // FSNAC name
+  doc.setFontSize(16); doc.setFont('helvetica','bold'); doc.setTextColor(40,40,38);
+  doc.text("Fu's Subcutaneous Needling Association of Canada (FSNAC)",W/2,57,{align:'center'});
+
+  // Divider
+  doc.setDrawColor(180,175,165); doc.setLineWidth(0.5);
+  doc.line(35,62,W-35,62);
+
+  // Title
+  doc.setFontSize(32); doc.setFont('helvetica','bold'); doc.setTextColor(25,25,22);
+  doc.text('Certificate of Completion',W/2,78,{align:'center'});
+
+  // Presented to
+  doc.setFontSize(11); doc.setFont('helvetica','normal'); doc.setTextColor(120,115,105);
+  doc.text('Presented to:',W/2,91,{align:'center'});
+
+  // Name
+  doc.setFontSize(26); doc.setFont('helvetica','bold'); doc.setTextColor(25,25,22);
+  doc.text(name,W/2,104,{align:'center'});
+  const nw=doc.getTextWidth(name);
+  doc.setDrawColor(100,95,90); doc.setLineWidth(0.4);
+  doc.line(W/2-nw/2,107,W/2+nw/2,107);
+
+  // Course description
+  doc.setFontSize(14); doc.setFont('helvetica','italic'); doc.setTextColor(55,52,48);
+  doc.text('has completed  12 hours FSN basic training course (online theory)',W/2,120,{align:'center'});
+  doc.text('and passed the test.',W/2,129,{align:'center'});
+
+  // Score
+  doc.setFontSize(12); doc.setFont('helvetica','normal'); doc.setTextColor(85,82,76);
+  doc.text('Score:   '+pct+'%',W/2,140,{align:'center'});
+
+  // FSNAC Seal — circle with text
+  const sx=W/2, sy=168, sr=20;
+  doc.setDrawColor(45,45,42); doc.setLineWidth(0.8);
+  doc.circle(sx,sy,sr,'S');
+  doc.setLineWidth(0.3); doc.circle(sx,sy,sr-2.5,'S');
+  // Arc text
+  const circText="FU'S SUBCUTANEOUS NEEDLING ASSOC. OF CANADA";
+  const r=sr-1.2;
+  doc.setFontSize(4.8); doc.setFont('helvetica','bold'); doc.setTextColor(45,45,42);
+  circText.split('').forEach((ch,i)=>{
+    const angle=(Math.PI*1.08)+(i/circText.length)*Math.PI*2*0.88;
+    doc.text(ch,sx+r*Math.cos(angle),sy+r*Math.sin(angle),{angle:(angle*180/Math.PI)+90});
+  });
+  // Center FSN + Chinese
+  doc.setFontSize(10); doc.setFont('helvetica','bold');
+  doc.text('FSN',sx,sy-1,{align:'center'});
+  doc.setFontSize(6);
+  doc.text('\u52a0\u62ff\u5927\u6d6e\u9488\u533b\u5b66\u4f1a',sx,sy+5,{align:'center'});
+  // Bullets
+  doc.setFontSize(8);
+  doc.text('\u2022 FSN \u2022',sx,sy+10,{align:'center'});
+
+  // Signature lines
+  const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  doc.setDrawColor(110,108,100); doc.setLineWidth(0.35);
+  doc.line(28,161,108,161);   // left
+  doc.line(189,161,269,161);  // right
+
+  doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(65,62,58);
+  doc.text('Instructor: Wu Di',68,166,{align:'center'});
+  doc.text('President of FSNAC',68,172,{align:'center'});
+
+  doc.text('Dr. Fu Zhonghua',229,166,{align:'center'});
+  doc.text('Honorary Chair of FSNAC',229,172,{align:'center'});
+
+  // Date
+  doc.setFontSize(10); doc.setFont('helvetica','bold'); doc.setTextColor(45,42,38);
+  doc.text(today,W/2,183,{align:'center'});
+
+  // SinoMed partnership note
+  doc.setFontSize(7); doc.setFont('helvetica','italic'); doc.setTextColor(140,135,125);
+  doc.text('Issued in collaboration with SinoMed Clinical Reference System  ·  sinomed.ca',W/2,H-9,{align:'center'});
+
+  doc.save('FSNAC-Certificate-'+name.replace(/ /g,'-')+'.pdf');
+}
 </script>
+
+<!-- FSN CERTIFICATION QUIZ PAGE -->
+<div id="page-quiz" class="page" style="display:none">
+  <div class="page-header">
+    <h1>认证测验 <span style="font-size:14px;font-weight:500;color:var(--steel)">FSN Certification Assessment</span></h1>
+  </div>
+  <div id="quiz-container" class="quiz-wrap">
+    <div class="quiz-hero" id="quiz-hero">
+      <h2>FSN Clinical Knowledge Assessment<br><span class="zh" style="font-size:16px;">浮针临床知识认证测验</span></h2>
+      <p class="en">20 questions · Multiple choice · Pass mark: 70% (14/20)<br>Review all modules before starting. Take your time — there is no time limit.</p>
+      <p class="zh">20题 · 含单选和多选 · 通过分数线：70%（14/20题）<br>建议先完整阅读所有章节再开始测验，不限时间。</p>
+      <div id="quiz-attempt-info" style="font-size:12px;opacity:.85;margin:10px 0 4px;"></div>
+      <button class="quiz-start-btn" id="quiz-start-btn" onclick="checkAndStartQuiz()">
+        <span class="en">▶ Start Assessment</span><span class="zh">▶ 开始测验</span>
+      </button>
+    </div>
+    <div id="quiz-area" style="display:none"></div>
+  </div>
+</div>
+
 </body>
 </html>
