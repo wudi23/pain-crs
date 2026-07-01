@@ -3535,9 +3535,9 @@ const SUPABASE_URL  = 'https://ucocgcbxdqjbbklnkyxt.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo';
 
 // Stripe (test mode)
-const STRIPE_PK          = 'pk_test_51To8B3LLhtHVv7x0UfkD6c97qQHBBo3iSbEh6kfSYh61ePo3sTXaQwUrVYGu2JyoELlESndnXYpGmo9A1eETiVZg00L8EKRmTo';
-const PRICE_SINGLE       = 'price_1To8NQLLhtHVv7x0TDsAzyS2';   // $29 CAD single module
-const PRICE_FULL         = 'price_1To8NQLLhtHVv7x0gb6h2n04';    // $149 CAD all modules
+const STRIPE_PK          = 'pk_live_51To8AvLpHoyExvp791FrzsTh5rAOtFpSs6bWt2wa6aBiVxf4RstjGtmIWhZTRAsvCV5Wd762IfWl5DgHo1kYzg9c00jsBBGmQE';
+const PRICE_SINGLE       = 'price_1ToCFALpHoyExvp7G59LXS4L';   // $29 CAD single module
+const PRICE_FULL         = 'price_1ToCFALpHoyExvp7WdymsBEV';    // $149 CAD all modules
 const EDGE_FN_URL        = 'https://ucocgcbxdqjbbklnkyxt.supabase.co/functions/v1/bright-processor';
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
@@ -3585,8 +3585,14 @@ async function doSignUp(){
 }
 
 async function doSignOut(){
-  await sb.auth.signOut();
-  localStorage.clear();
+  try { await sb.auth.signOut(); } catch(e) {}
+  // Clear all Supabase session keys from localStorage
+  Object.keys(localStorage).forEach(key => {
+    if(key.startsWith('sb-') || key.includes('supabase')) {
+      localStorage.removeItem(key);
+    }
+  });
+  sessionStorage.clear();
   window.location.reload();
 }
 
