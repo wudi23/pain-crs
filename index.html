@@ -3662,7 +3662,7 @@ function updateLockForModule(moduleId){
     const page = document.getElementById('page-'+moduleId);
     const nameEn = page?.querySelector('.page-title .en')?.textContent || moduleId;
     const nameZh = page?.querySelector('.page-title .zh')?.textContent || moduleId;
-    const closeBtn = `<button onclick="document.getElementById('global-lock').classList.remove('visible')" style="position:absolute;top:16px;right:18px;font-size:22px;color:var(--ink-faint);background:none;border:none;cursor:pointer;font-family:inherit;line-height:1;">×</button>`;
+    const closeBtn = `<button onclick="document.getElementById('global-lock').classList.remove('visible')" style="position:absolute;top:14px;right:16px;font-size:26px;color:var(--ink-mid);background:none;border:none;cursor:pointer;font-family:inherit;line-height:1;padding:4px 8px;border-radius:6px;" onmouseover="this.style.background='var(--rule)'" onmouseout="this.style.background='none'">×</button>`;
     if(!currentUser){
       lock.innerHTML = `${closeBtn}
         <div class="lock-icon">🔒</div>
@@ -3748,6 +3748,14 @@ sb.auth.onAuthStateChange(async (event, session) => {
   applyLockOverlays();
   updateHomePricingCTA();
   updateSidebarPricingCTA();
+});
+
+// Fallback: ensure CTAs render after DOM is ready (handles race condition)
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    updateHomePricingCTA();
+    updateSidebarPricingCTA();
+  }, 800);
 });
 
 function updateSidebarPricingCTA(){
