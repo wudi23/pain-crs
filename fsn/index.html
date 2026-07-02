@@ -237,6 +237,7 @@ body.lang-en li.en{display:list-item}
   <div class="nav-section-label zh">参考资料</div><div class="nav-section-label en" style="display:none">Reference</div>
   <button class="nav-item" onclick="showPage('quickref')"><span class="icon">📖</span><span class="zh-inline">速查手册</span><span class="en-inline" style="display:none">Quick Reference</span></button>
   <button class="nav-item" onclick="showPage('evidence')"><span class="icon">📊</span><span class="zh-inline">循证摘要与参考文献</span><span class="en-inline" style="display:none">Evidence & References</span></button>
+  <button class="nav-item" onclick="showPage('quiz');initQuizHero()"><span class="icon">📝</span><span class="zh-inline">认证测验</span><span class="en-inline" style="display:none">Certification Quiz</span></button>
 </nav>
 <main id="main">
 <!-- ===== PAGE: HOME ===== -->
@@ -1757,12 +1758,6 @@ window._sb = _sb;
   initQuizHero();
 })();
 
-// Call initQuizHero when quiz tab is opened
-const _origShowPage = typeof showPage === 'function' ? showPage : null;
-function showPage(id){
-  if(_origShowPage) _origShowPage(id);
-  if(id==='quiz') initQuizHero();
-}
 
 </script>
 
