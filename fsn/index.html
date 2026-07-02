@@ -207,6 +207,18 @@ body.lang-en li.en{display:list-item}
 .cert-btn{width:100%;padding:10px;background:var(--ok);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
 .q-retry-btn{margin-top:10px;padding:8px 16px;background:#f5f2ec;color:#555;border:1px solid #bbb;border-radius:8px;font-weight:600;font-size:12px;cursor:pointer;font-family:inherit;}
 
+
+/* h1 bilingual spans - inline within block h1 */
+h1 span.zh, h1 span.en { display:inline; }
+body.lang-en h1 span.zh { display:none; }
+body.lang-en h1 span.en { display:inline; }
+h1 span.en { display:none; }
+/* strong bilingual - inline */
+strong.zh, strong.en { display:inline; }
+strong.en { display:none; }
+body.lang-en strong.zh { display:none; }
+body.lang-en strong.en { display:inline; }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
