@@ -1743,7 +1743,7 @@ window._sb = _sb;
     return;
   }
   const {data:purchase} = await _sb.from('purchases')
-    .select('id,quiz_passed_at')
+    .select('id')
     .eq('user_id',session.user.id)
     .eq('module_id','fsn')
     .maybeSingle();
