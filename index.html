@@ -490,16 +490,7 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 // FSN Access Modal
 function openFSNModal(){
-  document.getElementById('fsn-modal').classList.add('open');
-
-  // Check login state
-  sb.auth.getSession().then(({data}) => {
-    const loggedIn = !!(data && data.session);
-    document.getElementById('fsn-login-notice').style.display = loggedIn ? 'none' : 'block';
-    document.getElementById('fsn-redeem-section').style.display = loggedIn ? 'block' : 'none';
-  });
-
-  // Set Teachable link based on current language
+  // Set Teachable link based on language first
   const isZh = localStorage.getItem('sinomed-lang') === 'zh';
   const link = document.getElementById('fsn-teachable-link');
   if(link){
@@ -507,6 +498,33 @@ function openFSNModal(){
       ? 'https://fsn-acupuncture.teachable.com/l/pdp/fsn-acupuncture'
       : 'https://fsn-acupuncture.teachable.com/l/pdp/fu-s-subcutaneous-needling-fsn-acupuncture';
   }
+
+  // Check if user already has FSN access — redirect directly if so
+  sb.auth.getSession().then(async ({data}) => {
+    if(data && data.session){
+      const user = data.session.user;
+      // Check purchases table for FSN access
+      const { data: purchase } = await sb
+        .from('purchases')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('module_id', 'fsn')
+        .maybeSingle();
+      if(purchase){
+        // Already has access — go directly to FSN
+        window.location.href = '/fsn/';
+        return;
+      }
+      // Logged in but no access — show redeem section
+      document.getElementById('fsn-login-notice').style.display = 'none';
+      document.getElementById('fsn-redeem-section').style.display = 'block';
+    } else {
+      // Not logged in — show login prompt
+      document.getElementById('fsn-login-notice').style.display = 'block';
+      document.getElementById('fsn-redeem-section').style.display = 'none';
+    }
+    document.getElementById('fsn-modal').classList.add('open');
+  });
 }
 function closeFSNModal(){
   document.getElementById('fsn-modal').classList.remove('open');
