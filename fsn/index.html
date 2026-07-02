@@ -164,8 +164,8 @@ body.lang-en li.en{display:list-item}
 
 /* ── Quiz & Certificate ─────────────────── */
 .quiz-hero{background:linear-gradient(135deg,#0D3B45,#1A5568);color:#fff;border-radius:16px;padding:28px;text-align:center;margin-bottom:20px;}
-.quiz-hero h2{font-size:18px;margin-bottom:8px;}
-.quiz-hero p{font-size:12px;opacity:.85;line-height:1.6;margin-bottom:14px;}
+.quiz-hero h2{font-size:18px;margin-bottom:8px;color:#fff;}
+.quiz-hero p{font-size:12px;opacity:.95;line-height:1.6;margin-bottom:14px;color:#fff;}
 .quiz-hero-sub{font-size:12px;opacity:.8;margin-bottom:12px;min-height:16px;}
 .quiz-start-btn{padding:10px 24px;background:#fff;color:#0D3B45;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;}
 .quiz-start-btn:hover{background:#e8f4f0;}
@@ -246,11 +246,11 @@ body.lang-en li.en{display:list-item}
   <div class="two-col">
     <div>
       <div class="card">
-        <div class="card-header open" onclick="toggleCard(this)">📌 基本信息 / Basic Information <span class="chevron">▼</span></div>
+        <div class="card-header open" onclick="toggleCard(this)"><span class="zh">📌 基本信息</span><span class="en">Basic Information</span> <span class="chevron">>▼</span></div>
         <div class="card-body open">
           <dl class="def-grid">
             <dt>发明人 / Inventor</dt><dd>符仲华 Fu Zhonghua</dd>
-            <dt>发明时间 / Year</dt><dd>1996年6月，中国南京 / June 1996, Nanjing, China</dd>
+            <dt>发明时间 / Year</dt><dd><span class="zh">1996年6月，中国南京</span><span class="en">June 1996, Nanjing, China</span></dd>
             <dt>核心操作 / Core Technique</dt><dd><span class="zh">皮下扫散 + 再灌注活动</span><span class="en">Subcutaneous sweeping + reperfusion approach</span></dd>
             <dt>治疗靶点 / Target</dt><dd><span class="zh">患肌（病理性紧张的肌肉）</span><span class="en">Tightened muscle (pathological tension)</span></dd>
             <dt>不刺入 / Does NOT</dt><dd><span class="zh">肌肉；不使用传统穴位；不追求得气</span><span class="en">Penetrate muscle; use classical acupoints; seek deqi</span></dd>
@@ -258,7 +258,7 @@ body.lang-en li.en{display:list-item}
         </div>
       </div>
       <div class="card">
-        <div class="card-header open" onclick="toggleCard(this)">⚡ 与传统针刺的本质区别 / vs Traditional Acupuncture <span class="chevron">▼</span></div>
+        <div class="card-header open" onclick="toggleCard(this)"><span class="zh">⚡ 与传统针刺的本质区别</span><span class="en">vs Traditional Acupuncture</span> <span class="chevron">>▼</span></div>
         <div class="card-body open">
           <table>
             <tr><th>比较项</th><th class="zh">传统针刺</th><th class="en">Traditional Acupuncture</th><th class="zh">浮针 FSN</th><th class="en">FSN</th></tr>
@@ -273,7 +273,7 @@ body.lang-en li.en{display:list-item}
     </div>
     <div>
       <div class="card">
-        <div class="card-header open" onclick="toggleCard(this)">📂 三疾病分类框架 / Three Disease Categories <span class="chevron">▼</span></div>
+        <div class="card-header open" onclick="toggleCard(this)"><span class="zh">📂 三疾病分类框架</span><span class="en">Three Disease Categories</span> <span class="chevron">>▼</span></div>
         <div class="card-body open">
           <div style="display:flex;flex-direction:column;gap:10px;margin:8px 0">
             <div onclick="showPage('indications')" style="cursor:pointer;background:var(--teal);color:var(--white);border-radius:8px;padding:12px 16px;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
@@ -320,7 +320,7 @@ body.lang-en li.en{display:list-item}
         </div>
       </div>
       <div class="card">
-        <div class="card-header open" onclick="toggleCard(this)">🔬 科学验证摘要 / Evidence Highlights <span class="chevron">▼</span></div>
+        <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🔬 科学验证摘要</span><span class="en">Evidence Highlights</span> <span class="chevron">>▼</span></div>
         <div class="card-body open">
           <ul class="dot-list">
             <li><span class="zh"><strong>30项RCT</strong>（膝OA，2169例）——疼痛和功能显著优于对照</span><span class="en"><strong>30 RCTs</strong> (knee OA, n=2169) — significantly superior pain and function</span></li>
@@ -334,7 +334,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header" onclick="toggleCard(this)">🏛️ 历史渊源与经典根基 / Historical Roots <span class="chevron">▼</span></div>
+    <div class="card-header" onclick="toggleCard(this)"><span class="zh">🏛️ 历史渊源与经典根基</span><span class="en">Historical Roots</span> <span class="chevron">>▼</span></div>
     <div class="card-body">
       <p class="zh">浮针于1996年由符仲华在南京行医时发明：将针压贴皮肤表面有时能止痛；极浅斜刺后配合横向扫散，效果显著。此后历经四个发展阶段：</p>
       <p class="en">FSN invented June 1996 by Fu Zhonghua in Nanjing through clinical serendipity — pressing needle against skin surface relieved pain; extremely shallow insertion with lateral sweeping produced excellent results. Four development stages:</p>
@@ -377,7 +377,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">1️⃣ 机械力学假说 / Mechanical Hypothesis <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">1️⃣ 机械力学假说</span><span class="en">Mechanical Hypothesis</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <div class="flow">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><strong class="zh">扫散运动</strong><strong class="en">Sweeping movement</strong> — <span class="zh">针体在皮下疏松结缔组织中产生反复横向机械变形</span><span class="en">repeated lateral mechanical deformation in subcutaneous loose CT</span></div></div>
@@ -392,7 +392,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">2️⃣ 再灌注假说 / Reperfusion Hypothesis <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">2️⃣ 再灌注假说</span><span class="en">Reperfusion Hypothesis</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <div class="flow">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><span class="zh">扫散松解患肌微血管受到的机械压迫</span><span class="en">Sweeping releases mechanical constraint on tightened muscle's microvasculature</span></div></div>
@@ -408,7 +408,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">3️⃣ 远程攻击 / Remote Attack <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">3️⃣ 远程攻击</span><span class="en">Remote Attack</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <p class="zh">皮下疏松结缔组织是全身最大的连续结缔组织网络，具有<strong>非极性</strong>（各向同性传导）特征。在远离患肌的部位进针，机械信号同样能通过筋膜网络到达靶肌，产生等效的治疗效果。</p>
       <p class="en">The subcutaneous loose CT is the body's largest continuous fascial network with <strong>non-polar (isotropic)</strong> properties. Needling far from the target muscle transmits equivalent mechanical signals through the fascial network.</p>
@@ -417,7 +417,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">4️⃣ 神经修复机制 / Neural Repair Mechanism <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">4️⃣ 神经修复机制</span><span class="en">Neural Repair Mechanism</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <p class="zh">浮针的治疗效应不限于筋膜-机械模型，还包括直接的神经修复过程——为神经病理性疼痛（如幻肢痛）的疗效提供科学基础。</p>
       <p class="en">FSN's effects extend beyond the fascial-mechanical model to include direct neurological repair — providing scientific basis for effectiveness in neuropathic pain including phantom limb pain.</p>
@@ -440,7 +440,7 @@ body.lang-en li.en{display:list-item}
     <span class="en"><strong>Never needle the secondary scene.</strong> The patient's pain is real and located where they feel it — but the <em>cause</em> is elsewhere. Find the tightened muscle and treat there.</span>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">🔑 患肌定义与触诊特征 / Definition & Palpation <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🔑 患肌定义与触诊特征</span><span class="en">Definition & Palpation</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <p class="zh"><strong>患肌（Tightened Muscle）</strong>：肌肉在非自主激活、身体静息状态下存在的持续异常收缩——一种不需要结构破坏的<em>功能性病变</em>。</p>
       <p class="en"><strong>Tightened Muscle</strong>: A sustained state of abnormal contraction at rest without voluntary activation — a <em>functional lesion</em> requiring no structural destruction.</p>
@@ -455,7 +455,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">⚡ 能量危机理论 · 发病机制 / Energy Crisis Theory <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">⚡ 能量危机理论 · 发病机制</span><span class="en">Energy Crisis Theory</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <div class="flow">
         <div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><strong class="zh">始动因素</strong><strong class="en">Initiating Factor</strong> — <span class="zh">运动终板ACh异常持续释放 → 肌节持续缩短</span><span class="en">Abnormal sustained ACh release at motor endplate → sustained sarcomere shortening</span></div></div>
@@ -469,7 +469,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">🎯 原发部位 vs 继发部位 / Primary Scene vs Secondary Scene <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🎯 原发部位 vs 继发部位</span><span class="en">Primary Scene vs Secondary Scene</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <div class="two-col">
         <div style="background:var(--ok-bg);border:1px solid var(--ok);border-radius:8px;padding:14px">
@@ -499,7 +499,7 @@ body.lang-en li.en{display:list-item}
 <div id="page-technique" class="page">
   <div class="page-header"><h1><span class="zh">针具与操作技术</span><span class="en">Needle & Technique</span><br><span style="font-size:14px;font-weight:500;color:var(--steel)" class="zh">针具结构 · 进针技术 · 扫散操作</span><span style="font-size:14px;font-weight:500;color:var(--steel)" class="en">Needle Structure · Insertion · Sweeping Procedure</span></h1></div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">🔧 浮针针具结构 / FSN Needle Structure <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🔧 浮针针具结构</span><span class="en">FSN Needle Structure</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <ol class="step-list">
         <li><strong class="zh">实心钢针芯</strong><strong class="en">Solid steel inner needle</strong> — <span style="color:var(--steel);font-size:12px">52mm长 · 0.6mm直径 · 斜面针尖 | 52mm length · 0.6mm diameter · beveled tip</span><br><span class="zh" style="font-size:13px">提供刺入皮肤所需的刚性</span><span class="en" style="font-size:13px">Provides rigidity for skin puncture</span></li>
@@ -532,7 +532,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header" onclick="toggleCard(this)">🛡️ 高风险区域安全注意 / Regional Safety Cautions <span class="chevron">▼</span></div>
+    <div class="card-header" onclick="toggleCard(this)"><span class="zh">🛡️ 高风险区域安全注意</span><span class="en">Regional Safety Cautions</span> <span class="chevron">>▼</span></div>
     <div class="card-body">
       <table>
         <tr><th class="zh">区域</th><th class="en">Region</th><th class="zh">风险结构</th><th class="en">Risk Structure</th><th class="zh">注意事项</th><th class="en">Precaution</th></tr>
@@ -545,7 +545,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header" onclick="toggleCard(this)">📅 疗程规划 / Treatment Course Planning <span class="chevron">▼</span></div>
+    <div class="card-header" onclick="toggleCard(this)"><span class="zh">📅 疗程规划</span><span class="en">Treatment Course Planning</span> <span class="chevron">>▼</span></div>
     <div class="card-body">
       <table>
         <tr><th class="zh">疾病类别</th><th class="en">Disease Category</th><th class="zh">疗程次数</th><th class="en">Sessions</th><th class="zh">频率</th><th class="en">Frequency</th><th class="zh">预期结果</th><th class="en">Expected Outcome</th></tr>
@@ -568,7 +568,7 @@ body.lang-en li.en{display:list-item}
     <span class="en">Sweeping creates conditions for reperfusion, but blood needs a pump to enter the ischemic zone. Without reperfusion approach, the energy crisis cycle cannot be truly broken — effects are transient and incomplete.</span>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">🎯 选择原则 / Selection Principle <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🎯 选择原则</span><span class="en">Selection Principle</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <div class="callout callout-amber"><strong class="zh">运动必须特异性地激活患肌</strong><strong class="en">Movement Must Specifically Engage the Primary Scene Muscle</strong><span class="zh">不激活患肌的运动无法向该肌肉提供泵血效应。患肌的主要功能动作决定再灌注动作选择。</span><span class="en">A movement that does not contract the primary scene muscle provides no pumping effect to that muscle. The primary action of the muscle determines the reperfusion approach.</span></div>
       <div class="two-col" style="margin-top:14px">
@@ -586,7 +586,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">📊 各肌肉再灌注动作对照表 / Reperfusion Approach Reference Table <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">📊 各肌肉再灌注动作对照表</span><span class="en">Reperfusion Approach Reference Table</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <table>
         <tr><th class="zh">患肌</th><th class="en">Primary Muscle</th><th class="zh">再灌注动作</th><th class="en">Reperfusion Approach</th><th class="zh">要点</th><th class="en">Notes</th></tr>
@@ -625,7 +625,7 @@ body.lang-en li.en{display:list-item}
 <div id="page-assessment" class="page">
   <div class="page-header"><h1><span class="zh">临床评估与诊断</span><span class="en">Assessment & Diagnosis</span><br><span style="font-size:14px;font-weight:500;color:var(--steel)" class="zh">定位患肌——浮针诊断的核心</span><span style="font-size:14px;font-weight:500;color:var(--steel)" class="en">Finding the Tightened Muscle</span></h1></div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">📋 问诊框架 / History-Taking Framework <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">📋 问诊框架</span><span class="en">History-Taking Framework</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <ol class="step-list">
         <li><strong class="zh">继发部位定位</strong><strong class="en">Secondary scene location</strong> — <span class="zh">精确描述症状位置（不仅是"膝盖痛"——前、内、外、后？哪侧？运动时还是静息时？）</span><span class="en">Precise symptom location (not just "knee pain" — anterior, medial, lateral, posterior? Which side? Motion or rest?)</span></li>
@@ -645,7 +645,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header open" onclick="toggleCard(this)">🖐️ 触诊五原则 / Five Palpation Principles <span class="chevron">▼</span></div>
+    <div class="card-header open" onclick="toggleCard(this)"><span class="zh">🖐️ 触诊五原则</span><span class="en">Five Palpation Principles</span> <span class="chevron">>▼</span></div>
     <div class="card-body open">
       <ol class="step-list">
         <li><strong class="zh">肌肉必须完全放松</strong><strong class="en">Muscle must be completely relaxed</strong> — <span class="zh">完全支撑、卸载所有张力。患者主动保持的肌肉会整体感觉紧实，无法显示差异性病理性紧张。</span><span class="en">Fully supported, all tension unloaded. A muscle the patient is actively holding feels uniformly firm and cannot reveal differential pathological tension.</span></li>
@@ -657,7 +657,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div>
   <div class="card">
-    <div class="card-header" onclick="toggleCard(this)">🚨 禁忌与转介指征 / Contraindications & Referral Indicators <span class="chevron">▼</span></div>
+    <div class="card-header" onclick="toggleCard(this)"><span class="zh">🚨 禁忌与转介指征</span><span class="en">Contraindications & Referral Indicators</span> <span class="chevron">>▼</span></div>
     <div class="card-body">
       <div class="callout callout-warn"><strong class="zh">治疗前转介红旗征</strong><strong class="en">Red Flags Requiring Referral First</strong><ul class="dot-list" style="margin-top:6px"><li class="zh">不明原因体重减轻伴肌肉骨骼症状</li><li class="en">Unexplained weight loss with musculoskeletal symptoms</li><li class="zh">任何体位均无法缓解的严重疼痛</li><li class="en">Severe pain unresponsive to any position</li><li class="zh">进行性加重的神经功能缺损</li><li class="en">Progressive neurological deficit</li><li class="zh">夜间疼痛伴全身症状</li><li class="en">Night pain awakening patient with systemic symptoms</li><li class="zh">近期明显创伤后疼痛，未经影像学排查</li><li class="en">Pain after significant recent trauma without prior imaging</li></ul></div>
     </div>
@@ -669,7 +669,7 @@ body.lang-en li.en{display:list-item}
 
   <h2>🧠 头颈面部 / Head, Face & Neck</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">枕下肌群 / Suboccipital Group <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">枕下肌群</span><span class="en">Suboccipital Group</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">头后大直肌：C2棘突→枕下项线；头后小直肌：C1后结节→枕下项线；头上斜肌：C1横突→枕骨；头下斜肌：C2棘突→C1横突</div><div class="en">Rectus capitis post major: C2 spinous→inferior nuchal line; minor: C1 tubercle→inferior nuchal line; Obliquus capitis sup/inf: C1 transverse process↔occiput/C1 transverse</div>
@@ -682,7 +682,7 @@ body.lang-en li.en{display:list-item}
     <div class="callout callout-note" style="margin-top:10px"><span class="zh">颈源性头痛常同时涉及枕下肌群、上斜方肌、头夹肌和SCM。评估全部，先处理最紧张者。</span><span class="en">Cervicogenic headache commonly co-involves suboccipitals, upper trapezius, splenius capitis, and SCM. Assess all; treat most tightened first.</span></div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">胸锁乳突肌 SCM / Sternocleidomastoid <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">胸锁乳突肌 SCM</span><span class="en">Sternocleidomastoid</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">胸骨头：胸骨柄；锁骨头：锁骨内1/3 → 乳突/枕骨上项线</div><div class="en">Sternal head: manubrium; Clavicular head: medial 1/3 clavicle → mastoid process/superior nuchal line</div>
@@ -694,7 +694,7 @@ body.lang-en li.en{display:list-item}
     <div class="callout callout-note" style="margin-top:10px"><span class="zh">头顶痛、前额痛、无牙科病因的磨牙痛、不明原因眩晕——在做其他诊断前先评估SCM。</span><span class="en">Vertex headache, frontal headache, molar toothache without dental pathology, unexplained dizziness — assess SCM before pursuing other diagnoses.</span></div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">斜方肌上部 / Upper Trapezius <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">斜方肌上部</span><span class="en">Upper Trapezius</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">枕外粗隆、上项线内侧、项韧带C1-C5 → 锁骨外1/3、肩峰</div><div class="en">External occipital protuberance, medial superior nuchal line, ligamentum nuchae C1-C5 → lateral clavicle, acromion</div>
@@ -703,7 +703,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">肩胛提肌 / Levator Scapulae <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">肩胛提肌</span><span class="en">Levator Scapulae</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">C1-C4横突 → 肩胛骨上角及内侧缘（肩胛冈上方）</div><div class="en">Transverse processes C1-C4 → superior angle and medial border of scapula (above scapular spine)</div>
@@ -713,7 +713,7 @@ body.lang-en li.en{display:list-item}
     <div class="callout callout-note" style="margin-top:10px"><span class="zh">急性落枕：肩胛提肌+同侧头夹肌是原发肌。单次浮针治疗常可接近完全缓解。</span><span class="en">Acute torticollis: levator scapulae + ipsilateral splenius capitis. Single FSN session often produces near-complete resolution.</span></div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">头颈夹肌 / Splenius Capitis &amp; Cervicis <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">头颈夹肌</span><span class="en">Splenius Capitis &amp; Cervicis</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">症状</div><div class="zh">头夹肌：头顶痛、同侧眼后痛；颈夹肌：枕部痛、上颈区、<strong>同侧眼视力模糊</strong>（长期被误认为眼科问题）</div><div class="en">Splenius capitis: vertex pain, pain behind ipsilateral eye; Splenius cervicis: base of skull, upper cervical, <strong>ipsilateral blurred vision</strong> (consistently overlooked as muscular)</div>
@@ -721,7 +721,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">斜角肌群 / Scalenes ⚠️ <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">斜角肌群</span><span class="en">Scalenes ⚠️</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-post">后肌源性 / Post-muscular</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">前斜角肌：C3-C6横突；中：C2-C7；后：C5-C7 → 第1肋（前/中）、第2肋（后）。<strong>臂丛和锁骨下动脉穿行于前中斜角肌之间（斜角肌三角）</strong></div><div class="en">Anterior: C3-C6; Middle: C2-C7; Posterior: C5-C7 → First rib (anterior/middle), second rib (posterior). <strong>Brachial plexus and subclavian artery pass between anterior and middle scalene</strong></div>
@@ -731,7 +731,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">咬肌与颞肌 / Masseter &amp; Temporalis <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">咬肌与颞肌</span><span class="en">Masseter &amp; Temporalis</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">症状</div><div class="zh">咬肌：面颊、TMJ、上下磨牙、耳、眉区痛（磨牙症）；颞肌：颞部头痛、磨牙痛（牙科治疗无效）；TMD：弹响、交锁、张口受限</div><div class="en">Masseter: cheek, TMJ, molar teeth, ear, eyebrow (bruxism); Temporalis: temporal headache, molar toothache (dental treatment fails); TMD: clicking, locking, limited mouth opening</div>
@@ -742,7 +742,7 @@ body.lang-en li.en{display:list-item}
   <hr class="section-divider">
   <h2>🦾 肩臂部 / Shoulder &amp; Arm</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">⭐ 冈下肌 / Infraspinatus（最重要）<span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">⭐ 冈下肌</span><span class="en">Infraspinatus（最重要）</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">肩胛骨冈下窝 → 肱骨大结节中面</div><div class="en">Infraspinous fossa of scapula → middle facet of greater tubercle of humerus</div>
@@ -754,7 +754,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">冈上肌 · 肩胛下肌 / Supraspinatus · Subscapularis <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">冈上肌 · 肩胛下肌</span><span class="en">Supraspinatus · Subscapularis</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="two-col">
       <div>
@@ -770,7 +770,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">胸大肌 · 胸小肌 / Pectoralis Major · Minor <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">胸大肌 · 胸小肌</span><span class="en">Pectoralis Major · Minor</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="two-col">
       <div>
         <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
@@ -790,7 +790,7 @@ body.lang-en li.en{display:list-item}
   <hr class="section-divider">
   <h2>🦾 前臂与肘部 / Forearm &amp; Elbow</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">⭐ 肱桡肌 / Brachioradialis（网球肘最重要原发肌）<span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">⭐ 肱桡肌</span><span class="en">Brachioradialis（网球肘最重要原发肌）</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">肱骨外侧髁上嵴上2/3及外侧肌间隔 → 桡骨茎突</div><div class="en">Proximal 2/3 lateral supracondylar ridge → styloid process of radius</div>
@@ -800,7 +800,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">旋前圆肌 / Pronator Teres（假性腕管综合征）<span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">旋前圆肌</span><span class="en">Pronator Teres（假性腕管综合征）</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-post">后肌源性 / Post-muscular</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">肱骨头：内上髁；尺骨头：冠突 → 桡骨旋前粗隆外侧面</div><div class="en">Humeral head: medial epicondyle; Ulnar head: coronoid process → lateral surface of radius at pronator tuberosity</div>
@@ -812,7 +812,7 @@ body.lang-en li.en{display:list-item}
   <hr class="section-divider">
   <h2>🦴 腰盆部 / Lumbar &amp; Pelvic</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">⭐ 腰方肌 / Quadratus Lumborum（最重要）<span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">⭐ 腰方肌</span><span class="en">Quadratus Lumborum（最重要）</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">髂腰韧带及髂嵴 → 第12肋下缘；L1-L4横突</div><div class="en">Iliolumbar ligament and iliac crest → inferior border of 12th rib; transverse processes L1-L4</div>
@@ -824,7 +824,7 @@ body.lang-en li.en{display:list-item}
     </div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">髂腰肌 · 臀小肌 · 梨状肌 / Iliopsoas · Gluteus Minimus · Piriformis <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">髂腰肌 · 臀小肌 · 梨状肌</span><span class="en">Iliopsoas · Gluteus Minimus · Piriformis</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="ic-grid">
       <div class="ic-label">髂腰肌<br><small>Iliopsoas</small></div>
       <div class="zh">症状：腹股沟痛、前髋痛、腰痛（久坐加重——髂腰肌缩短；行走/上楼加重）；单侧紧张→骨盆倾斜+代偿性腰椎侧弯；行走时髋不能完全伸展提示双侧受累。进针：ASIS稍内侧进针指向后内方髂窝；弓步髋伸展（一腿向前，后膝跪地，后髋下沉）。</div>
@@ -837,7 +837,7 @@ body.lang-en li.en{display:list-item}
       <div class="en">Pattern: deep buttock aching "inside the buttock"; worse with sitting, stairs, hip internal rotation. <strong>Sciatic nerve passes directly through piriformis in ~15%</strong>, alongside in remainder → compression produces sciatic symptoms; dyspareunia and pelvic pain in women. Needle: posterior sacral margin, direct laterally toward greater trochanter subcutaneously; Reperfusion: prone hip internal+external rotation against resistance.</div>
     </div>
   </div>
-<div class="card-header" onclick="toggleCard(this)">臀大肌 · 臀中肌 / Gluteus Maximus &amp; Medius <span class="chevron">▼</span></div>
+<div class="card-header" onclick="toggleCard(this)"><span class="zh">臀大肌 · 臀中肌</span><span class="en">Gluteus Maximus &amp; Medius</span> <span class="chevron">>▼</span></div>
 <div class="card-body">
   <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
   <div class="ic-grid">
@@ -855,7 +855,7 @@ body.lang-en li.en{display:list-item}
     <div class="en">Subcutaneous insertion lateral to tightened gluteal area, tip toward tightened muscle; avoid sciatic nerve pathway</div>
   </div>
 </div>
-<div class="card-header" onclick="toggleCard(this)">股内侧肌群 / Medial Thigh Group <span class="chevron">▼</span></div>
+<div class="card-header" onclick="toggleCard(this)"><span class="zh">股内侧肌群</span><span class="en">Medial Thigh Group</span> <span class="chevron">>▼</span></div>
 <div class="card-body">
   <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
   <div class="ic-grid">
@@ -881,7 +881,7 @@ body.lang-en li.en{display:list-item}
   <hr class="section-divider">
   <h2>🦵 膝腿踝足 / Knee, Leg, Ankle &amp; Foot</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">⭐ 股四头肌 / Quadriceps（浮针证据最充分适应症）<span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">⭐ 股四头肌</span><span class="en">Quadriceps（浮针证据最充分适应症）</span> <span class="chevron">>▼</span></div><div class="card-body">
     <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
     <div class="ic-grid">
       <div class="ic-label">起止点</div><div class="zh">股直肌：AIIS；股外侧肌：大转子/股外侧线；股内侧肌：股内侧线；股中间肌：股骨干前外侧面 → 经髌骨→髌腱→胫骨结节</div><div class="en">Rectus femoris: AIIS; Vastus lateralis: greater trochanter/lateral linea aspera; Vastus medialis: medial linea aspera; Intermedius: anterior femoral shaft → via patella→patellar tendon→tibial tuberosity</div>
@@ -892,7 +892,7 @@ body.lang-en li.en{display:list-item}
     <div class="callout callout-note" style="margin-top:10px">浮针膝OA研究：<strong>30项RCT（2169例）meta分析</strong>——疼痛和功能均显著优于对照。这是目前浮针循证基础最强的适应症。/ FSN knee OA: <strong>30 RCTs (n=2169) meta-analysis</strong> — significantly superior pain and function. The most evidence-supported FSN indication in current literature.</div>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">腓肠肌 · 比目鱼肌 · 胫骨后肌 · 腓骨肌 / Calf &amp; Ankle Muscles <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">腓肠肌 · 比目鱼肌 · 胫骨后肌 · 腓骨肌</span><span class="en">Calf &amp; Ankle Muscles</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="ic-grid">
       <div class="ic-label">腓肠肌<br><small>Gastrocnemius</small></div>
       <div class="zh">后腿痛、<strong>夜间小腿痉挛</strong>（肌筋膜触发点现象，非电解质不足）；牵涉至腘窝和足弓；跟腱病和足底筋膜炎的重要原发肌。进针：腘窝下方近端小腿进针指向跟腱交界处；再灌注：提踵；踝背屈抗阻。</div>
@@ -912,7 +912,7 @@ body.lang-en li.en{display:list-item}
   <hr class="section-divider">
   <h2>🫁 胸腹部 / Thorax &amp; Abdomen</h2>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">竖脊肌 · 菱形肌 · 膈肌 · 腹壁肌 / Trunk Muscles <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">竖脊肌 · 菱形肌 · 膈肌 · 腹壁肌</span><span class="en">Trunk Muscles</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="ic-grid">
       <div class="ic-label">竖脊肌<br><small>Erector spinae</small></div>
       <div class="zh">椎旁胸腰背痛；肋部"带状"放射（可误认为带状疱疹前驱或肋间神经痛）；下胸段牵涉至胁腹部（模拟肾痛）。进针：腰胸交界处或特定胸段进针，沿竖脊肌柱向上推进；再灌注：猫式屈伸；双膝抱胸。</div>
@@ -928,7 +928,7 @@ body.lang-en li.en{display:list-item}
       <div class="en">Lower rectus/oblique tension → bladder compression: urinary frequency, urgency, incomplete voiding (misdiagnosed as non-bacterial prostatitis/OAB); uterine compression → <strong>dysmenorrhea</strong> (uterus itself normal). Needle: linea semilunaris or lateral abdominal wall. <strong>Depth control — peritoneal cavity nearby!</strong></div>
     </div>
   </div>
-<div class="card-header" onclick="toggleCard(this)">前锯肌 / Serratus Anterior <span class="chevron">▼</span></div>
+<div class="card-header" onclick="toggleCard(this)"><span class="zh">前锯肌</span><span class="en">Serratus Anterior</span> <span class="chevron">>▼</span></div>
 <div class="card-body">
   <span class="muscle-tag tag-primary">原发肌 / Primary Scene</span>
   <div class="ic-grid">
@@ -1098,7 +1098,7 @@ body.lang-en li.en{display:list-item}
 <div id="page-contra" class="page">
   <div class="page-header"><h1><span class="zh">禁忌证与注意事项</span><span class="en">Contraindications & Precautions</span><br><span style="font-size:14px;font-weight:500;color:var(--steel)" class="zh">浮针临床安全框架</span><span style="font-size:14px;font-weight:500;color:var(--steel)" class="en">Safety Framework for FSN Practice</span></h1></div>
 
-  <div class="card"><div class="card-header open" onclick="toggleCard(this)">🚫 绝对禁忌证 / Absolute Contraindications <span class="chevron">▼</span></div><div class="card-body open">
+  <div class="card"><div class="card-header open" onclick="toggleCard(this)"><span class="zh">🚫 绝对禁忌证</span><span class="en">Absolute Contraindications</span> <span class="chevron">>▼</span></div><div class="card-body open">
     <table>
       <tr><th class="zh">禁忌证</th><th class="en">Contraindication</th><th class="zh">原因</th><th class="en">Reason</th></tr>
       <tr><td class="zh">进针部位感染、溃疡或恶性肿瘤</td><td class="en">Infection, ulceration, or malignancy at intended needle site</td><td class="zh">感染扩散风险；恶性肿瘤播散风险</td><td class="en">Risk of infection spread; malignancy dissemination risk</td></tr>
@@ -1108,7 +1108,7 @@ body.lang-en li.en{display:list-item}
     </table>
   </div></div>
 
-  <div class="card"><div class="card-header open" onclick="toggleCard(this)">⚠️ 重要注意事项 / Important Precautions <span class="chevron">▼</span></div><div class="card-body open">
+  <div class="card"><div class="card-header open" onclick="toggleCard(this)"><span class="zh">⚠️ 重要注意事项</span><span class="en">Important Precautions</span> <span class="chevron">>▼</span></div><div class="card-body open">
     <table>
       <tr><th class="zh">情况</th><th class="en">Situation</th><th class="zh">处置</th><th class="en">Management</th></tr>
       <tr><td class="zh">抗凝治疗（华法林、抗血小板药等）</td><td class="en">Anticoagulant therapy</td><td class="zh">可进行，但需谨慎。拔针后压迫2-3分钟（而非常规30秒）。监测进针部位出血和血肿。</td><td class="en">Can proceed with caution. Apply pressure 2-3 minutes after withdrawal (vs standard 30 seconds). Monitor for bleeding and hematoma.</td></tr>
@@ -1119,7 +1119,7 @@ body.lang-en li.en{display:list-item}
     </table>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">🔴 排查后再考虑浮针 / Refer/Exclude Before Using FSN <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">🔴 排查后再考虑浮针</span><span class="en">Refer/Exclude Before Using FSN</span> <span class="chevron">>▼</span></div><div class="card-body">
     <ul class="dot-list">
       <li class="zh">需要手术减压的结构性神经卡压</li><li class="en">Structural nerve compression requiring surgical decompression</li>
       <li class="zh">活动性炎症性关节炎（关节本身）</li><li class="en">Active inflammatory arthritis at the joint itself</li>
@@ -1129,7 +1129,7 @@ body.lang-en li.en{display:list-item}
     </ul>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">📊 不良反应记录 / Adverse Events (Published RCT Summary) <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">📊 不良反应记录</span><span class="en">Adverse Events (Published RCT Summary)</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="callout callout-ok">
       <strong class="zh">安全性总体评价（Gong等，2025年系统评价</strong><strong class="en">Gong et al. 2025 Systematic Review）</strong>
       <span class="zh">跨20+疾病的所有已发表浮针RCT中，不良事件均为轻微和短暂性——无严重不良事件报告。包括：进针部位短暂皮下瘀青；轻度治疗后酸痛（数小时内消退）；偶发轻微头晕（进针时）。</span>
@@ -1227,7 +1227,7 @@ body.lang-en li.en{display:list-item}
 
 </div></div>
 
-  <div class="card"><div class="card-header open" onclick="toggleCard(this)">⚡ 临床决策流程 / Clinical Decision Flowchart <span class="chevron">▼</span></div><div class="card-body open">
+  <div class="card"><div class="card-header open" onclick="toggleCard(this)"><span class="zh">⚡ 临床决策流程</span><span class="en">Clinical Decision Flowchart</span> <span class="chevron">>▼</span></div><div class="card-body open">
     <ol class="step-list">
       <li><strong class="zh">确定继发部位</strong><strong class="en">Identify secondary scene</strong> — <span class="zh">患者症状的精确位置</span><span class="en">exact location of patient's symptoms</span></li>
       <li><strong class="zh">疾病分类</strong><strong class="en">Classify disease type</strong> — <span class="zh">肌源性 / 前肌源性 / 后肌源性？</span><span class="en">Muscular / Pre-muscular / Post-muscular?</span></li>
@@ -1248,7 +1248,7 @@ body.lang-en li.en{display:list-item}
 <div id="page-evidence" class="page">
   <div class="page-header"><h1><span class="zh">循证摘要与参考文献</span><span class="en">Evidence Summary & References</span><br><span style="font-size:14px;font-weight:500;color:var(--steel)" class="zh">已发表临床与实验研究</span><span style="font-size:14px;font-weight:500;color:var(--steel)" class="en">Published Clinical and Experimental Studies</span></h1></div>
 
-  <div class="card"><div class="card-header open" onclick="toggleCard(this)">📊 高级别证据摘要 / High-Level Evidence Summary <span class="chevron">▼</span></div><div class="card-body open">
+  <div class="card"><div class="card-header open" onclick="toggleCard(this)"><span class="zh">📊 高级别证据摘要</span><span class="en">High-Level Evidence Summary</span> <span class="chevron">>▼</span></div><div class="card-body open">
     <table style="font-size:12px">
       <tr><th>Ref</th><th class="zh">设计/样本量</th><th class="en">Design/N</th><th class="zh">适应症</th><th class="en">Condition</th><th class="zh">主要发现</th><th class="en">Key Finding</th></tr>
       <tr><td><strong>[18]</strong></td><td colspan="2"><span class="badge badge-meta">Meta-analysis</span> 30 RCTs, n=2169</td><td class="zh">膝骨关节炎</td><td class="en">Knee OA</td><td class="zh">FSN在疼痛和功能方面均显著优于对照——迄今最大浮针Meta分析</td><td class="en">FSN significantly superior for pain and function — largest FSN meta-analysis to date</td></tr>
@@ -1266,7 +1266,7 @@ body.lang-en li.en{display:list-item}
     </table>
   </div></div>
 
-  <div class="card"><div class="card-header" onclick="toggleCard(this)">📚 完整参考文献列表 / Complete Reference List <span class="chevron">▼</span></div><div class="card-body">
+  <div class="card"><div class="card-header" onclick="toggleCard(this)"><span class="zh">📚 完整参考文献列表</span><span class="en">Complete Reference List</span> <span class="chevron">>▼</span></div><div class="card-body">
     <div class="ref-list">
       <div class="ref-item"><div class="ref-num">[1]</div><div>Fu ZH, Wang JH, Sun JH, Chen XY, Xu JG. Fu's subcutaneous needling: possible clinical evidence of the subcutaneous connective tissue in acupuncture. <em>J Altern Complement Med.</em> 2007;13(1):47–51. PMID: 17309377.</div></div>
       <div class="ref-item"><div class="ref-num">[2]</div><div>Fu Z, Hsieh YL, Hong CZ, et al. Remote subcutaneous needling to suppress the irritability of myofascial trigger spots: an experimental study in rabbits. <em>Evid Based Complement Alternat Med.</em> 2012;2012:353916. PMID: 23346200.</div></div>
