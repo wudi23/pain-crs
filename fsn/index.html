@@ -267,6 +267,16 @@ body.quiz-locked .home-back-btn{pointer-events:none!important;opacity:.4!importa
 .quiz-locked-notice{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(139,26,26,.92);color:#fff;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:600;z-index:500;display:none;}
 body.quiz-locked .quiz-locked-notice{display:block;}
 
+
+/* ── Mobile hamburger ────────────────── */
+#ham-btn{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:0 8px;line-height:1;}
+@media(max-width:800px){
+  #ham-btn{display:flex;align-items:center;}
+  #sidebar.mobile-open{transform:translateX(0)!important;}
+  #overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;}
+  #overlay.show{display:block;}
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -274,10 +284,12 @@ body.quiz-locked .quiz-locked-notice{display:block;}
 <body>
 <div id="topbar">
   <a href="/" class="home-back-btn">← SinoMed</a>
+  <button id="ham-btn" onclick="toggleSidebar()" aria-label="Menu">☰</button>
   <div class="logo" id="topbar-logo">浮针<span>FSN</span>知识库</div>
   <div class="spacer"></div>
   <button id="lang-toggle" onclick="toggleLang()">English</button>
 </div>
+<div id="overlay" onclick="closeSidebar()"></div>
 <div id="layout">
 <nav id="sidebar">
   <div id="search-wrap"><input type="text" id="search" placeholder="搜索 / Search..." oninput="handleSearch(this.value)"></div>
@@ -1988,23 +2000,23 @@ Review all modules before starting</span></p>
       <div class="fc-control-row">
         <label><span class="zh">区段</span><span class="en">Section</span></label>
         <select id="fc-qa-section" onchange="fcQaInit()">
-          <option value="all"><span class="zh">全部</span>All</option>
-          <option value="头颈面部">头颈面部 / Head, Face & Neck</option>
-          <option value="肩臂部">肩臂部 / Shoulder & Arm</option>
-          <option value="前臂与肘部">前臂与肘部 / Forearm & Elbow</option>
-          <option value="胸腹部">胸腹部 / Chest & Trunk</option>
-          <option value="腰盆部">腰盆部 / Lumbopelvic</option>
-          <option value="膝腿踝足">膝腿踝足 / Knee, Leg & Ankle</option>
+          <option value="all" data-zh="全部" data-en="All">全部</option>
+          <option value="头颈面部" data-zh="头颈面部" data-en="Head, Face & Neck">头颈面部</option>
+          <option value="肩臂部" data-zh="肩臂部" data-en="Shoulder & Arm">肩臂部</option>
+          <option value="前臂与肘部" data-zh="前臂与肘部" data-en="Forearm & Elbow">前臂与肘部</option>
+          <option value="胸腹部" data-zh="胸腹部" data-en="Chest & Trunk">胸腹部</option>
+          <option value="腰盆部" data-zh="腰盆部" data-en="Lumbopelvic">腰盆部</option>
+          <option value="膝腿踝足" data-zh="膝腿踝足" data-en="Knee, Leg & Ankle">膝腿踝足</option>
         </select>
       </div>
       <div class="fc-control-row">
         <label><span class="zh">考查</span><span class="en">Test on</span></label>
         <select id="fc-qa-topic" onchange="fcQaInit()">
-          <option value="0"><span class="zh">再灌注动作（RA）</span><span class="en">Reperfusion Approach</span></option>
-          <option value="1"><span class="zh">FSN进针点</span><span class="en">FSN Needling Point</span></option>
-          <option value="2"><span class="zh">主要症状</span><span class="en">Main Symptoms</span></option>
-          <option value="3"><span class="zh">起止点</span><span class="en">Origin &amp; Insertion</span></option>
-          <option value="all"><span class="zh">随机混合</span><span class="en">Random Mix</span></option>
+          <option value="0" data-zh="再灌注动作（RA）" data-en="Reperfusion Approach (RA)">再灌注动作（RA）</option>
+          <option value="1" data-zh="FSN进针点" data-en="FSN Needling Point">FSN进针点</option>
+          <option value="2" data-zh="主要症状" data-en="Main Symptoms">主要症状</option>
+          <option value="3" data-zh="起止点" data-en="Origin & Insertion">起止点</option>
+          <option value="all" data-zh="随机混合" data-en="Random Mix">随机混合</option>
         </select>
       </div>
     </div>
@@ -2053,13 +2065,13 @@ Review all modules before starting</span></p>
       <div class="fc-control-row">
         <label><span class="zh">区段</span><span class="en">Section</span></label>
         <select id="fc-br-section" onchange="fcBrowseInit()">
-          <option value="all"><span class="zh">全部</span>All</option>
-          <option value="头颈面部">头颈面部 / Head, Face & Neck</option>
-          <option value="肩臂部">肩臂部 / Shoulder & Arm</option>
-          <option value="前臂与肘部">前臂与肘部 / Forearm & Elbow</option>
-          <option value="胸腹部">胸腹部 / Chest & Trunk</option>
-          <option value="腰盆部">腰盆部 / Lumbopelvic</option>
-          <option value="膝腿踝足">膝腿踝足 / Knee, Leg & Ankle</option>
+          <option value="all" data-zh="全部" data-en="All">全部</option>
+          <option value="头颈面部" data-zh="头颈面部" data-en="Head, Face & Neck">头颈面部</option>
+          <option value="肩臂部" data-zh="肩臂部" data-en="Shoulder & Arm">肩臂部</option>
+          <option value="前臂与肘部" data-zh="前臂与肘部" data-en="Forearm & Elbow">前臂与肘部</option>
+          <option value="胸腹部" data-zh="胸腹部" data-en="Chest & Trunk">胸腹部</option>
+          <option value="腰盆部" data-zh="腰盆部" data-en="Lumbopelvic">腰盆部</option>
+          <option value="膝腿踝足" data-zh="膝腿踝足" data-en="Knee, Leg & Ankle">膝腿踝足</option>
         </select>
       </div>
     </div>
@@ -2166,6 +2178,18 @@ function applyLang() {
   if(typeof QS !== 'undefined' && QS.q && QS.q.length > 0 && QS.answered && QS.i >= QS.q.length){
     var qa = document.getElementById('quiz-area');
     if(qa && qa.style.display !== 'none') showQuizResult();
+  }
+  // Re-render flashcard if visible
+  if(typeof fcMode !== 'undefined'){
+    fcUpdateSelects();
+    var fcPage = document.getElementById('page-flashcard');
+    if(fcPage && fcPage.classList.contains('active')){
+      if(fcMode === 'qa'){
+        fcQaShow();
+      } else {
+        fcBrowseShow();
+      }
+    }
   }
 }
 
@@ -2580,6 +2604,15 @@ let fcBrList = [], fcBrIdx = 0;
 
 function isZhFC(){ return !document.body.classList.contains('lang-en'); }
 
+
+function fcUpdateSelects(){
+  var zh = isZhFC();
+  document.querySelectorAll('#fc-qa-section option, #fc-br-section option, #fc-qa-topic option').forEach(function(opt){
+    var label = zh ? opt.getAttribute('data-zh') : opt.getAttribute('data-en');
+    if(label) opt.textContent = label;
+  });
+}
+
 function fcSetMode(mode){
   fcMode = mode;
   document.getElementById('fc-btn-qa').classList.toggle('active', mode==='qa');
@@ -2590,7 +2623,7 @@ function fcSetMode(mode){
   else fcBrowseInit();
 }
 
-function fcInit(){ fcSetMode('qa'); }
+function fcInit(){ fcUpdateSelects(); fcSetMode('qa'); }
 
 /* ── Q&A ── */
 function fcQaInit(){
@@ -2769,6 +2802,28 @@ window.addEventListener('storage', function(e){
       hideExamLockOverlay();
     }
   }
+});
+
+
+function toggleSidebar(){
+  var sb = document.getElementById('sidebar');
+  var ov = document.getElementById('overlay');
+  var open = sb.classList.toggle('mobile-open');
+  if(ov) ov.classList.toggle('show', open);
+}
+function closeSidebar(){
+  var sb = document.getElementById('sidebar');
+  var ov = document.getElementById('overlay');
+  if(sb) sb.classList.remove('mobile-open');
+  if(ov) ov.classList.remove('show');
+}
+// Close sidebar when a nav item is clicked on mobile
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.nav-item').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(window.innerWidth <= 800) closeSidebar();
+    });
+  });
 });
 
 </script>
