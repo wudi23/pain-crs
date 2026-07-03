@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0">
 <title>浮针疗法知识库 | FSN Clinical Knowledge Base</title>
 <style>
 :root {
@@ -281,10 +281,21 @@ body.quiz-locked .quiz-locked-notice{display:block;}
 /* ── Mobile topbar fix ─────────────── */
 @media(max-width:800px){
   #topbar{padding:0 8px;}
-  #topbar-logo{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;}
+  #topbar-logo{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;}
   #lang-toggle{flex-shrink:0;font-size:11px;padding:4px 8px;white-space:nowrap;}
   .spacer{display:none;}
   .home-back-btn{font-size:11px;padding:4px 8px;}
+}
+
+
+/* Prevent horizontal overflow causing mobile zoom-out */
+html, body { overflow-x: hidden; }
+@media(max-width:800px){
+  #main { overflow-x: hidden; }
+  .ic-grid { overflow-x: auto; }
+  .def-grid { overflow-x: auto; }
+  .two-col { grid-template-columns: 1fr !important; }
+  table { display: block; overflow-x: auto; max-width: 100%; }
 }
 
 </style>
@@ -312,7 +323,7 @@ body.quiz-locked .quiz-locked-notice{display:block;}
   <button class="nav-item" onclick="showPage('reperfusion')"><span class="icon">🔄</span><span class="zh-inline">再灌注活动</span><span class="en-inline" style="display:none">Reperfusion Approach</span></button>
   <button class="nav-item" onclick="showPage('assessment')"><span class="icon">📋</span><span class="zh-inline">临床评估与诊断</span><span class="en-inline" style="display:none">Assessment & Diagnosis</span></button>
   <div class="nav-section-label zh">肌肉解剖</div><div class="nav-section-label en" style="display:none">Muscle Anatomy</div>
-  <button class="nav-item" onclick="showPage('anatomy')"><span class="icon">💪</span><span class="zh-inline">全身肌肉功能解剖</span><span class="en-inline" style="display:none">Functional Muscle Anatomy</span></button>
+  <button class="nav-item" onclick="showPage('anatomy')"><span class="icon">💪</span><span class="zh-inline">常用肌肉功能解剖</span><span class="en-inline" style="display:none">Functional Muscle Anatomy</span></button>
   <div class="nav-section-label zh">临床应用</div><div class="nav-section-label en" style="display:none">Clinical Applications</div>
   <button class="nav-item" onclick="showPage('indications')"><span class="icon">🎯</span><span class="zh-inline">适应症与治疗方案</span><span class="en-inline" style="display:none">Indications & Treatment</span></button>
   <button class="nav-item" onclick="showPage('contra')"><span class="icon">⚠️</span><span class="zh-inline">禁忌证与注意事项</span><span class="en-inline" style="display:none">Contraindications</span></button>
