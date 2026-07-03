@@ -288,6 +288,14 @@ body.quiz-locked .quiz-locked-notice{display:block;}
 }
 
 
+
+/* Flashcard Q&A nav buttons */
+.fc-qa-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.fc-qa-nav-btn{padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:var(--cream);color:var(--steel);font-size:13px;cursor:pointer;font-family:inherit;}
+.fc-qa-nav-btn:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
+.fc-qa-nav-btn:disabled{opacity:.35;cursor:default;}
+.fc-qa-nav-pos{font-size:12px;color:var(--steel);}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -2037,6 +2045,11 @@ Review all modules before starting</span></p>
     </div>
     <div class="fc-prog-label" id="fc-prog-label"></div>
 
+    <div class="fc-qa-nav">
+      <button class="fc-qa-nav-btn" id="fc-prev-btn" onclick="fcQaStep(-1)">◀ <span class="zh">上一题</span><span class="en">Prev</span></button>
+      <span class="fc-qa-nav-pos" id="fc-qa-nav-pos"></span>
+      <button class="fc-qa-nav-btn" id="fc-next-btn" onclick="fcQaStep(1)"><span class="zh">跳过 ▶</span><span class="en">Skip ▶</span></button>
+    </div>
     <div class="fc-card" id="fc-qa-card">
       <div class="fc-card-front" id="fc-front">
         <div class="fc-muscle-name" id="fc-name"></div>
@@ -2689,6 +2702,38 @@ function fcQaShow(){
   document.getElementById('fc-back').style.display = 'none';
   document.getElementById('fc-front').style.display = 'flex';
   document.getElementById('fc-front').style.flexDirection = 'column';
+  // Update nav position
+  var navPos = document.getElementById('fc-qa-nav-pos');
+  var prevBtn = document.getElementById('fc-prev-btn');
+  var nextBtn = document.getElementById('fc-next-btn');
+  if(navPos){
+    var zh = isZhFC();
+    var cardTotal = fcQaDeck.length + fcQaRetry.length;
+    navPos.textContent = (fcQaIdx+1) + ' / ' + cardTotal;
+  }
+  if(prevBtn) prevBtn.disabled = (fcQaIdx <= 0);
+  if(nextBtn) nextBtn.disabled = false;
+}
+
+function fcQaStep(dir){
+  // Move forward (skip) or backward in deck, don't mark as know/retry
+  if(dir > 0){
+    // Skip forward: move to next, put current at end of retry pile
+    fcQaRetry.push(fcQaDeck[fcQaIdx]);
+    fcQaIdx++;
+  } else {
+    // Go back: only if idx > 0
+    if(fcQaIdx <= 0) return;
+    fcQaIdx--;
+  }
+  if(fcQaIdx >= fcQaDeck.length){
+    if(fcQaRetry.length > 0){
+      fcQaRound++;
+      fcQaDeck = fcQaRetry.sort(()=>Math.random()-.5);
+      fcQaRetry = []; fcQaIdx = 0;
+    }
+  }
+  fcQaShow();
 }
 
 function fcReveal(){
