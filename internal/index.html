@@ -520,6 +520,7 @@ body{overflow-y:auto;}
   .dz-grid{grid-template-columns:1fr;}
 }
 </style>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <div class="topbar-nav">
@@ -10446,66 +10447,329 @@ body{overflow-y:auto;}
 
 </div><!-- /content-area -->
 </div><div id="page-nausea" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Digestive</span><span class="zh">消化系统</span></div>
-    <div class="page-title"><span class="en">Nausea / Vomiting</span><span class="zh">呕吐</span></div>
-    <div class="page-desc"><span class="en">Stomach Qi fails to descend and rebels upward. Which force is driving the rebellion — heat, cold-damp, food, or Liver invasion.</span><span class="zh">胃气不降而上逆。是什么在推动这股上逆——热、寒湿、食积，还是肝气犯胃。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('nausea','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('nausea','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('nausea','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('nausea','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Digestive</span><span class="zh">消化系统</span></div>
+  <div class="page-title"><span class="en">Nausea / Vomiting</span><span class="zh">呕吐</span></div>
+  <div class="page-desc"><span class="en">Root: Stomach Qi should descend; when it is disturbed it rebels upward. Every pattern of vomiting is one question — what is driving the Stomach Qi up: heat, cold, food, Liver invasion, or its own weakness. PC6 for nausea is the single best-evidenced point in all of acupuncture.</span><span class="zh">根本：胃气以降为顺，被扰则上逆。呕吐诸证只问一事——什么在推动胃气上逆：热、寒、食、肝犯，还是胃自身之虚。内关止呕，是整个针灸循证证据最强的单穴。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('nausea','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('nausea','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('nausea','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('nausea','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
   </div>
-  <div id="nausea-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="nausea-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>First screen red flags, then read the vomitus.</strong> Refer urgently for: vomiting with severe headache/neck stiffness, projectile vomiting, blood (coffee-ground or fresh), severe abdominal pain with rigidity, signs of obstruction, or dehydration. Once safe, the <em>nature of what comes up and when</em> tells you the pattern.</span>
+    <span class="zh"><strong>先筛红旗，再辨呕吐物。</strong>以下急转诊：呕吐伴剧烈头痛／颈强、喷射性呕吐、呕血（咖啡渣或鲜血）、剧烈腹痛拒按、梗阻征象、脱水。安全后，<em>吐什么、何时吐</em>即可定证。</span>
   </div>
-  <div id="nausea-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Why Vomiting is a Descent Failure of the Stomach</span><span class="zh">核心框架 · 呕吐为何是胃失和降</span></div>
+    <div class="cb-what"><span class="en">The Stomach governs "receiving and rotting" food and sends it downward (胃主降浊). Vomiting is the visible sign that this downward movement (降) has reversed into rebellion (逆). So the question is never "what stops the vomiting" but "what is forcing the Stomach Qi up." Excess drivers push it up (heat, cold-pathogen, retained food, Liver Qi invading); deficiency lets it float up (Stomach too weak to hold the descent). Identify the driver, redirect the Qi downward — the vomiting resolves.</span><span class="zh">胃主受纳腐熟、降浊下行。呕吐是"降"逆转为"逆"的外显。故所问从来不是"如何止呕"，而是"什么在迫胃气上逆"。实者迫之上（热、寒邪、食积、肝气犯胃）；虚者浮之上（胃虚不能主降）。识其driver、降其气，呕自止。</span></div>
   </div>
-  <div id="nausea-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="nausea-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-weiwan" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Digestive</span><span class="zh">消化系统</span></div>
-    <div class="page-title"><span class="en">Epigastric Pain</span><span class="zh">胃脘痛</span></div>
-    <div class="page-desc"><span class="en">Full pattern differentiation and treatment. For red-flag screening and referral of visceral pain, see the Pain module.</span><span class="zh">完整辨证论治。内脏痛的红旗筛查与转诊，见疼痛模块。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('weiwan','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('weiwan','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('weiwan','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('weiwan','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Vomitus quality</span><span class="zh">问一 · 吐物性状</span></span><span class="point-val"><span class="en">Sour-bitter hot fluid, thirst for cold → Stomach heat. Clear watery, no thirst → Cold. Sour-rotten undigested food → food stagnation. Scanty, dry-retching with little output → Stomach Yin/Qi weak.</span><span class="zh">吐物酸苦灼热、喜冷饮→胃热。清水稀涎、不渴→寒。酸腐未化食物→食积。量少、干呕物少→胃阴／气虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Timing & triggers</span><span class="zh">问二 · 时间诱因</span></span><span class="point-val"><span class="en">Right after eating + emotional upset → Liver invading Stomach. After overeating → food stagnation. After cold food/cold exposure → Cold. Intermittent, worse when tired, better with warm food → Spleen-Stomach weakness.</span><span class="zh">食后即吐+情志不畅→肝气犯胃。暴食后→食积。食冷／受凉后→寒。时作、劳则加重、得温食则减→脾胃虚弱。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Accompanying</span><span class="zh">问三 · 兼症</span></span><span class="point-val"><span class="en">Rib distension, belching, sighing → Liver. Burning epigastrium, foul breath, constipation → heat. Cold epigastric pain eased by warmth → cold. Foul belch, bloating relieved after vomiting → food. Fatigue, pale, poor appetite → deficiency.</span><span class="zh">胁胀、嗳气、太息→肝。胃脘灼热、口臭、便秘→热。胃脘冷痛得温减→寒。嗳腐、吐后胀减→食。乏力、面白、纳差→虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Special populations</span><span class="zh">问四 · 特殊人群</span></span><span class="point-val"><span class="en">Pregnancy (morning sickness / 妊娠恶阻), post-operative, and chemotherapy-induced nausea are the highest-value acupuncture indications — PC6 has strong evidence in all three. Treat gently in pregnancy; coordinate with oncology for chemo cases.</span><span class="zh">妊娠恶阻、术后、化疗呕吐是针灸最高价值适应症——内关在此三者循证证据强。孕期宜轻治；化疗者与肿瘤科协同。</span></span></div>
   </div>
-  <div id="weiwan-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="nausea-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Five patterns, one axis: all are the Stomach Qi failing to descend and rebelling up. Four are excess (a driver pushes it up); one is deficiency (the Stomach can't hold the descent).</span>
+    <span class="zh">五证一轴：皆胃气不降而上逆。四实（driver 迫之上），一虚（胃虚不主降）。</span>
   </div>
-  <div id="weiwan-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+
+  <div class="pattern-card pc-up">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Stomach Heat Rebelling Upward</span><span class="zh">① 胃热上逆</span></div>
+    <div class="pc-qi"><span class="en">Excessive Ascent — Stomach fire drives Qi and fluids upward</span><span class="zh">升太过——胃火迫气津上冲</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> vomiting sour-bitter hot fluid soon after eating, thirst for cold drinks, burning epigastrium, foul breath, possibly constipation; red tongue with yellow coat, rapid pulse. <b>Mechanism:</b> heat is Yang and rises; Stomach fire forces the contents and Qi upward before they can descend. <b>Treatment:</b> 清胃降逆止呕 — clear Stomach heat, descend the rebellion. Links to the 胃火·胃热 pattern card.</span><span class="zh"><b>主症：</b>食后不久吐酸苦灼热之物、喜冷饮、胃脘灼热、口臭、或便秘；舌红苔黄、脉数。<b>病机：</b>热为阳而炎上；胃火迫内容与气上逆，不得下行。<b>治法：</b>清胃降逆止呕。联动「胃火·胃热」证型卡。</span></div>
   </div>
-  <div id="weiwan-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="weiwan-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-benglou" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
-    <div class="page-title"><span class="en">Uterine Bleeding</span><span class="zh">崩漏</span></div>
-    <div class="page-desc"><span class="en">The Chong-Ren fails to hold the blood — from Qi not containing, blood-heat forcing, or stasis obstructing.</span><span class="zh">冲任不固，血失统摄——或气不摄血，或血热妄行，或瘀阻冲任。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('benglou','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('benglou','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('benglou','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('benglou','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Cold Pathogen Attacking the Stomach</span><span class="zh">② 寒邪犯胃</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — Cold congeals the Stomach, Qi cannot descend and rebels up</span><span class="zh">出入失常——寒凝胃腑，气不降而上逆</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> sudden vomiting of clear watery fluid, cold pain in the epigastrium relieved by warmth, no thirst, prefers warm drinks; white moist coat, tight/slow pulse. Often after cold food or cold exposure. <b>Mechanism:</b> Cold is contracting and congealing — it freezes the Stomach's descending function, and Qi rebels upward carrying clear fluid. <b>Treatment:</b> 温胃散寒，降逆止呕 — warm the Stomach, scatter Cold, descend rebellion. Links to the 寒湿 pattern card.</span><span class="zh"><b>主症：</b>突发呕吐清水稀涎、胃脘冷痛得温则减、不渴、喜热饮；苔白润、脉紧或迟。多因食冷或受凉。<b>病机：</b>寒性收引凝滞——冻遏胃之降，气逆挟清水上冲。<b>治法：</b>温胃散寒、降逆止呕。联动「寒湿」证型卡。</span></div>
   </div>
-  <div id="benglou-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Food Retention</span><span class="zh">③ 食滞内停</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — retained food blocks the Stomach, then rebels up</span><span class="zh">出入失常——食滞壅阻胃腑，积而上逆</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> vomiting of sour-rotten undigested food, foul belching, epigastric/abdominal distension that eases after vomiting, aversion to food, thick greasy coat. Follows overeating. <b>Mechanism:</b> excess food overwhelms Stomach transport; it stagnates, ferments, and blocks the Qi dynamic — the Stomach expels upward what it cannot send down. <b>Treatment:</b> 消食导滞，和胃降逆 — disperse food, resolve stagnation, harmonise and descend. Links to the 食积 pattern card.</span><span class="zh"><b>主症：</b>呕吐酸腐未化食物、嗳腐、脘腹胀满吐后减、厌食、苔厚腻。多因暴食。<b>病机：</b>食积超胃之运，滞而腐、阻气机——胃不能降则上排其所积。<b>治法：</b>消食导滞、和胃降逆。联动「食积」证型卡。</span></div>
   </div>
-  <div id="benglou-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">④ Liver Qi Invading the Stomach</span><span class="zh">④ 肝气犯胃</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — constrained Liver Qi overacts on the Stomach, driving Qi up</span><span class="zh">出入失常——肝郁横逆犯胃，迫气上逆</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> vomiting or retching triggered/worsened by emotional upset, acid regurgitation, belching, rib and epigastric distension, sighing; wiry pulse. <b>Mechanism:</b> the Liver governs free coursing; when emotion constrains it, Liver Qi rebels sideways (横逆) into the Stomach, disrupting its descent — a wood-overacting-on-earth vomiting. <b>Treatment:</b> 疏肝和胃，降逆止呕 — course the Liver, harmonise the Stomach, descend rebellion. Links to the 肝气郁结 pattern card (its widest network).</span><span class="zh"><b>主症：</b>呕吐或干呕遇情志诱发／加重、泛酸、嗳气、胸胁脘腹胀、太息；脉弦。<b>病机：</b>肝主疏泄，情志所郁则肝气横逆犯胃，扰其和降——木乘土之呕。<b>治法：</b>疏肝和胃、降逆止呕。联动「肝气郁结」证型卡（全库最广之网）。</span></div>
   </div>
-  <div id="benglou-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="benglou-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-ruapi" class="disease-page">
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">⑤ Spleen-Stomach Weakness</span><span class="zh">⑤ 脾胃虚弱</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent/Descent — a weak Stomach cannot maintain its downward function</span><span class="zh">升降不及——胃虚不能主降</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> intermittent vomiting of thin clear fluid, worse when tired or after eating a little too much, poor appetite, fatigue, pale face, loose stool; pale tongue, weak pulse. Chronic, not acute. <b>Mechanism:</b> when Spleen-Stomach Qi is weak, the Stomach lacks the strength to hold its descending function, so Qi floats up intermittently — a deficiency vomiting, distinct from the forceful excess types. <b>Treatment:</b> 健脾益胃，和中降逆 — strengthen Spleen-Stomach, harmonise the middle, descend gently. Reinforcing, may add moxa. Links to the 脾气虚 pattern card.</span><span class="zh"><b>主症：</b>时作呕吐清稀涎水、劳累或稍多食则甚、纳差、乏力、面白、便溏；舌淡、脉弱。属慢性非急性。<b>病机：</b>脾胃气虚则胃无力主降，气时时上浮——虚性呕吐，别于实证之势急。<b>治法：</b>健脾益胃、和中降逆。补法可加灸。联动「脾气虚」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="nausea-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">PC6 + ST36 + CV12 form the antiemetic core for every pattern — they harmonise the Stomach and descend rebellious Qi. Pattern points address the specific driver.</span>
+    <span class="zh">内关+足三里+中脘为各证止呕之核心——和胃降逆。配穴治具体 driver。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points (all patterns)</span><span class="zh">核心穴（各证通用）</span></span><span class="point-val"><span class="en">PC6 内关 — the single most evidence-based antiemetic point (regulates the middle Jiao, descends Qi, calms the Stomach); ST36 足三里 — He-sea of Stomach, harmonises and descends; CV12 中脘 — Mu of Stomach, the direct Stomach-harmonising point.</span><span class="zh">内关——循证最强之止呕穴（理中焦、降气、和胃）；足三里——胃之合，和降；中脘——胃募，直和胃气。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Stomach heat</span><span class="zh">① 胃热上逆</span></span><span class="point-val"><span class="en">+ ST44 内庭, LI4 合谷 (or ST45 厉兑) — clear Stomach fire; reducing method, no moxa.</span><span class="zh">+ 内庭、合谷（或厉兑）——清胃火；泻法不灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Cold pathogen</span><span class="zh">② 寒邪犯胃</span></span><span class="point-val"><span class="en">+ moxa CV12 中脘, ST36, CV13 上脘 — warm the Stomach and scatter Cold; add gentle moxa.</span><span class="zh">+ 灸中脘、足三里、上脘——温胃散寒；加温和灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Food retention</span><span class="zh">③ 食滞内停</span></span><span class="point-val"><span class="en">+ ST25 天枢, ST21 梁门, ST44 内庭, SP4 公孙 — disperse food and free the middle; reducing.</span><span class="zh">+ 天枢、梁门、内庭、公孙——消食导滞、通中；泻法。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Liver invading</span><span class="zh">④ 肝气犯胃</span></span><span class="point-val"><span class="en">+ LV3 太冲, GB34 阳陵泉, PC6 (emphasised) — course the Liver and descend rebellion; even method.</span><span class="zh">+ 太冲、阳陵泉、内关（重用）——疏肝降逆；平补平泻。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Spleen-Stomach weak</span><span class="zh">⑤ 脾胃虚弱</span></span><span class="point-val"><span class="en">+ BL20 脾俞, BL21 胃俞, SP4 公孙, CV6 气海 (+moxa) — tonify and warm the Spleen-Stomach; reinforcing.</span><span class="zh">+ 脾俞、胃俞、公孙、气海（加灸）——补温脾胃；补法。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="nausea-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Ban Xia and Sheng Jiang are the core Stomach-descending, anti-emetic pair across most patterns; the accompanying herbs shift by driver.</span>
+    <span class="zh">半夏、生姜为大多证降胃止呕之核心对；随 driver 变佐使。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Stomach heat 胃热上逆</span><span class="zh">① 胃热上逆</span></span><span class="point-val"><span class="en"><b>竹茹汤 / 黄连温胆汤</b> — Zhu Ru, Huang Lian clear Stomach heat; Ban Xia descends. For heat with fluid damage add 麦冬/芦根.</span><span class="zh"><b>竹茹汤／黄连温胆汤</b>——竹茹、黄连清胃热；半夏降逆。热伤津加麦冬、芦根。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Cold 寒邪犯胃</span><span class="zh">② 寒邪犯胃</span></span><span class="point-val"><span class="en"><b>小半夏汤 + 良附丸</b> — Ban Xia + Sheng Jiang descend and warm; Gao Liang Jiang + Xiang Fu warm the Stomach and scatter Cold. 藿香正气 if with damp/exterior cold.</span><span class="zh"><b>小半夏汤+良附丸</b>——半夏、生姜降温；高良姜、香附温胃散寒。兼湿／表寒用藿香正气。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Food 食滞内停</span><span class="zh">③ 食滞内停</span></span><span class="point-val"><span class="en"><b>保和丸</b> — Shan Zha, Shen Qu, Lai Fu Zi disperse food; Ban Xia + Chen Pi descend and harmonise. Strong stagnation → 枳实导滞丸.</span><span class="zh"><b>保和丸</b>——山楂、神曲、莱菔子消食；半夏、陈皮和降。积重→枳实导滞丸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Liver invading 肝气犯胃</span><span class="zh">④ 肝气犯胃</span></span><span class="point-val"><span class="en"><b>半夏厚朴汤 / 四七汤 + 左金丸</b> — course Qi and descend; Zuo Jin Wan (Huang Lian + Wu Zhu Yu) for the sour regurgitation of Liver-fire invading Stomach.</span><span class="zh"><b>半夏厚朴汤／四七汤+左金丸</b>——理气降逆；左金丸（黄连+吴茱萸）治肝火犯胃之泛酸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Spleen-Stomach weak 脾胃虚弱</span><span class="zh">⑤ 脾胃虚弱</span></span><span class="point-val"><span class="en"><b>香砂六君子汤</b> — Liu Jun Zi (Ren Shen, Bai Zhu, Fu Ling, Gan Cao, Ban Xia, Chen Pi) + Mu Xiang, Sha Ren — tonify Spleen-Stomach and harmonise the descent. The model formula for deficiency vomiting.</span><span class="zh"><b>香砂六君子汤</b>——六君子（参、术、苓、草、半夏、陈皮）+木香、砂仁——补脾胃、和降。虚性呕吐之代表方。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">For the three highest-value groups — pregnancy, post-op, chemotherapy — PC6 alone (or PC6 + ST36) is often enough and is what the evidence supports; you don't need the full pattern battery to reduce the nausea. Still differentiate the pattern for lasting results, but lead with PC6 for immediate relief. In pregnancy, keep stimulation gentle and avoid strongly reducing/forbidden points.</span>
+    <span class="zh">三大高价值人群——妊娠、术后、化疗——单用内关（或内关+足三里）常已足够，且正是循证所支持；不必上全套配穴即可缓解恶心。但仍须辨证以求长效，急则以内关取速效。孕期刺激宜轻，避强泻及妊娠禁忌穴。</span>
+  </div>
+</div>
+</div>
+<div id="page-weiwan" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Digestive</span><span class="zh">消化系统</span></div>
+  <div class="page-title"><span class="en">Epigastric Pain</span><span class="zh">胃脘痛</span></div>
+  <div class="page-desc"><span class="en">Root: the Stomach loses its harmonious descent and its collaterals lose free flow — "no free flow, pain (不通则痛)" or "no nourishment, pain (不荣则痛)." Six patterns span cold, heat, Qi, food, stasis, and deficiency. This module carries the full internal-medicine differentiation; for red-flag screening and referral of acute visceral pain, see the Pain module.</span><span class="zh">根本：胃失和降、胃络失于通畅——"不通则痛"或"不荣则痛"。六证涵盖寒、热、气、食、瘀、虚。本模块承担完整内科辨证；急性内脏痛的红旗筛查与转诊，见疼痛模块。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('weiwan','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('weiwan','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('weiwan','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('weiwan','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="weiwan-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Screen red flags first.</strong> Refer urgently for: severe unrelenting pain, pain radiating to back/shoulder with sweating (cardiac/pancreatic), rigid abdomen, melena or hematemesis, weight loss with anorexia in older patients, or pain that is clearly not gastric. Epigastric pain can mimic cardiac and biliary emergencies.</span>
+    <span class="zh"><strong>先筛红旗。</strong>以下急转诊：剧痛不缓、痛引背／肩伴冷汗（心源／胰源）、腹硬拒按、黑便或呕血、老年消瘦纳差、明显非胃源之痛。胃脘痛可与心源、胆源急症相似。</span>
+  </div>
+
+  <a class="boundary-link" onclick="showPage('visceral')"><span class="en">↔ Cross-module: acute visceral-pain red-flag screening lives in the Pain module (visceral pain). This page handles the full pattern-based treatment.</span><span class="zh">↔ 跨模块：急性内脏痛红旗筛查在疼痛模块（内脏痛）。本页承担完整辨证论治。</span></a>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Two Roads to Stomach Pain</span><span class="zh">核心框架 · 胃痛的两条路</span></div>
+    <div class="cb-what"><span class="en">All epigastric pain arises one of two ways. <b>Excess — "no free flow, pain" (不通则痛):</b> something obstructs the Stomach collaterals — cold congealing, heat scorching, Qi stagnating, food retained, or Blood static. The pain is usually stronger, refuses pressure, and is fixed or distending. <b>Deficiency — "no nourishment, pain" (不荣则痛):</b> the Stomach is under-warmed or under-nourished (Spleen-Stomach vacuity-cold, or Stomach Yin depleted); the pain is dull, likes pressure and warmth, and eases with food. Sorting excess from deficiency (and cold from heat) is the whole differentiation.</span><span class="zh">胃脘痛皆出两途。<b>实——"不通则痛"：</b>有物阻胃络——寒凝、热灼、气滞、食停、血瘀。痛多较剧、拒按、固定或胀。<b>虚——"不荣则痛"：</b>胃失温养（脾胃虚寒，或胃阴亏虚）；痛多隐隐、喜按喜温、得食则减。辨虚实（兼辨寒热）即全部辨证之要。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Pain quality</span><span class="zh">问一 · 痛的性质</span></span><span class="point-val"><span class="en">Distending pain moving with mood → Qi (Liver). Cold cramping pain → cold. Burning pain → heat. Fixed stabbing pain, worse at night → stasis. Dull pain, likes pressure → deficiency.</span><span class="zh">胀痛随情绪→气（肝）。冷绞痛→寒。灼痛→热。固定刺痛、夜甚→瘀。隐痛喜按→虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Pressure & warmth</span><span class="zh">问二 · 按压与温度</span></span><span class="point-val"><span class="en">Refuses pressure → excess. Likes pressure → deficiency. Eased by warmth → cold/vacuity-cold. Eased by cold, worse with warmth → heat.</span><span class="zh">拒按→实。喜按→虚。得温则减→寒／虚寒。得凉则减、遇热重→热。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Relation to food</span><span class="zh">问三 · 与进食关系</span></span><span class="point-val"><span class="en">Worse after eating, distension, foul belch → food/Qi excess. Better after eating (pain when hungry) → deficiency. Burning + hunger but no appetite, dry mouth → Stomach Yin deficiency.</span><span class="zh">食后加重、胀、嗳腐→食／气实。食后减（饥则痛）→虚。灼热+饥不欲食、口干→胃阴虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">White coat, tight/slow pulse → cold. Yellow coat, rapid → heat. Wiry → Qi. Purple/dark tongue, choppy pulse → stasis. Red-peeled tongue, thready-rapid → Stomach Yin xu. Pale tongue, weak pulse → vacuity-cold.</span><span class="zh">苔白、脉紧／迟→寒。苔黄、脉数→热。脉弦→气。舌紫黯、脉涩→瘀。舌红剥、脉细数→胃阴虚。舌淡、脉弱→虚寒。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="weiwan-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Six patterns. The first four are excess (不通则痛: cold, heat, Qi, food/stasis); the last two are deficiency (不荣则痛: vacuity-cold, Stomach Yin). Chronic pain often mixes — commonly Qi-stagnation evolving into stasis, or long heat draining Stomach Yin.</span>
+    <span class="zh">六证。前四属实（不通则痛：寒、热、气、食／瘀）；后二属虚（不荣则痛：虚寒、胃阴）。久痛多兼夹——常见气滞入瘀、久热耗胃阴。</span>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Cold Attacking the Stomach</span><span class="zh">① 寒邪客胃</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — Cold congeals the Stomach collaterals (不通则痛)</span><span class="zh">出入失常——寒凝胃络（不通则痛）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> sudden cold cramping epigastric pain, marked relief from warmth and worsening from cold, no thirst, prefers hot drinks; white coat, tight pulse. Often after cold food/exposure. <b>Treatment:</b> 温胃散寒，理气止痛 — warm the Stomach, scatter Cold, move Qi. Links to the 寒湿 pattern card.</span><span class="zh"><b>主症：</b>胃脘冷痛暴作、得温痛减遇寒加重、不渴、喜热饮；苔白、脉紧。多因食冷受凉。<b>治法：</b>温胃散寒、理气止痛。联动「寒湿」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-up">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Stomach Heat / Fire Blazing</span><span class="zh">② 胃热炽盛</span></div>
+    <div class="pc-qi"><span class="en">Excessive Ascent — Stomach fire scorches the collaterals (不通则痛)</span><span class="zh">升太过——胃火灼络（不通则痛）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> burning epigastric pain, thirst for cold, foul breath, acid regurgitation, hunger, possibly constipation; red tongue with yellow coat, rapid pulse. Often from spicy/greasy diet, alcohol, or Liver-fire transferring to the Stomach. <b>Treatment:</b> 清胃泻火，和中止痛 — clear Stomach, drain fire, harmonise. Links to the 胃火·胃热 pattern card.</span><span class="zh"><b>主症：</b>胃脘灼痛、喜冷、口臭、泛酸、消谷善饥、或便秘；舌红苔黄、脉数。多因辛辣肥甘、饮酒、或肝火犯胃。<b>治法：</b>清胃泻火、和中止痛。联动「胃火·胃热」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Liver Qi Invading the Stomach</span><span class="zh">③ 肝气犯胃</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — constrained Liver Qi overacts on the Stomach (气滞则不通)</span><span class="zh">出入失常——肝郁横逆犯胃（气滞则不通）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> distending epigastric pain radiating to the ribs, worse with emotional upset, belching, sighing, acid; wiry pulse. The most common chronic gastritis pattern. <b>Mechanism:</b> the Liver overacts on the Stomach; Qi stagnation blocks the collaterals — distending, moving pain that tracks the mood. <b>Treatment:</b> 疏肝理气，和胃止痛 — course the Liver, regulate Qi, harmonise the Stomach. Links to the 肝气郁结 pattern card (its widest network).</span><span class="zh"><b>主症：</b>胃脘胀痛连胁、遇情志加重、嗳气、太息、泛酸；脉弦。慢性胃炎最常见证。<b>病机：</b>肝木乘胃土；气滞阻络——胀痛走窜、随情绪变。<b>治法：</b>疏肝理气、和胃止痛。联动「肝气郁结」证型卡（全库最广之网）。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">④ Blood Stasis in the Stomach</span><span class="zh">④ 瘀血停胃</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — prolonged Qi stagnation enters the collaterals as stasis (瘀阻则不通)</span><span class="zh">出入失常——气滞日久入络成瘀（瘀阻则不通）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> fixed stabbing epigastric pain, worse at night and with pressure, sometimes a palpable fixed area, possibly black stool or coffee-ground vomitus (bleeding); purple/dark tongue, possibly with stasis spots, choppy pulse. The endpoint of chronic unresolved Qi stagnation. <b>Treatment:</b> 活血化瘀，理气止痛 — invigorate Blood, resolve stasis, move Qi. Links to the 气滞血瘀 pattern card. Note: dark stool/hematemesis needs medical evaluation.</span><span class="zh"><b>主症：</b>胃脘刺痛固定、夜甚拒按、或有定处压痛、或黑便／咖啡样呕吐物（出血）；舌紫黯或有瘀斑、脉涩。为久气滞不解之归宿。<b>治法：</b>活血化瘀、理气止痛。联动「气滞血瘀」证型卡。注：黑便／呕血须医学评估。</span></div>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">⑤ Spleen-Stomach Vacuity-Cold</span><span class="zh">⑤ 脾胃虚寒</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent — Spleen-Stomach Yang too weak to warm and nourish (不荣则痛)</span><span class="zh">升不及——脾胃阳虚，温养不足（不荣则痛）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> dull persistent epigastric pain that likes warmth and pressure and eases with food, worse when hungry/tired/cold, vomiting of clear fluid, cold limbs, fatigue, loose stool; pale tongue, weak pulse. The classic chronic peptic-type pain. <b>Mechanism:</b> Yang vacuity fails to warm and nourish the Stomach; "no nourishment, pain" — a deficiency ache, not an obstruction. <b>Treatment:</b> 温中健脾，和胃止痛 — warm the middle, strengthen the Spleen, harmonise the Stomach. Moxa is central. Links to the 脾气虚 pattern card.</span><span class="zh"><b>主症：</b>胃脘隐痛绵绵、喜温喜按、得食则减、饥／劳／寒则重、泛吐清水、肢冷、乏力、便溏；舌淡、脉弱。慢性消化性溃疡样痛之典型。<b>病机：</b>阳虚不能温养胃腑；"不荣则痛"——虚性隐痛，非阻滞。<b>治法：</b>温中健脾、和胃止痛。灸为要。联动「脾气虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">⑥ Stomach Yin Deficiency</span><span class="zh">⑥ 胃阴亏虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent — Stomach Yin depleted, empty heat, collaterals under-moistened (不荣则痛)</span><span class="zh">降不及——胃阴亏虚，虚热，胃络失濡（不荣则痛）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> dull burning epigastric pain, hunger without desire to eat, dry mouth and throat, dry stool, low-grade discomfort worse in the afternoon; red tongue with little/peeled coat, thready-rapid pulse. Often the end-stage of long-standing Stomach heat that has consumed the Yin. <b>Mechanism:</b> Stomach Yin (the moistening fluid) is depleted; the collaterals lose moisture and relative empty-heat arises — a dry, deficiency pain. <b>Treatment:</b> 养阴益胃，和中止痛 — nourish Yin, benefit the Stomach, harmonise. Links to the 阴虚火旺 pattern card.</span><span class="zh"><b>主症：</b>胃脘隐隐灼痛、饥不欲食、口干咽燥、大便干、午后为著；舌红少苔或剥、脉细数。多为久胃热耗阴之终末。<b>病机：</b>胃阴（濡润之津）亏，胃络失濡而相对生虚热——干性虚痛。<b>治法：</b>养阴益胃、和中止痛。联动「阴虚火旺」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="weiwan-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">CV12 + ST36 + PC6 harmonise the Stomach and stop pain in every pattern; pattern points address cold/heat/Qi/stasis/deficiency. Needle direction follows the mechanism.</span>
+    <span class="zh">中脘+足三里+内关为各证和胃止痛之核心；配穴治寒／热／气／瘀／虚。针向随病机。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points (all patterns)</span><span class="zh">核心穴（各证通用）</span></span><span class="point-val"><span class="en">CV12 中脘 (Mu of Stomach, influential point of Fu), ST36 足三里 (He-sea, harmonises Stomach), PC6 内关 (regulates middle, descends rebellion). These three are the backbone of every gastric pattern.</span><span class="zh">中脘（胃募、腑会）、足三里（合穴、和胃）、内关（理中焦、降逆）。三穴为各胃证之骨干。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Cold 寒邪客胃</span><span class="zh">① 寒邪客胃</span></span><span class="point-val"><span class="en">+ moxa CV12/CV13 上脘, ST36; add GB34 — warm and scatter cold, move Qi.</span><span class="zh">+ 灸中脘／上脘、足三里；加阳陵泉——温散寒、理气。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Heat 胃热炽盛</span><span class="zh">② 胃热炽盛</span></span><span class="point-val"><span class="en">+ ST44 内庭, LI11 曲池, LV2 行间 (if from Liver fire) — clear Stomach fire; reducing, no moxa.</span><span class="zh">+ 内庭、曲池、行间（肝火者）——清胃火；泻法不灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Liver Qi 肝气犯胃</span><span class="zh">③ 肝气犯胃</span></span><span class="point-val"><span class="en">+ LV3 太冲, GB34 阳陵泉, PC6 (emphasised), Qimen LV14 — course Liver, harmonise Stomach.</span><span class="zh">+ 太冲、阳陵泉、内关（重用）、期门——疏肝和胃。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Stasis 瘀血停胃</span><span class="zh">④ 瘀血停胃</span></span><span class="point-val"><span class="en">+ BL17 膈俞, SP10 血海, LV3 — invigorate Blood, resolve stasis (rule out active bleeding first).</span><span class="zh">+ 膈俞、血海、太冲——活血化瘀（先排除活动性出血）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Vacuity-cold 脾胃虚寒</span><span class="zh">⑤ 脾胃虚寒</span></span><span class="point-val"><span class="en">+ moxa BL20 脾俞, BL21 胃俞, CV6 气海, ST36 — warm and tonify Spleen-Stomach; reinforcing with generous moxa.</span><span class="zh">+ 灸脾俞、胃俞、气海、足三里——温补脾胃；补法重灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑥ Stomach Yin 胃阴亏虚</span><span class="zh">⑥ 胃阴亏虚</span></span><span class="point-val"><span class="en">+ SP6 三阴交, KI3 太溪, BL21 胃俞 — nourish Yin and benefit the Stomach; even/reinforcing, no moxa.</span><span class="zh">+ 三阴交、太溪、胃俞——养阴益胃；平补不灸。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="weiwan-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern. The pain resolves when the underlying obstruction is cleared or the deficiency is filled — treat the mechanism, not just the pain.</span>
+    <span class="zh">按证选方。祛其所阻或补其所虚，痛自止——治病机，非止痛。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Cold 寒邪客胃</span><span class="zh">① 寒邪客胃</span></span><span class="point-val"><span class="en"><b>良附丸 / 香苏散</b> — Gao Liang Jiang + Xiang Fu warm the Stomach and move Qi. Severe cold → 附子理中丸.</span><span class="zh"><b>良附丸／香苏散</b>——高良姜+香附温胃行气。寒重→附子理中丸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Heat 胃热炽盛</span><span class="zh">② 胃热炽盛</span></span><span class="point-val"><span class="en"><b>清中汤 / 化肝煎</b> — Huang Lian, Zhi Zi clear Stomach fire; add 左金丸 for acid with Liver fire.</span><span class="zh"><b>清中汤／化肝煎</b>——黄连、栀子清胃火；泛酸兼肝火加左金丸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Liver Qi 肝气犯胃</span><span class="zh">③ 肝气犯胃</span></span><span class="point-val"><span class="en"><b>柴胡疏肝散</b> — course the Liver and regulate Qi; the primary formula for Qi-stagnation gastric pain. Add 金铃子散 (Chuan Lian Zi + Yan Hu Suo) for pain.</span><span class="zh"><b>柴胡疏肝散</b>——疏肝理气；气滞胃痛之主方。痛甚加金铃子散（川楝子+延胡索）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Stasis 瘀血停胃</span><span class="zh">④ 瘀血停胃</span></span><span class="point-val"><span class="en"><b>失笑散 + 丹参饮</b> — Pu Huang + Wu Ling Zhi + Dan Shen invigorate Blood and stop pain. Add Qi-movers; if bleeding, add 白及/三七.</span><span class="zh"><b>失笑散+丹参饮</b>——蒲黄+五灵脂+丹参活血止痛。佐理气；出血加白及、三七。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Vacuity-cold 脾胃虚寒</span><span class="zh">⑤ 脾胃虚寒</span></span><span class="point-val"><span class="en"><b>黄芪建中汤</b> — Huang Qi + Gui Zhi + Yi Tang warm and tonify the middle; the model formula for deficiency-cold gastric pain that likes warmth and pressure.</span><span class="zh"><b>黄芪建中汤</b>——黄芪+桂枝+饴糖温补中焦；虚寒胃痛喜温喜按之代表方。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑥ Stomach Yin 胃阴亏虚</span><span class="zh">⑥ 胃阴亏虚</span></span><span class="point-val"><span class="en"><b>益胃汤 / 一贯煎</b> — Sha Shen, Mai Dong, Sheng Di nourish Stomach Yin; Yi Guan Jian if Liver-Stomach Yin both deficient.</span><span class="zh"><b>益胃汤／一贯煎</b>——沙参、麦冬、生地养胃阴；肝胃阴俱虚用一贯煎。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">Two evolutions dominate chronic gastric pain. (1) Qi-stagnation → stasis: what began as distending, mood-linked pain becomes fixed and stabbing over months/years — when you see this shift, add blood-movers before the stasis entrenches. (2) Heat → Yin deficiency: chronic Stomach heat slowly consumes Stomach Yin, so an initially burning, thirsty picture becomes a dry, hungry-no-appetite, peeled-tongue picture — stop draining and start nourishing. Reading these transitions is the mechanism-based clinician's edge over a fixed disease-formula.</span>
+    <span class="zh">慢性胃痛有两大演变。（1）气滞→血瘀：初为胀痛随情绪，历月历年转为固定刺痛——见此转折即当加活血，勿待瘀深。（2）热→阴虚：久胃热渐耗胃阴，初为灼痛口渴，转为口干、饥不欲食、舌剥——当止清而转养。识此转归，正是病机辨证胜于死守病方之处。</span>
+  </div>
+</div>
+</div>
+<div id="page-benglou" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
+  <div class="page-title"><span class="en">Uterine Bleeding (Beng Lou)</span><span class="zh">崩漏</span></div>
+  <div class="page-desc"><span class="en">Root: the Chong and Ren vessels fail to hold and regulate the blood, so menstrual bleeding becomes sudden and heavy (崩, flooding) or prolonged and dribbling (漏, spotting). The two are one disorder at different intensities and often convert into each other. Treatment follows the classic three-step: 塞流 (stop the flow) · 澄源 (clear the source) · 复旧 (restore the base).</span><span class="zh">根本：冲任不能固摄调节经血，致经血非时暴下（崩）或淋漓不尽（漏）。二者一病之轻重，且常相互转化。治遵经典三法：塞流·澄源·复旧。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('benglou','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('benglou','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('benglou','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('benglou','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="benglou-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Beng Lou is a symptom, not a diagnosis — rule out organic and dangerous causes first.</strong> Heavy or prolonged uterine bleeding requires medical evaluation: pregnancy-related bleeding (miscarriage, ectopic), fibroids/polyps, endometrial pathology (especially peri/post-menopausal or with risk factors), coagulation disorders, and malignancy must be excluded. Acupuncture/herbs support alongside — not instead of — proper gynecological assessment. Watch for signs of significant blood loss (dizziness, palpitation, pallor, hypotension) → urgent referral.</span>
+    <span class="zh"><strong>崩漏是症状而非诊断——先排除器质性及危险病因。</strong>量大或持续之子宫出血须医学评估：妊娠相关出血（流产、宫外孕）、肌瘤／息肉、子宫内膜病变（尤其围／绝经期或有高危因素者）、凝血障碍、恶性肿瘤须排除。针药为辅——不替代妇科评估。警惕明显失血征（头晕、心悸、面白、低血压）→急转诊。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Why the Chong-Ren Cannot Hold the Blood</span><span class="zh">核心框架 · 冲任为何不能固摄经血</span></div>
+    <div class="cb-what"><span class="en">The Chong is the "sea of blood" and the Ren "governs the uterus"; together they store and release menstrual blood in rhythm. Bleeding out of rhythm means this holding-and-regulating function has failed, in one of three ways: <b>Qi too weak to contain the blood</b> (气不摄血 — the vessel cannot hold; deficiency), <b>heat forcing the blood to move recklessly</b> (血热妄行 — the blood is driven out; excess or deficient-heat), or <b>stasis obstructing so new blood cannot return to the channel</b> (瘀阻冲任 — old stasis blocks, fresh blood spills). Identify which, then apply the three-step: stop the acute flow, correct the root cause, rebuild afterward.</span><span class="zh">冲为血海、任主胞胎，二者按节律蓄溢经血。经血非时而下，即此固摄调节失职，不外三途：<b>气不摄血</b>（脉不能固；虚）、<b>血热妄行</b>（血被迫出；实热或虚热）、<b>瘀阻冲任</b>（陈瘀阻络，新血不得归经而溢）。辨其属，则施三法：急则塞流、澄其源、后复旧。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Flow & color</span><span class="zh">问一 · 量与色</span></span><span class="point-val"><span class="en">Pale, thin, copious/prolonged blood → Qi not holding (deficiency). Bright-red or deep-red, thick, with clots, gushing → heat. Dark-purple with clots, fixed lower-abdominal pain → stasis.</span><span class="zh">色淡质稀、量多或淋漓→气不摄（虚）。色鲜红或深红、质稠有块、量涌→热。色紫黯有块、小腹固定痛→瘀。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Heat: excess or deficient</span><span class="zh">问二 · 辨虚实之热</span></span><span class="point-val"><span class="en">Full-heat: bright red, thirst, irritable, red face, rapid forceful pulse. Deficient-heat (Kidney Yin xu): persistent scanty red spotting, tidal heat, night sweat, sore weak low back, thready-rapid pulse.</span><span class="zh">实热：色鲜红、口渴、烦躁、面红、脉数有力。虚热（肾阴虚）：漏下量少色红、潮热、盗汗、腰膝酸软、脉细数。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Constitution & timing</span><span class="zh">问三 · 体质与时相</span></span><span class="point-val"><span class="en">Fatigue, pale, breathless, poor appetite → Qi/Spleen deficiency. Adolescents (immature Chong-Ren) and perimenopausal women (declining Kidney) are the two classic age peaks — note which.</span><span class="zh">乏力、面白、气短、纳差→气／脾虚。青春期（冲任未充）与围绝经期（肾气渐衰）为两大高发期——注明属哪端。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Beng vs Lou & conversion</span><span class="zh">问四 · 崩漏及转化</span></span><span class="point-val"><span class="en">Sudden heavy flooding (崩) vs prolonged light spotting (漏). They convert: prolonged Lou can suddenly become Beng; heavy Beng, once it depletes, settles into chronic Lou. The pattern often shifts (e.g. heat → later Qi deficiency from blood loss) — reassess over the course.</span><span class="zh">暴下如崩 vs 淋漓为漏。二者互转：久漏可骤成崩；崩甚耗气则转慢性漏。证型常随病程变（如热证失血后转气虚）——须随访再辨。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="benglou-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Four patterns across three mechanisms (Qi not holding / heat / stasis; heat splits into full and deficient). Whatever the pattern, the management sequence is the same three steps: 塞流 stop the flow acutely → 澄源 correct the root → 复旧 rebuild the blood and regulate the cycle.</span>
+    <span class="zh">四证三机（气不摄／热／瘀；热分实虚）。无论何证，处置皆循三法：塞流（急止血）→澄源（治其本）→复旧（补血调经）。</span>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Spleen Qi Deficiency — Qi Failing to Contain the Blood</span><span class="zh">① 脾虚气不摄血</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent — Spleen Qi too weak to raise and contain; the vessel cannot hold the blood</span><span class="zh">升不及——脾气虚不能升举固摄，脉不统血</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> heavy or prolonged flow of pale, thin blood; fatigue, breathlessness, pale sallow face, poor appetite, loose stool, bearing-down sensation; pale tongue, weak pulse. Common in adolescents and after chronic overwork/illness. <b>Mechanism:</b> the Spleen governs the containment of blood (脾统血); when Spleen Qi sinks and weakens, it can neither raise nor hold, so blood escapes the vessels. <b>Treatment:</b> 补气摄血，固冲止崩 — tonify Qi, contain the blood, secure the Chong. Moxa is key. Links to the 气血两虚 pattern card.</span><span class="zh"><b>主症：</b>经血量多或淋漓、色淡质稀；乏力、气短、面色㿠白或萎黄、纳差、便溏、小腹坠；舌淡、脉弱。多见青春期及久劳久病后。<b>病机：</b>脾统血，脾气下陷而虚则不能升举固摄，血溢脉外。<b>治法：</b>补气摄血、固冲止崩。灸为要。联动「气血两虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-up">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Blood-Heat Forcing the Blood (Full-Heat)</span><span class="zh">② 血热妄行（实热）</span></div>
+    <div class="pc-qi"><span class="en">Excessive Ascent/movement — heat drives the blood recklessly out of the Chong</span><span class="zh">升太过——热迫血妄行，溢于冲任之外</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> sudden heavy flooding of bright-red or deep-red thick blood, possibly with clots; thirst, irritability, red face, dark urine, dry stool; red tongue with yellow coat, rapid forceful pulse. <b>Mechanism:</b> heat is Yang and accelerating; it agitates the blood and forces it out of the vessels — "reckless movement of hot blood." <b>Treatment:</b> 清热凉血，固冲止血 — clear heat, cool the blood, secure the Chong and stop bleeding. Links to the 湿热 (血分热) pattern card.</span><span class="zh"><b>主症：</b>经血暴下、色鲜红或深红质稠、或有血块；口渴、烦躁、面红、尿黄、便干；舌红苔黄、脉数有力。<b>病机：</b>热为阳而急迫，扰动营血、迫血妄行——"血热妄行"。<b>治法：</b>清热凉血、固冲止血。联动「湿热（血分热）」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Kidney Yin Deficiency — Deficient-Heat Disturbing the Chong</span><span class="zh">③ 肾阴虚（虚热扰冲）</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent — Kidney Yin depleted, empty heat stirs the blood; Chong-Ren unstable</span><span class="zh">降不及——肾阴亏虚，虚热扰血，冲任不固</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> persistent scanty spotting of bright-red blood, or intermittent light flooding; dizziness, tinnitus, sore weak low back and knees, tidal heat, night sweats, five-heart heat; red tongue with little coat, thready-rapid pulse. Common perimenopausally. <b>Mechanism:</b> Kidney Yin (which anchors the Chong-Ren and cools the blood) is depleted; empty heat arises and disturbs the blood, while the weakened root cannot secure the vessels. <b>Treatment:</b> 滋肾益阴，固冲止血 — enrich Kidney Yin, secure the Chong, stop bleeding. Links to the 肾阴虚 pattern card.</span><span class="zh"><b>主症：</b>漏下量少色鲜红、或时崩时止；头晕、耳鸣、腰膝酸软、潮热、盗汗、五心烦热；舌红少苔、脉细数。围绝经期多见。<b>病机：</b>肾阴（固摄冲任、凉润营血）亏，虚热内生扰血，根本不固不能约束脉道。<b>治法：</b>滋肾益阴、固冲止血。联动「肾阴虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">④ Blood Stasis Obstructing the Chong-Ren</span><span class="zh">④ 瘀阻冲任</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — old stasis blocks the channel, fresh blood cannot return and spills</span><span class="zh">出入失常——陈瘀阻络，新血不得归经而妄行</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> prolonged dribbling or intermittent flooding of dark-purple blood with clots; fixed stabbing lower-abdominal pain that refuses pressure and eases somewhat after clots pass; purple tongue or with stasis spots, choppy pulse. <b>Mechanism:</b> static blood occupies the uterus/Chong so newly generated blood cannot enter the normal channel and instead leaks out at the wrong time — "static blood not resolved, bleeding will not stop" (瘀血不去，血不归经). <b>Treatment:</b> 活血化瘀，固冲止血 — invigorate Blood and resolve stasis so new blood returns to the channel, then secure the Chong. (Counterintuitive but classical: you move blood to stop bleeding here.) Links to the 气滞血瘀 pattern card.</span><span class="zh"><b>主症：</b>漏下淋漓或时崩、色紫黯有块；小腹刺痛固定拒按、血块下后稍减；舌紫或有瘀斑、脉涩。<b>病机：</b>瘀血占据胞宫／冲任，新血不得归经而非时妄溢——"瘀血不去，血不归经"。<b>治法：</b>活血化瘀（使新血归经）、固冲止血。（看似矛盾而实为经典：此处以活血而止血。）联动「气滞血瘀」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="benglou-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">SP1, CV4, SP6 and the extra point 断红穴 form the bleeding-control core; pattern points address the root. The three-step logic applies: emphasise stopping the flow acutely, then shift to root treatment as bleeding settles.</span>
+    <span class="zh">隐白、关元、三阴交及经外奇穴断红穴为止血核心；配穴治本。三法逻辑：急则重塞流，血势缓后转治本。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points (stop the flow)</span><span class="zh">核心穴（塞流）</span></span><span class="point-val"><span class="en">SP1 隐白 (moxa — classic empirical point to stop uterine bleeding, especially Spleen-not-holding), CV4 关元 (Ren + Chong origin, secures the uterus), SP6 三阴交 (crossing of three Yin, regulates the Chong-Ren), CV6 气海 (boosts Qi to contain blood). 断红穴 (extra point, between 2nd–3rd MC bones) for acute heavy bleeding.</span><span class="zh">隐白（灸——止崩漏之经验要穴，尤宜脾不统血）、关元（任冲之源，固胞宫）、三阴交（三阴之会，调冲任）、气海（益气摄血）。断红穴（经外奇穴，二三掌骨间）治急性大出血。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Spleen Qi not holding</span><span class="zh">① 脾虚气不摄血</span></span><span class="point-val"><span class="en">+ moxa BL20 脾俞, ST36 足三里, GV20 百会 (lift the sunken Qi); reinforcing with generous moxa.</span><span class="zh">+ 灸脾俞、足三里、百会（升举下陷）；补法重灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Full-heat</span><span class="zh">② 血热妄行</span></span><span class="point-val"><span class="en">+ SP10 血海, LI11 曲池, BL17 膈俞 — cool the blood and clear heat; reducing, no moxa (SP1 still moxa'd lightly to stop flow, or needled).</span><span class="zh">+ 血海、曲池、膈俞——凉血清热；泻法不灸（隐白仍可轻灸或针以止血）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Kidney Yin deficient-heat</span><span class="zh">③ 肾阴虚</span></span><span class="point-val"><span class="en">+ KI3 太溪, KI6 照海, BL23 肾俞, SP6 — enrich Yin, secure the Chong; even method.</span><span class="zh">+ 太溪、照海、肾俞、三阴交——滋阴固冲；平补。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Stasis</span><span class="zh">④ 瘀阻冲任</span></span><span class="point-val"><span class="en">+ SP10 血海, BL17 膈俞, LV3 太冲, ST29 归来 — invigorate Blood so new blood returns to channel; even/reducing.</span><span class="zh">+ 血海、膈俞、太冲、归来——活血使新血归经；平泻。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="benglou-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas follow the three-step: 塞流 (stop) uses charred hemostatics; 澄源 (clear source) treats the pattern; 复旧 (rebuild) tonifies Qi-Blood and Kidney to regulate the cycle afterward. Charred herbs (炭) are the shared hemostatic thread.</span>
+    <span class="zh">方药循三法：塞流用炭类止血；澄源治证；复旧补气血肾以善后调经。炭类（如各药炒炭）为共通止血线。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Spleen Qi not holding 脾虚气不摄血</span><span class="zh">① 脾虚气不摄血</span></span><span class="point-val"><span class="en"><b>固本止崩汤 / 归脾汤加减</b> — heavy Huang Qi + Ren Shen + Bai Zhu to tonify Qi and contain blood; add charred hemostatics (棕榈炭, 艾叶炭, 炮姜炭). This is the core deficiency prescription.</span><span class="zh"><b>固本止崩汤／归脾汤加减</b>——重用黄芪+人参+白术补气摄血；加炭类止血（棕榈炭、艾叶炭、炮姜炭）。虚证之核心方。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Full-heat 血热妄行</span><span class="zh">② 血热妄行</span></span><span class="point-val"><span class="en"><b>清热固经汤</b> — Sheng Di, Di Gu Pi, Huang Qin clear heat and cool the blood; Gui Ban + charred herbs (地榆炭, 藕节) secure and stop. Cool the blood to stop the reckless movement.</span><span class="zh"><b>清热固经汤</b>——生地、地骨皮、黄芩清热凉血；龟板+炭类（地榆炭、藕节）固涩止血。凉血以止妄行。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Kidney Yin deficient-heat 肾阴虚</span><span class="zh">③ 肾阴虚</span></span><span class="point-val"><span class="en"><b>左归丸 + 二至丸</b> — Shu Di, Shan Yu Rou enrich Kidney Yin; Nü Zhen Zi + Han Lian Cao (Er Zhi Wan) nourish Yin and stop bleeding. For the perimenopausal deficient-heat pattern.</span><span class="zh"><b>左归丸+二至丸</b>——熟地、山萸肉滋肾阴；女贞子+旱莲草（二至丸）养阴止血。围绝经期虚热证。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Stasis 瘀阻冲任</span><span class="zh">④ 瘀阻冲任</span></span><span class="point-val"><span class="en"><b>逐瘀止血汤 / 桃红四物汤加减</b> — invigorate Blood and resolve stasis (Dang Gui, Chuan Xiong, Tao Ren) with hemostatics (三七, 蒲黄炭) so new blood returns to the channel. Move to stop.</span><span class="zh"><b>逐瘀止血汤／桃红四物汤加减</b>——活血化瘀（当归、川芎、桃仁）配止血（三七、蒲黄炭），使新血归经。以通为止。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">The three-step (塞流·澄源·复旧) is a <em>sequence over time</em>, not three simultaneous goals. In the acute flooding phase, prioritise stopping the flow (even a temporary "hold" is worth it to prevent collapse). Once the bleeding slows, shift to 澄源 — treat the actual pattern, or the bleeding recurs. After it stops, 复旧: rebuild Qi-Blood and regulate the Kidney-Chong so the next cycle is normal. Skipping 复旧 is why Beng Lou recurs. And always remember: heavy or persistent bleeding is a red flag needing medical work-up — TCM manages the pattern <em>alongside</em> proper diagnosis, never in place of it.</span>
+    <span class="zh">三法（塞流·澄源·复旧）是<em>随时间之序</em>，非三者并求。暴崩期以塞流为先（即便暂"止"亦值，以防虚脱）。血缓后转澄源——治其真证，否则复发。血止后复旧：补气血、调肾冲，使下一周期正常。略复旧正是崩漏反复之由。并须牢记：量大或持续出血为红旗须医学检查——中医<em>与</em>诊断并行治证，绝不替代之。</span>
+  </div>
+</div>
+</div>
+<div id="page-ruapi" class="disease-page">
   <div class="page-header">
     <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
     <div class="page-title"><span class="en">Breast Hyperplasia</span><span class="zh">乳癖</span></div>
@@ -11866,12 +12130,13 @@ function crsSearch(q){
 function openSearch(){ const o=document.getElementById('search-overlay'); if(o){o.classList.add('open'); setTimeout(()=>{const i=document.getElementById('search-input'); if(i)i.focus();},50);} }
 function closeSearch(e){ if(!e || e.target.id==='search-overlay' || e.currentTarget.classList.contains('sr-close')){ document.getElementById('search-overlay').classList.remove('open'); } }
 
-// ---------- Supabase gating ----------
+// ---------- Supabase gating (matches working pain/ashi modules) ----------
+const SB_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo";
 let SB=null, SB_USER=null, PURCHASED=false;
 async function initSupabase(){
   try{
-    if(!window.supabase) return;
-    SB = window.supabase.createClient(SUPABASE_URL, window.__SB_ANON__ || '');
+    if(!window.supabase){ return; }
+    SB = window.supabase.createClient(SUPABASE_URL, SB_ANON);
     const {data:{session}} = await SB.auth.getSession();
     if(session && session.user){ SB_USER=session.user; await checkPurchase(); }
     SB.auth.onAuthStateChange((_e,s)=>{ SB_USER=s&&s.user?s.user:null; if(SB_USER) checkPurchase(); refreshGates(); });
@@ -11898,19 +12163,39 @@ function enforceGate(diseaseId){
       <div class="pw-lock">🔒</div>
       <div class="pw-title"><span class="en">${d.en} — full reasoning locked</span><span class="zh">${d.zh}——完整推理内容已锁定</span></div>
       <div class="pw-desc"><span class="en">Insomnia, Common Cold, Dizziness, Diarrhea and Dysmenorrhea are free to explore. Unlock all ${DISEASES.length} conditions, 24 pattern cards, 6 pathomechanism cards, and full cross-linking.</span><span class="zh">失眠、感冒、眩晕、泄泻、痛经可免费体验。解锁全部 ${DISEASES.length} 个病症、24 张证型卡、6 张病机卡及完整联动。</span></div>
-      <button class="pw-btn" onclick="startPurchase()"><span class="en">Unlock — CA$149</span><span class="zh">解锁 · CA$149</span></button>
+      <button class="pw-btn" onclick="startPurchase(this)"><span class="en">Unlock — CA$149</span><span class="zh">解锁 · CA$149</span></button>
     </div>`;
     page.prepend(pw);
   }
 }
 function refreshGates(){ const act=document.querySelector('.disease-page.active'); if(act){ const id=act.id.replace('page-',''); if(DZMAP[id]) enforceGate(id); } }
-async function startPurchase(){
-  if(!SB_USER){ window.location.href='/login.html?redirect=/internal/'; return; }
+async function startPurchase(btn){
+  // ensure we have a session; if not, send to login
+  let session=null;
+  try{ if(SB){ const r=await SB.auth.getSession(); session=r.data.session; } }catch(e){}
+  if(!session || !session.user){ window.location.href='/login.html?redirect=/internal/'; return; }
+  // loading state
+  if(btn){ btn.dataset.orig=btn.innerHTML; btn.innerHTML='<span class="en">Redirecting…</span><span class="zh">跳转中…</span>'; btn.style.pointerEvents='none'; btn.style.opacity='0.7'; }
   try{
-    const {data,error} = await SB.functions.invoke('bright-processor',{body:{price_id:PRICE_ID, module_id:MODULE_ID}});
-    if(error) throw error;
-    if(data && data.url) window.location.href=data.url;
-  }catch(err){ alert('Checkout error — please try again.'); console.error(err); }
+    const resp = await fetch(SUPABASE_URL+'/functions/v1/bright-processor', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SB_ANON},
+      body: JSON.stringify({
+        user_id: session.user.id,
+        module_id: MODULE_ID,
+        price_id: PRICE_ID,
+        return_url: window.location.href
+      })
+    });
+    const {url, error} = await resp.json();
+    if(error) throw new Error(error);
+    if(url){ window.location.href = url; return; }
+    throw new Error('No checkout URL returned');
+  }catch(err){
+    console.error('checkout', err);
+    alert('Checkout error: ' + (err.message||'please try again'));
+    if(btn && btn.dataset.orig){ btn.innerHTML=btn.dataset.orig; btn.style.pointerEvents=''; btn.style.opacity=''; }
+  }
 }
 
 // ---------- boot ----------
