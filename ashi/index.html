@@ -1,4 +1,4 @@
-<!-- SinoMed 阿是穴临床速查 · build v28 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
+<!-- SinoMed 阿是穴临床速查 · build v29 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / $129 CAD price -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -6119,7 +6119,7 @@ function setSiteLanguage(lang){ try{ localStorage.setItem(SINOMED_LANG_KEY, lang
 const SUPABASE_URL  = 'https://ucocgcbxdqjbbklnkyxt.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo';
 const ASHI_MODULE_ID = 'ashi';
-const ASHI_PRICE_ID = 'price_1TpJLNLpHoyExvp7HpHT2sax'; // $99 CAD, module 'ashi' (Stripe, 1459986 B.C. LTD. account)
+const ASHI_PRICE_ID = 'price_1TpLuXLpHoyExvp7xvsg4hvy'; // $129 CAD, module 'ashi' (Stripe, 1459986 B.C. LTD. account)
 let sb = null;
 try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON); }catch(e){ console.warn('[ashi] supabase client failed to init', e); }
 
@@ -6171,7 +6171,7 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') hidePaywall(); })
 async function goUnlock(){
   // Real checkout call, mirrors purchaseFSN() in sinomed_HOME_index.html — same Edge Function.
   if(!sb) { alert('Checkout unavailable — Supabase client failed to load.'); return; }
-  if(!ASHI_PRICE_ID){ alert('Checkout not yet configured — Di needs to create the $99 CAD Stripe price for "ashi" and set ASHI_PRICE_ID.'); return; }
+  if(!ASHI_PRICE_ID){ alert('Checkout not yet configured — Di needs to create the $129 CAD Stripe price for "ashi" and set ASHI_PRICE_ID.'); return; }
   const { data } = await sb.auth.getSession();
   if(!data || !data.session){ goLogin(); return; }
   const user = data.session.user;
