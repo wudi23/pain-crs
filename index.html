@@ -115,7 +115,8 @@ body {
   padding: 24px;
   text-decoration: none;
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
   transition: box-shadow .15s, border-color .15s, transform .1s;
   position: relative;
   overflow: hidden;
@@ -132,6 +133,7 @@ body {
 .mc-accent.amber { background: var(--amber); }
 .mc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
 .mc-tag {
+  align-self: flex-start;
   display: inline-block; font-size: 10px; font-weight: 700;
   letter-spacing: .06em; text-transform: uppercase;
   padding: 3px 9px; border-radius: 10px; margin-bottom: 10px;
@@ -151,6 +153,7 @@ body {
 .mc-cta {
   display: flex; align-items: center; justify-content: space-between;
   padding-top: 14px; border-top: 1px solid var(--rule);
+  margin-top: auto;
 }
 .mc-price { font-size: 13px; font-weight: 700; color: var(--ink-mid); }
 .mc-price .free { color: var(--jade); }
@@ -360,7 +363,7 @@ html[lang="zh"] .t-en{display:none;}
     </p>
     <p>
       <span class="t-en">Many practitioners know a great deal, yet struggle in the clinic. The reason is simple: they were trained to <strong>remember</strong>, never to <strong>think</strong>.</span>
-      <span class="t-zh">很多人学了大量理论，却依然不会看病。原因只有一个：他们从未被训练过<strong>如何思考</strong>，只被告知<strong>记住什么</strong>。</span>
+      <span class="t-zh">很多人学了大量理论，却依然不会看病。原因只有一个：从未被训练过<strong>如何思考</strong>，只被告知<strong>记住什么</strong>。</span>
     </p>
     <p>
       <span class="t-en">The SinoMed TCM Clinical Reasoning System starts where every patient encounter starts — the chief complaint. Like a detective working a case, it guides you step by step:</span>
@@ -393,8 +396,8 @@ html[lang="zh"] .t-en{display:none;}
     <div class="dim-header">
       <div class="dim-icon dim-icon-red">🩺</div>
       <div>
-        <div class="dim-title"><span class="t-en">Clinical Problems</span><span class="t-zh">临床问题</span></div>
-        <div class="dim-sub"><span class="t-en">Organised by condition and body region</span><span class="t-zh">按疾病与身体部位分类</span></div>
+        <div class="dim-title"><span class="t-en">Clinical Reasoning Systems</span><span class="t-zh">临床推理系统</span></div>
+        <div class="dim-sub"><span class="t-en">From pathomechanism to treatment — trained to think, not to memorise</span><span class="t-zh">从病机推导到治法方药——训练思考，而非记忆</span></div>
       </div>
     </div>
     <div class="modules-grid">
@@ -425,22 +428,25 @@ html[lang="zh"] .t-en{display:none;}
         <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
         <div class="mc-title"><span class="t-en">TCM Internal Medicine CRS</span><span class="t-zh">中医内科推理系统</span></div>
         <div class="mc-sub"><span class="t-en">Qi Dynamic Framework</span><span class="t-zh">气机升降出入体系</span></div>
-        <div class="mc-desc"><span class="t-en">The core module of this system. Migraine, insomnia, edema, tinnitus and more — organised by Qi ascent/descent pathomechanism.</span><span class="t-zh">本系统核心模块。偏头痛、失眠、水肿、耳鸣等——按气机升降出入病机分类组织。</span></div>
+        <div class="mc-desc"><span class="t-en">The core module of this system. 48 conditions across 10 systems — mind, digestion, lung, gynaecology and more — interconnected through symptom, pattern, and pathomechanism, reasoned via Qi dynamics to acupuncture and herbal treatment.</span><span class="t-zh">本系统核心模块。覆盖神志、消化、肺系、妇科等十大系统48个病症，症状、证型、病机三个入口互相联通，以气机升降出入推理至针灸与方药。</span></div>
         <div class="mc-cta">
           <span class="mc-price"><span class="free"><span class="t-en">5 conditions free</span><span class="t-zh">5个病免费</span></span> · <span class="t-en">$149 CAD full access</span><span class="t-zh">$149全部解锁</span></span>
           <span class="mc-arrow">→</span>
         </div>
       </a>
 
-      <div class="module-card coming-soon">
+      <a class="module-card available" href="/formulas/">
         <div class="mc-accent" style="background:#4A2C7A;"></div>
         <span class="mc-icon">🌿</span>
-        <span class="mc-tag mc-tag-soon"><span class="t-en">Coming Soon</span><span class="t-zh">即将上线</span></span>
-        <div class="mc-title"><span class="t-en">Classical Formulas</span><span class="t-zh">经典方剂</span></div>
-        <div class="mc-sub"><span class="t-en">Shang Han Lun · Classical Formulas</span><span class="t-zh">伤寒论经方</span></div>
-        <div class="mc-desc"><span class="t-en">Based on the Guilin Ancient Edition — 306 classical formulas within the Shang Han Lun clinical reasoning framework.</span><span class="t-zh">依桂林古本，含306首经方，伤寒论经方思维体系。</span></div>
-        <div class="mc-cta"><span class="mc-coming"><span class="t-en">In development</span><span class="t-zh">开发中</span></span></div>
-      </div>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
+        <div class="mc-title"><span class="t-en">TCM Formulas CRS</span><span class="t-zh">方药临床推理系统</span></div>
+        <div class="mc-sub"><span class="t-en">Shang Han Za Bing Lun Formula Framework</span><span class="t-zh">伤寒杂病论经方为骨架</span></div>
+        <div class="mc-desc"><span class="t-en">Guided by the Qi dynamic framework, structured on the classical formula system, centred on formula–pattern correspondence, herbs taught through formulas — a clinical reasoning system from pathomechanism to treatment method, formula, and herbs.</span><span class="t-zh">以气机升降出入为纲，以经方体系为骨架，以方证对应为核心，以方带药，构建从病机推导到治法、方药的临床推理体系。</span></div>
+        <div class="mc-cta">
+          <span class="mc-price"><span class="free"><span class="t-en">Free access</span><span class="t-zh">免费开放</span></span></span>
+          <span class="mc-arrow">→</span>
+        </div>
+      </a>
 
     </div>
   </div>
