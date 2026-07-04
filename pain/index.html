@@ -267,6 +267,26 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
   .rquiz-opt { font-size:12px; padding:7px 10px; }
 }
 
+
+/* ── Search ─────────────────────── */
+#search-wrap{position:relative;}
+#search-results{
+  position:absolute;left:0;right:0;top:100%;
+  background:#fff;border:1px solid #C8D8E8;border-radius:0 0 8px 8px;
+  max-height:60vh;overflow-y:auto;z-index:200;display:none;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+}
+.sr-item{
+  padding:9px 12px;cursor:pointer;border-bottom:1px solid #EEF4FA;
+  display:flex;flex-direction:column;gap:2px;
+}
+.sr-item:last-child{border-bottom:none;}
+.sr-item:hover{background:#EEF4FA;}
+.sr-disease{font-size:13px;font-weight:700;color:#1E3A5F;}
+.sr-cat{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#C8861A;margin-bottom:2px;}
+.sr-match{font-size:12px;color:#4A5A6A;}
+.sr-none{padding:12px;font-size:12px;color:#4A5A6A;text-align:center;}
+
 </style>
 </head>
 <body>
@@ -280,7 +300,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 <div id="overlay" onclick="closeSidebar()"></div>
 <div id="layout">
 <nav id="sidebar">
-  <div id="search-wrap"><input type="text" id="search" placeholder="搜索 / Search..."></div>
+  <div id="search-wrap"><input type="text" id="search" placeholder="搜索 / Search..." autocomplete="off" oninput="doSearch(this.value)" onkeydown="searchKey(event)">
+  <div id="search-results"></div></div>
   <button class="nav-item active" onclick="showPage('home',this)"><span class="icon">🏠</span><span class="zh" >首页</span><span class="en" style="display:none">Home</span></button>
   <button class="nav-item" onclick="showPage('pain-overview',this)"><span class="icon">🏛️</span><span class="zh" >基础框架</span><span class="en" style="display:none">Foundation</span></button>
   
@@ -343,15 +364,15 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
     </div>
     <div style="text-align:center;margin-top:14px;display:flex;gap:10px;justify-content:center">
       <a href="/account" style="display:inline-block;padding:10px 24px;background:var(--navy);color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">
-        <span class="zh">$29 购买本模块</span><span class="en" style="display:none">$29 Buy This Module</span></a>
+        <span class="zh">$29 购买本部位</span><span class="en" style="display:none">$29 Buy This Module</span></a>
       <a href="/account?bundle=1" style="display:inline-block;padding:10px 24px;background:#C8861A;color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:13px">
         <span class="zh">$149 全套购买</span><span class="en" style="display:none">$149 Full Bundle</span></a>
     </div>
   </div>
   <div class="section-block" style="background:var(--note-bg);border-color:var(--navy)">
-    <div class="section-title"><span class="zh" >颈痛（示范）已完整收录</span><span class="en" style="display:none">Neck Pain (Demo) — Fully Available</span></div>
-    <p class="point-val zh" style="color:var(--steel)">其他病症模块持续上线。点击左侧导航中的「颈痛」开始体验完整的推理流程。</p>
-    <p class="point-val en" style="display:none;color:var(--steel)">Other conditions are being added progressively. Click "Neck Pain" in the left sidebar to experience the full reasoning workflow.</p>
+    <div class="section-title"><span class="zh" >肩痛 — 永久免费</span><span class="en" style="display:none">Shoulder Pain — Permanently Free</span></div>
+    <p class="point-val zh" style="color:var(--steel)">所有14个疼痛病症模块已全部上线。其中肩痛模块完全免费开放，包含完整的六个标签页、交互式思维导图和推理测验，无需购买即可体验完整推理流程。</p>
+    <p class="point-val en" style="display:none;color:var(--steel)">All 14 pain condition modules are now live. Shoulder Pain is permanently free — including all six tabs, interactive reasoning map, and reasoning quiz — no purchase required to experience the full reasoning workflow.</p>
   </div>
 </div>
 <!-- ===== PAGE: FOUNDATION ===== -->
@@ -545,11 +566,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('headpain','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('headpain','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-headpain-intake">
-<div class="safety-box">
-    <div class="safety-title"><span class="en">⚠ Red Flags — Rule Out Before Treating</span><span class="zh">⚠ 红旗征——治疗前排除</span></div>
-    <div class="safety-body"><span class="en">Immediate referral: sudden onset "thunderclap" worst-ever headache (subarachnoid haemorrhage), headache with fever + neck stiffness + photophobia (meningitis), progressive headache waking from sleep (raised ICP/tumour), headache with focal neurological signs, new headache in patient over 50 with cancer history, post-trauma headache with LOC. These are not TCM presentations — they are medical emergencies.</span>
-    <span class="zh">立即转诊：突发"霹雳样"有生以来最严重头痛（蛛网膜下腔出血），头痛伴发热+颈项强直+畏光（脑膜炎），进行性头痛从睡眠中痛醒（颅内压升高/肿瘤），头痛伴局灶性神经系统体征，50岁以上有肿瘤史的新发头痛，外伤后头痛伴意识丧失。这些不是中医适应症——而是内科急症。</span></div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >枕/颈源性头痛</span><span class="en" style="display:none">Occipital / Cervicogenic</span></div><div class="point-val zh">疼痛从颈后上行至枕部，可至头顶或眼后；颈部活动受限；压迫枕下区可复制头痛</div><div class="point-val en" style="display:none">Pain travels from posterior neck to occiput, may reach vertex or retro-orbital area; restricted neck movement; compression of suboccipital area reproduces headache</div></div><div class="point-card"><div class="point-label"><span class="zh" >颞/偏头痛型</span><span class="en" style="display:none">Temporal / Migraine-type</span></div><div class="point-val zh">单侧颞部搏动性头痛；情绪或疲劳诱发或加重；可伴畏光、恶心；上斜方肌常有活跃触发点</div><div class="point-val en" style="display:none">Unilateral temporal throbbing pain; triggered or worsened by emotion or fatigue; may accompany photophobia, nausea; upper trapezius often has active trigger points</div></div><div class="point-card"><div class="point-label"><span class="zh" >头顶/全头弥漫</span><span class="en" style="display:none">Vertex / Diffuse</span></div><div class="point-val zh">头顶压迫感或头重；劳累后加重；颈夹肌及肩胛提肌紧张；常伴颈痛</div><div class="point-val en" style="display:none">Vertex pressure or head heaviness; worsened by fatigue; splenius capitis and levator scapulae tightness; often associated with neck pain</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">长时间屏幕使用、枕头高度不适、睡眠不足、情绪紧张、月经周期（偏头痛型）</div><div class="point-val en" style="display:none">Prolonged screen use, pillow height problems, sleep deprivation, emotional stress, menstrual cycle (migraine type)</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">低头加重→颈源性；光线和噪音敏感→偏头痛型；压迫颞部减轻→颞肌；按摩颈部缓解→肌筋膜型</div><div class="point-val en" style="display:none">Worsened by flexion → cervicogenic; light and noise sensitivity → migraine type; pressure on temple relieves → temporalis; neck massage relieves → myofascial type</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">恶心呕吐（偏头痛/颅压）；视力变化（须排除颞动脉炎）；耳鸣（胸锁乳突肌）；发热头痛须紧急排查</div><div class="point-val en" style="display:none">Nausea and vomiting (migraine/raised ICP); visual changes (exclude temporal arteritis); tinnitus (SCM); headache with fever requires urgent assessment</div></div></div>
 </div>
 <div class="phase-content" id="phase-headpain-exam">
 <div class="point-prescription">
@@ -752,23 +769,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('tmj','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 </div>
   <div class="phase-content active" id="phase-tmj-intake">
-<div class="concept-box">
-  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">TMJ — The Four Tissue Sources of Pain</span><span class="zh">颞颌关节痛的四个组织来源</span></div>
-  <div class="concept-body"><span class="en">
-    TMJ pain arises from four overlapping sources — identifying which predominates determines treatment:<br><br>
-    <strong>1. Masseter MTrP (most common):</strong> The masseter is the primary pain generator in most TMJ cases. MTrPs in the superficial masseter refer pain to the lower molars, jaw, and ear. Bruxism (teeth grinding) perpetually reactivates these trigger points.<br><br>
-    <strong>2. Temporalis MTrP:</strong> Fan-shaped muscle covering the temporal fossa. Anterior temporalis MTrPs refer pain to the upper teeth; posterior temporalis refers to the occiput. Often the "headache behind the eye" in TMJ patients.<br><br>
-    <strong>3. Lateral/Medial Pterygoid:</strong> Deep muscles of mastication, accessible intraorally or extraorally. Lateral pterygoid dysfunction → jaw deviation on opening; limited mouth opening. Medial pterygoid → pain on swallowing, ear fullness.<br><br>
-    <strong>4. Joint capsule and disc:</strong> Clicking = disc displacement (reducible); locking = disc displacement (non-reducible). Joint inflammation = true arthritis. Capsular tightness = limited opening. These require joint-specific treatment beyond muscle work.
-  </span>
-  <span class="zh">
-    颞颌关节痛来自四个重叠来源——识别哪个为主决定治疗：<br><br>
-    <strong>1. 咬肌触发点（最常见）：</strong>咬肌是大多数颞颌关节病例的主要疼痛源。咬肌浅层触发点将疼痛投射到下颌磨牙、下颌和耳部。磨牙症持续重新激活这些触发点。<br><br>
-    <strong>2. 颞肌触发点：</strong>覆盖颞窝的扇形肌肉。前部颞肌触发点将疼痛投射到上排牙齿；后部颞肌投射到枕部。常是颞颌关节患者的"眼后头痛"。<br><br>
-    <strong>3. 翼外肌/翼内肌：</strong>深部咀嚼肌，可经口腔内或口腔外入路。翼外肌功能障碍→开口时下颌偏斜；开口受限。翼内肌→吞咽时疼痛，耳部胀满感。<br><br>
-    <strong>4. 关节囊和关节盘：</strong>弹响=关节盘移位（可复位）；锁颌=关节盘移位（不可复位）。关节炎症=真性关节炎。关节囊紧张=开口受限。这些需要超越肌肉治疗的关节特异性处理。
-  </span></div>
-</div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >咀嚼/张口痛</span><span class="en" style="display:none">Chewing / Mouth Opening Pain</span></div><div class="point-val zh">咬硬物或大口进食时疼痛；张口受限（＜35mm）；颧骨下区或颞部压痛；牙齿咬合不适感</div><div class="point-val en" style="display:none">Pain when biting hard food or opening wide; restricted mouth opening (<35mm); tenderness below zygomatic arch or temporal region; dental occlusal discomfort</div></div><div class="point-card"><div class="point-label"><span class="zh" >耳前区弹响</span><span class="en" style="display:none">Pre-auricular Clicking</span></div><div class="point-val zh">张口或闭口时关节弹响；耳前区闷胀感；可伴耳鸣或耳痛；偶发性关节绞锁</div><div class="point-val en" style="display:none">Joint clicking on opening or closing; fullness and pressure anterior to the ear; may accompany tinnitus or ear pain; occasional joint locking</div></div><div class="point-card"><div class="point-label"><span class="zh" >面颊/颞部弥漫痛</span><span class="en" style="display:none">Diffuse Cheek / Temple Pain</span></div><div class="point-val zh">面颊或颞部持续性钝痛；晨起较重（夜间磨牙）；头痛延伸至眼眶；胸锁乳突肌常受累</div><div class="point-val en" style="display:none">Persistent dull ache in cheek or temporal region; worse in morning (nocturnal bruxism); headache extending to orbital area; SCM often involved</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">夜间磨牙（牙医确认）；长期单侧咀嚼习惯；近期牙科操作（长时间张口）；颈部外伤或鞭打伤</div><div class="point-val en" style="display:none">Nocturnal bruxism (dentist confirmed); chronic unilateral chewing habit; recent dental procedure (prolonged mouth opening); cervical trauma or whiplash</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">咀嚼、说话、打哈欠加重；软食缓解；夜间睡眠后晨起加重→磨牙；热敷颞部短期缓解</div><div class="point-val en" style="display:none">Worsened by chewing, talking, yawning; soft diet relieves; worse in morning after sleep → bruxism; temporary relief with heat over temporal area</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">耳鸣、头晕（胸锁乳突肌）；颈痛（颈颌功能性联系）；头痛（颞肌放射至上牙）；睡眠障碍</div><div class="point-val en" style="display:none">Tinnitus, dizziness (SCM); neck pain (functional cervical-mandibular connection); headache (temporalis referring to upper teeth); sleep disturbance</div></div></div>
 </div>
 <div class="phase-content" id="phase-tmj-exam">
 <div class="concept-box">
@@ -907,11 +908,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('lowback','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('lowback','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-lowback-intake">
-<div class="safety-box">
-    <div class="safety-title"><span class="en">⚠ Cauda Equina — Immediate Emergency Referral</span><span class="zh">⚠ 马尾综合征——立即急诊转诊</span></div>
-    <div class="safety-body"><span class="en">Cauda equina syndrome: bilateral leg weakness or numbness + saddle anaesthesia (perineum, genitals, inner thighs) + bowel or bladder dysfunction (retention or incontinence). This is a surgical emergency — spinal cord compression at L4/5 or S1 level. Any ONE of these signs with low back pain = immediate ER referral, do NOT treat with acupuncture first. Also refer: progressive motor weakness, fever with low back pain (discitis/osteomyelitis), cancer history with new thoracic or lumbar pain.</span>
-    <span class="zh">马尾综合征：双下肢无力或麻木+鞍区麻木（会阴、生殖器、大腿内侧）+肠道或膀胱功能障碍（潴留或失禁）。这是外科急症——L4/5或S1水平脊髓压迫。这些征象中任何一个伴腰痛=立即急诊转诊，不要先用针灸治疗。也需转诊：进行性运动无力，腰痛伴发热（椎间盘炎/骨髓炎），有肿瘤史的新发胸椎或腰椎疼痛。</span></div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >急性发作</span><span class="en" style="display:none">Acute Onset</span></div><div class="point-val zh">翻身困难、起床剧痛（腰方肌特征）；弯腰或搬重物后突发；单侧或双侧腰肌痉挛</div><div class="point-val en" style="display:none">Difficulty rolling over, severe pain on rising (QL hallmark); sudden onset after bending or lifting; unilateral or bilateral lumbar muscle spasm</div></div><div class="point-card"><div class="point-label"><span class="zh" >慢性劳损</span><span class="en" style="display:none">Chronic Postural</span></div><div class="point-val zh">久坐后起立最痛（髂腰肌特征）；长期弯腰工作后深部钝痛；休息后反而僵硬，活动后稍缓</div><div class="point-val en" style="display:none">Worst pain when rising after prolonged sitting (iliopsoas hallmark); deep aching after sustained flexion posture; worse after rest, slightly relieved by movement</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴腿部放射</span><span class="en" style="display:none">With Leg Radiation</span></div><div class="point-val zh">臀深部→大腿后侧放射（梨状肌/臀小肌）；无真正神经学体征；坐位压迫加重、行走减轻</div><div class="point-val en" style="display:none">Deep gluteal → posterior thigh radiation (piriformis/gluteus minimus); no true neurological signs; worse sitting, relieved by walking</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">弯腰提重、久坐（办公室工作）、受寒、床垫过软/过硬；情绪紧张（腰方肌应激反应）</div><div class="point-val en" style="display:none">Bending and lifting, prolonged sitting (office work), cold exposure, mattress too soft or firm; emotional stress (QL stress response)</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">起床头30分钟最重→关节僵硬；全天持续→肌筋膜；夜间痛明显→血瘀或肿瘤（须排查）；热敷缓解→寒凝</div><div class="point-val en" style="display:none">Worst in first 30 min after rising → joint stiffness; all-day persistence → myofascial; prominent night pain → blood stasis or neoplasm (must screen); heat relieves → Cold obstruction</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">下肢麻木（须排除神经根、马尾）；腹股沟或大腿前痛（髂腰肌放射）；会阴区症状须紧急排查</div><div class="point-val en" style="display:none">Lower limb numbness (exclude nerve root, cauda equina); groin or anterior thigh pain (iliopsoas referral); perineal symptoms require urgent assessment</div></div></div>
 </div>
 <div class="phase-content" id="phase-lowback-exam">
 <div class="point-prescription">
@@ -1110,27 +1107,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('sciatica','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('sciatica','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-sciatica-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Leg Pain Pattern — The Critical Differentiator</span><span class="zh">下肢疼痛模式——关键鉴别要素</span></span>
-      <div class="q-text"><span class="en">Does the pain go below the knee? Exactly which part of the leg? Electric/burning character? Or deep aching? Any numbness or weakness?</span><span class="zh">疼痛是否延伸至膝关节以下？腿的哪个部位？电击/灼烧性质？还是深部酸痛？是否有麻木或无力？</span></div>
-      <div class="q-why-brief"><span class="en">→ Below-knee radiation with specific dermatomal pattern = radiculopathy. Above-knee or diffuse = piriformis or SIJ referral</span><span class="zh">→ 膝关节以下放射伴特定皮节模式=根性病变。膝关节以上或弥漫性=梨状肌或骶髂关节牵涉</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail"><span class="en">
-        <strong>Electric/sharp pain from buttock down the posterior/lateral leg to the foot, follows a specific path, below knee:</strong> True radiculopathy. L5: lateral leg to dorsum of foot and big toe. S1: posterior calf to heel and lateral foot (little toe). The dermatomal precision below the knee is the definitive sign. SLR will be positive. Channel: BL channel (S1 = BL in the leg) or GB channel (L5 = GB in the leg).<br><br>
-        <strong>Deep aching in the buttock, posterior thigh, but vague below knee or absent:</strong> Piriformis syndrome or SIJ referral. No specific dermatomal pattern. Sitting worsens (piriformis is stretched by hip flexion). FABER may be positive (SIJ) or FAIR test positive (piriformis). Channel: GB30 (piriformis) or BL/GB junction (SIJ).<br><br>
-        <strong>Worsened by sitting, especially on hard surfaces:</strong> Piriformis — sitting compresses the piriformis and irritates the sciatic nerve against the ischium.<br><br>
-        <strong>Worsened by walking uphill or prolonged walking:</strong> Lateral spinal stenosis — the spinal canal narrows with extension (uphill walking extends the lumbar spine). Patients characteristically walk bent forward (flexion opens the canal). TCM: Kidney Xu + Phlegm-stasis narrowing the spinal channel.
-      </span>
-      <span class="zh">
-        <strong>从臀部沿腿后方/外侧至足部的电击/锐痛，沿特定路径，延伸至膝下：</strong>真性根性病变。L5：腿外侧至足背和大拇指。S1：小腿后方至足跟和足外侧（小趾）。膝关节以下的皮节精确性是确诊征象。SLR将阳性。经络：膀胱经（S1=腿部膀胱经）或胆经（L5=腿部胆经）。<br><br>
-        <strong>臀部、大腿后方深部酸痛，但膝关节以下模糊或缺失：</strong>梨状肌综合征或骶髂关节牵涉痛。无特定皮节模式。坐着加重（髋关节屈曲牵伸梨状肌）。FABER可能阳性（骶髂关节）或FAIR试验阳性（梨状肌）。经络：环跳（GB30）（梨状肌）或膀胱/胆经交汇（骶髂关节）。<br><br>
-        <strong>坐着加重，尤其在硬表面上：</strong>梨状肌——坐着压迫梨状肌并刺激坐骨神经对抗坐骨。<br><br>
-        <strong>上坡行走或长时间行走加重：</strong>侧方椎管狭窄——椎管在后伸时变窄（上坡行走伸展腰椎）。患者特征性弯腰向前行走（屈曲开放椎管）。中医：肾虚+痰瘀使脊髓通道变窄。
-      </span></div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >腰臀型</span><span class="en" style="display:none">Lumbar-Gluteal Pattern</span></div><div class="point-val zh">臀深部酸痛，可放射至大腿后侧；坐位压迫加重、站立或行走减轻；无真正神经学体征</div><div class="point-val en" style="display:none">Deep gluteal aching, may radiate to posterior thigh; worse sitting (compression), relieved by standing or walking; no true neurological signs</div></div><div class="point-card"><div class="point-label"><span class="zh" >大腿后侧型</span><span class="en" style="display:none">Posterior Thigh Pattern</span></div><div class="point-val zh">大腿后侧从臀部向下的放射性酸痛；坐骨结节区压痛；腘绳肌紧张，直腿抬高试验轻度阳性</div><div class="point-val en" style="display:none">Radiating ache along posterior thigh from buttock downward; ischial tuberosity tenderness; hamstring tightness, mildly positive straight leg raise</div></div><div class="point-card"><div class="point-label"><span class="zh" >小腿/踝足型</span><span class="en" style="display:none">Leg / Ankle / Foot Pattern</span></div><div class="point-val zh">放射至小腿外侧或足背；足趾麻木；需鉴别真性神经根压迫与肌筋膜放射痛</div><div class="point-val en" style="display:none">Radiation to lateral leg or dorsum of foot; toe numbness; must differentiate true nerve root compression from myofascial referred pain</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">长时间坐位（梨状肌综合征典型）；跑步、爬山；腰椎间盘突出；骨盆不对称</div><div class="point-val en" style="display:none">Prolonged sitting (typical piriformis syndrome); running, hiking; lumbar disc herniation; pelvic asymmetry</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">坐位加重、站立减轻→梨状肌；咳嗽/用力加重→真性神经根；夜间持续→血瘀；热敷部分缓解</div><div class="point-val en" style="display:none">Worse sitting, relieved standing → piriformis; worsened by coughing/straining → true radiculopathy; night persistence → Blood stasis; partial relief with heat</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">腿部感觉减退（需排查神经根）；排尿/排便障碍（须紧急排除马尾综合征）；双侧症状须高度重视</div><div class="point-val en" style="display:none">Leg sensory reduction (assess nerve root); bladder/bowel dysfunction (must urgently exclude cauda equina); bilateral symptoms require high alert</div></div></div>
 </div>
 <div class="phase-content" id="phase-sciatica-exam">
 <div name="concept-box" class="concept-box">
@@ -1299,45 +1276,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('piriformis','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 </div>
   <div class="phase-content active" id="phase-piriformis-intake">
-<div class="concept-box">
-  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Piriformis vs Disc Sciatica — The Critical Differential</span><span class="zh">梨状肌综合征与椎间盘坐骨神经痛——关键鉴别</span></div>
-  <div class="concept-body"><span class="en">
-    <strong>Piriformis Syndrome (PS):</strong><br>
-    — Deep buttock pain as the primary complaint (the MTrP itself)<br>
-    — Sciatic radiation: posterior thigh, often not below knee<br>
-    — Pain worse with sitting (piriformis is loaded with hip in flexion/internal rotation)<br>
-    — FAIR test positive (Flexion, Adduction, Internal Rotation — stretches piriformis)<br>
-    — No neurological deficit (numbness/weakness uncommon unless severe)<br>
-    — Normal or non-specific MRI<br>
-    — Worse sitting, better standing and walking<br><br>
-    <strong>Disc Sciatica (DS):</strong><br>
-    — Back pain often precedes or accompanies leg pain<br>
-    — Radiation typically below knee, often to foot<br>
-    — Positive SLR (Straight Leg Raise)<br>
-    — Neurological deficit possible (weak EHL, reduced ankle reflex)<br>
-    — MRI shows disc bulge at L4/5 or L5/S1<br>
-    — Worse with lumbar flexion, better with extension<br><br>
-    <strong>Overlap:</strong> Both can coexist. Many "failed back surgery" patients actually have piriformis syndrome as the residual pain source.
-  </span>
-  <span class="zh">
-    <strong>梨状肌综合征：</strong><br>
-    — 深部臀部疼痛为主诉（触发点本身）<br>
-    — 坐骨神经放射：大腿后侧，常不过膝<br>
-    — 坐位时疼痛加重（髋部屈曲/内旋时梨状肌负荷增加）<br>
-    — FAIR试验阳性（屈曲、内收、内旋——牵拉梨状肌）<br>
-    — 无神经功能障碍（麻木/无力不常见，除非严重）<br>
-    — MRI正常或非特异性<br>
-    — 坐位加重，站立和步行时减轻<br><br>
-    <strong>椎间盘坐骨神经痛：</strong><br>
-    — 腰痛常先于或伴随腿痛<br>
-    — 放射通常过膝，常至足部<br>
-    — 直腿抬高试验阳性<br>
-    — 可能有神经功能障碍（拇长伸肌无力，踝反射减弱）<br>
-    — MRI显示L4/5或L5/S1椎间盘突出<br>
-    — 腰椎屈曲加重，伸展时减轻<br><br>
-    <strong>重叠：</strong>两者可同时存在。许多"腰背手术失败"患者实际上将梨状肌综合征作为残余疼痛来源。
-  </span></div>
-</div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >臀深部酸痛</span><span class="en" style="display:none">Deep Gluteal Aching</span></div><div class="point-val zh">坐骨切迹内侧深部持续酸痛；久坐（超过30分钟）明显加重；起立或行走可部分缓解</div><div class="point-val en" style="display:none">Persistent deep aching medial to sciatic notch; markedly worsened by sitting over 30 minutes; partial relief on standing or walking</div></div><div class="point-card"><div class="point-label"><span class="zh" >假性坐骨神经痛</span><span class="en" style="display:none">Pseudo-Sciatica</span></div><div class="point-val zh">沿大腿后侧放射至腘窝，甚至小腿；无腰椎阳性体征；Freiberg征阳性（被动内旋髋关节诱发）</div><div class="point-val en" style="display:none">Radiation along posterior thigh to popliteal fossa, sometimes to calf; no lumbar positive signs; positive Freiberg test (passive hip internal rotation reproduces symptoms)</div></div><div class="point-card"><div class="point-label"><span class="zh" >女性特殊表现</span><span class="en" style="display:none">Female-Specific Presentation</span></div><div class="point-val zh">同房时深部盆腔痛；月经期加重；须与妇科疾病鉴别；梨状肌与盆底功能密切相关</div><div class="point-val en" style="display:none">Deep pelvic pain during intercourse; worsened during menstruation; must differentiate from gynaecological conditions; piriformis is closely linked to pelvic floor function</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">长时间驾车或久坐（尤其钱包后口袋受压）；跑步（外旋步态）；骨盆不对称；产后；髋部手术后</div><div class="point-val en" style="display:none">Prolonged driving or sitting (especially wallet in back pocket); running with toe-out gait; pelvic asymmetry; postpartum; after hip surgery</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">坐位加重（梨状肌被压缩）；内旋髋关节加重（Freiberg阳性）；外旋位减轻；行走时步态代偿</div><div class="point-val en" style="display:none">Sitting worsens (piriformis compressed); hip internal rotation worsens (positive Freiberg); external rotation position relieves; compensatory gait on walking</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">小腿或足部麻木（坐骨神经）；泌尿系症状（盆底联系）；对侧骶髂不适（骨盆代偿）</div><div class="point-val en" style="display:none">Calf or foot numbness (sciatic nerve); urological symptoms (pelvic floor connection); contralateral SI joint discomfort (pelvic compensation)</div></div></div>
 </div>
 <div class="phase-content" id="phase-piriformis-exam">
 <div class="concept-box">
@@ -1469,23 +1408,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('shoulder','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('shoulder','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-shoulder-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Location, Movement, and Pattern</span><span class="zh">位置、运动与模式</span></span>
-      <div class="q-text"><span class="en">Where exactly? Lateral, anterior, or posterior? Which movements hurt? Painful arc (abduction 60–120°)? Reaching overhead? Behind the back? Cross-body? Night pain? Gradual or sudden onset?</span><span class="zh">确切位置？外侧、前方还是后方？哪些运动疼痛？痛弧（外展60–120°）？过头动作？背后触及？水平内收？夜间疼痛？渐进还是突然起病？</span></div>
-      <div class="q-why-brief"><span class="en">→ Movement pattern identifies the injured structure and channel; night pain suggests capsular involvement (frozen shoulder)</span><span class="zh">→ 运动模式识别损伤结构和经络；夜间疼痛提示关节囊受累（冻结肩）</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail"><span class="en"><strong>Painful arc (60–120°) + lateral shoulder pain:</strong> Supraspinatus impingement or tear — LI channel. The supraspinatus tendon is compressed against the acromion during mid-arc abduction. Below 60° the tendon clears the acromion; above 120° it clears again. The painful arc is pathognomonic for subacromial impingement.<br><br> <strong>Severe night pain, loss of all planes of ROM, progressing over months:</strong> Frozen shoulder (adhesive capsulitis — /). The entire glenohumeral capsule contracts and adheres — all movements restricted. Classically: middle-aged women. Three phases: freezing (pain increasing, ROM declining), frozen (less pain but maximal stiffness), thawing (gradual ROM return). Night pain is a hallmark — any shoulder movement during sleep triggers capsular pain.<br><br> <strong>Anterior shoulder pain + pain on resisted elbow flexion (Speed's test):</strong> Bicipital tendinopathy — LU channel. The biceps long head tendon is inflamed in its groove on the anterior humerus.<br><br> <strong>Posterior shoulder + limited external rotation:</strong> Infraspinatus or teres minor tear/MTrP — SI/SJ channel. Posterior rotator cuff tears are less common than anterior but more often misdiagnosed.<br><br> <strong>AC joint line pain + worse with cross-body adduction:</strong> AC joint pathology — osteoarthritis, separation, or osteolysis. Pain precisely at the AC joint (top of shoulder where the clavicle meets the acromion). The Prolotherapy zone for AC joint ligament laxity.</span>
-      <span class="zh">
-        <strong>痛弧（60–120°）+肩外侧痛：</strong>冈上肌撞击或撕裂——大肠经。冈上肌腱在外展中弧时被压迫于肩峰下。60°以下肌腱避开肩峰；120°以上再次避开。痛弧是肩峰下撞击的特征性表现。<br><br>
-        <strong>剧烈夜间痛，各方向ROM全部丧失，数月进行性加重：</strong>冻结肩（粘连性关节囊炎——五十肩/漏肩风）。整个盂肱关节囊收缩粘连——所有方向运动受限。典型：中年女性。三期：冻结期（疼痛增加，ROM下降），冻结期（疼痛减轻但僵硬最大），解冻期（ROM逐渐恢复）。夜间疼痛是标志——睡眠期间任何肩部运动触发关节囊疼痛。<br><br>
-        <strong>肩前方疼痛+抗阻肘关节屈曲痛（Speed试验）：</strong>肱二头肌腱病——肺经。肱二头肌长头腱在肱骨前方沟中发炎。<br><br>
-        <strong>肩后方+外旋受限：</strong>冈下肌或小圆肌撕裂/MTrP——小肠/三焦经。后肩袖撕裂少于前肩袖，但更常被误诊。<br><br>
-        <strong>肩锁关节线疼痛+水平内收加重：</strong>肩锁关节病变——骨关节炎、分离或溶骨症。疼痛精确位于肩锁关节（锁骨与肩峰交汇处的肩部顶端）。肩锁韧带松弛的增生疗法区。
-      </span></div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >前方痛</span><span class="en" style="display:none">Anterior Pain</span></div><div class="point-val zh">喙突区或肱二头肌腱区压痛、屈肘和前屈时疼痛；常被描述为"肩膀里面痛"</div><div class="point-val en" style="display:none">Tenderness at coracoid or biceps tendon area; pain on elbow flexion and shoulder flexion; often described as "pain deep inside the shoulder"</div></div><div class="point-card"><div class="point-label"><span class="zh" >外侧/过头痛</span><span class="en" style="display:none">Lateral / Overhead Pain</span></div><div class="point-val zh">外展60-120°痛弧阳性；提重物、梳头、穿衣困难；肩峰下撞击或旋袖损伤特征</div><div class="point-val en" style="display:none">Positive painful arc 60–120° abduction; difficulty lifting, combing hair, dressing; features of subacromial impingement or rotator cuff injury</div></div><div class="point-card"><div class="point-label"><span class="zh" >全肩僵硬（冻结肩）</span><span class="en" style="display:none">Global Stiffness — Frozen Shoulder</span></div><div class="point-val zh">外旋和外展同时受限、夜间痛明显、逐渐起病；三角肌区深部胀痛；常见于40-60岁、女性、糖尿病患者</div><div class="point-val en" style="display:none">Combined restriction of ER and abduction, prominent night pain, gradual onset; deep deltoid region aching; common in 40–60-year-olds, female, diabetic patients</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">过顶运动（游泳、羽毛球）、提重物、睡姿（患侧受压）、跌倒支撑伤、近期制动</div><div class="point-val en" style="display:none">Overhead sports (swimming, badminton), heavy lifting, sleep posture (lying on affected side), fall with outstretched arm, recent immobilisation</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">夜间平卧加重（冻结肩/滑囊炎）；热敷缓解→寒凝；活动后减轻→气滞；外展上举加重→旋袖/撞击</div><div class="point-val en" style="display:none">Worsened lying flat at night (frozen shoulder/bursitis); heat relieves → Cold obstruction; activity relieves → Qi stagnation; worse on elevation → rotator cuff/impingement</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">上肢放射痛或麻木（需排除颈源性）；肩关节弹响（腱病/滑囊）；上肢力量下降（旋袖撕裂）</div><div class="point-val en" style="display:none">Upper limb radiation or numbness (exclude cervical origin); shoulder clicking (tendinopathy/bursitis); loss of arm strength (rotator cuff tear)</div></div></div>
 </div>
 <div class="phase-content" id="phase-shoulder-exam">
 <div class="point-prescription">
@@ -1706,21 +1629,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('elbow','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('elbow','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-elbow-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Lateral or Medial? The Two-Epicondyle Differentiation</span><span class="zh">外侧还是内侧？两上髁鉴别</span></span>
-      <div class="q-text"><span class="en">Pain on the lateral or medial side of the elbow? Worsened by gripping, lifting, or pouring? Occupation or sport (tennis, golf, keyboard, plumbing)?</span><span class="zh">肘关节外侧还是内侧疼痛？握持、抬举或倾倒时加重？职业或运动（网球、高尔夫、键盘、管道工）？</span></div>
-      <div class="q-why-brief"><span class="en">→ Lateral = LI channel (tennis elbow); Medial = HT/PC channel (golfer's elbow)</span><span class="zh">→ 外侧=大肠经（网球肘）；内侧=心/心包经（高尔夫球肘）</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail"><span class="en"><strong>Lateral epicondyle pain + worsened by wrist extension against resistance + gripping + "tennis" or typing occupation:</strong> Lateral epicondylitis (tennis elbow) — the common extensor origin is repeatedly overloaded. The LI11 point sits directly over the lateral epicondyle. The pain is at the enthesis (tendon-bone junction) — where the extensor carpi radialis brevis (ECRB) attaches most commonly. This is a classic Prolotherapy zone — the ECRB enthesis is avascular and cannot self-repair adequately from chronic repetitive strain.<br><br> <strong>Medial epicondyle pain + worsened by wrist flexion against resistance + forearm pronation + "golfer" or throwing sport:</strong> Medial epicondylitis (golfer's elbow) — the common flexor-pronator origin. HT3 (he-sea of Heart) is adjacent to the medial epicondyle. Less common than lateral epicondylitis but more disabling due to proximity to the ulnar nerve (ulnar nerve tingling in the ring and little finger can occur with medial epicondylitis).<br><br> <strong>Check for cervical source:</strong> C6/C7 radiculopathy refers pain to the lateral elbow (mimicking tennis elbow). Always palpate the forearm extensor MTrPs AND perform Spurling's before diagnosing true lateral epicondylitis.</span>
-      <span class="zh">
-        <strong>外上髁疼痛+腕伸展抗阻加重+握持+"网球"或打字职业：</strong>网球肘——伸肌总腱反复过载。LI11穴直接位于外上髁上方。疼痛在止点（肌腱-骨连接处）——桡侧腕短伸肌（ECRB）最常见的附着处。这是经典的增生疗法区域——ECRB止点为乏血管组织，无法从慢性重复性劳损中充分自我修复。<br><br>
-        <strong>内上髁疼痛+腕屈曲抗阻加重+前臂旋前+"高尔夫"或投掷运动：</strong>高尔夫球肘——屈肌-旋前肌总腱止点。HT3少海（心经合穴）邻近内上髁。比网球肘少见，但因邻近尺神经而更致残（内上髁炎可发生无名指和小指尺神经刺痛）。<br><br>
-        <strong>检查颈椎来源：</strong>C6/C7根性病变牵涉疼痛至肘外侧（模拟网球肘）。在诊断真性网球肘之前，始终触诊前臂伸肌MTrP并进行Spurling试验。
-      </span></div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >外侧髁痛（网球肘）</span><span class="en" style="display:none">Lateral Epicondyle — Tennis Elbow</span></div><div class="point-val zh">肱骨外上髁及前臂近端外侧痛；握力减弱（握手、拧毛巾困难）；提重物、腕背伸时加重</div><div class="point-val en" style="display:none">Lateral epicondyle and proximal lateral forearm pain; reduced grip strength (difficulty handshaking, wringing); worsened by lifting and wrist extension</div></div><div class="point-card"><div class="point-label"><span class="zh" >内侧髁痛（高尔夫球肘）</span><span class="en" style="display:none">Medial Epicondyle — Golfer's Elbow</span></div><div class="point-val zh">肱骨内上髁及前臂内侧痛；旋前、屈腕动作时加重；投掷运动员常见；尺神经症状需排查</div><div class="point-val en" style="display:none">Medial epicondyle and proximal medial forearm pain; worsened by pronation and wrist flexion; common in throwing athletes; ulnar nerve symptoms must be assessed</div></div><div class="point-card"><div class="point-label"><span class="zh" >弥漫性/关节内</span><span class="en" style="display:none">Diffuse / Intra-articular</span></div><div class="point-val zh">全肘关节肿胀；伸直受限（关节积液）；创伤后；须排查骨折、游离体、滑膜炎</div><div class="point-val en" style="display:none">Diffuse elbow swelling; extension restriction (joint effusion); post-trauma; must exclude fracture, loose body, synovitis</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">重复腕伸动作（电脑鼠标、木工、网球）；突然增加训练量；工具握持方式不当</div><div class="point-val en" style="display:none">Repetitive wrist extension (computer mouse, carpentry, tennis); sudden training load increase; improper tool grip technique</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">握力加重→外侧髁；前臂旋前加重→内侧髁；休息缓解但复发频繁→慢性腱病；热敷短期缓解</div><div class="point-val en" style="display:none">Grip worsens → lateral epicondyle; pronation worsens → medial epicondyle; rest relieves but frequent relapse → chronic tendinopathy; temporary relief with heat</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">前臂麻木（正中神经→假性腕管；尺神经→内侧型）；夜间痛（炎性期/血瘀）；力量明显下降</div><div class="point-val en" style="display:none">Forearm numbness (median nerve → pseudo-CTS; ulnar nerve → medial type); night pain (inflammatory phase/Blood stasis); significant strength loss</div></div></div>
 </div>
 <div class="phase-content" id="phase-elbow-exam">
 <div name="concept-box" class="concept-box">
@@ -1864,23 +1773,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('wrist','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('wrist','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-wrist-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Location and Character — The Three-Syndrome Differentiator</span><span class="zh">位置与性质——三大综合征鉴别</span></span>
-      <div class="q-text"><span class="en">Where exactly is the pain or discomfort? Palm and fingers numb/tingling? Radial side of thumb painful and swollen? Dorsal wrist aching with loading? Night symptoms?</span><span class="zh">确切位置？手掌和手指麻木/刺痛？拇指桡侧疼痛肿胀？负重时腕背部酸痛？夜间症状？</span></div>
-      <div class="q-why-brief"><span class="en">→ Location and character immediately identify which syndrome and which channel is involved</span><span class="zh">→ 位置和性质立即识别涉及哪种综合征和哪条经络</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail">
-        <span class="en"><strong>Numbness and tingling in thumb, index, middle, and radial half of ring finger — worse at night, relieved by shaking the hand (Flick sign):</strong> Carpal Tunnel Syndrome (CTS). The median nerve is compressed under the flexor retinaculum at PC7. Night worsening = venous congestion increases during sleep (neutral wrist position allows more interstitial pressure). Flick sign (shaking the hand relieves the numbness) is pathognomonic for CTS. In TCM: PC channel obstruction at the gate — Phlegm-Damp or Blood stasis blocking the channel's narrowest point.<br><br> <strong>Radial-side wrist pain and swelling at the base of the thumb, radiating up the forearm — worse with thumb movement and gripping:</strong> De Quervain's tenosynovitis (""). The APL and EPB tendon sheath at the radial styloid is inflamed. Classic in new mothers (repeated lifting of baby = repetitive thumb-radial deviation under load). Also occupational (hairdressers, assembly workers, golfers). In TCM: LI channel obstruction at the radial styloid — the LI channel runs directly through the anatomical snuffbox where the sheath lives.<br><br> <strong>Diffuse dorsal wrist pain, worse with weight-bearing, push-ups, getting up from a chair, or extension loading — history of fall on outstretched hand (FOOSH):</strong> Wrist ligament instability or TFCC (triangular fibrocartilage complex) injury. The scapholunate ligament (most common) or TFCC connects the carpal bones and prevents abnormal gliding. When torn or lax, the carpals shift abnormally under load → pain. This is the Prolotherapy zone — the avascular ligament and fibrocartilage cannot self-repair adequately.</span>
-        <span class="zh">
-          <strong>拇指、食指、中指和无名指桡侧半麻木刺痛——夜间加重，甩手后缓解（甩手征）：</strong>腕管综合征（CTS）。正中神经在PC7处屈肌支持带下受压。夜间加重=睡眠期间静脉淤血增加（腕部中立位允许更多组织间压力）。甩手征（甩手缓解麻木）是腕管综合征的特征性症状。中医：心包经在大陵关口受阻——痰湿或血瘀阻塞经络最狭窄处。<br><br>
-          <strong>腕部桡侧和拇指根部疼痛肿胀，放射至前臂——拇指运动和握持加重：</strong>De Quervain腱鞘炎（"妈妈手"）。桡骨茎突处APL和EPB腱鞘发炎。新生儿母亲经典（反复抱起婴儿=重复拇指-桡侧偏斜负荷）。也见于职业性（美发师、装配工人、高尔夫球手）。中医：大肠经在桡骨茎突处受阻——大肠经直接通过腱鞘所在的鼻烟壶。<br><br>
-          <strong>弥漫性腕背痛，负重加重（俯卧撑、从椅子起立或背伸负荷）——有手撑地跌倒史（FOOSH）：</strong>腕部韧带不稳或三角纤维软骨复合体（TFCC）损伤。舟月韧带（最常见）或TFCC连接腕骨并防止异常滑动。撕裂或松弛时，腕骨在负重下异常移位→疼痛。这是增生疗法适应区——乏血管韧带和纤维软骨无法充分自我修复。
-        </span>
-      </div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >背侧痛</span><span class="en" style="display:none">Dorsal Pain</span></div><div class="point-val zh">腕背部酸痛；电脑鼠标操作或打字后加重；腕伸肌腱区压痛；可伴腱鞘炎（de Quervain）</div><div class="point-val en" style="display:none">Dorsal wrist aching; worsened after mouse or keyboard use; wrist extensor tendon tenderness; may accompany tenosynovitis (de Quervain's)</div></div><div class="point-card"><div class="point-label"><span class="zh" >掌侧/假性腕管</span><span class="en" style="display:none">Palmar / Pseudo-CTS</span></div><div class="point-val zh">前三指（拇、食、中）麻木；腕部Tinel征阴性（假性腕管）；旋前圆肌区压痛；前臂近端放射</div><div class="point-val en" style="display:none">First three fingers (thumb, index, middle) numbness; negative Tinel at wrist (pseudo-CTS); pronator teres tenderness; proximal forearm radiation</div></div><div class="point-card"><div class="point-label"><span class="zh" >尺侧痛</span><span class="en" style="display:none">Ulnar-side Pain</span></div><div class="point-val zh">尺侧腕伸肌腱区或TFCC区域痛；旋转前臂时疼痛（门把手动作）；尺骨茎突区压痛</div><div class="point-val en" style="display:none">ECU tendon or TFCC area pain; pain on forearm rotation (door handle motion); ulnar styloid tenderness</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">重复键盘/鼠标使用；手工操作（园艺、绘画）；球拍运动；腕关节外伤；职业性振动工具使用</div><div class="point-val en" style="display:none">Repetitive keyboard/mouse use; manual work (gardening, painting); racket sports; wrist injury; occupational vibrating tool use</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">旋前腕关节加重→假性腕管；背伸加重→背侧肌腱；夜间麻醒→神经性（须排查真性腕管）；休息缓解→腱病</div><div class="point-val en" style="display:none">Pronation worsens → pseudo-CTS; extension worsens → dorsal tendons; nocturnal numbness waking patient → neural (must exclude true CTS); rest relieves → tendinopathy</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">手指精细动作下降（肌腱炎/神经卡压）；腕关节肿胀（积液/炎症）；前臂放射（旋前圆肌综合征）</div><div class="point-val en" style="display:none">Reduced fine finger movements (tendinopathy/nerve entrapment); wrist swelling (effusion/inflammation); forearm radiation (pronator teres syndrome)</div></div></div>
 </div>
 <div class="phase-content" id="phase-wrist-exam">
 <div class="point-prescription">
@@ -2166,29 +2059,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('knee','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('knee','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-knee-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Location and Movement Pattern</span><span class="zh">位置与运动模式</span></span>
-      <div class="q-text"><span class="en">Medial, lateral, anterior, or posterior? Pain going up stairs or down? Locking or giving way? Morning stiffness? Swelling? Clicking or grinding?</span><span class="zh">内侧、外侧、前方还是后方？上楼还是下楼痛？有无卡锁或打软腿？晨僵？肿胀？弹响或研磨感？</span></div>
-      <div class="q-why-brief"><span class="en">→ Location identifies the channel; functional patterns identify the tissue (cartilage vs meniscus vs ligament)</span><span class="zh">→ 位置识别经络；功能模式识别组织（软骨vs半月板vs韧带）</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail"><span class="en">
-        <strong>Medial joint line pain + worse going downstairs + McMurray positive:</strong> Medial meniscus tear — SP/LV channel at the medial joint line. Meniscal tears often produce a "locking" sensation (fragment catches in the joint) and localised joint line tenderness.<br><br>
-        <strong>Anterior knee pain + worse going upstairs + young active patient:</strong> Patellofemoral syndrome (runner's knee) — ST channel at the patella. The patella tracks laterally under load, producing anterior knee pain. Worse with stairs (patellofemoral pressure increases dramatically on stairs).<br><br>
-        <strong>Lateral knee pain + running + "band-like" tightness:</strong> Iliotibial band (ITB) syndrome — GB channel lateral knee. The ITB rubs against the lateral femoral condyle at ~30° of flexion (exactly the angle of every running footstrike). Point tenderness at Gerdy's tubercle (GB34 territory).<br><br>
-        <strong>Diffuse knee pain + crepitus + morning stiffness under 30 min + elderly:</strong> Knee osteoarthritis — primarily Kidney Xu (bone degeneration) + Phlegm-stasis (osteophytes). The grinding (crepitus) is the structural manifestation of cartilage loss. Both SP9 (medial joint) and GB34 (lateral joint) involvement.<br><br>
-        <strong>Giving way + after a twisting injury:</strong> Ligament laxity — ACL (anterior cruciate, medial twist) or MCL (medial blow). ACL and meniscal tears are the Prolotherapy zone for partial tears; full ACL rupture is surgical.
-      </span>
-      <span class="zh">
-        <strong>膝内侧关节线痛+下楼加重+McMurray阳性：</strong>内侧半月板撕裂——膝内侧关节线处脾/肝经。半月板撕裂常产生"卡锁"感（碎片嵌入关节）和局部关节线压痛。<br><br>
-        <strong>膝前疼痛+上楼加重+年轻活跃患者：</strong>髌股综合征（跑步膝）——髌骨处胃经。髌骨在负重时向外侧偏移，产生膝前疼痛。上楼加重（髌股压力在上楼时显著增加）。<br><br>
-        <strong>膝外侧疼痛+跑步+"带状"紧绷：</strong>髂胫束（ITB）综合征——胆经膝外侧。髂胫束在约30°屈曲时（正好是每次跑步着地的角度）摩擦股骨外侧髁。Gerdy结节处点状压痛（GB34区域）。<br><br>
-        <strong>弥漫性膝痛+摩擦感+晨僵不足30分钟+老年：</strong>膝关节骨关节炎——主要为肾虚（骨骼退变）+痰瘀（骨质增生）。磨擦感（摩擦音）是软骨丢失的结构性表现。阴陵泉（SP9）（内侧关节）和GB34（外侧关节）均受累。<br><br>
-        <strong>打软腿+扭转损伤后：</strong>韧带松弛——ACL（前交叉韧带，向内扭转）或MCL（内侧打击）。ACL和半月板撕裂是部分撕裂的增生疗法区；完全ACL断裂为手术适应症。
-      </span></div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >前方/髌周痛</span><span class="en" style="display:none">Anterior / Peripatellar</span></div><div class="point-val zh">上下楼和下蹲痛；久坐后起立僵硬（影院征阳性）；髌骨周围压痛；股四头肌无力</div><div class="point-val en" style="display:none">Pain on stairs and squatting; stiffness on rising after prolonged sitting (positive cinema sign); peripatellar tenderness; quadriceps weakness</div></div><div class="point-card"><div class="point-label"><span class="zh" >内侧痛</span><span class="en" style="display:none">Medial Pain</span></div><div class="point-val zh">内侧关节线或胫骨近端内侧痛；行走时内侧绞痛；鹅足区压痛；可与内侧副韧带损伤混淆</div><div class="point-val en" style="display:none">Medial joint line or proximal medial tibia pain; medial aching on walking; pes anserinus tenderness; may mimic MCL injury</div></div><div class="point-card"><div class="point-label"><span class="zh" >外侧痛</span><span class="en" style="display:none">Lateral Pain</span></div><div class="point-val zh">跑步后外侧痛（5km征）；髂胫束紧张；外侧关节线压痛；股二头肌和阔筋膜张肌紧张</div><div class="point-val en" style="display:none">Lateral pain after running (5km sign); IT band tightness; lateral joint line tenderness; biceps femoris and TFL tightness</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">跑步（增加训练量）、爬山、长时间跪位、外伤、退行性改变（中老年OA）</div><div class="point-val en" style="display:none">Running (increased training load), hiking, prolonged kneeling, trauma, degenerative change (OA in middle-aged and elderly)</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">下坡加重→髂胫束/外侧；起立加重→鹅足；夜间冷痛→寒湿型OA；热敷+活动减轻→气滞型</div><div class="point-val en" style="display:none">Worsened downhill → IT band/lateral; worse on rising → pes anserinus; cold night pain → Cold-Damp OA; heat and movement relieve → Qi stagnation type</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">关节肿胀（积液须查）；膝关节绞锁（半月板损伤）；打软腿（ACL/股四头肌无力）；关节弹响</div><div class="point-val en" style="display:none">Joint swelling (effusion — must assess); knee locking (meniscal tear); giving way (ACL/quadriceps weakness); joint clicking</div></div></div>
 </div>
 <div class="phase-content" id="phase-knee-exam">
 <div class="point-prescription">
@@ -2357,25 +2228,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('ankle','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('ankle','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-ankle-intake">
-<div class="q-card">
-    <div class="q-header">
-      <span class="q-badge badge-chief"><span class="en">Three Common Presentations</span><span class="zh">三种常见表现</span></span>
-      <div class="q-text"><span class="en">Heel pain worst in the morning (first steps)? Ankle laxity after an old sprain? Posterior heel/tendon pain with activity?</span><span class="zh">晨起第一步足跟痛最剧？旧扭伤后踝关节松弛？活动时足跟后方/肌腱疼痛？</span></div>
-      <div class="q-why-brief"><span class="en">→ Morning heel pain = plantar fasciitis (KI channel); ankle laxity = ATFL/CFL (GB channel Prolotherapy); posterior heel = Achilles (BL channel)</span><span class="zh">→ 晨起足跟痛=足底筋膜炎（肾经）；踝关节松弛=ATFL/CFL（胆经增生疗法）；足跟后方=跟腱（膀胱经）</span></div>
-    </div>
-    <div class="q-expand">
-      <div class="q-why-detail"><span class="en">
-        <strong>Heel pain worst with first steps in the morning, improves after a few minutes, returns after prolonged standing:</strong> Plantar fasciitis — the classic presentation. Blood stasis accumulates at the plantar fascia-calcaneus attachment during rest (night). The first steps stretch the fascia → ruptures the micro-adhesions → pain. After walking, the fascia warms and loosens (Blood flows). After prolonged standing, the fascia fatigues and stasis re-accumulates. TCM: KI channel Blood stasis at KI1 territory + Kidney deficiency (the plantar fascia requires Kidney Jing to maintain its structural integrity).<br><br>
-        <strong>Chronic lateral ankle giving-way after old sprain + positive anterior drawer:</strong> ATFL and CFL ligament laxity from incompletely healed sprain. The body cannot self-repair avascular ligament tissue → persistent lateral ankle instability. Prolotherapy to the ATFL and CFL entheses is the definitive non-surgical treatment.<br><br>
-        <strong>Posterior heel pain + morning stiffness + pain climbing stairs + tender 2–6cm above the calcaneus:</strong> Mid-portion Achilles tendinopathy (the most common). The 2–6cm zone above the calcaneal insertion is the "critical zone" — the most avascular segment of the Achilles. Chronic repetitive loading without adequate repair → tendon degeneration. Distinguished from insertional Achilles tendinopathy (at the calcaneus, more complex, includes Haglund's deformity — requires different approach).
-      </span>
-      <span class="zh">
-        <strong>晨起第一步足跟痛最剧，步行几分钟后改善，久站后复发：</strong>足底筋膜炎——经典表现。休息期间（夜间）血瘀积聚于跖筋膜-跟骨附着处。第一步牵伸筋膜→撕裂微粘连→疼痛。步行后筋膜温热松弛（血液流动）。久站后筋膜疲劳，血瘀再次积聚。中医：KI1区域跖侧肾经血瘀+肾虚（跖筋膜需要肾精维持其结构完整性）。<br><br>
-        <strong>旧扭伤后慢性踝关节外侧打软腿+前抽屉试验阳性：</strong>未完全愈合扭伤导致的ATFL和CFL韧带松弛。机体无法自行修复乏血管韧带组织→持续踝外侧不稳。ATFL和CFL止点增生疗法是确定性非手术治疗。<br><br>
-        <strong>足跟后方疼痛+晨僵+上楼疼痛+跟骨上方2–6cm处压痛：</strong>跟腱中段病（最常见）。跟骨止点上方2–6cm区域是"关键区"——跟腱最乏血管段。慢性重复性负荷无充分修复→肌腱退变。与止点型跟腱病（在跟骨处，更复杂，包括Haglund畸形——需要不同方法）区别。
-      </span></div>
-    </div>
-  </div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >外侧（扭伤型）</span><span class="en" style="display:none">Lateral — Sprain Type</span></div><div class="point-val zh">内翻损伤后外侧踝韧带区肿痛；腓骨肌腱区压痛；慢性不稳感（反复扭伤史）</div><div class="point-val en" style="display:none">Lateral ankle ligament pain and swelling after inversion injury; peroneal tendon tenderness; chronic instability (history of recurrent sprains)</div></div><div class="point-card"><div class="point-label"><span class="zh" >内侧（胫后肌腱）</span><span class="en" style="display:none">Medial — Tibialis Posterior</span></div><div class="point-val zh">内踝后下方痛；长时间站立或行走加重；可伴扁平足；足弓内侧压痛</div><div class="point-val en" style="display:none">Pain posterior and inferior to medial malleolus; worsened by prolonged standing or walking; may accompany flat foot; medial arch tenderness</div></div><div class="point-card"><div class="point-label"><span class="zh" >后跟/跟腱区</span><span class="en" style="display:none">Posterior Heel / Achilles</span></div><div class="point-val zh">跟腱止点或腱体本身疼痛；晨起僵痛、活动后稍缓；提踵时剧痛；腓肠肌和比目鱼肌紧张</div><div class="point-val en" style="display:none">Pain at Achilles insertion or tendon body; morning stiffness improving with activity; severe pain on calf raise; gastrocnemius and soleus tightness</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">急性扭伤（内翻）；增加跑步量；穿高跟鞋；踝关节功能性不稳；下肢生物力学异常</div><div class="point-val en" style="display:none">Acute inversion sprain; increased running volume; high-heeled footwear; functional ankle instability; lower limb biomechanical abnormality</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">负重加重→腱病/韧带；上坡加重→跟腱；不平地面加重→慢性不稳；夜间静息痛→炎性或血瘀</div><div class="point-val en" style="display:none">Load-bearing worsens → tendinopathy/ligament; uphill worsens → Achilles; uneven ground worsens → chronic instability; night rest pain → inflammatory or Blood stasis</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">足背麻木（腓浅神经损伤）；踝关节弹响（腱鞘炎/游离体）；皮肤青紫（急性期血瘀）</div><div class="point-val en" style="display:none">Dorsal foot numbness (superficial peroneal nerve injury); ankle clicking (tenosynovitis/loose body); bruising (acute Blood stasis)</div></div></div>
 </div>
 <div class="phase-content" id="phase-ankle-exam">
 <div name="concept-box" class="concept-box">
@@ -2523,29 +2376,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('plantar','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 </div>
   <div class="phase-content active" id="phase-plantar-intake">
-<div class="concept-box">
-  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Plantar Fasciitis — Why "Fasciitis" Is a Misnomer</span><span class="zh">足底筋膜炎——为什么"筋膜炎"这个名称是误导性的</span></div>
-  <div class="concept-body"><span class="en">
-    Modern histological studies show that plantar fasciitis is almost always a <strong>degenerative fasciosis</strong>, not an acute inflammatory condition. The characteristic finding is collagen disorganisation, myxoid degeneration, and angiofibroblastic hyperplasia at the calcaneal insertion — the same pathology as tennis elbow (lateral epicondylosis). There is no significant inflammatory infiltrate in chronic cases.<br><br>
-    <strong>Clinical implication:</strong> Anti-inflammatory treatments (NSAIDs, corticosteroid injection) target a pathological process that is not primarily inflammatory. They may temporarily reduce pain but do not address the degenerative change or restore tissue integrity. This explains why short-term steroid relief is followed by recurrence.<br><br>
-    <strong>Perpetuating factors — the key clinical assessment:</strong><br>
-    1. Gastrocnemius-soleus tightness (reduced ankle dorsiflexion) → increases tensile load on plantar fascia<br>
-    2. Intrinsic foot muscle weakness (especially abductor hallucis) → reduces arch support<br>
-    3. Excessive pronation / flat foot → increases medial fascial strain<br>
-    4. Obesity → increases compressive load<br>
-    5. Occupational standing → cumulative load
-  </span>
-  <span class="zh">
-    现代组织学研究表明，足底筋膜炎几乎总是<strong>退行性筋膜病</strong>，而非急性炎症性病症。特征性发现是跟骨附着处的胶原蛋白紊乱、黏液样退变和血管成纤维细胞增生——与网球肘（外侧上髁病）相同的病理改变。慢性病例中无显著炎症浸润。<br><br>
-    <strong>临床意义：</strong>抗炎治疗（NSAIDs，皮质类固醇注射）针对的是非主要炎症性的病理过程。它们可能暂时减轻疼痛，但不能处理退行性改变或恢复组织完整性。这解释了为什么短期类固醇缓解后会复发。<br><br>
-    <strong>维持因素——关键临床评估：</strong><br>
-    1. 腓肠肌-比目鱼肌紧张（踝关节背屈减少）→增加足底筋膜张力负荷<br>
-    2. 足内在肌无力（尤其是拇展肌）→减少足弓支撑<br>
-    3. 过度旋前/扁平足→增加筋膜内侧张力<br>
-    4. 肥胖→增加压缩负荷<br>
-    5. 职业性站立→累积负荷
-  </span></div>
-</div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >足跟晨痛（经典型）</span><span class="en" style="display:none">Morning Heel Pain — Classic</span></div><div class="point-val zh">晨起第一步跟骨内侧剧痛（最具特征性）；步行5-10分钟后减轻；久站或运动后再次加重</div><div class="point-val en" style="display:none">Severe medial calcaneal pain on first step in morning (most characteristic); improves after 5–10 min walking; worsens again after prolonged standing or exercise</div></div><div class="point-card"><div class="point-label"><span class="zh" >足弓/中足痛</span><span class="en" style="display:none">Arch / Midfoot Pain</span></div><div class="point-val zh">足纵弓内侧持续酸痛；久站加重；扁平足或高弓足相关；胫骨后肌紧张</div><div class="point-val en" style="display:none">Persistent medial longitudinal arch aching; worsened by prolonged standing; associated with flat foot or high arch; tibialis posterior tightness</div></div><div class="point-card"><div class="point-label"><span class="zh" >弥漫性足底痛</span><span class="en" style="display:none">Diffuse Plantar Pain</span></div><div class="point-val zh">整个足底弥漫性酸痛；赤脚行走加重；需排查跗管综合征（胫神经）、全身性疾病</div><div class="point-val en" style="display:none">Diffuse aching across the entire plantar surface; worse barefoot; must exclude tarsal tunnel syndrome (tibial nerve) and systemic disease</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">增加跑步或站立时间；鞋底支撑不足；超重；职业性长时间站立（教师、护士、厨师）</div><div class="point-val en" style="display:none">Increased running or standing time; insufficient footwear support; excess body weight; occupational prolonged standing (teacher, nurse, cook)</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">晨起第一步最痛→腓肠肌/比目鱼肌缩短；赤脚加重→足弓支撑不足；热敷缓解→寒凝型；拉伸小腿缓解→筋膜型</div><div class="point-val en" style="display:none">Worst on first morning step → gastrocnemius/soleus shortening; worse barefoot → insufficient arch support; heat relieves → Cold constraint type; calf stretch relieves → fascial type</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">足趾麻木（跗管综合征）；踝关节痛（合并肌腱病）；腰骶部不适（比目鱼肌远端放射）</div><div class="point-val en" style="display:none">Toe numbness (tarsal tunnel syndrome); ankle pain (concurrent tendinopathy); lumbosacral discomfort (distal soleus referral)</div></div></div>
 </div>
 <div class="phase-content" id="phase-plantar-exam">
 <div class="concept-box">
@@ -2675,16 +2506,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('visceral','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 </div>
   <div class="phase-content active" id="phase-visceral-intake">
-<div class="concept-box">
-  <div class="concept-title" onclick="this.parentElement.classList.toggle('open')"><span class="en">Visceral Pain vs Musculoskeletal Pain — The Fundamental Difference</span><span class="zh">内脏痛与肌骨痛的根本区别</span></div>
-  <div class="concept-body"><span class="en">Musculoskeletal pain = blocked Qi and Blood in the channels, muscles, and sinews. Trigger points, FSN, and local needling are appropriate.<br><br> Visceral pain = dysfunction of an internal Zang-Fu organ, expressed through its channel. The pain is a signal of organ Qi stagnation — treating only the pain site without addressing the organ is like treating the symptom without the cause.<br><br> <strong>The key principle:</strong> Every visceral pain has a specific organ-channel assignment. Stomach pain = Stomach channel dysfunction. Hypochondriac pain = Liver-GB channel. Chest pain = Heart or Lung channel. Treatment always addresses the organ's Qi dynamic, not just the pain location.<br><br> <strong>Qi dynamic for all visceral pain:</strong> — "When there is no free flow, there is pain." But the blockage mechanism differs: Cold constriction, Qi stagnation, Blood stasis, or Yin deficiency causing dryness and friction. Each requires a different approach.</span>
-  <span class="zh">
-    肌骨痛=经络、肌肉和筋腱中的气血阻滞。触发点、浮针和局部针刺是合适的。<br><br>
-    内脏痛=内部脏腑器官的功能障碍，通过其经络表现。疼痛是脏腑气机郁滞的信号——只治疗疼痛部位而不处理脏腑，如同治标而不治本。<br><br>
-    <strong>关键原则：</strong>每种内脏痛都有特定的脏腑经络归属。胃痛=胃的经络功能障碍。胁肋痛=肝胆经络。胸痛=心或肺经。治疗始终处理脏腑的气机，而非仅针对疼痛部位。<br><br>
-    <strong>所有内脏痛的气机：</strong>不通则痛。但阻滞机制不同：寒凝、气滞、血瘀或阴虚引起的燥热摩擦。每种需要不同的治疗方法。
-  </span></div>
-</div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >腹部症状</span><span class="en" style="display:none">Abdominal Symptoms</span></div><div class="point-val zh">非特异性腹痛、腹胀；排除器质性后持续；与姿势相关（前屈加重）；腹直肌和腹斜肌紧张</div><div class="point-val en" style="display:none">Non-specific abdominal pain and bloating; persists after organic causes excluded; posture-related (worsened by flexion); rectus abdominis and oblique muscle tightness</div></div><div class="point-card"><div class="point-label"><span class="zh" >胁肋/季肋区</span><span class="en" style="display:none">Hypochondriac / Costal</span></div><div class="point-val zh">深呼吸时加重的肋弓区带状放射痛；可误为带状疱疹前驱；竖脊肌和膈肌触发点放射</div><div class="point-val en" style="display:none">Band-like costal margin pain worsened by deep breathing; may mimic pre-herpetic neuralgia; erector spinae and diaphragm trigger point referral</div></div><div class="point-card"><div class="point-label"><span class="zh" >盆腔/泌尿症状</span><span class="en" style="display:none">Pelvic / Urological Symptoms</span></div><div class="point-val zh">非细菌性尿频、尿急；骨盆慢性疼痛；痛经；排除感染后持续；股内侧肌群和腹横肌受累</div><div class="point-val en" style="display:none">Non-bacterial urinary frequency and urgency; chronic pelvic pain; dysmenorrhoea; persists after infection excluded; adductor group and transversus abdominis involvement</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诊断路径</span><span class="en" style="display:none">Diagnostic Pathway</span></div><div class="point-val zh">内脏型肌筋膜痛须在排除器质性疾病后方可诊断。已完成的检查（超声、内镜、尿培养）阴性结果是重要线索</div><div class="point-val en" style="display:none">Visceral-type myofascial pain is a diagnosis of exclusion — only after organic disease ruled out. Negative investigations (ultrasound, endoscopy, urine culture) are important clues</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">特定姿势加重（肌筋膜特征）；精神紧张加重（自主神经参与）；热敷或按摩腹壁部分缓解</div><div class="point-val en" style="display:none">Specific postures worsen (myofascial characteristic); emotional stress worsens (autonomic nervous system involvement); heat or abdominal wall massage partially relieves</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">情绪焦虑/抑郁（高度相关）；睡眠障碍；肠易激综合征样表现；腰骶部不适（共同嫌疑肌）</div><div class="point-val en" style="display:none">Emotional anxiety/depression (highly correlated); sleep disturbance; IBS-like presentation; lumbosacral discomfort (shared suspect muscles)</div></div></div>
 </div>
 <div class="phase-content" id="phase-visceral-exam">
 <div class="concept-box">
@@ -2825,10 +2647,7 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <button class="phase-tab" onclick="showPhase('gout','treatment',this)"><span class="zh" >⑤ 治疗方案</span><span class="en" style="display:none">⑤ Treatment</span></button>
 <button class="phase-tab" onclick="showPhase('gout','herbs',this)"><span class="zh" >⑥ 方药</span><span class="en" style="display:none">⑥ Herbal Rx</span></button></div>
   <div class="phase-content active" id="phase-gout-intake">
-<div class="safety-box">
-  <div class="safety-title"><span class="en">⚠ Acute Gout — Co-manage with Medicine</span><span class="zh">⚠ 急性痛风——与内科联合管理</span></div>
-  <div class="safety-body"><span class="en">Acute gout with severe joint inflammation (red, hot, swollen, exquisitely tender) benefits from TCM adjunct but may require colchicine or NSAIDs for rapid pain control. Septic arthritis must be excluded if fever is present. TCM herbs are most effective for chronic urate management and reducing attack frequency. Allopurinol or febuxostat for urate-lowering should continue alongside TCM in established gout.</span><span class="zh">急性痛风伴严重关节炎症（红、热、肿、极度压痛）可受益于中医辅助，但可能需要秋水仙素或NSAIDs快速止痛。若有发热必须排除化脓性关节炎。中医草药对慢性尿酸管理和减少发作频率最有效。确诊痛风患者在接受中医治疗的同时应继续使用别嘌醇或非布司他降尿酸。</span></div>
-</div>
+<div class="section-block"><div class="section-title"><span class="zh" >主诉特征</span><span class="en" style="display:none">Chief Complaint Patterns</span></div><div class="point-card"><div class="point-label"><span class="zh" >急性发作期</span><span class="en" style="display:none">Acute Attack</span></div><div class="point-val zh">关节突发红热肿痛（常在夜间无诱因起病）；第一跖趾关节最常见（痛风石征）；触碰即剧痛</div><div class="point-val en" style="display:none">Sudden joint redness, heat, swelling, and severe pain (often nocturnal with no apparent trigger); first metatarsophalangeal joint most common (gout hallmark); exquisite touch sensitivity</div></div><div class="point-card"><div class="point-label"><span class="zh" >慢性/间歇期</span><span class="en" style="display:none">Chronic / Intercritical</span></div><div class="point-val zh">关节周围肌肉长期保护性痉挛；残余酸痛和功能受限；痛风石（耳廓、肘部、跟腱）；慢性关节病变</div><div class="point-val en" style="display:none">Prolonged protective periarticular muscle spasm; residual aching and functional restriction; tophi (auricle, elbow, Achilles tendon); chronic arthropathy</div></div><div class="point-card"><div class="point-label"><span class="zh" >多关节/不典型</span><span class="en" style="display:none">Polyarticular / Atypical</span></div><div class="point-val zh">多关节同时发作（少见但存在）；女性绝经后多见（雌激素对尿酸的保护作用消失）；须与类风湿鉴别</div><div class="point-val en" style="display:none">Simultaneous polyarticular involvement (uncommon but occurs); more common in post-menopausal women (loss of oestrogen urate protection); must differentiate from rheumatoid arthritis</div></div></div><div class="section-block"><div class="section-title"><span class="zh" >问诊要点</span><span class="en" style="display:none">Key History</span></div><div class="point-card"><div class="point-label"><span class="zh" >诱因</span><span class="en" style="display:none">Precipitating Factors</span></div><div class="point-val zh">高嘌呤饮食（红肉、海鲜、动物内脏）；大量饮酒（尤其啤酒）；脱水；突然开始降尿酸药物；外伤手术</div><div class="point-val en" style="display:none">High-purine diet (red meat, seafood, organ meats); heavy alcohol (especially beer); dehydration; initiating urate-lowering therapy; trauma or surgery</div></div><div class="point-card"><div class="point-label"><span class="zh" >加重与缓解</span><span class="en" style="display:none">Aggravating / Relieving</span></div><div class="point-val zh">急性期：任何触碰加重，冷敷（非热敷）可稍缓；慢性期：天气变化、受寒加重→寒湿痰瘀型</div><div class="point-val en" style="display:none">Acute phase: any contact worsens, cold pack (not heat) may slightly relieve; chronic phase: weather changes and cold worsening → Cold-Damp Phlegm-Stasis type</div></div><div class="point-card"><div class="point-label"><span class="zh" >伴随症状</span><span class="en" style="display:none">Associated Symptoms</span></div><div class="point-val zh">肾结石（尿酸盐沉积）；肾功能损害（须定期监测）；高血压、糖尿病、高脂血症（代谢综合征）</div><div class="point-val en" style="display:none">Renal calculi (urate deposition); renal impairment (must monitor regularly); hypertension, diabetes, dyslipidaemia (metabolic syndrome)</div></div></div>
 </div>
 <div class="phase-content" id="phase-gout-exam">
 
@@ -3010,7 +2829,9 @@ Indications: Neck pain with dizziness, head heaviness, greasy tongue coat</div><
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
-var isEn = false;
+// Read language from sinomed homepage (sinomed-lang key, default 'en')
+var _storedLang = localStorage.getItem('sinomed-lang');
+var isEn = (_storedLang === null) ? true : (_storedLang === 'en');
 
 function applyLang(){
   document.body.classList.toggle('lang-en', isEn);
@@ -3019,7 +2840,11 @@ function applyLang(){
   document.querySelectorAll('.zh').forEach(function(el){el.style.display=isEn?'none':'';});
   document.querySelectorAll('.en').forEach(function(el){el.style.display=isEn?'':'none';});
 }
-function toggleLang(){ isEn=!isEn; applyLang(); }
+function toggleLang(){
+  isEn=!isEn;
+  try{ localStorage.setItem('sinomed-lang', isEn?'en':'zh'); }catch(e){}
+  applyLang();
+}
 
 function showPage(id,el){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
@@ -3288,7 +3113,13 @@ function shoulderQuizAns(idx){
   else shoulder_sc++;
   var exp=document.getElementById('shoulder-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ shoulder_qi++; shoulderQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ shoulder_qi++; shoulderQuizRender(); };
+  var expEl=document.getElementById('shoulder-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function shoulderQuizDone(){
   document.getElementById('shoulder-quiz-area').innerHTML='';
@@ -3363,7 +3194,13 @@ function lowbackQuizAns(idx){
   else lowback_sc++;
   var exp=document.getElementById('lowback-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ lowback_qi++; lowbackQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ lowback_qi++; lowbackQuizRender(); };
+  var expEl=document.getElementById('lowback-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function lowbackQuizDone(){
   document.getElementById('lowback-quiz-area').innerHTML='';
@@ -3438,7 +3275,13 @@ function headpainQuizAns(idx){
   else headpain_sc++;
   var exp=document.getElementById('headpain-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ headpain_qi++; headpainQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ headpain_qi++; headpainQuizRender(); };
+  var expEl=document.getElementById('headpain-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function headpainQuizDone(){
   document.getElementById('headpain-quiz-area').innerHTML='';
@@ -3513,7 +3356,13 @@ function kneeQuizAns(idx){
   else knee_sc++;
   var exp=document.getElementById('knee-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ knee_qi++; kneeQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ knee_qi++; kneeQuizRender(); };
+  var expEl=document.getElementById('knee-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function kneeQuizDone(){
   document.getElementById('knee-quiz-area').innerHTML='';
@@ -3588,7 +3437,13 @@ function sciaticaQuizAns(idx){
   else sciatica_sc++;
   var exp=document.getElementById('sciatica-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ sciatica_qi++; sciaticaQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ sciatica_qi++; sciaticaQuizRender(); };
+  var expEl=document.getElementById('sciatica-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function sciaticaQuizDone(){
   document.getElementById('sciatica-quiz-area').innerHTML='';
@@ -3655,7 +3510,13 @@ function elbowQuizAns(idx){
   else elbow_sc++;
   var exp=document.getElementById('elbow-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ elbow_qi++; elbowQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ elbow_qi++; elbowQuizRender(); };
+  var expEl=document.getElementById('elbow-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function elbowQuizDone(){
   document.getElementById('elbow-quiz-area').innerHTML='';
@@ -3725,7 +3586,13 @@ function ankleQuizAns(idx){
   else ankle_sc++;
   var exp=document.getElementById('ankle-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ ankle_qi++; ankleQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ ankle_qi++; ankleQuizRender(); };
+  var expEl=document.getElementById('ankle-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function ankleQuizDone(){
   document.getElementById('ankle-quiz-area').innerHTML='';
@@ -3792,7 +3659,13 @@ function plantarQuizAns(idx){
   else plantar_sc++;
   var exp=document.getElementById('plantar-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ plantar_qi++; plantarQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ plantar_qi++; plantarQuizRender(); };
+  var expEl=document.getElementById('plantar-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function plantarQuizDone(){
   document.getElementById('plantar-quiz-area').innerHTML='';
@@ -3859,7 +3732,13 @@ function tmjQuizAns(idx){
   else tmj_sc++;
   var exp=document.getElementById('tmj-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ tmj_qi++; tmjQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ tmj_qi++; tmjQuizRender(); };
+  var expEl=document.getElementById('tmj-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function tmjQuizDone(){
   document.getElementById('tmj-quiz-area').innerHTML='';
@@ -3925,7 +3804,13 @@ function piriformisQuizAns(idx){
   else piriformis_sc++;
   var exp=document.getElementById('piriformis-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ piriformis_qi++; piriformisQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ piriformis_qi++; piriformisQuizRender(); };
+  var expEl=document.getElementById('piriformis-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function piriformisQuizDone(){
   document.getElementById('piriformis-quiz-area').innerHTML='';
@@ -3996,7 +3881,13 @@ function wristQuizAns(idx){
   else wrist_sc++;
   var exp=document.getElementById('wrist-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ wrist_qi++; wristQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ wrist_qi++; wristQuizRender(); };
+  var expEl=document.getElementById('wrist-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function wristQuizDone(){
   document.getElementById('wrist-quiz-area').innerHTML='';
@@ -4067,7 +3958,13 @@ function visceralQuizAns(idx){
   else visceral_sc++;
   var exp=document.getElementById('visceral-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ visceral_qi++; visceralQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ visceral_qi++; visceralQuizRender(); };
+  var expEl=document.getElementById('visceral-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function visceralQuizDone(){
   document.getElementById('visceral-quiz-area').innerHTML='';
@@ -4132,7 +4029,13 @@ function goutQuizAns(idx){
   else gout_sc++;
   var exp=document.getElementById('gout-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ gout_qi++; goutQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ gout_qi++; goutQuizRender(); };
+  var expEl=document.getElementById('gout-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function goutQuizDone(){
   document.getElementById('gout-quiz-area').innerHTML='';
@@ -4222,7 +4125,13 @@ function neckQuizAnswer(idx){
   else nqScore++;
   var exp=document.getElementById('nq-exp');if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
   nqAnswered.push(idx===q.ans);
-  setTimeout(function(){nqIdx++;neckQuizRender();},2200);
+  var nxtBtnN=document.createElement('button');
+  nxtBtnN.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtnN.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtnN.onclick=function(){nqIdx++;neckQuizRender();};
+  var expElN=document.getElementById('nq-exp');
+  if(expElN && expElN.parentNode) expElN.parentNode.appendChild(nxtBtnN);
+  applyLang();
 }
 function neckQuizDone(){
   document.getElementById('neck-quiz').innerHTML='';
@@ -4542,7 +4451,13 @@ function shoulderQuizAns(idx){
   else shoulder_sc++;
   var exp=document.getElementById('shoulder-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ shoulder_qi++; shoulderQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ shoulder_qi++; shoulderQuizRender(); };
+  var expEl=document.getElementById('shoulder-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function shoulderQuizDone(){
   document.getElementById('shoulder-quiz-area').innerHTML='';
@@ -4617,7 +4532,13 @@ function lowbackQuizAns(idx){
   else lowback_sc++;
   var exp=document.getElementById('lowback-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ lowback_qi++; lowbackQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ lowback_qi++; lowbackQuizRender(); };
+  var expEl=document.getElementById('lowback-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function lowbackQuizDone(){
   document.getElementById('lowback-quiz-area').innerHTML='';
@@ -4692,7 +4613,13 @@ function headpainQuizAns(idx){
   else headpain_sc++;
   var exp=document.getElementById('headpain-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ headpain_qi++; headpainQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ headpain_qi++; headpainQuizRender(); };
+  var expEl=document.getElementById('headpain-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function headpainQuizDone(){
   document.getElementById('headpain-quiz-area').innerHTML='';
@@ -4767,7 +4694,13 @@ function kneeQuizAns(idx){
   else knee_sc++;
   var exp=document.getElementById('knee-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ knee_qi++; kneeQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ knee_qi++; kneeQuizRender(); };
+  var expEl=document.getElementById('knee-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function kneeQuizDone(){
   document.getElementById('knee-quiz-area').innerHTML='';
@@ -4842,7 +4775,13 @@ function sciaticaQuizAns(idx){
   else sciatica_sc++;
   var exp=document.getElementById('sciatica-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ sciatica_qi++; sciaticaQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ sciatica_qi++; sciaticaQuizRender(); };
+  var expEl=document.getElementById('sciatica-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function sciaticaQuizDone(){
   document.getElementById('sciatica-quiz-area').innerHTML='';
@@ -4909,7 +4848,13 @@ function elbowQuizAns(idx){
   else elbow_sc++;
   var exp=document.getElementById('elbow-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ elbow_qi++; elbowQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ elbow_qi++; elbowQuizRender(); };
+  var expEl=document.getElementById('elbow-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function elbowQuizDone(){
   document.getElementById('elbow-quiz-area').innerHTML='';
@@ -4979,7 +4924,13 @@ function ankleQuizAns(idx){
   else ankle_sc++;
   var exp=document.getElementById('ankle-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ ankle_qi++; ankleQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ ankle_qi++; ankleQuizRender(); };
+  var expEl=document.getElementById('ankle-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function ankleQuizDone(){
   document.getElementById('ankle-quiz-area').innerHTML='';
@@ -5046,7 +4997,13 @@ function plantarQuizAns(idx){
   else plantar_sc++;
   var exp=document.getElementById('plantar-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ plantar_qi++; plantarQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ plantar_qi++; plantarQuizRender(); };
+  var expEl=document.getElementById('plantar-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function plantarQuizDone(){
   document.getElementById('plantar-quiz-area').innerHTML='';
@@ -5113,7 +5070,13 @@ function tmjQuizAns(idx){
   else tmj_sc++;
   var exp=document.getElementById('tmj-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ tmj_qi++; tmjQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ tmj_qi++; tmjQuizRender(); };
+  var expEl=document.getElementById('tmj-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function tmjQuizDone(){
   document.getElementById('tmj-quiz-area').innerHTML='';
@@ -5179,7 +5142,13 @@ function piriformisQuizAns(idx){
   else piriformis_sc++;
   var exp=document.getElementById('piriformis-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ piriformis_qi++; piriformisQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ piriformis_qi++; piriformisQuizRender(); };
+  var expEl=document.getElementById('piriformis-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function piriformisQuizDone(){
   document.getElementById('piriformis-quiz-area').innerHTML='';
@@ -5250,7 +5219,13 @@ function wristQuizAns(idx){
   else wrist_sc++;
   var exp=document.getElementById('wrist-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ wrist_qi++; wristQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ wrist_qi++; wristQuizRender(); };
+  var expEl=document.getElementById('wrist-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function wristQuizDone(){
   document.getElementById('wrist-quiz-area').innerHTML='';
@@ -5321,7 +5296,13 @@ function visceralQuizAns(idx){
   else visceral_sc++;
   var exp=document.getElementById('visceral-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ visceral_qi++; visceralQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ visceral_qi++; visceralQuizRender(); };
+  var expEl=document.getElementById('visceral-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function visceralQuizDone(){
   document.getElementById('visceral-quiz-area').innerHTML='';
@@ -5386,7 +5367,13 @@ function goutQuizAns(idx){
   else gout_sc++;
   var exp=document.getElementById('gout-exp');
   if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
-  setTimeout(function(){ gout_qi++; goutQuizRender(); },2200);
+  var nxtBtn=document.createElement('button');
+  nxtBtn.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtn.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtn.onclick=function(){ gout_qi++; goutQuizRender(); };
+  var expEl=document.getElementById('gout-exp');
+  if(expEl && expEl.parentNode) expEl.parentNode.appendChild(nxtBtn);
+  applyLang();
 }
 function goutQuizDone(){
   document.getElementById('gout-quiz-area').innerHTML='';
@@ -5476,7 +5463,13 @@ function neckQuizAnswer(idx){
   else nqScore++;
   var exp=document.getElementById('nq-exp');if(exp){exp.textContent=zh?q.exp_zh:q.exp_en;exp.classList.add('show');}
   nqAnswered.push(idx===q.ans);
-  setTimeout(function(){nqIdx++;neckQuizRender();},2200);
+  var nxtBtnN=document.createElement('button');
+  nxtBtnN.style.cssText='margin-top:10px;padding:8px 20px;background:#1E3A5F;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;display:block';
+  nxtBtnN.innerHTML='<span class="zh">下一题 →</span><span class="en" style="display:none">Next →</span>';
+  nxtBtnN.onclick=function(){nqIdx++;neckQuizRender();};
+  var expElN=document.getElementById('nq-exp');
+  if(expElN && expElN.parentNode) expElN.parentNode.appendChild(nxtBtnN);
+  applyLang();
 }
 function neckQuizDone(){
   document.getElementById('neck-quiz').innerHTML='';
@@ -5739,6 +5732,93 @@ function pqShowResult(){
 
 function pqStart(){pqBegin();}
 function pqRestart(){pqRenderRoot();}
+
+
+/* ══ SEARCH ══ */
+var SIDX = [{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"部位","ce":"Location","tz":["肩部","肩关节","肩膀","肩胛"],"te":["shoulder","glenohumeral"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"症状","ce":"Symptoms","tz":["肩痛","夜间痛","外旋受限","痛弧","冻结肩","肩袖","撞击"],"te":["shoulder pain","night pain","ER restricted","painful arc","frozen shoulder","impingement"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"嫌疑肌","ce":"Muscles","tz":["冈上肌","冈下肌","肩胛下肌","胸小肌","肱二头肌","三角肌"],"te":["supraspinatus","infraspinatus","subscapularis","pec minor","biceps brachii","deltoid"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"穴位","ce":"Acupoints","tz":["肩井","GB21","天柱","BL10","肩髃","LI15","肩贞","SI9"],"te":["GB21 Jianjing","BL10 Tianzhu","LI15 Jianyu","SI9 Jianzhen"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"气机","ce":"Qi Pattern","tz":["气滞血瘀","寒湿痹阻","肝肾亏虚","阳气不宣"],"te":["Qi-Blood stasis","Cold-Damp Bi","LK deficiency"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder Pain","cz":"浮针再灌注","ce":"FSN RA","tz":["外旋抗阻","外展抗阻","耸肩抗阻"],"te":["resisted ER","resisted abduction","resisted shrug"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"部位","ce":"Location","tz":["颈部","颈椎","颈肩","项部"],"te":["neck","cervical spine","cervicothoracic"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"症状","ce":"Symptoms","tz":["颈痛","落枕","颈僵","手麻","头晕","颈源性头痛","神经根型"],"te":["neck pain","torticollis","cervical rigidity","arm numbness","dizziness","cervicogenic headache","radiculopathy"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"嫌疑肌","ce":"Muscles","tz":["肩胛提肌","颈夹肌","斜方肌上部","枕下肌群","斜角肌","胸锁乳突肌","冈下肌"],"te":["levator scapulae","splenius cervicis","upper trapezius","suboccipitals","scalenes","SCM","infraspinatus"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"穴位","ce":"Acupoints","tz":["风池","GB20","天柱","BL10","肩井","GB21","大椎","GV14","后溪","SI3"],"te":["GB20 Fengchi","BL10 Tianzhu","GB21 Jianjing","GV14 Dazhui","SI3 Houxi"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"气机","ce":"Qi Pattern","tz":["寒凝气滞","肝郁气滞","肝肾亏虚","痰湿阻络","筋脉痹阻"],"te":["Cold-Qi stagnation","Liver Qi stagnation","LK deficiency","Phlegm-Damp","channel obstruction"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"方药","ce":"Herbal","tz":["葛根汤","身痛逐瘀汤","独活寄生汤","半夏白术天麻汤"],"te":["Ge Gen Tang","Shen Tong Zhu Yu Tang","Du Huo Ji Sheng Tang"]},{"d":"neckpain","zh":"颈痛","en":"Neck Pain","cz":"浮针再灌注","ce":"FSN RA","tz":["转头抗阻","耸肩抗阻","后伸抗阻"],"te":["resisted head rotation","resisted shoulder shrug","resisted extension"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"部位","ce":"Location","tz":["腰部","腰椎","腰骶","下背"],"te":["low back","lumbar spine","lumbosacral"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"症状","ce":"Symptoms","tz":["腰痛","腰背痛","翻身困难","起床痛","弯腰痛","坐立加重"],"te":["low back pain","difficulty rolling","pain on rising","bending pain"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"嫌疑肌","ce":"Muscles","tz":["腰方肌","竖脊肌","髂腰肌","梨状肌","臀小肌","腰大肌"],"te":["quadratus lumborum","QL","erector spinae","iliopsoas","piriformis","gluteus minimus"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"穴位","ce":"Acupoints","tz":["肾俞","BL23","委中","BL40","大肠俞","BL25","腰阳关","GV4","秩边","BL54"],"te":["BL23 Shenshu","BL40 Weizhong","GV4 Yaoyangguan","BL54 Zhibian"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"气机","ce":"Qi Pattern","tz":["寒湿痹阻","气滞血瘀","肾阳虚","肝肾亏虚"],"te":["Cold-Damp Bi","Qi-Blood stagnation","Kidney Yang deficiency","LK deficiency"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"方药","ce":"Herbal","tz":["独活寄生汤","肾气丸","右归丸","身痛逐瘀汤"],"te":["Du Huo Ji Sheng Tang","Jin Gui Shen Qi Wan"]},{"d":"lowback","zh":"下腰痛","en":"Low Back Pain","cz":"浮针再灌注","ce":"FSN RA","tz":["屈髋抗阻","屈膝抗阻","腰后伸抗阻","外展抗阻"],"te":["resisted hip flexion","resisted knee flexion","resisted lumbar extension"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"部位","ce":"Location","tz":["头部","枕部","颞部","头顶","前额","眶后"],"te":["head","occiput","temporal","vertex","frontal","retro-orbital"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"症状","ce":"Symptoms","tz":["头痛","偏头痛","颈源性头痛","头重","眩晕","耳鸣","畏光","恶心"],"te":["headache","migraine","cervicogenic headache","head heaviness","dizziness","tinnitus","photophobia","nausea"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"嫌疑肌","ce":"Muscles","tz":["枕下肌群","胸锁乳突肌","斜方肌上部","颞肌","头颈夹肌","肩胛提肌"],"te":["suboccipitals","SCM","upper trapezius","temporalis","splenius capitis","levator scapulae"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"穴位","ce":"Acupoints","tz":["百会","GV20","风池","GB20","太阳","EX-HN5","合谷","LI4","太冲","LV3"],"te":["GV20 Baihui","GB20 Fengchi","LI4 Hegu","LV3 Taichong"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"气机","ce":"Qi Pattern","tz":["风寒袭表","肝阳上亢","肝肾亏虚","痰湿内阻","肝郁化火"],"te":["Wind-Cold invasion","Liver Yang rising","LK deficiency","Phlegm-Damp","Liver Qi transforming fire"]},{"d":"headpain","zh":"头痛","en":"Headache","cz":"方药","ce":"Herbal","tz":["天麻钩藤饮","川芎茶调散","吴茱萸汤","半夏白术天麻汤"],"te":["Tian Ma Gou Teng Yin","Chuan Xiong Cha Tiao San"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"部位","ce":"Location","tz":["膝部","膝关节","髌骨","髌周","鹅足"],"te":["knee","patella","peripatellar","pes anserinus"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"症状","ce":"Symptoms","tz":["膝痛","上下楼痛","下蹲痛","骨关节炎","OA","髌股疼痛","跑步膝","髂胫束综合征","积液"],"te":["knee pain","stair pain","squatting pain","osteoarthritis","OA","patellofemoral","runner's knee","IT band syndrome","effusion"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"嫌疑肌","ce":"Muscles","tz":["股四头肌","股直肌","股内侧肌","阔筋膜张肌","缝匠肌","腘绳肌","股二头肌"],"te":["quadriceps","rectus femoris","VMO","TFL","sartorius","hamstrings","biceps femoris"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"穴位","ce":"Acupoints","tz":["犊鼻","ST35","梁丘","ST34","血海","SP10","阴陵泉","SP9","阳陵泉","GB34","足三里","ST36"],"te":["ST35 Dubi","SP10 Xuehai","GB34 Yanglingquan","ST36 Zusanli"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"气机","ce":"Qi Pattern","tz":["寒湿痹阻","气滞血瘀","肾虚骨痿","经络气血不通"],"te":["Cold-Damp Bi","Qi-Blood stasis","Kidney deficiency","channel block"]},{"d":"knee","zh":"膝痛","en":"Knee Pain","cz":"浮针再灌注","ce":"FSN RA","tz":["伸膝抗阻","屈膝抗阻"],"te":["resisted knee extension","resisted knee flexion"]},{"d":"sciatica","zh":"坐骨神经痛","en":"Sciatica","cz":"部位","ce":"Location","tz":["臀部","大腿后侧","腘窝","小腿","足底","坐骨"],"te":["buttock","posterior thigh","popliteal","calf","sole","sciatic"]},{"d":"sciatica","zh":"坐骨神经痛","en":"Sciatica","cz":"症状","ce":"Symptoms","tz":["坐骨神经痛","腿痛","放射痛","腿麻","假性坐骨神经痛","Freiberg征"],"te":["sciatica","leg pain","radiation","leg numbness","pseudo-sciatica","Freiberg test"]},{"d":"sciatica","zh":"坐骨神经痛","en":"Sciatica","cz":"嫌疑肌","ce":"Muscles","tz":["梨状肌","臀小肌","臀中肌","腘绳肌","腓肠肌","比目鱼肌"],"te":["piriformis","gluteus minimus","gluteus medius","hamstrings","gastrocnemius","soleus"]},{"d":"sciatica","zh":"坐骨神经痛","en":"Sciatica","cz":"穴位","ce":"Acupoints","tz":["环跳","GB30","委中","BL40","秩边","BL54","承扶","BL36","阳陵泉","GB34"],"te":["GB30 Huantiao","BL40 Weizhong","BL54 Zhibian"]},{"d":"sciatica","zh":"坐骨神经痛","en":"Sciatica","cz":"气机","ce":"Qi Pattern","tz":["气机出入障碍","筋脉痹阻","肾虚","经络阻滞"],"te":["Qi entry/exit block","sinew channel Bi","Kidney deficiency","channel obstruction"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"部位","ce":"Location","tz":["肘部","肘关节","肱骨外上髁","内上髁","前臂"],"te":["elbow","lateral epicondyle","medial epicondyle","forearm"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"症状","ce":"Symptoms","tz":["网球肘","高尔夫球肘","外上髁炎","内上髁炎","握力下降","旋前痛"],"te":["tennis elbow","golfer's elbow","lateral epicondylalgia","medial epicondylalgia","grip weakness","pronation pain"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"嫌疑肌","ce":"Muscles","tz":["肱桡肌","腕伸肌群","腕屈肌群","旋前圆肌","桡侧腕短伸肌","ECRB"],"te":["brachioradialis","wrist extensors","wrist flexors","pronator teres","ECRB"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"穴位","ce":"Acupoints","tz":["曲池","LI11","手三里","LI10","合谷","LI4","外关","SJ5"],"te":["LI11 Quchi","LI10 Shousanli","LI4 Hegu","SJ5 Waiguan"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"气机","ce":"Qi Pattern","tz":["气血瘀滞","筋脉痹阻"],"te":["Qi-Blood stasis","sinew channel Bi"]},{"d":"elbow","zh":"肘部疼痛","en":"Elbow Pain","cz":"浮针再灌注","ce":"FSN RA","tz":["屈肘抗阻","前臂旋前抗阻","伸腕抗阻"],"te":["resisted elbow flexion","resisted pronation","resisted wrist extension"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle Pain","cz":"部位","ce":"Location","tz":["踝部","踝关节","外踝","内踝","跟腱","腓骨"],"te":["ankle","lateral malleolus","medial malleolus","Achilles","fibula"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle Pain","cz":"症状","ce":"Symptoms","tz":["踝痛","踝扭伤","慢性不稳","跟腱炎","腱病","内翻损伤"],"te":["ankle pain","ankle sprain","chronic instability","Achilles tendinitis","tendinopathy","inversion injury"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle Pain","cz":"嫌疑肌","ce":"Muscles","tz":["腓骨肌群","腓肠肌","比目鱼肌","胫骨后肌","趾短伸肌"],"te":["peroneal group","gastrocnemius","soleus","tibialis posterior","extensor digitorum brevis"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle Pain","cz":"穴位","ce":"Acupoints","tz":["申脉","BL62","照海","KI6","丘墟","GB40","昆仑","BL60","太溪","KI3"],"te":["BL62 Shenmai","KI6 Zhaohai","GB40 Qiuxu","BL60 Kunlun","KI3 Taixi"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle Pain","cz":"气机","ce":"Qi Pattern","tz":["气滞血瘀","寒湿痹阻","筋脉失养"],"te":["Qi-Blood stasis","Cold-Damp","sinew malnourishment"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"部位","ce":"Location","tz":["足底","跟骨","足弓","足跟"],"te":["plantar","heel","calcaneus","foot arch"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"症状","ce":"Symptoms","tz":["足底痛","足跟痛","晨起痛","第一步痛","足底筋膜炎"],"te":["plantar pain","heel pain","morning pain","first step pain","plantar fasciitis"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"嫌疑肌","ce":"Muscles","tz":["比目鱼肌","腓肠肌","胫骨后肌","趾屈肌群"],"te":["soleus","gastrocnemius","tibialis posterior","toe flexors"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"穴位","ce":"Acupoints","tz":["太溪","KI3","昆仑","BL60","然谷","KI2","涌泉","KI1"],"te":["KI3 Taixi","BL60 Kunlun","KI1 Yongquan"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"气机","ce":"Qi Pattern","tz":["寒凝经脉","肾气亏虚"],"te":["Cold constraining channels","Kidney Qi deficiency"]},{"d":"plantar","zh":"足底筋膜炎","en":"Plantar Fasciitis","cz":"方药","ce":"Herbal","tz":["独活寄生汤","桂枝汤","金匮肾气丸"],"te":["Du Huo Ji Sheng Tang","Gui Zhi Tang"]},{"d":"tmj","zh":"颞颌关节痛","en":"TMJ Pain","cz":"部位","ce":"Location","tz":["颞颌关节","下颌","颞部","耳前","咬肌"],"te":["TMJ","mandible","temporal","pre-auricular","masseter"]},{"d":"tmj","zh":"颞颌关节痛","en":"TMJ Pain","cz":"症状","ce":"Symptoms","tz":["TMJ","颞颌关节痛","咬合痛","张口受限","关节弹响","磨牙","耳鸣","面颊痛"],"te":["TMJ pain","bite pain","restricted opening","clicking","bruxism","tinnitus","cheek pain"]},{"d":"tmj","zh":"颞颌关节痛","en":"TMJ Pain","cz":"嫌疑肌","ce":"Muscles","tz":["咬肌","颞肌","胸锁乳突肌","翼外肌","肩胛提肌"],"te":["masseter","temporalis","SCM","lateral pterygoid","levator scapulae"]},{"d":"tmj","zh":"颞颌关节痛","en":"TMJ Pain","cz":"穴位","ce":"Acupoints","tz":["下关","ST7","颊车","ST6","上关","GB3","翳风","SJ17","合谷","LI4"],"te":["ST7 Xiaguan","ST6 Jiache","GB3 Shangguan","SJ17 Yifeng"]},{"d":"tmj","zh":"颞颌关节痛","en":"TMJ Pain","cz":"气机","ce":"Qi Pattern","tz":["气滞血瘀","风寒袭络"],"te":["Qi-Blood stasis","Wind-Cold invading channels"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"部位","ce":"Location","tz":["臀部","梨状肌","坐骨切迹","骨盆"],"te":["buttock","piriformis","sciatic notch","pelvis"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"症状","ce":"Symptoms","tz":["梨状肌综合征","臀痛","假性坐骨神经痛","坐位加重","Freiberg征","深臀痛","盆腔痛"],"te":["piriformis syndrome","gluteal pain","pseudo-sciatica","worse sitting","Freiberg test","deep buttock pain"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"嫌疑肌","ce":"Muscles","tz":["梨状肌","臀小肌","股方肌","闭孔内肌"],"te":["piriformis","gluteus minimus","quadratus femoris","obturator internus"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"穴位","ce":"Acupoints","tz":["环跳","GB30","次髎","BL32","秩边","BL54","承扶","BL36"],"te":["GB30 Huantiao","BL32 Ciliao","BL54 Zhibian","BL36 Chengfu"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"气机","ce":"Qi Pattern","tz":["气血瘀滞","筋脉痹阻"],"te":["Qi-Blood stasis","sinew channel Bi"]},{"d":"piriformis","zh":"梨状肌综合征","en":"Piriformis Syndrome","cz":"浮针再灌注","ce":"FSN RA","tz":["外旋大腿抗阻","4字形体位维持"],"te":["resisted hip external rotation","figure-4 position"]},{"d":"wrist","zh":"腕部疼痛","en":"Wrist Pain","cz":"部位","ce":"Location","tz":["腕部","腕关节","腕背","腕管","尺侧","TFCC"],"te":["wrist","dorsal wrist","carpal tunnel","ulnar side","TFCC"]},{"d":"wrist","zh":"腕部疼痛","en":"Wrist Pain","cz":"症状","ce":"Symptoms","tz":["腕痛","腕管综合征","假性腕管","手指麻木","de Quervain","鼠标手","腕腱鞘炎"],"te":["wrist pain","CTS","pseudo-CTS","finger numbness","de Quervain's","repetitive strain"]},{"d":"wrist","zh":"腕部疼痛","en":"Wrist Pain","cz":"嫌疑肌","ce":"Muscles","tz":["腕伸肌群","腕屈肌群","旋前圆肌","肱桡肌","拇长展肌","拇短伸肌"],"te":["wrist extensors","wrist flexors","pronator teres","brachioradialis","APL","EPB"]},{"d":"wrist","zh":"腕部疼痛","en":"Wrist Pain","cz":"穴位","ce":"Acupoints","tz":["大陵","PC7","外关","SJ5","阳池","SJ4","神门","HT7","列缺","LU7"],"te":["PC7 Daling","SJ5 Waiguan","SJ4 Yangchi","HT7 Shenmen"]},{"d":"wrist","zh":"腕部疼痛","en":"Wrist Pain","cz":"气机","ce":"Qi Pattern","tz":["气血瘀滞","筋脉痹阻","气机不畅"],"te":["Qi-Blood stasis","sinew channel Bi","Qi flow obstruction"]},{"d":"visceral","zh":"内脏痛","en":"Visceral Pain","cz":"部位","ce":"Location","tz":["腹部","胁肋","季肋","盆腔","膈肌"],"te":["abdomen","hypochondriac","costal margin","pelvis","diaphragm"]},{"d":"visceral","zh":"内脏痛","en":"Visceral Pain","cz":"症状","ce":"Symptoms","tz":["腹痛","非细菌性前列腺炎","痛经","尿频","尿急","肠易激综合征","功能性腹痛","胁肋痛"],"te":["abdominal pain","non-bacterial prostatitis","dysmenorrhoea","urinary frequency","IBS","functional pain","rib pain"]},{"d":"visceral","zh":"内脏痛","en":"Visceral Pain","cz":"嫌疑肌","ce":"Muscles","tz":["腹直肌","腹斜肌","竖脊肌","膈肌","股内侧肌群","腹横肌"],"te":["rectus abdominis","obliques","erector spinae","diaphragm","adductors","transversus abdominis"]},{"d":"visceral","zh":"内脏痛","en":"Visceral Pain","cz":"穴位","ce":"Acupoints","tz":["中脘","CV12","气海","CV6","关元","CV4","足三里","ST36","三阴交","SP6"],"te":["CV12 Zhongwan","CV6 Qihai","CV4 Guanyuan","ST36 Zusanli","SP6 Sanyinjiao"]},{"d":"visceral","zh":"内脏痛","en":"Visceral Pain","cz":"气机","ce":"Qi Pattern","tz":["气机升降失调","肝气郁滞","气血瘀滞"],"te":["disrupted Qi ascent/descent","Liver Qi stagnation","Qi-Blood stasis"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"部位","ce":"Location","tz":["第一跖趾关节","足趾","踝部","膝部","痛风石","耳廓"],"te":["first MTP joint","toe","ankle","gout tophi","auricle"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"症状","ce":"Symptoms","tz":["痛风","高尿酸血症","痛风急性发作","痛风石","关节红热肿痛","夜间剧痛"],"te":["gout","hyperuricaemia","acute gout attack","tophi","red hot swollen joint","night pain"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"检查","ce":"Lab / Investigation","tz":["尿酸","血清尿酸","SUA","MSU晶体","双轨征","CRP","双能CT","DECT"],"te":["uric acid","serum uric acid","SUA","MSU crystals","double contour sign","CRP","DECT"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"穴位","ce":"Acupoints","tz":["太冲","LV3","太溪","KI3","阴陵泉","SP9","三阴交","SP6","足临泣","GB41"],"te":["LV3 Taichong","KI3 Taixi","SP9 Yinlingquan","SP6 Sanyinjiao"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"气机","ce":"Qi Pattern","tz":["湿热下注","脾虚痰瘀互结"],"te":["Damp-Heat pouring down","Spleen deficiency Phlegm-Stasis"]},{"d":"gout","zh":"痛风","en":"Gout","cz":"方药","ce":"Herbal","tz":["四妙散","宣痹汤","萆薢分清饮"],"te":["Si Miao San","Xuan Bi Tang"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder","cz":"浮针循证","ce":"FSN Evidence","tz":["浮针","FSN","扫散","再灌注","嫌疑肌","患肌","肌肉前病痛","肌肉后病痛"],"te":["FSN","Fu's Subcutaneous Needling","sweeping","reperfusion","suspect muscle","disturbing tissue"]},{"d":"neckpain","zh":"颈痛","en":"Neck","cz":"浮针循证","ce":"FSN Evidence","tz":["浮针","FSN","扫散","再灌注","嫌疑肌","患肌","肌肉前病痛","肌肉后病痛"],"te":["FSN","Fu's Subcutaneous Needling","sweeping","reperfusion","suspect muscle","disturbing tissue"]},{"d":"knee","zh":"膝痛","en":"Knee","cz":"浮针循证","ce":"FSN Evidence","tz":["浮针","FSN","扫散","再灌注","嫌疑肌","患肌","肌肉前病痛","肌肉后病痛"],"te":["FSN","Fu's Subcutaneous Needling","sweeping","reperfusion","suspect muscle","disturbing tissue"]},{"d":"lowback","zh":"下腰痛","en":"Low Back","cz":"浮针循证","ce":"FSN Evidence","tz":["浮针","FSN","扫散","再灌注","嫌疑肌","患肌","肌肉前病痛","肌肉后病痛"],"te":["FSN","Fu's Subcutaneous Needling","sweeping","reperfusion","suspect muscle","disturbing tissue"]},{"d":"shoulder","zh":"肩痛","en":"Shoulder","cz":"增生疗法","ce":"Prolotherapy","tz":["肩袖","关节囊","AC关节","喙锁韧带","增生疗法","葡萄糖","高渗葡萄糖","prolotherapy"],"te":["prolotherapy","dextrose","hyperosmolar glucose","肩袖","关节囊","AC关节","喙锁韧带"]},{"d":"knee","zh":"膝痛","en":"Knee","cz":"增生疗法","ce":"Prolotherapy","tz":["内侧副韧带","MCL","髌韧带","增生疗法","葡萄糖","高渗葡萄糖","prolotherapy"],"te":["prolotherapy","dextrose","hyperosmolar glucose","内侧副韧带","MCL","髌韧带"]},{"d":"ankle","zh":"踝关节痛","en":"Ankle","cz":"增生疗法","ce":"Prolotherapy","tz":["距腓前韧带","ATFL","跟腓韧带","增生疗法","葡萄糖","高渗葡萄糖","prolotherapy"],"te":["prolotherapy","dextrose","hyperosmolar glucose","距腓前韧带","ATFL","跟腓韧带"]},{"d":"lowback","zh":"下腰痛","en":"Low Back","cz":"增生疗法","ce":"Prolotherapy","tz":["项韧带","骶髂关节","小关节囊","增生疗法","葡萄糖","高渗葡萄糖","prolotherapy"],"te":["prolotherapy","dextrose","hyperosmolar glucose","项韧带","骶髂关节","小关节囊"]}];
+var srActive = -1;
+
+function doSearch(q){
+  var box=document.getElementById('search-results');
+  q=q.trim();
+  if(q.length<1){box.style.display='none';return;}
+  var zh=!isEn, terms=q.toLowerCase().split(/\s+/);
+  
+  // Score each index entry
+  var scored={};
+  SIDX.forEach(function(entry){
+    var pool=(zh?entry.tz:entry.te).concat(zh?[entry.zh,entry.cz]:[entry.en,entry.ce]);
+    var poolStr=pool.join(' ').toLowerCase();
+    var score=0;
+    terms.forEach(function(t){
+      if(poolStr.includes(t)) score+=t.length>2?3:1;
+    });
+    if(score>0){
+      var key=entry.d;
+      if(!scored[key]||scored[key].score<score){
+        scored[key]={score:score,entry:entry,matches:[]};
+      }
+      if(score>0)scored[key].matches.push({cat:zh?entry.cz:entry.ce,terms:pool.filter(function(p){return terms.some(function(t){return p.toLowerCase().includes(t);});}).slice(0,3)});
+    }
+  });
+  
+  var results=Object.values(scored).sort(function(a,b){return b.score-a.score;}).slice(0,8);
+  
+  if(!results.length){
+    box.innerHTML='<div class="sr-none">'+(zh?'未找到相关内容':'No results found')+'</div>';
+    box.style.display='block';srActive=-1;return;
+  }
+  
+    // Build results using DOM to avoid quote issues
+  box.innerHTML='';
+  results.forEach(function(r){
+    var e=r.entry;
+    var item=document.createElement('div');
+    item.className='sr-item';
+    item.dataset.did=e.d;
+    item.setAttribute('onclick','srGo(this.dataset.did)');
+    var dname=document.createElement('div');dname.className='sr-disease';
+    dname.textContent=zh?e.zh:e.en;item.appendChild(dname);
+    r.matches.slice(0,2).forEach(function(m){
+      var mt=document.createElement('div');mt.className='sr-match';
+      var catSpan=document.createElement('span');
+      catSpan.style.cssText='color:#C8861A;font-size:10px';
+      catSpan.textContent=m.cat;
+      mt.appendChild(catSpan);
+      mt.appendChild(document.createTextNode(' '+m.terms.slice(0,2).join(' · ')));
+      item.appendChild(mt);
+    });
+    box.appendChild(item);
+  });
+  box.style.display='block';srActive=-1;
+
+}
+function srGo(did){
+  document.getElementById('search-results').style.display='none';
+  document.getElementById('search').value='';
+  var btn=document.querySelector('.nav-item[onclick*="'+did+'"]');
+  showPage(did,btn||null);
+  // Highlight briefly
+  var pg=document.getElementById('page-'+did);
+  if(pg){pg.style.outline='3px solid #C8861A';setTimeout(function(){pg.style.outline='';},1500);}
+}
+
+function searchKey(e){
+  var box=document.getElementById('search-results');
+  var items=box.querySelectorAll('.sr-item');
+  if(e.key==='Escape'){box.style.display='none';return;}
+  if(e.key==='ArrowDown'){srActive=Math.min(srActive+1,items.length-1);}
+  if(e.key==='ArrowUp'){srActive=Math.max(srActive-1,0);}
+  items.forEach(function(el,i){el.style.background=i===srActive?'#EEF4FA':'';}); 
+  if(e.key==='Enter'&&srActive>=0&&items[srActive]){
+    srGo(items[srActive].dataset.did);
+  }
+}
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('#search-wrap'))
+    document.getElementById('search-results').style.display='none';
+});
 
 </script>
 </body>
