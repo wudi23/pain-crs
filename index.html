@@ -399,7 +399,7 @@ html[lang="zh"] .t-en{display:none;}
     </div>
     <div class="modules-grid">
 
-      <a class="module-card available" href="/pain/" onclick="event.preventDefault();handlePurchase('/pain/','price_1ToCFALpHoyExvp7WdymsBEV','pain')">
+      <a class="module-card available" href="/pain/" onclick="event.preventDefault();sbHandlePainPurchase()">
         <div class="mc-accent"></div>
         <span class="mc-icon">💊</span>
         <span class="mc-tag mc-tag-pain"><span class="t-en">14 modules</span><span class="t-zh">14个模块</span></span>
@@ -496,19 +496,12 @@ html[lang="zh"] .t-en{display:none;}
           <span class="mc-dot-tag"><span class="t-en">+64 more</span><span class="t-zh">+64块</span></span>
         </div>
         <div class="mc-cta">
-          <span class="mc-price"><span class="free"><span class="t-en">Free: Shoulder + Low Back</span><span class="t-zh">肩痛+腰痛 免费</span></span> · <span class="t-en">Full access $129 CAD</span><span class="t-zh">全部解锁 $129加元</span></span>
+          <span class="mc-price"><span class="free"><span class="t-en">Free preview</span><span class="t-zh">免费预览</span></span> · <span class="t-en">Full access $129 CAD</span><span class="t-zh">全部解锁 $129加元</span></span>
           <span class="mc-arrow" style="color:var(--jade);">→</span>
         </div>
       </a>
 
-      <div class="module-card coming-soon">
-        <div class="mc-accent jade"></div>
-        <span class="mc-icon">💉</span>
-        <span class="mc-tag mc-tag-soon"><span class="t-en">Coming Soon</span><span class="t-zh">即将上线</span></span>
-        <div class="mc-title"><span class="t-en">Prolotherapy</span><span class="t-zh">增生注射疗法</span></div>
-        <div class="mc-desc"><span class="t-en">Injection site protocols, solution preparation, indications by joint region, and safety guidelines.</span><span class="t-zh">注射部位方案、溶液配制、各关节适应症及安全规范。</span></div>
-        <div class="mc-cta"><span class="mc-coming"><span class="t-en">In development</span><span class="t-zh">开发中</span></span></div>
-      </div>
+      
 
     </div>
   </div>
@@ -545,7 +538,7 @@ html[lang="zh"] .t-en{display:none;}
   <p><span class="t-en">SinoMed · sinomed.ca · For professional continuing education and reference only.<br>Not a substitute for individualised clinical judgement. Comply with applicable laws and regulations in your jurisdiction.<br><br>Questions or account issues: <a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span><span class="t-zh">SinoMed · sinomed.ca · 仅供中医执业者继续教育和临床参考使用。<br>不能替代个体化临床判断。请遵守所在地区适用法规。<br><br>如有问题或账号支持：<a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span></p>
 </div>
 
-</div><!-- /page-wrap -->
+<!-- /page-wrap -->
 
 <!-- Disclaimer bar -->
 <div class="disclaimer" id="disc">
@@ -833,6 +826,19 @@ sb.auth.onAuthStateChange((event, session)=>{
   document.getElementById('btn-signin').style.display = user ? 'none' : '';
   document.getElementById('btn-signout').style.display = user ? '' : 'none';
 });
+
+async function sbHandlePainPurchase() {
+  if (typeof supabase === 'undefined') { window.location.href='/pain/'; return; }
+  const sb = supabase.createClient('https://ucocgcbxdqjbbklnkyxt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo');
+  const { data: {session} } = await sb.auth.getSession();
+  if (!session) { openModal(); return; }
+  // Check if already purchased
+  const {data:existing} = await sb.from('purchases').select('id')
+    .eq('user_id',session.user.id).eq('module_id','pain').maybeSingle();
+  if (existing) { window.location.href='/pain/'; return; }
+  // Not purchased — go to pain module (will show lock overlay)
+  window.location.href='/pain/';
+}
 </script>
 
 
