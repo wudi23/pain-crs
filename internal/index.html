@@ -533,9 +533,9 @@ body{overflow-y:auto;}
 <div class="app"><main class="main">
 <div id="page-home" class="disease-page">
   <div class="hero">
-    <div class="hero-eyebrow"><span class="en">SinoMed · Internal Medicine</span><span class="zh">思沃医 · 内科</span></div>
+    <div class="hero-eyebrow"><span class="en">SinoMed · Internal Medicine</span><span class="zh">SinoMed · 内科</span></div>
     <div class="hero-title"><span class="en">Internal Medicine Clinical Reasoning</span><span class="zh">内科临床推理系统</span></div>
-    <div class="hero-sub"><span class="en">Not a textbook — a linkage engine. Search a symptom, follow a pattern, watch one root branch into many diseases.</span><span class="zh">不是一本书，而是一个联动引擎。搜一个症状、追一条证型、看一个根本如何分叉为多个病症。</span></div>
+    <div class="hero-sub"><span class="en">The whole system is one linkage engine. Search a symptom, look up a pattern, and see how one pathomechanism branches into many diseases.</span><span class="zh">本系统整体为一个联通引擎。搜一个症状，查一个证型，看一个病机如何分叉为多个病症。</span></div>
     <div class="hero-search" onclick="openSearch()">
       <span class="sicon">🔍</span>
       <span class="sph"><span class="en">Search a symptom, disease, pattern, or formula…</span><span class="zh">搜索症状、病名、证型或方药……</span></span>
@@ -657,7 +657,7 @@ body{overflow-y:auto;}
           <div class="dz-npat"><span class="en">4 pattern links</span><span class="zh">4 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('ruapi')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Breast Hyperplasia</span><span class="dz-zh">乳癖</span>
-          <div class="dz-npat"><span class="en">1 pattern link</span><span class="zh">1 证型联动</span></div>
+          <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('quewu')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Insufficient Lactation</span><span class="dz-zh">缺乳</span>
           <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
@@ -679,7 +679,7 @@ body{overflow-y:auto;}
           <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('tuofa')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Hair Loss</span><span class="dz-zh">脱发</span>
-          <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
+          <div class="dz-npat"><span class="en">3 pattern links</span><span class="zh">3 证型联动</span></div>
         </div></div>
     </div>
     <div class="sys-block">
@@ -708,10 +708,10 @@ body{overflow-y:auto;}
           <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('hypertension')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Hypertension</span><span class="dz-zh">高血压</span>
-          <div class="dz-npat"><span class="en">1 pattern link</span><span class="zh">1 证型联动</span></div>
+          <div class="dz-npat"><span class="en">5 pattern links</span><span class="zh">5 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('hanzheng')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Sweating Disorders</span><span class="dz-zh">汗证</span>
-          <div class="dz-npat"><span class="en">1 pattern link</span><span class="zh">1 证型联动</span></div>
+          <div class="dz-npat"><span class="en">3 pattern links</span><span class="zh">3 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('dryeye')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Dry Eye</span><span class="dz-zh">干眼症</span>
           <div class="dz-npat"><span class="en">2 pattern links</span><span class="zh">2 证型联动</span></div>
@@ -727,7 +727,7 @@ body{overflow-y:auto;}
           <div class="dz-npat"><span class="en">1 pattern link</span><span class="zh">1 证型联动</span></div>
         </div><div class="dz-chip" onclick="showDisease('impotence')"><span class="dz-lock">🔒</span>
           <span class="dz-en">Impotence / ED</span><span class="dz-zh">阳痿</span>
-          <div class="dz-npat"><span class="en">1 pattern link</span><span class="zh">1 证型联动</span></div>
+          <div class="dz-npat"><span class="en">4 pattern links</span><span class="zh">4 证型联动</span></div>
         </div></div>
     </div>
     <div class="sys-block">
@@ -10770,66 +10770,263 @@ body{overflow-y:auto;}
 </div>
 </div>
 <div id="page-ruapi" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
-    <div class="page-title"><span class="en">Breast Hyperplasia</span><span class="zh">乳癖</span></div>
-    <div class="page-desc"><span class="en">Liver Qi knots with phlegm at the breast collaterals; symptoms wax and wane with the cycle.</span><span class="zh">肝郁痰凝结于乳络；症状随月经周期消长。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('ruapi','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('ruapi','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('ruapi','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('ruapi','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
+  <div class="page-title"><span class="en">Breast Hyperplasia</span><span class="zh">乳癖</span></div>
+  <div class="page-desc"><span class="en">Root: the breast lies on the Liver and Stomach channels and is governed by the Chong-Ren; when Liver Qi is constrained and/or the Chong-Ren is disharmonious, Qi stagnates and phlegm congeals into cyclical breast lumps. The classic pattern is 肝郁痰凝 on a background of 冲任失调.</span><span class="zh">根本：乳房属肝胃二经、司于冲任；肝气郁结和／或冲任失调，则气滞痰凝成周期性乳房结块。典型证为肝郁痰凝，其本多为冲任失调。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('ruapi','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('ruapi','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('ruapi','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('ruapi','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
   </div>
-  <div id="ruapi-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="ruapi-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Breast lumps require medical evaluation — do not treat a lump as "just 乳癖" without imaging/assessment.</strong> Refer for: a hard fixed painless lump, skin dimpling/retraction, nipple retraction or bloody discharge, unilateral non-cyclical enlargement, axillary nodes, or any lump in a higher-risk patient. TCM manages benign cyclical fibrocystic change (confirmed as such); it does not replace breast cancer screening. When malignancy is excluded, cyclical tender lumps that swell premenstrually and ease after respond well to Liver-coursing / phlegm-transforming treatment.</span>
+    <span class="zh"><strong>乳房肿块须医学评估——勿将肿块当作"只是乳癖"而不影像／评估。</strong>以下转诊：质硬固定无痛之块、皮肤凹陷／橘皮、乳头内陷或血性溢液、单侧非周期性增大、腋下结节、或高危患者之任何肿块。中医治良性周期性纤维囊性改变（已确诊者）；不替代乳腺癌筛查。恶性排除后，经前胀大、经后减之周期性触痛结块对疏肝／化痰治疗反应良好。</span>
   </div>
-  <div id="ruapi-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Qi Stagnation → Phlegm Congealing at the Breast</span><span class="zh">核心框架 · 气滞→痰凝于乳络</span></div>
+    <div class="cb-what"><span class="en">The breast sits at the crossing of the Liver channel (which governs the free flow of Qi) and the Stomach channel, and its function follows the Chong-Ren and the menstrual rhythm. 乳癖 is fundamentally an <b>entry-exit / obstruction disorder</b>: emotional constraint knots the Liver Qi → the Qi dynamic stalls in the breast → fluids that should move congeal into phlegm → phlegm and stagnant Qi bind into lumps. Because the Chong-Ren fill and empty with the cycle, the lumps swell and hurt premenstrually (when Qi-Blood is most congested) and ease after menses. Underneath, especially in longer-standing or perimenopausal cases, lies a 冲任失调 (Chong-Ren disharmony, often with Kidney involvement) that must also be regulated for lasting resolution.</span><span class="zh">乳房居肝经（主疏泄）与胃经之交，其用随冲任与月经节律。乳癖本质为<b>出入／阻滞之病</b>：情志郁结则肝气结→气机滞于乳→当行之津凝而成痰→痰与滞气搏结成块。冲任随周期盈亏，故块经前胀痛（气血最壅时）、经后减。其下，尤久病或围绝经期者，有<b>冲任失调</b>（常涉肾）之本，须同调方能久愈。</span></div>
   </div>
-  <div id="ruapi-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="ruapi-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-quewu" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Gynecology</span><span class="zh">妇科病证</span></div>
-    <div class="page-title"><span class="en">Insufficient Lactation</span><span class="zh">缺乳</span></div>
-    <div class="page-desc"><span class="en">Either the source is empty (Qi-Blood cannot generate milk) or the flow is blocked (Liver Qi stagnation).</span><span class="zh">或化源不足（气血不能生乳），或乳络不通（肝郁气滞）。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('quewu','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('quewu','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('quewu','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('quewu','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Lump character & cycle</span><span class="zh">问一 · 结块性状与周期</span></span><span class="point-val"><span class="en">Cyclical tender lumps, often bilateral/multiple, rubbery and mobile, swelling and painful premenstrually and easing after menses → benign 乳癖. (Hard, fixed, painless, non-cyclical, unilateral → refer, not this pattern.)</span><span class="zh">周期性触痛结块、多双侧／多发、韧而可动、经前胀痛经后减→良性乳癖。（硬、固定、无痛、非周期、单侧→转诊，非本证。）</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Emotional & Qi signs</span><span class="zh">问二 · 情志气滞象</span></span><span class="point-val"><span class="en">Irritability, low mood, rib and chest distension, sighing, symptoms worse with stress → Liver Qi constraint (the dominant driver). Premenstrual tension/breast pain tracking mood strongly supports this.</span><span class="zh">烦躁、情绪低落、胸胁胀、太息、压力时加重→肝气郁结（主driver）。经前紧张／乳痛随情绪明显支持之。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Chong-Ren / Kidney signs</span><span class="zh">问三 · 冲任／肾象</span></span><span class="point-val"><span class="en">Irregular menses, menstrual pain, low back soreness, or perimenopausal status → Chong-Ren disharmony (often with Kidney deficiency) underlying the Liver constraint — treat both. More prominent in longer-standing cases.</span><span class="zh">月经不调、痛经、腰酸、或围绝经期→肝郁之下有冲任失调（常兼肾虚）——须同治。久病者更著。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Wiry pulse, thin coat → Liver Qi constraint. Greasy coat, slippery-wiry pulse → phlegm-Qi binding. Signs of Kidney/Chong-Ren deficiency (deep-thready pulse, sore back) point to the underlying disharmony.</span><span class="zh">脉弦、苔薄→肝郁。苔腻、脉滑弦→痰气交结。肾／冲任虚象（脉沉细、腰酸）提示其本之失调。</span></span></div>
   </div>
-  <div id="quewu-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="ruapi-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Two linked patterns: the branch is 肝郁痰凝 (Liver constraint with phlegm congealing — the immediate lump-forming mechanism), and the root, especially in chronic cases, is 冲任失调 (Chong-Ren disharmony). Course the Liver and transform phlegm for the lumps; regulate the Chong-Ren (and Kidney) for lasting resolution.</span>
+    <span class="zh">二相连之证：标为肝郁痰凝（成块之即时机制），本（尤久病）为冲任失调。疏肝化痰治其块；调冲任（及肾）以久愈。</span>
   </div>
-  <div id="quewu-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Liver Constraint with Phlegm Congealing</span><span class="zh">① 肝郁痰凝</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — constrained Liver Qi stalls the breast, fluids congeal into phlegm-lumps</span><span class="zh">出入失常——肝气郁结滞乳，津凝成痰而结块</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> cyclical breast lumps that swell and hurt premenstrually and ease after menses, distending rather than fixed-stabbing pain, rib/chest distension, irritability, low mood, sighing; rubbery mobile lumps; wiry pulse, often with a greasy coat. <b>Mechanism:</b> emotional constraint knots the Liver Qi in the breast; the stalled Qi dynamic fails to move fluids, which congeal into phlegm and bind with the stagnant Qi into lumps — the immediate lump-forming pattern. <b>Treatment:</b> 疏肝解郁，化痰散结 — course the Liver, resolve constraint, transform phlegm, dissipate lumps. Links to the 肝气郁结 pattern card (its widest network).</span><span class="zh"><b>主症：</b>乳房结块经前胀大疼痛、经后减，胀痛而非固定刺痛，胸胁胀、烦躁、情绪低落、太息；块韧而可动；脉弦、多兼苔腻。<b>病机：</b>情志郁结，肝气结于乳；气机滞不行津，津凝成痰、与滞气搏结成块——成块之即时证。<b>治法：</b>疏肝解郁、化痰散结。联动「肝气郁结」证型卡（全库最广之网）。</span></div>
   </div>
-  <div id="quewu-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="quewu-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-tuofa" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Dermatology</span><span class="zh">皮肤病证</span></div>
-    <div class="page-title"><span class="en">Hair Loss</span><span class="zh">脱发</span></div>
-    <div class="page-desc"><span class="en">Hair is the surplus of Blood and the flower of the Kidney. Loss traces to Blood-dryness-wind or Liver-Kidney insufficiency.</span><span class="zh">发为血之余、肾之华。脱发本于血虚风燥或肝肾不足。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('tuofa','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('tuofa','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('tuofa','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('tuofa','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Chong-Ren Disharmony</span><span class="zh">② 冲任失调</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit / root disharmony — the Chong-Ren (with Kidney) fail to regulate, breast follows the disordered cycle</span><span class="zh">出入／本之失调——冲任（及肾）失调，乳随紊乱之周期</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> breast lumps closely tied to the menstrual cycle with irregular menses, menstrual pain, or perimenopausal change, low back soreness, and often signs of Kidney deficiency; lumps that persist or recur across cycles despite Liver-coursing alone. More prominent in longer-standing and perimenopausal cases. <b>Mechanism:</b> the breast and uterus share the Chong-Ren; when these vessels (frequently with underlying Kidney Yin/Yang imbalance) fail to fill and empty in rhythm, the breast tissue is chronically dysregulated — this is the root beneath the Liver-constraint branch, and why lumps recur if only the Qi is coursed. <b>Treatment:</b> 调摄冲任，补肾疏肝 — regulate the Chong-Ren, tonify the Kidney, course the Liver together. Links to the 冲任失调 pattern card.</span><span class="zh"><b>主症：</b>乳块与月经周期密切、伴月经不调、痛经、或围绝经期改变、腰酸、常兼肾虚象；单纯疏肝而块跨周期不消或复发。久病及围绝经期者更著。<b>病机：</b>乳与胞宫共司于冲任；此二脉（常兼肾阴／阳失衡）不能按节律盈亏，则乳络长期失调——此为肝郁之下之本，亦单纯理气则块复发之由。<b>治法：</b>调摄冲任、补肾疏肝并行。联动「冲任失调」证型卡。</span></div>
   </div>
-  <div id="tuofa-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="ruapi-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Local breast-region and Liver-Stomach channel points free the stagnation at the breast; distal Liver-coursing and Chong-Ren-regulating points treat the driver and root. Course the Liver first; add Chong-Ren/Kidney regulation for chronic cases.</span>
+    <span class="zh">局部乳区及肝胃经穴通乳之滞；远端疏肝、调冲任穴治driver与本。先疏肝；久病加调冲任／肾。</span>
   </div>
-  <div id="tuofa-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Local / breast region</span><span class="zh">局部·乳区</span></span><span class="point-val"><span class="en">ST18 乳根, SI1 少泽 (empirical breast point), LV14 期门 (Mu of Liver, over the breast area), GB21 肩井, CV17 膻中 (Qi-influential, opens the chest) — free the Qi and dissipate lumps locally. Needle breast-region points obliquely/shallowly.</span><span class="zh">乳根、少泽（乳病验穴）、期门（肝募、近乳区）、肩井、膻中（气会、宽胸）——局部行气散结。乳区穴宜斜／浅刺。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Liver-phlegm 肝郁痰凝</span><span class="zh">① 肝郁痰凝</span></span><span class="point-val"><span class="en">+ LV3 太冲, GB34 阳陵泉, PC6 内关, ST40 丰隆, SP6 三阴交 — course the Liver, move Qi, transform phlegm; even/reducing.</span><span class="zh">+ 太冲、阳陵泉、内关、丰隆、三阴交——疏肝、行气、化痰；平泻。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Chong-Ren 冲任失调</span><span class="zh">② 冲任失调</span></span><span class="point-val"><span class="en">+ CV4 关元, SP6 三阴交, KI3 太溪, BL23 肾俞, LV3 — regulate the Chong-Ren, tonify Kidney, course Liver; reinforcing for the root points.</span><span class="zh">+ 关元、三阴交、太溪、肾俞、太冲——调冲任、补肾、疏肝；本穴补法。</span></span></div>
   </div>
-  <div id="tuofa-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="tuofa-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-miantan" class="disease-page">
+</div>
+
+<!-- ④ HERBS -->
+<div id="ruapi-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern, coursing the Liver and transforming phlegm for the branch, regulating the Chong-Ren for the root. Treat cyclically where possible — emphasise Liver-coursing premenstrually.</span>
+    <span class="zh">按证选方，疏肝化痰治标、调冲任治本。可周期用药——经前重疏肝。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Liver-phlegm 肝郁痰凝</span><span class="zh">① 肝郁痰凝</span></span><span class="point-val"><span class="en"><b>逍遥散 + 消瘰丸加减</b> — Xiao Yao San courses the Liver and harmonises; Xiao Luo Wan (Xuan Shen, Mu Li, Bei Mu) softens hardness and transforms phlegm-nodules. Add Xia Ku Cao, Zhe Bei Mu, Ju He to dissipate breast lumps.</span><span class="zh"><b>逍遥散+消瘰丸加减</b>——逍遥散疏肝和中；消瘰丸（玄参、牡蛎、贝母）软坚化痰核。加夏枯草、浙贝母、橘核散乳块。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Chong-Ren 冲任失调</span><span class="zh">② 冲任失调</span></span><span class="point-val"><span class="en"><b>二仙汤 / 二至丸 + 疏肝散结药</b> — regulate the Chong-Ren and balance Kidney Yin-Yang (Er Xian Tang for perimenopausal cases), combined with Liver-coursing, phlegm-softening herbs. For recurrent lumps rooted in Chong-Ren/Kidney disharmony.</span><span class="zh"><b>二仙汤／二至丸+疏肝散结药</b>——调冲任、平肾阴阳（围绝经期用二仙汤），配疏肝软坚化痰之品。治根于冲任／肾失调之复发性乳块。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">Two non-negotiables and one clinical key. Non-negotiable first: any breast lump needs proper evaluation to exclude malignancy — TCM treats confirmed benign cyclical change, never a suspicious mass on faith. Second: the emotional dimension is not incidental — 乳癖 is the archetypal Liver-constraint disease, and durable improvement usually requires the patient to work on stress and mood, not just take herbs. The clinical key: if lumps keep recurring despite good Liver-coursing, look beneath to the Chong-Ren/Kidney root — treating the branch alone is why they come back. Time the treatment to the cycle: emphasise coursing and dissipating premenstrually when the lumps are worst.</span>
+    <span class="zh">二不可让步、一临床要点。首不可让步：任何乳房肿块须正规评估排除恶性——中医治已确诊之良性周期改变，绝不凭信治可疑之块。次：情志维度非偶然——乳癖为肝郁病之原型，持久改善多需病人调压力情绪，非仅服药。临床要点：若疏肝良而块仍反复，须察其下之冲任／肾之本——单治标正是复发之由。择周期用药：经前块甚时重疏肝散结。</span>
+  </div>
+</div>
+</div>
+<div id="page-quewu" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Gynecology / Postpartum</span><span class="zh">妇科·产后</span></div>
+  <div class="page-title"><span class="en">Insufficient Lactation</span><span class="zh">缺乳</span></div>
+  <div class="page-desc"><span class="en">Root: breast milk is transformed from Qi and Blood and coursed out through the breast by the Liver's free flow. Insufficient lactation therefore has two roads — not enough milk generated (Qi-Blood deficiency, milk thin and scanty) or milk generated but not released (Liver constraint, milk blocked with breast distension).</span><span class="zh">根本：乳汁由气血所化，赖肝之疏泄而出。缺乳有二途——化生不足（气血虚弱，乳少质稀）或化而不行（肝郁气滞，乳阻而胀）。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('quewu','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('quewu','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('quewu','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('quewu','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="quewu-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Support breastfeeding fundamentals alongside pattern treatment.</strong> Low supply is often multifactorial: latch and positioning, feeding frequency, hydration and nutrition, rest, and stress all matter and should be optimised with lactation support. Screen for and refer: retained placenta, significant postpartum hemorrhage, thyroid dysfunction, and mastitis (red hot painful breast + fever needs prompt treatment). TCM excels at the two classic patterns once feeding mechanics and medical causes are addressed.</span>
+    <span class="zh"><strong>辨证同时须支持哺乳基本要素。</strong>乳少常为多因：含接与体位、哺乳频率、水分营养、休息、压力皆重要，须配合哺乳指导优化。筛查并转诊：胎盘残留、产后大出血、甲状腺功能异常、乳腺炎（红肿热痛+发热须及时治）。哺乳机制与医学病因处理后，中医于二典型证甚效。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Generated from Qi-Blood, Released by the Liver</span><span class="zh">核心框架 · 气血所化·肝之疏泄</span></div>
+    <div class="cb-what"><span class="en">Breast milk is Qi-Blood transformed, and it is coursed out of the breast by the Liver's free-flowing function. Two things must therefore be intact: enough <b>Qi-Blood to generate the milk</b>, and free <b>Liver Qi to release it</b>. Insufficient lactation splits cleanly along these: <b>Qi-Blood deficiency (虚)</b> — after difficult labour, blood loss, or in a weak constitution, the source is empty, so milk is scanty, thin, and watery, and the breasts are soft and undistended (nothing to release). <b>Liver Qi stagnation (实/郁)</b> — with postpartum stress, upset, or depression, the Liver fails to course, so milk is generated but trapped: the breasts are full, distended, even painful, yet little comes out. The two are treated in opposite directions — tonify to generate vs course to release — so distinguishing them (by whether the breast is soft-empty or full-distended) is the whole task.</span><span class="zh">乳汁为气血所化，赖肝之疏泄而出于乳。故须二者俱全：足够<b>气血以化乳</b>，通畅<b>肝气以行乳</b>。缺乳沿此分明：<b>气血虚弱（虚）</b>——难产、失血后、或体弱，化源空，故乳少、质稀、清薄，乳房柔软不胀（无以行）。<b>肝郁气滞（实／郁）</b>——产后压力、抑郁，肝失疏泄，乳化而阻：乳房胀满、甚痛，而出少。二者治向相反——补以化 vs 疏以行——故辨之（凭乳房柔空或胀满）即全部之要。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Breast fullness — the key sign</span><span class="zh">问一 · 乳房胀否（关键）</span></span><span class="point-val"><span class="en"><b>Soft, undistended, no pain</b>, milk thin and scanty → Qi-Blood deficiency (nothing generated). <b>Full, distended, tender/painful</b>, milk present but not flowing → Liver Qi stagnation (generated but blocked). This single sign usually decides the pattern.</span><span class="zh"><b>柔软、不胀、不痛</b>，乳少质稀→气血虚弱（化生不足）。<b>胀满、触痛</b>，有乳而不出→肝郁气滞（化而阻）。此一征多定证。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Milk quality</span><span class="zh">问二 · 乳质</span></span><span class="point-val"><span class="en">Thin, watery, clear, scanty → deficiency. Normal or thick quality but not flowing, in a full breast → stagnation. Note total supply trend and feeding frequency.</span><span class="zh">清稀、量少→虚。质可而不行、乳房胀满→郁。注意总量趋势与哺乳频率。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Constitution & emotion</span><span class="zh">问三 · 体质与情志</span></span><span class="point-val"><span class="en">Fatigue, pale sallow face, poor appetite, dizziness, palpitation, difficult delivery/blood loss → Qi-Blood deficiency. Postpartum stress, low mood, irritability, rib/chest distension → Liver constraint. Postpartum mood also warrants attention for the mother's wellbeing.</span><span class="zh">乏力、面色萎黄、纳差、头晕、心悸、难产／失血→气血虚弱。产后压力、情绪低落、烦躁、胸胁胀→肝郁。产后情绪亦须关注产妇身心。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Pale tongue, thready-weak pulse → Qi-Blood deficiency. Normal or slightly red tongue, wiry pulse, thin coat → Liver Qi stagnation. Red breast with heat/fever → suspect mastitis, refer.</span><span class="zh">舌淡、脉细弱→气血虚弱。舌正或略红、脉弦、苔薄→肝郁气滞。乳房红热伴发热→疑乳腺炎，转诊。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="quewu-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Two patterns treated in opposite directions. The distinguishing sign is the breast itself: soft and empty = deficiency (tonify to generate milk); full and distended = stagnation (course to release milk). Getting this right is everything — tonifying a blocked breast worsens the distension; coursing an empty breast gives nothing to release.</span>
+    <span class="zh">二证治向相反。辨点在乳房本身：柔而空＝虚（补以生乳）；胀而满＝郁（疏以行乳）。辨对即全部——补胀满之乳增其胀，疏空虚之乳无以行。</span>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Qi-Blood Deficiency</span><span class="zh">① 气血两虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient generation — Qi-Blood too weak to transform into milk</span><span class="zh">化源不足——气血虚弱，不能化生乳汁</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> scanty thin watery milk (or none), <b>soft undistended painless breasts</b>, pale sallow lusterless face, fatigue, breathlessness, poor appetite, dizziness, palpitation; pale tongue, thready-weak pulse. Common after difficult labour, postpartum hemorrhage, or in a weak/undernourished mother. <b>Mechanism:</b> milk is transformed from Qi-Blood; when the postpartum source is depleted there simply is not enough substance to make milk — the breast is soft because there is nothing filling it. <b>Treatment:</b> 补益气血，佐通乳 — tonify Qi and Blood to generate milk, assisted by gentle milk-promoting herbs. Links to the 气血两虚 pattern card.</span><span class="zh"><b>主症：</b>乳汁清稀量少（或无）、<b>乳房柔软不胀不痛</b>、面色萎黄无华、乏力、气短、纳差、头晕、心悸；舌淡、脉细弱。多见难产、产后出血、或体弱营养不足之产妇。<b>病机：</b>乳为气血所化；产后化源亏则无质以成乳——乳房软因无物充之。<b>治法：</b>补益气血以生乳，佐通乳。联动「气血两虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Liver Qi Stagnation</span><span class="zh">② 肝郁气滞</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — constrained Liver Qi fails to course the milk out</span><span class="zh">出入失常——肝气郁结，乳汁疏泄不行</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> milk present but not flowing, <b>full, distended, tender or painful breasts</b>, chest and rib distension, low mood or irritability, poor appetite, sighing; often clear postpartum stress or upset; wiry pulse, thin coat. <b>Mechanism:</b> the Liver courses the Qi that releases milk from the breast; when postpartum emotion constrains the Liver, the milk is generated but trapped — the breasts fill and distend, yet little flows. This is obstruction, not deficiency: the substance is there but the door is shut. <b>Treatment:</b> 疏肝解郁，通络下乳 — course the Liver, resolve constraint, free the collaterals to release the milk. Links to the 肝气郁结 pattern card.</span><span class="zh"><b>主症：</b>有乳而不行、<b>乳房胀满、触痛</b>、胸胁胀、情绪低落或烦躁、纳差、太息；多有产后压力／不遂；脉弦、苔薄。<b>病机：</b>肝疏泄以行乳；产后情志郁肝，则乳化而阻——乳房胀满而出少。此属阻非虚：有质而门闭。<b>治法：</b>疏肝解郁、通络下乳。联动「肝气郁结」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="quewu-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Local breast points plus the empirical milk-point SI1 are the shared core; pattern points either tonify Qi-Blood or course the Liver. The direction is opposite by pattern — reinforce with moxa for deficiency, even/reduce to free the flow for stagnation.</span>
+    <span class="zh">局部乳穴配下乳验穴少泽为共核；配穴或补气血或疏肝。治向随证相反——虚则补法加灸，郁则平／泻以通。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points</span><span class="zh">核心穴</span></span><span class="point-val"><span class="en">SI1 少泽 (the classic empirical point to promote lactation — often bled/reduced), ST18 乳根, CV17 膻中 (Qi-influential, opens the chest and promotes milk flow), LV14 期门. These free and promote the milk locally in both patterns.</span><span class="zh">少泽（下乳经典验穴——常点刺／泻）、乳根、膻中（气会、宽胸下乳）、期门。两证均以此局部通乳。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Qi-Blood deficiency 气血两虚</span><span class="zh">① 气血两虚</span></span><span class="point-val"><span class="en">+ ST36 足三里, SP6 三阴交, BL20 脾俞, CV6 气海 (+moxa) — tonify Qi-Blood to generate milk; reinforcing with moxa. SI1 reinforced/gentle.</span><span class="zh">+ 足三里、三阴交、脾俞、气海（加灸）——补气血以生乳；补法加灸。少泽补／轻。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver stagnation 肝郁气滞</span><span class="zh">② 肝郁气滞</span></span><span class="point-val"><span class="en">+ LV3 太冲, GB34 阳陵泉, PC6 内关, SI1 少泽 (reduced/bled) — course the Liver and free the milk; even/reducing, no moxa. Add gentle breast massage.</span><span class="zh">+ 太冲、阳陵泉、内关、少泽（泻／点刺）——疏肝通乳；平泻不灸。配合轻柔乳房按摩。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="quewu-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas in opposite directions by pattern. Tong Cao, Wang Bu Liu Xing, Chuan Shan Jia (or its substitutes), and pig's-trotter soup are the traditional milk-promoting additions across patterns.</span>
+    <span class="zh">按证反向选方。通草、王不留行、穿山甲（或其代用品）、猪蹄汤为各证传统通乳之佐。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Qi-Blood deficiency 气血两虚</span><span class="zh">① 气血两虚</span></span><span class="point-val"><span class="en"><b>通乳丹</b> Tong Ru Dan — heavy Ren Shen + Huang Qi + Dang Gui + Mai Dong to tonify Qi-Blood and generate milk, with Tong Cao and pig's trotter to promote flow. Tonify the source; the milk follows.</span><span class="zh"><b>通乳丹</b>——重用人参+黄芪+当归+麦冬补气血生乳，佐通草、猪蹄通行。补其源，乳自生。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver stagnation 肝郁气滞</span><span class="zh">② 肝郁气滞</span></span><span class="point-val"><span class="en"><b>下乳涌泉散</b> Xia Ru Yong Quan San — course the Liver and free the collaterals (Chai Hu, Qing Pi, Chuan Xiong, Wang Bu Liu Xing, Chuan Shan Jia, Tong Cao) to release the trapped milk. Free the flow; the milk comes.</span><span class="zh"><b>下乳涌泉散</b>——疏肝通络（柴胡、青皮、川芎、王不留行、穿山甲、通草）以行阻滞之乳。通其行，乳自下。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">The whole clinical decision rests on one examination: is the breast soft-and-empty or full-and-distended? Soft and empty → deficiency → tonify Qi-Blood (and support nutrition and rest); pushing "milk-promoting" coursing herbs on an empty breast achieves little because there is nothing to release. Full and distended → stagnation → course the Liver, free the flow, gentle massage, and attend to the mother's postpartum mood; tonifying a blocked full breast worsens the distension and can risk stasis/mastitis. And throughout, remember the non-herbal fundamentals — latch, frequency, hydration, rest, and reassurance drive supply as much as any formula, and a red hot painful breast with fever is mastitis, which needs prompt medical attention.</span>
+    <span class="zh">整个临床决策系于一诊：乳房柔空还是胀满？柔空→虚→补气血（并支持营养休息）；于空乳强投通乳疏利之品无益，因无以行。胀满→郁→疏肝、通行、轻柔按摩、并关注产妇产后情绪；补胀满阻滞之乳反增其胀，可致瘀／乳腺炎之险。且须始终记非药之本——含接、频率、水分、休息、安慰之驱动泌乳不逊于任何方药，而乳房红热痛伴发热为乳腺炎，须及时医学处理。</span>
+  </div>
+</div>
+</div>
+<div id="page-tuofa" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Skin & Hair</span><span class="zh">皮肤·毛发</span></div>
+  <div class="page-title"><span class="en">Hair Loss</span><span class="zh">脱发</span></div>
+  <div class="page-desc"><span class="en">Root: "the hair is the surplus of the Blood (发为血之余)" and "the Kidney's bloom is in the hair (其华在发)." Hair is nourished from below by Kidney Essence and Blood and kept clear above by the scalp's local environment. Loss follows three roads: Blood-dryness with wind, Liver-Kidney (Essence-Blood) deficiency, or damp-heat steaming the scalp.</span><span class="zh">根本：「发为血之余」「肾其华在发」。发赖肾精与血自下濡养、赖头皮局部环境自上清利。脱发三途：血虚风燥、肝肾（精血）不足、湿热熏蒸头皮。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('tuofa','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('tuofa','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('tuofa','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('tuofa','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="tuofa-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Type the hair loss first.</strong> Sudden well-defined round bald patches = alopecia areata (斑秃, "油风") — often stress/fright-related, may regrow. Gradual patterned thinning (vertex/hairline) = androgenetic. Diffuse shedding a few months after illness/childbirth/crash-diet/stress = telogen effluvium (usually recovers). Screen for and refer: thyroid disease, iron deficiency/anemia, scarring alopecia, scalp fungal infection, and medication effects.</span>
+    <span class="zh"><strong>先分型。</strong>突发边界清之圆形斑片＝斑秃（油风）——多与压力／惊恐相关、可复生。渐进性规律性稀疏（巅顶／发际）＝雄激素性。病后／产后／过度节食／压力数月后弥漫脱落＝休止期脱发（多自复）。筛查并转诊：甲状腺病、缺铁／贫血、瘢痕性脱发、头皮真菌感染、药物影响。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Nourished from Below, Kept Clear Above</span><span class="zh">核心框架 · 下养上清</span></div>
+    <div class="cb-what"><span class="en">Healthy hair needs two things: enough Essence-Blood rising to nourish the root (肾精、阴血 filling the follicle from below), and a clear scalp environment above (no damp-heat obstructing). Loss is therefore either a <b>deficiency of nourishment</b> — Blood-dryness that generates wind (血虚风燥, the classic patchy 斑秃) or deeper Liver-Kidney Essence-Blood depletion (肝肾不足, premature graying + loss) — or an <b>excess obstructing above</b> — damp-heat steaming the scalp so the follicle is choked in oil (湿热, the greasy-scalp thinning). Match the road: you cannot grow hair by nourishing Blood if the problem is a damp-heat scalp, and vice versa.</span><span class="zh">健发需二事：足够精血上濡发根（肾精、阴血自下充毛囊），头皮环境清利于上（无湿热阻遏）。故脱发或为<b>濡养不足</b>——血虚生风（血虚风燥，典型斑秃）或更深之肝肾精血亏（肝肾不足，早白+脱发）——或为<b>实阻于上</b>——湿热熏蒸头皮，毛囊困于油腻（湿热，油腻性稀疏）。须对路：湿热头皮者养血无益，反之亦然。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Pattern of loss</span><span class="zh">问一 · 脱发形态</span></span><span class="point-val"><span class="en">Sudden round patches, smooth scalp → 斑秃 (blood-dryness/wind, often fright). Gradual vertex/hairline thinning with oily scalp → damp-heat. Diffuse thinning + premature graying + other deficiency signs → Liver-Kidney.</span><span class="zh">突发圆斑、头皮光滑→斑秃（血虚风燥／惊）。渐进巅顶／发际稀疏伴头皮油→湿热。弥漫稀疏+早白+他虚象→肝肾。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Scalp & hair quality</span><span class="zh">问二 · 头皮与发质</span></span><span class="point-val"><span class="en">Dry scalp, dry brittle lackluster hair → Blood-dryness / Liver-Kidney. Oily scalp, greasy hair, dandruff, itch → damp-heat. Note dandruff, itch, redness, pustules (may indicate scalp pathology needing referral).</span><span class="zh">头皮干、发干枯无泽→血虚／肝肾。头皮油、发腻、头屑、痒→湿热。注意头屑、瘙痒、红斑、脓疱（或提示头皮病变须转诊）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Systemic & trigger</span><span class="zh">问三 · 全身与诱因</span></span><span class="point-val"><span class="en">Pale, dizzy, palpitation, poor sleep, post-partum → Blood deficiency. Sore back, dizziness, tinnitus, premature graying, low libido → Liver-Kidney. Recent major stress/fright → often 斑秃. Rich greasy diet → damp-heat.</span><span class="zh">面白、头晕、心悸、眠差、产后→血虚。腰酸、头晕、耳鸣、早白、性欲低→肝肾。近期重大压力／惊吓→多斑秃。饮食肥甘→湿热。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Pale tongue, thready pulse → Blood deficiency. Red-peeled or pale tongue, deep-thready → Liver-Kidney. Red tongue, yellow greasy coat, slippery pulse → damp-heat.</span><span class="zh">舌淡、脉细→血虚。舌红剥或淡、脉沉细→肝肾。舌红苔黄腻、脉滑→湿热。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="tuofa-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Three patterns: two deficiency roads (Blood-dryness/wind and Liver-Kidney Essence-Blood) and one excess road (damp-heat scalp). Chronic patterned loss is often Liver-Kidney at root; the greasy-scalp presentation is damp-heat; sudden patches are Blood-dryness with wind.</span>
+    <span class="zh">三证：二虚路（血虚风燥、肝肾精血）与一实路（湿热头皮）。慢性规律脱发多根于肝肾；油腻头皮为湿热；突发斑片为血虚风燥。</span>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Blood Dryness Generating Wind</span><span class="zh">① 血虚风燥</span></div>
+    <div class="pc-qi"><span class="en">Insufficient nourishment → wind — Blood too dry to hold the hair, wind stirs and it falls</span><span class="zh">濡养不足生风——血虚发失濡，血虚生风而发落</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> sudden well-defined round bald patches (斑秃), dry scalp, dry brittle lackluster remaining hair, possibly scalp itch; often preceded by stress/fright/poor sleep; pale tongue, thready pulse. <b>Mechanism:</b> "the hair is the surplus of Blood" — when Blood is dry and deficient it cannot moisten the hair, and deficiency-generated wind (虚风) shakes it loose, so it falls suddenly in patches. <b>Treatment:</b> 养血祛风，滋养毛发 — nourish Blood, dispel wind, feed the hair. Links to the 血虚生风 pattern card.</span><span class="zh"><b>主症：</b>突发边界清之圆形斑秃、头皮干、余发干枯脆无泽、或头皮痒；多先有压力／惊吓／眠差；舌淡、脉细。<b>病机：</b>「发为血之余」——血虚燥则不能濡发，血虚生风（虚风）动摇之，故突然成片脱落。<b>治法：</b>养血祛风、滋养毛发。联动「血虚生风」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Liver-Kidney Insufficiency</span><span class="zh">② 肝肾不足</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent at the root — Essence-Blood too depleted to fill the hair</span><span class="zh">升不及于根本——精血亏虚不能充发</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> gradual diffuse thinning with premature graying, dry lackluster hair, sore weak low back and knees, dizziness, tinnitus, poor memory, low libido; red-peeled (Yin-def) or pale (Yang-def) tongue, deep-thready pulse. Often with aging or overwork. <b>Mechanism:</b> "the Kidney's bloom is in the hair" — Kidney Essence generates Blood and fills the hair; when Essence-Blood is depleted the hair loses its root supply, thins, greys, and falls. The deepest, most chronic hair-loss root. <b>Treatment:</b> 滋补肝肾，填精养血 — tonify Liver-Kidney, fill Essence, nourish Blood. Links to the 肾阴虚 pattern card.</span><span class="zh"><b>主症：</b>渐进弥漫稀疏伴早白、发干枯无泽、腰膝酸软、头晕、耳鸣、健忘、性欲低；舌红剥（阴虚）或淡（阳虚）、脉沉细。多见年老、劳伤。<b>病机：</b>「肾其华在发」——肾精生血充发；精血亏则发失根本之供，稀、白、落。脱发最深、最慢性之本。<b>治法：</b>滋补肝肾、填精养血。联动「肾阴虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Damp-Heat Steaming the Scalp</span><span class="zh">③ 湿热熏蒸</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit obstruction — damp-heat steams the scalp and chokes the follicle</span><span class="zh">出入受阻——湿热熏蒸头皮，困遏毛囊</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> oily greasy scalp with progressive thinning (especially vertex), greasy hair needing frequent washing, dandruff, itch, sometimes pustules; often with rich diet, bitter mouth, heavy body; red tongue, yellow greasy coat, slippery pulse. <b>Mechanism:</b> Spleen fails to transform damp → damp-heat rises and steams the scalp, so the follicle is smothered in turbid oil and the hair loosens — an excess/obstruction above, not a deficiency below. Nourishing Blood here worsens the grease. <b>Treatment:</b> 清热利湿，凉血 — clear heat, drain damp, cool the blood; keep the scalp clear. Links to the 湿热 (肌肤) pattern card.</span><span class="zh"><b>主症：</b>头皮油腻伴渐进稀疏（尤巅顶）、发腻需频洗、头屑、瘙痒、或脓疱；多饮食肥甘、口苦、身重；舌红苔黄腻、脉滑。<b>病机：</b>脾失运湿→湿热上蒸头皮，毛囊困于浊油而发松脱——实阻于上，非虚于下。此证养血反增其腻。<b>治法：</b>清热利湿、凉血；清利头皮。联动「湿热（肌肤）」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="tuofa-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Local scalp stimulation (including plum-blossom tapping over bald patches to move Qi-Blood to the follicles) plus pattern points that address the Blood/Essence root or the damp-heat above. Local + root is the standard combination.</span>
+    <span class="zh">局部头皮刺激（含梅花针叩刺斑片，引气血至毛囊）配辨证治血／精之本或湿热之上。局部+治本为标准配伍。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Local / scalp</span><span class="zh">局部·头皮</span></span><span class="point-val"><span class="en">GV20 百会, GV24/头维/four-shen-cong region, and plum-blossom (七星针) tapping over the bald patches to draw Qi-Blood to the scalp and stimulate the follicles. Local encircling needling around patches for 斑秃.</span><span class="zh">百会、头维／四神聪区，梅花针（七星针）叩刺斑片以引气血至头皮、激发毛囊。斑秃可围刺斑片周围。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Blood-dryness 血虚风燥</span><span class="zh">① 血虚风燥</span></span><span class="point-val"><span class="en">+ BL17 膈俞, SP10 血海, SP6 三阴交, ST36 — nourish Blood and dispel wind; reinforcing.</span><span class="zh">+ 膈俞、血海、三阴交、足三里——养血祛风；补法。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver-Kidney 肝肾不足</span><span class="zh">② 肝肾不足</span></span><span class="point-val"><span class="en">+ BL23 肾俞, KI3 太溪, BL18 肝俞, GB39 悬钟, CV4 关元 — tonify Liver-Kidney, fill Essence; reinforcing (+moxa if Yang-def).</span><span class="zh">+ 肾俞、太溪、肝俞、悬钟、关元——补肝肾、填精；补法（偏阳虚加灸）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Damp-heat 湿热熏蒸</span><span class="zh">③ 湿热熏蒸</span></span><span class="point-val"><span class="en">+ SP9 阴陵泉, ST40 丰隆, LI11 曲池, SP6 — clear and drain damp-heat; reducing, no moxa.</span><span class="zh">+ 阴陵泉、丰隆、曲池、三阴交——清利湿热；泻法不灸。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="tuofa-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern. Hair regrowth is slow — set a multi-month timeline. He Shou Wu, Han Lian Cao, Nü Zhen Zi, Sang Shen are the signature hair-nourishing herbs across the deficiency patterns.</span>
+    <span class="zh">按证选方。生发缓慢——须设数月周期。何首乌、旱莲草、女贞子、桑椹为各虚证生发要药。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Blood-dryness 血虚风燥</span><span class="zh">① 血虚风燥</span></span><span class="point-val"><span class="en"><b>神应养真丹 / 四物汤加减</b> — nourish Blood and dispel wind (Dang Gui, Shu Di, Bai Shao, Chuan Xiong + He Shou Wu, Tian Ma, Qiang Huo). For 斑秃 with fright, add Shen-settling herbs.</span><span class="zh"><b>神应养真丹／四物汤加减</b>——养血祛风（当归、熟地、白芍、川芎+何首乌、天麻、羌活）。斑秃兼惊者加安神之品。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver-Kidney 肝肾不足</span><span class="zh">② 肝肾不足</span></span><span class="point-val"><span class="en"><b>七宝美髯丹</b> Qi Bao Mei Ran Dan — the classic hair/greying formula: He Shou Wu, Gou Qi, Dang Gui, Tu Si Zi, Niu Xi to tonify Liver-Kidney and fill Essence-Blood. Add Er Zhi Wan (Nü Zhen Zi + Han Lian Cao) for Yin-deficient greying.</span><span class="zh"><b>七宝美髯丹</b>——生发乌须之经典方：何首乌、枸杞、当归、菟丝子、牛膝补肝肾、填精血。阴虚白发加二至丸（女贞子+旱莲草）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Damp-heat 湿热熏蒸</span><span class="zh">③ 湿热熏蒸</span></span><span class="point-val"><span class="en"><b>茵陈蒿汤 / 萆薢渗湿汤加减</b> — clear damp-heat and cool the blood (Yin Chen, Bai Xian Pi, Sheng Di, Ze Xie). Once the scalp clears and grease reduces, then nourish. Do not tonic-load a damp-heat scalp.</span><span class="zh"><b>茵陈蒿汤／萆薢渗湿汤加减</b>——清湿热、凉血（茵陈、白鲜皮、生地、泽泻）。头皮清、油减后再养。湿热头皮勿峻补。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">The decisive fork is scalp condition: a dry scalp points to deficiency (nourish Blood/Essence); an oily scalp points to damp-heat (clear first, nourish later). Getting this backwards is the commonest error — pouring rich Blood tonics onto a greasy damp-heat scalp makes it worse. For 斑秃, the fright/stress link is real: address sleep and the Shen alongside the scalp, and reassure — many patches regrow. And always set expectations on time: even when the pattern is right, visible regrowth takes months.</span>
+    <span class="zh">决定性分岔在头皮状态：干性头皮指向虚（养血／精）；油性头皮指向湿热（先清、后养）。颠倒此判为最常见之误——湿热油腻头皮上滥投滋腻养血反重之。斑秃者惊恐／压力之联系真实：治头皮同时调睡眠与心神、并予安慰——多数斑片可复生。并须设时间预期：即便对证，可见生发亦需数月。</span>
+  </div>
+</div>
+</div>
+<div id="page-miantan" class="disease-page">
 <div class="page-header">
   <div class="page-eyebrow"><span class="en">Neurology</span><span class="zh">神经病证</span></div>
   <div class="page-title"><span class="en">Facial Palsy (Bell's)</span><span class="zh">面瘫</span></div>
@@ -11029,86 +11226,395 @@ body{overflow-y:auto;}
 </div>
 </div>
 <div id="page-hypertension" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Metabolic & Endocrine</span><span class="zh">代谢内分泌</span></div>
-    <div class="page-title"><span class="en">Hypertension</span><span class="zh">高血压</span></div>
-    <div class="page-desc"><span class="en">Adjunct regulation. Most often Liver Yang rising on a Yin-deficient root; shares the 肝阳上亢 pattern with dizziness.</span><span class="zh">辅助调理。多为阴虚阳亢；与眩晕共享肝阳上亢证型。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('hypertension','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('hypertension','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('hypertension','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('hypertension','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Metabolic & Cardiovascular</span><span class="zh">代谢·心血管</span></div>
+  <div class="page-title"><span class="en">Hypertension</span><span class="zh">高血压</span></div>
+  <div class="page-desc"><span class="en">Root: a chronic imbalance in which Yang/fire/wind tends to rise while Yin/Essence fails to anchor below — the same upward-disturbance axis seen in dizziness and headache, expressed as sustained high pressure. TCM manages the pattern and symptoms <em>alongside</em> — never instead of — standard antihypertensive care and BP monitoring.</span><span class="zh">根本：阳／火／风偏于上亢，阴／精不能潜降于下之慢性失衡——与眩晕、头痛同一上扰之轴，表现为血压持续升高。中医辨证治标本，须<em>与</em>规范降压治疗及血压监测并行，绝不替代之。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('hypertension','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('hypertension','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('hypertension','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('hypertension','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
   </div>
-  <div id="hypertension-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
-  </div>
-  <div id="hypertension-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
-  </div>
-  <div id="hypertension-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="hypertension-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-hanzheng" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Metabolic & Endocrine</span><span class="zh">代谢内分泌</span></div>
-    <div class="page-title"><span class="en">Sweating Disorders</span><span class="zh">汗证</span></div>
-    <div class="page-desc"><span class="en">Spontaneous sweat = Qi/Yang fails to secure the exterior. Night sweat = Yin-empty fire forces fluids out.</span><span class="zh">自汗为气/阳不固表；盗汗为阴虚火迫津外泄。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('hanzheng','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('hanzheng','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('hanzheng','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('hanzheng','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
-  </div>
-  <div id="hanzheng-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
-  </div>
-  <div id="hanzheng-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
-  </div>
-  <div id="hanzheng-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="hanzheng-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-dryeye" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Metabolic & Endocrine</span><span class="zh">代谢内分泌</span></div>
-    <div class="page-title"><span class="en">Dry Eye</span><span class="zh">干眼症</span></div>
-    <div class="page-desc"><span class="en">The eye is the orifice of the Liver, moistened by Liver-Kidney Yin and Blood. Dryness = Yin/Blood no longer reaching upward.</span><span class="zh">目为肝窍，赖肝肾阴血濡养。目干为阴血不能上濡。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('dryeye','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('dryeye','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('dryeye','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('dryeye','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
-  </div>
-  <div id="dryeye-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
-  </div>
-  <div id="dryeye-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
-  </div>
-  <div id="dryeye-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="dryeye-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
-</div><div id="page-impotence" class="disease-page">
-  <div class="page-header">
-    <div class="page-eyebrow"><span class="en">Urology</span><span class="zh">泌尿生殖</span></div>
-    <div class="page-title"><span class="en">Impotence / ED</span><span class="zh">阳痿</span></div>
-    <div class="page-desc"><span class="en">The 宗筋 (ancestral sinew) fails to rise — from Mingmen fire declining, or from Liver Qi / damp-heat obstructing.</span><span class="zh">宗筋不振——或命门火衰，或肝郁/湿热阻滞。</span></div>
-    <div class="phase-tabs">
-      <button class="phase-tab active" onclick="showPhase('impotence','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
-      <button class="phase-tab" onclick="showPhase('impotence','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
-      <button class="phase-tab" onclick="showPhase('impotence','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
-      <button class="phase-tab" onclick="showPhase('impotence','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
-    </div>
-  </div>
-  <div id="impotence-intake" class="phase-panel active">
-    <div class="stub-note"><b><span class="en">Interactive skeleton ready.</span><span class="zh">交互骨架已就位。</span></b> <span class="en">This condition is wired into the linkage engine — every pattern card that transmits here already links correctly. Full intake / differentiation / point-and-herb content is being written and will appear in an upcoming update.</span><span class="zh">本病已接入联动内核——所有传变至此的证型卡均已正确链接。完整的问诊／辨证／穴方内容正在编写，将在后续更新中上线。</span></div>
-  </div>
-  <div id="impotence-pattern" class="phase-panel">
-    <div class="stub-note"><span class="en">Differentiation content in progress. The patterns that reach this disease are shown via the linkage engine on the Pattern Cards page.</span><span class="zh">辨证内容编写中。经联动内核传变至此的证型见"证型卡"页。</span></div>
-  </div>
-  <div id="impotence-acupuncture" class="phase-panel"><div class="stub-note"><span class="en">Point protocol coming soon.</span><span class="zh">针灸方案即将上线。</span></div></div>
-  <div id="impotence-herbs" class="phase-panel"><div class="stub-note"><span class="en">Herbal formulas coming soon.</span><span class="zh">方药即将上线。</span></div></div>
 </div>
+
+<!-- ① INTAKE -->
+<div id="hypertension-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Safety first — this is a medically managed condition.</strong> TCM treatment is adjunctive: continue prescribed antihypertensives and BP monitoring; never advise stopping medication. Refer urgently for hypertensive emergency signs: BP very high with severe headache, visual change, chest pain, dyspnea, focal neurological signs, or confusion. Screen for and refer secondary causes (renal, endocrine) and end-organ damage. Acupuncture may modestly assist BP control and clearly helps the symptoms (headache, dizziness, poor sleep) — set expectations accordingly.</span>
+    <span class="zh"><strong>安全第一——此为须医学管理之病。</strong>中医为辅助：继续服用降压药、监测血压；绝不建议停药。高血压急症征象须急转诊：血压极高伴剧烈头痛、视觉改变、胸痛、呼吸困难、局灶神经体征、意识模糊。筛查并转诊继发病因（肾性、内分泌）及靶器官损害。针灸或可小幅助控压、明显改善症状（头痛、眩晕、眠差）——据此设定预期。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · The Rising-Yang / Sinking-Yin Imbalance</span><span class="zh">核心框架 · 阳升太过·阴降不及之失衡</span></div>
+    <div class="cb-what"><span class="en">Hypertension is understood not as one entity but as a chronic disturbance of the up-down axis, usually in a <b>本虚标实</b> (deficient root, excess branch) structure. The <em>branch/excess</em> is what rises: Liver Yang, Liver fire, wind, or phlegm-damp surging upward (the acute, symptomatic, higher-pressure states). The <em>root/deficiency</em> is what fails to anchor: Liver-Kidney Yin or Kidney Essence too depleted to hold the Yang down (the chronic substrate, especially with age). Early/robust patients tend toward the excess end (Liver Yang/fire, phlegm); older/long-standing patients toward the deficient end (Yin/Essence). Most real patients are a moving mixture — subdue what rises while nourishing what should anchor.</span><span class="zh">高血压非单一病，而为升降之轴之慢性紊乱，多呈<b>本虚标实</b>之构。<em>标／实</em>为上升者：肝阳、肝火、风、痰湿上冲（急性、有症状、压力较高之态）。<em>本／虚</em>为失潜者：肝肾阴或肾精亏，不能潜阳于下（慢性底质，尤随年龄）。早期／壮实者偏实端（肝阳／火、痰）；年老／久病者偏虚端（阴／精）。多数病人为动态兼夹——潜其上亢，同时滋其当潜者。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Symptom pattern</span><span class="zh">问一 · 症状型</span></span><span class="point-val"><span class="en">Pounding headache, red face/eyes, irritability, worse with anger → Liver Yang/fire (excess). Heavy muffled head, chest oppression, obesity, nausea → phlegm-damp. Dizziness, tinnitus, sore low back, five-heart heat, insomnia → Yin-deficient Yang rising / Essence deficiency (root).</span><span class="zh">头痛剧、面红目赤、烦躁、怒则甚→肝阳／火（实）。头重如裹、胸闷、形胖、恶心→痰湿。眩晕、耳鸣、腰酸、五心烦热、失眠→阴虚阳亢／精亏（本）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Constitution & age</span><span class="zh">问二 · 体质与年龄</span></span><span class="point-val"><span class="en">Younger, robust, ruddy, stressed → excess (Liver Yang/fire). Stout, damp diet, sedentary → phlegm-damp. Older, thin or frail, long history → deficiency (Yin/Essence). This shifts the branch/root emphasis.</span><span class="zh">年轻、壮实、面红、压力大→实（肝阳／火）。形盛、饮食肥甘、久坐→痰湿。年老、体瘦或虚弱、病久→虚（阴／精）。据此调标本之重。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Course & comorbidity</span><span class="zh">问三 · 病程与合并</span></span><span class="point-val"><span class="en">Note duration, current medications, and comorbidities (diabetes, dyslipidemia, cardiac, renal). Dizziness links this page to the Dizziness protocol (shared Liver-Yang pattern); headache and tinnitus also cross-link.</span><span class="zh">记录病程、现用药、合并症（糖尿病、血脂异常、心、肾）。眩晕使本页与眩晕方案相连（共享肝阳证）；头痛、耳鸣亦交叉联动。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Red tongue, yellow coat, wiry(-rapid) pulse → Liver Yang/fire. Greasy coat, slippery pulse → phlegm-damp. Red tongue with little coat, thready-wiry-rapid → Yin-deficient Yang rising. Pale-ish tongue, deep-thready weak → Essence deficiency.</span><span class="zh">舌红苔黄、脉弦（数）→肝阳／火。苔腻、脉滑→痰湿。舌红少苔、脉细弦数→阴虚阳亢。舌偏淡、脉沉细弱→精亏。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="hypertension-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Five patterns along the excess→deficiency spectrum. The first three are excess/branch (Liver Yang, Liver fire, phlegm-damp — something rises); the last two are root/deficiency (Yin-deficient Yang rising, Essence deficiency — the anchor fails). 本虚标实 mixtures are the rule: subdue the branch acutely, nourish the root for lasting control.</span>
+    <span class="zh">五证沿实→虚之谱。前三属实／标（肝阳、肝火、痰湿——有物上升）；后二属本／虚（阴虚阳亢、精亏——潜降失职）。本虚标实兼夹为常：急则潜标，缓则滋本以久控。</span>
+  </div>
+
+  <div class="pattern-card pc-up">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Liver Yang Rising</span><span class="zh">① 肝阳上亢</span></div>
+    <div class="pc-qi"><span class="en">Excessive Ascent — Yin fails to anchor Liver Yang, Yang surges to the head</span><span class="zh">升太过——阴不潜阳，肝阳上冲头目</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> high BP with dizziness, distending headache (temples/vertex), tinnitus, flushed face, irritability, insomnia, worse with stress/anger; red tongue, wiry pulse. The most typical hypertension pattern, usually on a root of Liver-Kidney Yin deficiency. <b>Treatment:</b> 平肝潜阳 — pacify the Liver, subdue Yang, anchor with Yin. This is the same pattern as the Dizziness and Hemifacial-spasm 肝阳上亢 — see the 肝阳化风 pattern card for the full transmission (and the stroke risk at its extreme).</span><span class="zh"><b>主症：</b>血压高伴眩晕、头胀痛（颞／巅）、耳鸣、面红、烦躁、失眠、压力／怒则甚；舌红、脉弦。最典型之高血压证，多根于肝肾阴虚。<b>治法：</b>平肝潜阳（滋阴以潜）。此与眩晕、面肌痉挛之肝阳上亢同证——完整传变见「肝阳化风」证型卡（及亢极中风之险）。</span></div>
+  </div>
+
+  <div class="pattern-card pc-up">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Liver Fire Blazing</span><span class="zh">② 肝火亢盛</span></div>
+    <div class="pc-qi"><span class="en">Excessive Ascent — Liver fire blazes upward, more heat than the Yang-rising pattern</span><span class="zh">升太过——肝火上炎，较肝阳更甚之热</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> high BP with severe pounding headache, markedly red face and eyes, bitter mouth, marked irritability/anger, dry mouth, thirst, constipation, dark urine; red tongue with yellow coat, wiry-rapid forceful pulse. A fuller, hotter, more excess picture than pattern ①. <b>Mechanism:</b> constrained Liver Qi has transformed fully to fire, which blazes upward with force. <b>Treatment:</b> 清肝泻火 — clear the Liver, drain fire. Links to the 肝火 pattern card.</span><span class="zh"><b>主症：</b>血压高伴头痛剧烈搏动、面目红赤、口苦、烦躁易怒著、口干、渴、便秘、尿黄；舌红苔黄、脉弦数有力。较①更实、更热之象。<b>病机：</b>肝郁全然化火，上炎有力。<b>治法：</b>清肝泻火。联动「肝火」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Phlegm-Damp Excess</span><span class="zh">③ 痰湿壅盛</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit obstruction — phlegm-damp obstructs the Qi dynamic and clouds the head</span><span class="zh">出入受阻——痰湿阻遏气机、蒙蔽清窍</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> high BP with a heavy muffled head (as if wrapped), dizziness, chest and epigastric oppression, nausea, profuse sputum, heavy body, often overweight; greasy white/yellow coat, slippery pulse. Common in stout patients with rich diet and metabolic syndrome. <b>Mechanism:</b> Spleen fails to transform fluids → phlegm-damp accumulates and obstructs the Qi dynamic, clouding the clear orifices and disturbing the up-down flow. <b>Treatment:</b> 化痰祛湿，健脾和中 — transform phlegm, dispel damp, strengthen the Spleen. Ban Xia Bai Zhu Tian Ma Tang. Links to the 痰湿 pattern card.</span><span class="zh"><b>主症：</b>血压高伴头重如裹、眩晕、胸脘痞闷、恶心、痰多、身重、多形盛；苔白／黄腻、脉滑。多见形盛、饮食肥甘、代谢综合征者。<b>病机：</b>脾失健运→痰湿聚而阻气机，蒙清窍、扰升降。<b>治法：</b>化痰祛湿、健脾和中。半夏白术天麻汤。联动「痰湿」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">④ Yin Deficiency with Yang Rising</span><span class="zh">④ 阴虚阳亢</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent — Liver-Kidney Yin depleted, unanchored Yang rises (the classic 本虚标实)</span><span class="zh">降不及——肝肾阴虚，阳失潜降而上亢（典型本虚标实）</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> high BP with dizziness, tinnitus, dry eyes, sore weak low back and knees, five-heart heat, flushed cheeks, night sweats, insomnia, palpitation; red tongue with little coat, thready-wiry-rapid pulse. The core chronic pattern, especially mid-life onward. <b>Mechanism:</b> Liver-Kidney Yin (which anchors and cools the Yang) is deficient, so Yang rises relatively unchecked — deficiency below producing excess-like rising above. <b>Treatment:</b> 滋阴潜阳 — enrich Yin, subdue the rising Yang. This is the true root treatment for most Liver-Yang hypertension. Links to the 阴虚火旺 pattern card.</span><span class="zh"><b>主症：</b>血压高伴眩晕、耳鸣、目干、腰膝酸软、五心烦热、颧红、盗汗、失眠、心悸；舌红少苔、脉细弦数。核心慢性证，尤中年后。<b>病机：</b>肝肾阴（潜降凉制阳者）虚，阳相对失制而上亢——下虚生上之似实的亢。<b>治法：</b>滋阴潜阳。此为多数肝阳型高血压之真本治。联动「阴虚火旺」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">⑤ Kidney Essence Deficiency</span><span class="zh">⑤ 肾精亏虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent/anchoring at the root — Essence-marrow depleted, Yin and Yang both weak below</span><span class="zh">根本升摄不足——精髓亏虚，下元阴阳俱损</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> chronic hypertension in older patients with an empty muffled head, dizziness, persistent faint tinnitus, poor memory, sore weak knees, hair/teeth changes; may lean Yin-deficient (tidal heat, red-peeled tongue) or Yang-deficient (cold limbs, pale tongue). Deep-thready pulse. <b>Mechanism:</b> long depletion of Kidney Essence empties the marrow-sea and weakens the root's ability to anchor — the deepest, most chronic substrate of hypertension. <b>Treatment:</b> 补肾填精，平调阴阳 — tonify Kidney, fill Essence, rebalance Yin-Yang (with the leaning corrected). Links to the 肾精亏虚 pattern card.</span><span class="zh"><b>主症：</b>老年慢性高血压伴脑空头蒙、眩晕、耳鸣细微持续、健忘、膝软、发齿改变；或偏阴虚（潮热、舌红剥）或偏阳虚（肢冷、舌淡）。脉沉细。<b>病机：</b>肾精久亏，髓海空、根本潜摄之力衰——高血压最深、最慢性之底质。<b>治法：</b>补肾填精、平调阴阳（据偏向而纠）。联动「肾精亏虚」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="hypertension-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">LV3 + GB20 + ST36 + KI3 form a core that subdues rising Yang and anchors it to the Kidney; pattern points address fire/phlegm/Yin/Essence. Acupuncture here is adjunctive to medication — its clearest wins are the symptoms (headache, dizziness, sleep) and modest BP support.</span>
+    <span class="zh">太冲+风池+足三里+太溪为核心，潜上亢之阳而归肾；配穴治火／痰／阴／精。针灸此处为药物之辅——最明确之效在症状（头痛、眩晕、睡眠）与小幅助控压。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points</span><span class="zh">核心穴</span></span><span class="point-val"><span class="en">LV3 太冲 (pacifies Liver, guides Qi-Blood down), GB20 风池 (subdues Yang/wind rising to the head), ST36 足三里 (harmonises, has BP-regulating evidence), KI3 太溪 (anchors Yang to Kidney Water), LI11 曲池 (a commonly used point with BP-lowering data), GV20 百会 (regulates the head — reducing for excess).</span><span class="zh">太冲（平肝、导气血下行）、风池（潜上冲头之阳／风）、足三里（和调，有降压证据）、太溪（滋水潜阳）、曲池（常用降压穴，有数据）、百会（调头——实则泻）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Liver Yang 肝阳上亢</span><span class="zh">① 肝阳上亢</span></span><span class="point-val"><span class="en">+ LV2 行间, GB43 侠溪, KI3 太溪 — subdue Yang, anchor with Yin; even-reducing, no moxa.</span><span class="zh">+ 行间、侠溪、太溪——潜阳、滋阴以潜；平泻不灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver fire 肝火亢盛</span><span class="zh">② 肝火亢盛</span></span><span class="point-val"><span class="en">+ LV2 行间, GB20, LI11 曲池, LV/GB jing-well bleeding if very full — clear and drain fire; reducing.</span><span class="zh">+ 行间、风池、曲池、火盛可点刺井穴放血——清泻肝火；泻法。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Phlegm-damp 痰湿壅盛</span><span class="zh">③ 痰湿壅盛</span></span><span class="point-val"><span class="en">+ ST40 丰隆, SP9 阴陵泉, CV12 中脘, ST36 — transform phlegm, drain damp, strengthen Spleen.</span><span class="zh">+ 丰隆、阴陵泉、中脘、足三里——化痰、利湿、健脾。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Yin-deficient Yang rising 阴虚阳亢</span><span class="zh">④ 阴虚阳亢</span></span><span class="point-val"><span class="en">+ KI3 太溪, SP6 三阴交, LV3, KI6 照海 — enrich Yin and subdue Yang; even/reinforcing for the Yin points.</span><span class="zh">+ 太溪、三阴交、太冲、照海——滋阴潜阳；阴穴平补。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Essence deficiency 肾精亏虚</span><span class="zh">⑤ 肾精亏虚</span></span><span class="point-val"><span class="en">+ BL23 肾俞, GV4 命门, CV4 关元, GB39 悬钟 (marrow), KI3 — tonify Kidney and fill Essence; moxa if Yang-leaning.</span><span class="zh">+ 肾俞、命门、关元、悬钟（髓）、太溪——补肾填精；偏阳虚加灸。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="hypertension-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern. In most patients, combine a branch-subduing action with a root-nourishing one (标本兼治). Herbs are adjunctive — do not adjust or stop antihypertensive medication based on herbs.</span>
+    <span class="zh">按证选方。多数病人标本兼治——潜标配滋本。方药为辅——勿据方药调整或停降压药。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Liver Yang 肝阳上亢</span><span class="zh">① 肝阳上亢</span></span><span class="point-val"><span class="en"><b>天麻钩藤饮</b> Tian Ma Gou Teng Yin — Tian Ma + Gou Teng + Shi Jue Ming subdue Yang and extinguish wind; Niu Xi leads down; Du Zhong/Sang Ji Sheng support the Liver-Kidney root. The workhorse formula.</span><span class="zh"><b>天麻钩藤饮</b>——天麻+钩藤+石决明潜阳息风；牛膝引下；杜仲／桑寄生补肝肾之本。主力方。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver fire 肝火亢盛</span><span class="zh">② 肝火亢盛</span></span><span class="point-val"><span class="en"><b>龙胆泻肝汤</b> Long Dan Xie Gan Tang — drain full Liver-GB fire downward. For strong upward fire with constipation, brief use; transition to Yin-nourishing as fire settles.</span><span class="zh"><b>龙胆泻肝汤</b>——泻肝胆实火向下。火盛便秘者短用；火降后转滋阴。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Phlegm-damp 痰湿壅盛</span><span class="zh">③ 痰湿壅盛</span></span><span class="point-val"><span class="en"><b>半夏白术天麻汤</b> Ban Xia Bai Zhu Tian Ma Tang — transform phlegm, strengthen Spleen, with Tian Ma for the phlegm-dizziness. Add Ze Xie/Che Qian Zi to drain damp.</span><span class="zh"><b>半夏白术天麻汤</b>——化痰健脾，天麻治痰眩。加泽泻／车前子利湿。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Yin-deficient Yang rising 阴虚阳亢</span><span class="zh">④ 阴虚阳亢</span></span><span class="point-val"><span class="en"><b>杞菊地黄丸 / 镇肝熄风汤</b> — Qi Ju Di Huang Wan enriches Liver-Kidney Yin (with Gou Qi/Ju Hua for head-eyes); Zhen Gan Xi Feng Tang for marked Yin-deficient Yang surging toward wind. The root treatment.</span><span class="zh"><b>杞菊地黄丸／镇肝熄风汤</b>——杞菊地黄滋肝肾阴（枸杞／菊花清利头目）；阴虚阳亢近化风者用镇肝熄风汤。此为本治。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Essence deficiency 肾精亏虚</span><span class="zh">⑤ 肾精亏虚</span></span><span class="point-val"><span class="en"><b>左归丸 (Yin) / 右归丸 (Yang) / 二仙汤</b> — tonify Kidney and fill Essence per the Yin/Yang lean; Er Xian Tang balances Kidney Yin-Yang and is used for menopausal/elderly hypertension with mixed deficiency.</span><span class="zh"><b>左归丸（阴）／右归丸（阳）／二仙汤</b>——按阴阳偏向补肾填精；二仙汤平调肾阴阳，用于更年期／老年阴阳兼虚之高血压。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">Two anchors keep hypertension management honest. First, the pattern usually moves along the excess→deficiency line over a patient's life: a ruddy, stressed 40-year-old with Liver fire becomes, at 65, an Essence-deficient Yin-deficient-Yang-rising picture — treat where they <em>are</em>, and reassess over years, not visits. Second, and non-negotiable: this is medically managed disease. TCM improves symptoms and quality of life and may modestly aid control, but you monitor BP, coordinate with the prescriber, never advise stopping medication, and refer any hypertensive-emergency sign immediately. Treating the pattern well and respecting the medicine are not in conflict.</span>
+    <span class="zh">两锚使高血压治疗不失分寸。其一，证型多随一生沿实→虚线移动：40岁面红压力大之肝火者，65岁成精亏阴虚阳亢之象——治其<em>当下</em>，以年而非以诊次复评。其二，不可让步：此为须医学管理之病。中医改善症状与生活质量、或小幅助控，然须监测血压、与处方者协同、绝不建议停药、任何高血压急症征象立即转诊。治证之善与敬畏医学，二者不悖。</span>
+  </div>
+</div>
+</div>
+<div id="page-hanzheng" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Metabolic & Endocrine</span><span class="zh">代谢内分泌</span></div>
+  <div class="page-title"><span class="en">Sweating Disorders</span><span class="zh">汗证</span></div>
+  <div class="page-desc"><span class="en">Root: sweat is "the fluid of the Heart," released through the interstices (腠理) under the control of Wei Qi and the balance of Yin-Yang. Abnormal sweating means this control has failed — either the exterior is not secured (spontaneous sweat, 自汗, a Qi/Yang problem) or empty fire forces the fluids out at night (night sweat, 盗汗, a Yin problem).</span><span class="zh">根本：汗为心之液，由卫气司腠理开合、阴阳平衡而出。汗出异常即此调控失职——或表不固（自汗，气／阳之病），或虚火迫津夜出（盗汗，阴之病）。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('hanzheng','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('hanzheng','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('hanzheng','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('hanzheng','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="hanzheng-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>First separate the two axes — day vs night — and screen for secondary causes.</strong> Rule out or refer for: hyperthyroidism, infection/TB (night sweats + fever + weight loss), diabetes/hypoglycemia, menopause (see the Menopause page), lymphoma, and medication effects. Sudden profuse sweating with palpitation/collapse is a medical emergency (severe Yang collapse / cardiac). Localized sweating (palms, head only) is differentiated separately from generalized sweating.</span>
+    <span class="zh"><strong>先分两轴——日间／夜间——并筛继发病因。</strong>以下排除或转诊：甲亢、感染／结核（盗汗+发热+消瘦）、糖尿病／低血糖、更年期（见更年期页）、淋巴瘤、药物影响。突发大汗伴心悸／虚脱为急症（亡阳／心源）。局部汗（仅手心、仅头部）与全身汗分别辨证。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · The 自汗 / 盗汗 Axis</span><span class="zh">核心框架 · 自汗／盗汗之轴</span></div>
+    <div class="cb-what"><span class="en">Sweat is body fluid pushed out through the interstices. Two things normally keep it in check: <b>Wei Qi / Yang secures the exterior</b> (holds the pores appropriately closed), and <b>Yin anchors the fluids and restrains the Yang</b> (keeps them from being forced out). Two classic patterns follow. <b>Spontaneous sweat (自汗):</b> occurs by day, worse on exertion, when Qi/Yang fails to secure the exterior — the pores stay open, fluid leaks. A deficiency of the <em>holding, securing</em> function. <b>Night sweat (盗汗):</b> occurs during sleep and stops on waking, when Yin is deficient and empty fire (unrestrained at night when Yang enters the interior) forces the fluids out. A deficiency of the <em>anchoring, cooling</em> function. The rule of thumb — <em>自汗多气虚阳虚, 盗汗多阴虚</em> — orients you, though overlap and exceptions exist.</span><span class="zh">汗为津液经腠理外泄。常有二者约束之：<b>卫气／阳固表</b>（司腠理适度闭合），<b>阴敛津液、制约阳气</b>（使津不被迫出）。故成两典型证。<b>自汗：</b>日间、动则加重，因气／阳不固表——腠理疏开，津液外泄。属<em>固摄</em>之虚。<b>盗汗：</b>寐中出、醒则止，因阴虚而虚火（夜间阳入于里则失制）迫津外泄。属<em>潜敛</em>之虚。总纲——<em>自汗多气虚阳虚，盗汗多阴虚</em>——可为向导，然有重叠与例外。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Day or night</span><span class="zh">问一 · 昼夜</span></span><span class="point-val"><span class="en">Sweating by day, awake, worse on exertion, stops with rest → spontaneous sweat (自汗, Qi/Yang). Sweating during sleep, drenching, stops on waking → night sweat (盗汗, Yin). Both day and night → mixed or severe deficiency.</span><span class="zh">日间清醒时出、动则甚、静则止→自汗（气／阳）。寐中出、湿透、醒则止→盗汗（阴）。昼夜均出→兼夹或重虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Accompanying — deficiency type</span><span class="zh">问二 · 兼症辨虚型</span></span><span class="point-val"><span class="en">Fatigue, breathlessness, easy colds, pale → Lung-Wei Qi not securing. Palpitation, poor sleep, pale face, poor memory → Heart-Blood not holding. Tidal heat, five-heart heat, dry mouth, red cheeks → Yin-deficient empty fire.</span><span class="zh">乏力、气短、易感冒、面白→肺卫不固。心悸、眠差、面白、健忘→心血不足。潮热、五心烦热、口干、颧红→阴虚火旺。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Location & character</span><span class="zh">问三 · 部位与性状</span></span><span class="point-val"><span class="en">Whole-body vs localized (head/face, palms-soles, half-body). Sweat that is cold and profuse with cold limbs → Yang deficiency (more serious). Sticky yellow sweat with heat signs → damp-heat (a less common excess type). Note sweat color/odor.</span><span class="zh">全身 vs 局部（头面、手足心、半身）。汗冷量多伴肢冷→阳虚（较重）。汗黏色黄兼热象→湿热（较少见之实型）。注意汗之色与味。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Pale tongue, weak pulse → Qi/Yang not securing. Pale tongue, thready-weak → Heart-Blood. Red tongue with little/peeled coat, thready-rapid → Yin-deficient empty fire. Red tongue, yellow greasy coat → damp-heat.</span><span class="zh">舌淡、脉弱→气／阳不固。舌淡、脉细弱→心血。舌红少苔或剥、脉细数→阴虚火旺。舌红苔黄腻→湿热。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="hanzheng-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Three core patterns along the 自汗/盗汗 axis: two securing/holding failures (Lung-Wei Qi, Heart-Blood) that give spontaneous sweat, and one anchoring failure (Yin-deficient fire) that gives night sweat. (A damp-heat excess type and a Yang-collapse emergency type exist but are less common / urgent.)</span>
+    <span class="zh">沿自汗／盗汗轴之三核心证：二固摄之虚（肺卫气、心血）致自汗，一潜敛之虚（阴虚火）致盗汗。（另有湿热实型与亡阳急症型，较少见／属急。）</span>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Lung-Wei Qi Not Securing (Spontaneous Sweat)</span><span class="zh">① 肺卫不固自汗</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent/holding — Wei Qi too weak to secure the exterior, pores stay open</span><span class="zh">升不及／固摄不足——卫气不固表，腠理疏而汗泄</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> spontaneous daytime sweating, markedly worse on the slightest exertion; aversion to wind, frequent colds, fatigue, breathlessness, pale complexion; pale tongue, weak pulse. <b>Mechanism:</b> the Lung governs the Wei Qi that controls the opening and closing of the interstices; when Wei Qi is weak it cannot hold the pores closed, so fluid leaks out — worse with exertion, which further disperses the already-weak Qi. <b>Treatment:</b> 益气固表止汗 — boost Qi, secure the exterior, stop sweating. Yu Ping Feng San is the signature. Links to the 脾气虚 (肺脾气虚) pattern card.</span><span class="zh"><b>主症：</b>日间自汗、稍动即甚；恶风、易感冒、乏力、气短、面色㿠白；舌淡、脉弱。<b>病机：</b>肺主卫气以司腠理开合，卫气虚则不能敛闭腠理，津液外泄——动则耗其已虚之气，故动甚。<b>治法：</b>益气固表止汗。玉屏风散为代表。联动「脾气虚（肺脾气虚）」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Heart-Blood Deficiency</span><span class="zh">② 心血不足</span></div>
+    <div class="pc-qi"><span class="en">Insufficient generation — Heart-Blood empty, sweat (the fluid of the Heart) not held</span><span class="zh">化源不足——心血亏虚，汗（心之液）失于统摄</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> sweating (spontaneous and/or night) with palpitation, poor dream-disturbed sleep, pale lusterless face, fatigue, poor memory, dizziness; pale tongue, thready-weak pulse. Common after blood loss, chronic illness, or overthinking. <b>Mechanism:</b> "sweat is the fluid of the Heart"; when Heart-Blood is deficient, the Heart cannot govern and hold its own fluid, and the unsettled Shen further loosens its control — so sweat escapes. <b>Treatment:</b> 补血养心，益气敛汗 — tonify Blood, nourish the Heart, boost Qi and astringe sweat. Links to the 心脾两虚 pattern card.</span><span class="zh"><b>主症：</b>汗出（自汗和／或盗汗）伴心悸、眠差多梦、面色无华、乏力、健忘、头晕；舌淡、脉细弱。多见失血、久病、思虑后。<b>病机：</b>「汗为心之液」；心血虚则心不能主摄其液，心神不宁更失其固——汗遂外泄。<b>治法：</b>补血养心、益气敛汗。联动「心脾两虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Yin Deficiency with Empty Fire (Night Sweat)</span><span class="zh">③ 阴虚火旺盗汗</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent — Yin fails to anchor Yang; empty fire forces the fluids out at night</span><span class="zh">降不及——阴不制阳，虚火夜迫津外泄</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> night sweats (drenching during sleep, stopping on waking), five-heart heat, tidal flush over the cheeks, dry mouth and throat, insomnia, possibly low-grade afternoon fever; red tongue with little or peeled coat, thready-rapid pulse. <b>Mechanism:</b> when Yin is depleted it cannot restrain the Yang; at night the Yang enters the interior where, unchecked by cooling Yin, empty fire arises and steams the fluids out through the interstices — and stops on waking when Yang returns to the exterior. <b>Treatment:</b> 滋阴降火，固表止汗 — enrich Yin, clear empty fire, astringe sweat. Links to the 阴虚火旺 pattern card.</span><span class="zh"><b>主症：</b>盗汗（寐中湿透、醒则止）、五心烦热、颧红潮热、口干咽燥、失眠、或午后低热；舌红少苔或剥、脉细数。<b>病机：</b>阴亏不能制阳；夜则阳入于里，失阴凉之制，虚火内生蒸津外泄——醒则阳出于表而止。<b>治法：</b>滋阴降火、固表止汗。联动「阴虚火旺」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="hanzheng-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">HT6 + KI7 + LU7/LI4 anchor the sweat-regulating core; pattern points address Qi/Blood/Yin. HT6 (Yin-Xi) and KI7 (Fu Liu) are the two classic empirical points — the pairing famously distinguishes and treats spontaneous vs night sweat.</span>
+    <span class="zh">阴郄+复溜+列缺／合谷为调汗核心；配穴治气／血／阴。阴郄、复溜为止汗两大经验穴——此配伍以辨治自汗与盗汗著称。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points</span><span class="zh">核心穴</span></span><span class="point-val"><span class="en">HT6 阴郄 (Xi-cleft of Heart — the premier point to stop sweating, especially night sweat), KI7 复溜 (regulates sweat via the Kidney — reinforce for spontaneous sweat, even for night sweat), LU7 列缺 + LI4 合谷 (regulate the Wei Qi and the opening/closing of the interstices). Classic teaching: 复溜 reinforcing + 合谷 reducing to stop sweat; reverse to promote sweat.</span><span class="zh">阴郄（心之郄——止汗第一穴，尤宜盗汗）、复溜（从肾调汗——自汗补、盗汗平）、列缺+合谷（调卫气及腠理开合）。经典：补复溜、泻合谷以止汗；反之则发汗。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Lung-Wei Qi 肺卫不固</span><span class="zh">① 肺卫不固自汗</span></span><span class="point-val"><span class="en">+ BL13 肺俞, ST36 足三里, CV6 气海 (+moxa), BL43 膏肓 — boost Qi and secure the exterior; reinforcing with moxa.</span><span class="zh">+ 肺俞、足三里、气海（加灸）、膏肓——益气固表；补法加灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Heart-Blood 心血不足</span><span class="zh">② 心血不足</span></span><span class="point-val"><span class="en">+ HT7 神门, BL15 心俞, BL17 膈俞, SP6 三阴交, ST36 — nourish Heart-Blood, settle the Shen, astringe sweat; reinforcing.</span><span class="zh">+ 神门、心俞、膈俞、三阴交、足三里——养心血、宁神、敛汗；补法。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Yin-deficient fire 阴虚火旺</span><span class="zh">③ 阴虚火旺盗汗</span></span><span class="point-val"><span class="en">+ KI3 太溪, KI6 照海, SP6 三阴交, HT6 阴郄 (emphasised) — enrich Yin, clear empty fire, stop night sweat; even method, no moxa.</span><span class="zh">+ 太溪、照海、三阴交、阴郄（重用）——滋阴降火、止盗汗；平补平泻、不灸。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="hanzheng-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern, with astringent sweat-stoppers (麻黄根, 浮小麦, 煅牡蛎, 五味子) added across patterns to hold the fluid while the root is corrected.</span>
+    <span class="zh">按证选方，各证佐收涩止汗（麻黄根、浮小麦、煅牡蛎、五味子）以固津，同时治本。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Lung-Wei Qi 肺卫不固</span><span class="zh">① 肺卫不固自汗</span></span><span class="point-val"><span class="en"><b>玉屏风散</b> Yu Ping Feng San — Huang Qi + Bai Zhu + Fang Feng to boost Qi and secure the exterior; the signature formula for spontaneous sweat with easy colds. Add 煅牡蛎/浮小麦 to astringe.</span><span class="zh"><b>玉屏风散</b>——黄芪+白术+防风，益气固表；自汗易感冒之代表方。加煅牡蛎／浮小麦收涩。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Heart-Blood 心血不足</span><span class="zh">② 心血不足</span></span><span class="point-val"><span class="en"><b>归脾汤</b> Gui Pi Tang — tonify Heart-Spleen, nourish Blood, settle the Shen; add 五味子/浮小麦 to astringe sweat. For sweating with palpitation and poor sleep.</span><span class="zh"><b>归脾汤</b>——补心脾、养血、宁神；加五味子／浮小麦敛汗。治汗出兼心悸眠差。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Yin-deficient fire 阴虚火旺</span><span class="zh">③ 阴虚火旺盗汗</span></span><span class="point-val"><span class="en"><b>当归六黄汤</b> Dang Gui Liu Huang Tang — the classic night-sweat formula: Dang Gui + Sheng/Shu Di enrich Yin, the three Huang (Qin/Lian/Bai) clear empty fire, Huang Qi secures the exterior. For milder cases → 知柏地黄丸 + 牡蛎散.</span><span class="zh"><b>当归六黄汤</b>——盗汗经典方：当归+生／熟地滋阴，三黄（芩／连／柏）清虚火，黄芪固表。轻者→知柏地黄丸+牡蛎散。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">The 自汗=Qi/Yang, 盗汗=Yin rule is a starting orientation, not a law. In practice many patients — especially the chronically ill or elderly — have both, or a Heart-Blood pattern that sweats day and night. Treat what you actually find. Two safety notes: persistent night sweats with fever and weight loss must be worked up (TB, lymphoma, thyroid); and profuse cold sweating with cold limbs and a faint pulse is Yang collapse (亡阳) — a medical emergency, not a clinic sweating complaint. For menopausal flushing-sweats, see the Menopause page (Kidney Yin/Yang axis).</span>
+    <span class="zh">自汗=气／阳、盗汗=阴之纲是起始向导，非铁律。临床多数病人——尤久病、年老者——常两者并见，或心血证昼夜均汗。据实所见而治。二安全提示：持续盗汗伴发热消瘦须查（结核、淋巴瘤、甲状腺）；大汗淋漓而肢冷脉微为亡阳——急症，非门诊汗证。更年期潮热汗出见更年期页（肾阴／阳之轴）。</span>
+  </div>
+</div>
+</div>
+<div id="page-dryeye" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Sensory / Ophthalmology</span><span class="zh">五官·眼科</span></div>
+  <div class="page-title"><span class="en">Dry Eye</span><span class="zh">干眼</span></div>
+  <div class="page-desc"><span class="en">Root: the eye is where the Essence of all five Zang pours up (五脏六腑之精皆上注于目), and is governed especially by the Liver (肝开窍于目) and moistened by Yin-fluid and Blood. Dry eye is a failure of this upward moistening — the fluids and Blood no longer reach and nourish the eye, most often from Liver-Kidney Yin deficiency or Blood deficiency, sometimes with empty heat.</span><span class="zh">根本：五脏六腑之精皆上注于目，尤为肝所主（肝开窍于目），赖阴津与血濡润。干眼为此上濡失职——津血不能上达濡目，多因肝肾阴虚或阴血亏虚，或兼虚热。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('dryeye','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('dryeye','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('dryeye','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('dryeye','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="dryeye-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>Screen for secondary and serious causes.</strong> Consider and refer: Sjögren's syndrome and other autoimmune disease (dry eyes + dry mouth + joint symptoms), thyroid eye disease, Bell's palsy (incomplete eye closure), medication effects (antihistamines, antidepressants), and contact-lens or screen-related surface disease. Red painful eye with visual loss or photophobia is not simple dry eye — refer urgently. Otherwise dry eye responds well to Yin/Blood-nourishing pattern treatment plus local points and lifestyle (screen breaks, humidity).</span>
+    <span class="zh"><strong>筛查继发与严重病因。</strong>考虑并转诊：干燥综合征及其他自身免疫病（眼干+口干+关节症状）、甲状腺眼病、面瘫（闭眼不全）、药物影响（抗组胺、抗抑郁药）、隐形眼镜／屏幕相关眼表病。红痛眼伴视力下降或畏光非单纯干眼——急转诊。余者干眼对滋阴／养血辨证治疗+局部穴+生活调（屏幕休息、湿度）反应良好。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Why the Eye Loses Its Moisture</span><span class="zh">核心框架 · 目为何失润</span></div>
+    <div class="cb-what"><span class="en">The eye is nourished by the upward flow of Essence, Yin-fluid, and Blood — the Liver stores Blood and opens to the eye, the Kidney stores Essence, and the fluids moisten. Dry eye is fundamentally a <b>failure of moistening from insufficiency</b>: either Liver-Kidney Yin is depleted (the fluids that should moisten the eye are gone, often with empty heat that further dries — the aging/screen-strain/menopausal picture), or Blood is deficient (the eye is not filled and nourished, worse with fatigue — the post-illness/overwork picture). Occasionally there is a relative excess overlay (Liver fire/wind-heat scorching the surface), but the dominant story in chronic dry eye is deficiency. Treat by nourishing what should rise to the eye.</span><span class="zh">目赖精、阴津、血上濡——肝藏血而开窍于目、肾藏精、津液润之。干眼本质为<b>虚而失濡</b>：或肝肾阴亏（当濡目之津已耗，常兼虚热更燥——年老／用眼／更年期之象），或阴血不足（目失充养、劳则加重——病后／劳伤之象）。偶有相对之实（肝火／风热灼目表），然慢性干眼以虚为主。治在濡养当上濡目者。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Sensation & timing</span><span class="zh">问一 · 感觉与时相</span></span><span class="point-val"><span class="en">Dry, gritty, burning, foreign-body sensation, worse in the evening / after screens / in dry air. Burning with heat sensation, worse when tired-and-hot → Yin-deficient empty heat. Dry with blurred vision worse on fatigue → Blood deficiency.</span><span class="zh">干涩、磨砂感、灼热、异物感，入夜／用屏／干燥环境加重。灼热感、疲而燥热甚→阴虚有热。干伴视物模糊、劳则甚→血虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Systemic dryness</span><span class="zh">问二 · 全身干燥</span></span><span class="point-val"><span class="en">Dry mouth/throat, tidal heat, night sweat, sore low back, dizziness, tinnitus → Liver-Kidney Yin. Pale face, dizziness, palpitation, scanty pale menses → Blood deficiency. Widespread dryness + joint symptoms → screen for Sjögren's/autoimmune.</span><span class="zh">口咽干、潮热、盗汗、腰酸、头晕、耳鸣→肝肾阴虚。面白、头晕、心悸、经少色淡→血虚。广泛干燥+关节症状→筛查干燥综合征／自免。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Use & environment</span><span class="zh">问三 · 用眼与环境</span></span><span class="point-val"><span class="en">Hours of screen/near work, contact lenses, air-conditioning, low humidity — these deplete and dry regardless of pattern; address them alongside. Menopausal status (Yin decline) and age are relevant to the Liver-Kidney picture.</span><span class="zh">屏幕／近距用眼时长、隐形眼镜、空调、低湿度——不论何证均耗且燥，须同时干预。更年期（阴衰）与年龄与肝肾之象相关。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Red tongue with little/peeled coat, thready-rapid pulse → Liver-Kidney Yin (with heat). Pale tongue, thready pulse → Blood deficiency. Red tongue, yellow coat, wiry-rapid → Liver-fire overlay (less common).</span><span class="zh">舌红少苔或剥、脉细数→肝肾阴虚（兼热）。舌淡、脉细→血虚。舌红苔黄、脉弦数→兼肝火（较少见）。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="dryeye-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Two core deficiency patterns: Liver-Kidney Yin deficiency (with empty heat — the dominant chronic dry-eye pattern) and Yin-Blood deficiency (the eye not filled). Both are failures of upward moistening; treat by enriching Yin and nourishing Blood so the fluids reach the eye.</span>
+    <span class="zh">二核心虚证：肝肾阴虚（兼虚热——慢性干眼主证）与阴血亏虚（目失充）。皆上濡失职；治在滋阴养血，使津血上达于目。</span>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Liver-Kidney Yin Deficiency</span><span class="zh">① 肝肾阴虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent — Yin-fluid depleted, empty heat dries the eye further</span><span class="zh">降不及——阴津亏虚，虚热更灼目窍</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> dry burning gritty eyes, photophobia, blurred vision, worse in the evening and after screen use, with dry mouth/throat, tidal heat, night sweats, sore weak low back, dizziness, tinnitus; red tongue with little or peeled coat, thready-rapid pulse. Common with aging, menopause, and prolonged near work. <b>Mechanism:</b> the Liver stores Blood and opens to the eye; the Kidney stores the Essence that underwrites the Liver-Blood and the ocular fluids. When Liver-Kidney Yin is depleted, the eye loses its moistening fluid, and empty heat arising from Yin deficiency dries it further — a dry-and-hot deficiency. <b>Treatment:</b> 滋补肝肾，养阴明目 — enrich Liver-Kidney Yin, nourish fluids, brighten the eyes. Links to the 阴虚火旺 pattern card.</span><span class="zh"><b>主症：</b>目干灼磨、畏光、视物模糊、入夜及用屏后加重，伴口咽干、潮热、盗汗、腰膝酸软、头晕、耳鸣；舌红少苔或剥、脉细数。多见年老、更年期、久近距用眼。<b>病机：</b>肝藏血开窍于目；肾藏精以充肝血及目之津。肝肾阴亏则目失濡津，阴虚生虚热更灼之——燥而热之虚。<b>治法：</b>滋补肝肾、养阴明目。联动「阴虚火旺」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Yin-Blood Deficiency</span><span class="zh">② 阴血亏虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient generation — Blood too deficient to fill and moisten the eye</span><span class="zh">化源不足——阴血亏虚不能充濡目窍</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> dry gritty eyes with blurred vision that worsens with fatigue and improves with rest, dry eyes without much heat sensation, pale lusterless face, dizziness, palpitation, scanty pale menses (in women); pale tongue, thready pulse. Common after blood loss, childbirth, chronic illness, or overwork. <b>Mechanism:</b> "the Liver stores Blood, and when the eye receives Blood it can see (肝受血而能视)"; when Blood is deficient it cannot rise to fill and moisten the eye, so the eye is dry and vision blurs — a nourishment failure, cooler and more purely deficient than pattern ①. <b>Treatment:</b> 养血滋阴，益目 — nourish Blood, enrich Yin, benefit the eye. Links to the 气血两虚 pattern card.</span><span class="zh"><b>主症：</b>目干磨、视物模糊、劳则加重、休息则缓、干而少热感、面色无华、头晕、心悸、经少色淡（女）；舌淡、脉细。多见失血、产后、久病、劳伤。<b>病机：</b>「肝受血而能视」；血虚则不能上充濡目，故目干视糊——濡养不足，较①更凉、更纯虚。<b>治法：</b>养血滋阴、益目。联动「气血两虚」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="dryeye-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Local periocular points move Qi-Blood to the eye and stimulate tear function; distal points nourish the Liver-Kidney/Blood root. Local + root is the standard combination. Needle periocular points shallowly and carefully.</span>
+    <span class="zh">局部眼周穴引气血至目、促泪液功能；远端穴治肝肾／血之本。局部+治本为标准配伍。眼周穴宜浅刺慎刺。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Local / periocular</span><span class="zh">局部·眼周</span></span><span class="point-val"><span class="en">BL2 攒竹, TE23 丝竹空, GB1 瞳子髎, ST1 承泣, EX 鱼腰, EX 太阳 — encircle and stimulate the eye to move Qi-Blood and promote lacrimation. Needle shallowly, avoid the globe; press firmly after withdrawal (periocular bruising risk).</span><span class="zh">攒竹、丝竹空、瞳子髎、承泣、鱼腰、太阳——围目行气血、促泪。浅刺、避眼球；出针后按压（眼周易瘀）。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Distal (both patterns)</span><span class="zh">远端（两证通用）</span></span><span class="point-val"><span class="en">LV3 太冲, GB37 光明 (Luo of GB, empirical eye point), KI3 太溪, SP6 三阴交, BL18 肝俞, BL23 肾俞 — nourish Liver-Kidney and Blood, brighten the eyes.</span><span class="zh">太冲、光明（胆络，明目验穴）、太溪、三阴交、肝俞、肾俞——养肝肾血、明目。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Liver-Kidney Yin 肝肾阴虚</span><span class="zh">① 肝肾阴虚</span></span><span class="point-val"><span class="en">+ KI6 照海, KI3 太溪 (emphasised), SP6 — enrich Yin, clear empty heat; even/reinforcing, no moxa.</span><span class="zh">+ 照海、太溪（重用）、三阴交——滋阴清虚热；平补不灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Yin-Blood 阴血亏虚</span><span class="zh">② 阴血亏虚</span></span><span class="point-val"><span class="en">+ BL17 膈俞, SP10 血海, ST36 足三里, SP6 — nourish Blood and generate fluids; reinforcing.</span><span class="zh">+ 膈俞、血海、足三里、三阴交——养血生津；补法。</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="dryeye-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Formulas by pattern, both centered on nourishing Yin-Blood to bring moisture to the eye. Gou Qi Zi, Ju Hua, Mi Meng Hua, Sang Shen are the signature eye-brightening moistening herbs.</span>
+    <span class="zh">按证选方，皆以养阴血、濡目为中心。枸杞子、菊花、密蒙花、桑椹为明目润燥要药。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Liver-Kidney Yin 肝肾阴虚</span><span class="zh">① 肝肾阴虚</span></span><span class="point-val"><span class="en"><b>杞菊地黄丸</b> Qi Ju Di Huang Wan — Liu Wei Di Huang (enrich Liver-Kidney Yin) + Gou Qi Zi + Ju Hua (nourish and brighten the eyes). The signature dry-eye formula. Add Mai Dong/Sha Shen to generate fluids if very dry.</span><span class="zh"><b>杞菊地黄丸</b>——六味地黄（滋肝肾阴）+枸杞子+菊花（养目明目）。干眼代表方。甚燥加麦冬／沙参生津。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Yin-Blood 阴血亏虚</span><span class="zh">② 阴血亏虚</span></span><span class="point-val"><span class="en"><b>四物汤 + 明目地黄丸加减</b> — nourish Blood (Dang Gui, Shu Di, Bai Shao, Chuan Xiong) with Gou Qi/Ju Hua/Mi Meng Hua to lead Blood to the eye and brighten vision. For Blood-deficiency dry eye with fatigue-blur.</span><span class="zh"><b>四物汤+明目地黄丸加减</b>——养血（当归、熟地、白芍、川芎）配枸杞／菊花／密蒙花引血明目。治血虚干眼、劳则视糊。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">Two things decide outcomes in dry eye. First, address the behavioral drivers — screen time, blink rate, contact lenses, dry/air-conditioned environments deplete Yin-fluid faster than any formula can replace it; pattern treatment without lifestyle change under-performs. Second, screen for Sjögren's and autoimmune disease whenever dry eyes come with dry mouth and joint symptoms — that is a referral, not a Yin-deficiency to be tonified alone. When it is straightforward Liver-Kidney or Blood-deficiency dry eye, Qi Ju Di Huang Wan plus periocular needling and screen discipline works reliably, though over weeks.</span>
+    <span class="zh">干眼二事决定疗效。其一，处理行为诱因——屏幕时间、瞬目频率、隐形眼镜、干燥／空调环境耗阴津之速快于任何方药所能补；辨证而不改生活方式则效逊。其二，眼干伴口干与关节症状时须筛查干燥综合征与自免病——此为转诊，非可独补之阴虚。若为单纯肝肾或血虚干眼，杞菊地黄丸配眼周针刺与用屏节制可靠有效，然以周计。</span>
+  </div>
+</div>
+</div>
+<div id="page-impotence" class="disease-page">
+<div class="page-header">
+  <div class="page-eyebrow"><span class="en">Urology / Men's Health</span><span class="zh">泌尿生殖·男科</span></div>
+  <div class="page-title"><span class="en">Impotence (ED)</span><span class="zh">阳痿</span></div>
+  <div class="page-desc"><span class="en">Root: the ancestral sinew (宗筋) fails to rise. It can fail from too little fire (Mingmen/Kidney Yang declining, Heart-Spleen not nourishing) or from obstruction (Liver Qi constrained, damp-heat pouring down). Modern ED is frequently psychogenic — the Liver-Qi and fright patterns matter as much as the classic Kidney-Yang picture.</span><span class="zh">根本：宗筋不振。或因火不足（命门／肾阳衰、心脾失养），或因所阻（肝郁、湿热下注）。现代阳痿多属心因性——肝郁与惊恐两证与经典肾阳证同等重要。</span></div>
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="showPhase('impotence','intake',this)"><span class="en">① Intake</span><span class="zh">① 问诊</span></button>
+    <button class="phase-tab" onclick="showPhase('impotence','pattern',this)"><span class="en">② Differentiation</span><span class="zh">② 辨证</span></button>
+    <button class="phase-tab" onclick="showPhase('impotence','acupuncture',this)"><span class="en">③ Acupuncture</span><span class="zh">③ 针灸</span></button>
+    <button class="phase-tab" onclick="showPhase('impotence','herbs',this)"><span class="en">④ Herbs</span><span class="zh">④ 方药</span></button>
+  </div>
+</div>
+
+<!-- ① INTAKE -->
+<div id="impotence-intake" class="phase-panel active">
+  <div class="tip-box">
+    <span class="en"><strong>First separate psychogenic from organic, and screen for treatable medical causes.</strong> Preserved morning/nocturnal erections and situational failure point to psychogenic (Liver-Qi / fright) — highly responsive. Absent morning erections, gradual global decline, or risk factors (diabetes, cardiovascular disease, low testosterone, medications, pelvic surgery) suggest organic causes needing medical work-up. ED can be an early marker of cardiovascular disease — do not treat in isolation without appropriate referral.</span>
+    <span class="zh"><strong>先分心因性与器质性，并筛查可治的医学病因。</strong>晨勃／夜间勃起保留、情境性失败提示心因性（肝郁／惊恐）——极易见效。晨勃消失、渐进性全面减退、或有高危因素（糖尿病、心血管病、低睾酮、药物、盆腔手术）提示器质性，须医学检查。阳痿可为心血管病之早期信号——勿孤立处理，须适当转诊。</span>
+  </div>
+
+  <div class="concept-box">
+    <div class="cb-label"><span class="en">Core Framework · Why the Ancestral Sinew Fails to Rise</span><span class="zh">核心框架 · 宗筋为何不振</span></div>
+    <div class="cb-what"><span class="en">Erection is the "ancestral sinew" (宗筋) filling and rising — it depends on Kidney Yang/Mingmen fire to warm and drive it, on Qi-Blood to fill it, and on the Liver (which governs the sinews and the free flow of Qi) to release it. So impotence arises two ways. <b>Insufficiency (不用):</b> Mingmen fire declines (肾阳虚), or Heart-Spleen fails to generate and lead Qi-Blood to the sinew (心脾两虚) — nothing to raise it. <b>Obstruction (不通):</b> Liver Qi is constrained so the sinew cannot be released (肝郁气滞 — the classic psychogenic ED), or damp-heat pours down and slackens it (湿热下注). Fright can also injure the Kidney and scatter the Qi (惊恐伤肾). Match the mechanism — a Kidney-Yang tonic given to a Liver-Qi patient makes things worse.</span><span class="zh">勃起为宗筋充而举——赖肾阳／命门火以温煦鼓动、气血以充盈、肝（主筋、主疏泄）以启之。故阳痿有二。<b>不用（虚）：</b>命门火衰（肾阳虚），或心脾不能化生并输气血于宗筋（心脾两虚）——无以举之。<b>不通（阻）：</b>肝气郁结则宗筋不得舒（肝郁气滞——典型心因性阳痿），或湿热下注而弛纵（湿热下注）。惊恐亦可伤肾散气（惊恐伤肾）。须对证——给肝郁者投补肾壮阳，反增其害。</span></div>
+  </div>
+
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Q1 · Onset & situation</span><span class="zh">问一 · 起病与情境</span></span><span class="point-val"><span class="en">Sudden, situational, after stress/relationship strain, better when relaxed or on holiday → Liver-Qi (psychogenic). Sudden after a fright/shock → fright injuring Kidney. Gradual with aging/overindulgence → Kidney Yang.</span><span class="zh">突发、情境性、压力／关系紧张后、放松或休假时好转→肝郁（心因性）。受惊吓后突发→惊恐伤肾。随年龄／房劳渐起→肾阳虚。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q2 · Cold/warmth & vitality</span><span class="zh">问二 · 寒温与精力</span></span><span class="point-val"><span class="en">Cold limbs, sore cold low back/knees, low libido, clear frequent urine, listlessness → Kidney Yang. Palpitation, fatigue, poor sleep, pallor, overthinking → Heart-Spleen. Genital damp/sweaty, heavy limbs, bitter mouth, scanty dark urine → damp-heat.</span><span class="zh">畏寒肢冷、腰膝冷痛、性欲低、小便清长、精神萎靡→肾阳虚。心悸、乏力、眠差、面白、思虑多→心脾。阴部潮湿、肢重、口苦、尿黄→湿热。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q3 · Emotional state</span><span class="zh">问三 · 情志</span></span><span class="point-val"><span class="en">Anxiety, performance worry, timidity, being easily startled → Liver-Qi / fright patterns. Depression, rib distension, sighing → Liver constraint. Chronic worry, mental exhaustion → Heart-Spleen. The psychological dimension is central in most modern cases.</span><span class="zh">焦虑、表现性担忧、胆怯、易惊→肝郁／惊恐。抑郁、胸胁胀、太息→肝郁。久虑、心神疲惫→心脾。现代多数病例心理维度为核心。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">Q4 · Tongue & pulse</span><span class="zh">问四 · 舌脉</span></span><span class="point-val"><span class="en">Pale swollen tongue, deep-weak/slow pulse → Kidney Yang. Pale tongue, thready-weak pulse → Heart-Spleen. Wiry pulse → Liver-Qi. Red tongue with yellow greasy coat, slippery-rapid pulse → damp-heat.</span><span class="zh">舌淡胖、脉沉弱／迟→肾阳。舌淡、脉细弱→心脾。脉弦→肝郁。舌红苔黄腻、脉滑数→湿热。</span></span></div>
+  </div>
+</div>
+
+<!-- ② DIFFERENTIATION -->
+<div id="impotence-pattern" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Five patterns across two axes: deficiency that cannot raise the sinew (Kidney Yang, Heart-Spleen, fright) and obstruction that will not release it (Liver-Qi, damp-heat). The classic teaching over-weights Kidney Yang; in practice, Liver-Qi (psychogenic) is the most common modern pattern — do not reflexively tonify Yang.</span>
+    <span class="zh">五证两轴：虚而不能举（肾阳、心脾、惊恐）与阻而不得舒（肝郁、湿热）。经典偏重肾阳；临床肝郁（心因性）为现代最常见证——勿见阳痿即壮阳。</span>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">① Mingmen Fire Decline / Kidney Yang Deficiency</span><span class="zh">① 命门火衰·肾阳虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Ascent at the root — Mingmen fire fails to warm and raise the ancestral sinew</span><span class="zh">升不及于根本——命门火衰，不能温举宗筋</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> impotence with weak or absent erection, low libido, cold limbs, sore cold low back and knees, clear frequent/nocturnal urination, listlessness, possibly dawn diarrhea; pale swollen tongue, deep-weak/slow pulse. Often with aging, chronic illness, or sexual overindulgence. <b>Mechanism:</b> Mingmen fire is the root warmth driving the sinew; when it declines, there is no Yang to raise it — the classic deficiency ED. <b>Treatment:</b> 温补肾阳，兴阳起痿 — warm and tonify Kidney Yang, rouse the Yang. Moxa is central. Links to the 肾阳虚 pattern card.</span><span class="zh"><b>主症：</b>阳痿举而不坚或不举、性欲淡漠、畏寒肢冷、腰膝冷痛、小便清长／夜尿、精神萎靡、或五更泻；舌淡胖、脉沉弱／迟。多见年老、久病、房劳。<b>病机：</b>命门火为鼓动宗筋之根，火衰则无阳以举——典型虚性阳痿。<b>治法：</b>温补肾阳、兴阳起痿。灸为要。联动「肾阳虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">② Liver Qi Stagnation (Psychogenic)</span><span class="zh">② 肝郁气滞（心因性）</span></div>
+    <div class="pc-qi"><span class="en">Entry-Exit disorder — constrained Liver Qi cannot release the ancestral sinew</span><span class="zh">出入失常——肝气郁结，宗筋不得舒启</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> impotence closely tied to mood and stress, often with preserved morning erections, performance anxiety, rib and chest distension, irritability or low mood, sighing; wiry pulse. Improves when relaxed. The most common modern pattern. <b>Mechanism:</b> the Liver governs the sinews and the free coursing of Qi; emotional constraint knots the Qi so the sinew cannot be released — this is obstruction, not deficiency, and tonifying Yang here worsens the constraint. <b>Treatment:</b> 疏肝解郁，兴阳 — course the Liver, resolve constraint. Address the psychological dimension. Links to the 肝气郁结 pattern card.</span><span class="zh"><b>主症：</b>阳痿与情绪压力密切相关、多晨勃保留、表现性焦虑、胸胁胀闷、烦躁或情绪低落、太息；脉弦。放松则好转。现代最常见证。<b>病机：</b>肝主筋、主疏泄；情志郁结则气不舒，宗筋不得启——属阻非虚，此时壮阳反增其郁。<b>治法：</b>疏肝解郁、兴阳。兼顾心理。联动「肝气郁结」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-mid">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">③ Heart-Spleen Dual Deficiency</span><span class="zh">③ 心脾两虚</span></div>
+    <div class="pc-qi"><span class="en">Insufficient generation — Heart-Spleen fails to generate and lead Qi-Blood to the sinew</span><span class="zh">化源不足——心脾不能生化、输布气血于宗筋</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> impotence with palpitation, fatigue, poor sleep, poor appetite, pale sallow face, poor memory; from overthinking, overwork, or chronic worry; pale tongue, thready-weak pulse. <b>Mechanism:</b> overthinking injures the Spleen; the Spleen no longer generates Qi-Blood and the Heart-Blood empties, so the sinew is not filled and the Shen not settled — a deficiency of substance and of spirit together. <b>Treatment:</b> 补益心脾，益气养血 — tonify Heart-Spleen, boost Qi and Blood. Links to the 心脾两虚 pattern card.</span><span class="zh"><b>主症：</b>阳痿伴心悸、乏力、眠差、纳差、面色萎黄、健忘；多因思虑、劳倦、久忧；舌淡、脉细弱。<b>病机：</b>思虑伤脾，脾不生血、心血亏，宗筋失充、心神不安——形神俱虚。<b>治法：</b>补益心脾、益气养血。联动「心脾两虚」证型卡。</span></div>
+  </div>
+
+  <div class="pattern-card pc-down">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">④ Fright and Fear Injuring the Kidney</span><span class="zh">④ 惊恐伤肾</span></div>
+    <div class="pc-qi"><span class="en">Insufficient Descent/holding — fright scatters the Qi and fear descends it; Kidney fails to hold</span><span class="zh">气机失固——惊则气乱、恐则气下，肾失固摄</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> impotence arising after a frightening or traumatic sexual/life experience, timidity, being easily startled, palpitation, insomnia, apprehension, suspicious guardedness; pulse often wiry-thready. <b>Mechanism:</b> "fright scatters the Qi, fear makes the Qi descend"; a shock disrupts the Kidney's grasp and the Heart-Shen's steadiness, so the sinew cannot rise. Overlaps heavily with anxiety. <b>Treatment:</b> 益肾宁神，定志起痿 — tonify the Kidney, settle the Shen, restore confidence. Psychological reassurance is essential. (Treated within this page; shares mechanism with anxiety/fright patterns.)</span><span class="zh"><b>主症：</b>阳痿起于惊吓或创伤性性／生活经历后、胆怯、易惊、心悸、失眠、疑虑戒备；脉多弦细。<b>病机：</b>「惊则气乱，恐则气下」；惊扰肾之固摄与心神之定，宗筋不举。与焦虑高度重叠。<b>治法：</b>益肾宁神、定志起痿。心理疏导为要。（本页论治；与焦虑／惊恐病机相通。）</span></div>
+  </div>
+
+  <div class="pattern-card pc-out">
+    <div class="tx-title"><span class="tx-dot"></span><span class="en">⑤ Damp-Heat Pouring Downward</span><span class="zh">⑤ 湿热下注</span></div>
+    <div class="pc-qi"><span class="en">Descent excess / obstruction — damp-heat pours into the lower Jiao and slackens the sinew</span><span class="zh">降太过／阻滞——湿热下注，宗筋弛纵</span></div>
+    <div class="pc-why"><span class="en"><b>Key symptoms:</b> impotence (a slack, non-firm sinew) with damp/sweaty itchy genitals, heavy limbs, bitter sticky mouth, scanty dark urine or urinary discomfort, possibly with prostatitis; red tongue with yellow greasy coat, slippery-rapid pulse. Often with alcohol, rich diet, or lower-Jiao infection. <b>Mechanism:</b> damp-heat is turbid and heavy; poured into the lower Jiao it obstructs and relaxes the ancestral sinew — an excess/obstruction ED, not a deficiency. Tonifying here is wrong; you must clear. <b>Treatment:</b> 清热利湿 — clear heat, drain damp. Links to the 湿热 pattern card.</span><span class="zh"><b>主症：</b>阳痿（宗筋弛纵不坚）伴阴部潮湿瘙痒、肢体困重、口苦黏、小便黄少或不适、或兼前列腺炎；舌红苔黄腻、脉滑数。多因饮酒、肥甘、下焦感染。<b>病机：</b>湿热重浊，下注则阻遏弛纵宗筋——属实／阻，非虚。此时补则误，当清。<b>治法：</b>清热利湿。联动「湿热」证型卡。</span></div>
+  </div>
+</div>
+
+<!-- ③ ACUPUNCTURE -->
+<div id="impotence-acupuncture" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">CV4/CV3, BL23, and SP6 form the core (tonify Kidney, benefit the lower Origin, regulate the three Yin at the genitals); pattern points address fire/Qi/Shen/damp-heat. Needle direction and moxa follow the mechanism — warm and tonify for deficiency, course and clear for obstruction.</span>
+    <span class="zh">关元／中极、肾俞、三阴交为核心（补肾、益下元、调宗筋之三阴）；配穴治火／气／神／湿热。针向与灸随病机——虚则温补，阻则疏清。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">Core points</span><span class="zh">核心穴</span></span><span class="point-val"><span class="en">CV4 关元 + CV3 中极 (Ren, front-Mu region of the lower Origin — tonify Kidney and rouse Yang), BL23 肾俞 (back-shu of Kidney), SP6 三阴交 (crossing of three Yin at the genital sinew), BL32 次髎 (sacral, regulates the lower Jiao / genital function). Add 关元/命门 moxa for Yang deficiency.</span><span class="zh">关元+中极（任脉下元募区——补肾兴阳）、肾俞（肾之背俞）、三阴交（宗筋三阴之会）、次髎（骶部，调下焦／性功能）。阳虚加灸关元／命门。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">① Kidney Yang 命门火衰</span><span class="zh">① 命门火衰·肾阳虚</span></span><span class="point-val"><span class="en">+ moxa GV4 命门, BL23 肾俞, CV4 关元, KI3 太溪 — warm and tonify Mingmen fire; reinforcing with generous moxa.</span><span class="zh">+ 灸命门、肾俞、关元、太溪——温补命门火；补法重灸。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver Qi 肝郁气滞</span><span class="zh">② 肝郁气滞</span></span><span class="point-val"><span class="en">+ LV3 太冲, GB34 阳陵泉, PC6 内关, LV5 蠡沟 (Luo of Liver, reaches the genitals) — course the Liver and free the sinew; even method, minimal moxa. Pair with reassurance/counseling.</span><span class="zh">+ 太冲、阳陵泉、内关、蠡沟（肝络，达前阴）——疏肝启宗筋；平补平泻、少灸。配合心理疏导。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Heart-Spleen 心脾两虚</span><span class="zh">③ 心脾两虚</span></span><span class="point-val"><span class="en">+ HT7 神门, ST36 足三里, BL20 脾俞, BL15 心俞 (+moxa) — tonify Heart-Spleen and settle the Shen; reinforcing.</span><span class="zh">+ 神门、足三里、脾俞、心俞（加灸）——补心脾、宁心神；补法。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Fright 惊恐伤肾</span><span class="zh">④ 惊恐伤肾</span></span><span class="point-val"><span class="en">+ HT7 神门, PC6 内关, GB40 丘墟, KI3 太溪, GV20 百会 — settle the Shen, restore courage, tonify Kidney; even method.</span><span class="zh">+ 神门、内关、丘墟、太溪、百会——宁神定志、益肾;平补平泻。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Damp-heat 湿热下注</span><span class="zh">⑤ 湿热下注</span></span><span class="point-val"><span class="en">+ SP9 阴陵泉, SP6, LV2 行间, BL32 次髎, CV3 中极 — clear and drain lower-Jiao damp-heat; reducing, no moxa. (Do NOT tonify Yang here.)</span><span class="zh">+ 阴陵泉、三阴交、行间、次髎、中极——清利下焦湿热；泻法不灸。（此证忌壮阳。）</span></span></div>
+  </div>
+</div>
+
+<!-- ④ HERBS -->
+<div id="impotence-herbs" class="phase-panel">
+  <div class="tip-box">
+    <span class="en">Match the formula to the mechanism. The single biggest clinical error in ED is reflexively prescribing Yang tonics — correct for Kidney-Yang decline, harmful for Liver-Qi constraint and damp-heat.</span>
+    <span class="zh">按病机选方。阳痿最大临床误区是见痿即壮阳——肾阳虚者宜，肝郁与湿热者则害。</span>
+  </div>
+  <div class="section-block">
+    <div class="point-card"><span class="point-label"><span class="en">① Kidney Yang 命门火衰</span><span class="zh">① 命门火衰·肾阳虚</span></span><span class="point-val"><span class="en"><b>赞育丹 / 右归丸</b> — warm and tonify Kidney Yang, rouse the sinew (Lu Rong, Rou Cong Rong, Ba Ji Tian, Yin Yang Huo, Fu Zi, Rou Gui). The core Yang-deficiency prescription.</span><span class="zh"><b>赞育丹／右归丸</b>——温补肾阳、兴阳起痿（鹿茸、肉苁蓉、巴戟天、淫羊藿、附子、肉桂）。阳虚之核心方。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">② Liver Qi 肝郁气滞</span><span class="zh">② 肝郁气滞</span></span><span class="point-val"><span class="en"><b>逍遥散 / 柴胡疏肝散 加减</b> — course the Liver and resolve constraint; add a little Yang-moving (Yin Yang Huo, Shi Chang Pu) rather than heavy tonics. Treat the constraint, not the "deficiency."</span><span class="zh"><b>逍遥散／柴胡疏肝散加减</b>——疏肝解郁；佐少量启阳（淫羊藿、石菖蒲），勿重补。治其郁，非治其"虚"。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">③ Heart-Spleen 心脾两虚</span><span class="zh">③ 心脾两虚</span></span><span class="point-val"><span class="en"><b>归脾汤</b> — tonify Heart-Spleen, boost Qi and Blood, settle the Shen. Add Kidney-supporting herbs if libido is also low.</span><span class="zh"><b>归脾汤</b>——补益心脾、益气养血、宁心神。性欲亦低者加助肾之品。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">④ Fright 惊恐伤肾</span><span class="zh">④ 惊恐伤肾</span></span><span class="point-val"><span class="en"><b>大补元煎 + 安神定志丸</b> — tonify the Kidney/Origin and settle the fright-scattered Shen; restore confidence. Counseling is inseparable from the herbs here.</span><span class="zh"><b>大补元煎+安神定志丸</b>——补肾益元、镇惊安神、复其信心。此证心理疏导与方药不可分。</span></span></div>
+    <div class="point-card"><span class="point-label"><span class="en">⑤ Damp-heat 湿热下注</span><span class="zh">⑤ 湿热下注</span></span><span class="point-val"><span class="en"><b>龙胆泻肝汤 / 萆薢分清饮</b> — clear and drain lower-Jiao damp-heat. Once the damp-heat clears, the sinew recovers — no tonic needed. Tonifying before clearing traps the pathogen.</span><span class="zh"><b>龙胆泻肝汤／萆薢分清饮</b>——清利下焦湿热。湿热去则宗筋自复——不必补。未清先补则闭门留寇。</span></span></div>
+  </div>
+  <div class="case-box">
+    <div class="case-label"><span class="en">Clinical pearl</span><span class="zh">临证心得</span></div>
+    <span class="en">The decisive question is <em>deficiency or obstruction</em>. A young, stressed patient with preserved morning erections and situational failure has Liver-Qi ED — course the Liver, address the anxiety, and often add nothing tonic; heavy Yang tonics make him more constrained and more anxious. Reserve the powerful Yang tonics (Lu Rong, Fu Zi) for the genuinely cold, low-libido, aging Kidney-Yang picture. And always remember ED can flag cardiovascular or metabolic disease — pattern treatment sits alongside, not instead of, appropriate medical evaluation.</span>
+    <span class="zh">决定性之问是<em>虚还是阻</em>。年轻、压力大、晨勃保留、情境性失败者为肝郁阳痿——疏肝、解其焦虑，常无须补；重投壮阳反使其更郁更焦。峻补之品（鹿茸、附子）留给真正畏寒、性欲低、年老之肾阳证。并须牢记阳痿可为心血管／代谢病之信号——辨证治疗与医学评估并行，非替代之。</span>
+  </div>
+</div>
+</div>
+
 </main></div>
 <div id="search-overlay" onclick="closeSearch(event)">
   <div class="search-panel" onclick="event.stopPropagation()">
@@ -11338,6 +11844,7 @@ const PATTERNS = [
     {mech:{en:"Liver invades Stomach → vomiting",zh:"肝气犯胃作呕"}, sym:{en:"vomiting/retching worse with emotion, belching",zh:"呕吐嗳气、情志诱发或加重"}, disease:"nausea", slot:"ganyu", label:{en:"Vomiting (肝气犯胃)",zh:"呕吐·肝气犯胃"}},
     {mech:{en:"Liver invades Stomach → epigastric pain",zh:"肝气犯胃脘痛"}, sym:{en:"distending epigastric pain radiating to ribs, worse with stress",zh:"胃脘胀痛连胁、遇情志加重"}, disease:"weiwan", slot:"ganyu", label:{en:"Epigastric Pain (肝气犯胃)",zh:"胃脘痛·肝气犯胃"}},
     {mech:{en:"Milk blocked by Qi constraint",zh:"肝郁气滞乳汁不行"}, sym:{en:"milk suddenly scanty after upset, breast distension",zh:"情志不畅后乳汁骤少、乳房胀满"}, disease:"quewu", slot:"ganyu", label:{en:"Insufficient Lactation (肝郁)",zh:"缺乳·肝郁气滞"}},
+    {mech:{en:"Qi constraint, sinew not roused",zh:"肝郁宗筋不用"}, sym:{en:"impotence with stress/anxiety, rib distension, better on holiday",zh:"阳痿伴情志抑郁、胸胁胀、放松时好转"}, disease:"impotence", slot:"ganyu", label:{en:"Impotence (肝郁气滞)",zh:"阳痿·肝郁气滞"}},
   ],
   xref:[{p:"ganhuo",note:{en:"vs Liver Fire — stagnation has no heat signs yet (no red face/bitter taste); once fire ignites → ganhuo",zh:"与肝火鉴别——单纯气郁无热象（无面红口苦），一旦化火即转肝火"}}],
   tx:{law:{en:"Course the Liver, resolve constraint",zh:"疏肝解郁"}, formula:{en:"Chai Hu Shu Gan San / Xiao Yao San",zh:"柴胡疏肝散／逍遥散"}, pts:"LV3, LV14, GB34, PC6, SP6"},
@@ -11349,7 +11856,8 @@ const PATTERNS = [
   gist:{en:"When Liver Qi stagnation persists, it transforms to fire. Fire is Yang, it blazes upward — harassing the Heart-Shen (insomnia, palpitation), scorching the ear (tinnitus), or over-restraining Metal to invade the Lung (木火刑金 cough).",
         zh:"肝郁日久化火。火为阳邪，其性炎上——上扰心神（失眠、心悸）、上灼耳窍（耳鸣）、或木火刑金犯肺（咳嗽）。"},
   branches:[
-    {mech:{en:"Fire harasses Heart-Shen",zh:"上扰心神"}, sym:{en:"can't fall asleep, vivid dreams, irritable",zh:"入睡难、多梦、烦躁"}, disease:"insomnia", slot:"ganhuo", label:{en:"Insomnia (肝郁化火)",zh:"失眠·肝郁化火"}},
+    {mech:{en:"Liver fire blazes up → hypertension",zh:"肝火上炎高血压"}, sym:{en:"high BP with pounding headache, red face/eyes, bitter mouth, irritable, constipation",zh:"血压高伴头痛剧、面红目赤、口苦、烦躁、便秘"}, disease:"hypertension", slot:"ganhuo", label:{en:"Hypertension (肝火亢盛)",zh:"高血压·肝火亢盛"}},
+    {mech:{en:"Liver constraint transforms to fire, harasses the Shen",zh:"肝郁化火扰神"}, sym:{en:"can't fall asleep, vivid dreams, irritable",zh:"入睡难、多梦、烦躁"}, disease:"insomnia", slot:"ganhuo", label:{en:"Insomnia (肝郁化火)",zh:"失眠·肝郁化火"}},
     {mech:{en:"Fire harasses Heart at night",zh:"火扰心神（夜）"}, sym:{en:"emotion-triggered sleeplessness, anger",zh:"情志诱发不寐、易怒"}, disease:"emosleep", slot:"ganhuo", label:{en:"Emotional Insomnia",zh:"情志失眠"}},
     {mech:{en:"Fire agitates the Heart",zh:"火扰心动"}, sym:{en:"palpitation with irritability, red face",zh:"心悸伴烦躁、面红"}, disease:"palpitation", slot:"ganhuo", label:{en:"Palpitations",zh:"心悸"}},
     {mech:{en:"Fire scorches the ear",zh:"火灼耳窍"}, sym:{en:"sudden loud tinnitus, worse with anger",zh:"耳鸣声大、怒则加重"}, disease:"tinnitus", slot:"ganhuo", label:{en:"Tinnitus (肝火上扰)",zh:"耳鸣·肝火上扰"}},
@@ -11376,6 +11884,7 @@ const PATTERNS = [
     {mech:{en:"Source of Qi depleted",zh:"气之化源不足"}, sym:{en:"exhaustion, weak limbs, poor appetite",zh:"倦怠乏力、四肢无力、纳差"}, disease:"fatigue", slot:"pifei", label:{en:"Fatigue (脾肺气虚)",zh:"慢性疲劳·脾肺气虚"}},
     {mech:{en:"Spleen-Stomach weak, Qi won't descend",zh:"脾胃虚弱胃失和降"}, sym:{en:"intermittent vomiting of thin fluid, poor appetite, fatigue",zh:"时作呕吐清水、纳呆、倦怠"}, disease:"nausea", slot:"pixu", label:{en:"Vomiting (脾胃虚弱)",zh:"呕吐·脾胃虚弱"}},
     {mech:{en:"Spleen-Stomach vacuity-cold pain",zh:"脾胃虚寒脘痛"}, sym:{en:"dull epigastric pain eased by warmth/pressure/food, fatigue, cold limbs",zh:"胃脘隐痛、喜温喜按、得食则减、神疲肢冷"}, disease:"weiwan", slot:"pixu", label:{en:"Epigastric Pain (脾胃虚寒)",zh:"胃脘痛·脾胃虚寒"}},
+    {mech:{en:"Wei Qi fails to secure the exterior",zh:"肺卫不固腠理疏"}, sym:{en:"spontaneous daytime sweating worse on exertion, easy colds, fatigue, pale",zh:"自汗日间、动则加重、易感冒、乏力、面白"}, disease:"hanzheng", slot:"pifei", label:{en:"Sweating (肺卫不固·自汗)",zh:"汗证·肺卫不固自汗"}},
   ],
   xref:[{p:"shenyang",note:{en:"vs Kidney Yang Xu — Spleen Xu diarrhea is post-prandial/daytime with food undigested; Kidney Yang (五更泻) is dawn diarrhea with cold limbs, sore low back",zh:"与肾阳虚鉴别——脾虚泻多食后、日间、完谷不化；肾阳虚为五更泻，伴畏寒肢冷、腰膝酸软"}}],
   tx:{law:{en:"Tonify Qi, strengthen Spleen, raise the clear",zh:"补气健脾，升举清阳"}, formula:{en:"Bu Zhong Yi Qi Tang / Shen Ling Bai Zhu San",zh:"补中益气汤／参苓白术散"}, pts:"ST36, SP3, SP6, CV6, BL20 (+moxa)"},
@@ -11405,6 +11914,7 @@ const PATTERNS = [
   gist:{en:"Damp-Heat is one pathogen wearing different clothes by location. In the gut it drives dysentery/diarrhea; in Liver-Gallbladder it erupts as shingles; in the lower Jiao it inflames the prostate/bladder; in the skin it weeps as eczema/hives. Recognize the pair (heavy+hot, yellow+greasy) anywhere.",
         zh:"湿热为一邪随部位而异。在肠腑则痢下/泄泻；在肝胆则发带状疱疹；在下焦则前列腺膀胱炎；在肌肤则湿疹瘾疹。抓其共性（重浊+热，黄+腻）即可识于各处。"},
   branches:[
+    {mech:{en:"Damp-heat steams the scalp",zh:"湿热熏蒸头皮"}, sym:{en:"oily scalp with greasy hair loss, itch, dandruff, thinning at vertex",zh:"头皮油腻脱发、瘙痒、头屑、巅顶稀疏"}, disease:"tuofa", slot:"shire", label:{en:"Hair Loss (血热风燥/湿热)",zh:"脱发·湿热熏蒸"}},
     {mech:{en:"Damp-Heat pours into intestines",zh:"湿热下注大肠"}, sym:{en:"bloody-mucus stool, tenesmus, burning anus",zh:"下痢赤白脓血、里急后重、肛门灼热"}, disease:"dysentery", slot:"shire", label:{en:"Dysentery (湿热痢)",zh:"痢疾·湿热痢"}},
     {mech:{en:"Damp-Heat forces descent",zh:"湿热迫降"}, sym:{en:"urgent foul diarrhea, burning, yellow",zh:"泻下急迫、粪色黄褐臭秽、肛门灼热"}, disease:"diarrhea", slot:"shire", label:{en:"Diarrhea (湿热)",zh:"泄泻·湿热"}},
     {mech:{en:"Liver-GB Damp-Heat erupts",zh:"肝胆湿热外发"}, sym:{en:"unilateral blistering rash, burning pain, bitter mouth",zh:"单侧簇集水疱、灼痛、口苦"}, disease:"herpes-zoster", slot:"shire", label:{en:"Herpes Zoster (肝胆湿热)",zh:"带状疱疹·肝胆湿热"}},
@@ -11413,6 +11923,7 @@ const PATTERNS = [
     {mech:{en:"Damp-Heat in lower Jiao",zh:"下焦湿热"}, sym:{en:"urinary burning/frequency, perineal heaviness",zh:"尿频尿痛、会阴坠胀"}, disease:"prostate", slot:"shire", label:{en:"Prostatitis (湿热)",zh:"前列腺炎·下焦湿热"}},
     {mech:{en:"Damp-Heat steams to face",zh:"湿热熏蒸头面"}, sym:{en:"oily inflamed pustular acne, foul breath",zh:"痤疮红肿脓疱、口臭"}, disease:"acne", slot:"shire", label:{en:"Acne (胃肠湿热)",zh:"痤疮·胃肠湿热"}},
     {mech:{en:"Blood-heat forces the Chong",zh:"血热迫血妄行"}, sym:{en:"sudden heavy bright-red flooding, thirst, irritable, red tongue",zh:"经血暴下鲜红量多、口渴、心烦、舌红"}, disease:"benglou", slot:"shire", label:{en:"Uterine Bleeding (血热)",zh:"崩漏·血热妄行"}},
+    {mech:{en:"Damp-Heat pours to the sinew",zh:"湿热下注宗筋"}, sym:{en:"impotence with genital damp/heat, heavy limbs, greasy yellow coat, scanty dark urine",zh:"阳痿伴阴部潮湿、肢重、苔黄腻、小便黄"}, disease:"impotence", slot:"shire", label:{en:"Impotence (湿热下注)",zh:"阳痿·湿热下注"}},
     {mech:{en:"Damp-Heat pours to bladder",zh:"湿热蕴膀胱"}, sym:{en:"cycle-linked hives / lower-Jiao heat",zh:"下焦湿热证候"}, disease:"edema", slot:"shire", label:{en:"Edema (湿热壅盛)",zh:"水肿·湿热壅盛"}},
   ],
   xref:[{p:"tanshi",note:{en:"vs pure Phlegm-Damp — Damp-Heat has clear heat signs (yellow greasy coat, burning, foul odor, rapid pulse); Phlegm-Damp is cold-neutral (white greasy coat, heaviness without burning)",zh:"与痰湿鉴别——湿热有明确热象（苔黄腻、灼热、臭秽、脉数）；痰湿偏寒（苔白腻、重着而不灼）"}}],
@@ -11430,6 +11941,8 @@ const PATTERNS = [
     {mech:{en:"Heart-Blood fails to house Shen",zh:"心血失藏"}, sym:{en:"palpitation on exertion, SOB, fatigue",zh:"劳则心悸、气短、乏力"}, disease:"palpitation", slot:"xinpi", label:{en:"Palpitations (心脾两虚)",zh:"心悸·心脾两虚"}},
     {mech:{en:"Postpartum Qi-Blood + Qi constraint",zh:"产后气血虚兼郁"}, sym:{en:"postnatal low mood, exhaustion, tearful",zh:"产后抑郁、极度疲惫、易哭"}, disease:"postpartum", slot:"depression", label:{en:"Postpartum Depression",zh:"产后抑郁"}},
     {mech:{en:"Qi-Blood both depleted",zh:"气血两虚"}, sym:{en:"deep exhaustion post-illness/birth, dizzy",zh:"病后/产后重度疲劳、头晕"}, disease:"fatigue", slot:"qixue", label:{en:"Fatigue (气血两虚)",zh:"慢性疲劳·气血两虚"}},
+    {mech:{en:"Heart-Spleen empty, sinew unroused",zh:"心脾两虚宗筋失养"}, sym:{en:"impotence with palpitation, fatigue, poor sleep, overthinking",zh:"阳痿伴心悸、乏力、眠差、思虑过度"}, disease:"impotence", slot:"xinpi", label:{en:"Impotence (心脾两虚)",zh:"阳痿·心脾两虚"}},
+    {mech:{en:"Heart-Blood empty, sweat not held",zh:"心血不足汗失固摄"}, sym:{en:"night sweats or spontaneous sweat with palpitation, poor sleep, pale, fatigue",zh:"盗汗或自汗伴心悸、眠差、面白、乏力"}, disease:"hanzheng", slot:"xinpi", label:{en:"Sweating (心血不足)",zh:"汗证·心血不足"}},
   ],
   xref:[{p:"xinshen",note:{en:"vs Heart-Kidney disharmony — Heart-Spleen is Qi-Blood empty (pale, fatigue, palpitation on exertion); Heart-Kidney is Yin-empty fire (five-heart heat, night sweat, tidal flush)",zh:"与心肾不交鉴别——心脾两虚为气血虚（面白、乏力、劳则悸），心肾不交为阴虚火（五心烦热、盗汗、潮红）"}}],
   tx:{law:{en:"Tonify Qi and Blood, strengthen Spleen, nourish Shen",zh:"补益气血，健脾养心"}, formula:{en:"Gui Pi Tang",zh:"归脾汤"}, pts:"HT7, SP6, ST36, BL15, BL20, CV6 (+moxa)"},
@@ -11491,7 +12004,8 @@ const PATTERNS = [
   gist:{en:"When Yin (the cooling, anchoring substance) is depleted, Yang is no longer restrained and floats as 'empty fire.' Location decides the face: Lung Yin → dry cough; Stomach Yin → hungry-not-eating, hiccup; Kidney Yin → tidal heat, night sweat; overall → the 消渴 thirst axis.",
         zh:"阴（凉润、潜镇之质）亏则阳失制约，虚火上浮。随部位见证：肺阴虚→干咳；胃阴虚→饥不欲食、呃逆；肾阴虚→潮热盗汗；总为消渴口渴之轴。"},
   branches:[
-    {mech:{en:"Empty fire disturbs Shen",zh:"虚火扰神"}, sym:{en:"agitated depression, dry mouth, tidal heat",zh:"郁而虚烦、口干、潮热"}, disease:"depression", slot:"yinxu", label:{en:"Depression (阴虚火旺)",zh:"郁证·阴虚火旺"}},
+    {mech:{en:"Yin-deficient Yang rising → hypertension",zh:"阴虚阳亢高血压"}, sym:{en:"high BP with dizziness, tinnitus, five-heart heat, sore low back, insomnia, red tongue",zh:"血压高伴眩晕、耳鸣、五心烦热、腰酸、失眠、舌红"}, disease:"hypertension", slot:"yinxu", label:{en:"Hypertension (阴虚阳亢)",zh:"高血压·阴虚阳亢"}},
+    {mech:{en:"Constraint-fire consumes Yin",zh:"郁火伤阴"}, sym:{en:"agitated depression, dry mouth, tidal heat",zh:"郁而虚烦、口干、潮热"}, disease:"depression", slot:"yinxu", label:{en:"Depression (阴虚火旺)",zh:"郁证·阴虚火旺"}},
     {mech:{en:"Yin-empty throat, empty fire",zh:"阴虚咽喉失润"}, sym:{en:"chronic dry scratchy throat, worse evening",zh:"咽干灼痒、入夜加重、干咳"}, disease:"pharyngitis", slot:"yinxu", label:{en:"Chronic Pharyngitis (阴虚)",zh:"慢性咽炎·阴虚火旺"}},
     {mech:{en:"Lung Yin depleted",zh:"肺阴亏虚"}, sym:{en:"dry unproductive cough, scanty sticky sputum, night sweat",zh:"干咳无痰或痰少而黏、盗汗"}, disease:"cough", slot:"feiyin", label:{en:"Cough (肺阴虚)",zh:"咳嗽·肺阴虚"}},
     {mech:{en:"Stomach Yin fails to descend",zh:"胃阴不降"}, sym:{en:"hiccup, hungry-no-appetite, dry mouth",zh:"呃逆、饥不欲食、口干"}, disease:"hiccup", slot:"weiyin", label:{en:"Hiccup (胃阴虚)",zh:"呃逆·胃阴虚"}},
@@ -11557,7 +12071,8 @@ const PATTERNS = [
   gist:{en:"When Spleen transport fails, damp congeals into phlegm — a sticky, heavy, obstructing pathogen. It settles wherever it can: Lung (cough, profuse sputum), breast/nodes (nodular acne, lumps), Chong-Ren (PCOS/anovulation), body (obesity, heaviness).",
         zh:"脾失健运则湿聚为痰——黏滞、重浊、阻遏之邪。随处停积：肺（咳嗽痰多）、乳络（结节痤疮、结块）、冲任（多囊/无排卵）、周身（肥胖、困重）。"},
   branches:[
-    {mech:{en:"Phlegm-damp obstructs Lung",zh:"痰湿蕴肺"}, sym:{en:"wet cough, profuse white sputum, chest fullness",zh:"咳嗽痰多色白、胸闷"}, disease:"cough", slot:"tanshi", label:{en:"Cough (痰湿)",zh:"咳嗽·痰湿"}},
+    {mech:{en:"Phlegm-damp obstructs → hypertension",zh:"痰湿阻遏高血压"}, sym:{en:"high BP with heavy muffled head, chest oppression, obesity, nausea, greasy coat",zh:"血压高伴头重如裹、胸闷、形胖、恶心、苔腻"}, disease:"hypertension", slot:"tanshi", label:{en:"Hypertension (痰湿壅盛)",zh:"高血压·痰湿壅盛"}},
+    {mech:{en:"Phlegm-damp collects in the Lung",zh:"痰湿蕴肺"}, sym:{en:"wet cough, profuse white sputum, chest fullness",zh:"咳嗽痰多色白、胸闷"}, disease:"cough", slot:"tanshi", label:{en:"Cough (痰湿)",zh:"咳嗽·痰湿"}},
     {mech:{en:"Phlegm congeals as nodules",zh:"痰凝成结"}, sym:{en:"deep nodular/cystic acne, jaw/neck lumps",zh:"结节囊肿型痤疮、下颌颈部结块"}, disease:"acne", slot:"tanshi", label:{en:"Acne (痰湿凝结)",zh:"痤疮·痰湿凝结"}},
     {mech:{en:"Phlegm blocks Chong-Ren",zh:"痰阻冲任"}, sym:{en:"PCOS, anovulation, heavy body, greasy",zh:"多囊卵巢、无排卵、形体肥胖、白带多"}, disease:"infertility", slot:"tanshi", label:{en:"Infertility (痰湿阻滞)",zh:"不孕·痰湿阻滞"}},
     {mech:{en:"Phlegm-damp fills the body",zh:"痰湿充斥"}, sym:{en:"heavy overweight body, poor appetite, greasy coat",zh:"形体肥胖困重、纳呆、苔腻"}, disease:"obesity", slot:"pixu", label:{en:"Obesity (痰湿)",zh:"肥胖·痰湿"}},
@@ -11572,7 +12087,8 @@ const PATTERNS = [
   gist:{en:"Kidney Essence generates Marrow and fills the brain and orifices. Depleted by aging, overwork, or long illness, it fails to reach the top (tinnitus, dizziness) and drains the deepest reserve (severe chronic fatigue, post-withdrawal collapse).",
         zh:"肾精生髓充脑窍。年老、劳伤、久病而亏，则不能上达（耳鸣、眩晕），根本储备耗竭（重度疲劳、戒断后期虚脱）。"},
   branches:[
-    {mech:{en:"Marrow-sea empty, ear unfilled",zh:"髓海不足耳失充"}, sym:{en:"faint persistent tinnitus, dizziness, sore back",zh:"耳鸣细微持续、眩晕、腰酸"}, disease:"tinnitus", slot:"shenjing", label:{en:"Tinnitus (肾精亏虚)",zh:"耳鸣·肾精亏虚"}},
+    {mech:{en:"Kidney Essence depleted → hypertension",zh:"肾精亏虚高血压"}, sym:{en:"chronic high BP in elderly with empty head, dizziness, tinnitus, sore knees, poor memory",zh:"老年久病血压高伴脑空、眩晕、耳鸣、膝软、健忘"}, disease:"hypertension", slot:"shenjing", label:{en:"Hypertension (肾精亏虚)",zh:"高血压·肾精亏虚"}},
+    {mech:{en:"Marrow-sea empty, ears/head unfilled",zh:"髓海不足清窍失充"}, sym:{en:"faint persistent tinnitus, dizziness, sore back",zh:"耳鸣细微持续、眩晕、腰酸"}, disease:"tinnitus", slot:"shenjing", label:{en:"Tinnitus (肾精亏虚)",zh:"耳鸣·肾精亏虚"}},
     {mech:{en:"Essence-Heart depleted post-withdrawal",zh:"肾精心阴耗竭"}, sym:{en:"post-acute withdrawal exhaustion, insomnia, empty",zh:"戒断后期极度虚弱、失眠、空虚感"}, disease:"addiction", slot:"shenjing", label:{en:"Withdrawal (肾精耗竭)",zh:"戒断·肾精耗竭"}},
     {mech:{en:"Deepest reserve exhausted",zh:"根本耗竭"}, sym:{en:"CFS/ME, profound exhaustion, sore back/knees",zh:"慢性疲劳综合征、极度虚惫、腰膝酸软"}, disease:"fatigue", slot:"shenjing", label:{en:"Fatigue (肾精耗竭)",zh:"慢性疲劳·肾精耗竭"}},
   ],
@@ -11647,6 +12163,7 @@ const PATTERNS = [
   gist:{en:"The Chong (Sea of Blood) and Ren (Sea of Yin) govern the menstrual rhythm. When disharmonized — usually rooted in Liver-Kidney — symptoms wax and wane with the cycle: premenstrual hives, cyclical acne, irregular periods, breast lumps. The 'it-tracks-my-cycle' signature.",
         zh:"冲为血海、任主胞胎，司月经之节律。失调（多本于肝肾）则症随经期消长：经前瘾疹、周期性痤疮、月经不调、乳房结块。抓'随月经周期变化'之征。"},
   branches:[
+    {mech:{en:"Chong-Ren disharmony, phlegm knots at breast",zh:"冲任失调痰凝乳络"}, sym:{en:"breast lumps that swell/pain premenstrually and ease after, cyclical with menses",zh:"乳房结块经前胀痛、经后减、随月经周期"}, disease:"ruapi", slot:"chongren", label:{en:"Breast Hyperplasia (冲任失调)",zh:"乳癖·冲任失调"}},
     {mech:{en:"Cycle-linked surface wind",zh:"冲任失调发于肌表"}, sym:{en:"hives flaring premenstrually, cycle-linked",zh:"经前瘾疹发作、与月经相关"}, disease:"urticaria", slot:"chongren", label:{en:"Urticaria (冲任失调)",zh:"荨麻疹·冲任失调"}},
     {mech:{en:"Cycle-linked hormonal acne",zh:"冲任失调发于头面"}, sym:{en:"chin/jaw acne flaring with cycle",zh:"下颌痤疮随月经加重"}, disease:"acne", slot:"chongren", label:{en:"Acne (冲任失调)",zh:"痤疮·冲任失调"}},
     {mech:{en:"Sea of Blood loses rhythm",zh:"血海失调"}, sym:{en:"irregular timing/volume, premenstrual tension",zh:"经期先后不定、量乱、经前紧张"}, disease:"menstrual-irreg", slot:"ganyu", label:{en:"Menstrual Irregularity",zh:"月经不调"}},
