@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SinoMed — Clinical Reference for TCM Practitioners</title>
+<title>SinoMed — TCM Clinical Reasoning System</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%238B1A1A'/><text y='72' x='50' text-anchor='middle' font-size='62' font-family='serif' fill='white'>针</text></svg>">
 <style>
 :root {
@@ -76,9 +76,9 @@ body {
   text-align: center;
 }
 .hero-kicker {
-  font-size: 11px; font-weight: 700; letter-spacing: .14em;
+  font-size: 16px; font-weight: 700; letter-spacing: .06em;
   text-transform: uppercase; color: var(--vermillion);
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .hero-title {
   font-size: clamp(28px, 5vw, 44px);
@@ -266,6 +266,54 @@ html[lang="zh"] .t-en{display:none;}
   background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImNpcmNsZS1jbGlwIj4KICAgICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiLz4KICAgIDwvY2xpcFBhdGg+CiAgICA8IS0tIE11c2NsZSB0ZXh0dXJlIHBhdHRlcm4gKHJlZCBzaWRlKSAtLT4KICAgIDxwYXR0ZXJuIGlkPSJtdXNjbGUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgogICAgICA8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjOEIxQTFBIi8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iMiIgeDI9IjgiIHkyPSI0IiBzdHJva2U9IiNBNTI4MjgiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjYiLz4KICAgICAgPGxpbmUgeDE9IjAiIHkxPSI1IiB4Mj0iOCIgeTI9IjciIHN0cm9rZT0iIzZCMEYwRiIgc3Ryb2tlLXdpZHRoPSIwLjYiIG9wYWNpdHk9IjAuNSIvPgogICAgICA8bGluZSB4MT0iMCIgeTE9IjAiIHgyPSI4IiB5Mj0iMSIgc3Ryb2tlPSIjQzQzMDMwIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CiAgICA8L3BhdHRlcm4+CiAgICA8IS0tIE5lcnZlIHRleHR1cmUgcGF0dGVybiAoZ3JleSBzaWRlKSAtLT4KICAgIDxwYXR0ZXJuIGlkPSJuZXJ2ZSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIj4KICAgICAgPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjRThFNERFIi8+CiAgICAgIDxsaW5lIHgxPSIyIiB5MT0iMCIgeDI9IjMiIHkyPSIxMCIgc3Ryb2tlPSIjQkJCQkJCIiBzdHJva2Utd2lkdGg9IjAuNCIgb3BhY2l0eT0iMC43Ii8+CiAgICAgIDxsaW5lIHgxPSI2IiB5MT0iMCIgeDI9IjgiIHkyPSIxMCIgc3Ryb2tlPSIjQ0NDQ0NDIiBzdHJva2Utd2lkdGg9IjAuMyIgb3BhY2l0eT0iMC41Ii8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNCIgeDI9IjEwIiB5Mj0iNiIgc3Ryb2tlPSIjQUFBQUFBIiBzdHJva2Utd2lkdGg9IjAuMyIgb3BhY2l0eT0iMC40Ii8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIAogIDwhLS0gQmFja2dyb3VuZCBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9IiNFOEU0REUiIHN0cm9rZT0iI0NDQ0NDQyIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICAKICA8IS0tIFJlZCBtdXNjbGUgaGFsZiAobGVmdC95aW4gc2lkZSkgLS0+CiAgPHBhdGggZD0iTTUwIDIgQTQ4IDQ4IDAgMCAwIDUwIDk4IEEyNCAyNCAwIDAgMCA1MCA1MCBBMjQgMjQgMCAwIDEgNTAgMiBaIiAKICAgICAgICBmaWxsPSJ1cmwoI211c2NsZSkiIGNsaXAtcGF0aD0idXJsKCNjaXJjbGUtY2xpcCkiLz4KICAKICA8IS0tIFlpbi15YW5nIFMtY3VydmUgZGl2aWRlciBsaW5lcyBmb3IgdGV4dHVyZSAtLT4KICA8cGF0aCBkPSJNNTAgMiBDNTAgMjYsIDI2IDI2LCAyNiA1MCBDMjYgNzQsIDUwIDc0LCA1MCA5OCIgCiAgICAgICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNkIwRjBGIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4zIi8+CiAgCiAgPCEtLSBTbWFsbCBjaXJjbGUgKG5lcnZlIGluIG11c2NsZSA9IHdoaXRlIGRvdCkgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSIyNiIgcj0iOCIgZmlsbD0idXJsKCNuZXJ2ZSkiLz4KICAKICA8IS0tIFNtYWxsIGNpcmNsZSAobXVzY2xlIGluIG5lcnZlID0gcmVkIGRvdCkgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI3NCIgcj0iOCIgZmlsbD0idXJsKCNtdXNjbGUpIi8+CiAgCiAgPCEtLSBNYWluIFMtY3VydmUgZGl2aWRlciAtLT4KICA8cGF0aCBkPSJNNTAgMiBBMjQgMjQgMCAwIDEgNTAgNTAgQTI0IDI0IDAgMCAwIDUwIDk4IiAKICAgICAgICBmaWxsPSJub25lIiBzdHJva2U9IiM4QjFBMUEiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjQiLz4KICAKICA8IS0tIE91dGVyIHJpbmcgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhCMUExQSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4=") center/cover no-repeat;
   border-radius:50%;
 }
+
+/* ── Clinical Manifesto Section ─────────────────────── */
+.manifesto {
+  max-width: 720px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+}
+.manifesto-hook {
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 24px;
+  letter-spacing: -.01em;
+}
+.manifesto-hook em {
+  font-style: normal;
+  color: var(--vermillion);
+}
+.manifesto-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink-muted);
+}
+.manifesto-body p { margin-bottom: 16px; }
+.manifesto-body strong { color: var(--ink); font-weight: 700; }
+.manifesto-body .flow-steps {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--cream);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 4px 0;
+}
+.manifesto-body .flow-steps span { color: var(--ink-muted); font-weight: 400; }
+.manifesto-close {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--vermillion);
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
 </style>
 </head>
 <body>
@@ -292,10 +340,49 @@ html[lang="zh"] .t-en{display:none;}
 
 <!-- Hero -->
 <div class="hero">
-  <div class="hero-kicker"><span class="t-en">Clinical Reference for TCM Practitioners</span><span class="t-zh">中医临床参考系统</span></div>
-  <h1 class="hero-title"><span class="t-en">Clinical reasoning,<br><em>not memorisation.</em></span><span class="t-zh">临床推理，<br><em>而非死记硬背。</em></span></h1>
+  <div class="hero-kicker"><span class="t-en">TCM Clinical Reasoning System</span><span class="t-zh">中医临床推理体系</span></div>
+  <h1 class="hero-title"><span class="t-en">Clinical Reasoning<br><em>Not Memorisation</em></span><span class="t-zh">临床推理<br><em>而非死记硬背</em></span></h1>
   <div class="hero-rule"></div>
-  <p class="hero-sub"><span class="t-en">A clinical reasoning system for TCM practitioners — integrating real-world application, structured learning, and point-of-care reference into a single platform.</span><span class="t-zh">面向中医执业者的临床推理系统——将实战应用、结构化学习与临床即时参考整合于一体。</span></p>
+  <p class="hero-sub"><span class="t-en">A structured system for training and applying clinical reasoning in TCM — from chief complaint to final treatment, every step has its logic.</span><span class="t-zh">面向中医执业者的临床推理训练与参考平台——从主诉到治疗方案，每一步都有逻辑可循。</span></p>
+</div>
+
+
+<!-- Clinical Manifesto -->
+<div class="manifesto">
+  <div class="manifesto-hook">
+    <span class="t-en">A patient brings only their <em>symptoms.</em></span>
+    <span class="t-zh">病人只带来<em>症状。</em></span>
+  </div>
+  <div class="manifesto-body">
+    <p>
+      <span class="t-en">From the first complaint to the final treatment — every step in between requires clinical reasoning, not memorisation.</span>
+      <span class="t-zh">从第一句主诉开始，到最终的治疗方案——这中间每一步，都需要临床推理，而不是知识堆砌。</span>
+    </p>
+    <p>
+      <span class="t-en">Many practitioners know a great deal, yet struggle in the clinic. The reason is simple: they were trained to <strong>remember</strong>, never to <strong>think</strong>.</span>
+      <span class="t-zh">很多人学了大量理论，却依然不会看病。原因只有一个：他们从未被训练过<strong>如何思考</strong>，只被告知<strong>记住什么</strong>。</span>
+    </p>
+    <p>
+      <span class="t-en">The SinoMed TCM Clinical Reasoning System starts where every patient encounter starts — the chief complaint. Like a detective working a case, it guides you step by step:</span>
+      <span class="t-zh">SinoMed 中医临床推理体系从主诉出发，以破案的方式逐步推进：</span>
+    </p>
+    <p>
+      <span class="t-en">
+        <span class="flow-steps">Symptom <span>→</span> Pathomechanism <span>→</span> Pattern <span>→</span> Treatment Principle <span>→</span> Prescription</span>
+      </span>
+      <span class="t-zh">
+        <span class="flow-steps">症状 <span>→</span> 病机 <span>→</span> 辨证 <span>→</span> 治法 <span>→</span> 处方</span>
+      </span>
+    </p>
+    <p>
+      <span class="t-en">Every step has its logic. Every step can be learned.</span>
+      <span class="t-zh">每一步都有逻辑，每一步都可以被学会。</span>
+    </p>
+  </div>
+  <div class="manifesto-close">
+    <span class="t-en">This is what clinical training should always have been. Every module in this system is built on this single path.</span>
+    <span class="t-zh">这是一条真实的临床路径，也是唯一值得训练的路径。本系统内各个模块均遵循这一推理体系。</span>
+  </div>
 </div>
 
 <!-- Modules -->
@@ -396,14 +483,23 @@ html[lang="zh"] .t-en{display:none;}
         </div>
       </div>
 
-      <div class="module-card coming-soon">
+      <a class="module-card available" href="/ashi/">
         <div class="mc-accent jade"></div>
         <span class="mc-icon">🎯</span>
-        <span class="mc-tag mc-tag-soon"><span class="t-en">Coming Soon</span><span class="t-zh">即将上线</span></span>
-        <div class="mc-title"><span class="t-en">MTrP — Trigger Point Therapy</span><span class="t-zh">激痛点疗法</span></div>
-        <div class="mc-desc"><span class="t-en">Trigger point location, dry needling technique, referred pain patterns, and muscle-by-muscle treatment protocols.</span><span class="t-zh">触发点定位、干针技术、牵涉痛规律及逐肌治疗方案。</span></div>
-        <div class="mc-cta"><span class="mc-coming"><span class="t-en">In development</span><span class="t-zh">开发中</span></span></div>
-      </div>
+        <span class="mc-tag mc-tag-tech"><span class="t-en">66 Muscles + Safety Layers</span><span class="t-zh">66块肌肉 + 安全层次卡</span></span>
+        <div class="mc-title"><span class="t-en">Ashi Point Reference</span><span class="t-zh">阿是穴临床速查</span></div>
+        <div class="mc-sub"><span class="t-en">Trigger Point / MTrP Quick Reference</span><span class="t-zh">激痛点 / 阿是穴速查</span></div>
+        <div class="mc-desc"><span class="t-en">Symptom-to-muscle reverse lookup, referred pain patterns, needling depth &amp; safety layers, and rehab guidance across 66 muscles.</span><span class="t-zh">症状反查患肌、牵涉痛规律、一穴多肌刺有浅深与安全提示，覆盖66块肌肉。</span></div>
+        <div class="mc-modules">
+          <span class="mc-dot-tag"><span class="t-en">Shoulder</span><span class="t-zh">肩痛</span></span>
+          <span class="mc-dot-tag"><span class="t-en">Low Back</span><span class="t-zh">腰痛</span></span>
+          <span class="mc-dot-tag"><span class="t-en">+64 more</span><span class="t-zh">+64块</span></span>
+        </div>
+        <div class="mc-cta">
+          <span class="mc-price"><span class="free"><span class="t-en">Free: Shoulder + Low Back</span><span class="t-zh">肩痛+腰痛 免费</span></span> · <span class="t-en">Full access $99 CAD</span><span class="t-zh">全部解锁 $99加元</span></span>
+          <span class="mc-arrow" style="color:var(--jade);">→</span>
+        </div>
+      </a>
 
       <div class="module-card coming-soon">
         <div class="mc-accent jade"></div>
@@ -433,7 +529,7 @@ html[lang="zh"] .t-en{display:none;}
       <div class="how-step">
         <div class="how-num">2</div>
         <div class="how-step-title"><span class="t-en">Access your modules</span><span class="t-zh">访问所需模块</span></div>
-        <div class="how-step-desc"><span class="t-en">Purchase pain modules individually or as a bundle, access FSN with a course redemption code, or explore future modules as they launch.</span><span class="t-zh">按需购买疼痛模块，凭课程兑换码访问浮针模块，更多模块陆续开放。</span></div>
+        <div class="how-step-desc"><span class="t-en">Each module is sold separately. The FSN module is accessed with a course redemption code. More modules are on the way.</span><span class="t-zh">每个模块独立，可单独购买。浮针模块凭购课兑换码访问。更多模块持续上线。</span></div>
       </div>
       <div class="how-step">
         <div class="how-num">3</div>
