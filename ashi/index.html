@@ -1,4 +1,4 @@
-<!-- SinoMed 阿是穴临床速查 · build v25 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit -->
+<!-- SinoMed 阿是穴临床速查 · build v28 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -178,7 +178,11 @@
   .pslayer:hover{background:#EFF0EC}
   .pslayer.cur{background:var(--clinical-bg);border-left-color:var(--clinical);cursor:default}
   .pslayer.danger{background:#FCF0EE;border-left-color:var(--tp);cursor:default}
-  .verstag{font-size:10px;color:var(--ink-3);opacity:.55;margin-left:6px;font-family:monospace;align-self:flex-end}
+  .site-back{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--ink-3);text-decoration:none;padding:6px 10px;border-radius:8px;border:1px solid var(--line);margin-left:14px;white-space:nowrap;flex-shrink:0}
+  .site-back:hover{color:var(--tp);border-color:var(--tp-soft);background:var(--tp-bg)}
+  .site-back svg{flex-shrink:0}
+  @media (max-width:760px){ .site-back{order:1;margin-left:8px;padding:5px 8px} .site-back-label{display:none !important} }
+
   .lockicon{font-size:12px;margin-left:6px;opacity:.7;vertical-align:middle}
   .kb-card.locked{opacity:.6}
   .kb-card.locked:hover{opacity:.85}
@@ -293,8 +297,11 @@
     <div class="brand" onclick="goTop('home')">
       <span class="mark">SinoMed</span>
       <span class="sub"><span class="zh">阿是穴临床速查</span><span class="en">Ashi Point Reference</span></span>
-      <span class="verstag">v25</span>
     </div>
+    <a class="site-back" href="/" title="Back to SinoMed">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span class="site-back-label"><span class="zh">SinoMed 首页</span><span class="en">SinoMed Home</span></span>
+    </a>
     <div class="search">
       <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
       <input id="searchInput" type="text" autocomplete="off" oninput="doSearch(this.value)" onfocus="doSearch(this.value)">
