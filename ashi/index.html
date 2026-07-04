@@ -6112,7 +6112,7 @@ function setSiteLanguage(lang){ try{ localStorage.setItem(SINOMED_LANG_KEY, lang
 const SUPABASE_URL  = 'https://ucocgcbxdqjbbklnkyxt.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo';
 const ASHI_MODULE_ID = 'ashi';
-const ASHI_PRICE_ID = null; // >>> TODO(Di): create the $99 CAD price for module 'ashi' in Stripe/Supabase and paste its price_id here.
+const ASHI_PRICE_ID = 'price_1TpJLNLpHoyExvp7HpHT2sax'; // $99 CAD, module 'ashi' (Stripe, 1459986 B.C. LTD. account)
 let sb = null;
 try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON); }catch(e){ console.warn('[ashi] supabase client failed to init', e); }
 
@@ -6366,4 +6366,3 @@ initSession();
 </div>
 </body>
 </html>
-
