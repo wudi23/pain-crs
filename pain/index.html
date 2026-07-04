@@ -2905,9 +2905,9 @@ function sbApplyGating(){
           '<div style="font-size:20px;font-weight:800;margin-bottom:8px"><span class="zh">购买后解锁</span><span class="en" style="display:none">Unlock after purchase</span></div>'+
           '<div style="font-size:13px;opacity:.85;margin-bottom:16px;line-height:1.7">'+
           '<span class="zh">🔸 疼痛推理系统 <strong>$29 CAD</strong> · 单独购买 · 14个病症 · 终身访问<br>'+
-          '🔶 全套模块价格待定 · </span>'+
+          '</span>'+
           '<span class="en" style="display:none">🔸 Pain Reasoning System <strong>$29 CAD</strong> · Single purchase · 14 conditions · Lifetime access<br>'+
-          '🔶 Full bundle — pricing TBD · </span></div>'+
+          '</span></div>'+
           '<a href="#" onclick="buyPain();return false" class="dlo-btn"><span class="zh">$149 解锁全部14个部位</span><span class="en" style="display:none">$149 Unlock All 14 Conditions</span></a>'+
           '</div>';
         pg.style.position='relative';pg.appendChild(lk);
@@ -5813,53 +5813,71 @@ var PAIN_PRICE_BUNDLE = 'price_1ToCFALpHoyExvp7WdymsBEV';  // $149 all 14 condit
 
 /* ══ PURCHASE HANDLER ══ */
 async function buyPain() {
-  // Check login
-  if (!sbClient) {
-    window.location.href = '/';  // redirect to homepage to login
+  // Ensure Supabase client exists
+  var sb = sbClient;
+  if (!sb && typeof supabase !== 'undefined') {
+    sb = supabase.createClient('https://ucocgcbxdqjbbklnkyxt.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo');
+  }
+  if (!sb) {
+    alert('请先在主页登录后再购买 / Please log in on the homepage first');
+    window.location.href = '/';
     return;
   }
-  const { data: { session } } = await sbClient.auth.getSession();
-  if (!session) {
-    window.location.href = '/';  // not logged in — go home
+
+  var sessionData;
+  try {
+    var result = await sb.auth.getSession();
+    sessionData = result.data.session;
+  } catch(e) {
+    alert('Session error: ' + e.message);
     return;
   }
-  
-  // Show loading state on all buy buttons
+
+  if (!sessionData) {
+    // Not logged in — send to homepage
+    window.location.href = '/?openModal=1';
+    return;
+  }
+
+  // Show loading
   document.querySelectorAll('.dlo-btn').forEach(function(b) {
-    b.textContent = isEn ? 'Redirecting…' : '跳转中…';
+    b.textContent = isEn ? 'Redirecting to checkout…' : '正在跳转到支付页面…';
     b.style.pointerEvents = 'none';
     b.style.opacity = '0.7';
   });
-  
+
   try {
-    const resp = await fetch('https://ucocgcbxdqjbbklnkyxt.supabase.co/functions/v1/bright-processor', {
+    var resp = await fetch('https://ucocgcbxdqjbbklnkyxt.supabase.co/functions/v1/bright-processor', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo'
       },
       body: JSON.stringify({
-        user_id: session.user.id,
+        user_id: sessionData.user.id,
         module_id: 'pain',
         price_id: 'price_1ToCFALpHoyExvp7WdymsBEV',
         return_url: window.location.href
       })
     });
-    const { url, error } = await resp.json();
-    if (url) {
-      window.location.href = url;  // → Stripe checkout
+
+    var respText = await resp.text();
+    var data;
+    try { data = JSON.parse(respText); }
+    catch(e) { alert('Server response error: ' + respText.slice(0,200)); return; }
+
+    if (data.url) {
+      window.location.href = data.url;
     } else {
-      alert(isEn ? 'Error: ' + (error || 'Please try again') : '错误：' + (error || '请重试'));
+      alert('Error: ' + (data.error || JSON.stringify(data)));
       document.querySelectorAll('.dlo-btn').forEach(function(b) {
-        b.style.pointerEvents = '';
-        b.style.opacity = '';
+        b.style.pointerEvents = ''; b.style.opacity = '';
       });
     }
   } catch(e) {
-    alert(isEn ? 'Network error, please try again.' : '网络错误，请重试。');
+    alert('Network error: ' + e.message);
     document.querySelectorAll('.dlo-btn').forEach(function(b) {
-      b.style.pointerEvents = '';
-      b.style.opacity = '';
+      b.style.pointerEvents = ''; b.style.opacity = '';
     });
   }
 }
