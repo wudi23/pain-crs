@@ -235,6 +235,7 @@ body {
 .dim-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
 .dim-icon-red{background:var(--verm-bg);border:1px solid rgba(139,26,26,0.15);}
 .dim-icon-jade{background:var(--jade-bg);border:1px solid rgba(26,107,90,0.15);}
+.dim-icon-theory{background:#f2ead9;border:1px solid rgba(138,109,59,0.28);color:#7a4a2b;}
 .dim-title{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:2px;}
 .dim-sub{font-size:12px;color:var(--ink-muted);}
 
@@ -264,11 +265,6 @@ html[lang="zh"] .t-en{display:none;}
   .mc-price { font-size: 12px; }
 }
 
-.mc-icon-fsn{
-  display:block;width:40px;height:40px;margin-bottom:12px;
-  background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPGRlZnM+CiAgICA8Y2xpcFBhdGggaWQ9ImNpcmNsZS1jbGlwIj4KICAgICAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiLz4KICAgIDwvY2xpcFBhdGg+CiAgICA8IS0tIE11c2NsZSB0ZXh0dXJlIHBhdHRlcm4gKHJlZCBzaWRlKSAtLT4KICAgIDxwYXR0ZXJuIGlkPSJtdXNjbGUiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgogICAgICA8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjOEIxQTFBIi8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iMiIgeDI9IjgiIHkyPSI0IiBzdHJva2U9IiNBNTI4MjgiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjYiLz4KICAgICAgPGxpbmUgeDE9IjAiIHkxPSI1IiB4Mj0iOCIgeTI9IjciIHN0cm9rZT0iIzZCMEYwRiIgc3Ryb2tlLXdpZHRoPSIwLjYiIG9wYWNpdHk9IjAuNSIvPgogICAgICA8bGluZSB4MT0iMCIgeTE9IjAiIHgyPSI4IiB5Mj0iMSIgc3Ryb2tlPSIjQzQzMDMwIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CiAgICA8L3BhdHRlcm4+CiAgICA8IS0tIE5lcnZlIHRleHR1cmUgcGF0dGVybiAoZ3JleSBzaWRlKSAtLT4KICAgIDxwYXR0ZXJuIGlkPSJuZXJ2ZSIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIj4KICAgICAgPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjRThFNERFIi8+CiAgICAgIDxsaW5lIHgxPSIyIiB5MT0iMCIgeDI9IjMiIHkyPSIxMCIgc3Ryb2tlPSIjQkJCQkJCIiBzdHJva2Utd2lkdGg9IjAuNCIgb3BhY2l0eT0iMC43Ii8+CiAgICAgIDxsaW5lIHgxPSI2IiB5MT0iMCIgeDI9IjgiIHkyPSIxMCIgc3Ryb2tlPSIjQ0NDQ0NDIiBzdHJva2Utd2lkdGg9IjAuMyIgb3BhY2l0eT0iMC41Ii8+CiAgICAgIDxsaW5lIHgxPSIwIiB5MT0iNCIgeDI9IjEwIiB5Mj0iNiIgc3Ryb2tlPSIjQUFBQUFBIiBzdHJva2Utd2lkdGg9IjAuMyIgb3BhY2l0eT0iMC40Ii8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIAogIDwhLS0gQmFja2dyb3VuZCBjaXJjbGUgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9IiNFOEU0REUiIHN0cm9rZT0iI0NDQ0NDQyIgc3Ryb2tlLXdpZHRoPSIwLjUiLz4KICAKICA8IS0tIFJlZCBtdXNjbGUgaGFsZiAobGVmdC95aW4gc2lkZSkgLS0+CiAgPHBhdGggZD0iTTUwIDIgQTQ4IDQ4IDAgMCAwIDUwIDk4IEEyNCAyNCAwIDAgMCA1MCA1MCBBMjQgMjQgMCAwIDEgNTAgMiBaIiAKICAgICAgICBmaWxsPSJ1cmwoI211c2NsZSkiIGNsaXAtcGF0aD0idXJsKCNjaXJjbGUtY2xpcCkiLz4KICAKICA8IS0tIFlpbi15YW5nIFMtY3VydmUgZGl2aWRlciBsaW5lcyBmb3IgdGV4dHVyZSAtLT4KICA8cGF0aCBkPSJNNTAgMiBDNTAgMjYsIDI2IDI2LCAyNiA1MCBDMjYgNzQsIDUwIDc0LCA1MCA5OCIgCiAgICAgICAgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNkIwRjBGIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC4zIi8+CiAgCiAgPCEtLSBTbWFsbCBjaXJjbGUgKG5lcnZlIGluIG11c2NsZSA9IHdoaXRlIGRvdCkgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSIyNiIgcj0iOCIgZmlsbD0idXJsKCNuZXJ2ZSkiLz4KICAKICA8IS0tIFNtYWxsIGNpcmNsZSAobXVzY2xlIGluIG5lcnZlID0gcmVkIGRvdCkgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI3NCIgcj0iOCIgZmlsbD0idXJsKCNtdXNjbGUpIi8+CiAgCiAgPCEtLSBNYWluIFMtY3VydmUgZGl2aWRlciAtLT4KICA8cGF0aCBkPSJNNTAgMiBBMjQgMjQgMCAwIDEgNTAgNTAgQTI0IDI0IDAgMCAwIDUwIDk4IiAKICAgICAgICBmaWxsPSJub25lIiBzdHJva2U9IiM4QjFBMUEiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjQiLz4KICAKICA8IS0tIE91dGVyIHJpbmcgLS0+CiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzhCMUExQSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4=") center/cover no-repeat;
-  border-radius:50%;
-}
 
 /* ── Clinical Manifesto Section ─────────────────────── */
 .manifesto {
@@ -366,8 +362,8 @@ html[lang="zh"] .t-en{display:none;}
       <span class="t-zh">很多人学了大量理论，却依然不会看病。原因只有一个：从未被训练过<strong>如何思考</strong>，只被告知<strong>记住什么</strong>。</span>
     </p>
     <p>
-      <span class="t-en">The SinoMed TCM Clinical Reasoning System starts where every patient encounter starts — the chief complaint. Like a detective working a case, it guides you step by step:</span>
-      <span class="t-zh">SinoMed 中医临床推理体系从主诉出发，以破案的方式逐步推进：</span>
+      <span class="t-en">The TCM Clinical Reasoning System starts where every patient encounter starts — the chief complaint. Like a detective working a case, it guides you step by step:</span>
+      <span class="t-zh">中医临床推理体系从主诉出发，以破案的方式逐步推进：</span>
     </p>
     <p>
       <span class="t-en">
@@ -383,8 +379,8 @@ html[lang="zh"] .t-en{display:none;}
     </p>
   </div>
   <div class="manifesto-close">
-    <span class="t-en">This is what clinical training should always have been. Every module in this system is built on this single path.</span>
-    <span class="t-zh">这是一条真实的临床路径，也是唯一值得训练的路径。本系统内各个模块均遵循这一推理体系。</span>
+    <span class="t-en">This is what clinical training should always have been. The reasoning itself is written up as one free theoretical module (ascending–descending / exiting–entering as its frame); every other module is its application in a specific clinical field.</span>
+    <span class="t-zh">这是一条真实的临床路径，也是唯一值得训练的路径。这套推理本身被单独写成了一个免费的理论模块（升降出入为纲）；其余各模块，都是它在具体病域的落地。</span>
   </div>
 </div>
 
@@ -392,7 +388,32 @@ html[lang="zh"] .t-en{display:none;}
 <div class="modules-section">
 
   <!-- CLINICAL PROBLEMS -->
-  <div class="dim-section">
+      <div class="dim-section dim-section-theory">
+    <div class="dim-header">
+      <div class="dim-icon dim-icon-theory">☯</div>
+      <div>
+        <div class="dim-title"><span class="t-en">The Foundation · Start Here</span><span class="t-zh">理论根基 · 从这里开始</span></div>
+        <div class="dim-sub"><span class="t-en">One coordinate underlies every module below. Understand the reasoning first; the clinical systems are its application.</span><span class="t-zh">下面所有模块共用同一套推理坐标。先读懂这套推理，各临床系统都是它在具体病域的落地。</span></div>
+      </div>
+    </div>
+    <div class="modules-grid">
+
+      <a class="module-card available" href="/theory/">
+        <div class="mc-accent" style="background:#8a6d3b;"></div>
+        <span class="mc-icon">☯</span>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">Foundation</span><span class="t-zh">理论根基</span></span>
+        <div class="mc-title"><span class="t-en">TCM Theoretical Reasoning System</span><span class="t-zh">中医理论推理系统</span></div>
+        <div class="mc-sub"><span class="t-en">Classics for the Skeleton, the Clinic for Proof</span><span class="t-zh">经学立骨 · 临床验神</span></div>
+        <div class="mc-desc"><span class="t-en">With ascending–descending / exiting–entering as one master coordinate, it places the six conformations, the Jin–Yuan schools and warm disease on a single map, and reasons step by step from a patient's chief complaint down to principle, method, formula, point and technique. It is the shared groundwork beneath every clinical module below.</span><span class="t-zh">它以升降出入双坐标为纲，把伤寒六经、金元诸家与温病放到同一张图上，从病人的一句主诉一步步推导到理、法、方、药、穴、术。它是下面每一个临床模块共同的底层坐标。</span></div>
+        <div class="mc-cta">
+          <span class="mc-price"><span class="free"><span class="t-en">Free access</span><span class="t-zh">免费开放</span></span></span>
+          <span class="mc-arrow">→</span>
+        </div>
+      </a>
+    </div>
+    </div>
+
+    <div class="dim-section">
     <div class="dim-header">
       <div class="dim-icon dim-icon-red">🩺</div>
       <div>
@@ -476,7 +497,7 @@ html[lang="zh"] .t-en{display:none;}
 
       <div class="module-card available" onclick="openFSNModal()" style="cursor:pointer;">
         <div class="mc-accent jade"></div>
-        <div class="mc-icon-fsn"></div>
+        <span class="mc-icon">🪡</span>
         <span class="mc-tag mc-tag-tech"><span class="t-en">Knowledge Base + Assessment</span><span class="t-zh">知识库 + 认证测验</span></span>
         <div class="mc-title"><span class="t-en">FSN Clinical Manual</span><span class="t-zh">浮针临床手册</span></div>
 
@@ -505,7 +526,7 @@ html[lang="zh"] .t-en{display:none;}
           <span class="mc-dot-tag"><span class="t-en">+64 more</span><span class="t-zh">+64块</span></span>
         </div>
         <div class="mc-cta">
-          <span class="mc-price"><span class="free"><span class="t-en">Free preview</span><span class="t-zh">免费预览</span></span> · <span class="t-en">Full access $129 CAD</span><span class="t-zh">全部解锁 $129加元</span></span>
+          <span class="mc-price"><span class="free"><span class="t-en">Free preview</span><span class="t-zh">免费预览</span></span> · <span class="t-en">$129 CAD full access</span><span class="t-zh">$129全部解锁</span></span>
           <span class="mc-arrow" style="color:var(--jade);">→</span>
         </div>
       </a>
