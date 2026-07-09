@@ -136,7 +136,7 @@ main{max-width:860px;margin:0 auto;padding:0 16px 80px}
 <header>
   <a class="back" href="/">← SinoMed</a>
   <h1>内科临床推理系统</h1>
-  <button class="lang" onclick="toggleLang()">EN</button>
+  <button class="lang" onclick="toggleLang()" title="English version coming soon">EN soon</button>
 </header>
 <main>
   <!-- 首页 -->
@@ -187,7 +187,17 @@ const DATA = {"trees": {"acidreflux": {"symptom_id": "acidreflux", "symptom_zh":
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 function go(p){document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));
   const el=document.getElementById('page-'+p); if(el)el.classList.add('on'); window.scrollTo(0,0);}
-function toggleLang(){/* 占位:双语在定稿后统一补 */}
+function toggleLang(){
+  // 英文版建设中,先提示coming soon(双语内容将在定稿后统一补)
+  const box=document.getElementById('matmodal');
+  box.innerHTML=`<div class="mback" onclick="closeMat()"></div><div class="mcard" style="text-align:center">
+    <div class="mhead">🌐 English version coming soon</div>
+    <p>英文版正在建设中，敬请期待。目前内容为中文版。</p>
+    <p style="font-size:13px;color:#6b5d43">The English version is under development. Content is currently available in Chinese.</p>
+    <button class="mclose" onclick="closeMat()">好的 / OK</button>
+    </div>`;
+  box.classList.add('on');
+}
 
 /* ---------- 首页卡片 ---------- */
 let curTag='全部';
