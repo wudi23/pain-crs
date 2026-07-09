@@ -163,6 +163,55 @@ body {
 .module-card:hover .mc-arrow { transform: translateX(4px); color: var(--vermillion); }
 .mc-coming { font-size: 12px; color: var(--ink-faint); font-style: italic; }
 
+/* ── Pricing Section ─────────────────────────────────── */
+.pricing-section {
+  background: linear-gradient(180deg, #f5efe2 0%, var(--paper) 100%);
+  padding: 48px 24px 56px; scroll-margin-top: 64px;
+}
+.pricing-inner { max-width: 880px; margin: 0 auto; }
+.pricing-title { font-size: 24px; font-weight: 800; color: var(--ink); text-align: center; margin-bottom: 6px; }
+.pricing-subtitle { font-size: 14px; color: var(--ink-muted); text-align: center; margin-bottom: 28px; }
+.pass-card {
+  border: 2px solid var(--gold); border-radius: 12px; background: #fffdf8;
+  padding: 22px 24px; margin-bottom: 28px;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+  box-shadow: 0 2px 10px rgba(138,109,59,0.10);
+}
+.pass-info { flex: 1 1 320px; }
+.pass-name { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+.pass-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+.pass-cta { text-align: right; flex: 0 0 auto; }
+.pass-price { font-size: 26px; font-weight: 800; color: var(--ink); }
+.pass-price .was { font-size: 13px; color: var(--ink-faint); text-decoration: line-through; font-weight: 400; margin-right: 8px; }
+.pass-note { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+.pricing-rows { border: 1px solid var(--rule); border-radius: 12px; background: #fff; overflow: hidden; }
+.pr-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 14px 18px; border-bottom: 1px solid var(--rule);
+}
+.pr-row:last-child { border-bottom: none; }
+.pr-main { flex: 1 1 auto; min-width: 0; }
+.pr-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+.pr-free-scope { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+.pr-cta { flex: 0 0 auto; text-align: right; font-size: 13px; }
+.pr-price { font-weight: 700; color: var(--ink); }
+.pr-badge-free { color: var(--jade); font-weight: 700; }
+.pr-owned { color: var(--jade); font-weight: 700; }
+.pr-btn {
+  display: inline-block; margin-left: 10px; padding: 5px 14px; border-radius: 6px;
+  background: var(--accent); color: #F5F0E8; font-size: 12px; font-weight: 700;
+  border: none; cursor: pointer; text-decoration: none;
+}
+.pr-btn:hover { opacity: .9; }
+.pr-btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.pricing-footnote { font-size: 12px; color: var(--ink-faint); text-align: center; margin-top: 14px; }
+@media (max-width: 600px) {
+  .pass-card { flex-direction: column; align-items: flex-start; }
+  .pass-cta { text-align: left; }
+  .pr-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .pr-cta { text-align: left; }
+}
+
 /* ── HOW IT WORKS ────────────────────────────── */
 .how-section {
   background: var(--paper-warm);
@@ -324,6 +373,7 @@ html[lang="zh"] .t-en{display:none;}
     <span class="logo-zh t-zh">诚医</span>
   </div>
   <div class="topbar-right">
+    <a class="topbar-signin" href="#pricing" style="text-decoration:none;"><span class="t-en">Pricing</span><span class="t-zh">定价</span></a>
     <div class="lang-switch">
       <button class="lbtn active" id="lbtn-en" onclick="setLang('en')">EN</button>
       <button class="lbtn" id="lbtn-zh" onclick="setLang('zh')">中文</button>
@@ -449,9 +499,9 @@ html[lang="zh"] .t-en{display:none;}
         <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
         <div class="mc-title"><span class="t-en">TCM Internal Medicine CRS</span><span class="t-zh">中医内科推理系统</span></div>
         <div class="mc-sub"><span class="t-en">Qi Dynamic Framework</span><span class="t-zh">气机升降出入体系</span></div>
-        <div class="mc-desc"><span class="t-en">The core module of this system. 48 conditions across 10 systems — mind, digestion, lung, gynaecology and more — interconnected through symptom, pattern, and pathomechanism, reasoned via Qi dynamics to acupuncture and herbal treatment.</span><span class="t-zh">本系统核心模块。覆盖神志、消化、肺系、妇科等十大系统48个病症，症状、证型、病机三个入口互相联通，以气机升降出入推理至针灸与方药。</span></div>
+        <div class="mc-desc"><span class="t-en">The core module of this system. 52 conditions across 10 systems — mind, digestion, lung, gynaecology and more — interconnected through symptom, pattern, and pathomechanism, reasoned via Qi dynamics to acupuncture and herbal treatment.</span><span class="t-zh">本系统核心模块。覆盖神志、消化、肺系、妇科等十大系统52个病症，症状、证型、病机三个入口互相联通，以气机升降出入推理至针灸与方药。</span></div>
         <div class="mc-cta">
-          <span class="mc-price"><span class="free"><span class="t-en">5 conditions free</span><span class="t-zh">5个病免费</span></span> · <span class="t-en">$149 CAD full access</span><span class="t-zh">$149全部解锁</span></span>
+          <span class="mc-price"><span class="free"><span class="t-en">10 conditions free</span><span class="t-zh">10个病免费</span></span> · <span class="t-en">$149 CAD full access</span><span class="t-zh">$149全部解锁</span></span>
           <span class="mc-arrow">→</span>
         </div>
       </a>
@@ -526,7 +576,7 @@ html[lang="zh"] .t-en{display:none;}
           <span class="mc-dot-tag"><span class="t-en">+64 more</span><span class="t-zh">+64块</span></span>
         </div>
         <div class="mc-cta">
-          <span class="mc-price"><span class="free"><span class="t-en">Free preview</span><span class="t-zh">免费预览</span></span> · <span class="t-en">$129 CAD full access</span><span class="t-zh">$129全部解锁</span></span>
+          <span class="mc-price"><span class="free"><span class="t-en">Free preview</span><span class="t-zh">免费预览</span></span> · <span class="t-en">Full access $129 CAD</span><span class="t-zh">全部解锁 $129加元</span></span>
           <span class="mc-arrow" style="color:var(--jade);">→</span>
         </div>
       </a>
@@ -539,6 +589,70 @@ html[lang="zh"] .t-en{display:none;}
 </div>
 </div>
 
+<!-- Pricing Overview -->
+<div class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-title"><span class="t-en">Pricing</span><span class="t-zh">定价总览</span></div>
+    <div class="pricing-subtitle"><span class="t-en">Everything on one page — what each module covers, what's free, and what it costs.</span><span class="t-zh">一页看清所有模块——内容范围、免费部分与价格。</span></div>
+
+    <div class="pass-card">
+      <div class="pass-info">
+        <div class="pass-name"><span class="t-en">All-Access Pass</span><span class="t-zh">全站通行证</span></div>
+        <div class="pass-desc"><span class="t-en">Unlock every paid module — Pain, Ashi/Trigger Point, and Internal Medicine — with one purchase. All future updates to these modules included.</span><span class="t-zh">一次购买，解锁全部收费模块——疼痛、阿是穴/激痛点、内科，含这些模块日后的全部更新。</span></div>
+      </div>
+      <div class="pass-cta" id="pass-cta">
+        <div class="pass-price"><span class="was">$427</span>$329 CAD</div>
+      </div>
+    </div>
+
+    <div class="pricing-rows">
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">☯ Theoretical Reasoning System</span><span class="t-zh">☯ 中医理论推理系统</span></div>
+          <div class="pr-free-scope"><span class="t-en">The shared foundation beneath every clinical module</span><span class="t-zh">全部临床模块共同的底层坐标</span></div>
+        </div>
+        <div class="pr-cta"><span class="pr-badge-free"><span class="t-en">Free</span><span class="t-zh">免费开放</span></span><a class="pr-btn ghost" href="/theory/"><span class="t-en">Enter</span><span class="t-zh">进入</span></a></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">🌿 TCM Formulas CRS</span><span class="t-zh">🌿 方药临床推理系统</span></div>
+          <div class="pr-free-scope"><span class="t-en">Classical formula system, formula–pattern correspondence</span><span class="t-zh">经方体系为骨架，方证对应为核心</span></div>
+        </div>
+        <div class="pr-cta"><span class="pr-badge-free"><span class="t-en">Free</span><span class="t-zh">免费开放</span></span><a class="pr-btn ghost" href="/formulas/"><span class="t-en">Enter</span><span class="t-zh">进入</span></a></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">📜 TCM Internal Medicine CRS</span><span class="t-zh">📜 中医内科推理系统</span></div>
+          <div class="pr-free-scope"><span class="t-en">10 conditions free · 52 conditions across 10 systems</span><span class="t-zh">10个病免费 · 十大系统52个病症</span></div>
+        </div>
+        <div class="pr-cta" id="pr-cta-internal"><span class="pr-price">$149 CAD</span><button class="pr-btn" onclick="buyModule('internal')"><span class="t-en">Buy</span><span class="t-zh">购买</span></button></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">💊 Pain Medicine CRS</span><span class="t-zh">💊 疼痛临床推理系统</span></div>
+          <div class="pr-free-scope"><span class="t-en">Shoulder module free forever · 14 pain regions</span><span class="t-zh">肩痛模块永久免费 · 14个部位</span></div>
+        </div>
+        <div class="pr-cta" id="pr-cta-pain"><span class="pr-price">$149 CAD</span><button class="pr-btn" onclick="buyModule('pain')"><span class="t-en">Buy</span><span class="t-zh">购买</span></button></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">🎯 Ashi / Trigger Point System</span><span class="t-zh">🎯 阿是穴/激痛点系统</span></div>
+          <div class="pr-free-scope"><span class="t-en">Shoulder + low back free (20 muscles) · 66 muscles, 28 conditions</span><span class="t-zh">肩+腰免费（20块肌肉）· 66肌肉，28个疼痛问题</span></div>
+        </div>
+        <div class="pr-cta" id="pr-cta-ashi"><span class="pr-price">$129 CAD</span><button class="pr-btn" onclick="buyModule('ashi')"><span class="t-en">Buy</span><span class="t-zh">购买</span></button></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
+          <div class="pr-name"><span class="t-en">🪡 FSN Clinical Manual</span><span class="t-zh">🪡 浮针临床手册</span></div>
+          <div class="pr-free-scope"><span class="t-en">Included with the FSN online course</span><span class="t-zh">浮针在线课程附赠</span></div>
+        </div>
+        <div class="pr-cta"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
+      </div>
+    </div>
+    <div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
+  </div>
+</div>
+
 <!-- How it works -->
 <div class="how-section">
   <div class="how-inner">
@@ -547,7 +661,7 @@ html[lang="zh"] .t-en{display:none;}
       <div class="how-step">
         <div class="how-num">1</div>
         <div class="how-step-title"><span class="t-en">Start free, right away</span><span class="t-zh">免费即刻开始</span></div>
-        <div class="how-step-desc"><span class="t-en">Browse all free content without an account — shoulder pain, five internal medicine conditions, and the full formulas system. Create an account only when you're ready to unlock more.</span><span class="t-zh">无需注册即可浏览全部免费内容——肩痛、内科5个病症、方药系统全开放。购买解锁时注册账号即可。</span></div>
+        <div class="how-step-desc"><span class="t-en">Browse all free content without an account — shoulder pain, ten internal medicine conditions, and the full formulas system. Create an account only when you're ready to unlock more.</span><span class="t-zh">无需注册即可浏览全部免费内容——肩痛、内科10个病症、方药系统全开放。购买解锁时注册账号即可。</span></div>
       </div>
       <div class="how-step">
         <div class="how-num">2</div>
@@ -605,6 +719,87 @@ html[lang="zh"] .t-en{display:none;}
 const SUPABASE_URL  = 'https://ucocgcbxdqjbbklnkyxt.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+/* ── Pricing: config + state-aware rendering ─────────── */
+const PRICING = {
+  pain:     { price: 149, price_id: 'price_1ToCFALpHoyExvp7WdymsBEV', path: '/pain/' },
+  ashi:     { price: 129, price_id: 'price_1TpLuXLpHoyExvp7xvsg4hvy', path: '/ashi/' },
+  internal: { price: 149, price_id: 'price_1TpWucLpHoyExvp7ZdFT7EMa', path: '/internal/' }
+};
+// All-Access Pass — set live:true AFTER creating the Stripe price and inserting
+// the 'allaccess' row (status=live) into the Supabase modules table.
+const PASS = { module_id: 'allaccess', price: 329, price_id: 'price_1TrQuKLpHoyExvp7oG1PDnrL', live: true };
+
+function prOwnedHTML(path){
+  return '<span class="pr-owned">✓ <span class="t-en">Owned</span><span class="t-zh">已拥有</span></span>'
+       + '<a class="pr-btn ghost" href="'+path+'"><span class="t-en">Enter</span><span class="t-zh">进入</span></a>';
+}
+
+async function renderPricing(){
+  let owned = new Set();
+  try{
+    const { data } = await sb.auth.getSession();
+    if(data && data.session){
+      const uid = data.session.user.id;
+      const { data: rows } = await sb.from('purchases').select('module_id').eq('user_id', uid);
+      if(rows) rows.forEach(r => owned.add(r.module_id));
+    }
+  }catch(e){ /* signed out or network issue — show default prices */ }
+
+  const hasPass = owned.has('allaccess');
+
+  // Per-module CTAs
+  Object.keys(PRICING).forEach(mid => {
+    const el = document.getElementById('pr-cta-'+mid);
+    if(!el) return;
+    if(hasPass || owned.has(mid)) el.innerHTML = prOwnedHTML(PRICING[mid].path);
+  });
+
+  // Pass card CTA
+  const passEl = document.getElementById('pass-cta');
+  if(!passEl) return;
+  if(hasPass){
+    passEl.innerHTML = '<div class="pass-price"><span class="pr-owned">✓ <span class="t-en">Full access owned</span><span class="t-zh">已拥有全站</span></span></div>';
+    return;
+  }
+  if(Object.keys(PRICING).every(mid => owned.has(mid))){
+    passEl.innerHTML = '<div class="pass-price"><span class="pr-owned">✓ <span class="t-en">All paid modules unlocked</span><span class="t-zh">已解锁全部收费模块</span></span></div>';
+    return;
+  }
+  const ownedAny = Object.keys(PRICING).some(mid => owned.has(mid));
+  let html = '<div class="pass-price"><span class="was">$427</span>$' + PASS.price + ' CAD</div>';
+  if(ownedAny){
+    // Policy: single-module buyers continue module-by-module; no upgrade credit.
+    html += '<div class="pass-note"><span class="t-en">You own individual modules — please continue purchasing by module</span><span class="t-zh">您已按模块购买——请继续按模块购买解锁</span></div>';
+  } else if(PASS.live){
+    html += '<button class="pr-btn" style="margin-top:6px;" onclick="buyPass()"><span class="t-en">Unlock everything</span><span class="t-zh">解锁全部</span></button>';
+  } else {
+    html += '<div class="pass-note"><span class="t-en">Coming soon</span><span class="t-zh">即将开放</span></div>';
+  }
+  passEl.innerHTML = html;
+}
+
+async function startCheckout(module_id, price_id){
+  const { data } = await sb.auth.getSession();
+  if(!(data && data.session)){ openModal(); return; }
+  const user = data.session.user;
+  try{
+    const resp = await fetch(SUPABASE_URL + '/functions/v1/bright-processor', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer ' + SUPABASE_ANON },
+      body: JSON.stringify({ user_id: user.id, module_id: module_id, price_id: price_id, return_url: window.location.origin })
+    });
+    const { url, error } = await resp.json();
+    if(error) throw new Error(error);
+    window.location.href = url;
+  }catch(e){
+    alert('Checkout error: ' + e.message);
+  }
+}
+function buyModule(mid){ startCheckout(mid, PRICING[mid].price_id); }
+function buyPass(){ if(PASS.live) startCheckout(PASS.module_id, PASS.price_id); }
+
+document.addEventListener('DOMContentLoaded', renderPricing);
 
 
 // FSN Access Modal
