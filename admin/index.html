@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" contenat="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow">
 <title>SinoMed · 管理员授权</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯</text></svg>">
 <style>
@@ -164,20 +164,24 @@ function escapeHtml(s){
 
 /* ================= 后端调用 ================= */
 async function callApi(payload){
-  var sess = await sb.auth.getSession();
-  var token = sess && sess.data && sess.data.session ? sess.data.session.access_token : "";
-  var resp = await fetch(FN_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token,
-      "apikey": SUPABASE_ANON_KEY
-    },
-    body: JSON.stringify(payload)
-  });
-  var data = null;
-  try { data = await resp.json(); } catch(e) { data = {}; }
-  return { status: resp.status, data: data };
+  try {
+    var sess = await sb.auth.getSession();
+    var token = sess && sess.data && sess.data.session ? sess.data.session.access_token : "";
+    var resp = await fetch(FN_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "apikey": SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify(payload)
+    });
+    var data = null;
+    try { data = await resp.json(); } catch(e) { data = {}; }
+    return { status: resp.status, data: data };
+  } catch(e) {
+    return { status: 0, data: { error: "无法连接服务端函数 admin-api（" + (e && e.message ? e.message : e) + "）。请确认 Edge Function admin-api 已部署且名称一字不差。" } };
+  }
 }
 
 /* ================= 权限门 ================= */
@@ -188,7 +192,7 @@ async function enterAdmin(){
   var r = await callApi({ action: "list" });
   if (r.status === 403) { kickOut(); return; }
   if (r.status !== 200) {
-    showMsg("loginMsg", "服务端错误：" + (r.data.error || r.status), false);
+    showMsg("loginMsg", "服务端验证失败：" + (r.data.error || ("HTTP " + r.status)), false);
     return;
   }
   $("pageLogin").classList.add("hidden");
@@ -241,15 +245,24 @@ async function refreshList(){
 
 /* ================= 事件绑定 ================= */
 $("btnLogin").addEventListener("click", async function(){
-  clearMsg("loginMsg");
-  var email = $("loginEmail").value.trim();
-  var pass = $("loginPass").value;
-  if (!email || !pass) { showMsg("loginMsg", "请输入邮箱和密码", false); return; }
-  var r = await sb.auth.signInWithPassword({ email: email, password: pass });
-  if (r.error) { showMsg("loginMsg", "登录失败：" + r.error.message, false); return; }
-  var em = (r.data && r.data.user && r.data.user.email || "").toLowerCase();
-  if (em !== ADMIN_EMAIL) { kickOut(); return; }   // 前端快速拦截（真正拦截在服务端）
-  enterAdmin();
+  var btn = this;
+  try {
+    var email = $("loginEmail").value.trim();
+    var pass = $("loginPass").value;
+    if (!email || !pass) { showMsg("loginMsg", "请输入邮箱和密码", false); return; }
+    btn.disabled = true;
+    showMsg("loginMsg", "登录中…", true);
+    var r = await sb.auth.signInWithPassword({ email: email, password: pass });
+    if (r.error) { showMsg("loginMsg", "登录失败：" + r.error.message, false); return; }
+    var em = (r.data && r.data.user && r.data.user.email || "").toLowerCase();
+    if (em !== ADMIN_EMAIL) { kickOut(); return; }   // 前端快速拦截（真正拦截在服务端）
+    showMsg("loginMsg", "登录成功，正在验证管理员身份…", true);
+    await enterAdmin();
+  } catch(e) {
+    showMsg("loginMsg", "发生错误：" + (e && e.message ? e.message : e), false);
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 $("btnLogout").addEventListener("click", async function(){
@@ -322,14 +335,18 @@ $("tblBody").addEventListener("click", async function(ev){
 
 /* ================= 启动：已有 session 直接进入 ================= */
 (async function init(){
-  var sess = await sb.auth.getSession();
-  var user = sess && sess.data && sess.data.session ? sess.data.session.user : null;
-  if (user) {
-    if ((user.email || "").toLowerCase() !== ADMIN_EMAIL) { kickOut(); return; }
-    enterAdmin();
+  try {
+    var sess = await sb.auth.getSession();
+    var user = sess && sess.data && sess.data.session ? sess.data.session.user : null;
+    if (user) {
+      if ((user.email || "").toLowerCase() !== ADMIN_EMAIL) { kickOut(); return; }
+      showMsg("loginMsg", "已登录，正在验证管理员身份…", true);
+      await enterAdmin();
+    }
+  } catch(e) {
+    showMsg("loginMsg", "初始化错误：" + (e && e.message ? e.message : e), false);
   }
 })();
 </script>
 </body>
 </html>
-
