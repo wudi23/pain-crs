@@ -1,1 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" contenat="noindex, nofollow">
+<title>SinoMed · 管理员授权</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☯</text></svg>">
+<style>
+  :root{
+    --ink:#2e2618; --paper:#faf7f0; --gold:#8a6d3b; --accent:#7a4a2b;
+    --line:#e2dccc; --danger:#a33a2a; --ok:#3a6b45;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    min-height:100vh;}
+  /* 顶栏 */
+  .topbar{position:sticky; top:0; z-index:50; height:56px; background:var(--paper);
+    border-bottom:1px solid var(--line); display:flex; align-items:center; padding:0 16px;}
+  .topbar a.back{color:var(--gold); text-decoration:none; font-size:15px; flex:0 0 auto;}
+  .topbar .bar-title{flex:1; text-align:center; font-weight:600; font-size:16px;}
+  .topbar .bar-right{flex:0 0 auto; width:80px; text-align:right;}
+  .topbar .bar-right button{background:none; border:none; color:var(--gold); cursor:pointer; font-size:14px;}
+  main{max-width:960px; margin:0 auto; padding:24px 16px 80px;}
+  h2{font-size:18px; margin:28px 0 12px; color:var(--accent);}
+  .card{background:#fff; border:1px solid var(--line); border-radius:10px; padding:20px; margin-bottom:16px;}
+  label{display:block; font-size:13px; color:#6b6252; margin:12px 0 4px;}
+  input[type=email], input[type=password], input[type=date], select{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:8px;
+    font-size:15px; background:#fff; color:var(--ink);}
+  .btn{display:inline-block; padding:10px 22px; border-radius:8px; border:none;
+    background:var(--gold); color:#fff; font-size:15px; cursor:pointer; margin-top:16px;}
+  .btn:disabled{opacity:.5; cursor:not-allowed;}
+  .btn-danger{background:none; border:1px solid var(--danger); color:var(--danger);
+    padding:4px 12px; border-radius:6px; font-size:13px; cursor:pointer;}
+  .msg{margin-top:12px; font-size:14px; display:none;}
+  .msg.err{color:var(--danger); display:block;}
+  .msg.ok{color:var(--ok); display:block;}
+  /* 表格 */
+  .tbl-wrap{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:14px;}
+  th,td{padding:10px 8px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap;}
+  th{color:#6b6252; font-weight:600; font-size:13px;}
+  td .tag{display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px;}
+  .tag-admin{background:#efe7d6; color:var(--accent);}
+  .tag-stripe{background:#e3ecdf; color:var(--ok);}
+  .expired{color:var(--danger);}
+  .hidden{display:none;}
+  .hint{font-size:13px; color:#8b8272; margin-top:8px;}
+  @media(max-width:820px){
+    main{padding:16px 10px 60px;}
+    .card{padding:14px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back" href="/">←SinoMed</a>
+  <div class="bar-title">管理员授权</div>
+  <div class="bar-right"><button id="btnLogout" class="hidden">退出登录</button></div>
+</div>
+
+<main id="main">
+
+  <!-- ===== 登录区 ===== -->
+  <div id="pageLogin" class="card">
+    <h2 style="margin-top:0">管理员登录</h2>
+    <label>邮箱</label>
+    <input type="email" id="loginEmail" autocomplete="username">
+    <label>密码</label>
+    <input type="password" id="loginPass" autocomplete="current-password">
+    <button class="btn" id="btnLogin">登录</button>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+
+  <!-- ===== 管理区 ===== -->
+  <div id="pageAdmin" class="hidden">
+
+    <div class="card">
+      <h2 style="margin-top:0">授权用户</h2>
+      <label>用户邮箱（必须已注册）</label>
+      <input type="email" id="grantEmail" placeholder="user@example.com">
+      <label>模块</label>
+      <select id="grantModule">
+        <option value="pain">疼痛（pain）</option>
+        <option value="ashi">阿是/MTrP（ashi）</option>
+        <option value="internal">内科（internal）</option>
+        <option value="fsn">浮针（fsn）</option>
+        <option value="allaccess">全站通（allaccess）</option>
+      </select>
+      <label>有效期</label>
+      <select id="grantExpiry">
+        <option value="">永久</option>
+        <option value="30">30 天</option>
+        <option value="90">90 天</option>
+        <option value="180">180 天</option>
+        <option value="365">1 年</option>
+        <option value="custom">自定义日期…</option>
+      </select>
+      <input type="date" id="grantCustomDate" class="hidden" style="margin-top:8px">
+      <br>
+      <button class="btn" id="btnGrant">授权</button>
+      <div class="msg" id="grantMsg"></div>
+      <div class="hint">授权将写入 purchases 表（price_id = admin_grant，金额 0）。到期后各模块自动失效。</div>
+    </div>
+
+    <div class="card">
+      <h2 style="margin-top:0">已授权 / 已购买记录</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>邮箱</th><th>模块</th><th>来源</th><th>时间</th><th>到期</th><th>操作</th></tr>
+          </thead>
+          <tbody id="tblBody">
+            <tr><td colspan="6">加载中…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ================= 配置 ================= */
+var SUPABASE_URL = "https://ucocgcbxdqjbbklnkyxt.supabase.co";
+var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo";
+var ADMIN_EMAIL = "wu23di@gmail.com";
+var FN_URL = SUPABASE_URL + "/functions/v1/admin-api";
+
+var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+var MODULE_NAMES = {
+  pain: "疼痛", ashi: "阿是/MTrP", internal: "内科",
+  fsn: "浮针", allaccess: "全站通", theory: "理论", formulas: "方药"
+};
+
+/* ================= 工具 ================= */
+function $(id){ return document.getElementById(id); }
+function showMsg(id, text, ok){
+  var el = $(id);
+  el.textContent = text;
+  el.className = "msg " + (ok ? "ok" : "err");
+}
+function clearMsg(id){
+  var el = $(id);
+  el.textContent = "";
+  el.className = "msg";
+}
+function fmtDate(iso){
+  if(!iso) return "";
+  var d = new Date(iso);
+  var p = function(n){ return (n < 10 ? "0" : "") + n; };
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+function escapeHtml(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+
+/* ================= 后端调用 ================= */
+async function callApi(payload){
+  var sess = await sb.auth.getSession();
+  var token = sess && sess.data && sess.data.session ? sess.data.session.access_token : "";
+  var resp = await fetch(FN_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + token,
+      "apikey": SUPABASE_ANON_KEY
+    },
+    body: JSON.stringify(payload)
+  });
+  var data = null;
+  try { data = await resp.json(); } catch(e) { data = {}; }
+  return { status: resp.status, data: data };
+}
+
+/* ================= 权限门 ================= */
+function kickOut(){ window.location.href = "/"; }
+
+async function enterAdmin(){
+  // 服务端二次验证：list 返回 403 即非管理员，跳回首页
+  var r = await callApi({ action: "list" });
+  if (r.status === 403) { kickOut(); return; }
+  if (r.status !== 200) {
+    showMsg("loginMsg", "服务端错误：" + (r.data.error || r.status), false);
+    return;
+  }
+  $("pageLogin").classList.add("hidden");
+  $("pageAdmin").classList.remove("hidden");
+  $("btnLogout").classList.remove("hidden");
+  renderTable(r.data.rows || []);
+}
+
+/* ================= 列表渲染 ================= */
+function renderTable(rows){
+  var tb = $("tblBody");
+  if (!rows.length) {
+    tb.innerHTML = "<tr><td colspan=\"6\">暂无记录</td></tr>";
+    return;
+  }
+  var now = new Date().toISOString();
+  var html = "";
+  for (var i = 0; i < rows.length; i++) {
+    var r = rows[i];
+    var isAdminGrant = r.price_id === "admin_grant";
+    var srcTag = isAdminGrant
+      ? "<span class=\"tag tag-admin\">管理员授权</span>"
+      : "<span class=\"tag tag-stripe\">Stripe购买</span>";
+    var expiry;
+    if (!r.expires_at) {
+      expiry = "永久";
+    } else if (r.expires_at <= now) {
+      expiry = "<span class=\"expired\">已过期 " + fmtDate(r.expires_at) + "</span>";
+    } else {
+      expiry = fmtDate(r.expires_at);
+    }
+    html += "<tr>"
+      + "<td>" + escapeHtml(r.email || r.user_id) + "</td>"
+      + "<td>" + escapeHtml(MODULE_NAMES[r.module_id] || r.module_id) + "</td>"
+      + "<td>" + srcTag + "</td>"
+      + "<td>" + fmtDate(r.created_at) + "</td>"
+      + "<td>" + expiry + "</td>"
+      + "<td><button class=\"btn-danger\" data-revoke=\"" + escapeHtml(r.id)
+      + "\" data-src=\"" + (isAdminGrant ? "admin" : "stripe")
+      + "\" data-email=\"" + escapeHtml(r.email || "") + "\">撤销</button></td>"
+      + "</tr>";
+  }
+  tb.innerHTML = html;
+}
+
+async function refreshList(){
+  var r = await callApi({ action: "list" });
+  if (r.status === 200) renderTable(r.data.rows || []);
+}
+
+/* ================= 事件绑定 ================= */
+$("btnLogin").addEventListener("click", async function(){
+  clearMsg("loginMsg");
+  var email = $("loginEmail").value.trim();
+  var pass = $("loginPass").value;
+  if (!email || !pass) { showMsg("loginMsg", "请输入邮箱和密码", false); return; }
+  var r = await sb.auth.signInWithPassword({ email: email, password: pass });
+  if (r.error) { showMsg("loginMsg", "登录失败：" + r.error.message, false); return; }
+  var em = (r.data && r.data.user && r.data.user.email || "").toLowerCase();
+  if (em !== ADMIN_EMAIL) { kickOut(); return; }   // 前端快速拦截（真正拦截在服务端）
+  enterAdmin();
+});
+
+$("btnLogout").addEventListener("click", async function(){
+  await sb.auth.signOut();
+  window.location.reload();
+});
+
+$("grantExpiry").addEventListener("change", function(){
+  $("grantCustomDate").classList.toggle("hidden", this.value !== "custom");
+});
+
+$("btnGrant").addEventListener("click", async function(){
+  clearMsg("grantMsg");
+  var email = $("grantEmail").value.trim();
+  var moduleId = $("grantModule").value;
+  if (!email) { showMsg("grantMsg", "请输入用户邮箱", false); return; }
+
+  var expiresAt = null;
+  var sel = $("grantExpiry").value;
+  if (sel === "custom") {
+    var dv = $("grantCustomDate").value;
+    if (!dv) { showMsg("grantMsg", "请选择自定义到期日期", false); return; }
+    expiresAt = new Date(dv + "T23:59:59").toISOString();
+  } else if (sel) {
+    expiresAt = new Date(Date.now() + parseInt(sel, 10) * 86400000).toISOString();
+  }
+
+  var btn = this;
+  btn.disabled = true;
+  var r = await callApi({ action: "grant", email: email, module_id: moduleId, expires_at: expiresAt });
+  btn.disabled = false;
+
+  if (r.status === 200 && r.data.ok) {
+    showMsg("grantMsg", "授权成功：" + email + " → " + (MODULE_NAMES[moduleId] || moduleId)
+      + (expiresAt ? "（至 " + fmtDate(expiresAt) + "）" : "（永久）"), true);
+    $("grantEmail").value = "";
+    refreshList();
+  } else if (r.data.error === "user_not_found") {
+    showMsg("grantMsg", "该邮箱未注册，请让对方先在 sinomed.ca 注册账号", false);
+  } else if (r.data.error === "already_active") {
+    showMsg("grantMsg", "该用户此模块已有未过期的权限，无需重复授权", false);
+  } else if (r.status === 403) {
+    kickOut();
+  } else {
+    showMsg("grantMsg", "授权失败：" + (r.data.error || r.status), false);
+  }
+});
+
+$("tblBody").addEventListener("click", async function(ev){
+  var btn = ev.target.closest("[data-revoke]");
+  if (!btn) return;
+  var id = btn.getAttribute("data-revoke");
+  var src = btn.getAttribute("data-src");
+  var email = btn.getAttribute("data-email");
+  var warn = src === "stripe"
+    ? "⚠️ 这是一条 Stripe 真实购买记录！\n撤销将删除该购买记录（" + email + "），确定要继续吗？"
+    : "确定撤销 " + email + " 的这条授权吗？";
+  if (!window.confirm(warn)) return;
+  if (src === "stripe" && !window.confirm("再次确认：删除 Stripe 购买记录不可恢复。")) return;
+
+  var r = await callApi({ action: "revoke", id: id });
+  if (r.status === 200 && r.data.ok) {
+    refreshList();
+  } else if (r.status === 403) {
+    kickOut();
+  } else {
+    window.alert("撤销失败：" + (r.data.error || r.status));
+  }
+});
+
+/* ================= 启动：已有 session 直接进入 ================= */
+(async function init(){
+  var sess = await sb.auth.getSession();
+  var user = sess && sess.data && sess.data.session ? sess.data.session.user : null;
+  if (user) {
+    if ((user.email || "").toLowerCase() !== ADMIN_EMAIL) { kickOut(); return; }
+    enterAdmin();
+  }
+})();
+</script>
+</body>
+</html>
 
