@@ -1,23 +1,24 @@
-<!-- SinoMed 阿是穴临床速查 · build v29 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / $129 CAD price -->
+<!-- SinoMed 阿是穴临床速查 · build v28 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>阿是穴临床速查 · SinoMed</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%AF%3C/text%3E%3C/svg%3E">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CjxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgcng9IjciIGZpbGw9IiNDNDNEM0QiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOS41IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjU1Ii8+CjxwYXRoIGQ9Ik0xMC41IDEwLjVsMTEgMTFNMjEuNSAxMC41bC0xMSAxMSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjIuMSIgZmlsbD0iI0Y0QzIzMyIvPgo8L3N2Zz4=">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F4F5F2; --card:#FCFCFB; --ink:#1A2430; --ink-2:#4A5561; --ink-3:#78828E;
+    --paper:#faf7f0; --card:#FCFCFB; --ink:#2e2618; --ink-2:#4A5561; --ink-3:#78828E;
     --line:#E2E4DF; --line-2:#D0D3CD;
     --tp:#C43D3D; --tp-soft:#F4DAD6;
     --acupoint:#1F7A6B; --acupoint-bg:#E1F0EC;
     --meridian:#B7791F; --meridian-bg:#F6ECD6;
     --clinical:#7B2D43; --clinical-bg:#F3E1E7;
-    --gold:#C9A227;
+    --gold:#8a6d3b;--accent:#7a4a2b;
     --shadow:0 1px 2px rgba(26,36,48,.05),0 8px 24px rgba(26,36,48,.06);
     --shadow-lg:0 2px 6px rgba(26,36,48,.06),0 18px 44px rgba(26,36,48,.10);
   }
@@ -37,10 +38,10 @@
 
   .topbar{position:sticky;top:0;z-index:50;background:rgba(244,245,242,.92);
     backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
-  .topbar-inner{max-width:1000px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:12px}
-  .brand{display:flex;align-items:baseline;gap:9px;font-family:"Fraunces",serif;cursor:pointer}
+  .topbar-inner{max-width:1000px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:12px;position:relative}
+  .brand{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;cursor:pointer;white-space:nowrap;pointer-events:auto}
   .brand .mark{font-weight:600;font-size:19px}
-  .brand .sub{font-family:"Noto Serif SC",serif;font-size:12.5px;color:var(--ink-3);font-weight:500}
+  .brand .sub{font-family:"Noto Serif SC",serif;font-size:15px;color:var(--ink-2);font-weight:600;letter-spacing:.5px}
   .spacer{flex:1}
   .nav-link{font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer;padding:6px 10px;border-radius:8px;transition:.15s}
   .nav-link:hover{background:#EDEEEA;color:var(--ink)}
@@ -74,7 +75,7 @@
 
   .hero{padding:52px 0 10px}
   .eyebrow{font-family:"Noto Serif SC",serif;font-size:12.5px;letter-spacing:3px;color:var(--tp);font-weight:700;margin-bottom:14px}
-  .hero h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(28px,4.6vw,42px);line-height:1.14;letter-spacing:-.4px}
+  .hero h1{font-family:"Noto Serif SC",serif;font-weight:800;font-size:clamp(21px,3.2vw,29px);line-height:1.18;letter-spacing:-.3px}
   .hero h1 .en{font-family:"Fraunces",serif;font-weight:600}
   .hero .subttl{font-family:"Noto Serif SC",serif;font-size:15px;color:var(--ink-3);margin-top:10px}
   body.lang-en .hero .subttl{font-family:"Fraunces",serif;font-style:italic}
@@ -287,6 +288,40 @@
     .botbar .bb span{font-size:10.5px;font-weight:700}
     .botbar .bb.on{color:var(--tp)}
   }
+
+    /* --- top-bar user area (site-wide standard) --- */
+    .user-area{display:flex;align-items:center;gap:8px;margin-right:4px}
+    .user-login-btn{background:none;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+    .user-login-btn:hover{background:var(--gold);color:#fff}
+    .user-signed{display:inline-flex;align-items:center;gap:8px}
+    .user-email{font-size:12px;color:var(--ink);opacity:.72;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .user-signout{background:none;border:1px solid var(--line);color:var(--ink);opacity:.7;border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+    .user-signout:hover{opacity:1;border-color:var(--gold);color:var(--gold)}
+    @media(max-width:820px){ .user-email{max-width:96px} }
+
+    .hub-search{margin:2px 0 16px}
+    .hub-search .search{max-width:none;flex:none;width:100%;display:block}
+    .hub-search .search input{font-size:15px;padding:12px 14px 12px 40px}
+    .hub-search .s-ico{width:18px;height:18px}
+    .entry-tiles{grid-template-columns:repeat(3,1fr)}
+    .entry-mini{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:16px;font-size:13.5px}
+    .mini-link{cursor:pointer;color:var(--gold);font-weight:600;padding:4px 8px;border-radius:8px}
+    .mini-link:hover{background:var(--meridian-bg)}
+    .mini-sep{color:var(--line-2)}
+    .grp-tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 10px;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
+    .grp-tile:hover{border-color:var(--gold);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+    .grp-h{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:3px}
+    .grp-n{font-size:12.5px;color:var(--ink-2);opacity:.8}
+    .why-banner{background:var(--meridian-bg);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:12px 16px;font-size:13.5px;line-height:1.65;color:var(--ink);margin:2px 0 6px}
+    .int-jump{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:600;color:var(--clinical);text-decoration:none;border:1px solid var(--clinical-bg);background:var(--clinical-bg);border-radius:999px;padding:4px 12px}
+    .int-jump:hover{background:var(--clinical);color:#fff}
+    @media(max-width:820px){ .entry-tiles{grid-template-columns:1fr} }
+
+    @media(max-width:640px){
+      .site-back .site-back-label{display:none}
+      .brand .sub{font-size:13.5px;letter-spacing:0}
+      .user-email{max-width:70px}
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -294,23 +329,16 @@
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="brand" onclick="goTop('home')">
-      <span class="mark">SinoMed</span>
-      <span class="sub"><span class="zh">阿是穴临床速查</span><span class="en">Ashi Point Reference</span></span>
-    </div>
     <a class="site-back" href="/" title="Back to SinoMed">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <span class="site-back-label"><span class="zh">SinoMed 首页</span><span class="en">SinoMed Home</span></span>
     </a>
-    <div class="search">
-      <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
-      <input id="searchInput" type="text" autocomplete="off" oninput="doSearch(this.value)" onfocus="doSearch(this.value)">
-      <div class="search-results" id="searchResults"></div>
+    <div class="brand" onclick="goTop('home')">
+      <span class="sub"><span class="zh">阿是穴临床速查</span><span class="en">Ashi Point Reference</span></span>
     </div>
     <div class="spacer"></div>
-    <span class="nav-link desk" data-top="lookup-home" onclick="goTop('lookup-home')"><span class="zh">症状反查</span><span class="en">Reverse lookup</span></span>
-    <span class="nav-link desk" data-top="kb" onclick="goTop('kb')"><span class="zh">知识库</span><span class="en">Library</span></span>
-    <span class="nav-link desk" data-top="cards" onclick="goTop('cards')"><span class="zh">学习卡片</span><span class="en">Flashcards</span></span>
+    <span class="user-area" id="userArea">
+      <button class="user-login-btn" id="userLoginBtn" onclick="goLogin()" style="display:none"><span class="zh">登录</span><span class="en">Log in</span></button><span class="user-signed" id="userSigned" style="display:none"><span class="user-email" id="userEmail" title=""></span><button class="user-signout" id="userSignout" onclick="ashiSignOut()"><span class="zh">退出</span><span class="en">Logout</span></button></span></span>
     <button class="lang-btn" id="langBtn">EN</button>
   </div>
 </div>
@@ -319,7 +347,6 @@
 <div class="page active" id="page-home">
   <div class="wrap">
     <div class="hero">
-      <div class="eyebrow"><span class="zh">SinoMed 临床速查</span><span class="en">SinoMed Clinical Quick Reference</span></div>
       <h1><span class="zh">阿是穴临床速查</span><span class="en">Ashi Point<br>Clinical Quick Reference</span></h1>
       <div class="subttl"><span class="zh">从症状出发，反向锁定靶肌肉。</span><span class="en">Start from the symptom, reverse-lock the target muscle.</span></div>
       <div class="intro-body">
@@ -398,6 +425,38 @@
 
     </div><!-- /frameworkBody -->
 
+    <div class="sec-head"><h2><span class="zh">临床速查入口</span><span class="en">Quick lookup</span></h2><span class="hint"><span class="zh">四种方式定位患肌，各走各的角度</span><span class="en">four ways in — each a different angle to the culprit muscle</span></span></div>
+    <div class="hub-search"><div class="search">
+      <svg class="s-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
+      <input id="searchInput" type="text" autocomplete="off" oninput="doSearch(this.value)" onfocus="doSearch(this.value)">
+      <div class="search-results" id="searchResults"></div>
+    </div></div>
+    <div class="tiles entry-tiles">
+      <div class="tile" onclick="goTop('lookup-home')">
+        <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 6 4 10c0 5 8 12 8 12s8-7 8-12c0-4-3-8-8-8z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <h3><span class="zh">A · 牵涉痛区反查</span><span class="en">A · By referral zone</span></h3>
+        <p><span class="zh">痛/牵涉在哪个区，反推可能的责任肌。</span><span class="en block">From where it hurts or refers, back to the culprit muscles.</span></p>
+        <div class="go"><span class="zh">选部位 →</span><span class="en">Pick a zone →</span></div>
+      </div>
+      <div class="tile" onclick="goTop('lookup-action')">
+        <div class="ti"><svg viewBox="0 0 24 24"><path d="M6 20V10M6 10l4-4 3 3 5-5"/><path d="M14 4h4v4"/></svg></div>
+        <h3><span class="zh">B · 动作 / 功能反查</span><span class="en">B · By restricted movement</span></h3>
+        <p><span class="zh">从做不了的动作(抬臂/转头/握力…)反推相关肌群。</span><span class="en block">From a movement you can’t do back to the muscle group.</span></p>
+        <div class="go"><span class="zh">选动作 →</span><span class="en">Pick a movement →</span></div>
+      </div>
+      <div class="tile" onclick="goTop('lookup-clue')">
+        <div class="ti"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/><path d="M11 8v6M8 11h6"/></svg></div>
+        <h3><span class="zh">C · 症状特征鉴别</span><span class="en">C · By symptom quality</span></h3>
+        <p><span class="zh">从痛的性质(放射/仿内脏/夜痛/头晕…)横切鉴别。</span><span class="en block">From the quality of the symptom across all muscles — the differential.</span></p>
+        <div class="go"><span class="zh">选特征 →</span><span class="en">Pick a clue →</span></div>
+      </div>
+    </div>
+    <div class="entry-mini">
+      <span class="mini-link" onclick="goTop('kb')"><span class="zh">📚 肌肉知识库</span><span class="en">📚 Muscle library</span></span>
+      <span class="mini-sep">·</span>
+      <span class="mini-link" onclick="goTop('cards')"><span class="zh">🎴 学习卡片</span><span class="en">🎴 Flashcards</span></span>
+    </div>
+
     <div class="sec-head"><h2><span class="zh">临床推理链</span><span class="en">Clinical reasoning chain</span></h2></div>
     <p class="lede"><span class="zh">从"哪儿痛"出发，顺着牵涉痛模式反查嫌疑肌，一步步锁定患肌，再借穴精确定位、触诊确认、安全进针。肌肉知识库只是它的底层。</span><span class="en block">From "where it hurts," trace the referral pattern back to the suspect muscles, narrow to the target, then localize precisely by acupoint, confirm by palpation, and needle safely. The muscle library is only its foundation.</span></p>
     <div class="flow">
@@ -411,35 +470,31 @@
       </div>
     </div>
 
-    <div class="sec-head"><h2><span class="zh">痛在哪里？</span><span class="en">Where does it hurt?</span></h2><span class="hint"><span class="zh">点一个部位，反查会牵涉到这里的肌肉</span><span class="en">tap a region to find muscles that refer there</span></span></div>
-    <div class="lookup-box" id="regionBox"></div>
-
-    <div class="sec-head"><h2><span class="zh">三种用法</span><span class="en">Three ways in</span></h2></div>
-    <div class="tiles">
-      <div class="tile t1" onclick="goTop('lookup-home')">
-        <div class="ti"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg></div>
-        <h3><span class="zh">症状反查</span><span class="en">Reverse lookup</span></h3>
-        <p><span class="zh">痛在哪，反推可能牵涉的患肌。</span><span class="en block">From pain location back to the culprit muscles.</span></p>
-        <div class="go"><span class="zh">从部位开始 →</span><span class="en">Start →</span></div>
-      </div>
-      <div class="tile t2" onclick="goTop('kb')">
-        <div class="ti"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16M9 5v14"/></svg></div>
-        <h3><span class="zh">肌肉知识库</span><span class="en">Muscle library</span></h3>
-        <p><span class="zh">按区段查阅每块肌肉。</span><span class="en block">Browse each muscle by region.</span></p>
-        <div class="go"><span class="zh">浏览肌肉 →</span><span class="en">Browse →</span></div>
-      </div>
-      <div class="tile t3" onclick="goTop('cards')">
-        <div class="ti"><svg viewBox="0 0 24 24"><path d="M3 7l7-3 11 4-7 3z"/><path d="M3 7v9l7 3M21 8v9l-7 3-4-1.7"/></svg></div>
-        <h3><span class="zh">学习卡片</span><span class="en">Flashcards</span></h3>
-        <p><span class="zh">练"牵涉→肌肉"的反射。</span><span class="en block">Drill the "referral → muscle" reflex.</span></p>
-        <div class="go"><span class="zh">开始练习 →</span><span class="en">Practice →</span></div>
-      </div>
     </div>
-  </div>
   <footer><div class="foot"><span class="zh">© SinoMed 阿是穴临床速查 · 临床整理，参考现代激痛点研究</span><span class="en block">© SinoMed Ashi Point Clinical Quick Reference · a clinical compilation</span></div></footer>
 </div>
 
 <!-- LOOKUP HOME -->
+<!-- LOOKUP: ACTION (Entry B) -->
+<div class="page" id="page-lookup-action">
+  <div class="wrap">
+    <div class="back" onclick="back()"><span class="zh">← 返回</span><span class="en">← Back</span></div>
+    <div class="page-title"><span class="zh">动作 / 功能受限反查</span><span class="en">By restricted movement</span></div>
+    <div class="page-sub"><span class="zh">从做不了的动作，反推相关患肌群（组内按高发→低发排）</span><span class="en">from a movement you can’t do back to the muscle group (ordered most→least common)</span></div>
+    <div class="lookup-box" id="actionGrid"></div>
+  </div>
+</div>
+
+<!-- LOOKUP: CLUE (Entry C) -->
+<div class="page" id="page-lookup-clue">
+  <div class="wrap">
+    <div class="back" onclick="back()"><span class="zh">← 返回</span><span class="en">← Back</span></div>
+    <div class="page-title"><span class="zh">症状特征鉴别</span><span class="en">By symptom quality</span></div>
+    <div class="page-sub"><span class="zh">从痛的性质横切所有肌肉，给鉴别要点，专治误诊</span><span class="en">cut across all muscles by symptom quality — the differential that prevents misdiagnosis</span></div>
+    <div class="lookup-box" id="clueGrid"></div>
+  </div>
+</div>
+
 <div class="page" id="page-lookup-home">
   <div class="wrap">
     <div class="back" onclick="back()"><span class="zh">← 返回</span><span class="en">← Back</span></div>
@@ -832,7 +887,7 @@ const ASHI_DATA=[
       "ear",
       "jaw"
     ],
-    "pr": 2
+    "pr": 1
   },
   {
     "id": "scalenes",
@@ -5972,6 +6027,7 @@ function shortRefEn(m){return m.referral.en.split('. ')[0]+'.';}
 function suspectRegions(){ if(flowCtx.condition) return flowCtx.condition.regions; if(flowCtx.region) return [flowCtx.region]; return []; }
 function currentSuspects(){
   let arr;
+  if(flowCtx.listMode){ return flowCtx.listMode.map(byId).filter(Boolean); }
   if(flowCtx.diagnosis){ arr=flowCtx.diagnosis.ids.map(byId).filter(Boolean); }
   else { const set=new Set(suspectRegions()); arr=ASHI_DATA.filter(m=>(m.refers_to||[]).some(c=>set.has(c))); }
   return arr.sort((a,b)=>(a.pr||1)-(b.pr||1));
@@ -6018,11 +6074,42 @@ function openTechTag(key){
 function suspectCount(){ return currentSuspects().length; }
 function flowNodeZh(){ return flowCtx.diagnosis? flowCtx.diagnosis.zh : flowCtx.condition? flowCtx.condition.zh : regionZh(flowCtx.region); }
 function flowNodeEn(){ return flowCtx.diagnosis? flowCtx.diagnosis.en : flowCtx.condition? flowCtx.condition.en : regionEn(flowCtx.region); }
+
+/* ===== Entry B (action) / C (clue) reverse-lookup + internal linkify ===== */
+const ASHI_ACTION=[{"id": "b_arm_raise", "zh": "抬臂 / 上举困难", "en": "Difficulty raising the arm", "why_zh": "外展的启动靠冈上肌(0–30°)，续力靠三角肌；全程须冈下肌/肩胛下肌稳定肱骨头防上移，肩胛上回旋靠前锯肌+上斜方肌配合。任一环失能都表现为“抬不起来”。", "why_en": "Abduction is initiated by supraspinatus (0–30°) and carried by deltoid; throughout, infraspinatus/subscapularis must stabilise the humeral head, while scapular upward rotation needs serratus anterior + upper trapezius. Failure of any link presents as “can’t lift”.", "muscles": ["upper_trapezius", "infraspinatus", "supraspinatus", "deltoid", "subscapularis", "serratus_anterior", "teres_minor"]}, {"id": "b_turn_head", "zh": "转头 / 颈旋转受限", "en": "Restricted head turning", "why_zh": "颈旋转是多肌协同：上斜方/肩胛提肌驱动、头夹肌同侧旋转、SCM对侧旋转，枕下肌群做寰枢精细旋转。紧张带受限方向不同，据此定位。", "why_en": "Head rotation is multi-muscle: upper trap/levator drive it, splenius rotates ipsilaterally, SCM contralaterally, suboccipitals fine-tune atlanto-axial rotation. The direction of restriction localises the culprit.", "muscles": ["upper_trapezius", "scm", "levator_scapulae", "splenius", "suboccipitals", "semispinalis_capitis"]}, {"id": "b_open_mouth", "zh": "张口 / 咀嚼受限 (TMJ)", "en": "Restricted mouth opening / chewing", "why_zh": "闭口力来自咬肌/颞肌/翼内肌，张口与关节盘位移由翼外肌直接牵拉；二腹肌协助下拉下颌。开口偏斜、弹响、卡顿各指向不同肌。", "why_en": "Closing force comes from masseter/temporalis/medial pterygoid; opening and disc translation are driven directly by lateral pterygoid, assisted by digastric. Deviation, clicking and catching each point to a different muscle.", "muscles": ["temporalis", "masseter", "lateral_pterygoid", "medial_pterygoid", "digastric"]}, {"id": "b_elbow", "zh": "屈肘 / 伸肘无力", "en": "Weak elbow flexion / extension", "why_zh": "屈肘由肱二头肌(旋后位最强)与肱桡肌(中立位最强)分担，伸肘靠肱三头肌。无力方向(屈/伸)与前臂姿势决定责任肌。", "why_en": "Elbow flexion is shared by biceps (strongest supinated) and brachioradialis (strongest neutral); extension by triceps. The direction of weakness and forearm posture identify the culprit.", "muscles": ["brachioradialis", "biceps_brachii", "triceps_brachii"]}, {"id": "b_grip", "zh": "握力下降 / 抓握痛", "en": "Reduced grip / painful gripping", "why_zh": "有力抓握需腕伸肌群先固定腕于伸位，指屈肌才能高效发力；伸肌过劳(网球肘样)或屈肌/手内在肌激痛点都致握力下降与抓握痛。", "why_en": "Powerful grip requires wrist extensors to first fix the wrist in extension so finger flexors can work; overload of the extensors (tennis-elbow-like) or trigger points in flexors/intrinsics both reduce grip and cause painful gripping.", "muscles": ["extensor_carpi_radialis", "flexor_carpi", "apl_epb", "extensor_digitorum", "flexor_digitorum", "hand_intrinsics"]}, {"id": "b_forearm_rot", "zh": "前臂旋转受限", "en": "Restricted forearm rotation", "why_zh": "旋前靠旋前圆肌、旋后靠旋后肌+肱二头肌，肱桡肌把前臂带回中立。旋转受限方向指向对应肌。", "why_en": "Pronation by pronator teres, supination by supinator + biceps, with brachioradialis returning the forearm to neutral. The restricted direction points to the muscle.", "muscles": ["brachioradialis", "supinator", "pronator_teres"]}, {"id": "b_bend_back", "zh": "弯腰 / 直腰受限", "en": "Restricted trunk bending", "why_zh": "竖脊肌/多裂肌离心控制前屈、向心伸腰，腰方肌固定第12肋与骨盆，髂腰肌牵拉腰椎前凸。起身痛、直不起腰各有其源。", "why_en": "Erector spinae/multifidi eccentrically control flexion and extend the spine; quadratus lumborum anchors the 12th rib and pelvis; iliopsoas tethers the lumbar lordosis. Pain on rising vs inability to straighten each has its own source.", "muscles": ["quadratus_lumborum", "erector_spinae", "iliopsoas", "multifidi"]}, {"id": "b_single_leg", "zh": "单腿站不稳 / 骨盆下垂", "en": "Unstable single-leg stance / pelvic drop", "why_zh": "单腿站立靠臀中/臀小肌外展稳定骨盆(防对侧下垂)，腰方肌上提同侧髋，阔筋膜张肌辅助。Trendelenburg征即此机制失能。", "why_en": "Single-leg stance depends on gluteus medius/minimus abducting to stabilise the pelvis (preventing contralateral drop), quadratus lumborum hiking the ipsilateral hip, TFL assisting. A Trendelenburg sign is failure of this mechanism.", "muscles": ["gluteus_medius", "quadratus_lumborum", "gluteus_minimus", "tensor_fasciae_latae"]}, {"id": "b_stand_up", "zh": "起立 / 上楼费力 (伸髋弱)", "en": "Difficulty rising / climbing stairs", "why_zh": "起立/上楼是伸髋动作：臀大肌为主力，腘绳肌协同伸髋，髂腰肌离心控制并在坐起时启动屈髋。伸髋无力即费力。", "why_en": "Rising/stair-climbing is hip extension: gluteus maximus is prime mover, hamstrings assist extension, iliopsoas controls eccentrically and initiates hip flexion when sitting up. Weak extension = difficulty.", "muscles": ["iliopsoas", "hamstrings", "gluteus_maximus"]}, {"id": "b_knee", "zh": "屈 / 伸膝受限", "en": "Restricted knee flexion / extension", "why_zh": "伸膝靠股四头(股直肌跨髋、VMO末端锁膝)，屈膝靠腘绳肌，腘肌在屈膝启动时“解锁”膝关节。卡在某角度或打软各指向不同肌。", "why_en": "Knee extension by quadriceps (rectus femoris crosses the hip, VMO locks terminal extension), flexion by hamstrings, with popliteus “unlocking” the knee at flexion onset. Catching at an angle or giving-way each points to a different muscle.", "muscles": ["rectus_femoris", "vastus_medialis", "hamstrings", "vastus_lateralis", "popliteus"]}, {"id": "b_dorsiflex", "zh": "抬足 / 足下垂 (背伸弱)", "en": "Foot drop / weak dorsiflexion", "why_zh": "背伸抬足由胫骨前肌主导，趾长伸肌与腓骨肌协同并控制内外翻。足下垂/绊脚是这组失能的典型表现。", "why_en": "Dorsiflexion is led by tibialis anterior, with extensor digitorum longus and peroneals assisting and controlling inversion/eversion. Foot-drop/tripping is the classic failure of this group.", "muscles": ["tibialis_anterior", "peroneus", "extensor_digitorum_longus"]}, {"id": "b_plantarflex", "zh": "踮脚 / 蹬地无力 (跖屈)", "en": "Weak push-off / plantarflexion", "why_zh": "蹬地跖屈以小腿三头肌为主力，胫骨后肌与趾长屈肌协同并维持内侧支撑。踮脚无力、蹬地痛源于此。", "why_en": "Push-off plantarflexion is led by triceps surae, with tibialis posterior and flexor digitorum longus assisting and supporting the medial arch. Weak heel-raise and painful push-off arise here.", "muscles": ["triceps_surae", "tibialis_posterior", "flexor_digitorum_longus"]}, {"id": "b_arch", "zh": "足弓塌陷 / 久站足痛", "en": "Arch collapse / prolonged-standing foot pain", "why_zh": "内侧纵弓的动态维持靠胫骨后肌(主动“吊索”)、足底固有肌与拇展肌。弓塌陷、久站足底酸痛是这组疲劳/失能。", "why_en": "The medial longitudinal arch is dynamically maintained by tibialis posterior (the active “sling”), plantar intrinsics and abductor hallucis. Arch collapse and aching after prolonged standing reflect fatigue/failure of this group.", "muscles": ["tibialis_posterior", "plantar_intrinsics", "abductor_hallucis"]}, {"id": "b_breath", "zh": "深吸气痛 / 呼吸费力", "en": "Painful deep breath / laboured breathing", "why_zh": "辅助吸气靠斜角肌/上后锯肌上提上位肋、胸小肌牵拉，下后锯肌稳定下位肋。深吸气诱发或加重痛，提示呼吸肌源而非胸腔内病(仍须先排除)。", "why_en": "Accessory inspiration uses scalenes/serratus posterior superior to elevate upper ribs and pectoralis minor to pull; serratus posterior inferior stabilises lower ribs. Pain provoked by deep inspiration suggests a respiratory-muscle source rather than intrathoracic disease (which must still be excluded first).", "muscles": ["pectoralis_minor", "scalenes", "serratus_posterior_superior", "serratus_posterior_inferior"]}, {"id": "b_scap", "zh": "肩胛失稳 / 翼状肩", "en": "Scapular instability / winging", "why_zh": "肩胛紧贴胸壁、上举时上回旋，靠前锯肌+菱形肌+胸小肌的力偶。前锯肌失能即翼状肩，直接限制上举。", "why_en": "Keeping the scapula against the chest wall and upwardly rotating it during elevation depends on the serratus anterior + rhomboids + pectoralis minor force-couple. Serratus failure causes winging and directly limits elevation.", "muscles": ["rhomboids", "pectoralis_minor", "serratus_anterior"]}];
+const ASHI_CLUE=[{"id": "c_radiate", "zh": "放射麻木样 · 似神经根 / 坐骨神经", "en": "Radiating / numb, mimics radiculopathy or sciatica", "why_zh": "激痛点牵涉可沿肢体呈带状放射、伴麻木感，酷似神经根或坐骨神经痛。鉴别铁点：无真正皮节/肌节缺失与反射改变，深压紧张带能复现整条牵涉痛。", "why_en": "Trigger-point referral can radiate in a band down the limb with numbness, closely mimicking radiculopathy or sciatica. Key differentiator: no true dermatomal/myotomal deficit or reflex change, and deep pressure on the taut band reproduces the whole referral.", "muscles": ["gluteus_minimus", "infraspinatus", "scalenes", "piriformis"]}, {"id": "c_visceral", "zh": "仿内脏 · 深部钝痛 (须先排内科)", "en": "Visceral-mimic deep ache (rule out internal disease first)", "why_zh": "腹壁/胸壁激痛点能仿造内脏症状(心绞痛样、消化不适、盆腔痛)。★铁律：必须先由内科/相关专科排除真正脏器病，二者可并存，躯体源不可替代脏器评估。★点肌名可跳内科对应病做排查。", "why_en": "Abdominal/chest-wall trigger points can mimic visceral symptoms (angina-like, GI, pelvic). ★Iron rule: a genuine organ disease must first be excluded by internal medicine/relevant specialty; the two can coexist and the somatic source never replaces organ evaluation.★ Tap a muscle to jump to the matching internal-medicine page to work it up.", "muscles": ["iliopsoas", "pectoralis_major", "serratus_anterior", "rectus_abdominis", "adductors", "obliques"]}, {"id": "c_headface", "zh": "头面 / 眼耳牵涉痛", "en": "Head-face / eye-ear referred pain", "why_zh": "头面/眼耳区牵涉痛常非头内病，而来自颈肩咀嚼肌：上斜方“问号形”、SCM投射至眼额耳、颞肌/咬肌投射至颞颌与牙。据牵涉分布与咬合/转头诱发鉴别偏头痛、TMJ、枕神经痛。", "why_en": "Head-face/eye-ear referral is often not intracranial but from neck-shoulder-masticatory muscles: upper trap’s “question-mark”, SCM projecting to eye/forehead/ear, temporalis/masseter to the TMJ and teeth. The referral pattern and provocation by clenching/head-turning distinguish migraine, TMJ and occipital neuralgia.", "muscles": ["upper_trapezius", "scm", "splenius", "temporalis", "masseter"]}, {"id": "c_dizzy", "zh": "头晕 / 平衡 / 视物模糊 (非旋转)", "en": "Dizziness / imbalance / blurred vision (non-vertiginous)", "why_zh": "非旋转性头晕、平衡与视物不稳可源于富含本体感受器的SCM与枕下肌群(参与头眼协调)。与前庭性眩晕鉴别：无真性旋转与眼震，随颈姿改变、伴颈痛。", "why_en": "Non-vertiginous dizziness, imbalance and visual unsteadiness can arise from the proprioceptor-rich SCM and suboccipitals (which serve head-eye coordination). Distinguish from vestibular vertigo: no true spinning or nystagmus, varies with neck posture, accompanied by neck pain.", "muscles": ["scm", "suboccipitals"]}, {"id": "c_night", "zh": "夜间痛 / 侧卧压醒", "en": "Night pain / woken by side-lying pressure", "why_zh": "夜间痛、侧卧被压醒多见于承重/受压的深层稳定肌：臀中/臀小肌(侧卧压髋外侧)、冈上/冈下肌(压肩)。与炎性关节痛的夜痛鉴别：定点深压可复现，改变体位可缓解。", "why_en": "Night pain and being woken by side-lying pressure are common in weight-bearing/compressed deep stabilisers: gluteus medius/minimus (lateral hip when side-lying) and supraspinatus/infraspinatus (shoulder). Distinguish from inflammatory arthralgia: point pressure reproduces it and repositioning relieves it.", "muscles": ["gluteus_medius", "gluteus_minimus", "infraspinatus", "supraspinatus"]}];
+const ASHI_INT_GOTO={"pectoralis_major": "", "rectus_abdominis": "weiwan", "obliques": "weiwan", "adductors": "dysmenorrhea", "serratus_anterior": "", "iliopsoas": "weiwan"};
+
+function intLink(mid){
+  var g=(typeof ASHI_INT_GOTO!=='undefined')?ASHI_INT_GOTO[mid]:'';
+  var href=g?('../internal/index.html?goto='+g):'../internal/index.html';
+  return '<a class="int-jump" href="'+href+'" onclick="event.stopPropagation()"><span class="zh">→ 去内科排查</span><span class="en">→ Work up in Internal Medicine</span></a>';
+}
+function renderActionHome(){
+  var box=document.getElementById('actionGrid'); if(!box) return;
+  box.innerHTML=ASHI_ACTION.map(function(g){
+    var more=g.muscles.length>3?('+'+(g.muscles.length-3)):'';
+    return '<div class="grp-tile" onclick="openGroup(\''+g.id+'\',\'action\')"><div class="grp-h">'+biI(g.zh,g.en)+'</div><div class="grp-n">'+biI(g.muscles.length+' 块相关肌 '+more,g.muscles.length+' muscles '+more)+'</div></div>';
+  }).join('');
+}
+function renderClueHome(){
+  var box=document.getElementById('clueGrid'); if(!box) return;
+  box.innerHTML=ASHI_CLUE.map(function(g){
+    return '<div class="grp-tile" onclick="openGroup(\''+g.id+'\',\'clue\')"><div class="grp-h">'+biI(g.zh,g.en)+'</div><div class="grp-n">'+biI(g.muscles.length+' 块相关肌',g.muscles.length+' muscles')+'</div></div>';
+  }).join('');
+}
+function openGroup(gid,kind){
+  var arr=(kind==='clue')?ASHI_CLUE:ASHI_ACTION;
+  var g=arr.find(function(x){return x.id===gid;}); if(!g) return;
+  flowCtx={region:null,condition:null,diagnosis:null,muscleId:null,listMode:g.muscles.slice(),groupTitle:{zh:g.zh,en:g.en},groupWhy:{zh:g.why_zh,en:g.why_en},showInternal:(gid==='c_visceral')};
+  go('result'); renderSuspectList();
+}
+
 function renderSuspectList(){
-  const titleZh=flowCtx.diagnosis? ('疑似「'+flowCtx.diagnosis.zh+'」· 可能的肌源') : flowCtx.condition? flowCtx.condition.zh : ('痛在：'+regionZh(flowCtx.region));
-  const titleEn=flowCtx.diagnosis? ('Mimics "'+flowCtx.diagnosis.en+'" · muscular sources') : flowCtx.condition? flowCtx.condition.en : ('Pain at: '+regionEn(flowCtx.region));
+  const titleZh=flowCtx.listMode? flowCtx.groupTitle.zh : flowCtx.diagnosis? ('疑似「'+flowCtx.diagnosis.zh+'」· 可能的肌源') : flowCtx.condition? flowCtx.condition.zh : ('痛在：'+regionZh(flowCtx.region));
+  const titleEn=flowCtx.listMode? flowCtx.groupTitle.en : flowCtx.diagnosis? ('Mimics "'+flowCtx.diagnosis.en+'" · muscular sources') : flowCtx.condition? flowCtx.condition.en : ('Pain at: '+regionEn(flowCtx.region));
   document.getElementById('resultTitle').innerHTML=biI(titleZh,titleEn);
-  document.getElementById('mm-result').innerHTML=renderMindmap('suspects');
+  document.getElementById('mm-result').innerHTML=flowCtx.listMode? ('<div class="why-banner">'+bi(flowCtx.groupWhy.zh,flowCtx.groupWhy.en)+'</div>') : renderMindmap('suspects');
   const matches=currentSuspects();
   const box=document.getElementById('suspectList');
   if(matches.length===0){
@@ -6033,7 +6120,7 @@ function renderSuspectList(){
       return `<div class="suspect" onclick="openMuscle('${m.id}')">
         <div class="s-top"><span class="rank">${biI('嫌疑肌 '+(i+1),'Suspect '+(i+1))}</span><span class="s-name">${biI(m.name_zh,m.name_en)}</span>${lockBadge(m.id)}</div>
         <div class="s-why">${bi(shortRef(m),shortRefEn(m))}</div>
-        <div class="s-pts">${pts}</div></div>`;
+        <div class="s-pts">${pts}</div>${(flowCtx.showInternal&&m.internal)?intLink(m.id):''}</div>`;
     }).join('');
   }
 }
@@ -6119,7 +6206,7 @@ function setSiteLanguage(lang){ try{ localStorage.setItem(SINOMED_LANG_KEY, lang
 const SUPABASE_URL  = 'https://ucocgcbxdqjbbklnkyxt.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo';
 const ASHI_MODULE_ID = 'ashi';
-const ASHI_PRICE_ID = 'price_1TpLuXLpHoyExvp7xvsg4hvy'; // $129 CAD, module 'ashi' (Stripe, 1459986 B.C. LTD. account)
+const ASHI_PRICE_ID = 'price_1TpLuXLpHoyExvp7xvsg4hvy'; // $129 CAD, module 'ashi' (finalized pricing)
 let sb = null;
 try{ sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON); }catch(e){ console.warn('[ashi] supabase client failed to init', e); }
 
@@ -6133,14 +6220,14 @@ function lockBadge(id){ return isUnlocked(id) ? '' : '<span class="lockicon" tit
 
 async function getSinomedSession(){
   // Real check: mirrors openFSNModal()'s pattern in sinomed_HOME_index.html.
-  if(!sb) return { loggedIn:false, purchasedAshi:false };
+  if(!sb) return { loggedIn:false, purchasedAshi:false, email:'' };
   try{
     const { data } = await sb.auth.getSession();
-    if(!data || !data.session) return { loggedIn:false, purchasedAshi:false };
+    if(!data || !data.session) return { loggedIn:false, purchasedAshi:false, email:'' };
     const user = data.session.user;
-    const { data: purchase } = await sb.from('purchases').select('id').eq('user_id', user.id).eq('module_id', ASHI_MODULE_ID).maybeSingle();
-    return { loggedIn:true, purchasedAshi: !!purchase };
-  }catch(e){ console.warn('[ashi] session check failed, defaulting to logged-out/locked', e); return { loggedIn:false, purchasedAshi:false }; }
+    const { data: purchase } = await sb.from('purchases').select('module_id').eq('user_id', user.id).in('module_id', [ASHI_MODULE_ID,'allaccess']);
+    return { loggedIn:true, purchasedAshi: !!(purchase && purchase.length), email: user.email || '' };
+  }catch(e){ console.warn('[ashi] session check failed, defaulting to logged-out/locked', e); return { loggedIn:false, purchasedAshi:false, email:'' }; }
 }
 function cacheAccessLocally(hasAccess){ try{ localStorage.setItem('ashi_access_cache', hasAccess?'1':'0'); }catch(e){} }
 function readCachedAccess(){ try{ return localStorage.getItem('ashi_access_cache')==='1'; }catch(e){ return false; } }
@@ -6153,7 +6240,28 @@ async function initSession(){
   const s = await getSinomedSession();
   ASHI_LOGGED_IN = s.loggedIn; ASHI_HAS_ACCESS = s.purchasedAshi;
   cacheAccessLocally(ASHI_HAS_ACCESS);
+  updateUserBar(s);
   renderKB(); buildDeck();
+}
+
+// Site-wide top-bar user area (mirrors pain-module Final updateUserBar): email+logout when in, login when out.
+function updateUserBar(s){
+  var login=document.getElementById('userLoginBtn');
+  var signed=document.getElementById('userSigned');
+  var emailEl=document.getElementById('userEmail');
+  if(!login||!signed) return;
+  if(s && s.loggedIn){
+    if(emailEl){ emailEl.textContent = s.email || ''; emailEl.title = s.email || ''; }
+    login.style.display='none'; signed.style.display='';
+  }else{
+    login.style.display=''; signed.style.display='none';
+  }
+}
+async function ashiSignOut(){
+  try{ if(sb) await sb.auth.signOut(); }catch(e){}
+  ASHI_LOGGED_IN=false; ASHI_HAS_ACCESS=false; cacheAccessLocally(false);
+  updateUserBar({loggedIn:false,email:''}); renderKB(); buildDeck();
+  try{ hidePaywall(); }catch(e){}
 }
 
 function showPaywall(id){
@@ -6171,7 +6279,7 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape') hidePaywall(); })
 async function goUnlock(){
   // Real checkout call, mirrors purchaseFSN() in sinomed_HOME_index.html — same Edge Function.
   if(!sb) { alert('Checkout unavailable — Supabase client failed to load.'); return; }
-  if(!ASHI_PRICE_ID){ alert('Checkout not yet configured — Di needs to create the $129 CAD Stripe price for "ashi" and set ASHI_PRICE_ID.'); return; }
+  if(!ASHI_PRICE_ID){ alert('Checkout not yet configured — set ASHI_PRICE_ID.'); return; }
   const { data } = await sb.auth.getSession();
   if(!data || !data.session){ goLogin(); return; }
   const user = data.session.user;
@@ -6205,7 +6313,7 @@ function renderMuscle(id,inFlow){
   const refsList=(m.refers_to||[]).map(regionZh).join('、'), refsListEn=(m.refers_to||[]).map(regionEn).join(', ');
   const panes={
     loc: renderPointLayers(m.id)+fld('起止点','Origin & Insertion',bi(m.origin_insertion.zh,m.origin_insertion.en))+fld('功能','Function',bi(m.function.zh,m.function.en))+`<div class="field"><div class="f-label">${bi('阿是穴分布 & 定位','Ashi points & localization')}</div>${tps}</div>`,
-    ref: fld('牵涉痛','Referred pain',bi(m.referral.zh,m.referral.en),'referral')+`<div class="xref">${bi('反查部位：<b>'+refsList+'</b>','Refers to: <b>'+refsListEn+'</b>')}</div>`+fld('引起症状','Symptoms',bi(m.symptoms.zh,m.symptoms.en))+fld('常见误诊','Common misdiagnoses',bi(m.misdiagnosis.zh,m.misdiagnosis.en))+(m.internal?fld('内科关联','Internal-medicine link',bi(m.internal.zh,m.internal.en),'internal'):''),
+    ref: fld('牵涉痛','Referred pain',bi(m.referral.zh,m.referral.en),'referral')+`<div class="xref">${bi('反查部位：<b>'+refsList+'</b>','Refers to: <b>'+refsListEn+'</b>')}</div>`+fld('引起症状','Symptoms',bi(m.symptoms.zh,m.symptoms.en))+fld('常见误诊','Common misdiagnoses',bi(m.misdiagnosis.zh,m.misdiagnosis.en))+(m.internal?fld('内科关联','Internal-medicine link',bi(m.internal.zh,m.internal.en)+intLink(m.id),'internal'):''),
     palp: fld('触诊要点','Palpation',bi(m.palpation.zh,m.palpation.en)),
     needle: fld('治疗提示','Treatment notes',treat),
     rehab: fld('功能运动','Corrective exercise',bi(m.exercise.zh,m.exercise.en))
@@ -6349,8 +6457,8 @@ function setSearchPlaceholder(){ const i=document.getElementById('searchInput');
 computeFreeIds();
 buildSearchIndex(); setSearchPlaceholder();
 initFramework();
-renderRegionGrid(document.getElementById('regionBox'));
 renderRegionGrid(document.getElementById('regionBox2'));
+renderActionHome(); renderClueHome();
 renderKB(); buildDeck();
 initSession();
 </script>
