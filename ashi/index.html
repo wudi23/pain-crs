@@ -1,4 +1,4 @@
-<!-- SinoMed 阿是穴临床速查 · build v28 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
+<!-- SinoMed 阿是穴临床速查 · build v33 · 2026-07-11 · +inbound ?goto +point-linkify · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -322,6 +322,8 @@
       .brand .sub{font-size:13.5px;letter-spacing:0}
       .user-email{max-width:70px}
     }
+  .pt-xlink{color:var(--acupoint);border-bottom:1px dashed var(--acupoint);text-decoration:none;font-weight:600;}
+  .pt-xlink:hover{background:var(--acupoint-bg);border-radius:3px;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -6168,7 +6170,13 @@ const badgeIcon={
 };
 const tierMeta={acupoint:{zh:'经穴锚定',en:'Acupoint-anchored'},meridian:{zh:'经络循行',en:'Meridian pathway'},clinical:{zh:'经验高发点',en:'Experience zone'}};
 const xMark="<svg class='tp-x' viewBox='0 0 22 22'><circle cx='11' cy='11' r='9' fill='none' stroke='#C43D3D' stroke-width='1.4'/><path d='M7 7l8 8M15 7l-8 8' stroke='#C43D3D' stroke-width='2.4' stroke-linecap='round'/></svg>";
-function tpBlock(tp){const t=tierMeta[tp.loc.type];return `<div class="tp-item"><div class="tp-top">${xMark}<span class="tp-name">${bi(tp.label_zh,tp.label_en)}</span></div><div class="tp-desc">${bi(tp.desc_zh,tp.desc_en)}</div><div class="tp-loc"><span class="badge ${tp.loc.type}">${badgeIcon[tp.loc.type]}${biI(t.zh,t.en)}</span><span class="pt">${bi(tp.loc.point_zh,tp.loc.point_en)}</span><span class="nt">${bi('· '+tp.loc.note_zh,'· '+tp.loc.note_en)}</span></div></div>`;}
+function linkifyPoints(html){
+  // wrap acupoint codes (e.g. GB21, BL57, LI10, CV12, GV14, LR3) with a link to the points module.
+  // codes: 2 uppercase letters (meridian) + digits, optionally already spaced. LV historical -> LR handled by points module.
+  return (html||'').replace(/\b(LU|LI|ST|SP|HT|SI|BL|KI|PC|TE|GB|LR|LV|CV|GV|SJ|RN|DU)\s?(\d{1,2})\b/g,
+    function(m,mer,num){ return '<a class="pt-xlink" href="../points/index.html?goto='+mer+num+'" title="经穴详情 / point detail">'+m+'</a>'; });
+}
+function tpBlock(tp){const t=tierMeta[tp.loc.type];return `<div class="tp-item"><div class="tp-top">${xMark}<span class="tp-name">${linkifyPoints(bi(tp.label_zh,tp.label_en))}</span></div><div class="tp-desc">${linkifyPoints(bi(tp.desc_zh,tp.desc_en))}</div><div class="tp-loc"><span class="badge ${tp.loc.type}">${badgeIcon[tp.loc.type]}${biI(t.zh,t.en)}</span><span class="pt">${linkifyPoints(bi(tp.loc.point_zh,tp.loc.point_en))}</span><span class="nt">${bi('· '+tp.loc.note_zh,'· '+tp.loc.note_en)}</span></div></div>`;}
 function fld(lz,le,html,cls){return `<div class="field ${cls||''}"><div class="f-label">${bi(lz,le)}</div><div class="f-text">${html}</div></div>`;}
 const TABS=[{key:'loc',zh:'定位',en:'Localization'},{key:'ref',zh:'牵涉·鉴别',en:'Referral & Differential'},{key:'palp',zh:'触诊',en:'Palpation'},{key:'needle',zh:'针刺·安全',en:'Needling & Safety'},{key:'rehab',zh:'康复',en:'Rehab'}];
 
@@ -6461,6 +6469,18 @@ renderRegionGrid(document.getElementById('regionBox2'));
 renderActionHome(); renderClueHome();
 renderKB(); buildDeck();
 initSession();
+
+/* --- inbound ?goto={muscle_id} : direct-land from other modules (points/internal/pain) --- */
+(function handleAshiInbound(){
+  try{
+    var g = new URLSearchParams(location.search).get('goto');
+    if(!g) return;
+    g = g.trim();
+    // normalize: accept muscle_id directly; strip any code parens/suffix just in case
+    var target = byId(g);
+    if(target){ openMuscleKB(g); }        // routes through paywall if locked; free muscles open directly
+  }catch(e){ /* silent: bad param just lands on home */ }
+})();
 </script>
 
 <div id="paywallModal" class="paywall-overlay" onclick="if(event.target===this)hidePaywall()">
