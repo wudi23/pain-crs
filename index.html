@@ -747,6 +747,14 @@ async function renderPricing(){
   }catch(e){ /* signed out or network issue — show default prices */ }
 
   const hasPass = owned.has('allaccess');
+  const ownsAll = Object.keys(PRICING).every(mid => owned.has(mid));
+
+  // Nothing left to sell — hide the whole pricing section and its topbar entry
+  if(hasPass || ownsAll){
+    const sec = document.getElementById('pricing'); if(sec) sec.style.display = 'none';
+    const lnk = document.querySelector('a[href="#pricing"]'); if(lnk) lnk.style.display = 'none';
+    // still mark module cards as owned below
+  }
 
   // Per-module CTAs
   Object.keys(PRICING).forEach(mid => {
