@@ -9,6 +9,11 @@ body{font-family:"Noto Serif SC","Songti SC",serif;background:var(--paper);color
 header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:10px}
 header .back{font-size:14px;color:var(--accent);text-decoration:none;flex:none}
 header h1{font-size:16px;font-weight:600;flex:1;text-align:center}
+header h1{margin-right:auto}
+.userbar{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold)}
+.userbar .uemail{max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.userbar button{font-size:12px;color:var(--gold);background:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer;font-family:inherit}
+.userbar button:hover{border-color:var(--gold)}
 header .lang{font-size:13px;color:var(--gold);background:none;border:1px solid var(--line);border-radius:6px;padding:3px 10px;cursor:pointer;font-family:inherit}
 main{max-width:860px;margin:0 auto;padding:0 16px 80px}
 .page{display:none}.page.on{display:block}
@@ -136,6 +141,7 @@ main{max-width:860px;margin:0 auto;padding:0 16px 80px}
 <header>
   <a class="back" href="/">← SinoMed</a>
   <h1>内科临床推理系统</h1>
+  <div id="userbar" class="userbar"></div>
   <button class="lang" onclick="toggleLang()" title="English version coming soon">EN soon</button>
 </header>
 <main>
@@ -254,13 +260,30 @@ const SB_URL = "https://ucocgcbxdqjbbklnkyxt.supabase.co";
 const SB_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo";
 const MODULE_ID = "internal";
 const PRICE_ID = "price_1TpWucLpHoyExvp7ZdFT7EMa"; // 内科 $149 CAD
+function updateUserBar(){
+  const bar=document.getElementById('userbar');
+  if(!bar) return;
+  if(SB_USER){
+    const email=SB_USER.email||'已登录';
+    bar.innerHTML=`<span class="uemail" title="${esc(email)}">${esc(email)}</span><button onclick="signOut()">退出</button>`;
+  }else{
+    bar.innerHTML=`<button onclick="location.href='/'">登录</button>`;
+  }
+}
+async function signOut(){
+  try{ if(SB) await SB.auth.signOut(); }catch(e){}
+  SB_USER=null; PURCHASED=false; ALLACCESS=false;
+  updateUserBar();
+  try{ if(typeof renderDiseaseGroups==='function') renderDiseaseGroups(); }catch(e){}
+}
 async function initSupabase(){
   try{
     if(!window.supabase){ console.warn('supabase-js未加载'); return; }
     SB = window.supabase.createClient(SB_URL, SB_ANON);
     const {data:{session}} = await SB.auth.getSession();
     if(session && session.user){ SB_USER=session.user; await checkPurchase(); }
-    SB.auth.onAuthStateChange((_e,s)=>{ SB_USER=s&&s.user?s.user:null; if(SB_USER){ checkPurchase(); } else { PURCHASED=false; ALLACCESS=false; try{ if(typeof renderDiseaseGroups==='function') renderDiseaseGroups(); }catch(e){} } });
+    updateUserBar();
+    SB.auth.onAuthStateChange((_e,s)=>{ SB_USER=s&&s.user?s.user:null; updateUserBar(); if(SB_USER){ checkPurchase(); } else { PURCHASED=false; ALLACCESS=false; try{ if(typeof renderDiseaseGroups==='function') renderDiseaseGroups(); }catch(e){} } });
   }catch(err){ console.warn('supabase init', err); }
 }
 async function checkPurchase(){
@@ -288,7 +311,7 @@ async function doPurchase(){
     else { alert('购买发起失败，请稍后再试或联系我们。'); }
   }catch(err){ console.warn('purchase', err); alert('购买发起失败，请稍后再试。'); }
 }
-initSupabase();
+updateUserBar(); initSupabase();
 
 function isUnlocked(sym){
   // deploy版:免费病直接开;付费病查Supabase购买(本模块internal 或 全站通行证allaccess)
