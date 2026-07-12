@@ -1,4 +1,4 @@
-<!-- SinoMed 阿是穴临床速查 · build v33 · 2026-07-11 · +inbound ?goto +point-linkify · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
+<!-- SinoMed 阿是穴临床速查 · build v28 · 2026-07-04 · 66 muscles / 28 conditions / 9 point-layer cards / real Supabase session+lang inherit / homepage return btn -->
 <!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -322,8 +322,9 @@
       .brand .sub{font-size:13.5px;letter-spacing:0}
       .user-email{max-width:70px}
     }
-  .pt-xlink{color:var(--acupoint);border-bottom:1px dashed var(--acupoint);text-decoration:none;font-weight:600;}
-  .pt-xlink:hover{background:var(--acupoint-bg);border-radius:3px;}
+
+    .pt-jump{color:var(--acupoint);text-decoration:none;border-bottom:1px dashed var(--acupoint);cursor:pointer;font-weight:600}
+    .pt-jump:hover{background:var(--acupoint-bg);border-bottom-style:solid}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1444,8 +1445,8 @@ const ASHI_DATA=[
         "desc_en": "Posterior deltoid; pain over the back of the shoulder.",
         "loc": {
           "type": "acupoint",
-          "point_zh": "肩髎 SJ14 / 臑俞 SI10",
-          "point_en": "SJ14 Jianliao / SI10 Naoshu",
+          "point_zh": "肩髎 TE14 / 臑俞 SI10",
+          "point_en": "TE14 Jianliao / SI10 Naoshu",
           "note_zh": "三焦/小肠经",
           "note_en": "Sanjiao / Small Intestine meridian"
         }
@@ -3306,8 +3307,8 @@ const ASHI_DATA=[
         "desc_en": "Long head near the axilla, medial head near the elbow — refer to the posterior arm and elbow.",
         "loc": {
           "type": "acupoint",
-          "point_zh": "臑会 SJ13 / 清冷渊 SJ11 / 天井 SJ10 区",
-          "point_en": "SJ13 / SJ11 / SJ10 zone",
+          "point_zh": "臑会 TE13 / 清冷渊 TE11 / 天井 TE10 区",
+          "point_en": "TE13 / TE11 / TE10 zone",
           "note_zh": "三焦经",
           "note_en": "Sanjiao meridian"
         }
@@ -3437,8 +3438,8 @@ const ASHI_DATA=[
         "desc_en": "Mid dorsal forearm — referral often localizes to 'certain fingers' as an aching fullness.",
         "loc": {
           "type": "acupoint",
-          "point_zh": "四渎 SJ9 / 支沟 SJ6 区",
-          "point_en": "SJ9 Sidu / SJ6 Zhigou zone",
+          "point_zh": "四渎 TE9 / 支沟 TE6 区",
+          "point_en": "TE9 Sidu / TE6 Zhigou zone",
           "note_zh": "三焦经",
           "note_en": "Sanjiao meridian"
         }
@@ -4804,8 +4805,8 @@ const ASHI_DATA=[
         "desc_en": "Posterior belly (below the mastoid, deep to upper SCM) and anterior belly (submandibular) — posterior mimics SCM pain, anterior refers to the lower incisors.",
         "loc": {
           "type": "acupoint",
-          "point_zh": "翳风 SJ17（后腹）/ 廉泉 CV23（舌骨上）区",
-          "point_en": "SJ17 Yifeng (posterior) / CV23 (suprahyoid) zone",
+          "point_zh": "翳风 TE17（后腹）/ 廉泉 CV23（舌骨上）区",
+          "point_en": "TE17 Yifeng (posterior) / CV23 (suprahyoid) zone",
           "note_zh": "三焦/任脉",
           "note_en": "Sanjiao / Ren"
         }
@@ -4933,8 +4934,8 @@ const ASHI_DATA=[
         "desc_en": "Supraorbital/lateral and brow region — refers around the eye, nasal bridge and upper cheek, worse with eye strain.",
         "loc": {
           "type": "acupoint",
-          "point_zh": "太阳 EX-HN5 / 丝竹空 SJ23 / 攒竹 BL2 区",
-          "point_en": "EX-HN5 Taiyang / SJ23 / BL2 zone",
+          "point_zh": "太阳 EX-HN5 / 丝竹空 TE23 / 攒竹 BL2 区",
+          "point_en": "EX-HN5 Taiyang / TE23 / BL2 zone",
           "note_zh": "经外奇穴/三焦/膀胱经",
           "note_en": "extra / Sanjiao / Bladder"
         }
@@ -5992,8 +5993,14 @@ const TECH_TAGS=[
 
 </script>
 <script>
-function bi(zh,en){return `<span class="zh">${zh}</span><span class="en block">${en}</span>`;}
-function biI(zh,en){return `<span class="zh">${zh}</span><span class="en">${en}</span>`;}
+function ptLink(s){
+  if(typeof s!=='string' || s.indexOf('pt-jump')>=0) return s;
+  return s.replace(/\bEX-(?:HN|UE|LE|B|CA)\d{1,2}\b|\b(?:LU|LI|ST|SP|HT|SI|BL|KI|PC|TE|GB|LR|CV|GV)\d{1,2}\b/g, function(code){
+    return '<a class="pt-jump" href="../points/index.html?goto='+encodeURIComponent(code)+'" onclick="event.stopPropagation()" title="'+code+' \u2192 \u7ecf\u7a74\u5e93">'+code+'</a>';
+  });
+}
+function bi(zh,en){return `<span class="zh">${ptLink(zh)}</span><span class="en block">${ptLink(en)}</span>`;}
+function biI(zh,en){return `<span class="zh">${ptLink(zh)}</span><span class="en">${ptLink(en)}</span>`;}
 const byId=id=>ASHI_DATA.find(m=>m.id===id);
 const regionZh=code=>{for(const g of REGIONS){const it=g.items.find(i=>i.code===code);if(it)return it.zh;}return code;};
 const regionEn=code=>{for(const g of REGIONS){const it=g.items.find(i=>i.code===code);if(it)return it.en;}return code;};
@@ -6170,13 +6177,7 @@ const badgeIcon={
 };
 const tierMeta={acupoint:{zh:'经穴锚定',en:'Acupoint-anchored'},meridian:{zh:'经络循行',en:'Meridian pathway'},clinical:{zh:'经验高发点',en:'Experience zone'}};
 const xMark="<svg class='tp-x' viewBox='0 0 22 22'><circle cx='11' cy='11' r='9' fill='none' stroke='#C43D3D' stroke-width='1.4'/><path d='M7 7l8 8M15 7l-8 8' stroke='#C43D3D' stroke-width='2.4' stroke-linecap='round'/></svg>";
-function linkifyPoints(html){
-  // wrap acupoint codes (e.g. GB21, BL57, LI10, CV12, GV14, LR3) with a link to the points module.
-  // codes: 2 uppercase letters (meridian) + digits, optionally already spaced. LV historical -> LR handled by points module.
-  return (html||'').replace(/\b(LU|LI|ST|SP|HT|SI|BL|KI|PC|TE|GB|LR|LV|CV|GV|SJ|RN|DU)\s?(\d{1,2})\b/g,
-    function(m,mer,num){ return '<a class="pt-xlink" href="../points/index.html?goto='+mer+num+'" title="经穴详情 / point detail">'+m+'</a>'; });
-}
-function tpBlock(tp){const t=tierMeta[tp.loc.type];return `<div class="tp-item"><div class="tp-top">${xMark}<span class="tp-name">${linkifyPoints(bi(tp.label_zh,tp.label_en))}</span></div><div class="tp-desc">${linkifyPoints(bi(tp.desc_zh,tp.desc_en))}</div><div class="tp-loc"><span class="badge ${tp.loc.type}">${badgeIcon[tp.loc.type]}${biI(t.zh,t.en)}</span><span class="pt">${linkifyPoints(bi(tp.loc.point_zh,tp.loc.point_en))}</span><span class="nt">${bi('· '+tp.loc.note_zh,'· '+tp.loc.note_en)}</span></div></div>`;}
+function tpBlock(tp){const t=tierMeta[tp.loc.type];return `<div class="tp-item"><div class="tp-top">${xMark}<span class="tp-name">${bi(tp.label_zh,tp.label_en)}</span></div><div class="tp-desc">${bi(tp.desc_zh,tp.desc_en)}</div><div class="tp-loc"><span class="badge ${tp.loc.type}">${badgeIcon[tp.loc.type]}${biI(t.zh,t.en)}</span><span class="pt">${bi(tp.loc.point_zh,tp.loc.point_en)}</span><span class="nt">${bi('· '+tp.loc.note_zh,'· '+tp.loc.note_en)}</span></div></div>`;}
 function fld(lz,le,html,cls){return `<div class="field ${cls||''}"><div class="f-label">${bi(lz,le)}</div><div class="f-text">${html}</div></div>`;}
 const TABS=[{key:'loc',zh:'定位',en:'Localization'},{key:'ref',zh:'牵涉·鉴别',en:'Referral & Differential'},{key:'palp',zh:'触诊',en:'Palpation'},{key:'needle',zh:'针刺·安全',en:'Needling & Safety'},{key:'rehab',zh:'康复',en:'Rehab'}];
 
@@ -6469,18 +6470,6 @@ renderRegionGrid(document.getElementById('regionBox2'));
 renderActionHome(); renderClueHome();
 renderKB(); buildDeck();
 initSession();
-
-/* --- inbound ?goto={muscle_id} : direct-land from other modules (points/internal/pain) --- */
-(function handleAshiInbound(){
-  try{
-    var g = new URLSearchParams(location.search).get('goto');
-    if(!g) return;
-    g = g.trim();
-    // normalize: accept muscle_id directly; strip any code parens/suffix just in case
-    var target = byId(g);
-    if(target){ openMuscleKB(g); }        // routes through paywall if locked; free muscles open directly
-  }catch(e){ /* silent: bad param just lands on home */ }
-})();
 </script>
 
 <div id="paywallModal" class="paywall-overlay" onclick="if(event.target===this)hidePaywall()">
