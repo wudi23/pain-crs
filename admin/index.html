@@ -46,6 +46,24 @@
   .tag-admin{background:#efe7d6; color:var(--accent);}
   .tag-stripe{background:#e3ecdf; color:var(--ok);}
   .expired{color:var(--danger);}
+  /* 销售仪表盘 */
+  .stat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:6px;}
+  .stat{background:var(--paper); border:1px solid var(--line); border-radius:8px;
+    padding:14px 8px; text-align:center;}
+  .stat-num{font-size:24px; font-weight:700; color:var(--accent);}
+  .stat-lbl{font-size:12px; color:#8b8272; margin-top:4px;}
+  .mod-row{display:flex; align-items:center; gap:10px; padding:9px 4px;
+    border-bottom:1px solid var(--line); cursor:pointer;}
+  .mod-row:hover{background:var(--paper);}
+  .mod-name{flex:0 0 130px; font-size:14px;}
+  .mod-bar-wrap{flex:1; background:var(--paper); border-radius:6px; height:14px; overflow:hidden;}
+  .mod-bar{height:100%; background:var(--gold); border-radius:6px;}
+  .mod-count{flex:0 0 70px; text-align:right; font-size:14px; font-weight:600; color:var(--accent);}
+  .mod-buyers{display:none; padding:6px 4px 12px 20px; font-size:13px; color:#6b6252;
+    border-bottom:1px solid var(--line);}
+  .mod-buyers.open{display:block;}
+  .mod-buyers div{padding:2px 0;}
+  @media(max-width:600px){ .stat-grid{grid-template-columns:repeat(2,1fr);} .mod-name{flex-basis:96px;} }
   .hidden{display:none;}
   .hint{font-size:13px; color:#8b8272; margin-top:8px;}
   @media(max-width:820px){
@@ -77,6 +95,22 @@
 
   <!-- ===== 管理区 ===== -->
   <div id="pageAdmin" class="hidden">
+
+    <div class="card">
+      <h2 style="margin-top:0">📊 销售统计</h2>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-num" id="stTodayCount">–</div><div class="stat-lbl">今日售出</div></div>
+        <div class="stat"><div class="stat-num" id="stTodayRev">–</div><div class="stat-lbl">今日收入</div></div>
+        <div class="stat"><div class="stat-num" id="stTodayUsers">–</div><div class="stat-lbl">今日新注册</div></div>
+        <div class="stat"><div class="stat-num" id="stMonthCount">–</div><div class="stat-lbl">本月售出</div></div>
+        <div class="stat"><div class="stat-num" id="stMonthRev">–</div><div class="stat-lbl">本月收入</div></div>
+        <div class="stat"><div class="stat-num" id="stMonthUsers">–</div><div class="stat-lbl">本月新注册</div></div>
+      </div>
+      <div class="hint" id="totalUsersHint"></div>
+      <h2 style="font-size:15px; margin:18px 0 4px">模块销量排行（点击查看购买人）</h2>
+      <div id="modRank"><div class="hint">加载中…</div></div>
+      <div class="hint">统计仅含 Stripe 真实购买（不含管理员授权）。金额单位 CAD。</div>
+    </div>
 
     <div class="card">
       <h2 style="margin-top:0">授权用户</h2>
@@ -199,7 +233,94 @@ async function enterAdmin(){
   $("pageAdmin").classList.remove("hidden");
   $("btnLogout").classList.remove("hidden");
   renderTable(r.data.rows || []);
+  renderDashboard(r.data.rows || [], r.data.user_stats || null);
 }
+
+/* ================= 销售仪表盘 ================= */
+// amount 单位自适应：Stripe 常以"分"存储；本站价位 129/149/329，
+// 因此数值 >= 1000 视为分（如 14900 → $149），否则视为元。
+function toDollars(a){ a = Number(a) || 0; return a >= 1000 ? a / 100 : a; }
+function fmtMoney(n){ return "$" + n.toLocaleString("en-CA", { maximumFractionDigits: 2 }); }
+
+function renderDashboard(rows, userStats){
+  var now = new Date();
+  function sameDay(iso){
+    if (!iso) return false;
+    var d = new Date(iso);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+  }
+  function sameMonth(iso){
+    if (!iso) return false;
+    var d = new Date(iso);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  }
+
+  var sales = [];
+  for (var i = 0; i < rows.length; i++) {
+    if (rows[i].price_id !== "admin_grant") sales.push(rows[i]);
+  }
+
+  var tc = 0, tr = 0, mc = 0, mr = 0;
+  var byMod = {};
+  for (var j = 0; j < sales.length; j++) {
+    var s = sales[j];
+    var amt = toDollars(s.amount);
+    if (sameDay(s.created_at))   { tc++; tr += amt; }
+    if (sameMonth(s.created_at)) { mc++; mr += amt; }
+    var m = s.module_id || "?";
+    if (!byMod[m]) byMod[m] = { count: 0, buyers: [] };
+    byMod[m].count++;
+    byMod[m].buyers.push({ email: s.email || s.user_id, date: s.created_at });
+  }
+
+  $("stTodayCount").textContent = tc;
+  $("stTodayRev").textContent = fmtMoney(tr);
+  $("stMonthCount").textContent = mc;
+  $("stMonthRev").textContent = fmtMoney(mr);
+  if (userStats) {
+    $("stTodayUsers").textContent = userStats.new_today;
+    $("stMonthUsers").textContent = userStats.new_this_month;
+    $("totalUsersHint").textContent = "注册用户总数：" + userStats.total_users
+      + " · 累计售出：" + sales.length + " · 累计收入：" + fmtMoney(sales.reduce(function(a, x){ return a + toDollars(x.amount); }, 0));
+  } else {
+    $("stTodayUsers").textContent = "–";
+    $("stMonthUsers").textContent = "–";
+    $("totalUsersHint").textContent = "注册用户统计不可用（请先在 SQL Editor 执行 stats.sql）"
+      + " · 累计售出：" + sales.length + " · 累计收入：" + fmtMoney(sales.reduce(function(a, x){ return a + toDollars(x.amount); }, 0));
+  }
+
+  // 模块销量排行
+  var mods = Object.keys(byMod).sort(function(a, b){ return byMod[b].count - byMod[a].count; });
+  var wrap = $("modRank");
+  if (!mods.length) { wrap.innerHTML = "<div class=\"hint\">暂无销售记录</div>"; return; }
+  var max = byMod[mods[0]].count;
+  var html = "";
+  for (var k = 0; k < mods.length; k++) {
+    var mid = mods[k];
+    var info = byMod[mid];
+    var pct = Math.max(4, Math.round(info.count / max * 100));
+    var buyersHtml = "";
+    for (var b = 0; b < info.buyers.length; b++) {
+      buyersHtml += "<div>✔ " + escapeHtml(info.buyers[b].email)
+        + " <span style=\"color:#a89e8c\">" + fmtDate(info.buyers[b].date) + "</span></div>";
+    }
+    html += "<div class=\"mod-row\" data-mod=\"" + escapeHtml(mid) + "\">"
+      + "<div class=\"mod-name\">" + escapeHtml(MODULE_NAMES[mid] || mid) + "</div>"
+      + "<div class=\"mod-bar-wrap\"><div class=\"mod-bar\" style=\"width:" + pct + "%\"></div></div>"
+      + "<div class=\"mod-count\">" + info.count + " 人</div>"
+      + "</div>"
+      + "<div class=\"mod-buyers\" data-buyers=\"" + escapeHtml(mid) + "\">" + buyersHtml + "</div>";
+  }
+  wrap.innerHTML = html;
+}
+
+$("modRank").addEventListener("click", function(ev){
+  var row = ev.target.closest(".mod-row");
+  if (!row) return;
+  var mid = row.getAttribute("data-mod");
+  var panel = document.querySelector("[data-buyers=\"" + mid + "\"]");
+  if (panel) panel.classList.toggle("open");
+});
 
 /* ================= 列表渲染 ================= */
 function renderTable(rows){
@@ -240,7 +361,10 @@ function renderTable(rows){
 
 async function refreshList(){
   var r = await callApi({ action: "list" });
-  if (r.status === 200) renderTable(r.data.rows || []);
+  if (r.status === 200) {
+    renderTable(r.data.rows || []);
+    renderDashboard(r.data.rows || [], r.data.user_stats || null);
+  }
 }
 
 /* ================= 事件绑定 ================= */
