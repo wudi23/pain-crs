@@ -363,6 +363,15 @@ html[lang="zh"] .t-en{display:none;}
 }
 
 </style>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#7a4a2b">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SinoMed">
+<script>
+if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+</script>
 </head>
 <body>
 
@@ -393,6 +402,41 @@ html[lang="zh"] .t-en{display:none;}
   <h1 class="hero-title"><span class="t-en">Clinical Reasoning<br><em>Not Memorisation</em></span><span class="t-zh">临床推理<br><em>而非死记硬背</em></span></h1>
   <div class="hero-rule"></div>
   <p class="hero-sub"><span class="t-en">A structured system for training and applying clinical reasoning in TCM — from chief complaint to final treatment, every step has its logic.</span><span class="t-zh">面向中医执业者的临床推理训练与参考平台——从主诉到治疗方案，每一步都有逻辑可循。</span></p>
+<!-- 添加到主屏（自动识别：安卓/桌面Chrome=真安装 · iOS=分享指引 · 已装/不支持=自动隐藏） -->
+<div id="a2hs" style="display:none;text-align:center;margin:6px 0 30px">
+  <button id="a2hs-btn" style="border:none;cursor:pointer;background:var(--vermillion,#8B1A1A);color:#fff;font-size:14px;font-weight:600;padding:10px 20px;border-radius:999px;box-shadow:0 3px 12px rgba(139,26,26,.22)">
+    <span class="t-en">&#128241; Add to Home Screen</span><span class="t-zh">&#128241; 添加到主屏</span>
+  </button>
+</div>
+<div id="a2hs-ios" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.45)">
+  <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:86%;max-width:360px;background:#FAF8F4;border-radius:16px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center;color:#1a1a18">
+    <div style="font-size:15px;line-height:1.7">
+      <span class="t-en">In Safari, tap <b>Share &#8593;</b> at the bottom &rarr; <b>&quot;Add to Home Screen&quot;</b> to use it like an app.</span>
+      <span class="t-zh">在 Safari 里点底部 <b>分享 &#8593;</b> &rarr; 选 <b>&#12300;添加到主屏幕&#12301;</b>，即可像 App 一样使用。</span>
+    </div>
+    <button id="a2hs-ios-x" style="margin-top:14px;border:none;cursor:pointer;background:var(--vermillion,#8B1A1A);color:#fff;font-size:14px;padding:8px 22px;border-radius:999px">
+      <span class="t-en">Got it</span><span class="t-zh">知道了</span>
+    </button>
+  </div>
+</div>
+<script>
+(function(){
+  function standalone(){ try{ return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone===true; }catch(e){ return navigator.standalone===true; } }
+  if(standalone()) return;
+  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  var box=document.getElementById('a2hs'), btn=document.getElementById('a2hs-btn'), deferred=null;
+  addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferred=e; box.style.display=''; });
+  addEventListener('appinstalled',function(){ box.style.display='none'; });
+  if(isIOS){ box.style.display=''; }
+  btn && btn.addEventListener('click',function(){
+    if(deferred){ deferred.prompt(); deferred.userChoice.finally(function(){ deferred=null; box.style.display='none'; }); }
+    else if(isIOS){ document.getElementById('a2hs-ios').style.display='block'; }
+  });
+  var x=document.getElementById('a2hs-ios-x');
+  x && x.addEventListener('click',function(){ document.getElementById('a2hs-ios').style.display='none'; });
+})();
+</script>
+
 </div>
 
 
