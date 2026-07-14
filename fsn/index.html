@@ -452,6 +452,15 @@ body.lang-en .zh-inline{display:none}
 .dx-group-label{font-weight:700;color:var(--teal);font-size:14px;margin:14px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--cream-dk)}
 .dx-group-label .en,.dx-group-label .zh{}
 </style>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#7a4a2b">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SinoMed">
+<script>
+if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+</script>
 </head>
 <body>
 
