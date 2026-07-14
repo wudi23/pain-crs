@@ -346,6 +346,15 @@
   .qz-rev .qr-why{font-size:12.5px;color:var(--sub);margin-top:5px;line-height:1.6}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#7a4a2b">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SinoMed">
+<script>
+if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+</script>
 </head>
 <body>
 
