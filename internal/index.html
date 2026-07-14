@@ -7,7 +7,8 @@
 body{font-family:"Noto Serif SC","Songti SC",serif;background:var(--paper);color:var(--ink);line-height:1.85}
 /* 顶栏 */
 header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:10px}
-header .back{font-size:14px;color:var(--accent);text-decoration:none;flex:none}
+header .back{font-size:13px;color:var(--accent);text-decoration:none;flex:none;border:1px solid var(--line);border-radius:6px;padding:3px 12px;background:none;transition:.15s}
+header .back:hover{border-color:var(--accent);background:var(--soft,#f3ede0)}
 header h1{font-size:16px;font-weight:600;flex:1;text-align:center}
 header h1{margin-right:auto}
 .userbar{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold)}
