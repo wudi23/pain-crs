@@ -461,6 +461,16 @@ body.lang-en .zh-inline{display:none}
 <script>
 if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
 </script>
+<style id="topbar-fix">
+.topbar{flex-wrap:nowrap}
+.topbar>.site-back{flex:0 0 auto}
+.topbar>.brand{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar>.userbar{flex:0 0 auto;flex-wrap:nowrap;white-space:nowrap;min-width:0}
+.userbar>*{flex:0 0 auto}
+.u-email{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar>.lang-toggle{flex:0 0 auto;white-space:nowrap}
+@media(max-width:520px){.topbar{gap:7px;padding:9px 10px}.topbar>.brand{font-size:14px}.u-email{max-width:78px}}
+</style>
 </head>
 <body>
 
