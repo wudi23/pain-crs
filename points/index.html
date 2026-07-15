@@ -355,6 +355,16 @@
 <script>
 if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
 </script>
+<style id="topbar-fix">
+header{flex-wrap:nowrap}
+.hhome{flex:0 0 auto;white-space:nowrap}
+.hb{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.huser{flex:0 0 auto;flex-wrap:nowrap;white-space:nowrap;min-width:0}
+#userSigned{display:inline-flex;align-items:center;gap:8px;min-width:0}
+#userEmail{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:middle}
+#userSignout,#userLoginBtn,#langBtn{flex:0 0 auto;white-space:nowrap}
+@media(max-width:520px){header{gap:7px;padding:9px 12px}.hb{font-size:14px}#userEmail{max-width:78px}}
+</style>
 </head>
 <body>
 
