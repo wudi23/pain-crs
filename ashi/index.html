@@ -1597,5 +1597,26 @@ window.__ashiPhases=function(id){ ASHI_HAS_ACCESS=true; computeFreeIds(); openMu
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+<button id="stepBack" onclick="ashiStepBack()" style="display:none;position:fixed;right:16px;bottom:20px;z-index:60;font-family:inherit;font-size:14px;background:var(--accent,#7a4a2b);color:#fff;border:none;border-radius:22px;padding:10px 20px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)"><span class="zh">↩ 返回上一步</span><span class="en">↩ Back</span></button>
+<script>
+/* ★模块内"返回上一步"悬浮按钮 —— 接 NAV_STACK，有历史才显示★ */
+function ashiStepBack(){ try{ backFromMuscle(); }catch(e){} setTimeout(updateStepBack,30); }
+function updateStepBack(){
+  var b=document.getElementById('stepBack'); if(!b) return;
+  // 有导航历史，且当前不在首页 → 显示
+  var onHome = document.getElementById('page-home') && document.getElementById('page-home').classList.contains('active');
+  b.style.display = (typeof NAV_STACK!=='undefined' && NAV_STACK.length>0 && !onHome) ? 'block' : 'none';
+  // 跨模块返回按钮若存在且显示，本按钮上移避免重叠
+  var fb=document.getElementById('floatBack');
+  b.style.bottom = (fb && fb.style.display!=='none' && fb.classList.contains('show')) ? '74px' : '20px';
+}
+/* 每次页面切换后刷新按钮：包裹 showPage */
+(function(){
+  if(typeof showPage==='function'){
+    var _orig=showPage;
+    window.showPage=function(id){ _orig(id); try{ updateStepBack(); }catch(e){} };
+  }
+})();
+</script>
 </body>
 </html>
