@@ -531,13 +531,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="SinoMed">
 <script>
-if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
 </script>
 </head>
 <body>
 
 <header class="bar">
-  <div class="bar-left"><a class="bar-back" href="/">← SinoMed</a></div>
+  <div class="bar-left"><a class="bar-back" href="../index.html">← SinoMed</a></div>
   <div class="bar-title"><button onclick="goHome()"><span class="zh">阿是穴临床速查</span><span class="en">Ashi clinical quick-reference</span></button></div>
   <div class="bar-right">
     <button class="bar-btn" id="langBtn" onclick="setLang(isEN()?'zh':'en')">中</button>
@@ -826,7 +826,7 @@ let ASHI_HAS_ACCESS=false;
 const ASHI_FREE_REGIONS=['shoulder','low_back'];
 let ASHI_FREE_IDS=new Set();
 function computeFreeIds(){ ASHI_FREE_IDS=new Set(ASHI.muscles.filter(m=>(m.refers_to||[]).some(c=>ASHI_FREE_REGIONS.includes(c))).map(m=>m.id)); }
-function isUnlocked(id){ return ASHI_HAS_ACCESS || ASHI_FREE_IDS.has(id); }
+function isUnlocked(id){ if(location.protocol==='file:') return true; return ASHI_HAS_ACCESS || ASHI_FREE_IDS.has(id); }
 function cacheAccess(v){ try{ localStorage.setItem('ashi_access_cache', v?'1':'0'); }catch(e){} }
 function readCachedAccess(){ try{ return localStorage.getItem('ashi_access_cache')==='1'; }catch(e){ return false; } }
 async function getSession(){
@@ -849,7 +849,7 @@ async function initSession(){
   computeFreeIds(); ASHI_HAS_ACCESS=readCachedAccess();
   const s=await getSession(); ASHI_HAS_ACCESS=!!s.purchased; cacheAccess(ASHI_HAS_ACCESS); updateUserBar(s);
 }
-function goLogin(){ window.location.href='/'; }
+function goLogin(){ window.location.href='../index.html'; }
 async function ashiSignOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} ASHI_HAS_ACCESS=false; cacheAccess(false); updateUserBar({loggedIn:false,email:''}); }
 function goUnlock(){ window.location.href='/#pricing'; }
 function showPaywall(){ document.getElementById('paywall').classList.add('show'); }
@@ -1501,10 +1501,10 @@ function handleInbound(){
 }
 function floatReturn(){
   const fb=document.getElementById('floatBack'), from=fb.dataset.from, back=fb.dataset.back;
-  const map={points:'../points/index.html',internal:'../internal/index.html',pain:'../pain/index.html',fsn:'../fsn/index.html',formulas:'../formulas/index.html',theory:'../theory/index.html',hub:'/'};
+  const map={points:'../points/index.html',internal:'../internal/index.html',pain:'../pain/index.html',fsn:'../fsn/index.html',formulas:'../formulas/index.html',theory:'../theory/index.html',hub:'../index.html'};
   if(map[from]){ let href=map[from]; if(back) href+='#'+back; window.location.href=href; }
   else if(history.length>1){ history.back(); }
-  else { window.location.href='/'; }
+  else { window.location.href='../index.html'; }
 }
 
 /* ============================================================ UTIL ============================================================ */
@@ -1534,6 +1534,22 @@ window.__ashiPhases=function(id){ ASHI_HAS_ACCESS=true; computeFreeIds(); openMu
   const page=document.getElementById('page-muscle');
   return {tabs:page.querySelectorAll('.phase-tab').length, phases:page.querySelectorAll('.mphase').length,
     activePhases:page.querySelectorAll('.mphase.active').length, hasStratum:/pl-card/.test(page.innerHTML), hasJlink:/jlink/.test(page.innerHTML)}; };
+</script>
+<!-- SINOMED_XMOD_BACK: 全站统一 跨模块原路返回悬浮按钮 -->
+<button id="xmodBack" onclick="__xmodBack&&__xmodBack()" style="display:none;position:fixed;left:16px;bottom:20px;z-index:70;font-family:inherit;font-size:14px;background:#7a4a2b;color:#fff;border:none;border-radius:22px;padding:10px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)">&#8592; Back</button>
+<script>
+(function(){
+  var NM={internal:['\u5185\u79d1\u7cfb\u7edf','Internal Medicine'],points:['\u7ecf\u7a74','Meridians & Points'],formulas:['\u65b9\u836f','Formulas'],ashi:['\u963f\u662f\u7a74','Ashi Points'],pain:['\u75bc\u75db','Pain'],fsn:['\u6d6e\u9488','FSN'],theory:['\u57fa\u7840\u7406\u8bba','Theory']};
+  function keyOf(p){ var f=(p||'').split('/').filter(Boolean)[0]||''; return NM[f]?f:''; }
+  var from='';
+  try{ var q=new URLSearchParams(location.search); var qf=q.get('from'); if(qf&&NM[qf]) from=qf; }catch(e){}
+  if(!from){ try{ if(document.referrer){ var r=new URL(document.referrer); if(r.origin===location.origin){ var k=keyOf(r.pathname); if(k&&k!==keyOf(location.pathname)) from=k; } } }catch(e){} }
+  window.__xmodBack=function(){ try{ if(history.length>1){ history.back(); return; } }catch(e){} var qb='';try{qb=new URLSearchParams(location.search).get('back')||'';}catch(e){} location.href = from?('../'+from+'/index.html'+(qb?('#'+qb):'')):'../index.html'; };
+  if(!from) return;
+  function draw(){ var b=document.getElementById('xmodBack'); if(!b) return; var en=false; try{ en=(document.documentElement.getAttribute('data-lang')==='en')||(localStorage.getItem('sinomed-lang')==='en'); }catch(e){} b.textContent=en?('\u2190 Back to '+NM[from][1]):('\u2190 \u8fd4\u56de'+NM[from][0]); b.style.display='block'; }
+  function boot(){ draw(); try{ new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']}); }catch(e){} }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
 </script>
 </body>
 </html>
