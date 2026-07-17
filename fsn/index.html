@@ -459,24 +459,14 @@ body.lang-en .zh-inline{display:none}
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="SinoMed">
 <script>
-if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
 </script>
-<style id="topbar-fix">
-.topbar{flex-wrap:nowrap}
-.topbar>.site-back{flex:0 0 auto}
-.topbar>.brand{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.topbar>.userbar{flex:0 0 auto;flex-wrap:nowrap;white-space:nowrap;min-width:0}
-.userbar>*{flex:0 0 auto}
-.u-email{max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.topbar>.lang-toggle{flex:0 0 auto;white-space:nowrap}
-@media(max-width:520px){.topbar{gap:7px;padding:9px 10px}.topbar>.brand{font-size:14px}.u-email{max-width:78px}}
-</style>
 </head>
 <body>
 
 <!-- ══════════ TOPBAR (updateUserBar standard) ══════════ -->
 <div class="topbar">
-  <a class="site-back" href="/" title="SinoMed" aria-label="Back to SinoMed">←&nbsp;SinoMed</a>
+  <a class="site-back" href="../index.html" title="SinoMed" aria-label="Back to SinoMed">←&nbsp;SinoMed</a>
   <div class="brand" onclick="goTop('home')" style="cursor:pointer">
     <span class="zh">浮针临床速查手册</span><span class="en">FSN Clinical Quick Reference</span>
   </div>
@@ -2531,7 +2521,7 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
       <span class="zh">此模块需要登录并凭浮针课程兑换码访问。请返回首页进行兑换。</span>
       <span class="en">This module requires login and a valid FSN course redemption code. Please return to the homepage to redeem.</span>
     </p>
-    <a href="/" style="display:inline-block;padding:11px 24px;background:#1A6B5A;color:#fff;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;">
+    <a href="../index.html" style="display:inline-block;padding:11px 24px;background:#1A6B5A;color:#fff;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;">
       <span class="zh">← 返回首页</span><span class="en">← Back to SinoMed</span>
     </a>
   </div>
@@ -2607,13 +2597,13 @@ function updateUserBar(){
       bar.innerHTML = '<span class="u-email" title="'+email+'">'+email+'</span>'
         + '<button onclick="fsnLogout()">'+biI('退出','Log out')+'</button>';
     } else {
-      bar.innerHTML = '<a class="u-btn" href="/">'+biI('登录','Log in')+'</a>';
+      bar.innerHTML = '<a class="u-btn" href="../index.html">'+biI('登录','Log in')+'</a>';
     }
   });
 }
 function fsnLogout(){
-  if(window._sb){ window._sb.auth.signOut().finally(function(){ window.location.href='/'; }); }
-  else { window.location.href='/'; }
+  if(window._sb){ window._sb.auth.signOut().finally(function(){ window.location.href='../index.html'; }); }
+  else { window.location.href='../index.html'; }
 }
 
 /* ══════════ BOOT ══════════ */
@@ -2631,7 +2621,7 @@ function fsnHandleInbound(){
         document.body.appendChild(b); }
       b.innerHTML = '<span class="zh">\u2190 \u8fd4\u56de'+SRCMAP[from]+'</span><span class="en">\u2190 Back to '+from+'</span>';
       var back = qs.get('back')||'';
-      b.onclick=function(){ location.href='/'+from+'/#'+back; };
+      b.onclick=function(){ try{ if(history.length>1){ history.back(); return; } }catch(e){} location.href='../'+from+'/index.html'+(back?('#'+back):''); };
       b.style.display='block';
     }
     // restore: returning to fsn with #pageId
@@ -3609,10 +3599,10 @@ function makeFSNCertWithName(name, dateObj){
 
 
 /* ── Supabase Init & FSN Access Check ── */
-const _sb = supabase.createClient('https://ucocgcbxdqjbbklnkyxt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo');
+const _sb = (typeof supabase==='undefined') ? null : supabase.createClient('https://ucocgcbxdqjbbklnkyxt.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo');
 window._sb = _sb;
 
-(async function checkFSNAccess(){
+(async function checkFSNAccess(){ if(location.protocol==='file:'||!_sb){ var _ov=document.getElementById('fsn-login-overlay'); if(_ov)_ov.style.display='none'; try{initQuizHero();}catch(e){} return; }
   const {data:{session}} = await _sb.auth.getSession();
   if(!session){
     // Not logged in - show login overlay
@@ -3626,7 +3616,7 @@ window._sb = _sb;
     .maybeSingle();
   if(!purchase){
     // No access - redirect home
-    window.location.href='/';
+    window.location.href='../index.html';
     return;
   }
   // Has access - show content, init quiz hero
@@ -3883,5 +3873,21 @@ window.addEventListener('storage', function(e){
 
 </script>
 
+<!-- SINOMED_XMOD_BACK: 全站统一 跨模块原路返回悬浮按钮 -->
+<button id="xmodBack" onclick="__xmodBack&&__xmodBack()" style="display:none;position:fixed;left:16px;bottom:20px;z-index:70;font-family:inherit;font-size:14px;background:#7a4a2b;color:#fff;border:none;border-radius:22px;padding:10px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)">&#8592; Back</button>
+<script>
+(function(){
+  var NM={internal:['\u5185\u79d1\u7cfb\u7edf','Internal Medicine'],points:['\u7ecf\u7a74','Meridians & Points'],formulas:['\u65b9\u836f','Formulas'],ashi:['\u963f\u662f\u7a74','Ashi Points'],pain:['\u75bc\u75db','Pain'],fsn:['\u6d6e\u9488','FSN'],theory:['\u57fa\u7840\u7406\u8bba','Theory']};
+  function keyOf(p){ var f=(p||'').split('/').filter(Boolean)[0]||''; return NM[f]?f:''; }
+  var from='';
+  try{ var q=new URLSearchParams(location.search); var qf=q.get('from'); if(qf&&NM[qf]) from=qf; }catch(e){}
+  if(!from){ try{ if(document.referrer){ var r=new URL(document.referrer); if(r.origin===location.origin){ var k=keyOf(r.pathname); if(k&&k!==keyOf(location.pathname)) from=k; } } }catch(e){} }
+  window.__xmodBack=function(){ try{ if(history.length>1){ history.back(); return; } }catch(e){} var qb='';try{qb=new URLSearchParams(location.search).get('back')||'';}catch(e){} location.href = from?('../'+from+'/index.html'+(qb?('#'+qb):'')):'../index.html'; };
+  if(!from) return;
+  function draw(){ var b=document.getElementById('xmodBack'); if(!b) return; var en=false; try{ en=(document.documentElement.getAttribute('data-lang')==='en')||(localStorage.getItem('sinomed-lang')==='en'); }catch(e){} b.textContent=en?('\u2190 Back to '+NM[from][1]):('\u2190 \u8fd4\u56de'+NM[from][0]); b.style.display='block'; }
+  function boot(){ draw(); try{ new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']}); }catch(e){} }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
 </body>
 </html>
