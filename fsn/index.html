@@ -2201,6 +2201,21 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListene
 .badge-warn,.fsn-content .badge-warn{background:#FBE8E6;color:#8E1F1F;border-color:#EEC1BB}
 
 .en,.en-inline{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+
+/* ★手机版顶栏合理化★ */
+.topbar .brand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto}
+.topbar .site-back,.topbar .userbar,.topbar .lang-toggle{flex:0 0 auto}
+@media(max-width:560px){
+  .topbar{gap:6px;padding:8px 10px}
+  .topbar .brand{font-size:13px}
+  .topbar .site-back{font-size:12px}
+  .topbar .userbar{font-size:11px;max-width:92px;overflow:hidden}
+  .topbar .userbar *{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:84px}
+}
+@media(max-width:380px){
+  .topbar .brand{display:none}
+}
+
 </style>
 
 <div class="qr-group">
