@@ -344,6 +344,20 @@
   .qz-rev .qr-yours{color:var(--red)}
   .qz-rev .qr-correct{color:#15803d;font-weight:700}
   .qz-rev .qr-why{font-size:12.5px;color:var(--sub);margin-top:5px;line-height:1.6}
+
+/* ★手机版顶栏合理化★ */
+header .hb{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1 1 auto}
+header .hhome,header .huser{flex:0 0 auto}
+@media(max-width:560px){
+  header{gap:6px;padding:9px 10px}
+  header .hb{font-size:13px}
+  header .hhome{font-size:11.5px;padding:3px 7px}
+  header #userEmail{max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:bottom}
+}
+@media(max-width:380px){
+  header .hb{display:none}
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="manifest" href="/manifest.webmanifest">
@@ -576,7 +590,16 @@ function normPointCode(raw){
     .replace(/^SJ/,'TE').replace(/^(RN|REN|任)/,'CV').replace(/^(DU|督)/,'GV')
     .replace(/^(KD|SHEN)/,'KI').replace(/^LV/,'LR');
 }
-function resolveTreatLink(t){return t.link||'';}
+function resolveTreatLink(t){
+    var lk=t.link||''; if(!lk) return '';
+    // 跨模块链接统一补 from=points（返回悬浮按钮的首选触发条件；离线 file:// 下 referrer 常空，必须靠 from）
+    if(/\.\.\/(internal|pain|formulas|ashi|fsn|theory)\/index\.html/.test(lk) && lk.indexOf('from=')<0){
+      var hi=lk.indexOf('#'); var hash = hi>=0 ? lk.slice(hi) : ''; var base = hi>=0 ? lk.slice(0,hi) : lk;
+      base += (base.indexOf('?')>=0 ? '&' : '?') + 'from=points';
+      lk = base + hash;   // query 必须在 hash 之前
+    }
+    return lk;
+  }
 
 // ashi muscle_id -> display name (so cross-links show 中文名, not the id)
 const MUSCLE_NAMES={
