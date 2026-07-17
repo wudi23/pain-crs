@@ -185,6 +185,21 @@ mark{background:#f2ead9}
 .auth-msg{font-size:12px;margin-top:12px;text-align:center;min-height:18px}
 .auth-msg.error{color:#a33}.auth-msg.success{color:#3c6b32}
 .auth-close{position:absolute;top:12px;right:14px;font-size:20px;color:#a09578;cursor:pointer;border:none;background:none;font-family:inherit;line-height:1}
+
+/* ★手机版顶栏合理化：单行不换行、品牌收缩、按钮不挤压★ */
+#topbar .title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#topbar .home-btn,#topbar .user-bar,#topbar .lang{flex:0 0 auto}
+@media(max-width:560px){
+  #topbar{gap:6px;padding:8px 10px}
+  #topbar .title{font-size:13px;flex:1 1 auto}
+  #topbar .home-btn{font-size:12px;padding:4px 8px}
+  #topbar .signin-btn,#topbar .user-signout{font-size:10.5px;padding:3px 7px}
+  #topbar #user-chip{max-width:78px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+@media(max-width:380px){
+  #topbar .title{display:none}   /* 极窄屏隐藏中间标题，只留左返回+右账户/语言，杜绝竖排 */
+}
+
 </style><link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#7a4a2b">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
@@ -713,6 +728,20 @@ document.body.addEventListener('click',function(e){
   }
 });
 applyLang();
+/* ★跨模块入站 ?goto=sid（可含 #p-锚点）—— points/ashi 深链接落地打开对应病页 ★ */
+(function(){ try{
+  var g = new URLSearchParams(location.search).get('goto');
+  if(!g) return;
+  var parts = String(g).split('#');
+  var sid = parts[0];
+  var sub = parts[1] || (location.hash ? location.hash.replace(/^#/,'') : '');
+  if(!REGIONS.some(function(r){return r.sid===sid;})) return;   // 库里有才跳
+  showLogical(sid);                                              // 自带门控(未解锁→预览遮罩)
+  if(sub){ setTimeout(function(){
+      var t=document.getElementById(sub) || document.getElementById('p-'+sub);
+      if(t && t.scrollIntoView) t.scrollIntoView({block:'center'});
+  }, 200); }
+}catch(e){} })();
 /* 部署版：登录后拉取购买记录并刷新锁；离线版 loadAccess 是 no-op（未登录=只开放免费病）*/
 loadAccess().then(function(){ refreshLocks(); });
 /* 部署版：监听登录状态变化（登录/登出自动刷新解锁） */
