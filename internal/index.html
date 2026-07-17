@@ -484,10 +484,7 @@ function showPaywall(sym){
     </div>`;
   box.classList.add('on');
 }
-function doPurchase(){
-  // deploy版:调 bright-processor Edge Function 发起Stripe结算(module_id=internal, price_id)
-  alert('deploy版将跳转Stripe结算\nmodule_id='+DATA.module_id+'\nprice_id='+DATA.price_id+'\n（需先登录，购买后写purchases表永久解锁）');
-}
+
 function renderDisease(){
   const t=DATA.trees[curSym];
   let h=`<h2 style="font-size:20px;margin:6px 0">${esc(pickv(t.symptom_zh,t.symptom_en))}</h2>
