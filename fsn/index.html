@@ -3904,5 +3904,20 @@ window.addEventListener('storage', function(e){
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+<button id="stepBack" onclick="__stepBack()" style="display:none;position:fixed;right:16px;bottom:20px;z-index:60;font-family:inherit;font-size:14px;background:var(--teal,#7a4a2b);color:#fff;border:none;border-radius:22px;padding:10px 20px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)"><span class="zh">↩ 返回上一步</span><span class="en">↩ Back</span></button>
+<script>
+/* ★模块内"返回上一步"悬浮按钮★ */
+function __stepBack(){ try{ back(); }catch(e){} setTimeout(__updStepBack,30); }
+function __updStepBack(){
+  var b=document.getElementById('stepBack'); if(!b) return;
+  var show=false;
+  try{ show = (typeof navStack!=='undefined' && navStack.length>1); }catch(e){ show=false; }
+  b.style.display = show ? 'block' : 'none';
+  var fb=document.getElementById('xmodBack')||document.getElementById('floatBack');
+  b.style.bottom = (fb && fb.style.display!=='none' && (fb.classList.contains('show')||fb.style.display==='block')) ? '74px' : '20px';
+}
+document.addEventListener('click',function(){ setTimeout(__updStepBack,50); },true);
+setInterval(__updStepBack, 800);
+</script>
 </body>
 </html>
