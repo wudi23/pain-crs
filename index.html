@@ -721,7 +721,7 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
           <div class="pr-name"><span class="t-en">🪡 FSN Clinical Manual</span><span class="t-zh">🪡 浮针临床手册</span></div>
           <div class="pr-free-scope"><span class="t-en">Included with the FSN online course</span><span class="t-zh">浮针在线课程附赠</span></div>
         </div>
-        <div class="pr-cta"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
+        <div class="pr-cta" id="pr-cta-fsn"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
       </div>
     </div>
     <div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
@@ -845,6 +845,11 @@ async function renderPricing(){
     const lnk = document.querySelector('a[href="#pricing"]'); if(lnk) lnk.style.display = 'none';
     // still mark module cards as owned below
   }
+
+  /* ★FSN：兑换码模块，全站通不解锁，只认 module_id='fsn'。
+     已有权限时把"兑换"换成"进入"，避免已兑换的人还看到兑换按钮。★ */
+  const fsnEl = document.getElementById('pr-cta-fsn');
+  if(fsnEl && owned.has('fsn')) fsnEl.innerHTML = prOwnedHTML('/fsn/');
 
   // Per-module CTAs
   Object.keys(PRICING).forEach(mid => {
