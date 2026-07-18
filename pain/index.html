@@ -445,7 +445,10 @@ function applyLang(){
   var sbTxt=document.getElementById('stepBackTxt');
   if(sbTxt) sbTxt.textContent = LANG==='zh'?'↩ 返回上一步':'↩ Back';
   var ft=document.getElementById('footerTxt');
-  if(ft) ft.textContent = LANG==='zh'?'© 2026 SinoMed · 未经授权不得转载 · sinomed.ca':'© 2026 SinoMed · All rights reserved · sinomed.ca';
+  if(ft){ var _y=new Date().getFullYear(); var _cy=(_y>2026)?('2026–'+_y):'2026';
+    ft.textContent = LANG==='zh'?('© '+_cy+' SinoMed · 未经授权不得转载 · sinomed.ca'):('© '+_cy+' SinoMed · All rights reserved · sinomed.ca'); }
+  var fl=document.getElementById('footerLegal');
+  if(fl) fl.textContent = LANG==='zh'?'服务条款 · 退款政策 · 隐私政策':'Terms · Refunds · Privacy';
   // 显示当前语言页，隐藏另一语言；保持逻辑页一致
   var cur = document.body.getAttribute('data-page')||'home';
   showLogical(cur);
@@ -893,6 +896,18 @@ function __painUpdBack(){
 
 <!-- © 2026 SinoMed (sinomed.ca) · Original clinical reasoning content by Di Wu, R.TCM.P. · Unauthorized reproduction prohibited · 本站内容为原创，未经授权不得转载 -->
 <footer id="siteFooter" style="text-align:center;padding:22px 16px 28px;margin-top:32px;border-top:1px solid rgba(120,90,50,.18);font-size:12px;color:#8a7a5c;line-height:1.7">
-<span id="footerTxt">© 2026 SinoMed · 未经授权不得转载 · sinomed.ca</span>
+<span id="footerTxt">© 2026 SinoMed · sinomed.ca</span>
+<br><a id="footerLegal" href="../legal/index.html" style="color:#8a7a5c;text-decoration:underline;">服务条款 · 退款政策 · 隐私政策</a>
 </footer>
+<script>
+/* 页脚年份立即初始化(不等applyLang)，起始2026 */
+(function(){
+  var y=new Date().getFullYear(), cy=(y>2026)?('2026–'+y):'2026';
+  var ft=document.getElementById('footerTxt');
+  if(ft){ var zh=(typeof LANG!=='undefined'&&LANG==='zh');
+    ft.textContent='© '+cy+' SinoMed · '+(zh?'未经授权不得转载':'All rights reserved')+' · sinomed.ca'; }
+  var fl=document.getElementById('footerLegal');
+  if(fl) fl.textContent = zh?'服务条款 · 退款政策 · 隐私政策':'Terms · Refunds · Privacy';
+})();
+</script>
 </body></html>
