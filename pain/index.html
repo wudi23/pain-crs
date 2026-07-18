@@ -546,11 +546,35 @@ function showPaywall(pageEl, sid){
     : {t:'"'+nm+'" is premium content',d:'The navigator, patterns, and herbs for this condition require unlocking.',
        b1:'Buy Pain module ($149)',b2:'Buy All-Access Pass ($329 · unlocks every module)',
        free:'Free to try now: Shoulder / Low Back / Neck',note:'Already purchased? Log in to unlock automatically.'};
+  /* ★全站通推荐区：仅在"一个付费模块都没买"时显示★
+     已买过任一模块的人，全站通反而更贵（$329 叠加在已付款之上），故隐藏。 */
+  var _ownedPaid = (ACCESS.purchases||[]).filter(function(m){return ['internal','pain','ashi'].indexOf(m)>=0;}).length;
+  var passBlock = '';
+  if(_ownedPaid===0){
+    var P = LANG==='zh' ? {
+      tag:'★ 更划算的选择', name:'全站通行证 · $329 CAD',
+      body:'一次解锁全部三个收费模块：内科 $149 + 疼痛 $149 + 阿是穴 $129，单买合计 <b>$427</b>，一起买只需 <b>$329</b>，<b>立省 $98</b>。含这些模块日后的全部更新。',
+      warn:'请注意：购买单个模块后，后续只能继续按模块单独购买，<b>不提供差价升级到全站通</b>。若你日后可能还需要其他模块，现在一起购买是唯一更省的时机。',
+      btn:'解锁全部三个模块 · $329 →'
+    } : {
+      tag:'★ BETTER VALUE', name:'All-Access Pass · $329 CAD',
+      body:'Unlock all three paid modules at once: Internal $149 + Pain $149 + Ashi $129. Bought separately that is <b>$427</b>; together it is <b>$329</b> — <b>you save $98</b>. All future updates included.',
+      warn:'Please note: once you buy a single module, further modules are purchased one by one — <b>there is no upgrade credit toward the all-access pass</b>. If you may want other modules later, buying together now is the only cheaper option.',
+      btn:'Unlock all three · $329 →'
+    };
+    passBlock = '<div style="margin-top:16px;padding:16px;border:2px solid #8a6d3b;border-radius:12px;background:#fffdf6;text-align:left">'
+      + '<div style="font-size:12px;font-weight:700;color:#8a6d3b;letter-spacing:.04em;margin-bottom:6px">'+P.tag+'</div>'
+      + '<div style="font-size:16px;font-weight:800;color:#7a4a2b;margin-bottom:6px">'+P.name+'</div>'
+      + '<div style="font-size:13px;color:#5d5344;line-height:1.7;margin-bottom:10px">'+P.body+'</div>'
+      + '<div style="font-size:12.5px;color:#8a5a2b;background:#fdf4ec;border-left:3px solid #b5761f;padding:8px 10px;border-radius:0 6px 6px 0;margin-bottom:12px">'+P.warn+'</div>'
+      + '<button class="pw-btn" style="background:#8a6d3b;width:100%" onclick="startCheckout(\'allaccess\')">'+P.btn+'</button>'
+      + '</div>';
+  }
   var box=document.createElement('div');
   box.className='paywall';
   box.innerHTML='<div class="pw-box"><h2>'+L.t+'</h2><p>'+L.d+'</p>'
     +'<button class="pw-btn pw-primary" onclick="startCheckout(\'pain\')">'+L.b1+'</button>'
-    +'<button class="pw-btn pw-allaccess" onclick="startCheckout(\'allaccess\')">'+L.b2+'</button>'
+    +passBlock
     +'<div class="pw-free">'+L.free+'</div>'
     +'<div class="pw-note">'+L.note+'</div></div>';
   pageEl.appendChild(box);
