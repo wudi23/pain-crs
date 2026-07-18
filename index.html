@@ -26,6 +26,9 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
   --radius:     10px;
   --radius-lg:  16px;
+  /* ★补：原被使用却从未定义，导致购买按钮背景透明、近白色字看不清★ */
+  --accent:     #7a4a2b;
+  --gold:       #8a6d3b;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; }
@@ -180,10 +183,10 @@ body {
 .pass-info { flex: 1 1 320px; }
 .pass-name { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
 .pass-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
-.pass-cta { text-align: right; flex: 0 0 auto; }
+.pass-cta { text-align: right; flex: 0 1 auto; min-width: 0; max-width: 100%; }
 .pass-price { font-size: 26px; font-weight: 800; color: var(--ink); }
 .pass-price .was { font-size: 13px; color: var(--ink-faint); text-decoration: line-through; font-weight: 400; margin-right: 8px; }
-.pass-note { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+.pass-note { font-size: 12px; color: var(--ink-muted); margin-top: 4px; line-height: 1.5; max-width: 320px; margin-left: auto; }
 .pricing-rows { border: 1px solid var(--rule); border-radius: 12px; background: #fff; overflow: hidden; }
 .pr-row {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
@@ -207,7 +210,10 @@ body {
 .pricing-footnote { font-size: 12px; color: var(--ink-faint); text-align: center; margin-top: 14px; }
 @media (max-width: 600px) {
   .pass-card { flex-direction: column; align-items: flex-start; }
-  .pass-cta { text-align: left; }
+  /* ★关键修复：column 方向下 flex-basis 变成"高度"，320px 会撑出约225px空白★ */
+  .pass-info { flex: 0 0 auto; width: 100%; }
+  .pass-cta { text-align: left; width: 100%; }
+  .pass-note { margin-left: 0; }
   .pr-row { flex-direction: column; align-items: flex-start; gap: 6px; }
   .pr-cta { text-align: left; }
 }
@@ -256,6 +262,7 @@ body {
   padding: 32px 24px 80px; text-align: center;
   font-size: 12px; color: var(--ink-faint);
 }
+.footer .cr-line { color: var(--ink-muted); font-weight: 600; }
 .footer a { color: var(--ink-faint); }
 
 /* ── AUTH MODAL ───────────────────────────────── */
@@ -302,6 +309,10 @@ html[lang="zh"] .t-en{display:none;}
   .hero-title { font-size: 26px; }
   .topbar { padding: 0 12px; height: 48px; }
   .topbar-logo { font-size: 16px; }
+  /* ★手机端顶栏腾空间：隐藏邮箱与定价链接，保证登录/退出按钮不被挤出屏幕★ */
+  .topbar-user { display: none !important; }
+  .topbar-right > a.topbar-signin[href="#pricing"] { display: none; }
+  .topbar-right { gap: 8px; }
   .lang-switch { margin-right: 4px; }
   .lbtn { padding: 3px 7px; font-size: 10px; }
   .topbar-signin { font-size: 11px; padding: 4px 8px; }
@@ -742,9 +753,19 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
 </div>
 
 <!-- Footer -->
+<!-- © 2026 SinoMed (sinomed.ca) · Original clinical reasoning content by Di Wu, R.TCM.P. · Unauthorized reproduction prohibited · 本站内容为原创，未经授权不得转载 -->
 <div class="footer">
-  <p><span class="t-en">SinoMed · sinomed.ca · For professional continuing education and reference only.<br>Not a substitute for individualised clinical judgement. Comply with applicable laws and regulations in your jurisdiction.<br><br>Questions or account issues: <a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span><span class="t-zh">SinoMed · sinomed.ca · 仅供中医执业者继续教育和临床参考使用。<br>不能替代个体化临床判断。请遵守所在地区适用法规。<br><br>如有问题或账号支持：<a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span></p>
+  <p><span class="t-en"><span class="cr-line">© <span class="cr-year">2026</span> SinoMed · All rights reserved · sinomed.ca</span><br>For professional continuing education and reference only.<br>Not a substitute for individualised clinical judgement. Comply with applicable laws and regulations in your jurisdiction.<br><br>Questions or account issues: <a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span><span class="t-zh"><span class="cr-line">© <span class="cr-year">2026</span> SinoMed · 未经授权不得转载 · sinomed.ca</span><br>仅供中医执业者继续教育和临床参考使用。<br>不能替代个体化临床判断。请遵守所在地区适用法规。<br><br>如有问题或账号支持：<a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span></p>
 </div>
+<script>
+/* 版权年份自动更新：起始2026，显示 2026 或 2026–当前年 */
+(function(){
+  var y=new Date().getFullYear();
+  var txt=(y>2026)?('2026–'+y):'2026';
+  var els=document.querySelectorAll('.cr-year');
+  for(var i=0;i<els.length;i++) els[i].textContent=txt;
+})();
+</script>
 
 <!-- /page-wrap -->
 
