@@ -553,19 +553,16 @@ function showPaywall(pageEl, sid){
   if(_ownedPaid===0){
     var P = LANG==='zh' ? {
       tag:'★ 更划算的选择', name:'全站通行证 · $329 CAD',
-      body:'一次解锁全部三个收费模块：内科 $149 + 疼痛 $149 + 阿是穴 $129，单买合计 <b>$427</b>，一起买只需 <b>$329</b>，<b>立省 $98</b>。含这些模块日后的全部更新。',
       warn:'请注意：购买单个模块后，后续只能继续按模块单独购买，<b>不提供差价升级到全站通</b>。若你日后可能还需要其他模块，现在一起购买是唯一更省的时机。',
       btn:'解锁全部三个模块 · $329 →'
     } : {
       tag:'★ BETTER VALUE', name:'All-Access Pass · $329 CAD',
-      body:'Unlock all three paid modules at once: Internal $149 + Pain $149 + Ashi $129. Bought separately that is <b>$427</b>; together it is <b>$329</b> — <b>you save $98</b>. All future updates included.',
       warn:'Please note: once you buy a single module, further modules are purchased one by one — <b>there is no upgrade credit toward the all-access pass</b>. If you may want other modules later, buying together now is the only cheaper option.',
       btn:'Unlock all three · $329 →'
     };
     passBlock = '<div style="margin-top:16px;padding:16px;border:2px solid #8a6d3b;border-radius:12px;background:#fffdf6;text-align:left">'
       + '<div style="font-size:12px;font-weight:700;color:#8a6d3b;letter-spacing:.04em;margin-bottom:6px">'+P.tag+'</div>'
       + '<div style="font-size:16px;font-weight:800;color:#7a4a2b;margin-bottom:6px">'+P.name+'</div>'
-      + '<div style="font-size:13px;color:#5d5344;line-height:1.7;margin-bottom:10px">'+P.body+'</div>'
       + '<div style="font-size:12.5px;color:#8a5a2b;background:#fdf4ec;border-left:3px solid #b5761f;padding:8px 10px;border-radius:0 6px 6px 0;margin-bottom:12px">'+P.warn+'</div>'
       + '<button class="pw-btn" style="background:#8a6d3b;width:100%" onclick="startCheckout(\'allaccess\')">'+P.btn+'</button>'
       + '</div>';
@@ -933,6 +930,59 @@ function __painUpdBack(){
     ft.textContent='© '+cy+' SinoMed · '+(zh?'未经授权不得转载':'All rights reserved')+' · sinomed.ca'; }
   var fl=document.getElementById('footerLegal');
   if(fl) fl.textContent = zh?'服务条款 · 退款政策 · 隐私政策':'Terms · Refunds · Privacy';
+})();
+</script>
+<script>
+/* ★法务弹窗：点条款/退款/隐私链接时在弹窗内阅读，不跳走、不开新标签页★
+   手机上尤其重要——开新标签页会打断购买流程，很多人回不来。 */
+(function(){
+  var BASE='../legal/index.html';
+  function curLang(){
+    try{ return localStorage.getItem('sinomed-lang')==='zh' ? 'zh' : 'en'; }catch(e){ return 'en'; }
+  }
+  function build(){
+    if(document.getElementById('legalModal')) return;
+    var wrap=document.createElement('div');
+    wrap.id='legalModal';
+    wrap.style.cssText='display:none;position:fixed;inset:0;z-index:9999;background:rgba(30,25,20,.55);align-items:center;justify-content:center;padding:16px';
+    wrap.innerHTML =
+      '<div style="position:relative;background:#fff;border-radius:14px;max-width:720px;width:100%;height:min(84vh,760px);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e6e1d8;flex:0 0 auto">'
+      +   '<span id="legalModalTitle" style="font-size:14px;font-weight:700;color:#5d5344"></span>'
+      +   '<button id="legalModalClose" aria-label="Close" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#7a6a55;font-size:20px;line-height:32px;cursor:pointer;padding:0">&times;</button>'
+      + '</div>'
+      + '<iframe id="legalModalFrame" title="Legal" style="border:0;width:100%;flex:1 1 auto"></iframe>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    wrap.addEventListener('click',function(e){ if(e.target===wrap) closeLegal(); });
+    document.getElementById('legalModalClose').addEventListener('click',closeLegal);
+  }
+  window.openLegal=function(hash){
+    build();
+    var zh = curLang()==='zh';
+    var titles = {'#terms': zh?'服务条款':'Terms of Use',
+                  '#refund': zh?'退款政策':'Refund Policy',
+                  '#privacy': zh?'隐私政策':'Privacy Policy'};
+    document.getElementById('legalModalTitle').textContent = titles[hash] || (zh?'条款与政策':'Legal');
+    document.getElementById('legalModalFrame').src = BASE+'?embed=1&lang='+curLang()+(hash||'');
+    document.getElementById('legalModal').style.display='flex';
+    document.documentElement.style.overflow='hidden';
+  };
+  window.closeLegal=function(){
+    var m=document.getElementById('legalModal');
+    if(m){ m.style.display='none'; document.getElementById('legalModalFrame').src='about:blank'; }
+    document.documentElement.style.overflow='';
+  };
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLegal(); });
+  /* 拦截所有指向法务页的链接，改为弹窗打开 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href*="legal/index.html"]');
+    if(!a) return;
+    e.preventDefault();
+    var h=a.getAttribute('href')||'';
+    var i=h.indexOf('#');
+    openLegal(i>=0 ? h.slice(i) : '');
+  }, true);
 })();
 </script>
 </body></html>
