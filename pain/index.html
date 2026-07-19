@@ -538,7 +538,7 @@ function _showLogicalNow(logical){
 function showPaywall(pageEl, sid){
   removePaywall(pageEl);
   var reg=REGIONS.filter(function(x){return x.sid===sid;})[0];
-  var nm=reg?(LANG==='zh'?reg.sh:reg.en):sid;
+  var nm=reg?(LANG==='zh'?(reg.zh||reg.en||sid):(reg.en||reg.zh||sid)):sid;
   var L=LANG==='zh'
     ? {t:'『'+nm+'』为付费内容',d:'本病的推导器、证治、方药需解锁后查看。',
        b1:'购买疼痛模块（$149）',b2:'购买全站通票（$329·解锁全部模块）',
@@ -851,7 +851,7 @@ function atGrant(mods){
   var rows = REGIONS.map(function(r){
     var ok = isUnlocked(r.sid);
     var free = FREE_DISEASES.indexOf(r.sid)>=0;
-    var nm = LANG==='zh'?r.sh:r.en;
+    var nm = LANG==='zh'?(r.zh||r.en||r.sid):(r.en||r.zh||r.sid);
     return '<div class="at-item '+(ok?'at-ok':'at-lock')+'">'
       + (ok?'\u2713':'\u2715') + ' ' + nm + (free?' <span class="at-free">\u514d\u8d39</span>':'') + '</div>';
   }).join('');
