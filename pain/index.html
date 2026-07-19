@@ -575,6 +575,7 @@ function showPaywall(pageEl, sid){
   box.innerHTML='<div class="pw-box"><h2>'+L.t+'</h2><p>'+L.d+'</p>'
     +'<button class="pw-btn pw-primary" onclick="startCheckout(\'pain\')">'+L.b1+'</button>'
     +passBlock
+    +'<div style="margin-top:14px;font-size:11.5px;line-height:1.6;color:#8a7a5c;text-align:center">'+(LANG==='zh'?'完成购买即表示您同意<a href="../legal/index.html#terms" target="_blank" rel="noopener" style="color:#7a4a2b">服务条款</a>与<a href="../legal/index.html#refund" target="_blank" rel="noopener" style="color:#7a4a2b">退款政策</a>。':'By completing a purchase you agree to the <a href="../legal/index.html#terms" target="_blank" rel="noopener" style="color:#7a4a2b">Terms of Use</a> and <a href="../legal/index.html#refund" target="_blank" rel="noopener" style="color:#7a4a2b">Refund Policy</a>.')+'</div>'
     +'<div class="pw-free">'+L.free+'</div>'
     +'<div class="pw-note">'+L.note+'</div></div>';
   pageEl.appendChild(box);
