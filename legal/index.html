@@ -81,6 +81,14 @@ table.legal-tbl th { background:var(--paper-warm); font-weight:700; color:var(--
   .legal-wrap { padding:28px 16px 48px; }
   .legal-title { font-size:22px; }
 }
+
+/* ★embed 模式：被弹窗 iframe 嵌入时，只显示正文★ */
+html[data-embed="1"] .topbar,
+html[data-embed="1"] .legal-hero,
+html[data-embed="1"] .legal-nav,
+html[data-embed="1"] .footer { display: none !important; }
+html[data-embed="1"] .legal-wrap { padding-top: 8px; }
+html[data-embed="1"] body { background: #fff; }
 </style>
 </head>
 <body>
@@ -341,6 +349,12 @@ function setLang(lang){
 (function(){
   var l='en';
   try{ l = localStorage.getItem('sinomed-lang') || 'en'; }catch(e){}
+  /* 允许父页面用 ?lang= 指定语言（弹窗嵌入时保持与主站一致） */
+  try{
+    var qp=new URLSearchParams(location.search);
+    if(qp.get('lang')==='zh'||qp.get('lang')==='en') l=qp.get('lang');
+    if(qp.get('embed')==='1') document.documentElement.setAttribute('data-embed','1');
+  }catch(e){}
   setLang(l);
 })();
 /* 版权年份自动更新：起始2026，显示 2026 或 2026–当前年 */
