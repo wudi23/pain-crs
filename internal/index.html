@@ -494,15 +494,14 @@ function showPaywall(sym){
     : `<button class="mclose" onclick="location.href='../index.html'">${pickv('前往登录 →','Sign in →')}</button>`;
   /* ★全站通推荐区：仅在"一个付费模块都没买"时显示★
      已买过任一模块的人，全站通反而更贵（$329 叠加在已付款之上），故隐藏。 */
-  const passBlock = (SB_USER && OWNED_PAID===0) ? `
+  const passBlock = (OWNED_PAID===0) ? `
     <div style="margin-top:18px;padding:16px;border:2px solid #8a6d3b;border-radius:12px;background:#fffdf6;text-align:left">
       <div style="font-size:12px;font-weight:700;color:#8a6d3b;letter-spacing:.04em;margin-bottom:6px">${pickv('★ 更划算的选择','★ BETTER VALUE')}</div>
       <div style="font-size:16px;font-weight:800;color:#7a4a2b;margin-bottom:6px">${pickv('全站通行证 · $329 CAD','All-Access Pass · $329 CAD')}</div>
-      <div style="font-size:13px;color:#5d5344;line-height:1.7;margin-bottom:10px">${pickv('一次解锁全部三个收费模块：内科 $149 + 疼痛 $149 + 阿是穴 $129，单买合计 <b>$427</b>，一起买只需 <b>$329</b>，<b>立省 $98</b>。含这些模块日后的全部更新。','Unlock all three paid modules at once: Internal $149 + Pain $149 + Ashi $129. Bought separately that is <b>$427</b>; together it is <b>$329</b> — <b>you save $98</b>. All future updates included.')}</div>
       <div style="font-size:12.5px;color:#8a5a2b;background:#fdf4ec;border-left:3px solid #b5761f;padding:8px 10px;border-radius:0 6px 6px 0;margin-bottom:12px">${pickv('请注意：购买单个模块后，后续只能继续按模块单独购买，<b>不提供差价升级到全站通</b>。若你日后可能还需要其他模块，现在一起购买是唯一更省的时机。','Please note: once you buy a single module, further modules are purchased one by one — <b>there is no upgrade credit toward the all-access pass</b>. If you may want other modules later, buying together now is the only cheaper option.')}</div>
       <button class="mclose" style="background:#8a6d3b;width:100%" onclick="buyAllAccess()">${pickv('解锁全部三个模块 · $329 →','Unlock all three · $329 →')}</button>
     </div>` : '';
-  box.innerHTML=`<div class="mback" onclick="closeMat()"></div><div class="mcard">
+  box.innerHTML=`<div class="mback" onclick="closeMat()"></div><div class="mcard"><button aria-label="Close" onclick="closeMat()" style="position:sticky;top:-4px;float:right;z-index:5;margin:-8px -6px 0 0;width:32px;height:32px;line-height:30px;text-align:center;font-size:20px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#7a6a55;cursor:pointer;padding:0">&times;</button>
     <div class="mhead">🔒 ${esc(dz)} · ${pickv('需解锁','Locked')}</div>
     <p>${pickv('本病属付费内容。内科临床推理系统全部解锁 ','This disease is paid content. Unlock the entire Internal Medicine Clinical Reasoning System for ')}<b>$149 CAD</b>${pickv('（一次买断，永久解锁），或持全站通行证解锁。',' (one-time purchase, permanent unlock), or unlock with the all-access pass.')}</p>
     <p style="font-size:13.5px;color:#6b5d43">${pickv('免费开放：','Free access: ')}${DATA.free_diseases.map(f=>{const _o=(DATA.diseases_live.find(d=>d.id===f)||{});return esc(pickv(_o.zh||f, _o.en||_o.zh||f));}).join(pickv('、',', '))}${pickv('。','.')}</p>
@@ -962,4 +961,61 @@ go('home');
 })();
 </script>
 
+<script>
+/* Esc 键关闭付费弹窗 */
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ try{ closeMat(); }catch(err){} } });
+</script>
+<script>
+/* ★法务弹窗：点条款/退款/隐私链接时在弹窗内阅读，不跳走、不开新标签页★
+   手机上尤其重要——开新标签页会打断购买流程，很多人回不来。 */
+(function(){
+  var BASE='../legal/index.html';
+  function curLang(){
+    try{ return localStorage.getItem('sinomed-lang')==='zh' ? 'zh' : 'en'; }catch(e){ return 'en'; }
+  }
+  function build(){
+    if(document.getElementById('legalModal')) return;
+    var wrap=document.createElement('div');
+    wrap.id='legalModal';
+    wrap.style.cssText='display:none;position:fixed;inset:0;z-index:9999;background:rgba(30,25,20,.55);align-items:center;justify-content:center;padding:16px';
+    wrap.innerHTML =
+      '<div style="position:relative;background:#fff;border-radius:14px;max-width:720px;width:100%;height:min(84vh,760px);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e6e1d8;flex:0 0 auto">'
+      +   '<span id="legalModalTitle" style="font-size:14px;font-weight:700;color:#5d5344"></span>'
+      +   '<button id="legalModalClose" aria-label="Close" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#7a6a55;font-size:20px;line-height:32px;cursor:pointer;padding:0">&times;</button>'
+      + '</div>'
+      + '<iframe id="legalModalFrame" title="Legal" style="border:0;width:100%;flex:1 1 auto"></iframe>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    wrap.addEventListener('click',function(e){ if(e.target===wrap) closeLegal(); });
+    document.getElementById('legalModalClose').addEventListener('click',closeLegal);
+  }
+  window.openLegal=function(hash){
+    build();
+    var zh = curLang()==='zh';
+    var titles = {'#terms': zh?'服务条款':'Terms of Use',
+                  '#refund': zh?'退款政策':'Refund Policy',
+                  '#privacy': zh?'隐私政策':'Privacy Policy'};
+    document.getElementById('legalModalTitle').textContent = titles[hash] || (zh?'条款与政策':'Legal');
+    document.getElementById('legalModalFrame').src = BASE+'?embed=1&lang='+curLang()+(hash||'');
+    document.getElementById('legalModal').style.display='flex';
+    document.documentElement.style.overflow='hidden';
+  };
+  window.closeLegal=function(){
+    var m=document.getElementById('legalModal');
+    if(m){ m.style.display='none'; document.getElementById('legalModalFrame').src='about:blank'; }
+    document.documentElement.style.overflow='';
+  };
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLegal(); });
+  /* 拦截所有指向法务页的链接，改为弹窗打开 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href*="legal/index.html"]');
+    if(!a) return;
+    e.preventDefault();
+    var h=a.getAttribute('href')||'';
+    var i=h.indexOf('#');
+    openLegal(i>=0 ? h.slice(i) : '');
+  }, true);
+})();
+</script>
 </body></html>
