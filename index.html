@@ -373,6 +373,11 @@ html[lang="zh"] .t-en{display:none;}
   border-top: 1px solid var(--border);
 }
 
+
+/* 语言切换的按钮类元素需保持 inline-block（.t-en 默认 inline 会破坏按钮外观） */
+a.pr-btn.t-en, a.pr-btn.t-zh { display: none; }
+html[lang="en"] a.pr-btn.t-en { display: inline-block; }
+html[lang="zh"] a.pr-btn.t-zh { display: inline-block; }
 </style>
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#7a4a2b">
@@ -721,10 +726,14 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
           <div class="pr-name"><span class="t-en">🪡 FSN Clinical Manual</span><span class="t-zh">🪡 浮针临床手册</span></div>
           <div class="pr-free-scope"><span class="t-en">Included with the FSN online course</span><span class="t-zh">浮针在线课程附赠</span></div>
         </div>
-        <div class="pr-cta" id="pr-cta-fsn"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
+        <div class="pr-cta" id="pr-cta-fsn"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><a class="pr-btn t-en" href="https://fsn-acupuncture.teachable.com/l/pdp/fu-s-subcutaneous-needling-fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">Enroll</a><a class="pr-btn t-zh" href="https://fsn-acupuncture.teachable.com/l/pdp/fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">报名课程</a><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
       </div>
     </div>
-    <div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
+    <div class="pricing-footnote" style="margin-top:16px;color:var(--ink-muted);">
+  <span class="t-en">By completing a purchase you agree to the <a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">Terms of Use</a> and <a href="legal/index.html#refund" target="_blank" rel="noopener" style="color:var(--accent);">Refund Policy</a>.</span>
+  <span class="t-zh">完成购买即表示您同意<a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">服务条款</a>与<a href="legal/index.html#refund" target="_blank" rel="noopener" style="color:var(--accent);">退款政策</a>。</span>
+</div>
+<div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
   </div>
 </div>
 
@@ -798,6 +807,13 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
     <div id="form-up" style="display:none">
       <div class="mfield"><label>Email</label><input type="email" id="up-email" placeholder="you@example.com"></div>
       <div class="mfield"><label>Password (min 6 chars)</label><input type="password" id="up-pw" placeholder="••••••••"></div>
+      <label id="agree-row" style="display:flex;align-items:flex-start;gap:9px;margin:14px 0 6px;font-size:13px;line-height:1.55;color:var(--ink-mid);cursor:pointer;">
+        <input type="checkbox" id="up-agree" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;cursor:pointer;">
+        <span>
+          <span class="t-en">I have read and agree to the <a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">Terms of Use</a> and <a href="legal/index.html#privacy" target="_blank" rel="noopener" style="color:var(--accent);">Privacy Policy</a>.</span>
+          <span class="t-zh">我已阅读并同意<a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">服务条款</a>和<a href="legal/index.html#privacy" target="_blank" rel="noopener" style="color:var(--accent);">隐私政策</a>。</span>
+        </span>
+      </label>
       <button class="mbtn" onclick="doSignUp()">Create Account</button>
     </div>
     <div class="mmsg" id="mmsg"></div>
@@ -849,7 +865,12 @@ async function renderPricing(){
   /* ★FSN：兑换码模块，全站通不解锁，只认 module_id='fsn'。
      已有权限时把"兑换"换成"进入"，避免已兑换的人还看到兑换按钮。★ */
   const fsnEl = document.getElementById('pr-cta-fsn');
-  if(fsnEl && owned.has('fsn')) fsnEl.innerHTML = prOwnedHTML('/fsn/');
+  if(fsnEl && owned.has('fsn')){
+    /* 已兑换：显示"已拥有 + 进入"，同时保留报名入口（可能想推荐给同行） */
+    fsnEl.innerHTML = prOwnedHTML('/fsn/')
+      + '<a class="pr-btn ghost t-en" href="https://fsn-acupuncture.teachable.com/l/pdp/fu-s-subcutaneous-needling-fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">Course</a>'
+      + '<a class="pr-btn ghost t-zh" href="https://fsn-acupuncture.teachable.com/l/pdp/fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">课程页</a>';
+  }
 
   // Per-module CTAs
   Object.keys(PRICING).forEach(mid => {
@@ -1130,11 +1151,21 @@ async function doSignIn(){
   setMsg('Signing in…','');
   const {error}=await sb.auth.signInWithPassword({email,password:pw});
   if(error) setMsg(error.message,'err');
-  else closeModal();
+  else { closeModal(); try{ await renderPricing(); }catch(e){} }
 }
 async function doSignUp(){
   const email=document.getElementById('up-email').value.trim();
   const pw=document.getElementById('up-pw').value;
+  /* ★必须勾选同意条款才能注册（默认不勾）★ */
+  const agree=document.getElementById('up-agree');
+  if(agree && !agree.checked){
+    const zh = document.documentElement.getAttribute('lang')==='zh';
+    setMsg(zh?'请先阅读并勾选同意服务条款与隐私政策。':'Please read and accept the Terms of Use and Privacy Policy first.','err');
+    const row=document.getElementById('agree-row');
+    if(row){ row.style.outline='2px solid var(--vermillion)'; row.style.outlineOffset='4px'; row.style.borderRadius='6px';
+      setTimeout(function(){ row.style.outline='none'; }, 2200); }
+    return;
+  }
   setMsg('Creating account…','');
   const {error}=await sb.auth.signUp({email,password:pw});
   if(error) setMsg(error.message,'err');
@@ -1153,6 +1184,9 @@ sb.auth.onAuthStateChange((event, session)=>{
   document.getElementById('user-email').style.display = user ? '' : 'none';
   document.getElementById('btn-signin').style.display = user ? 'none' : '';
   document.getElementById('btn-signout').style.display = user ? '' : 'none';
+
+  /* ★登录/登出后立即重算购买状态，避免显示过时的"购买"按钮导致重复付费★ */
+  try{ renderPricing(); }catch(e){}
 });
 
 async function sbHandlePainPurchase() {
@@ -1252,5 +1286,58 @@ async function sbHandlePainPurchase() {
     <div class="mmsg" id="fsn-modal-msg"></div>
   </div>
 </div>
+<script>
+/* ★法务弹窗：点条款/退款/隐私链接时在弹窗内阅读，不跳走、不开新标签页★
+   手机上尤其重要——开新标签页会打断购买流程，很多人回不来。 */
+(function(){
+  var BASE='legal/index.html';
+  function curLang(){
+    try{ return localStorage.getItem('sinomed-lang')==='zh' ? 'zh' : 'en'; }catch(e){ return 'en'; }
+  }
+  function build(){
+    if(document.getElementById('legalModal')) return;
+    var wrap=document.createElement('div');
+    wrap.id='legalModal';
+    wrap.style.cssText='display:none;position:fixed;inset:0;z-index:9999;background:rgba(30,25,20,.55);align-items:center;justify-content:center;padding:16px';
+    wrap.innerHTML =
+      '<div style="position:relative;background:#fff;border-radius:14px;max-width:720px;width:100%;height:min(84vh,760px);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e6e1d8;flex:0 0 auto">'
+      +   '<span id="legalModalTitle" style="font-size:14px;font-weight:700;color:#5d5344"></span>'
+      +   '<button id="legalModalClose" aria-label="Close" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#7a6a55;font-size:20px;line-height:32px;cursor:pointer;padding:0">&times;</button>'
+      + '</div>'
+      + '<iframe id="legalModalFrame" title="Legal" style="border:0;width:100%;flex:1 1 auto"></iframe>'
+      + '</div>';
+    document.body.appendChild(wrap);
+    wrap.addEventListener('click',function(e){ if(e.target===wrap) closeLegal(); });
+    document.getElementById('legalModalClose').addEventListener('click',closeLegal);
+  }
+  window.openLegal=function(hash){
+    build();
+    var zh = curLang()==='zh';
+    var titles = {'#terms': zh?'服务条款':'Terms of Use',
+                  '#refund': zh?'退款政策':'Refund Policy',
+                  '#privacy': zh?'隐私政策':'Privacy Policy'};
+    document.getElementById('legalModalTitle').textContent = titles[hash] || (zh?'条款与政策':'Legal');
+    document.getElementById('legalModalFrame').src = BASE+'?embed=1&lang='+curLang()+(hash||'');
+    document.getElementById('legalModal').style.display='flex';
+    document.documentElement.style.overflow='hidden';
+  };
+  window.closeLegal=function(){
+    var m=document.getElementById('legalModal');
+    if(m){ m.style.display='none'; document.getElementById('legalModalFrame').src='about:blank'; }
+    document.documentElement.style.overflow='';
+  };
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLegal(); });
+  /* 拦截所有指向法务页的链接，改为弹窗打开 */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('a[href*="legal/index.html"]');
+    if(!a) return;
+    e.preventDefault();
+    var h=a.getAttribute('href')||'';
+    var i=h.indexOf('#');
+    openLegal(i>=0 ? h.slice(i) : '');
+  }, true);
+})();
+</script>
 </body>
 </html>
