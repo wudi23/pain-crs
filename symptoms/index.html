@@ -1,1 +1,1662 @@
+<!DOCTYPE html>
+<html lang="zh" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SinoMed 症状学 · Symptoms</title>
+<meta name="description" content="SinoMed 症状学模块：以气机升降出入为框架的症状推导系统 | Symptom reasoning through the qi-dynamic framework">
+<meta name="theme-color" content="#1f5c61">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231f5c61'/%3E%3Cg stroke='%23fff' stroke-width='4.5' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 42 V23 M21 23 l-6.5 7.5 M21 23 l6.5 7.5'/%3E%3Cpath d='M43 22 V41 M43 41 l-6.5 -7.5 M43 41 l6.5 -7.5'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{
+  --pri:#1f5c61;        /* 黛青 · 主色（首页入口卡边线同此） */
+  --pri-deep:#123c40;
+  --pri-soft:#e7f0ef;
+  --pri-line:#c9dbd9;
+  --ink:#232f31;
+  --ink-soft:#5a6b6d;
+  --bg:#f5f8f7;
+  --card:#ffffff;
+  --sand:#f3ede2;       /* 暖沙 · 经文引文底 */
+  --sand-line:#e0d5bf;
+  --shi:#a8592f;        /* 实 · 赭 */
+  --xu:#48699c;         /* 虚 · 青蓝 */
+  --mix:#7a6f4e;        /* 夹杂 · 苍金 */
+  --back:#7a4a2b;       /* 平台悬浮返回钮规范色 */
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:16px}
+h1,h2,.cite,.tagline,.bb-line,.tp-line{font-family:Georgia,"Songti SC","Noto Serif SC","STSong",serif}
+a{color:var(--pri);text-decoration:none}
 
+/* 顶栏 */
+#topbar{position:sticky;top:0;z-index:100;background:var(--pri);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 16px;box-shadow:0 1px 6px rgba(18,60,64,.25)}
+#topbar .logo{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.5px}
+#topbar .logo svg{display:block}
+#topbar .sp{flex:1}
+#topbar a.homelink{color:#dcebe9;font-size:14px}
+#topbar button{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:8px;padding:4px 12px;font-size:14px;cursor:pointer}
+#installbtn{display:none}
+
+#app{max-width:860px;margin:0 auto;padding:20px 16px 80px}
+
+/* 首页 */
+.hero{padding:26px 4px 8px}
+.hero h1{font-size:26px;color:var(--pri-deep);letter-spacing:1px}
+.tagline{margin-top:8px;color:var(--ink-soft);font-size:16px}
+.searchbox{position:relative;margin:18px 0 6px}
+#q{width:100%;padding:12px 16px;font-size:16px;border:1.5px solid var(--pri-line);border-radius:var(--radius);background:var(--card);color:var(--ink)}
+#q:focus{outline:none;border-color:var(--pri)}
+.qres{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--pri-line);border-radius:var(--radius);box-shadow:0 8px 28px rgba(18,60,64,.14);z-index:60;max-height:60vh;overflow:auto}
+.qres.open{display:block}
+.qr-item{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--pri-soft)}
+.qr-item b{font-weight:600}
+.qr-item.qr-off{color:var(--ink-soft)}
+.qr-item.qr-off i,.chip-planned i{font-style:normal;font-size:11px;background:var(--pri-soft);color:var(--ink-soft);border-radius:6px;padding:1px 6px;margin-left:6px}
+.qr-ft span{font-size:12px;color:var(--ink-soft)}
+.qr-alias{padding:10px 14px;border-bottom:1px solid var(--pri-soft);background:var(--pri-soft)}
+.qr-alias-h{font-size:12px;color:var(--pri-deep);font-weight:700;margin-bottom:4px}
+.qr-none{padding:14px;color:var(--ink-soft)}
+
+section h2{font-size:19px;color:var(--pri-deep);margin:26px 0 10px}
+.hint{font-size:13px;color:var(--ink-soft);margin-top:6px}
+
+/* 气机总图 */
+.blocks{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:10px}
+.block{background:var(--card);border:1.5px solid var(--pri-line);border-radius:var(--radius);padding:14px 8px;text-align:center;transition:border-color .15s}
+.block:hover{border-color:var(--pri)}
+.block-zh{display:block;font-size:20px;font-weight:700;color:var(--pri-deep);font-family:Georgia,"Songti SC","Noto Serif SC",serif}
+.block-n{display:inline-block;margin-top:6px;font-size:12px;color:#fff;background:var(--pri);border-radius:10px;padding:0 8px}
+
+/* 十纲 */
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+.cat{background:var(--card);border:1.5px solid var(--pri-line);border-radius:var(--radius);padding:12px 14px;display:block}
+.cat-on:hover{border-color:var(--pri)}
+.cat-off{opacity:.55}
+.cat-nm{display:block;font-weight:600}
+.cat-ct{display:block;font-size:12px;color:var(--ink-soft);margin-top:2px}
+
+/* 症状卡列表 */
+.symcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:10px}
+.symcard{background:var(--card);border:1.5px solid var(--pri-line);border-radius:var(--radius);padding:14px 16px;transition:border-color .15s,transform .15s}
+.symcard:hover{border-color:var(--pri);transform:translateY(-2px)}
+.symcard-nm{font-size:18px;font-weight:700;color:var(--pri-deep)}
+.symcard-sub{font-size:12px;color:var(--ink-soft);margin:2px 0 8px}
+.symcard-dirs{display:flex;flex-wrap:wrap;gap:6px}
+.mini{font-size:12px;border-radius:8px;padding:2px 8px;background:var(--pri-soft);color:var(--ink)}
+.mini.xs-shi{box-shadow:inset 3px 0 0 var(--shi)}
+.mini.xs-xu{box-shadow:inset 3px 0 0 var(--xu)}
+.mini.xs-mix{box-shadow:inset 3px 0 0 var(--mix)}
+
+/* 推导器预告 */
+.deriver{margin-top:28px;background:linear-gradient(135deg,var(--pri-deep),var(--pri));color:#eaf4f3;border-radius:var(--radius);padding:18px 20px}
+.deriver h2{color:#fff;margin:0 0 6px}
+.deriver p{font-size:14px;color:#cfe3e1}
+
+.foot{margin-top:36px;text-align:center;font-size:12px;color:var(--ink-soft)}
+
+/* 详情 */
+.backlink{display:inline-block;margin:4px 0 12px;font-size:14px}
+.detail .d-head h1{font-size:28px;color:var(--pri-deep)}
+.aka{font-size:13px;color:var(--ink-soft);margin-top:4px}
+.sec{margin-top:24px}
+.sec h2{display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--pri-line);padding-bottom:6px}
+.sec-n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--pri);color:#fff;font-size:14px;font-family:inherit}
+.what{background:var(--card);border:1px solid var(--pri-line);border-radius:var(--radius);padding:14px 16px}
+
+/* 方向卡 + 推导链（signature） */
+.dir{background:var(--card);border:1.5px solid var(--pri-line);border-left:5px solid var(--pri);border-radius:var(--radius);padding:14px 16px;margin-top:14px}
+.dir-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.dir-label{font-weight:700;font-size:17px;color:var(--pri-deep)}
+.wbadge{font-size:12px;border-radius:8px;padding:2px 9px;color:#fff;white-space:nowrap}
+.wbadge.w3{background:var(--pri)}
+.wbadge.w2{background:#5f8b87}
+.wbadge.w1{background:#9db6b3}
+.xsbadge{font-size:12px;border-radius:8px;padding:2px 9px;color:#fff;white-space:nowrap}
+.xsbadge.xs-shi{background:var(--shi)}
+.xsbadge.xs-xu{background:var(--xu)}
+.xsbadge.xs-mix{background:var(--mix)}
+.dir-tags{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:8px}
+.dir-meta{font-size:12px;color:var(--ink-soft)}
+.chip{display:inline-block;font-size:13px;border-radius:8px;padding:3px 10px;background:var(--pri-soft);color:var(--pri-deep);border:1px solid var(--pri-line)}
+.chip-link:hover,.chip-tag:hover,.chip-xm:hover{border-color:var(--pri);background:#dcebe9}
+.chip-planned{color:var(--ink-soft);border-style:dashed;cursor:default}
+.chain{margin-top:12px}
+.step{display:flex;gap:12px;align-items:flex-start}
+.step-n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--pri-soft);border:1.5px solid var(--pri);color:var(--pri-deep);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:2px}
+.step-t{flex:1}
+.step-arrow{color:var(--pri);font-size:15px;margin:2px 0 2px 8px;line-height:1}
+.cite{margin-top:12px;background:var(--sand);border:1px solid var(--sand-line);border-radius:8px;padding:10px 14px;font-size:14.5px;color:#4a4232}
+.cite-l{display:inline-block;font-size:11px;color:#8a7a56;border:1px solid var(--sand-line);border-radius:6px;padding:0 6px;margin-right:8px;vertical-align:1px;font-family:-apple-system,sans-serif}
+
+/* 虚实鉴别关卡 */
+.bianbie{background:var(--card);border:1.5px solid var(--pri);border-radius:var(--radius);padding:14px 16px;margin-top:12px}
+.bb-title{font-weight:700;color:var(--pri-deep);font-size:16px}
+.bb-keyq{margin-top:8px;background:var(--pri-soft);border-radius:8px;padding:9px 12px;font-weight:600}
+.bb-keyq span{display:inline-block;font-size:11px;color:#fff;background:var(--pri);border-radius:6px;padding:1px 7px;margin-right:8px;font-weight:400;vertical-align:1px}
+.bb-rows{margin-top:10px;display:grid;gap:8px}
+.bb-row{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:14.5px}
+.bb-side{font-weight:700}
+.bb-line{margin-top:10px;color:var(--pri-deep);border-top:1px dashed var(--pri-line);padding-top:9px;font-size:15px}
+.note{margin-top:10px;background:var(--pri-soft);border-radius:8px;padding:9px 12px;font-size:14px}
+.note span{font-size:11px;color:#fff;background:var(--pri);border-radius:6px;padding:1px 7px;margin-right:8px}
+
+/* 伴随症状 */
+.comp{margin-top:12px}
+.comp-h{font-size:14px;color:var(--ink-soft);margin-bottom:6px}
+.comp-chips{display:flex;flex-wrap:wrap;gap:7px}
+
+/* 舌脉 */
+.tp-table{display:grid;gap:8px;margin-top:8px}
+.tp-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;background:var(--card);border:1px solid var(--pri-line);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.tp-dir{font-weight:600;color:var(--pri-deep)}
+.tp-tp b{display:inline-block;font-size:11px;color:#fff;background:var(--pri);border-radius:6px;padding:0 6px;margin-right:6px;font-weight:400}
+.tp-line{margin-top:12px;color:var(--pri-deep);font-size:15px;border-left:3px solid var(--pri);padding-left:12px}
+
+/* 跨模块 */
+.xm{display:grid;gap:10px;margin-top:8px}
+.xm-g{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.xm-l{font-size:12px;color:#fff;background:var(--pri);border-radius:6px;padding:1px 8px}
+
+/* 反查 */
+.taghits h1{font-size:22px;color:var(--pri-deep);margin-bottom:12px}
+.block-tag{margin-top:18px}
+.block-tag small{color:var(--ink-soft);font-weight:400}
+.hit{display:flex;align-items:center;flex-wrap:wrap;gap:8px;background:var(--card);border:1px solid var(--pri-line);border-radius:10px;padding:10px 14px;margin-top:8px}
+.hit:hover{border-color:var(--pri)}
+.hit-sym{font-weight:700;color:var(--pri-deep)}
+.hit-lbl{color:var(--ink-soft);font-size:14px}
+
+/* 悬浮返回（平台规范） */
+#floatback{position:fixed;right:20px;bottom:20px;z-index:9999;background:var(--back);color:#fff;border-radius:24px;padding:10px 18px;font-size:14px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+
+@media (max-width:520px){
+  .bb-row{grid-template-columns:1fr}
+  .tp-row{grid-template-columns:1fr}
+  .hero h1{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .symcard,.block{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="topbar">
+  <span class="logo">
+    <svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#ffffff" opacity="0.16"/><g stroke="#fff" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 42 V23 M21 23 l-6.5 7.5 M21 23 l6.5 7.5"/><path d="M43 22 V41 M43 41 l-6.5 -7.5 M43 41 l6.5 -7.5"/></g></svg>
+    <span class="zh">症状学</span><span class="en">Symptoms</span>
+  </span>
+  <span class="sp"></span>
+  <a class="homelink" href="../index.html"><span class="zh">首页</span><span class="en">Home</span></a>
+  <button id="installbtn" type="button"></button>
+  <button id="langbtn" type="button">EN</button>
+</div>
+<style>
+[data-lang="en"] .zh{display:none!important}
+[data-lang="zh"] .en{display:none!important}
+</style>
+<div id="app"></div>
+<script>
+"use strict";
+/* ============================================================
+   SinoMed 症状学模块 · 数据层 v1
+   受控词表 VOCAB / 证型别名 ALIASES / 全站症状总目 ROSTER / 十纲 CATS / 症状卡 SYMPTOMS
+   规范：所有展示文本均为 {zh, en} 字段对；病机标签用受控词表枚举，禁止自由文字。
+   ============================================================ */
+
+const VOCAB = {
+  tags: [
+    "升不及","升太过","降不及","降太过",
+    "出不及","出太过","入不及",
+    "枢机不利·少阳","枢机不利·中焦",
+    "通道受阻·痰","通道受阻·湿","通道受阻·瘀","通道受阻·食积",
+    "气虚","血虚","阴虚","阳虚"
+  ],
+  tag_en: {
+    "升不及": "Insufficient Ascent",
+    "升太过": "Excessive Ascent",
+    "降不及": "Insufficient Descent",
+    "降太过": "Excessive Descent",
+    "出不及": "Insufficient Exit (Outward Blocked)",
+    "出太过": "Excessive Exit (Leakage)",
+    "入不及": "Insufficient Entry (Failure to Store)",
+    "枢机不利·少阳": "Pivot Dysfunction · Shaoyang",
+    "枢机不利·中焦": "Pivot Dysfunction · Middle Jiao",
+    "通道受阻·痰": "Pathway Obstruction · Phlegm",
+    "通道受阻·湿": "Pathway Obstruction · Damp",
+    "通道受阻·瘀": "Pathway Obstruction · Blood Stasis",
+    "通道受阻·食积": "Pathway Obstruction · Food Stagnation",
+    "气虚": "Qi Deficiency",
+    "血虚": "Blood Deficiency",
+    "阴虚": "Yin Deficiency",
+    "阳虚": "Yang Deficiency"
+  },
+  loc: ["表","半表半里","上焦","中焦","下焦","全身"],
+  loc_en: {
+    "表": "Exterior",
+    "半表半里": "Half-exterior, half-interior",
+    "上焦": "Upper jiao",
+    "中焦": "Middle jiao",
+    "下焦": "Lower jiao",
+    "全身": "Whole body"
+  },
+  xushi: ["虚","实","虚实夹杂"],
+  xushi_en: { "虚": "Deficiency", "实": "Excess", "虚实夹杂": "Mixed deficiency–excess" },
+  blocks: [
+    { id: "sheng",  zh: "升",   en: "Ascent",   tags: ["升不及","升太过"] },
+    { id: "jiang",  zh: "降",   en: "Descent",  tags: ["降不及","降太过"] },
+    { id: "chu",    zh: "出",   en: "Exit",     tags: ["出不及","出太过"] },
+    { id: "ru",     zh: "入",   en: "Entry",    tags: ["入不及"] },
+    { id: "shuji",  zh: "枢机", en: "Pivot",    tags: ["枢机不利·少阳","枢机不利·中焦"] },
+    { id: "tongdao",zh: "通道", en: "Pathways", tags: ["通道受阻·痰","通道受阻·湿","通道受阻·瘀","通道受阻·食积"] },
+    { id: "huayuan",zh: "化源", en: "Source",   tags: ["气虚","血虚","阴虚","阳虚"] }
+  ]
+};
+
+/* 证型 → 气机标签 模糊映射（宽进严出：前台查询宽，后台计分严） */
+const ALIASES = [
+  { zh: "肝气郁结", en: "Liver qi constraint", tags: ["出不及","枢机不利·少阳"] },
+  { zh: "肝郁气滞", en: "Liver qi stagnation", tags: ["出不及","枢机不利·少阳"] },
+  { zh: "肝郁",     en: "Liver constraint",    tags: ["出不及","枢机不利·少阳"] },
+  { zh: "中气下陷", en: "Sinking of middle qi", tags: ["升不及","气虚"] },
+  { zh: "脾虚",     en: "Spleen deficiency",   tags: ["气虚","升不及"] },
+  { zh: "脾气虚",   en: "Spleen qi deficiency", tags: ["气虚","升不及"] },
+  { zh: "心肾不交", en: "Heart–kidney non-interaction", tags: ["入不及","降不及"] },
+  { zh: "痰湿中阻", en: "Phlegm-damp obstructing the middle", tags: ["通道受阻·痰","通道受阻·湿","枢机不利·中焦"] },
+  { zh: "阴虚火旺", en: "Yin deficiency with effulgent fire", tags: ["阴虚","入不及"] },
+  { zh: "卫表不固", en: "Unconsolidated defensive exterior", tags: ["气虚","出太过"] },
+  { zh: "表虚不固", en: "Exterior deficiency, failing to secure", tags: ["气虚","出太过"] },
+  { zh: "营卫不和", en: "Ying–wei disharmony", tags: ["出太过"] },
+  { zh: "阳明腑实", en: "Yangming bowel excess", tags: ["降不及","通道受阻·食积"] },
+  { zh: "少阳证",   en: "Shaoyang pattern",    tags: ["枢机不利·少阳"] },
+  { zh: "少阳枢机不利", en: "Shaoyang pivot dysfunction", tags: ["枢机不利·少阳"] },
+  { zh: "湿热内蕴", en: "Damp-heat brewing internally", tags: ["通道受阻·湿"] },
+  { zh: "食积",     en: "Food stagnation",     tags: ["通道受阻·食积"] },
+  { zh: "食积化热", en: "Food stagnation transforming into heat", tags: ["通道受阻·食积"] },
+  { zh: "肾阳虚",   en: "Kidney yang deficiency", tags: ["阳虚"] },
+  { zh: "肾阴虚",   en: "Kidney yin deficiency", tags: ["阴虚"] },
+  { zh: "气虚发热", en: "Qi-deficiency fever", tags: ["气虚","升不及"] },
+  { zh: "甘温除热", en: "Sweet-warm method to relieve heat", tags: ["气虚","升不及"] },
+  { zh: "火郁",     en: "Constrained fire",    tags: ["出不及"] },
+  { zh: "火郁发之", en: "Constrained fire — vent it", tags: ["出不及"] },
+  { zh: "外感风寒", en: "Wind-cold invasion",  tags: ["出不及"] },
+  { zh: "风寒束表", en: "Wind-cold fettering the exterior", tags: ["出不及"] },
+  { zh: "里热炽盛", en: "Blazing interior heat", tags: ["降不及","升太过"] },
+  { zh: "虚阳浮越", en: "Floating of deficient yang", tags: ["入不及","阳虚"] },
+  { zh: "湿遏热伏", en: "Damp trapping latent heat", tags: ["通道受阻·湿"] },
+  { zh: "血虚",     en: "Blood deficiency",    tags: ["血虚"] },
+  { zh: "津亏",     en: "Fluid depletion",     tags: ["阴虚","血虚"] }
+];
+
+/* 全站症状总目（78 条）。built=true 者已上线；false 者显示"待上线"，供伴随症状引用与路线图展示。 */
+const ROSTER = [
+  /* 一、寒热汗液 */
+  { id: "ehan",           zh: "恶寒",        en: "Aversion to Cold",            cat: "hanre",   built: true },
+  { id: "fare",           zh: "发热",        en: "Fever",                       cat: "hanre",   built: true },
+  { id: "hanre_wanglai",  zh: "寒热往来",    en: "Alternating Chills & Fever",  cat: "hanre",   built: true },
+  { id: "chaore",         zh: "潮热",        en: "Tidal Fever",                 cat: "hanre",   built: true },
+  { id: "zihan",          zh: "自汗",        en: "Spontaneous Sweating",        cat: "hanre",   built: true },
+  { id: "daohan",         zh: "盗汗",        en: "Night Sweats",                cat: "hanre",   built: true },
+  { id: "wuhan",          zh: "无汗",        en: "Absence of Sweating",         cat: "hanre",   built: true },
+  { id: "shouzuxinre",    zh: "手足心热",    en: "Heat in Palms & Soles",       cat: "hanre",   built: true },
+  /* 二、头面五官 */
+  { id: "toutong",   zh: "头痛",       en: "Headache",                 cat: "toumian", built: false },
+  { id: "touyun",    zh: "头晕",       en: "Dizziness",                cat: "toumian", built: false },
+  { id: "touzhong",  zh: "头重",       en: "Heavy-headedness",         cat: "toumian", built: false },
+  { id: "erming",    zh: "耳鸣",       en: "Tinnitus",                 cat: "toumian", built: false },
+  { id: "muxuan",    zh: "目眩",       en: "Swimming Vision",          cat: "toumian", built: false },
+  { id: "muchi",     zh: "目赤",       en: "Red Eyes",                 cat: "toumian", built: false },
+  { id: "kouku",     zh: "口苦",       en: "Bitter Taste",             cat: "toumian", built: false },
+  { id: "kougan",    zh: "口干",       en: "Dry Mouth",                cat: "toumian", built: false },
+  { id: "koudan",    zh: "口淡",       en: "Bland Taste",              cat: "toumian", built: false },
+  { id: "kounian",   zh: "口黏",       en: "Sticky Mouth",             cat: "toumian", built: false },
+  { id: "yangan",    zh: "咽干",       en: "Dry Throat",               cat: "toumian", built: false },
+  { id: "meiheqi",   zh: "咽中异物感", en: "Plum-pit Sensation",       cat: "toumian", built: false },
+  { id: "bisai",     zh: "鼻塞",       en: "Nasal Congestion",         cat: "toumian", built: false },
+  /* 三、胸胁心肺 */
+  { id: "xiongmen",  zh: "胸闷",   en: "Chest Oppression",       cat: "xiongxie", built: false },
+  { id: "xinji",     zh: "心悸",   en: "Palpitations",           cat: "xiongxie", built: false },
+  { id: "qiduan",    zh: "气短",   en: "Shortness of Breath",    cat: "xiongxie", built: false },
+  { id: "kesou",     zh: "咳嗽",   en: "Cough",                  cat: "xiongxie", built: false },
+  { id: "ketan",     zh: "咯痰",   en: "Expectoration of Phlegm",cat: "xiongxie", built: false },
+  { id: "chuanxi",   zh: "喘",     en: "Dyspnea / Wheezing",     cat: "xiongxie", built: false },
+  { id: "xiezhang",  zh: "胁胀",   en: "Hypochondriac Distension", cat: "xiongxie", built: false },
+  { id: "shantaixi", zh: "善太息", en: "Frequent Sighing",       cat: "xiongxie", built: false },
+  /* 四、脘腹 */
+  { id: "wanpi",     zh: "脘痞",     en: "Epigastric Stuffiness",  cat: "wanfu", built: false },
+  { id: "weizhang",  zh: "胃胀",     en: "Stomach Distension",     cat: "wanfu", built: false },
+  { id: "fuzhang",   zh: "腹胀",     en: "Abdominal Distension",   cat: "wanfu", built: false },
+  { id: "futong",    zh: "腹痛",     en: "Abdominal Pain",         cat: "wanfu", built: false },
+  { id: "changming", zh: "肠鸣",     en: "Borborygmus",            cat: "wanfu", built: false },
+  { id: "fansuan",   zh: "反酸",     en: "Acid Reflux",            cat: "wanfu", built: false },
+  { id: "aiqi",      zh: "嗳气",     en: "Belching",               cat: "wanfu", built: false },
+  { id: "eni",       zh: "呃逆",     en: "Hiccup",                 cat: "wanfu", built: false },
+  { id: "exin",      zh: "恶心呕吐", en: "Nausea & Vomiting",      cat: "wanfu", built: false },
+  /* 五、饮食口渴 */
+  { id: "nadai",          zh: "纳呆",       en: "Poor Appetite",                cat: "yinshi", built: false },
+  { id: "yiji",           zh: "易饥",       en: "Rapid Hungering",              cat: "yinshi", built: false },
+  { id: "shihoukunjuan",  zh: "食后困倦",   en: "Post-meal Drowsiness",         cat: "yinshi", built: false },
+  { id: "kouke",          zh: "口渴多饮",   en: "Thirst with Much Drinking",    cat: "yinshi", built: false },
+  { id: "kebuyuyin",      zh: "渴不欲饮",   en: "Thirst without Desire to Drink", cat: "yinshi", built: false },
+  /* 六、二便 */
+  { id: "bianmi",         zh: "便秘",       en: "Constipation",             cat: "erbian", built: false },
+  { id: "fuxie",          zh: "腹泻",       en: "Diarrhea",                 cat: "erbian", built: false },
+  { id: "dabiannianzhi",  zh: "大便黏滞",   en: "Sticky Stools",            cat: "erbian", built: false },
+  { id: "biantang",       zh: "便溏",       en: "Loose Stools",             cat: "erbian", built: false },
+  { id: "wangubuhua",     zh: "完谷不化",   en: "Undigested Food in Stool", cat: "erbian", built: false },
+  { id: "niaopin",        zh: "尿频",       en: "Frequent Urination",       cat: "erbian", built: false },
+  { id: "niaohuang",      zh: "尿黄",       en: "Dark Urine",               cat: "erbian", built: false },
+  { id: "niaoqingchang",  zh: "尿清长",     en: "Clear Copious Urine",      cat: "erbian", built: false },
+  { id: "yeniao",         zh: "夜尿",       en: "Nocturia",                 cat: "erbian", built: false },
+  { id: "longbi",         zh: "癃闭",       en: "Urinary Retention",        cat: "erbian", built: false },
+  /* 七、睡眠神志 */
+  { id: "shimian_rushu",  zh: "失眠·入睡难", en: "Insomnia · Difficulty Falling Asleep", cat: "shuimian", built: false },
+  { id: "shimian_yixing", zh: "失眠·易醒",   en: "Insomnia · Frequent Waking",           cat: "shuimian", built: false },
+  { id: "shimian_zaoxing",zh: "失眠·早醒",   en: "Insomnia · Early Waking",              cat: "shuimian", built: false },
+  { id: "duomeng",        zh: "多梦",        en: "Dream-disturbed Sleep",                cat: "shuimian", built: false },
+  { id: "shishui",        zh: "嗜睡",        en: "Somnolence",                           cat: "shuimian", built: false },
+  { id: "jianwang",       zh: "健忘",        en: "Poor Memory",                          cat: "shuimian", built: false },
+  { id: "fanzao",         zh: "烦躁",        en: "Vexation & Irritability",              cat: "shuimian", built: false },
+  { id: "qingxudiluo",    zh: "情绪低落",    en: "Low Mood",                             cat: "shuimian", built: false },
+  { id: "yijing",         zh: "易惊",        en: "Easily Startled",                      cat: "shuimian", built: false },
+  /* 八、肢体形躯 */
+  { id: "fali",      zh: "乏力",  en: "Fatigue",          cat: "zhiti", built: false },
+  { id: "zhileng",   zh: "肢冷",  en: "Cold Limbs",       cat: "zhiti", built: false },
+  { id: "mamu",      zh: "麻木",  en: "Numbness",         cat: "zhiti", built: false },
+  { id: "zhenchan",  zh: "震颤",  en: "Tremor",           cat: "zhiti", built: false },
+  { id: "choujin",   zh: "抽筋",  en: "Cramps",           cat: "zhiti", built: false },
+  { id: "yaosuan",   zh: "腰酸",  en: "Sore Lower Back",  cat: "zhiti", built: false },
+  { id: "shuizhong", zh: "水肿",  en: "Edema",            cat: "zhiti", built: false },
+  { id: "shenzhong", zh: "身重",  en: "Heavy Body",       cat: "zhiti", built: false },
+  /* 九、妇科 */
+  { id: "yuejing_xianqi",  zh: "月经先期",     en: "Early Periods",                  cat: "fuke", built: false },
+  { id: "yuejing_houqi",   zh: "月经后期",     en: "Late Periods",                   cat: "fuke", built: false },
+  { id: "yuejing_buding",  zh: "先后不定期",   en: "Irregular Cycle",                cat: "fuke", built: false },
+  { id: "liangduo",        zh: "月经量多",     en: "Heavy Menstrual Flow",           cat: "fuke", built: false },
+  { id: "liangshao",       zh: "月经量少",     en: "Scanty Menstrual Flow",          cat: "fuke", built: false },
+  { id: "tongjing",        zh: "痛经",         en: "Dysmenorrhea",                   cat: "fuke", built: false },
+  { id: "daixia",          zh: "带下异常",     en: "Abnormal Vaginal Discharge",     cat: "fuke", built: false },
+  { id: "jingqianruzhang", zh: "经前乳胀",     en: "Premenstrual Breast Distension", cat: "fuke", built: false }
+];
+
+const CATS = [
+  { id: "hanre",    zh: "寒热汗液", en: "Chills, Fever & Sweat" },
+  { id: "toumian",  zh: "头面五官", en: "Head, Face & Sense Organs" },
+  { id: "xiongxie", zh: "胸胁心肺", en: "Chest, Flanks, Heart & Lung" },
+  { id: "wanfu",    zh: "脘腹",     en: "Epigastrium & Abdomen" },
+  { id: "yinshi",   zh: "饮食口渴", en: "Appetite & Thirst" },
+  { id: "erbian",   zh: "二便",     en: "Bowels & Urination" },
+  { id: "shuimian", zh: "睡眠神志", en: "Sleep & Spirit" },
+  { id: "zhiti",    zh: "肢体形躯", en: "Limbs & Body" },
+  { id: "fuke",     zh: "妇科",     en: "Gynecology" },
+  { id: "shemai",   zh: "舌脉验证", en: "Tongue & Pulse Verification", special: true }
+];
+
+/* ============================================================
+   第一纲 · 寒热汗液（8 症）
+   ============================================================ */
+const SYMPTOMS = {
+
+  /* ---------------- 恶寒 ---------------- */
+  "ehan": {
+    id: "ehan", cat: "hanre",
+    name: { zh: "恶寒", en: "Aversion to Cold" },
+    aka: { zh: ["畏寒", "怕冷", "恶风"], en: ["Fear of cold (wei han)", "Cold intolerance", "Aversion to wind"] },
+    what: {
+      zh: "自觉怕冷。经典分两类：加衣被、近火取暖而不减者为恶寒；得温则缓者为畏寒。一词之差，虚实迥异——恶寒多因阳气被遏而不达，畏寒多因阳气本亏而不足。另有恶风者，遇风则恶、避之则缓，属表虚不固，较恶寒为轻。本卡以恶寒／畏寒的虚实鉴别为纲。",
+      en: "A subjective feeling of cold. Classically divided in two: cold that is NOT relieved by adding clothes or sitting by a fire is aversion to cold (wu han); cold that IS relieved by warmth is fear of cold (wei han). One word apart, yet deficiency and excess diverge completely — aversion to cold usually means yang qi is obstructed and not reaching the surface, while fear of cold means yang qi itself is insufficient. Aversion to wind — discomfort only on exposure to wind, eased by avoiding it — indicates an unconsolidated exterior and is the mildest form. This card is organized around the deficiency–excess differentiation."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "外寒束表，卫阳郁遏", en: "External cold fetters the exterior; defensive yang is constrained" },
+        tags: ["出不及"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defensive level" },
+        nature: { zh: "寒", en: "Cold" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "肌表的温煦全赖卫阳外达——卫气温分肉、充皮肤、司腠理开阖", en: "Surface warmth depends entirely on defensive yang reaching outward — defensive qi warms the flesh, fills the skin, and governs the opening and closing of the pores" },
+          { zh: "寒性收引，外袭肌表，腠理闭塞", en: "Cold by nature contracts and constricts; striking the exterior, it seals the interstices" },
+          { zh: "卫阳被遏于内，出而不得（出不及）——阳气不是不足，是不达", en: "Defensive yang is trapped inside, unable to exit (insufficient exit) — yang is not lacking, it is not arriving" },
+          { zh: "分肉失于温煦，故恶寒；因阳气未亏，虽加衣被、近火而不减", en: "The flesh loses its warmth, hence aversion to cold; since yang itself is intact, adding clothes or approaching warmth brings no relief" }
+        ],
+        cite: {
+          zh: "《灵枢·本藏》：卫气者，所以温分肉，充皮肤，肥腠理，司开阖者也。《素问·举痛论》：寒则气收。",
+          en: "Lingshu · Benzang: Defensive qi warms the flesh, fills the skin, thickens the interstices, and governs opening and closing. Suwen · Jutong Lun: With cold, qi contracts."
+        },
+        companions: [
+          { id: "fare",    note: { zh: "卫阳郁而化热，故恶寒发热并见", en: "Constrained defensive yang turns to heat — chills and fever together" } },
+          { id: "wuhan",   note: { zh: "腠理闭则玄府不开", en: "Sealed interstices, closed sweat pores" } },
+          { id: "toutong", note: { zh: "寒凝经脉，头身疼痛", en: "Cold congeals the channels — head and body pain" } },
+          { id: "bisai",   note: { zh: "肺卫被郁，鼻窍不利", en: "Lung-defensive constraint blocks the nose" } }
+        ],
+        tongue: { zh: "舌苔薄白", en: "Thin white coating" },
+        pulse:  { zh: "脉浮紧", en: "Floating, tight" }
+      },
+      {
+        id: "d2",
+        label: { zh: "阳气亏虚，温煦无力（畏寒）", en: "Yang deficiency failing to warm (fear of cold)" },
+        tags: ["阳虚"], loc: "全身",
+        organ: { zh: "脾肾", en: "Spleen & kidney" },
+        nature: { zh: "寒", en: "Cold" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "肾阳为一身阳气之根，脾阳赖之以运——化源层面的阳气总量不足", en: "Kidney yang is the root of the body’s yang, and spleen yang depends on it — at the generative-source level, total yang is insufficient" },
+          { zh: "阳虚则温煦、气化、推动皆不及——非被遏，乃本亏", en: "With yang deficient, warming, transformation, and propulsion all fall short — nothing is blocking it; it is simply lacking" },
+          { zh: "肌表、四末、脏腑同失温养，故周身畏冷、四肢不温", en: "Surface, limbs, and organs all lose warmth: whole-body cold intolerance with cool limbs" },
+          { zh: "外来热力可暂补其不足，故得温则减、喜暖蜷卧——与恶寒之加衣不减恰成对照", en: "External warmth temporarily supplements the deficit, so warming relieves it — the exact mirror of aversion to cold, which clothing cannot ease" }
+        ],
+        companions: [
+          { id: "zhileng",       note: { zh: "阳不达四末", en: "Yang fails to reach the extremities" } },
+          { id: "biantang",      note: { zh: "脾阳不运则便溏", en: "Spleen yang fails to transform — loose stools" } },
+          { id: "niaoqingchang", note: { zh: "肾阳不化则尿清长", en: "Kidney yang fails to transform fluids — clear copious urine" } },
+          { id: "yeniao",        note: { zh: "阳虚不摄，夜尿频多", en: "Deficient yang cannot contain — nocturia" } },
+          { id: "fali",          note: { zh: "阳气推动无力", en: "Weak propulsion — fatigue" } }
+        ],
+        tongue: { zh: "舌淡胖，苔白滑", en: "Pale, swollen tongue with white slippery coating" },
+        pulse:  { zh: "脉沉迟无力", en: "Deep, slow, forceless" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "多穿衣、烤火之后，怕冷减不减？", en: "Does adding clothes or sitting by a heater actually relieve the cold?" },
+      rows: [
+        { side: { zh: "实（恶寒）", en: "Excess (aversion to cold)" },
+          feats: { zh: "加衣不减；多兼发热、无汗、头身痛；新起病", en: "Not relieved by clothing; usually with fever, no sweating, head and body aches; recent onset" } },
+        { side: { zh: "虚（畏寒）", en: "Deficiency (fear of cold)" },
+          feats: { zh: "得温则减；多兼肢冷、便溏、夜尿清长；久病渐起", en: "Relieved by warmth; usually with cold limbs, loose stools, clear nocturia; gradual, chronic course" } }
+      ],
+      line: { zh: "一问取暖能否缓解，虚实立判：能缓解者阳本亏，不能缓解者阳被遏。", en: "One question — does warming help? — settles it: if warmth relieves, yang is deficient; if it does not, yang is obstructed." }
+    },
+    xm: {
+      internal: [ { id: "cold", zh: "感冒", en: "Common Cold" } ],
+      points: [
+        { code: "LI4",  zh: "合谷", py: "Hegu" },
+        { code: "LU7",  zh: "列缺", py: "Lieque" },
+        { code: "GB20", zh: "风池", py: "Fengchi" },
+        { code: "GV14", zh: "大椎", py: "Dazhui" },
+        { code: "CV4",  zh: "关元", py: "Guanyuan" }
+      ],
+      formulas: [
+        { py: "mahuangtang", zh: "麻黄汤", en: "Ma Huang Tang" },
+        { py: "guizhitang",  zh: "桂枝汤", en: "Gui Zhi Tang" },
+        { py: "sinitang",    zh: "四逆汤", en: "Si Ni Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 发热 ---------------- */
+  "fare": {
+    id: "fare", cat: "hanre",
+    name: { zh: "发热", en: "Fever" },
+    aka: { zh: ["身热", "低热", "高热"], en: ["Generalized heat", "Low-grade fever", "High fever"] },
+    what: {
+      zh: "体温升高，或体温不高而自觉发热。第一步永远是辨热型：恶寒发热并见者病在表；但热不寒者病在里；寒热往来者病在枢机；发有定时者为潮热——后两者另有专卡。热型，就是气机受困位置的坐标。",
+      en: "Elevated body temperature, or a subjective feeling of heat without measurable fever. The first step is always to identify the fever pattern: fever WITH chills means the exterior; fever WITHOUT chills means the interior; alternating chills and fever means the pivot; fever at fixed times is tidal fever — the latter two have their own cards. The fever pattern is the coordinate of where the qi dynamic is trapped."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "外邪袭表，正邪交争", en: "A pathogen strikes the exterior; upright and evil contend" },
+        tags: ["出不及"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defensive level" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "邪犯肌表，卫气起而抗邪，趋集于表", en: "A pathogen invades the surface; defensive qi rises to resist and masses at the exterior" },
+          { zh: "邪正相争，卫阳郁滞而不得宣散（出不及）", en: "As pathogen and upright qi contend, defensive yang becomes constrained and cannot diffuse (insufficient exit)" },
+          { zh: "气有余便是火——郁则生热，故发热", en: "Accumulated qi becomes fire — constraint generates heat, hence fever" },
+          { zh: "卫阳既郁于争，分肉又失其温，故发热与恶寒并见——并见者，表证之的据", en: "Yang is tied up in the struggle while the flesh loses its warming, so fever and chills appear together — their co-presence is the hallmark of an exterior pattern" }
+        ],
+        companions: [
+          { id: "ehan",    note: { zh: "并见恶寒为表证铁证", en: "Chills alongside fever — hard evidence of an exterior pattern" } },
+          { id: "wuhan",   note: { zh: "风寒者腠理闭而无汗", en: "In wind-cold the pores seal — no sweating" } },
+          { id: "toutong", note: { zh: "经气不利，头身疼痛", en: "Obstructed channel qi — head and body pain" } },
+          { id: "bisai",   note: { zh: "肺窍不利", en: "Blocked lung orifice" } }
+        ],
+        tongue: { zh: "舌苔薄白或薄黄", en: "Thin white or thin yellow coating" },
+        pulse:  { zh: "脉浮", en: "Floating" }
+      },
+      {
+        id: "d2",
+        label: { zh: "里热炽盛，蒸腾于外", en: "Blazing interior heat steaming outward" },
+        tags: ["降不及","升太过"], loc: "中焦",
+        organ: { zh: "阳明胃肠", en: "Yangming stomach & intestines" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "邪入于里，从阳化热；阳明多气多血，最易酿成大热", en: "The pathogen enters the interior and transforms into heat; yangming, rich in qi and blood, most readily brews great heat" },
+          { zh: "热性升散，蒸腾充斥——升发太过而敛降不及", en: "Heat by nature rises and disperses, steaming and filling the body — ascent becomes excessive while descent and containment fail" },
+          { zh: "热自内发，故但热不寒、反恶热，蒸蒸汗出", en: "The heat issues from within: fever without chills, aversion to heat instead, with steaming sweat" },
+          { zh: "热迫津伤，故渴喜冷饮、尿黄便结相随", en: "Heat forces out and damages fluids — thirst for cold drinks, dark urine, and bound stools follow" }
+        ],
+        companions: [
+          { id: "kouke",     note: { zh: "热盛伤津，渴喜冷饮", en: "Heat damages fluids — thirst for cold drinks" } },
+          { id: "zihan",     note: { zh: "里热蒸迫，汗大出", en: "Interior heat steams — profuse sweating" } },
+          { id: "bianmi",    note: { zh: "热结肠腑", en: "Heat binds the bowels" } },
+          { id: "niaohuang", note: { zh: "热灼津液", en: "Heat scorches the fluids" } },
+          { id: "fanzao",    note: { zh: "热扰心神", en: "Heat harasses the spirit" } }
+        ],
+        tongue: { zh: "舌红苔黄燥", en: "Red tongue, dry yellow coating" },
+        pulse:  { zh: "脉洪数或滑数", en: "Surging-rapid or slippery-rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "脾胃气虚，清阳不升（气虚发热）", en: "Spleen-stomach qi deficiency; clear yang fails to ascend (qi-deficiency fever)" },
+        tags: ["气虚","升不及"], loc: "中焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        xushi: "虚", weight: 1,
+        chain: [
+          { zh: "劳倦伤脾，谷气不盛——化源先亏", en: "Overwork injures the spleen and grain qi weakens — the generative source is depleted first" },
+          { zh: "脾胃气虚，清阳不升、谷气下流（升不及）", en: "With spleen-stomach qi deficient, clear yang fails to rise and grain qi sinks downward (insufficient ascent)" },
+          { zh: "阳气郁于中而不布，郁而化热——热非有余，乃气虚不运之变", en: "Yang qi stagnates in the middle undistributed and turns to heat — this heat is not a surplus, but a byproduct of qi too weak to circulate" },
+          { zh: "故多为长期低热，劳则气耗更甚而热增，兼倦怠纳呆——此甘温除热之所本", en: "Hence chronic low-grade fever, worsened by exertion as qi is further consumed, with weariness and poor appetite — the very basis of the sweet-warm method for relieving heat" }
+        ],
+        cite: {
+          zh: "《素问·调经论》：有所劳倦……谷气不盛，上焦不行，下脘不通，胃气热，热气熏胸中，故内热。",
+          en: "Suwen · Tiaojing Lun: With overwork and fatigue … grain qi is not abundant, the upper jiao does not circulate, the lower stomach duct does not flow through, stomach qi heats, and the heat fumes the chest — hence internal heat."
+        },
+        companions: [
+          { id: "fali",          note: { zh: "气虚之本证", en: "The root sign of qi deficiency" } },
+          { id: "shihoukunjuan", note: { zh: "清阳不升，食后困倦", en: "Clear yang fails to rise — drowsy after meals" } },
+          { id: "nadai",         note: { zh: "脾运无力", en: "Weak spleen transformation" } },
+          { id: "zihan",         note: { zh: "气虚不固而自汗", en: "Qi too weak to secure — spontaneous sweating" } }
+        ],
+        tongue: { zh: "舌淡苔薄白", en: "Pale tongue, thin white coating" },
+        pulse:  { zh: "脉虚大或细弱", en: "Deficient-large or thin-weak" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "病程新久？热势与劳累、休息的关系？", en: "How long has it lasted? How does the fever relate to exertion and rest?" },
+      rows: [
+        { side: { zh: "实（表证／里热）", en: "Excess (exterior / interior heat)" },
+          feats: { zh: "新起，热势高；表证兼恶寒无汗，里热兼恶热渴饮便结", en: "Recent onset, higher fever; exterior type with chills and no sweat, interior type with aversion to heat, thirst, bound stools" } },
+        { side: { zh: "虚（气虚发热）", en: "Deficiency (qi-deficiency fever)" },
+          feats: { zh: "久病低热，劳则加重、休息则减，兼倦怠纳呆脉虚", en: "Chronic low-grade fever, worse with exertion and eased by rest, with weariness, poor appetite, deficient pulse" } }
+      ],
+      line: { zh: "新起高热多实，久病低热、劳则加重者多为气虚发热——甘温可除，苦寒反伤。", en: "Recent high fever is usually excess; chronic low fever worsened by exertion is usually qi-deficiency fever — sweet-warm herbs relieve it, bitter-cold ones injure further." }
+    },
+    xm: {
+      internal: [ { id: "cold", zh: "感冒", en: "Common Cold" } ],
+      points: [
+        { code: "GV14", zh: "大椎", py: "Dazhui" },
+        { code: "LI11", zh: "曲池", py: "Quchi" },
+        { code: "LI4",  zh: "合谷", py: "Hegu" }
+      ],
+      formulas: [
+        { py: "yinqiaosan",      zh: "银翘散",     en: "Yin Qiao San" },
+        { py: "baihutang",       zh: "白虎汤",     en: "Bai Hu Tang" },
+        { py: "buzhongyiqitang", zh: "补中益气汤", en: "Bu Zhong Yi Qi Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 寒热往来 ---------------- */
+  "hanre_wanglai": {
+    id: "hanre_wanglai", cat: "hanre",
+    name: { zh: "寒热往来", en: "Alternating Chills & Fever" },
+    aka: { zh: ["往来寒热"], en: ["Chills and fever coming and going"] },
+    what: {
+      zh: "恶寒与发热交替出现，寒时不热、热时不寒，界限分明。这是枢机层面的特征性症状——邪不在表、不在里，正邪在出入之枢上拉锯。",
+      en: "Chills and fever alternate — during chills there is no fever, during fever no chills, the two clearly demarcated. This is the signature symptom of the pivot level: the pathogen is neither at the exterior nor in the interior, but locked in a tug-of-war with upright qi at the pivot of exit and entry."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "少阳枢机不利，正邪分争", en: "Shaoyang pivot dysfunction; upright and evil contend by turns" },
+        tags: ["枢机不利·少阳"], loc: "半表半里",
+        organ: { zh: "胆·三焦", en: "Gallbladder & sanjiao" },
+        xushi: "虚实夹杂", weight: 3,
+        chain: [
+          { zh: "血弱气尽，腠理开，邪气因入，与正气相搏，结于胁下——正气先有一分不足，邪方能踞于枢位", en: "When blood is weak and qi spent, the interstices open, the pathogen slips in, grapples with upright qi, and lodges beneath the flanks — a degree of deficiency lets the evil occupy the pivot" },
+          { zh: "少阳居半表半里，为出入之枢；邪踞其位，枢转不利", en: "Shaoyang sits half-exterior, half-interior — the pivot of exit and entry; with the pathogen lodged there, the pivot cannot turn" },
+          { zh: "正气盛时驱邪向外，阳气得伸则发热；邪气进时正却于内，阳郁不达则恶寒", en: "When upright qi gains, it drives the evil outward and yang extends — fever; when the evil advances, upright qi retreats inward and yang is pent up — chills" },
+          { zh: "正邪分争，互有进退，故寒已而热、热已而寒，往来交替", en: "The two contend with alternating advantage, so chills give way to fever and fever to chills, coming and going" },
+          { zh: "枢机既滞，胆火郁而上炎、经气结于胁下——口苦、咽干、目眩、胸胁苦满随之", en: "With the pivot jammed, constrained gallbladder fire flares upward and channel qi knots beneath the flanks — bitter taste, dry throat, swimming vision, and hypochondriac fullness follow" }
+        ],
+        cite: {
+          zh: "《伤寒论》96条：伤寒五六日中风，往来寒热，胸胁苦满，嘿嘿不欲饮食，心烦喜呕……小柴胡汤主之。",
+          en: "Shanghan Lun, line 96: Cold damage of five or six days … alternating chills and fever, hypochondriac fullness, taciturn with no desire to eat, vexation and retching … Xiao Chai Hu Tang governs."
+        },
+        companions: [
+          { id: "kouku",     note: { zh: "胆火上溢", en: "Gallbladder fire spills upward" } },
+          { id: "yangan",    note: { zh: "火灼津伤", en: "Fire scorches the fluids" } },
+          { id: "muxuan",    note: { zh: "少阳经气上逆", en: "Shaoyang channel qi rebels upward" } },
+          { id: "xiezhang",  note: { zh: "经气结于胁下，胸胁苦满", en: "Channel qi knots beneath the flanks" } },
+          { id: "shantaixi", note: { zh: "枢机不转，叹息以自舒", en: "The pivot will not turn — sighing to relieve it" } },
+          { id: "nadai",     note: { zh: "嘿嘿不欲饮食", en: "Taciturn, no desire to eat" } },
+          { id: "exin",      note: { zh: "胆热犯胃则喜呕", en: "Gallbladder heat invades the stomach — retching" } }
+        ],
+        tongue: { zh: "舌苔薄白或薄黄", en: "Thin white or thin yellow coating" },
+        pulse:  { zh: "脉弦", en: "Wiry" }
+      },
+      {
+        id: "d2",
+        label: { zh: "邪伏膜原，休作有时", en: "Pathogen latent in the membrane source; attacks at fixed intervals" },
+        tags: ["枢机不利·少阳","通道受阻·湿"], loc: "半表半里",
+        organ: { zh: "膜原", en: "Membrane source (mo yuan)" },
+        nature: { zh: "湿浊", en: "Damp turbidity" },
+        xushi: "实", weight: 1,
+        chain: [
+          { zh: "疟邪或湿浊秽毒伏于膜原——膜原外通肌腠、内近胃腑，亦半表半里之地", en: "Malarial or foul damp-turbid evils lie latent in the membrane source — outwardly linked to the flesh, inwardly near the stomach, likewise half-exterior half-interior territory" },
+          { zh: "邪伏而正气与之相争有时：争则寒战壮热，休则一如常人", en: "The evil lies dormant and upright qi engages it periodically: during the clash, shaking chills and high fever; between attacks, apparently normal" },
+          { zh: "故寒热往来发作有定时（休作有时）——与少阳之无定时者可辨", en: "Hence the alternation recurs at fixed times (remitting and returning on schedule) — distinguishable from the irregular alternation of shaoyang" }
+        ],
+        companions: [
+          { id: "xiongmen", note: { zh: "湿浊阻遏气机", en: "Damp turbidity obstructs the qi dynamic" } },
+          { id: "exin",     note: { zh: "浊邪犯胃", en: "Turbid evil invades the stomach" } }
+        ],
+        tongue: { zh: "舌苔白厚腻如积粉", en: "Thick, greasy white coating like powder" },
+        pulse:  { zh: "脉弦数", en: "Wiry, rapid" }
+      }
+    ],
+    note: {
+      zh: "鉴别要点：少阳往来寒热无定时；疟邪／膜原者休作有时、发有定期。问『发作有没有钟点』即可分。",
+      en: "Key distinction: shaoyang alternation follows no schedule; the membrane-source type attacks at fixed intervals. One question — does it come on a timetable? — separates them."
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "TE5",  zh: "外关", py: "Waiguan" },
+        { code: "GB34", zh: "阳陵泉", py: "Yanglingquan" },
+        { code: "GV14", zh: "大椎", py: "Dazhui" }
+      ],
+      formulas: [
+        { py: "xiaochaihutang", zh: "小柴胡汤", en: "Xiao Chai Hu Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 潮热 ---------------- */
+  "chaore": {
+    id: "chaore", cat: "hanre",
+    name: { zh: "潮热", en: "Tidal Fever" },
+    aka: { zh: ["午后潮热", "日晡潮热", "夜热早凉"], en: ["Afternoon tidal fever", "Late-afternoon fever", "Night fever cooling by dawn"] },
+    what: {
+      zh: "发热如潮汐，按时而至或按时加重。问『何时热』就是问『哪一段气机失守』——午后入夜属阴分，日晡属阳明，午后黏滞不扬多属湿。三个时间窗，三条气机线。",
+      en: "Fever that comes like the tide, arriving or intensifying at fixed times. Asking WHEN it heats is asking WHICH segment of the qi dynamic has failed — afternoon into night points to the yin aspect, late afternoon (3–5 pm) to yangming, and a muffled afternoon heat to damp. Three time windows, three qi-dynamic lines."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "阴虚不敛，虚热外浮", en: "Yin deficiency fails to contain yang; deficient heat floats outward" },
+        tags: ["阴虚","入不及"], loc: "下焦",
+        organ: { zh: "肝肾", en: "Liver & kidney" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "日入之后，阳气当敛降入阴，藏于阴分", en: "After sundown, yang qi should be contained, descend, and enter the yin aspect for storage" },
+          { zh: "阴虚则化源不足，阴分不能容纳、收敛此阳（入不及）", en: "With yin deficient, the generative source is depleted and the yin aspect cannot receive or contain this yang (insufficient entry)" },
+          { zh: "阳不得入，浮越于外、蒸于阴分，故午后至夜低热、两颧潮红", en: "Denied entry, yang floats outward and steams the yin aspect — low fever from afternoon into night, with flushed cheekbones" },
+          { zh: "虚热循阴经外发则五心烦热；蒸津外泄则盗汗；夜热早凉、热退无汗为其特征", en: "Deficient heat issues along the yin channels — heat in the five centers; it steams fluids out — night sweats; night fever cooling by dawn, subsiding without sweat, is its signature" }
+        ],
+        companions: [
+          { id: "daohan",        note: { zh: "寐则虚热蒸津", en: "In sleep, deficient heat steams the fluids out" } },
+          { id: "shouzuxinre",   note: { zh: "虚热循阴经发于四末", en: "Deficient heat issues along the yin channels to palms and soles" } },
+          { id: "kougan",        note: { zh: "阴亏津少", en: "Yin depleted, fluids scant" } },
+          { id: "shimian_rushu", note: { zh: "虚热扰神，阳不入阴", en: "Deficient heat harasses the spirit; yang cannot enter yin" } },
+          { id: "yaosuan",       note: { zh: "肾阴亏于下", en: "Kidney yin depleted below" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse:  { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "阳明腑实，日晡潮热", en: "Yangming bowel excess; tidal fever at late afternoon" },
+        tags: ["降不及","通道受阻·食积"], loc: "中焦",
+        organ: { zh: "胃肠", en: "Stomach & intestines" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "燥屎内结，腑气不通——阳明降令阻绝，降不及之极", en: "Dry stool binds within and bowel qi cannot pass — the yangming order to descend is severed, insufficient descent at its extreme" },
+          { zh: "日晡（申时）阳明经气当旺，正气得势，与内结之邪相争愈烈", en: "At late afternoon (shen hour, 3–5 pm) yangming channel qi is at its height; with upright qi in force, the clash with the bound evil intensifies" },
+          { zh: "故其热随日晡而潮，蒸蒸而盛，兼腹满硬痛、便秘", en: "Hence the fever surges like a tide at late afternoon, steaming and strong, with abdominal fullness, hardness, pain, and constipation" }
+        ],
+        cite: {
+          zh: "《伤寒论》208条：……日晡所发潮热者……可攻里也。",
+          en: "Shanghan Lun, line 208: … tidal fever arising at late afternoon … the interior may be attacked."
+        },
+        companions: [
+          { id: "bianmi",  note: { zh: "燥屎内结", en: "Dry stool binds within" } },
+          { id: "fuzhang", note: { zh: "腑气不通则满", en: "Blocked bowel qi — fullness" } },
+          { id: "futong",  note: { zh: "腹满硬痛拒按", en: "Full, hard, painful abdomen refusing pressure" } }
+        ],
+        tongue: { zh: "舌红，苔黄燥甚则焦黑起刺", en: "Red tongue; dry yellow coating, in severe cases scorched black with prickles" },
+        pulse:  { zh: "脉沉实有力", en: "Deep, replete, forceful" }
+      },
+      {
+        id: "d3",
+        label: { zh: "湿遏热伏，身热不扬", en: "Damp traps latent heat; muffled fever that does not blaze" },
+        tags: ["通道受阻·湿"], loc: "中焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        nature: { zh: "湿热", en: "Damp-heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "湿性黏滞，弥漫中焦，气机为其所遏", en: "Damp is sticky and lingering; pervading the middle jiao, it smothers the qi dynamic" },
+          { zh: "热处湿中，如烟蒙火——欲透不得，故身热不扬（初扪不显，久按灼手）", en: "Heat sits inside damp like fire under smoke — it cannot break through, so the fever is muffled (barely felt at first touch, scorching on prolonged pressure)" },
+          { zh: "午后阳气渐敛，欲入而为湿所拒，湿热交蒸更显，故午后热甚", en: "In the afternoon yang begins to withdraw inward, but damp refuses it entry; damp and heat steam together more strongly — the fever worsens in the afternoon" },
+          { zh: "湿浊上蒙下注，故兼身重、脘痞、口黏、便黏", en: "Damp turbidity clouds above and pours below — heaviness, epigastric stuffiness, sticky mouth, sticky stools accompany it" }
+        ],
+        companions: [
+          { id: "shenzhong",     note: { zh: "湿性重浊", en: "Damp is heavy and turbid" } },
+          { id: "wanpi",         note: { zh: "湿阻中焦", en: "Damp obstructs the middle jiao" } },
+          { id: "kounian",       note: { zh: "湿浊上泛", en: "Damp turbidity floods upward" } },
+          { id: "dabiannianzhi", note: { zh: "湿性黏滞下注", en: "Sticky damp pours downward" } }
+        ],
+        tongue: { zh: "舌苔白腻或黄腻", en: "White or yellow greasy coating" },
+        pulse:  { zh: "脉濡数", en: "Soggy, rapid" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "热起何时、热势如何？久按肌肤灼不灼手？", en: "When does the heat start and how strong is it? Does the skin scorch the hand on prolonged pressure?" },
+      rows: [
+        { side: { zh: "虚（阴虚）", en: "Deficiency (yin deficiency)" },
+          feats: { zh: "夜热早凉、五心烦热、颧红盗汗、舌红少苔", en: "Night fever cooling by dawn, heat in the five centers, flushed cheeks, night sweats, red tongue with scant coating" } },
+        { side: { zh: "实（腑实）", en: "Excess (bowel excess)" },
+          feats: { zh: "日晡蒸蒸、腹满硬痛便结、苔黄燥、脉沉实", en: "Steaming fever at late afternoon, full hard painful abdomen with constipation, dry yellow coating, deep replete pulse" } },
+        { side: { zh: "实（湿遏）", en: "Excess (damp trapping heat)" },
+          feats: { zh: "午后身热不扬、身重脘痞、苔腻脉濡", en: "Muffled afternoon fever, heaviness and epigastric stuffiness, greasy coating, soggy pulse" } }
+      ],
+      line: { zh: "夜热早凉者阴虚；日晡蒸蒸者腑实；午后不扬者湿遏——三个时间窗，三条气机线。", en: "Night fever cooling by dawn — yin deficiency; steaming at late afternoon — bowel excess; muffled afternoon heat — damp trapping. Three time windows, three qi-dynamic lines." }
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "KI3", zh: "太溪", py: "Taixi" },
+        { code: "HT6", zh: "阴郄", py: "Yinxi" },
+        { code: "ST25", zh: "天枢", py: "Tianshu" }
+      ],
+      formulas: [
+        { py: "qinghaobiejiatang", zh: "青蒿鳖甲汤", en: "Qing Hao Bie Jia Tang" },
+        { py: "dachengqitang",     zh: "大承气汤",   en: "Da Cheng Qi Tang" },
+        { py: "sanrentang",        zh: "三仁汤",     en: "San Ren Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 自汗 ---------------- */
+  "zihan": {
+    id: "zihan", cat: "hanre",
+    name: { zh: "自汗", en: "Spontaneous Sweating" },
+    aka: { zh: ["白昼汗出", "动则汗出"], en: ["Daytime sweating", "Sweating on exertion"] },
+    what: {
+      zh: "不因劳动、厚衣、发热而白昼汗出，动则尤甚。《素问·阴阳别论》：阳加于阴谓之汗——汗由阳气蒸化阴津而成，卫气司其开阖。自汗即开阖环节失守：或固摄无力，或里热逼迫，或营卫失谐。",
+      en: "Daytime sweating not caused by exertion, heavy clothing, or fever, worse on movement. Suwen · Yinyang Bielun: yang acting upon yin is called sweat — sweat forms when yang qi steams yin fluids, and defensive qi governs the opening and closing of the pores. Spontaneous sweating means the opening-closing checkpoint has failed: securing too weak, interior heat forcing outward, or ying and wei out of accord."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "气虚不固，津液外泄", en: "Qi deficiency failing to secure; fluids leak outward" },
+        tags: ["气虚","出太过"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defensive level" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "卫气司腠理开阖，如门之有键", en: "Defensive qi governs the opening and closing of the interstices, like the latch on a door" },
+          { zh: "肺脾气虚，卫外之气化源不足，固摄无权——门键松弛", en: "With lung-spleen qi deficient, the source that generates defensive qi runs short and securing loses authority — the latch goes slack" },
+          { zh: "腠理疏而津液自泄——出太过，其本在固摄不及", en: "The interstices loosen and fluids leak out of their own accord — excessive exit, rooted in insufficient securing" },
+          { zh: "动则气耗，固摄愈弱，故动辄汗出益甚，兼气短乏力、易感外邪", en: "Movement consumes qi and securing weakens further — sweating worsens with any exertion, with shortness of breath, fatigue, and susceptibility to external invasion" }
+        ],
+        companions: [
+          { id: "fali",   note: { zh: "气虚之本证", en: "The root sign of qi deficiency" } },
+          { id: "qiduan", note: { zh: "宗气不足", en: "Ancestral qi insufficient" } },
+          { id: "ehan",   note: { zh: "卫外不固，恶风易感", en: "Unsecured exterior — aversion to wind, easy invasion" } }
+        ],
+        tongue: { zh: "舌淡苔薄白", en: "Pale tongue, thin white coating" },
+        pulse:  { zh: "脉弱", en: "Weak" }
+      },
+      {
+        id: "d2",
+        label: { zh: "里热炽盛，蒸津外迫", en: "Blazing interior heat steams fluids outward" },
+        tags: ["降不及","升太过"], loc: "中焦",
+        organ: { zh: "阳明", en: "Yangming" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "阳加于阴谓之汗——阳热亢盛，则蒸迫太过", en: "Yang acting upon yin is called sweat — when yang heat runs rampant, the steaming becomes excessive" },
+          { zh: "里热鸱张，敛降不及，热势蒸腾于外", en: "Interior heat spreads unchecked; containment and descent fail, and the heat steams outward" },
+          { zh: "津液被逼，涌泄为汗——故汗大出而热不退，兼面赤口渴、恶热喜冷", en: "Fluids are forced out in a gush of sweat — profuse sweating yet the fever persists, with red face, thirst, aversion to heat, craving for cold" }
+        ],
+        companions: [
+          { id: "fare",      note: { zh: "蒸蒸发热", en: "Steaming fever" } },
+          { id: "kouke",     note: { zh: "热盛伤津", en: "Heat damages fluids" } },
+          { id: "niaohuang", note: { zh: "津为热灼", en: "Fluids scorched by heat" } },
+          { id: "fanzao",    note: { zh: "热扰心神", en: "Heat harasses the spirit" } }
+        ],
+        tongue: { zh: "舌红苔黄", en: "Red tongue, yellow coating" },
+        pulse:  { zh: "脉洪大或滑数", en: "Surging-large or slippery-rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "营卫不和，卫不护营", en: "Ying–wei disharmony; wei fails to guard ying" },
+        tags: ["出太过"], loc: "表",
+        organ: { zh: "营卫", en: "Ying & wei levels" },
+        xushi: "虚实夹杂", weight: 2,
+        chain: [
+          { zh: "卫行脉外而司开阖，营行脉内而藏津液；二者相谐，则开阖有度", en: "Wei travels outside the vessels governing opening and closing; ying travels within, storing the fluids. In accord, opening and closing keep their measure" },
+          { zh: "卫气不与营气相谐——卫浮于外，失其固密之职，营阴不得内守", en: "Wei falls out of accord with ying — floating outward, it abandons its sealing duty, and ying-yin can no longer hold within" },
+          { zh: "故时时自汗出，或伴微恶风，而无里热、气虚之征", en: "Hence intermittent spontaneous sweating, perhaps with slight aversion to wind, yet without signs of interior heat or qi deficiency" },
+          { zh: "桂枝汤调和营卫，正是复其开阖之常", en: "Gui Zhi Tang harmonizes ying and wei — precisely restoring the normal rhythm of opening and closing" }
+        ],
+        cite: {
+          zh: "《伤寒论》53条：病常自汗出者，此为荣气和……以卫气不共荣气谐和故尔……宜桂枝汤。",
+          en: "Shanghan Lun, line 53: When illness brings constant spontaneous sweating, the ying qi is in order … it is because wei qi is not in accord with ying qi … Gui Zhi Tang is appropriate."
+        },
+        companions: [
+          { id: "ehan", note: { zh: "啬啬恶风", en: "Shivering aversion to wind" } }
+        ],
+        tongue: { zh: "舌淡红苔薄白", en: "Pale-red tongue, thin white coating" },
+        pulse:  { zh: "脉浮缓", en: "Floating, moderate" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "汗出之时，怕冷还是怕热？汗后神疲不疲？", en: "While sweating, is there aversion to cold or to heat? Is there exhaustion after sweating?" },
+      rows: [
+        { side: { zh: "虚（气虚／营卫不和）", en: "Deficiency (qi deficiency / ying–wei disharmony)" },
+          feats: { zh: "汗出恶风、动则加重、汗后气怯神疲，舌淡脉弱缓", en: "Sweating with aversion to wind, worse on exertion, weak and spent after sweating; pale tongue, weak or moderate pulse" } },
+        { side: { zh: "实（里热）", en: "Excess (interior heat)" },
+          feats: { zh: "汗出蒸蒸、恶热面赤、口渴饮冷，舌红苔黄脉洪", en: "Steaming sweat with aversion to heat, red face, thirst for cold drinks; red tongue, yellow coating, surging pulse" } }
+      ],
+      line: { zh: "汗后怕风气怯者虚，汗出恶热饮冷者实——同一身汗，两条相反的气机线。", en: "Fear of wind and exhaustion after sweating — deficiency; aversion to heat and craving cold drinks while sweating — excess. The same sweat, two opposite qi-dynamic lines." }
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "LI4", zh: "合谷", py: "Hegu" },
+        { code: "KI7", zh: "复溜", py: "Fuliu" },
+        { code: "HT6", zh: "阴郄", py: "Yinxi" }
+      ],
+      formulas: [
+        { py: "yupingfengsan", zh: "玉屏风散", en: "Yu Ping Feng San" },
+        { py: "baihutang",     zh: "白虎汤",   en: "Bai Hu Tang" },
+        { py: "guizhitang",    zh: "桂枝汤",   en: "Gui Zhi Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 盗汗 ---------------- */
+  "daohan": {
+    id: "daohan", cat: "hanre",
+    name: { zh: "盗汗", en: "Night Sweats" },
+    aka: { zh: ["寝汗"], en: ["Sleep sweating"] },
+    what: {
+      zh: "寐则汗出，醒则汗止，如盗贼乘夜而至。教科书言盗汗属阴虚——高概率如此，但非定论：湿热郁蒸亦可盗汗。仍须以伴随症状与舌脉验证方向，不可见盗汗二字即断阴虚。",
+      en: "Sweating during sleep that stops on waking, arriving like a thief in the night. Textbooks assign night sweats to yin deficiency — the high-probability direction, but not a verdict: damp-heat steaming can also produce them. The direction must still be verified by companion symptoms and by tongue and pulse; the two words alone settle nothing."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "阴虚内热，寐则阳入蒸阴", en: "Yin deficiency with internal heat; in sleep, yang enters and steams the yin" },
+        tags: ["阴虚","入不及"], loc: "全身",
+        organ: { zh: "心肾", en: "Heart & kidney" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "寐时卫气离表入里，行于阴分", en: "In sleep, defensive qi leaves the surface and travels inward through the yin aspect" },
+          { zh: "阴虚有热，阳入阴分，两热相合，蒸迫阴津", en: "Where yin is deficient and holds heat, the entering yang joins that heat, and together they steam the yin fluids" },
+          { zh: "卫气既入，肌表无卫外之固，津随虚热外泄——故寐则汗出", en: "With defensive qi withdrawn inside, the surface has no guard; fluids escape with the deficient heat — hence sweating in sleep" },
+          { zh: "醒则卫气复出于表，开阖之职复司，故汗止——一入一出，正是本症节律之由", en: "On waking, defensive qi returns to the surface and resumes command of opening and closing — the sweat stops. One entry, one exit: the very rhythm of this symptom" }
+        ],
+        cite: {
+          zh: "《金匮要略·血痹虚劳》：男子平人，脉虚弱细微者，善盗汗也。",
+          en: "Jingui Yaolüe · Xuebi Xulao: In an apparently healthy man, a deficient, weak, thin, faint pulse means a tendency to night sweats."
+        },
+        companions: [
+          { id: "chaore",        note: { zh: "夜热早凉", en: "Night fever cooling by dawn" } },
+          { id: "shouzuxinre",   note: { zh: "五心烦热", en: "Heat in the five centers" } },
+          { id: "kougan",        note: { zh: "阴亏津少", en: "Yin depleted, fluids scant" } },
+          { id: "shimian_rushu", note: { zh: "虚热扰神", en: "Deficient heat harasses the spirit" } },
+          { id: "yaosuan",       note: { zh: "肾阴亏于下", en: "Kidney yin depleted below" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse:  { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "湿热内郁，睡则蒸泄", en: "Damp-heat pent within; steaming leakage in sleep" },
+        tags: ["通道受阻·湿"], loc: "中焦",
+        organ: { zh: "肝胆脾胃", en: "Liver-gallbladder & spleen-stomach" },
+        nature: { zh: "湿热", en: "Damp-heat" },
+        xushi: "实", weight: 1,
+        chain: [
+          { zh: "湿热蕴于里，气机被遏；白昼阳气外用，尚可疏泄", en: "Damp-heat smolders within and pins down the qi dynamic; by day, outward-deployed yang can still vent it" },
+          { zh: "入睡阳气内入，与郁伏之湿热相合，蒸势骤增", en: "In sleep, yang withdraws inward and joins the pent-up damp-heat — the steaming force surges" },
+          { zh: "热蒸湿动，津液外渗——故寐则汗出，且汗黏或染衣", en: "Heat steams and damp stirs, fluids seep outward — sweating in sleep, sticky or staining the clothes" },
+          { zh: "兼口苦口黏、尿黄苔腻——与阴虚之舌红少苔判然有别", en: "With bitter sticky mouth, dark urine, greasy coating — starkly different from the red, scant-coated tongue of yin deficiency" }
+        ],
+        companions: [
+          { id: "kouku",     note: { zh: "湿热熏蒸肝胆", en: "Damp-heat fumes the liver-gallbladder" } },
+          { id: "kounian",   note: { zh: "湿浊上泛", en: "Damp turbidity floods upward" } },
+          { id: "niaohuang", note: { zh: "湿热下注", en: "Damp-heat pours downward" } },
+          { id: "shenzhong", note: { zh: "湿性重浊", en: "Damp is heavy and turbid" } }
+        ],
+        tongue: { zh: "舌红苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse:  { zh: "脉濡数或弦滑", en: "Soggy-rapid or wiry-slippery" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "汗质黏不黏、染不染衣？舌苔腻不腻？", en: "Is the sweat sticky, does it stain the clothes? Is the tongue coating greasy?" },
+      rows: [
+        { side: { zh: "虚（阴虚）", en: "Deficiency (yin deficiency)" },
+          feats: { zh: "汗清稀，兼潮热颧红五心热，舌红少苔脉细数", en: "Clear thin sweat, with tidal fever, flushed cheeks, heat in the five centers; red tongue, scant coating, thin rapid pulse" } },
+        { side: { zh: "实（湿热）", en: "Excess (damp-heat)" },
+          feats: { zh: "汗黏染衣，兼口苦口黏尿黄，苔黄腻脉濡数", en: "Sticky, staining sweat, with bitter sticky mouth and dark urine; yellow greasy coating, soggy rapid pulse" } }
+      ],
+      line: { zh: "汗清稀舌净者阴虚，汗黏腻苔腻者湿热——盗汗二字定不了方向，舌上一看便知。", en: "Thin sweat with a clean tongue — yin deficiency; sticky sweat with a greasy coating — damp-heat. The words alone decide nothing; one look at the tongue does." }
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "HT6", zh: "阴郄", py: "Yinxi" },
+        { code: "KI7", zh: "复溜", py: "Fuliu" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" }
+      ],
+      formulas: [
+        { py: "dangguiliuhuangtang", zh: "当归六黄汤", en: "Dang Gui Liu Huang Tang" },
+        { py: "liuweidihuangwan",    zh: "六味地黄丸", en: "Liu Wei Di Huang Wan" },
+        { py: "longdanxiegantang",   zh: "龙胆泻肝汤", en: "Long Dan Xie Gan Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 无汗 ---------------- */
+  "wuhan": {
+    id: "wuhan", cat: "hanre",
+    name: { zh: "无汗", en: "Absence of Sweating" },
+    aka: { zh: ["不得汗", "久不出汗"], en: ["Unable to sweat", "Chronic anhidrosis"] },
+    what: {
+      zh: "当汗而不得汗。新感无汗与久病无汗，一实一虚，处置南辕北辙：一者玄府闭，当开；一者汗源竭，当补。误发虚人之汗，即犯虚虚之戒。",
+      en: "Sweating absent when it ought to occur. Absence of sweat in a new illness and in chronic disease are one excess and one deficiency, and their handling runs in opposite directions: in one the sweat pores are sealed and must be opened; in the other the source of sweat is exhausted and must be replenished. To force sweat from the depleted is to commit the classic error of draining the already-deficient."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "寒束肌表，玄府闭塞", en: "Cold fetters the exterior; the sweat pores are sealed" },
+        tags: ["出不及"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defensive level" },
+        nature: { zh: "寒", en: "Cold" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "寒主收引——寒则气收", en: "Cold governs contraction — with cold, qi draws in" },
+          { zh: "寒袭肌表，腠理致密，玄府（汗孔）闭而不开", en: "Cold strikes the surface, the interstices tighten, and the sweat pores seal shut" },
+          { zh: "津液欲出无门（出不及）——故无汗，兼恶寒发热、头身疼痛", en: "Fluids find no gate to exit (insufficient exit) — no sweating, with chills, fever, head and body pain" },
+          { zh: "阳郁于内不得泄越，故发热反甚——麻黄汤开腠发汗，正为启此闭", en: "Yang pent inside cannot vent, so the fever runs higher — Ma Huang Tang opens the interstices and promotes sweating precisely to unlock this seal" }
+        ],
+        cite: {
+          zh: "《素问·举痛论》：寒则气收。",
+          en: "Suwen · Jutong Lun: With cold, qi contracts."
+        },
+        companions: [
+          { id: "ehan",    note: { zh: "卫阳被遏", en: "Defensive yang constrained" } },
+          { id: "fare",    note: { zh: "阳郁化热", en: "Pent-up yang turns to heat" } },
+          { id: "toutong", note: { zh: "寒凝经脉", en: "Cold congeals the channels" } }
+        ],
+        tongue: { zh: "舌苔薄白", en: "Thin white coating" },
+        pulse:  { zh: "脉浮紧", en: "Floating, tight" }
+      },
+      {
+        id: "d2",
+        label: { zh: "津血亏虚，汗源不足", en: "Fluid and blood depleted; the source of sweat runs dry" },
+        tags: ["血虚","阴虚"], loc: "全身",
+        organ: { zh: "营血", en: "Ying-blood level" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "汗者津液所化，津血同源——夺血者无汗，夺汗者无血", en: "Sweat is transformed from the fluids, and fluids share their source with blood — rob the blood and there is no sweat; rob the sweat and there is no blood" },
+          { zh: "久病、失血、素亏之人，化源不足，无液可蒸", en: "In the chronically ill, the blood-depleted, and the constitutionally weak, the generative source is short — there is no fluid left to steam" },
+          { zh: "故久不出汗、肌肤枯涩，虽暑热运动亦少汗", en: "Hence chronic absence of sweat with dry, rough skin — scant sweating even in summer heat or exercise" },
+          { zh: "此时无汗非闭，乃源竭——治在滋养化源，绝非发散", en: "Here the absence is not a seal but an empty well — treatment lies in nourishing the source, never in dispersing outward" }
+        ],
+        cite: {
+          zh: "《灵枢·营卫生会》：夺血者无汗，夺汗者无血。",
+          en: "Lingshu · Yingwei Shenghui: Rob the blood and there is no sweat; rob the sweat and there is no blood."
+        },
+        companions: [
+          { id: "kougan", note: { zh: "津亏于上", en: "Fluids depleted above" } },
+          { id: "bianmi", note: { zh: "津亏肠燥", en: "Fluid-depleted, dry intestines" } },
+          { id: "fali",   note: { zh: "化源不足", en: "Generative source insufficient" } }
+        ],
+        tongue: { zh: "舌淡或红而少津", en: "Pale, or red and dry with scant fluids" },
+        pulse:  { zh: "脉细", en: "Thin" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "新病还是久病？兼不兼恶寒发热身痛？", en: "New illness or chronic? Are there chills, fever, and body aches?" },
+      rows: [
+        { side: { zh: "实（玄府闭）", en: "Excess (sealed pores)" },
+          feats: { zh: "新起，兼恶寒发热头身痛，脉浮紧", en: "Recent onset, with chills, fever, head and body pain; floating tight pulse" } },
+        { side: { zh: "虚（汗源竭）", en: "Deficiency (source exhausted)" },
+          feats: { zh: "久不出汗，肌肤枯涩，兼口干便结，脉细", en: "Long-standing anhidrosis with dry rough skin, dry mouth, bound stools; thin pulse" } }
+      ],
+      line: { zh: "新起无汗兼表证者闭也，当开；久不出汗、肤燥津亏者竭也，当补——一发一补，误用即败。", en: "New-onset with exterior signs — sealed: open it. Chronic with dry skin and depleted fluids — exhausted: replenish it. One disperses, one nourishes; confuse them and the case is lost." }
+    },
+    xm: {
+      internal: [ { id: "cold", zh: "感冒", en: "Common Cold" } ],
+      points: [
+        { code: "LI4",  zh: "合谷", py: "Hegu" },
+        { code: "GV14", zh: "大椎", py: "Dazhui" },
+        { code: "LU7",  zh: "列缺", py: "Lieque" }
+      ],
+      formulas: [
+        { py: "mahuangtang", zh: "麻黄汤", en: "Ma Huang Tang" }
+      ]
+    }
+  },
+
+  /* ---------------- 手足心热 ---------------- */
+  "shouzuxinre": {
+    id: "shouzuxinre", cat: "hanre",
+    name: { zh: "手足心热", en: "Heat in Palms & Soles" },
+    aka: { zh: ["五心烦热", "手足烦热"], en: ["Heat in the five centers", "Vexing heat in hands and feet"] },
+    what: {
+      zh: "手足心自觉发热，甚则欲握冷物、伸出被外，常与心胸烦热并称五心烦热。手足心为劳宫、涌泉所在，阴经之气所聚，阴分之热最易由此外露；然火郁、食积之热亦发于四末——不可见此症即断阴虚。",
+      en: "A subjective heat in the palms and soles, in severe cases driving one to grasp cold objects or stick the feet out of the covers; together with heat in the chest it is called heat in the five centers. The palm center (Laogong) and sole center (Yongquan) are gathering points of the yin channels, so heat from the yin aspect shows itself here most readily — yet constrained fire and food stagnation also send heat to the extremities. The symptom alone does not prove yin deficiency."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "阴虚内热，虚火循阴经外发", en: "Yin deficiency with internal heat; deficient fire issues along the yin channels" },
+        tags: ["阴虚","入不及"], loc: "下焦",
+        organ: { zh: "肝肾", en: "Liver & kidney" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "阴虚则阳失其敛藏之所（入不及），虚热内生", en: "With yin deficient, yang loses its place of containment and storage (insufficient entry), and deficient heat arises within" },
+          { zh: "掌心劳宫、足心涌泉，皆阴经经气聚会之门户", en: "Laogong at the palm center and Yongquan at the sole center are both gateways where yin-channel qi converges" },
+          { zh: "虚热循阴经达于四末孔窍——故手足心热，夜间阴分主时更甚", en: "Deficient heat travels the yin channels to these portals — heat in palms and soles, worse at night when the yin aspect holds office" },
+          { zh: "兼潮热盗汗、舌红少苔——阴分证候成组出现，方可定案", en: "With tidal fever, night sweats, and a red scant-coated tongue — only when the yin-aspect signs appear as a set is the case settled" }
+        ],
+        companions: [
+          { id: "chaore",        note: { zh: "夜热早凉", en: "Night fever cooling by dawn" } },
+          { id: "daohan",        note: { zh: "寐则蒸津外泄", en: "Fluids steamed out in sleep" } },
+          { id: "kougan",        note: { zh: "阴亏津少", en: "Yin depleted, fluids scant" } },
+          { id: "shimian_rushu", note: { zh: "虚热扰神", en: "Deficient heat harasses the spirit" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse:  { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "火郁于中，发于四末", en: "Fire constrained in the middle vents to the extremities" },
+        tags: ["出不及"], loc: "中焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "过食生冷或抑遏太过，阳气郁于脾土之中，不得升散（出不及）", en: "Excess of raw cold food, or heavy suppression, pens yang qi within the spleen earth, unable to rise and disperse (insufficient exit)" },
+          { zh: "郁久化火，火性欲发而无路", en: "Long constraint turns to fire — fire that presses to vent yet finds no road" },
+          { zh: "四肢禀气于脾胃——郁火循其所主，走注四末，故手足烦热，扪之烙手", en: "The four limbs receive their qi from the spleen-stomach — the pent fire follows that jurisdiction into the extremities: vexing heat in palms and soles, scorching to the touch" },
+          { zh: "其热昼夜无别、按之灼手，与阴虚夜甚之烘热有别——东垣升阳散火，火郁发之", en: "This heat runs day and night alike and scorches on pressure, unlike the night-worse baking of yin deficiency — Dongyuan raises the yang and scatters the fire: constrained fire, vent it" }
+        ],
+        cite: {
+          zh: "《素问·六元正纪大论》：火郁发之。",
+          en: "Suwen · Liuyuan Zhengji Da Lun: Constrained fire — vent it."
+        },
+        companions: [
+          { id: "fanzao", note: { zh: "郁火扰心", en: "Pent fire harasses the heart" } },
+          { id: "wanpi",  note: { zh: "气郁中焦", en: "Qi constrained in the middle jiao" } }
+        ],
+        tongue: { zh: "舌红苔薄", en: "Red tongue, thin coating" },
+        pulse:  { zh: "脉沉数或弦", en: "Deep-rapid or wiry" }
+      },
+      {
+        id: "d3",
+        label: { zh: "食积化热（小儿多见）", en: "Food stagnation transforming into heat (common in children)" },
+        tags: ["通道受阻·食积"], loc: "中焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 1,
+        chain: [
+          { zh: "乳食积滞中焦，通道受阻，郁而化热", en: "Milk and food stagnate in the middle jiao; the pathway is blocked and the stagnation turns to heat" },
+          { zh: "积热熏蒸，外达四末——故手足心热，夜卧不安", en: "The stagnant heat fumes and steams outward to the extremities — heat in palms and soles, restless sleep" },
+          { zh: "兼腹胀嗳腐、大便酸臭、纳呆——积去则热自平", en: "With abdominal distension, sour belching, foul sour stools, poor appetite — remove the stagnation and the heat settles of itself" }
+        ],
+        companions: [
+          { id: "fuzhang", note: { zh: "积滞中阻", en: "Stagnation blocks the middle" } },
+          { id: "aiqi",    note: { zh: "嗳腐吞酸", en: "Sour, putrid belching" } },
+          { id: "nadai",   note: { zh: "积滞碍运", en: "Stagnation impedes transformation" } }
+        ],
+        tongue: { zh: "舌苔厚腻", en: "Thick greasy coating" },
+        pulse:  { zh: "脉滑", en: "Slippery" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "夜间加重还是昼夜无别？扪之烙手否？兼盗汗还是兼腹胀嗳腐？", en: "Worse at night, or the same day and night? Does it scorch the examining hand? Accompanied by night sweats, or by distension and sour belching?" },
+      rows: [
+        { side: { zh: "虚（阴虚）", en: "Deficiency (yin deficiency)" },
+          feats: { zh: "夜甚，兼潮热盗汗，舌红少苔", en: "Worse at night, with tidal fever and night sweats; red tongue, scant coating" } },
+        { side: { zh: "实（火郁）", en: "Excess (constrained fire)" },
+          feats: { zh: "昼夜俱热、扪之灼手，兼烦躁，脉沉数", en: "Hot day and night, scorching to the touch, with vexation; deep rapid pulse" } },
+        { side: { zh: "实（食积）", en: "Excess (food stagnation)" },
+          feats: { zh: "小儿多见，兼腹胀嗳腐便臭，苔厚腻", en: "Common in children, with distension, sour belching, foul stools; thick greasy coating" } }
+      ],
+      line: { zh: "夜甚兼盗汗舌净者阴虚；昼夜俱热、扪之灼手者火郁；小儿兼腹胀嗳腐者食积。", en: "Night-worse with night sweats and a clean tongue — yin deficiency; hot round the clock and scorching to the touch — constrained fire; a child with distension and sour belching — food stagnation." }
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "KI3", zh: "太溪", py: "Taixi" },
+        { code: "PC8", zh: "劳宫", py: "Laogong" },
+        { code: "KI1", zh: "涌泉", py: "Yongquan" }
+      ],
+      formulas: [
+        { py: "liuweidihuangwan", zh: "六味地黄丸", en: "Liu Wei Di Huang Wan" },
+        { py: "baohewan",         zh: "保和丸",     en: "Bao He Wan" }
+      ]
+    }
+  }
+
+};
+
+</script>
+<script>
+"use strict";
+/* SinoMed 症状学模块 · 引擎层 v1 */
+(function () {
+
+  /* ============================================================
+     建设期开关：正式上线时改为 false，以下内容一次性全部消失——
+     ①十纲卡的"筹备中／已上线"计数与状态字
+     ②首页分批上线说明
+     ③推导器预告区块
+     ④伴随症状与搜索结果里的"待上线"徽标（未上线症状转为普通文字，不可点）
+     除此之外无任何占位性文案。
+     ============================================================ */
+  var BUILD_MODE = true;
+
+  var LKEY = "sinomed-lang";
+
+  function getLang() {
+    try { return localStorage.getItem(LKEY) || "en"; } catch (e) { return "en"; }
+  }
+  function setLang(l) {
+    try { localStorage.setItem(LKEY, l); } catch (e) {}
+    document.documentElement.setAttribute("data-lang", l);
+    render();
+  }
+  function pick(o) {
+    if (o == null) return "";
+    if (typeof o === "string") return o;
+    var l = getLang();
+    return o[l] != null ? o[l] : (o.zh || "");
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  var UI = {
+    zh: {
+      title: "症状学 · 气机推导",
+      tagline: "一个症状，是一段气机的证词——先推导方向，再用舌脉验证。",
+      search_ph: "搜索症状或证型（如：口苦、肝郁气滞）",
+      map_title: "气机总图 · 按方向反查",
+      map_hint: "点任一环节，反查可由它推导出的全部症状",
+      cats_title: "十纲目录",
+      built: "", planned: "筹备中", special_hint: "校准工具",
+      count_unit: "症",
+      roadmap: "本模块按十纲分批上线，当前开放第一纲「寒热汗液」。未收录的类似症状，可循『类症归并』原则查其主症。",
+      deriver_title: "症状组合推导器",
+      deriver_hint: "勾选多个症状，交叉推导最可能的气机方向——二期开放，数据地基已就位。",
+      w3: "高概率", w2: "常见", w1: "少见",
+      sec_what: "症状内涵", sec_derive: "气机推导", sec_inquiry: "问诊指南",
+      sec_tp: "舌脉验证", sec_xm: "相关联动",
+      bianbie: "虚实鉴别关卡", keyq: "关键一问",
+      companions: "同机高概率伴随",
+      planned_badge: "待上线",
+      note_label: "鉴别提示",
+      tongue: "舌", pulse: "脉", cite_label: "经文依据",
+      xm_internal: "内科", xm_points: "经穴", xm_formulas: "方药",
+      results: "搜索结果", noresult: "未找到，试试更短的关键词",
+      alias_hit: "证型 → 气机翻译", alias_lead: "对应以下气机状态：",
+      tag_hits_pre: "可推导出「", tag_hits_post: "」的症状与方向",
+      block_title_post: " · 所辖方向",
+      back_home: "返回目录", aka: "又名／含",
+      dir_unit: "个方向",
+      lang_btn: "EN",
+      install: "安装应用",
+      footer: "SinoMed 症状学 · 免费开放 · 内容按十纲持续扩充"
+    },
+    en: {
+      title: "Symptoms · Qi-Dynamic Reasoning",
+      tagline: "A symptom is testimony from the qi dynamic — derive the direction first, then verify it with tongue and pulse.",
+      search_ph: "Search a symptom or pattern (e.g. night sweats, liver qi stagnation)",
+      map_title: "Qi-Dynamic Map · Reverse Lookup",
+      map_hint: "Tap any segment to list every symptom it can produce",
+      cats_title: "Ten Categories",
+      built: "", planned: "Coming", special_hint: "Calibration tool",
+      count_unit: "",
+      roadmap: "The module goes live category by category; Category 1, Chills, Fever & Sweat, is now open. Related symptoms not yet listed are folded into their principal symptom.",
+      deriver_title: "Multi-Symptom Deriver",
+      deriver_hint: "Select several symptoms and cross-derive the most probable qi-dynamic direction — opens in Phase 2; the data foundation is already in place.",
+      w3: "High probability", w2: "Common", w1: "Less common",
+      sec_what: "What It Is", sec_derive: "Qi-Dynamic Derivation", sec_inquiry: "Inquiry Guide",
+      sec_tp: "Tongue & Pulse Verification", sec_xm: "Related Modules",
+      bianbie: "Deficiency–Excess Checkpoint", keyq: "The One Key Question",
+      companions: "High-probability companions of this mechanism",
+      planned_badge: "Coming soon",
+      note_label: "Differentiation note",
+      tongue: "Tongue", pulse: "Pulse", cite_label: "Classical Source",
+      xm_internal: "Internal Medicine", xm_points: "Points", xm_formulas: "Formulas",
+      results: "Results", noresult: "Nothing found — try a shorter keyword",
+      alias_hit: "Pattern → Qi-Dynamic Translation", alias_lead: "corresponds to these qi-dynamic states:",
+      tag_hits_pre: "Symptoms derivable from “", tag_hits_post: "”",
+      block_title_post: " · Directions",
+      back_home: "Back to Contents", aka: "Also known as",
+      dir_unit: " directions",
+      lang_btn: "中文",
+      install: "Install App",
+      footer: "SinoMed Symptoms · Free & open · Expanding category by category"
+    }
+  };
+  function t(k) { return (UI[getLang()] && UI[getLang()][k]) || k; }
+
+  function tagName(tag) { return getLang() === "zh" ? tag : (VOCAB.tag_en[tag] || tag); }
+  function locName(l) { return l ? (getLang() === "zh" ? l : (VOCAB.loc_en[l] || l)) : ""; }
+  function xsName(x) { return getLang() === "zh" ? x : (VOCAB.xushi_en[x] || x); }
+  function xsCls(x) { return x === "虚" ? "xs-xu" : (x === "实" ? "xs-shi" : "xs-mix"); }
+  function wLabel(w) { return t("w" + w); }
+  function wCls(w) { return "w" + w; }
+
+  var ROSTER_MAP = {};
+  ROSTER.forEach(function (r) { ROSTER_MAP[r.id] = r; });
+
+  function symName(id) {
+    var r = ROSTER_MAP[id];
+    if (!r) return id;
+    return getLang() === "zh" ? r.zh : r.en;
+  }
+
+  function pointLabel(p) {
+    return getLang() === "zh" ? (p.code + "（" + p.zh + "）") : (p.code + " (" + p.py + ")");
+  }
+
+  /* ---------- 跨模块链接（相对路径 + from/back，规范：/{target}/?from&back#anchor） ---------- */
+  function xmInternalUrl(id, sid) { return "../internal/?goto=" + encodeURIComponent(id) + "&from=symptoms&back=sym-" + encodeURIComponent(sid); }
+  function xmPointUrl(code, sid) { return "../points/?goto=" + encodeURIComponent(code) + "&from=symptoms&back=sym-" + encodeURIComponent(sid); }
+  function xmFormulaUrl(py, sid) { return "../formulas/?from=symptoms&back=sym-" + encodeURIComponent(sid) + "#f_" + encodeURIComponent(py); }
+
+  /* ---------- 渲染：公共小件 ---------- */
+  function companionChip(c) {
+    var r = ROSTER_MAP[c.id];
+    var nm = esc(symName(c.id));
+    var note = c.note ? esc(pick(c.note)) : "";
+    if (r && r.built) {
+      return '<a class="chip chip-link" href="#sym-' + esc(c.id) + '" title="' + note + '">' + nm + '</a>';
+    }
+    return '<span class="chip chip-planned" title="' + note + '">' + nm + (BUILD_MODE ? '<i>' + esc(t("planned_badge")) + '</i>' : '') + '</span>';
+  }
+
+  function tagChip(tag) {
+    return '<a class="chip chip-tag" href="#tag-' + encodeURIComponent(tag) + '">' + esc(tagName(tag)) + '</a>';
+  }
+
+  function dirCard(sym, d, compact) {
+    var h = '<div class="dir" id="' + esc(sym.id + "-" + d.id) + '">';
+    h += '<div class="dir-head">';
+    h += '<span class="wbadge ' + wCls(d.weight) + '">' + esc(wLabel(d.weight)) + '</span>';
+    h += '<span class="xsbadge ' + xsCls(d.xushi) + '">' + esc(xsName(d.xushi)) + '</span>';
+    h += '<span class="dir-label">' + esc(pick(d.label)) + '</span>';
+    h += '</div>';
+    h += '<div class="dir-tags">';
+    d.tags.forEach(function (tg) { h += tagChip(tg); });
+    var meta = [];
+    if (d.loc) meta.push(locName(d.loc));
+    if (d.organ) meta.push(pick(d.organ));
+    if (d.nature) meta.push(pick(d.nature));
+    if (meta.length) h += '<span class="dir-meta">' + esc(meta.join(" · ")) + '</span>';
+    h += '</div>';
+    if (!compact) {
+      h += '<div class="chain">';
+      d.chain.forEach(function (st, i) {
+        h += '<div class="step"><div class="step-n">' + (i + 1) + '</div><div class="step-t">' + esc(pick(st)) + '</div></div>';
+        if (i < d.chain.length - 1) h += '<div class="step-arrow">↓</div>';
+      });
+      h += '</div>';
+      if (d.cite) h += '<div class="cite"><span class="cite-l">' + esc(t("cite_label")) + '</span>' + esc(pick(d.cite)) + '</div>';
+    }
+    h += '</div>';
+    return h;
+  }
+
+  /* ---------- 首页 ---------- */
+  function tagHitCount(tag) {
+    var n = 0;
+    Object.keys(SYMPTOMS).forEach(function (k) {
+      SYMPTOMS[k].dirs.forEach(function (d) { if (d.tags.indexOf(tag) >= 0) n++; });
+    });
+    return n;
+  }
+
+  function renderHome() {
+    var h = '';
+    h += '<section class="hero"><h1>' + esc(t("title")) + '</h1><p class="tagline">' + esc(t("tagline")) + '</p></section>';
+
+    /* 搜索 */
+    h += '<section class="searchbox"><input id="q" type="search" placeholder="' + esc(t("search_ph")) + '" autocomplete="off"><div id="qres" class="qres"></div></section>';
+
+    /* 气机总图 */
+    h += '<section class="mapsec"><h2>' + esc(t("map_title")) + '</h2><p class="hint">' + esc(t("map_hint")) + '</p><div class="blocks">';
+    VOCAB.blocks.forEach(function (b) {
+      var n = 0; b.tags.forEach(function (tg) { n += tagHitCount(tg); });
+      h += '<a class="block" href="#block-' + b.id + '"><span class="block-zh">' + esc(getLang() === "zh" ? b.zh : b.en) + '</span><span class="block-n">' + n + '</span></a>';
+    });
+    h += '</div></section>';
+
+    /* 十纲 */
+    h += '<section class="catsec"><h2>' + esc(t("cats_title")) + '</h2><div class="cats">';
+    CATS.forEach(function (c) {
+      var items = ROSTER.filter(function (r) { return r.cat === c.id; });
+      var builtN = items.filter(function (r) { return r.built; }).length;
+      var nm = getLang() === "zh" ? c.zh : c.en;
+      var ct = "";
+      if (c.special) ct = BUILD_MODE ? (t("special_hint") + " · " + t("planned")) : t("special_hint");
+      else if (builtN > 0) ct = items.length + t("count_unit");
+      else ct = BUILD_MODE ? (items.length + t("count_unit") + " · " + t("planned")) : (items.length + t("count_unit"));
+      if (!c.special && builtN > 0) {
+        h += '<a class="cat cat-on" href="#cat-' + c.id + '"><span class="cat-nm">' + esc(nm) + '</span><span class="cat-ct">' + esc(ct) + '</span></a>';
+      } else {
+        h += '<div class="cat cat-off"><span class="cat-nm">' + esc(nm) + '</span><span class="cat-ct">' + esc(ct) + '</span></div>';
+      }
+    });
+    h += '</div>';
+    if (BUILD_MODE) h += '<p class="hint">' + esc(t("roadmap")) + '</p>';
+    h += '</section>';
+
+    /* 推导器预告 */
+    if (BUILD_MODE) h += '<section class="deriver"><h2>' + esc(t("deriver_title")) + '</h2><p>' + esc(t("deriver_hint")) + '</p></section>';
+
+    h += '<footer class="foot">' + esc(t("footer")) + '</footer>';
+    return h;
+  }
+
+  function renderCatList(catId, embedded) {
+    var cat = null;
+    CATS.forEach(function (c) { if (c.id === catId) cat = c; });
+    if (!cat) return "";
+    var h = '<section class="symlist" id="cat-' + esc(catId) + '">';
+    h += '<h2>' + esc(getLang() === "zh" ? cat.zh : cat.en) + '</h2><div class="symcards">';
+    ROSTER.filter(function (r) { return r.cat === catId && r.built; }).forEach(function (r) {
+      var s = SYMPTOMS[r.id];
+      if (!s) return;
+      var dirsBrief = s.dirs.map(function (d) {
+        return '<span class="mini ' + xsCls(d.xushi) + '">' + esc(pick(d.label)) + '</span>';
+      }).join("");
+      h += '<a class="symcard" href="#sym-' + esc(r.id) + '">';
+      h += '<div class="symcard-nm">' + esc(getLang() === "zh" ? r.zh : r.en) + '</div>';
+      h += '<div class="symcard-sub">' + s.dirs.length + esc(getLang() === "zh" ? " " + t("dir_unit") : t("dir_unit")) + '</div>';
+      h += '<div class="symcard-dirs">' + dirsBrief + '</div>';
+      h += '</a>';
+    });
+    h += '</div></section>';
+    if (!embedded) h = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>' + h;
+    return h;
+  }
+
+  /* ---------- 症状详情（五段式） ---------- */
+  function renderSym(id) {
+    var s = SYMPTOMS[id];
+    if (!s) return renderHome();
+    var h = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>';
+    h += '<article class="detail" id="sym-' + esc(id) + '">';
+    h += '<header class="d-head"><h1>' + esc(pick(s.name)) + '</h1>';
+    if (s.aka) {
+      var akas = getLang() === "zh" ? s.aka.zh : s.aka.en;
+      h += '<p class="aka">' + esc(t("aka")) + '：' + esc(akas.join(" · ")) + '</p>';
+    }
+    h += '</header>';
+
+    /* 1 症状内涵 */
+    h += '<section class="sec"><h2><span class="sec-n">1</span>' + esc(t("sec_what")) + '</h2><p class="what">' + esc(pick(s.what)) + '</p></section>';
+
+    /* 2 气机推导 */
+    h += '<section class="sec"><h2><span class="sec-n">2</span>' + esc(t("sec_derive")) + '</h2>';
+    s.dirs.forEach(function (d) { h += dirCard(s, d, false); });
+    h += '</section>';
+
+    /* 3 问诊指南 */
+    h += '<section class="sec"><h2><span class="sec-n">3</span>' + esc(t("sec_inquiry")) + '</h2>';
+    if (s.bianbie) {
+      h += '<div class="bianbie"><div class="bb-title">&#9878; ' + esc(t("bianbie")) + '</div>';
+      h += '<div class="bb-keyq"><span>' + esc(t("keyq")) + '</span>' + esc(pick(s.bianbie.key)) + '</div>';
+      h += '<div class="bb-rows">';
+      s.bianbie.rows.forEach(function (r) {
+        h += '<div class="bb-row"><div class="bb-side">' + esc(pick(r.side)) + '</div><div class="bb-feats">' + esc(pick(r.feats)) + '</div></div>';
+      });
+      h += '</div><div class="bb-line">' + esc(pick(s.bianbie.line)) + '</div></div>';
+    }
+    if (s.note) h += '<div class="note"><span>' + esc(t("note_label")) + '</span>' + esc(pick(s.note)) + '</div>';
+    s.dirs.forEach(function (d) {
+      if (!d.companions || !d.companions.length) return;
+      h += '<div class="comp"><div class="comp-h"><span class="wbadge ' + wCls(d.weight) + '">' + esc(wLabel(d.weight)) + '</span> ' + esc(pick(d.label)) + ' — ' + esc(t("companions")) + '</div><div class="comp-chips">';
+      d.companions.forEach(function (c) { h += companionChip(c); });
+      h += '</div></div>';
+    });
+    h += '</section>';
+
+    /* 4 舌脉验证 */
+    h += '<section class="sec"><h2><span class="sec-n">4</span>' + esc(t("sec_tp")) + '</h2><div class="tp-table">';
+    s.dirs.forEach(function (d) {
+      h += '<div class="tp-row"><div class="tp-dir">' + esc(pick(d.label)) + '</div><div class="tp-tp"><b>' + esc(t("tongue")) + '</b>' + esc(pick(d.tongue)) + '</div><div class="tp-tp"><b>' + esc(t("pulse")) + '</b>' + esc(pick(d.pulse)) + '</div></div>';
+    });
+    h += '</div></section>';
+
+    /* 5 相关联动 */
+    var xm = s.xm || {};
+    var hasXm = (xm.internal && xm.internal.length) || (xm.points && xm.points.length) || (xm.formulas && xm.formulas.length);
+    if (hasXm) {
+      h += '<section class="sec"><h2><span class="sec-n">5</span>' + esc(t("sec_xm")) + '</h2><div class="xm">';
+      if (xm.internal && xm.internal.length) {
+        h += '<div class="xm-g"><span class="xm-l">' + esc(t("xm_internal")) + '</span>';
+        xm.internal.forEach(function (it) {
+          h += '<a class="chip chip-xm" href="' + xmInternalUrl(it.id, s.id) + '">' + esc(getLang() === "zh" ? it.zh : it.en) + '</a>';
+        });
+        h += '</div>';
+      }
+      if (xm.points && xm.points.length) {
+        h += '<div class="xm-g"><span class="xm-l">' + esc(t("xm_points")) + '</span>';
+        xm.points.forEach(function (p) {
+          h += '<a class="chip chip-xm" href="' + xmPointUrl(p.code, s.id) + '">' + esc(pointLabel(p)) + '</a>';
+        });
+        h += '</div>';
+      }
+      if (xm.formulas && xm.formulas.length) {
+        h += '<div class="xm-g"><span class="xm-l">' + esc(t("xm_formulas")) + '</span>';
+        xm.formulas.forEach(function (f) {
+          h += '<a class="chip chip-xm" href="' + xmFormulaUrl(f.py, s.id) + '">' + esc(getLang() === "zh" ? f.zh : f.en) + '</a>';
+        });
+        h += '</div>';
+      }
+      h += '</div></section>';
+    }
+
+    h += '</article>';
+    return h;
+  }
+
+  /* ---------- 标签／区块反查 ---------- */
+  function tagHits(tag) {
+    var hits = [];
+    Object.keys(SYMPTOMS).forEach(function (k) {
+      SYMPTOMS[k].dirs.forEach(function (d) {
+        if (d.tags.indexOf(tag) >= 0) hits.push({ sym: SYMPTOMS[k], dir: d });
+      });
+    });
+    hits.sort(function (a, b) { return b.dir.weight - a.dir.weight; });
+    return hits;
+  }
+
+  function renderTag(tag) {
+    var hits = tagHits(tag);
+    var h = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>';
+    h += '<section class="taghits"><h1>' + esc(t("tag_hits_pre")) + esc(tagName(tag)) + esc(t("tag_hits_post")) + '</h1>';
+    if (!hits.length) h += '<p class="hint">' + esc(t("noresult")) + '</p>';
+    hits.forEach(function (x) {
+      h += '<a class="hit" href="#sym-' + esc(x.sym.id) + '">';
+      h += '<span class="hit-sym">' + esc(pick(x.sym.name)) + '</span>';
+      h += '<span class="wbadge ' + wCls(x.dir.weight) + '">' + esc(wLabel(x.dir.weight)) + '</span>';
+      h += '<span class="xsbadge ' + xsCls(x.dir.xushi) + '">' + esc(xsName(x.dir.xushi)) + '</span>';
+      h += '<span class="hit-lbl">' + esc(pick(x.dir.label)) + '</span>';
+      h += '</a>';
+    });
+    h += '</section>';
+    return h;
+  }
+
+  function renderBlock(bid) {
+    var b = null;
+    VOCAB.blocks.forEach(function (x) { if (x.id === bid) b = x; });
+    if (!b) return renderHome();
+    var h = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>';
+    h += '<section class="taghits"><h1>' + esc(getLang() === "zh" ? b.zh : b.en) + esc(t("block_title_post")) + '</h1>';
+    b.tags.forEach(function (tg) {
+      var hits = tagHits(tg);
+      h += '<h2 class="block-tag">' + esc(tagName(tg)) + ' <small>' + hits.length + '</small></h2>';
+      hits.forEach(function (x) {
+        h += '<a class="hit" href="#sym-' + esc(x.sym.id) + '">';
+        h += '<span class="hit-sym">' + esc(pick(x.sym.name)) + '</span>';
+        h += '<span class="wbadge ' + wCls(x.dir.weight) + '">' + esc(wLabel(x.dir.weight)) + '</span>';
+        h += '<span class="xsbadge ' + xsCls(x.dir.xushi) + '">' + esc(xsName(x.dir.xushi)) + '</span>';
+        h += '<span class="hit-lbl">' + esc(pick(x.dir.label)) + '</span>';
+        h += '</a>';
+      });
+    });
+    h += '</section>';
+    return h;
+  }
+
+  /* ---------- 搜索 ---------- */
+  function doSearch(q) {
+    q = q.trim();
+    var box = document.getElementById("qres");
+    if (!box) return;
+    if (!q) { box.innerHTML = ""; box.classList.remove("open"); return; }
+    var lq = q.toLowerCase();
+    var h = "";
+    var found = false;
+
+    /* 证型别名 */
+    ALIASES.forEach(function (a) {
+      if (a.zh.indexOf(q) >= 0 || a.en.toLowerCase().indexOf(lq) >= 0) {
+        found = true;
+        h += '<div class="qr-alias"><div class="qr-alias-h">' + esc(t("alias_hit")) + '</div>';
+        h += '<div class="qr-alias-b"><b>' + esc(getLang() === "zh" ? a.zh : a.en) + '</b> ' + esc(t("alias_lead")) + ' ';
+        a.tags.forEach(function (tg) { h += tagChip(tg); });
+        h += '</div></div>';
+      }
+    });
+
+    /* 症状名（含未上线，未上线者显示徽标） */
+    ROSTER.forEach(function (r) {
+      var s = SYMPTOMS[r.id];
+      var akaHit = false;
+      if (s && s.aka) {
+        (s.aka.zh || []).forEach(function (x) { if (x.indexOf(q) >= 0) akaHit = true; });
+        (s.aka.en || []).forEach(function (x) { if (x.toLowerCase().indexOf(lq) >= 0) akaHit = true; });
+      }
+      if (r.zh.indexOf(q) >= 0 || r.en.toLowerCase().indexOf(lq) >= 0 || r.id.indexOf(lq) >= 0 || akaHit) {
+        found = true;
+        if (r.built) {
+          h += '<a class="qr-item" href="#sym-' + esc(r.id) + '"><b>' + esc(symName(r.id)) + '</b></a>';
+        } else {
+          h += '<div class="qr-item qr-off"><b>' + esc(symName(r.id)) + '</b>' + (BUILD_MODE ? '<i>' + esc(t("planned_badge")) + '</i>' : '') + '</div>';
+        }
+      }
+    });
+
+    /* 全文（推导链、内涵段） */
+    var ftHits = [];
+    Object.keys(SYMPTOMS).forEach(function (k) {
+      var s = SYMPTOMS[k];
+      var blob = pick(s.what);
+      s.dirs.forEach(function (d) {
+        blob += " " + pick(d.label);
+        d.chain.forEach(function (st) { blob += " " + pick(st); });
+      });
+      if (blob.toLowerCase().indexOf(lq) >= 0 && !(s.name.zh.indexOf(q) >= 0 || s.name.en.toLowerCase().indexOf(lq) >= 0)) {
+        ftHits.push(s);
+      }
+    });
+    ftHits.forEach(function (s) {
+      found = true;
+      h += '<a class="qr-item qr-ft" href="#sym-' + esc(s.id) + '"><b>' + esc(pick(s.name)) + '</b><span>…' + esc(getLang() === "zh" ? "全文命中" : "full-text match") + '</span></a>';
+    });
+
+    if (!found) h = '<div class="qr-none">' + esc(t("noresult")) + '</div>';
+    box.innerHTML = h;
+    box.classList.add("open");
+  }
+
+  /* ---------- 路由 ---------- */
+  function render() {
+    var app = document.getElementById("app");
+    if (!app) return;
+    var hash = decodeURIComponent(location.hash || "").replace(/^#/, "");
+    var html;
+    if (hash.indexOf("sym-") === 0) html = renderSym(hash.slice(4));
+    else if (hash.indexOf("tag-") === 0) html = renderTag(hash.slice(4));
+    else if (hash.indexOf("block-") === 0) html = renderBlock(hash.slice(6));
+    else if (hash.indexOf("cat-") === 0) html = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>' + renderCatList(hash.slice(4), true);
+    else html = renderHome();
+    app.innerHTML = html;
+    var q = document.getElementById("q");
+    if (q) q.addEventListener("input", function () { doSearch(q.value); });
+    var lb = document.getElementById("langbtn");
+    if (lb) lb.textContent = t("lang_btn");
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- 启动 ---------- */
+  function boot() {
+    document.documentElement.setAttribute("data-lang", getLang());
+
+    /* 入站 ?goto= */
+    var p = new URLSearchParams(location.search);
+    var g = p.get("goto");
+    if (g && !location.hash) {
+      var gid = g.replace(/[^a-z0-9_-]/gi, "");
+      if (ROSTER_MAP[gid]) location.hash = "#sym-" + gid;
+    }
+
+    /* 悬浮返回按钮（规范：仅 from 存在时显示，#7a4a2b） */
+    var from = p.get("from");
+    if (from && /^[a-z0-9_-]+$/i.test(from)) {
+      var back = p.get("back") || "";
+      back = back.replace(/[^a-zA-Z0-9_\-]/g, "");
+      var a = document.createElement("a");
+      a.id = "floatback";
+      a.href = "../" + from + "/" + (back ? "#" + back : "");
+      a.innerHTML = getLang() === "zh" ? "&larr; 返回" : "&larr; Back";
+      document.body.appendChild(a);
+    }
+
+    /* 语言切换 */
+    var lb = document.getElementById("langbtn");
+    if (lb) lb.addEventListener("click", function () { setLang(getLang() === "zh" ? "en" : "zh"); });
+
+    /* PWA */
+    if ("serviceWorker" in navigator && location.protocol === "https:") {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    }
+    var deferred = null;
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      deferred = e;
+      var b = document.getElementById("installbtn");
+      if (b) {
+        b.style.display = "inline-block";
+        b.textContent = t("install");
+        b.onclick = function () { if (deferred) { deferred.prompt(); deferred = null; b.style.display = "none"; } };
+      }
+    });
+
+    window.addEventListener("hashchange", render);
+    render();
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+})();
+
+</script>
+</body>
+</html>
