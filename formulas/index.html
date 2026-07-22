@@ -208,12 +208,12 @@ main{max-width:900px;margin:0 auto;padding:18px 16px 60px;}
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="SinoMed">
 <script>
-if('serviceWorker' in navigator && location.protocol!=='file:'){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
+if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
 </script>
 </head>
 <body>
 <header>
-<a class="hhome" href="../index.html">← SinoMed</a>
+<a class="hhome" href="/">← SinoMed</a>
 <span class="hb" onclick="sfShow('home')"><span class="zh">方药推理系统</span><span class="en">Formula Reasoning System</span></span>
 <button id="langBtn" onclick="sfToggleLang()">中文</button>
 </header>
@@ -6448,11 +6448,11 @@ function render(id){
 var navStack=[];
 window.sfShow=function(id){
   if(current && current!==id){ navStack.push(current); }
-  if(render(id)){try{if(history&&history.pushState)history.pushState({p:id,stack:navStack.slice()},'','#'+id);}catch(e){try{location.hash=id;}catch(e2){}}}
+  if(render(id)&&history&&history.pushState){history.pushState({p:id,stack:navStack.slice()},'','#'+id);}
   updateFloatBack();
 };
 window.sfBack=function(){
-  if(navStack.length){ var prev=navStack.pop(); render(prev); try{if(history&&history.pushState)history.pushState({p:prev,stack:navStack.slice()},'','#'+prev);}catch(e){try{location.hash=prev;}catch(e2){}} updateFloatBack(); }
+  if(navStack.length){ var prev=navStack.pop(); render(prev); if(history&&history.pushState){history.pushState({p:prev,stack:navStack.slice()},'','#'+prev);} updateFloatBack(); }
   else { history.back(); }
 };
 function updateFloatBack(){
@@ -6539,7 +6539,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var h=(location.hash||'').replace('#','');
   if(!(h&&document.getElementById('pg-'+h))){h='home';}
   render(h);
-  try{if(history&&history.replaceState)history.replaceState({p:h},'','#'+h);}catch(e){}
+  if(history&&history.replaceState){history.replaceState({p:h},'','#'+h);}
 });
 })();
 </script>
@@ -7052,7 +7052,7 @@ window.__qzTest={GEN:GEN,genOne:genOne,QF:QF,QH:QH,QKB:QKB};
 <button id="xmodBack" onclick="__xmodBack&&__xmodBack()" style="display:none;position:fixed;left:16px;bottom:20px;z-index:70;font-family:inherit;font-size:14px;background:#7a4a2b;color:#fff;border:none;border-radius:22px;padding:10px 18px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)">&#8592; Back</button>
 <script>
 (function(){
-  var NM={internal:['\u5185\u79d1\u7cfb\u7edf','Internal Medicine'],points:['\u7ecf\u7a74','Meridians & Points'],formulas:['\u65b9\u836f','Formulas'],ashi:['\u963f\u662f\u7a74','Ashi Points'],pain:['\u75bc\u75db','Pain'],fsn:['\u6d6e\u9488','FSN'],theory:['\u57fa\u7840\u7406\u8bba','Theory']};
+  var NM={symptoms:['\u75c7\u72b6\u6c14\u673a\u63a8\u7406','Symptom Reasoning'],internal:['\u5185\u79d1\u7cfb\u7edf','Internal Medicine'],points:['\u7ecf\u7a74','Meridians & Points'],formulas:['\u65b9\u836f','Formulas'],ashi:['\u963f\u662f\u7a74','Ashi Points'],pain:['\u75bc\u75db','Pain'],fsn:['\u6d6e\u9488','FSN'],theory:['\u57fa\u7840\u7406\u8bba','Theory']};
   function keyOf(p){ var f=(p||'').split('/').filter(Boolean)[0]||''; return NM[f]?f:''; }
   var from='';
   try{ var q=new URLSearchParams(location.search); var qf=q.get('from'); if(qf&&NM[qf]) from=qf; }catch(e){}
@@ -7064,36 +7064,5 @@ window.__qzTest={GEN:GEN,genOne:genOne,QF:QF,QH:QH,QKB:QKB};
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
-<button id="stepBack" onclick="__stepBack()" style="display:none;position:fixed;right:16px;bottom:20px;z-index:60;font-family:inherit;font-size:14px;background:var(--accent,#7a4a2b);color:#fff;border:none;border-radius:22px;padding:10px 20px;cursor:pointer;box-shadow:0 3px 12px rgba(46,38,24,.28)"><span class="zh">↩ 返回上一步</span><span class="en">↩ Back</span></button>
-<script>
-/* ★模块内"返回上一步"悬浮按钮★ */
-function __stepBack(){ try{ sfBack(); }catch(e){} setTimeout(__updStepBack,30); }
-function __updStepBack(){
-  var b=document.getElementById('stepBack'); if(!b) return;
-  var show=false;
-  try{ show = (typeof navStack!=='undefined' && navStack.length>0); }catch(e){ show=false; }
-  b.style.display = show ? 'block' : 'none';
-  var fb=document.getElementById('xmodBack')||document.getElementById('floatBack');
-  b.style.bottom = (fb && fb.style.display!=='none' && (fb.classList.contains('show')||fb.style.display==='block')) ? '74px' : '20px';
-}
-document.addEventListener('click',function(){ setTimeout(__updStepBack,50); },true);
-setInterval(__updStepBack, 800);
-</script>
-
-<!-- © 2026 SinoMed (sinomed.ca) · Original clinical reasoning content by Di Wu, R.TCM.P. · Unauthorized reproduction prohibited · 本站内容为原创，未经授权不得转载 -->
-<footer id="siteFooter" style="text-align:center;padding:22px 16px 28px;margin-top:32px;border-top:1px solid rgba(120,90,50,.18);font-size:12px;color:#8a7a5c;line-height:1.7;">
-<span class="zh">© <span class="cr-year">2026</span> SinoMed · 未经授权不得转载 · sinomed.ca</span><span class="en">© <span class="cr-year">2026</span> SinoMed · All rights reserved · sinomed.ca</span>
-<br><a href="../legal/index.html" style="color:#8a7a5c;text-decoration:underline;"><span class="zh">服务条款 · 退款政策 · 隐私政策</span><span class="en">Terms · Refunds · Privacy</span></a>
-</footer>
-<script>
-/* 版权年份自动更新：起始2026，显示 2026 或 2026–当前年 */
-(function(){
-  var y=new Date().getFullYear();
-  var txt=(y>2026)?('2026–'+y):'2026';
-  var els=document.querySelectorAll('.cr-year');
-  for(var i=0;i<els.length;i++) els[i].textContent=txt;
-})();
-</script>
-
 </body>
 </html>
