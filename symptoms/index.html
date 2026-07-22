@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>SinoMed 症状气机推导 · Symptom Qi-Dynamic Reasoning</title>
-<meta name="description" content="SinoMed 症状气机推导模块：以气机升降出入为框架的症状推导系统 | Symptom reasoning through the qi-dynamic framework">
+<title>SinoMed 症状气机推理 · Symptom Qi-Dynamic Reasoning</title>
+<meta name="description" content="SinoMed 症状气机推理模块：以气机升降出入为框架的症状推理系统 | Symptom reasoning through the qi-dynamic framework">
 <meta name="theme-color" content="#1f5c61">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231f5c61'/%3E%3Cg stroke='%23fff' stroke-width='4.5' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 42 V23 M21 23 l-6.5 7.5 M21 23 l6.5 7.5'/%3E%3Cpath d='M43 22 V41 M43 41 l-6.5 -7.5 M43 41 l6.5 -7.5'/%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -314,6 +314,66 @@ section h2{font-size:19px;color:var(--pri-deep);margin:26px 0 10px}
   html{scroll-behavior:auto}
 }
 .snav:focus-visible,.symcard:focus-visible,.block:focus-visible,.cat-on:focus-visible,.chip:focus-visible,#floatback:focus-visible{outline:2px solid var(--pri);outline-offset:2px}
+
+/* ===== 症状组合推导器 ===== */
+.dvsec{max-width:820px;margin:0 auto}
+.dvsec>h1{font-size:22px;color:var(--pri-deep);margin-bottom:6px}
+.dvsec>.hint{color:var(--ink-soft);font-size:14px;line-height:1.7;margin-bottom:18px}
+.dv-chosen-wrap{background:var(--pri-soft);border:1.5px solid var(--pri-line);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
+.dv-chosen-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.dv-chosen-h b{color:var(--pri-deep);font-size:14px}
+.dv-clear{background:none;border:1px solid var(--pri-line);color:var(--ink-soft);border-radius:8px;padding:3px 12px;font-size:13px;cursor:pointer}
+.dv-clear:hover{border-color:var(--pri);color:var(--pri-deep)}
+.dv-chosen{display:flex;flex-wrap:wrap;gap:8px;min-height:20px}
+.dv-chosen .dv-none{color:var(--ink-soft);font-size:14px}
+.dv-chip{background:var(--pri);color:#fff;border:none;border-radius:20px;padding:5px 12px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.dv-chip i{font-style:normal;opacity:.8;font-size:15px;line-height:1}
+.dv-chip:hover{background:var(--pri-deep)}
+.dv-pick{margin-bottom:22px}
+.dv-pick-h{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.dv-pick-h b{color:var(--pri-deep);font-size:15px}
+.dv-pick-h span{color:var(--ink-soft);font-size:13px}
+.dv-search{width:100%;box-sizing:border-box;border:1.5px solid var(--pri-line);border-radius:10px;padding:9px 13px;font-size:14px;margin-bottom:12px;background:var(--card);color:var(--ink)}
+.dv-search:focus{outline:none;border-color:var(--pri)}
+.dv-pick-body{display:flex;flex-direction:column;gap:12px}
+.dv-grp-h{font-size:13px;color:var(--pri-deep);font-weight:600;margin-bottom:6px}
+.dv-grp-body{display:flex;flex-wrap:wrap;gap:7px}
+.dv-opt{background:var(--card);border:1.3px solid var(--pri-line);color:var(--ink);border-radius:18px;padding:5px 12px;font-size:13.5px;cursor:pointer;transition:all .12s}
+.dv-opt:hover{border-color:var(--pri)}
+.dv-opt.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.dv-none{color:var(--ink-soft);font-size:14px;padding:6px 0}
+.dv-res{margin-top:8px}
+.dv-res>h2{font-size:17px;color:var(--pri-deep);margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--pri-line)}
+.dv-empty{color:var(--ink-soft);font-size:14px;padding:16px;text-align:center;background:var(--pri-soft);border-radius:var(--radius)}
+.dv-empty.soft{background:var(--sand);border:1px solid var(--sand-line);color:var(--ink);margin-bottom:12px}
+.dv-card{background:var(--card);border:1.5px solid var(--pri-line);border-left-width:4px;border-radius:var(--radius);padding:14px 16px;margin-bottom:12px}
+.dv-card.lean-xu{border-left-color:var(--xu)}
+.dv-card.lean-shi{border-left-color:var(--shi)}
+.dv-card.lean-mix{border-left-color:var(--pri)}
+.dv-card-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.dv-tag{font-size:16px;font-weight:700;color:var(--pri-deep)}
+.dv-blk{font-size:12px;background:var(--pri-soft);color:var(--pri-deep);border-radius:6px;padding:2px 8px}
+.dv-cov{margin-left:auto;font-size:12.5px;color:var(--ink-soft)}
+.dv-bar-wrap{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.dv-bar-l{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.dv-bar{flex:1;height:8px;background:var(--pri-soft);border-radius:5px;overflow:hidden}
+.dv-bar i{display:block;height:100%;background:var(--pri);border-radius:5px;transition:width .25s}
+.dv-card.lean-xu .dv-bar i{background:var(--xu)}
+.dv-card.lean-shi .dv-bar i{background:var(--shi)}
+.dv-bar-n{font-size:13px;font-weight:600;color:var(--pri-deep);min-width:16px;text-align:right}
+.dv-sup-h,.dv-ten-h{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px}
+.dv-sup-chips,.dv-ten-chips{display:flex;flex-wrap:wrap;gap:7px}
+.dv-sup-chip{display:inline-flex;align-items:center;gap:5px;background:var(--pri-soft);border-radius:16px;padding:3px 10px 3px 4px;font-size:13px;color:var(--ink);text-decoration:none;border:1px solid transparent}
+.dv-sup-chip:hover{border-color:var(--pri)}
+.dv-sup-chip i{font-style:normal;color:var(--ink-soft);font-size:12px}
+.dv-sup-chip .wbadge{font-size:11px;padding:1px 7px}
+.dv-ten{margin-top:11px;padding-top:10px;border-top:1px dashed var(--sand-line)}
+.dv-ten-h{color:var(--shi)}
+.dv-ten-chip{display:inline-flex;align-items:center;gap:5px;background:var(--sand);border:1px solid var(--sand-line);border-radius:16px;padding:3px 10px;font-size:13px;color:var(--ink);text-decoration:none}
+.dv-ten-chip:hover{border-color:var(--shi)}
+.dv-ten-chip i{font-style:normal;color:var(--ink-soft);font-size:12px}
+.dv-note{margin-top:16px;font-size:12.5px;color:var(--ink-soft);line-height:1.7;background:var(--sand);border:1px solid var(--sand-line);border-radius:10px;padding:11px 13px}
+
 </style>
 </head>
 <body>
@@ -334,7 +394,7 @@ section h2{font-size:19px;color:var(--pri-deep);margin:26px 0 10px}
 </footer>
 <!--
   SinoMed · sinomed.ca
-  Symptoms Module (症状学 · 气机推导) — content authored by Di Wu, R.TCM.P.
+  Symptoms Module (症状学 · 气机推理) — content authored by Di Wu, R.TCM.P.
   © 2026 1459986 B.C. LTD, British Columbia, Canada. All rights reserved.
   Unauthorized reproduction prohibited. 未经授权不得转载。
   Contact: support@sinomed.ca
@@ -10923,7 +10983,7 @@ const ASHI_WHITELIST = [
      ④伴随症状与搜索结果里的"待上线"徽标（未上线症状转为普通文字，不可点）
      除此之外无任何占位性文案。
      ============================================================ */
-  var BUILD_MODE = true;
+  var BUILD_MODE = false;
 
   var LKEY = "sinomed-lang";
 
@@ -10947,7 +11007,7 @@ const ASHI_WHITELIST = [
 
   var UI = {
     zh: {
-      title: "症状气机推导",
+      title: "症状气机推理",
       tagline: "一个症状，是一段气机的证词——先推导方向，再用舌脉验证。",
       search_ph: "搜索症状或证型（如：口苦、肝郁气滞）",
       map_title: "气机总图 · 按方向反查",
@@ -10957,7 +11017,23 @@ const ASHI_WHITELIST = [
       count_unit: "症",
       roadmap: "本模块按十纲分批上线，当前开放第一纲「寒热汗液」。未收录的类似症状，可循『类症归并』原则查其主症。",
       deriver_title: "症状组合推导器",
-      deriver_hint: "勾选多个症状，交叉推导最可能的气机方向——二期开放，数据地基已就位。",
+      deriver_hint: "勾选你观察到的多个症状，交叉推导最可能的气机方向，并看清每个方向由哪些症状支持、与哪些症状存在张力。",
+      dv_pick: "① 勾选症状",
+      dv_pick_hint: "从下方十纲中勾选（可搜索）。勾选越多，推导越聚焦。",
+      dv_search_ph: "搜索症状名或别名…",
+      dv_chosen: "已选症状",
+      dv_clear: "清空",
+      dv_result: "② 推导结果 · 气机方向",
+      dv_empty: "先在上方勾选至少一个症状，这里会实时推导。",
+      dv_one_hint: "已选 1 个症状——多选几个，交叉推导才有意义。",
+      dv_score: "证据强度",
+      dv_support: "支持此方向的症状",
+      dv_tension: "与此方向存在张力（虚实倾向相反）",
+      dv_covers: "覆盖",
+      dv_of: "/",
+      dv_syms_unit: "症",
+      dv_note: "本推导只指向「气机方向」，是把多个症状收拢到升降出入坐标上的线索，不等于最终证型；证型仍需四诊合参、结合舌脉从舍判定。",
+      dv_remove: "移除",
       w3: "高概率", w2: "常见", w1: "少见",
       sec_what: "症状内涵", sec_derive: "气机推导", sec_inquiry: "问诊指南",
       sec_tp: "舌脉验证", sec_xm: "相关联动",
@@ -11010,7 +11086,23 @@ const ASHI_WHITELIST = [
       count_unit: "",
       roadmap: "The module goes live category by category; Category 1, Chills, Fever & Sweat, is now open. Related symptoms not yet listed are folded into their principal symptom.",
       deriver_title: "Multi-Symptom Deriver",
-      deriver_hint: "Select several symptoms and cross-derive the most probable qi-dynamic direction — opens in Phase 2; the data foundation is already in place.",
+      deriver_hint: "Check off the symptoms you observe and cross-derive the most probable qi-dynamic directions, seeing which symptoms support each direction and which stand in tension with it.",
+      dv_pick: "\u2460 Select symptoms",
+      dv_pick_hint: "Check from the ten categories below (searchable). The more you select, the sharper the derivation.",
+      dv_search_ph: "Search a symptom name or alias\u2026",
+      dv_chosen: "Selected",
+      dv_clear: "Clear",
+      dv_result: "\u2461 Result \u00b7 Qi-dynamic directions",
+      dv_empty: "Select at least one symptom above; the derivation updates here in real time.",
+      dv_one_hint: "One symptom selected \u2014 add a few more for cross-derivation to mean something.",
+      dv_score: "Evidence strength",
+      dv_support: "Symptoms supporting this direction",
+      dv_tension: "In tension with this direction (opposite deficiency/excess lean)",
+      dv_covers: "covers",
+      dv_of: "of",
+      dv_syms_unit: "",
+      dv_note: "This derivation points only to qi-dynamic directions \u2014 clues that gather several symptoms onto the ascending-descending coordinate. It is not a final pattern; that still requires the four examinations and tongue-pulse confirmation.",
+      dv_remove: "remove",
       w3: "High probability", w2: "Common", w1: "Less common",
       sec_what: "What It Is", sec_derive: "Qi-Dynamic Derivation", sec_inquiry: "Inquiry Guide",
       sec_tp: "Tongue & Pulse Verification", sec_xm: "Related Modules",
@@ -11070,7 +11162,7 @@ const ASHI_WHITELIST = [
     points:   { zh: "经穴", en: "Points" },
     formulas: { zh: "方药", en: "Formulas" },
     theory:   { zh: "理论", en: "Theory" },
-    symptoms: { zh: "症状气机推导", en: "Symptom Reasoning" }
+    symptoms: { zh: "症状气机推理", en: "Symptom Reasoning" }
   };
 
   var ROSTER_MAP = {};
@@ -11223,13 +11315,12 @@ const ASHI_WHITELIST = [
     h += '</section>';
 
     /* 自测入口 */
-    h += '<section class="learn"><a class="learn-card" href="#quiz"><span class="lc-ico">&#9998;</span>' +
+    h += '<section class="learn"><a class="learn-card" href="#deriver"><span class="lc-ico">&#9863;</span>' +
+         '<span class="lc-b"><b>' + esc(t("deriver_title")) + '</b><i>' + esc(t("deriver_hint")) + '</i></span><span class="lc-go">&rarr;</span></a>' +
+         '<a class="learn-card" href="#quiz"><span class="lc-ico">&#9998;</span>' +
          '<span class="lc-b"><b>' + esc(t("quiz_entry_t")) + '</b><i>' + esc(t("quiz_entry_d")) + '</i></span><span class="lc-go">&rarr;</span></a>' +
          '<a class="learn-card" href="#cards"><span class="lc-ico">&#9782;</span>' +
          '<span class="lc-b"><b>' + esc(t("cards_entry_t")) + '</b><i>' + esc(t("cards_entry_d")) + '</i></span><span class="lc-go">&rarr;</span></a></section>';
-
-    /* 推导器预告 */
-    if (BUILD_MODE) h += '<section class="deriver"><h2>' + esc(t("deriver_title")) + '</h2><p>' + esc(t("deriver_hint")) + '</p></section>';
 
     return h;
   }
@@ -11919,6 +12010,217 @@ const ASHI_WHITELIST = [
     return h;
   }
 
+  /* ---------- 症状组合推导器 ---------- */
+  /* 已选症状 id 集合（跨语言/重绘持久） */
+  var DERIVER = { picked: [], q: "" };
+
+  /* 判断一个方向的虚实倾向：返回 'xu' | 'shi' | 'mix' | '' */
+  function dirLean(d) {
+    var x = d.xushi || "";
+    if (x === "虚") return "xu";
+    if (x === "实") return "shi";
+    if (x === "虚实夹杂") return "mix";
+    return "";
+  }
+
+  /* 核心推导：给定已选症状 id 列表，按气机标签累积证据 */
+  function deriveResult(ids) {
+    /* cand[tag] = { tag, score, supports:[{id,weight,dirLabel,lean}], leans:{xu,shi} } */
+    var cand = {};
+    ids.forEach(function (id) {
+      var s = SYMPTOMS[id];
+      if (!s) return;
+      /* 一个症状对某标签的贡献，取其"挂该标签的方向中权重最高者"，避免同症多方向自我叠加 */
+      var best = {}; /* tag -> {weight, dir} */
+      s.dirs.forEach(function (d) {
+        (d.tags || []).forEach(function (tg) {
+          if (!best[tg] || d.weight > best[tg].weight) best[tg] = { weight: d.weight, dir: d };
+        });
+      });
+      Object.keys(best).forEach(function (tg) {
+        var b = best[tg];
+        if (!cand[tg]) cand[tg] = { tag: tg, score: 0, supports: [], leans: { xu: 0, shi: 0 } };
+        cand[tg].score += b.weight;
+        cand[tg].supports.push({ id: id, weight: b.weight, dirLabel: b.dir.label, lean: dirLean(b.dir) });
+        var ln = dirLean(b.dir);
+        if (ln === "xu") cand[tg].leans.xu++;
+        else if (ln === "shi") cand[tg].leans.shi++;
+      });
+    });
+
+    /* 计算"张力"：对每个候选标签，找出勾选症状中——该症有方向支持此标签，但该症还有另一方向的虚实倾向与"此标签支持方向的主流倾向"相反。
+       更实用的张力：某症状整体只提供了与本方向相反倾向的证据（即该症在别处强烈指向相反虚实）。
+       实现：对候选 T，遍历所有已选症状；若某症【不支持 T】但其最强方向的虚实倾向 与 T 的主流倾向相反，则记为张力项。 */
+    var cands = Object.keys(cand).map(function (k) { return cand[k]; });
+    cands.forEach(function (c) {
+      /* 本方向主流虚实倾向 */
+      c.mainLean = c.leans.xu === c.leans.shi ? "mix" : (c.leans.xu > c.leans.shi ? "xu" : "shi");
+      c.tension = [];
+      if (c.mainLean === "xu" || c.mainLean === "shi") {
+        var opp = c.mainLean === "xu" ? "shi" : "xu";
+        var supportIds = {};
+        c.supports.forEach(function (sp) { supportIds[sp.id] = 1; });
+        ids.forEach(function (id) {
+          if (supportIds[id]) return; /* 已支持本方向的不算张力 */
+          var s = SYMPTOMS[id];
+          if (!s) return;
+          /* 该症最强方向的倾向 */
+          var top = null;
+          s.dirs.forEach(function (d) { if (!top || d.weight > top.weight) top = d; });
+          if (top && dirLean(top) === opp) {
+            c.tension.push({ id: id, dirLabel: top.label, lean: opp });
+          }
+        });
+      }
+    });
+
+    /* 排序：分高优先，同分覆盖症状多者优先 */
+    cands.sort(function (a, b) {
+      if (b.score !== a.score) return b.score - a.score;
+      return b.supports.length - a.supports.length;
+    });
+    return cands;
+  }
+
+  function renderDeriver() {
+    var h = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>';
+    h += '<section class="dvsec"><h1>' + esc(t("deriver_title")) + '</h1><p class="hint">' + esc(t("deriver_hint")) + '</p>';
+    /* 已选 chips + 清空 */
+    h += '<div class="dv-chosen-wrap"><div class="dv-chosen-h"><b>' + esc(t("dv_chosen")) + '</b>';
+    h += '<button class="dv-clear" data-dv="clear">' + esc(t("dv_clear")) + '</button></div>';
+    h += '<div id="dvChosen" class="dv-chosen"></div></div>';
+    /* 搜索 */
+    h += '<div class="dv-pick"><div class="dv-pick-h"><b>' + esc(t("dv_pick")) + '</b><span>' + esc(t("dv_pick_hint")) + '</span></div>';
+    h += '<input id="dvSearch" class="dv-search" type="search" placeholder="' + esc(t("dv_search_ph")) + '" autocomplete="off">';
+    h += '<div id="dvPick" class="dv-pick-body"></div></div>';
+    /* 结果 */
+    h += '<div class="dv-res"><h2>' + esc(t("dv_result")) + '</h2><div id="dvRes"></div>';
+    h += '<p class="dv-note">' + esc(t("dv_note")) + '</p></div>';
+    h += '</section>';
+    return h;
+  }
+
+  /* 绘制"已选" chips */
+  function paintChosen() {
+    var box = document.getElementById("dvChosen");
+    if (!box) return;
+    if (!DERIVER.picked.length) { box.innerHTML = '<span class="dv-none">—</span>'; return; }
+    var h = "";
+    DERIVER.picked.forEach(function (id) {
+      var s = SYMPTOMS[id];
+      if (!s) return;
+      h += '<button class="dv-chip" data-dv="rm" data-id="' + esc(id) + '" title="' + esc(t("dv_remove")) + '">' + esc(pick(s.name)) + ' <i>\u00d7</i></button>';
+    });
+    box.innerHTML = h;
+  }
+
+  /* 绘制勾选面板（按十纲分组，受搜索过滤） */
+  function paintPick() {
+    var box = document.getElementById("dvPick");
+    if (!box) return;
+    var q = (DERIVER.q || "").trim().toLowerCase();
+    var pickedSet = {};
+    DERIVER.picked.forEach(function (id) { pickedSet[id] = 1; });
+    var h = "";
+    CATS.forEach(function (cat) {
+      var items = ROSTER.filter(function (r) {
+        if (r.cat !== cat.id || !r.built || !SYMPTOMS[r.id]) return false;
+        if (!q) return true;
+        var s = SYMPTOMS[r.id];
+        var hay = (pick(s.name) + " " + s.name.zh + " " + s.name.en).toLowerCase();
+        if (s.aka) hay += " " + s.aka.zh.join(" ").toLowerCase() + " " + s.aka.en.join(" ").toLowerCase();
+        return hay.indexOf(q) >= 0;
+      });
+      if (!items.length) return;
+      h += '<div class="dv-grp"><div class="dv-grp-h">' + esc(pick(cat)) + '</div><div class="dv-grp-body">';
+      items.forEach(function (r) {
+        var on = pickedSet[r.id] ? " on" : "";
+        h += '<button class="dv-opt' + on + '" data-dv="tog" data-id="' + esc(r.id) + '">' + esc(pick(SYMPTOMS[r.id].name)) + '</button>';
+      });
+      h += '</div></div>';
+    });
+    if (!h) h += '<div class="dv-none">—</div>';
+    box.innerHTML = h;
+  }
+
+  /* 绘制推导结果 */
+  function paintRes() {
+    var box = document.getElementById("dvRes");
+    if (!box) return;
+    var n = DERIVER.picked.length;
+    if (!n) { box.innerHTML = '<div class="dv-empty">' + esc(t("dv_empty")) + '</div>'; return; }
+    var cands = deriveResult(DERIVER.picked);
+    var maxScore = cands.length ? cands[0].score : 1;
+    var h = "";
+    if (n === 1) h += '<div class="dv-empty soft">' + esc(t("dv_one_hint")) + '</div>';
+    cands.forEach(function (c) {
+      var pct = Math.round((c.score / maxScore) * 100);
+      var block = null;
+      VOCAB.blocks.forEach(function (b) { if ((b.tags || []).indexOf(c.tag) >= 0) block = b; });
+      var leanCls = c.mainLean === "xu" ? "lean-xu" : (c.mainLean === "shi" ? "lean-shi" : "lean-mix");
+      h += '<div class="dv-card ' + leanCls + '">';
+      h += '<div class="dv-card-h"><span class="dv-tag">' + esc(tagName(c.tag)) + '</span>';
+      if (block) h += '<span class="dv-blk">' + esc(pick(block)) + '</span>';
+      h += '<span class="dv-cov">' + esc(t("dv_covers")) + ' ' + c.supports.length + ' ' + esc(t("dv_of")) + ' ' + n + ' ' + esc(t("dv_syms_unit")) + '</span></div>';
+      /* 证据强度条 */
+      h += '<div class="dv-bar-wrap"><span class="dv-bar-l">' + esc(t("dv_score")) + '</span><span class="dv-bar"><i style="width:' + pct + '%"></i></span><span class="dv-bar-n">' + c.score + '</span></div>';
+      /* 支持症状 */
+      h += '<div class="dv-sup"><div class="dv-sup-h">' + esc(t("dv_support")) + '</div><div class="dv-sup-chips">';
+      c.supports.sort(function (a, b) { return b.weight - a.weight; });
+      c.supports.forEach(function (sp) {
+        var s = SYMPTOMS[sp.id];
+        h += '<a class="dv-sup-chip ' + wCls(sp.weight) + '" href="#sym-' + esc(sp.id) + '"><span class="wbadge ' + wCls(sp.weight) + '">' + esc(wLabel(sp.weight)) + '</span>' + esc(pick(s.name)) + '<i>·' + esc(pick(sp.dirLabel)) + '</i></a>';
+      });
+      h += '</div></div>';
+      /* 张力 */
+      if (c.tension && c.tension.length) {
+        h += '<div class="dv-ten"><div class="dv-ten-h">&#9888; ' + esc(t("dv_tension")) + '</div><div class="dv-ten-chips">';
+        c.tension.forEach(function (tn) {
+          var s = SYMPTOMS[tn.id];
+          h += '<a class="dv-ten-chip" href="#sym-' + esc(tn.id) + '">' + esc(pick(s.name)) + '<i>·' + esc(pick(tn.dirLabel)) + '</i></a>';
+        });
+        h += '</div></div>';
+      }
+      h += '</div>';
+    });
+    box.innerHTML = h;
+  }
+
+  function paintDeriver() {
+    paintChosen();
+    paintPick();
+    paintRes();
+  }
+
+  function wireDeriver() {
+    var sec = document.querySelector(".dvsec");
+    if (!sec) return;
+    /* 语言切换/进入：重绘 */
+    paintDeriver();
+    var srch = document.getElementById("dvSearch");
+    if (srch) {
+      srch.value = DERIVER.q || "";
+      srch.addEventListener("input", function () { DERIVER.q = srch.value; paintPick(); });
+    }
+    sec.addEventListener("click", function (e) {
+      var b = e.target.closest ? e.target.closest("[data-dv]") : null;
+      if (!b) return;
+      var act = b.getAttribute("data-dv");
+      if (act === "clear") { DERIVER.picked = []; paintDeriver(); }
+      else if (act === "tog") {
+        var id = b.getAttribute("data-id");
+        var i = DERIVER.picked.indexOf(id);
+        if (i >= 0) DERIVER.picked.splice(i, 1); else DERIVER.picked.push(id);
+        paintChosen(); paintPick(); paintRes();
+      } else if (act === "rm") {
+        var rid = b.getAttribute("data-id");
+        var j = DERIVER.picked.indexOf(rid);
+        if (j >= 0) DERIVER.picked.splice(j, 1);
+        paintChosen(); paintPick(); paintRes();
+      }
+    });
+  }
+
   function wireQuiz() {
     var q = document.getElementById("quizbox");
     var sec = document.querySelector(".quizsec");
@@ -11998,6 +12300,7 @@ const ASHI_WHITELIST = [
     else if (hash === "shemai" || hash === "cat-shemai") html = renderShemai();
     else if (hash === "quiz") html = renderQuiz();
     else if (hash === "cards") html = renderCards();
+    else if (hash === "deriver") html = renderDeriver();
     else if (hash.indexOf("cat-") === 0) html = '<a class="backlink" href="#">&larr; ' + esc(t("back_home")) + '</a>' + renderCatList(hash.slice(4), true);
     else html = renderHome();
     app.innerHTML = html;
@@ -12009,6 +12312,7 @@ const ASHI_WHITELIST = [
     if (hb) hb.textContent = t("title");
     wireSecNav();
     wireQuiz();
+    wireDeriver();
     drawFloatBack();
     drawFooter();
     try { window.scrollTo(0, 0); } catch (e) {}
