@@ -26,9 +26,6 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
   --radius:     10px;
   --radius-lg:  16px;
-  /* ★补：原被使用却从未定义，导致购买按钮背景透明、近白色字看不清★ */
-  --accent:     #7a4a2b;
-  --gold:       #8a6d3b;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; }
@@ -183,10 +180,10 @@ body {
 .pass-info { flex: 1 1 320px; }
 .pass-name { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
 .pass-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
-.pass-cta { text-align: right; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+.pass-cta { text-align: right; flex: 0 0 auto; }
 .pass-price { font-size: 26px; font-weight: 800; color: var(--ink); }
 .pass-price .was { font-size: 13px; color: var(--ink-faint); text-decoration: line-through; font-weight: 400; margin-right: 8px; }
-.pass-note { font-size: 12px; color: var(--ink-muted); margin-top: 4px; line-height: 1.5; max-width: 320px; margin-left: auto; }
+.pass-note { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
 .pricing-rows { border: 1px solid var(--rule); border-radius: 12px; background: #fff; overflow: hidden; }
 .pr-row {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
@@ -210,10 +207,7 @@ body {
 .pricing-footnote { font-size: 12px; color: var(--ink-faint); text-align: center; margin-top: 14px; }
 @media (max-width: 600px) {
   .pass-card { flex-direction: column; align-items: flex-start; }
-  /* ★关键修复：column 方向下 flex-basis 变成"高度"，320px 会撑出约225px空白★ */
-  .pass-info { flex: 0 0 auto; width: 100%; }
-  .pass-cta { text-align: left; width: 100%; }
-  .pass-note { margin-left: 0; }
+  .pass-cta { text-align: left; }
   .pr-row { flex-direction: column; align-items: flex-start; gap: 6px; }
   .pr-cta { text-align: left; }
 }
@@ -262,7 +256,6 @@ body {
   padding: 32px 24px 80px; text-align: center;
   font-size: 12px; color: var(--ink-faint);
 }
-.footer .cr-line { color: var(--ink-muted); font-weight: 600; }
 .footer a { color: var(--ink-faint); }
 
 /* ── AUTH MODAL ───────────────────────────────── */
@@ -309,10 +302,6 @@ html[lang="zh"] .t-en{display:none;}
   .hero-title { font-size: 26px; }
   .topbar { padding: 0 12px; height: 48px; }
   .topbar-logo { font-size: 16px; }
-  /* ★手机端顶栏腾空间：隐藏邮箱与定价链接，保证登录/退出按钮不被挤出屏幕★ */
-  .topbar-user { display: none !important; }
-  .topbar-right > a.topbar-signin[href="#pricing"] { display: none; }
-  .topbar-right { gap: 8px; }
   .lang-switch { margin-right: 4px; }
   .lbtn { padding: 3px 7px; font-size: 10px; }
   .topbar-signin { font-size: 11px; padding: 4px 8px; }
@@ -373,21 +362,7 @@ html[lang="zh"] .t-en{display:none;}
   border-top: 1px solid var(--border);
 }
 
-
-/* 语言切换的按钮类元素需保持 inline-block（.t-en 默认 inline 会破坏按钮外观） */
-a.pr-btn.t-en, a.pr-btn.t-zh { display: none; }
-html[lang="en"] a.pr-btn.t-en { display: inline-block; }
-html[lang="zh"] a.pr-btn.t-zh { display: inline-block; }
 </style>
-<link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#7a4a2b">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="SinoMed">
-<script>
-if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); }); }
-</script>
 </head>
 <body>
 
@@ -418,41 +393,6 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
   <h1 class="hero-title"><span class="t-en">Clinical Reasoning<br><em>Not Memorisation</em></span><span class="t-zh">临床推理<br><em>而非死记硬背</em></span></h1>
   <div class="hero-rule"></div>
   <p class="hero-sub"><span class="t-en">A structured system for training and applying clinical reasoning in TCM — from chief complaint to final treatment, every step has its logic.</span><span class="t-zh">面向中医执业者的临床推理训练与参考平台——从主诉到治疗方案，每一步都有逻辑可循。</span></p>
-<!-- 添加到主屏（自动识别：安卓/桌面Chrome=真安装 · iOS=分享指引 · 已装/不支持=自动隐藏） -->
-<div id="a2hs" style="display:none;text-align:center;margin:6px 0 30px">
-  <button id="a2hs-btn" style="border:none;cursor:pointer;background:var(--vermillion,#8B1A1A);color:#fff;font-size:14px;font-weight:600;padding:10px 20px;border-radius:999px;box-shadow:0 3px 12px rgba(139,26,26,.22)">
-    <span class="t-en">&#128241; Add to Home Screen</span><span class="t-zh">&#128241; 添加到主屏</span>
-  </button>
-</div>
-<div id="a2hs-ios" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.45)">
-  <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);width:86%;max-width:360px;background:#FAF8F4;border-radius:16px;padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center;color:#1a1a18">
-    <div style="font-size:15px;line-height:1.7">
-      <span class="t-en">In Safari, tap <b>Share &#8593;</b> at the bottom &rarr; <b>&quot;Add to Home Screen&quot;</b> to use it like an app.</span>
-      <span class="t-zh">在 Safari 里点底部 <b>分享 &#8593;</b> &rarr; 选 <b>&#12300;添加到主屏幕&#12301;</b>，即可像 App 一样使用。</span>
-    </div>
-    <button id="a2hs-ios-x" style="margin-top:14px;border:none;cursor:pointer;background:var(--vermillion,#8B1A1A);color:#fff;font-size:14px;padding:8px 22px;border-radius:999px">
-      <span class="t-en">Got it</span><span class="t-zh">知道了</span>
-    </button>
-  </div>
-</div>
-<script>
-(function(){
-  function standalone(){ try{ return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone===true; }catch(e){ return navigator.standalone===true; } }
-  if(standalone()) return;
-  var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  var box=document.getElementById('a2hs'), btn=document.getElementById('a2hs-btn'), deferred=null;
-  addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); deferred=e; box.style.display=''; });
-  addEventListener('appinstalled',function(){ box.style.display='none'; });
-  if(isIOS){ box.style.display=''; }
-  btn && btn.addEventListener('click',function(){
-    if(deferred){ deferred.prompt(); deferred.userChoice.finally(function(){ deferred=null; box.style.display='none'; }); }
-    else if(isIOS){ document.getElementById('a2hs-ios').style.display='block'; }
-  });
-  var x=document.getElementById('a2hs-ios-x');
-  x && x.addEventListener('click',function(){ document.getElementById('a2hs-ios').style.display='none'; });
-})();
-</script>
-
 </div>
 
 
@@ -515,6 +455,19 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
         <div class="mc-title"><span class="t-en">TCM Theoretical Reasoning System</span><span class="t-zh">中医理论推理</span></div>
         <div class="mc-sub"><span class="t-en">Classics for the Skeleton, the Clinic for Proof</span><span class="t-zh">经学立骨 · 临床验神</span></div>
         <div class="mc-desc"><span class="t-en">With ascending–descending / exiting–entering as one master coordinate, it places the six conformations, the Jin–Yuan schools and warm disease on a single map, and reasons step by step from a patient's chief complaint down to principle, method, formula, point and technique. It is the shared groundwork beneath every clinical module below.</span><span class="t-zh">它以升降出入双坐标为纲，把伤寒六经、金元诸家与温病放到同一张图上，从病人的一句主诉一步步推导到理、法、方、药、穴、术。它是下面每一个临床模块共同的底层坐标。</span></div>
+        <div class="mc-cta">
+          <span class="mc-price"><span class="free"><span class="t-en">Free access</span><span class="t-zh">免费开放</span></span></span>
+          <span class="mc-arrow">→</span>
+        </div>
+      </a>
+
+      <a class="module-card available" href="/symptoms/">
+        <div class="mc-accent amber"></div>
+        <span class="mc-icon">🧭</span>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">Qi Reasoning</span><span class="t-zh">气机推理</span></span>
+        <div class="mc-title"><span class="t-en">Symptom Qi-Dynamic Reasoning</span><span class="t-zh">症状气机推理</span></div>
+        <div class="mc-sub"><span class="t-en">90 Common Symptoms · Qi-Dynamic Frame</span><span class="t-zh">90个常见症状 · 升降出入为纲</span></div>
+        <div class="mc-desc"><span class="t-en">Reasoning training that starts from a single symptom: it walks through 90 common symptoms one by one, explaining why each points to a specific Qi-dynamic change, then links onward to the related conditions, points, and formulas. The bridge between the theoretical frame and the clinical modules.</span><span class="t-zh">从单个症状切入的推理训练：90个常见症状，逐个讲解"为什么这个症状指向这种气机改变"，再链接到相应的病、穴与方。它是理论坐标与临床模块之间的桥。</span></div>
         <div class="mc-cta">
           <span class="mc-price"><span class="free"><span class="t-en">Free access</span><span class="t-zh">免费开放</span></span></span>
           <span class="mc-arrow">→</span>
@@ -688,6 +641,13 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
       </div>
       <div class="pr-row">
         <div class="pr-main">
+          <div class="pr-name"><span class="t-en">🧭 Symptom Qi-Dynamic Reasoning</span><span class="t-zh">🧭 症状气机推理</span></div>
+          <div class="pr-free-scope"><span class="t-en">90 common symptoms · mechanism-level reasoning</span><span class="t-zh">90个常见症状 · 机制级推理</span></div>
+        </div>
+        <div class="pr-cta"><span class="pr-badge-free"><span class="t-en">Free</span><span class="t-zh">免费开放</span></span><a class="pr-btn ghost" href="/symptoms/"><span class="t-en">Enter</span><span class="t-zh">进入</span></a></div>
+      </div>
+      <div class="pr-row">
+        <div class="pr-main">
           <div class="pr-name"><span class="t-en">📍 Meridians &amp; Points Foundations</span><span class="t-zh">📍 经络腧穴基础</span></div>
           <div class="pr-free-scope"><span class="t-en">All 14 channels · 361 points · specific-point system</span><span class="t-zh">十四经361穴全览 · 特定穴体系</span></div>
         </div>
@@ -726,14 +686,10 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
           <div class="pr-name"><span class="t-en">🪡 FSN Clinical Manual</span><span class="t-zh">🪡 浮针临床手册</span></div>
           <div class="pr-free-scope"><span class="t-en">Included with the FSN online course</span><span class="t-zh">浮针在线课程附赠</span></div>
         </div>
-        <div class="pr-cta" id="pr-cta-fsn"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><a class="pr-btn t-en" href="https://fsn-acupuncture.teachable.com/l/pdp/fu-s-subcutaneous-needling-fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">Enroll</a><a class="pr-btn t-zh" href="https://fsn-acupuncture.teachable.com/l/pdp/fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">报名课程</a><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
+        <div class="pr-cta"><span class="pr-price"><span class="t-en">Redemption code</span><span class="t-zh">兑换码解锁</span></span><button class="pr-btn ghost" onclick="openFSNModal()"><span class="t-en">Redeem</span><span class="t-zh">兑换</span></button></div>
       </div>
     </div>
-    <div class="pricing-footnote" style="margin-top:16px;color:var(--ink-muted);">
-  <span class="t-en">By completing a purchase you agree to the <a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">Terms of Use</a> and <a href="legal/index.html#refund" target="_blank" rel="noopener" style="color:var(--accent);">Refund Policy</a>.</span>
-  <span class="t-zh">完成购买即表示您同意<a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">服务条款</a>与<a href="legal/index.html#refund" target="_blank" rel="noopener" style="color:var(--accent);">退款政策</a>。</span>
-</div>
-<div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
+    <div class="pricing-footnote" id="pricing-footnote"><span class="t-en">Prices in CAD. One-time purchase, no subscription. Free content requires no account. <strong>Note: individual module purchases cannot later be credited toward the All-Access Pass — after buying a single module, further unlocks are module-by-module only.</strong></span><span class="t-zh">价格为加元。一次购买，非订阅制。免费内容无需注册。<strong>请注意：单模块购买后，日后只能继续按模块购买，无法补差价升级为全站通行证。</strong></span></div>
   </div>
 </div>
 
@@ -762,24 +718,9 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
 </div>
 
 <!-- Footer -->
-<!-- © 2026 SinoMed (sinomed.ca) · Original clinical reasoning content by Di Wu, R.TCM.P. · Unauthorized reproduction prohibited · 本站内容为原创，未经授权不得转载 -->
 <div class="footer">
-  <p><span class="t-en"><span class="cr-line">© <span class="cr-year">2026</span> SinoMed · All rights reserved · sinomed.ca</span><br>For professional continuing education and reference only.<br>Not a substitute for individualised clinical judgement. Comply with applicable laws and regulations in your jurisdiction.<br><br>Questions or account issues: <a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span><span class="t-zh"><span class="cr-line">© <span class="cr-year">2026</span> SinoMed · 未经授权不得转载 · sinomed.ca</span><br>仅供中医执业者继续教育和临床参考使用。<br>不能替代个体化临床判断。请遵守所在地区适用法规。<br><br>如有问题或账号支持：<a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span></p>
-  <p style="margin-top:14px;">
-    <a href="legal/index.html" style="color:var(--ink-muted);font-weight:600;text-decoration:underline;">
-      <span class="t-en">Terms · Refunds · Privacy</span><span class="t-zh">服务条款 · 退款政策 · 隐私政策</span>
-    </a>
-  </p>
+  <p><span class="t-en">SinoMed · sinomed.ca · For professional continuing education and reference only.<br>Not a substitute for individualised clinical judgement. Comply with applicable laws and regulations in your jurisdiction.<br><br>Questions or account issues: <a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span><span class="t-zh">SinoMed · sinomed.ca · 仅供中医执业者继续教育和临床参考使用。<br>不能替代个体化临床判断。请遵守所在地区适用法规。<br><br>如有问题或账号支持：<a href="mailto:support@sinomed.ca" style="color:var(--ink-faint);">support@sinomed.ca</a></span></p>
 </div>
-<script>
-/* 版权年份自动更新：起始2026，显示 2026 或 2026–当前年 */
-(function(){
-  var y=new Date().getFullYear();
-  var txt=(y>2026)?('2026–'+y):'2026';
-  var els=document.querySelectorAll('.cr-year');
-  for(var i=0;i<els.length;i++) els[i].textContent=txt;
-})();
-</script>
 
 <!-- /page-wrap -->
 
@@ -807,13 +748,6 @@ if('serviceWorker' in navigator){ addEventListener('load',function(){ navigator.
     <div id="form-up" style="display:none">
       <div class="mfield"><label>Email</label><input type="email" id="up-email" placeholder="you@example.com"></div>
       <div class="mfield"><label>Password (min 6 chars)</label><input type="password" id="up-pw" placeholder="••••••••"></div>
-      <label id="agree-row" style="display:flex;align-items:flex-start;gap:9px;margin:14px 0 6px;font-size:13px;line-height:1.55;color:var(--ink-mid);cursor:pointer;">
-        <input type="checkbox" id="up-agree" style="margin-top:3px;flex:0 0 auto;width:16px;height:16px;cursor:pointer;">
-        <span>
-          <span class="t-en">I have read and agree to the <a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">Terms of Use</a> and <a href="legal/index.html#privacy" target="_blank" rel="noopener" style="color:var(--accent);">Privacy Policy</a>.</span>
-          <span class="t-zh">我已阅读并同意<a href="legal/index.html#terms" target="_blank" rel="noopener" style="color:var(--accent);">服务条款</a>和<a href="legal/index.html#privacy" target="_blank" rel="noopener" style="color:var(--accent);">隐私政策</a>。</span>
-        </span>
-      </label>
       <button class="mbtn" onclick="doSignUp()">Create Account</button>
     </div>
     <div class="mmsg" id="mmsg"></div>
@@ -860,16 +794,6 @@ async function renderPricing(){
     const sec = document.getElementById('pricing'); if(sec) sec.style.display = 'none';
     const lnk = document.querySelector('a[href="#pricing"]'); if(lnk) lnk.style.display = 'none';
     // still mark module cards as owned below
-  }
-
-  /* ★FSN：兑换码模块，全站通不解锁，只认 module_id='fsn'。
-     已有权限时把"兑换"换成"进入"，避免已兑换的人还看到兑换按钮。★ */
-  const fsnEl = document.getElementById('pr-cta-fsn');
-  if(fsnEl && owned.has('fsn')){
-    /* 已兑换：显示"已拥有 + 进入"，同时保留报名入口（可能想推荐给同行） */
-    fsnEl.innerHTML = prOwnedHTML('/fsn/')
-      + '<a class="pr-btn ghost t-en" href="https://fsn-acupuncture.teachable.com/l/pdp/fu-s-subcutaneous-needling-fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">Course</a>'
-      + '<a class="pr-btn ghost t-zh" href="https://fsn-acupuncture.teachable.com/l/pdp/fsn-acupuncture" target="_blank" rel="noopener" style="margin-left:10px;text-decoration:none;">课程页</a>';
   }
 
   // Per-module CTAs
@@ -1151,21 +1075,11 @@ async function doSignIn(){
   setMsg('Signing in…','');
   const {error}=await sb.auth.signInWithPassword({email,password:pw});
   if(error) setMsg(error.message,'err');
-  else { closeModal(); try{ await renderPricing(); }catch(e){} }
+  else closeModal();
 }
 async function doSignUp(){
   const email=document.getElementById('up-email').value.trim();
   const pw=document.getElementById('up-pw').value;
-  /* ★必须勾选同意条款才能注册（默认不勾）★ */
-  const agree=document.getElementById('up-agree');
-  if(agree && !agree.checked){
-    const zh = document.documentElement.getAttribute('lang')==='zh';
-    setMsg(zh?'请先阅读并勾选同意服务条款与隐私政策。':'Please read and accept the Terms of Use and Privacy Policy first.','err');
-    const row=document.getElementById('agree-row');
-    if(row){ row.style.outline='2px solid var(--vermillion)'; row.style.outlineOffset='4px'; row.style.borderRadius='6px';
-      setTimeout(function(){ row.style.outline='none'; }, 2200); }
-    return;
-  }
   setMsg('Creating account…','');
   const {error}=await sb.auth.signUp({email,password:pw});
   if(error) setMsg(error.message,'err');
@@ -1184,9 +1098,6 @@ sb.auth.onAuthStateChange((event, session)=>{
   document.getElementById('user-email').style.display = user ? '' : 'none';
   document.getElementById('btn-signin').style.display = user ? 'none' : '';
   document.getElementById('btn-signout').style.display = user ? '' : 'none';
-
-  /* ★登录/登出后立即重算购买状态，避免显示过时的"购买"按钮导致重复付费★ */
-  try{ renderPricing(); }catch(e){}
 });
 
 async function sbHandlePainPurchase() {
@@ -1286,58 +1197,5 @@ async function sbHandlePainPurchase() {
     <div class="mmsg" id="fsn-modal-msg"></div>
   </div>
 </div>
-<script>
-/* ★法务弹窗：点条款/退款/隐私链接时在弹窗内阅读，不跳走、不开新标签页★
-   手机上尤其重要——开新标签页会打断购买流程，很多人回不来。 */
-(function(){
-  var BASE='legal/index.html';
-  function curLang(){
-    try{ return localStorage.getItem('sinomed-lang')==='zh' ? 'zh' : 'en'; }catch(e){ return 'en'; }
-  }
-  function build(){
-    if(document.getElementById('legalModal')) return;
-    var wrap=document.createElement('div');
-    wrap.id='legalModal';
-    wrap.style.cssText='display:none;position:fixed;inset:0;z-index:9999;background:rgba(30,25,20,.55);align-items:center;justify-content:center;padding:16px';
-    wrap.innerHTML =
-      '<div style="position:relative;background:#fff;border-radius:14px;max-width:720px;width:100%;height:min(84vh,760px);box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column">'
-      + '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e6e1d8;flex:0 0 auto">'
-      +   '<span id="legalModalTitle" style="font-size:14px;font-weight:700;color:#5d5344"></span>'
-      +   '<button id="legalModalClose" aria-label="Close" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;color:#7a6a55;font-size:20px;line-height:32px;cursor:pointer;padding:0">&times;</button>'
-      + '</div>'
-      + '<iframe id="legalModalFrame" title="Legal" style="border:0;width:100%;flex:1 1 auto"></iframe>'
-      + '</div>';
-    document.body.appendChild(wrap);
-    wrap.addEventListener('click',function(e){ if(e.target===wrap) closeLegal(); });
-    document.getElementById('legalModalClose').addEventListener('click',closeLegal);
-  }
-  window.openLegal=function(hash){
-    build();
-    var zh = curLang()==='zh';
-    var titles = {'#terms': zh?'服务条款':'Terms of Use',
-                  '#refund': zh?'退款政策':'Refund Policy',
-                  '#privacy': zh?'隐私政策':'Privacy Policy'};
-    document.getElementById('legalModalTitle').textContent = titles[hash] || (zh?'条款与政策':'Legal');
-    document.getElementById('legalModalFrame').src = BASE+'?embed=1&lang='+curLang()+(hash||'');
-    document.getElementById('legalModal').style.display='flex';
-    document.documentElement.style.overflow='hidden';
-  };
-  window.closeLegal=function(){
-    var m=document.getElementById('legalModal');
-    if(m){ m.style.display='none'; document.getElementById('legalModalFrame').src='about:blank'; }
-    document.documentElement.style.overflow='';
-  };
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLegal(); });
-  /* 拦截所有指向法务页的链接，改为弹窗打开 */
-  document.addEventListener('click',function(e){
-    var a=e.target.closest && e.target.closest('a[href*="legal/index.html"]');
-    if(!a) return;
-    e.preventDefault();
-    var h=a.getAttribute('href')||'';
-    var i=h.indexOf('#');
-    openLegal(i>=0 ? h.slice(i) : '');
-  }, true);
-})();
-</script>
 </body>
 </html>
