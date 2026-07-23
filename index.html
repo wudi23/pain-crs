@@ -26,10 +26,6 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
   --radius:     10px;
   --radius-lg:  16px;
-  --accent:     #7a4a2b;
-  --gold:       #8a6d3b;
-  --cream:      #F5F2EC;
-  --border:     #E0DDD6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; }
@@ -181,7 +177,7 @@ body {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
   box-shadow: 0 2px 10px rgba(138,109,59,0.10);
 }
-.pass-info { flex: 1 1 320px; min-width: 0; }
+.pass-info { flex: 1 1 320px; }
 .pass-name { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
 .pass-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
 .pass-cta { text-align: right; flex: 0 0 auto; }
@@ -203,7 +199,7 @@ body {
 .pr-owned { color: var(--jade); font-weight: 700; }
 .pr-btn {
   display: inline-block; margin-left: 10px; padding: 5px 14px; border-radius: 6px;
-  background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+  background: var(--accent); color: #F5F0E8; font-size: 12px; font-weight: 700;
   border: none; cursor: pointer; text-decoration: none;
 }
 .pr-btn:hover { opacity: .9; }
@@ -211,9 +207,7 @@ body {
 .pricing-footnote { font-size: 12px; color: var(--ink-faint); text-align: center; margin-top: 14px; }
 @media (max-width: 600px) {
   .pass-card { flex-direction: column; align-items: flex-start; }
-  /* column 布局下 flex-basis 作用于高度，320px 会撑出大片空白，故归零 */
-  .pass-info { flex: 0 0 auto; width: 100%; }
-  .pass-cta { text-align: left; flex: 0 0 auto; width: 100%; }
+  .pass-cta { text-align: left; }
   .pr-row { flex-direction: column; align-items: flex-start; gap: 6px; }
   .pr-cta { text-align: left; }
 }
@@ -508,10 +502,10 @@ html[lang="zh"] .t-en{display:none;}
       <a class="module-card available" href="/pain/">
         <div class="mc-accent"></div>
         <span class="mc-icon">💊</span>
-        <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">Build Your Practice</span><span class="t-zh">立业之本</span></span>
         <div class="mc-title"><span class="t-en">Pain Medicine CRS</span><span class="t-zh">疼痛临床推理</span></div>
-        <div class="mc-sub"><span class="t-en">Myofascial &amp; Musculoskeletal</span><span class="t-zh">肌筋膜与肌骨疼痛</span></div>
-        <div class="mc-desc"><span class="t-en">From intake and examination to prescription — a complete reasoning chain: 13 pain regions plus the Bi-Syndrome framework, visceral-referral screening station, and facial palsy, built on a three-layer high-efficacy treatment framework with a reverse pattern-lookup index. Shoulder, neck, and low back free in full.</span><span class="t-zh">从问诊查体推理到治法处方的完整推理链：13个部位疼痛＋痹证总纲＋内脏牵涉痛识别站＋面瘫，三层高效治疗方案框架，配证型索引·辨证反查。肩、颈、腰三病免费完整体验。</span></div>
+        <div class="mc-sub"><span class="t-en">Enter Through Pain · Stand on Results</span><span class="t-zh">由痛入道 · 以效立身</span></div>
+        <div class="mc-desc"><span class="t-en">The field TCM acupuncturists face most often. From intake and examination to prescription — a complete reasoning chain: 13 pain regions plus the Bi-Syndrome framework, visceral-referral screening station, and facial palsy; a three-layer high-efficacy treatment framework, needling as the general and herbs in support, with a reverse pattern-lookup index. Shoulder, neck, and low back free in full.</span><span class="t-zh">中医针灸师最常面对的领域。从问诊查体推理到治法处方的完整推理链：13个部位疼痛＋痹证总纲＋内脏牵涉痛识别站＋面瘫；三层高效治疗方案框架，针法为主、方药为佐，配证型索引·辨证反查。肩、颈、腰三病免费完整体验。</span></div>
         <div class="mc-modules">
           <span class="mc-dot-tag"><span class="t-en">Shoulder</span><span class="t-zh">肩</span></span>
           <span class="mc-dot-tag"><span class="t-en">Neck</span><span class="t-zh">颈</span></span>
@@ -528,10 +522,10 @@ html[lang="zh"] .t-en{display:none;}
       <a class="module-card available" href="/internal/">
         <div class="mc-accent amber"></div>
         <span class="mc-icon">📜</span>
-        <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">Depth of the Craft</span><span class="t-zh">医道纵深</span></span>
         <div class="mc-title"><span class="t-en">TCM Internal Medicine CRS</span><span class="t-zh">中医内科推理</span></div>
-        <div class="mc-sub"><span class="t-en">Qi Dynamic Framework</span><span class="t-zh">气机升降出入体系</span></div>
-        <div class="mc-desc"><span class="t-en">The core module of this system. 52 conditions across 10 systems — mind, digestion, lung, gynaecology and more — interconnected through symptom, pattern, and pathomechanism, reasoned via Qi dynamics to acupuncture and herbal treatment.</span><span class="t-zh">本系统核心模块。覆盖神志、消化、肺系、妇科等十大系统52个病症，症状、证型、病机三个入口互相联通，以气机升降出入推理至针灸与方药。</span></div>
+        <div class="mc-sub"><span class="t-en">10 Systems · 52 Conditions</span><span class="t-zh">十大系统 · 52个病症</span></div>
+        <div class="mc-desc"><span class="t-en">The core module of this system — the deepening from pain into full-scope practice. 52 conditions across 10 systems — mind, digestion, lung, gynaecology and more — interconnected through symptom, pattern, and pathomechanism, reasoned via Qi dynamics to acupuncture and herbal treatment.</span><span class="t-zh">本系统核心模块，从痛证走向全科的纵深——覆盖神志、消化、肺系、妇科等十大系统52个病症，症状、证型、病机三个入口互相联通，以气机升降出入推理至针灸与方药。</span></div>
         <div class="mc-cta">
           <span class="mc-price"><span class="free"><span class="t-en">10 conditions free</span><span class="t-zh">10个病免费</span></span> · <span class="t-en">$149 CAD full access</span><span class="t-zh">$149全部解锁</span></span>
           <span class="mc-arrow">→</span>
@@ -541,7 +535,7 @@ html[lang="zh"] .t-en{display:none;}
       <a class="module-card available" href="/formulas/">
         <div class="mc-accent" style="background:#4A2C7A;"></div>
         <span class="mc-icon">🌿</span>
-        <span class="mc-tag mc-tag-pain"><span class="t-en">Core Module</span><span class="t-zh">核心模块</span></span>
+        <span class="mc-tag mc-tag-pain"><span class="t-en">The Prescriber's Craft</span><span class="t-zh">处方之功</span></span>
         <div class="mc-title"><span class="t-en">TCM Formulas CRS</span><span class="t-zh">方药临床推理</span></div>
         <div class="mc-sub"><span class="t-en">Shang Han Za Bing Lun Formula Framework</span><span class="t-zh">伤寒杂病论经方为骨架</span></div>
         <div class="mc-desc"><span class="t-en">Guided by the Qi dynamic framework, structured on the classical formula system, centred on formula–pattern correspondence, herbs taught through formulas — a clinical reasoning system from pathomechanism to treatment method, formula, and herbs.</span><span class="t-zh">以气机升降出入为纲，以经方体系为骨架，以方证对应为核心，以方带药，构建从病机推导到治法、方药的临床推理体系。</span></div>
