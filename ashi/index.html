@@ -864,7 +864,7 @@ async function initSession(){
   computeFreeIds(); ASHI_HAS_ACCESS=readCachedAccess();
   const s=await getSession(); ASHI_HAS_ACCESS=!!s.purchased; cacheAccess(ASHI_HAS_ACCESS); updateUserBar(s);
 }
-function goLogin(){ window.location.href='../index.html'; }
+function goLogin(){ window.location.href='../index.html?login=1&next=/ashi/'; }
 async function ashiSignOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} ASHI_HAS_ACCESS=false; cacheAccess(false); updateUserBar({loggedIn:false,email:''}); }
 async function buyAllAccess(){
   try{
