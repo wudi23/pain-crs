@@ -4058,7 +4058,7 @@ Object.assign(SYMPTOMS, {
         { py: "liangfuwan", zh: "良附丸", en: "Liang Fu Wan" },
         { py: "baohewan", zh: "保和丸", en: "Bao He Wan" },
         { py: "xiaojianzhongtang", zh: "小建中汤", en: "Xiao Jian Zhong Tang" },
-        { py: "shaofuzhuyutang", zh: "少腹逐瘀汤", en: "Shao Fu Zhu Yu Tang" }
+        { py: "shaoyaosan", zh: "少腹逐瘀汤", en: "Shao Fu Zhu Yu Tang" }
       ]
     }
   },
@@ -4782,7 +4782,7 @@ Object.assign(SYMPTOMS, {
       ],
       formulas: [
         { py: "qingweisan", zh: "清胃散", en: "Qing Wei San" },
-        { py: "yunvjian", zh: "玉女煎", en: "Yu Nü Jian" },
+        { py: "yuruntang", zh: "玉女煎", en: "Yu Nü Jian" },
         { py: "yiweitang", zh: "益胃汤", en: "Yi Wei Tang" }
       ]
     }
@@ -4947,7 +4947,7 @@ Object.assign(SYMPTOMS, {
       ],
       formulas: [
         { py: "baihutang", zh: "白虎汤", en: "Bai Hu Tang" },
-        { py: "yunvjian", zh: "玉女煎", en: "Yu Nü Jian" },
+        { py: "yuruntang", zh: "玉女煎", en: "Yu Nü Jian" },
         { py: "liuweidihuangwan", zh: "六味地黄丸", en: "Liu Wei Di Huang Wan" }
       ]
     }
@@ -10746,7 +10746,6 @@ const POINT_WHITELIST = [
      库中确无的后世时方（止嗽散、参苓白术散、甘露消毒丹等）不在表中，
      其链接自动保持不可点——正是「库里有才跳」。 */
 const FORMULA_MAP = {
-  "gegentang": "getang",
   "anshendingzhiwan": "anshendingzhi",
   "baihutang": "baihu",
   "banxiabaizhutianmatang": "banxiabaizhutianma",
@@ -11029,7 +11028,8 @@ const ASHI_WHITELIST = [
       dv_one_hint: "已选 1 个症状——多选几个，交叉推导才有意义。",
       dv_score: "证据强度",
       dv_support: "支持此方向的症状",
-      dv_tension: "与此方向存在张力（虚实倾向相反）",
+      dv_tension_xu: "以下症状偏实，与本方向的虚象相反",
+      dv_tension_shi: "以下症状偏虚，与本方向的实象相反",
       dv_covers: "覆盖",
       dv_of: "/",
       dv_syms_unit: "症",
@@ -11098,7 +11098,8 @@ const ASHI_WHITELIST = [
       dv_one_hint: "One symptom selected \u2014 add a few more for cross-derivation to mean something.",
       dv_score: "Evidence strength",
       dv_support: "Symptoms supporting this direction",
-      dv_tension: "In tension with this direction (opposite deficiency/excess lean)",
+      dv_tension_xu: "These symptoms lean excess \u2014 contrary to this direction's deficiency",
+      dv_tension_shi: "These symptoms lean deficiency \u2014 contrary to this direction's excess",
       dv_covers: "covers",
       dv_of: "of",
       dv_syms_unit: "",
@@ -12175,7 +12176,8 @@ const ASHI_WHITELIST = [
       h += '</div></div>';
       /* 张力 */
       if (c.tension && c.tension.length) {
-        h += '<div class="dv-ten"><div class="dv-ten-h">&#9888; ' + esc(t("dv_tension")) + '</div><div class="dv-ten-chips">';
+        var tenKey = (c.mainLean === "xu") ? "dv_tension_xu" : "dv_tension_shi";
+        h += '<div class="dv-ten"><div class="dv-ten-h">&#9888; ' + esc(t(tenKey)) + '</div><div class="dv-ten-chips">';
         c.tension.forEach(function (tn) {
           var s = SYMPTOMS[tn.id];
           h += '<a class="dv-ten-chip" href="#sym-' + esc(tn.id) + '">' + esc(pick(s.name)) + '<i>·' + esc(pick(tn.dirLabel)) + '</i></a>';
