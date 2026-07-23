@@ -26,6 +26,10 @@
   --shadow-lg:  0 8px 32px rgba(0,0,0,0.12);
   --radius:     10px;
   --radius-lg:  16px;
+  --accent:     #7a4a2b;
+  --gold:       #8a6d3b;
+  --cream:      #F5F2EC;
+  --border:     #E0DDD6;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; }
@@ -177,7 +181,7 @@ body {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
   box-shadow: 0 2px 10px rgba(138,109,59,0.10);
 }
-.pass-info { flex: 1 1 320px; }
+.pass-info { flex: 1 1 320px; min-width: 0; }
 .pass-name { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
 .pass-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
 .pass-cta { text-align: right; flex: 0 0 auto; }
@@ -199,7 +203,7 @@ body {
 .pr-owned { color: var(--jade); font-weight: 700; }
 .pr-btn {
   display: inline-block; margin-left: 10px; padding: 5px 14px; border-radius: 6px;
-  background: var(--accent); color: #F5F0E8; font-size: 12px; font-weight: 700;
+  background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
   border: none; cursor: pointer; text-decoration: none;
 }
 .pr-btn:hover { opacity: .9; }
@@ -207,7 +211,9 @@ body {
 .pricing-footnote { font-size: 12px; color: var(--ink-faint); text-align: center; margin-top: 14px; }
 @media (max-width: 600px) {
   .pass-card { flex-direction: column; align-items: flex-start; }
-  .pass-cta { text-align: left; }
+  /* column 布局下 flex-basis 作用于高度，320px 会撑出大片空白，故归零 */
+  .pass-info { flex: 0 0 auto; width: 100%; }
+  .pass-cta { text-align: left; flex: 0 0 auto; width: 100%; }
   .pr-row { flex-direction: column; align-items: flex-start; gap: 6px; }
   .pr-cta { text-align: left; }
 }
