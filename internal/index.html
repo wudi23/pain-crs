@@ -385,7 +385,7 @@ async function checkPurchase(){
 }
 async function buyAllAccess(){
   try{
-    if(!SB_USER){ location.href='../index.html'; return; }
+    if(!SB_USER){ location.href='../index.html?login=1&next=/internal/'; return; }
     const {data:{session}} = await SB.auth.getSession();
     const resp = await fetch(SB_URL+'/functions/v1/bright-processor', {
       method:'POST',
@@ -400,7 +400,7 @@ async function buyAllAccess(){
 }
 async function doPurchase(){
   try{
-    if(!SB_USER){ location.href='../index.html'; return; }
+    if(!SB_USER){ location.href='../index.html?login=1&next=/internal/'; return; }
     const {data:{session}} = await SB.auth.getSession();
     const resp = await fetch(SB_URL+'/functions/v1/bright-processor', {
       method:'POST',
