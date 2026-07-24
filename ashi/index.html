@@ -395,8 +395,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .mi-chips{display:flex;flex-wrap:wrap;gap:7px}
 .mi-chip{font-size:13px;color:var(--plum);background:var(--paper-2);border:1px solid var(--veil);border-radius:999px;padding:5px 13px;cursor:pointer;transition:.13s}
 .mi-chip:hover{background:var(--bloom);border-color:var(--lotus-soft);color:var(--lotus-deep);transform:translateY(-1px)}
-.mi-chip.locked{color:var(--mist)}
-.mi-lock{color:var(--lotus-soft);margin-left:3px}
+.mi-chip.locked{color:var(--mist);background:transparent;border-style:dashed;border-color:var(--veil);opacity:.75}
+.mi-chip.locked:hover{background:var(--bloom);border-style:solid;opacity:1}
+.mi-lock{margin-left:5px;font-size:11px;opacity:.85;filter:grayscale(.35)}
 
 /* points page — accordion (collapsed cards, expand on tap) */
 .pt-acc{border:1px solid var(--veil);border-radius:12px;overflow:hidden;margin:0 0 9px;background:var(--paper)}
@@ -960,7 +961,8 @@ function renderMindex(){
     arr.forEach(m=>{
       const nm=escapeHtml(isEN()?(m.name_en||''):(m.name_zh||''));
       const locked=!isUnlocked(m.id);
-      h+=`<button class="mi-chip${locked?' locked':''}" onclick="openMuscle('${m.id}',{from:'home'})">${nm}${locked?'<span class="mi-lock">·</span>':''}</button>`;
+      const lockIco = locked ? '<span class="mi-lock" aria-label="需购买">&#128274;</span>' : '';
+      h+=`<button class="mi-chip${locked?' locked':''}" onclick="openMuscle('${m.id}',{from:'home'})"${locked?' title="'+(isEN()?'Paid content — unlock to view':'付费内容 · 解锁后查看')+'"':''}>${nm}${lockIco}</button>`;
     });
     h+=`</div></div>`;
   });
