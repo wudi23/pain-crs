@@ -837,15 +837,22 @@ async function startCheckout(module_id, price_id){
   const { data } = await sb.auth.getSession();
   if(!(data && data.session)){ openModal(); return; }
   const user = data.session.user;
+  const __tk = data.session.access_token;   /* 用用户 JWT 鉴权，服务端应据此认定身份 */
   try{
     const resp = await fetch(SUPABASE_URL + '/functions/v1/bright-processor', {
       method:'POST',
-      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer ' + SUPABASE_ANON },
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+__tk },
       body: JSON.stringify({ user_id: user.id, module_id: module_id, price_id: price_id, return_url: window.location.origin })
     });
-    const { url, error } = await resp.json();
-    if(error) throw new Error(error);
-    window.location.href = url;
+    const j = await resp.json();
+    if(j && j.already){
+      alert(document.documentElement.lang === 'en'
+        ? 'You already own this. Refresh to unlock.'
+        : '您已拥有该内容，刷新页面即可解锁。');
+      location.reload(); return;
+    }
+    if(j && j.error) throw new Error(j.error);
+    window.location.href = j.url;
   }catch(e){
     alert('Checkout error: ' + e.message);
   }
