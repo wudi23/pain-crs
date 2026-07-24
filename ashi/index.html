@@ -861,8 +861,17 @@ function updateUserBar(s){
   else{ login.style.display='';signed.style.display='none'; }
 }
 async function initSession(){
-  computeFreeIds(); ASHI_HAS_ACCESS=readCachedAccess();
-  const s=await getSession(); ASHI_HAS_ACCESS=!!s.purchased; cacheAccess(ASHI_HAS_ACCESS); updateUserBar(s);
+  computeFreeIds();
+  /* 不再用 localStorage 旧值预设权限：缓存按域名存、不跟账号走，
+     换账号后会在真实权限查回来之前把付费内容显示成已解锁。
+     一律先按"无权限"渲染，等 getSession() 返回再解锁。 */
+  ASHI_HAS_ACCESS = false;
+  try { if (typeof refreshLocks === 'function') refreshLocks(); } catch(e){}
+  const s = await getSession();
+  ASHI_HAS_ACCESS = !!s.purchased;
+  cacheAccess(ASHI_HAS_ACCESS);
+  updateUserBar(s);
+  try { if (typeof refreshLocks === 'function') refreshLocks(); } catch(e){}
 }
 function goLogin(){ window.location.href='../index.html?login=1&next=/ashi/'; }
 async function ashiSignOut(){ try{ if(sb) await sb.auth.signOut(); }catch(e){} ASHI_HAS_ACCESS=false; cacheAccess(false); updateUserBar({loggedIn:false,email:''}); }
