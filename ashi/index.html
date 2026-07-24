@@ -872,9 +872,10 @@ async function buyAllAccess(){
     const {data} = await sb.auth.getSession();
     const session = data && data.session;
     if(!session){ goLogin(); return; }
+    const __tk = session.access_token;
     const resp = await fetch(SUPABASE_URL+'/functions/v1/bright-processor', {
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+__tk},
       body: JSON.stringify({ user_id: session.user.id, module_id: 'allaccess', price_id: ALLACCESS_PRICE_ID, return_url: window.location.href.split('?')[0] })
     });
     const j = await resp.json();
@@ -890,9 +891,10 @@ async function goUnlock(){
     const {data} = await sb.auth.getSession();
     const session = data && data.session;
     if(!session){ goLogin(); return; }   // 未登录 → 去登录
+    const __tk = session.access_token;
     const resp = await fetch(SUPABASE_URL+'/functions/v1/bright-processor', {
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+__tk},
       body: JSON.stringify({ user_id: session.user.id, module_id: MODULE_ID, price_id: ASHI_PRICE_ID, return_url: window.location.href.split('?')[0] })
     });
     const j = await resp.json();
