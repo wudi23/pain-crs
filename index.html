@@ -970,19 +970,35 @@ async function purchaseFSN(){
   msg.className='mmsg';
   
   try {
+    /* 用登录用户的 JWT 鉴权（原先硬编码 anon key，服务端无法确认身份） */
+    const __tk = session.data.session.access_token;
     const resp = await fetch('https://ucocgcbxdqjbbklnkyxt.supabase.co/functions/v1/bright-processor', {
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjb2NnY2J4ZHFqYmJrbG5reXh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4MzE0ODksImV4cCI6MjA5ODQwNzQ4OX0.gpzg7Gp8r7vFjMBJMzYjvXb6TZPWt_Jp3VVBpm-tnEo'},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+__tk},
       body: JSON.stringify({
         user_id: user.id,
         module_id: 'fsn',
-        price_id: 'price_1ToCFALpHoyExvp7G59LXS4L', // $29 placeholder - update to FSN price
         return_url: window.location.origin
       })
     });
-    const {url, error} = await resp.json();
-    if(error) throw new Error(error);
-    window.location.href = url;
+    const j = await resp.json();
+    if(j && j.already){
+      msg.textContent = document.documentElement.lang === 'en'
+        ? 'You already have FSN access. Refresh to unlock.'
+        : '您已拥有浮针模块权限，刷新即可解锁。';
+      msg.className='mmsg ok'; return;
+    }
+    if(j && j.error){
+      /* FSN 为兑换码专属，服务端会返回 not_purchasable */
+      if(String(j.error).indexOf('not_purchasable') >= 0){
+        msg.textContent = document.documentElement.lang === 'en'
+          ? 'FSN is available by redemption code only (included with the course).'
+          : '浮针模块为课程附赠，仅通过兑换码开通，不单独售卖。';
+        msg.className='mmsg err'; return;
+      }
+      throw new Error(j.error);
+    }
+    window.location.href = j.url;
   } catch(e){
     msg.textContent='Checkout error: ' + e.message;
     msg.className='mmsg err';
