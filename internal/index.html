@@ -389,7 +389,7 @@ async function buyAllAccess(){
     const {data:{session}} = await SB.auth.getSession();
     const resp = await fetch(SB_URL+'/functions/v1/bright-processor', {
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SB_ANON},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(session&&session.access_token)},
       body: JSON.stringify({ user_id: SB_USER.id, module_id: 'allaccess', price_id: ALLACCESS_PRICE_ID, return_url: location.href })
     });
     const j = await resp.json();
@@ -404,7 +404,7 @@ async function doPurchase(){
     const {data:{session}} = await SB.auth.getSession();
     const resp = await fetch(SB_URL+'/functions/v1/bright-processor', {
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SB_ANON},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(session&&session.access_token)},
       body: JSON.stringify({ user_id: SB_USER.id, module_id: MODULE_ID, price_id: PRICE_ID, return_url: location.href })
     });
     const j = await resp.json();
