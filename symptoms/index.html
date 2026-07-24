@@ -12526,7 +12526,13 @@ const ASHI_WHITELIST = [
       f_rights: "All rights reserved", f_legal: "Terms · Refunds · Privacy"
     }
   };
-  function t(k) { return (UI[getLang()] && UI[getLang()][k]) || k; }
+  function t(k) {
+    var tbl = UI[getLang()];
+    /* 注意：词条值可能是空字符串（如英文的 count_unit），
+       不能用 || 回退，否则空值会被当成"缺失"而显示键名本身。 */
+    if (tbl && Object.prototype.hasOwnProperty.call(tbl, k)) return tbl[k];
+    return k;
+  }
 
   function tagName(tag) { return getLang() === "zh" ? tag : (VOCAB.tag_en[tag] || tag); }
   function locName(l) { return l ? (getLang() === "zh" ? l : (VOCAB.loc_en[l] || l)) : ""; }
