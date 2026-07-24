@@ -520,6 +520,9 @@ const ROSTER = [
   { id: "yatong",    zh: "牙痛",       en: "Toothache",                cat: "toumian", built: false },
   { id: "muganse",   zh: "目干涩",     en: "Dry Gritty Eyes",          cat: "toumian", built: false },
   { id: "kouchuang", zh: "口舌生疮",   en: "Mouth & Tongue Sores",     cat: "toumian", built: false },
+  { id: "shiwumohu", zh: "视物模糊",   en: "Blurred Vision",           cat: "toumian", built: false },
+  { id: "erlong",    zh: "耳聋",       en: "Hearing Loss",             cat: "toumian", built: false },
+  { id: "binv",      zh: "鼻衄",       en: "Nosebleed",                cat: "toumian", built: false },
   /* 三、胸胁心肺 */
   { id: "xiongmen",  zh: "胸闷",   en: "Chest Oppression",       cat: "xiongxie", built: false },
   { id: "xinji",     zh: "心悸",   en: "Palpitations",           cat: "xiongxie", built: false },
@@ -531,6 +534,7 @@ const ROSTER = [
   { id: "shantaixi", zh: "善太息", en: "Frequent Sighing",       cat: "xiongxie", built: false },
   { id: "xintong",   zh: "心痛",   en: "Chest / Heart Pain",     cat: "xiongxie", built: false },
   { id: "kaxie",     zh: "咯血",   en: "Coughing Blood",         cat: "xiongxie", built: false },
+  { id: "shengsi",   zh: "声音嘶哑", en: "Hoarseness",             cat: "xiongxie", built: false },
   /* 四、脘腹 */
   { id: "wanpi",     zh: "脘痞",     en: "Epigastric Stuffiness",  cat: "wanfu", built: false },
   { id: "weizhang",  zh: "胃胀",     en: "Stomach Distension",     cat: "wanfu", built: false },
@@ -571,6 +575,7 @@ const ROSTER = [
   { id: "fanzao",         zh: "烦躁",        en: "Vexation & Irritability",              cat: "shuimian", built: false },
   { id: "qingxudiluo",    zh: "情绪低落",    en: "Low Mood",                             cat: "shuimian", built: false },
   { id: "yijing",         zh: "易惊",        en: "Easily Startled",                      cat: "shuimian", built: false },
+  { id: "beishang",       zh: "悲伤欲哭",    en: "Tearfulness",                          cat: "shuimian", built: false },
   /* 八、肢体形躯 */
   { id: "fali",      zh: "乏力",  en: "Fatigue",          cat: "zhiti", built: false },
   { id: "zhileng",   zh: "肢冷",  en: "Cold Limbs",       cat: "zhiti", built: false },
@@ -583,6 +588,13 @@ const ROSTER = [
   { id: "guanjietong", zh: "关节痛", en: "Joint Pain",     cat: "zhiti", built: false },
   { id: "jianjingtong",zh: "肩颈项强",en: "Neck & Shoulder Stiffness", cat: "zhiti", built: false },
   { id: "zugentong",   zh: "足跟痛", en: "Heel Pain",      cat: "zhiti", built: false },
+  { id: "xiaoshou",    zh: "消瘦",   en: "Weight Loss",    cat: "zhiti", built: false },
+  { id: "shenyang",    zh: "身痒",       en: "Itching",              cat: "pifu", built: false },
+  { id: "pizhen",      zh: "皮疹",       en: "Skin Rash",            cat: "pifu", built: false },
+  { id: "pifuganzao",  zh: "皮肤干燥",   en: "Dry Skin",             cat: "pifu", built: false },
+  { id: "cuochuang",   zh: "痤疮",       en: "Acne",                 cat: "pifu", built: false },
+  { id: "mianse",      zh: "面色异常",   en: "Abnormal Complexion",  cat: "pifu", built: false },
+  { id: "tuofa",       zh: "脱发",       en: "Hair Loss",            cat: "pifu", built: false },
   /* 九、妇科 */
   { id: "yuejing_xianqi",  zh: "月经先期",     en: "Early Periods",                  cat: "fuke", built: false },
   { id: "yuejing_houqi",   zh: "月经后期",     en: "Late Periods",                   cat: "fuke", built: false },
@@ -603,6 +615,7 @@ const CATS = [
   { id: "erbian",   zh: "二便",     en: "Bowels & Urination" },
   { id: "shuimian", zh: "睡眠神志", en: "Sleep & Spirit" },
   { id: "zhiti",    zh: "肢体形躯", en: "Limbs & Body" },
+  { id: "pifu",     zh: "皮肤外候", en: "Skin & Outward Signs" },
   { id: "fuke",     zh: "妇科",     en: "Gynecology" },
   { id: "shemai",   zh: "舌脉验证", en: "Tongue & Pulse Verification", special: true }
 ];
@@ -9956,6 +9969,1367 @@ Object.assign(SYMPTOMS, {
 ROSTER.forEach(function (r) { if (SYMPTOMS[r.id]) r.built = true; });
 
 "use strict";
+/* 第十一纲 · 皮肤外候 · 批次A（身痒/皮疹/皮肤干燥） */
+Object.assign(SYMPTOMS, {
+
+  "shenyang": {
+    id: "shenyang", cat: "pifu",
+    name: { zh: "身痒", en: "Itching" },
+    aka: { zh: ["皮肤瘙痒", "遍身瘙痒", "风瘙痒"], en: ["Pruritus", "Generalized itching", "Skin itch"] },
+    what: {
+      zh: "皮肤瘙痒，或遍身、或局部，或有皮损、或肤色如常。「诸痒皆属于风」——痒之为症，总由「风」动于肌肤：然风有外来、有内生。外风者，风邪（每夹寒、夹热、夹湿）客于肌表，营卫失和而痒（实，起病急、遇风加重）；内风者，血虚生风、阴虚血燥，肌肤失于濡养而风自内生（虚，病久、夜间为甚、皮肤干燥脱屑）。此外湿热蕴肤、虫毒外侵亦致痒（实）。故身痒首辨内外虚实：新起、皮损红赤、遇风热加重者多外风实证；久痒、肤燥无华、夜间尤甚、遇温加重者多血虚风燥。老年冬季瘙痒、久病瘙痒，以血虚阴亏为多。",
+      en: "Itching of the skin, generalized or local, with or without visible lesions. 'All itching belongs to wind' — itching arises always from wind stirring in the skin, yet wind may come from without or be engendered within. External wind (often with cold, heat, or damp) lodges at the surface and disharmonizes construction and defense, hence itching (excess — abrupt onset, worse in wind). Internal wind arises when blood deficiency engenders wind or yin depletion dries the blood, leaving the skin unnourished (deficiency — chronic, worse at night, with dry flaking skin). Damp-heat smoldering in the skin and parasitic-toxin invasion also cause itching (excess). So itching is first sorted by inner-outer and deficiency-excess: new onset with red lesions, worse in wind or heat, is mostly external-wind excess; long-standing itch with dry lustreless skin, worse at night and with warmth, is mostly blood-deficiency wind-dryness. Winter itch in the aged and itching in chronic illness are mostly blood-yin depletion."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "血虚生风，肌肤失养", en: "Blood deficiency engenders wind; the skin loses nourishment" },
+        tags: ["血虚", "阴虚"], loc: "全身",
+        organ: { zh: "肝脾", en: "Liver & spleen" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、失血、年高、脾虚化源不足，营血亏虚", en: "Chronic illness, blood loss, age, or spleen deficiency shorting the source depletes constructive blood" },
+          { zh: "血虚则肌肤失于濡养，燥而不润；血虚生风，风动则痒（不荣则痒）", en: "With blood deficient the skin goes unmoistened and dry; blood deficiency engenders wind, and stirring wind brings itching (no nourishment, hence itching)" },
+          { zh: "故遍身瘙痒、皮肤干燥脱屑、抓痕血痂、肤色无华、无明显红肿", en: "Hence generalized itching, dry flaking skin, scratch marks and blood crusts, a lustreless complexion, without marked redness or swelling" },
+          { zh: "痒以夜间及冬季为甚（阴分主夜、燥令伤津），兼头晕心悸、面白、爪甲不荣，舌淡脉细——当归饮子所主之血虚风燥", en: "Itching worst at night and in winter (night belongs to yin; dry seasons injure fluids), with dizziness, palpitations, a pale face, lustreless nails; pale tongue, thin pulse — the blood-deficiency wind-dryness governed by Dang Gui Yin Zi" }
+        ],
+        companions: [
+          { id: "pifuganzao", note: { zh: "血虚肌肤失濡", en: "Blood deficiency leaves the skin unmoistened" } },
+          { id: "touyun", note: { zh: "血虚清窍失养", en: "Blood deficiency leaves the clear orifices unnourished" } },
+          { id: "xinji", note: { zh: "血不养心", en: "Blood fails to nourish the heart" } },
+          { id: "shimian_yixing", note: { zh: "痒扰不寐", en: "Itching disturbs sleep" } },
+          { id: "mianse", note: { zh: "血虚则面色无华", en: "Blood deficiency, a lustreless complexion" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉细", en: "Thin" }
+      },
+      {
+        id: "d2",
+        label: { zh: "风热外袭，郁于肌表", en: "Wind-heat assails and lodges at the surface" },
+        tags: ["出不及", "升太过"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defense" },
+        nature: { zh: "风热", en: "Wind-heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "外感风热，或风邪郁久化热，客于肌表", en: "External wind-heat, or wind long constrained turning to heat, lodges at the surface" },
+          { zh: "风热郁于肌肤腠理，营卫不和、气血怫郁（出不及、风热郁表）", en: "Wind-heat constrains the skin and interstices, construction and defense fall out of harmony and qi and blood are pent (insufficient exit, wind-heat constrained)" },
+          { zh: "故起病急骤、瘙痒剧烈、皮损色红、灼热、遇热或搔抓后加重、得凉稍减", en: "Hence abrupt onset, severe itching, red hot lesions, worse with heat or after scratching, eased a little by cool" },
+          { zh: "或起风团（瘾疹）、此起彼伏，兼口渴、心烦，舌红苔薄黄脉浮数——消风散所主之风热痒", en: "Sometimes with wheals (urticaria) rising and subsiding, with thirst and vexation; red tongue, thin yellow coating, floating rapid pulse — the wind-heat itch governed by Xiao Feng San" }
+        ],
+        companions: [
+          { id: "pizhen", note: { zh: "风热发于肌肤", en: "Wind-heat erupts in the skin" } },
+          { id: "fanzao", note: { zh: "热扰心神则烦", en: "Heat harassing the spirit brings vexation" } },
+          { id: "kouke", note: { zh: "热盛伤津", en: "Blazing heat injures fluids" } },
+          { id: "fare", note: { zh: "风热袭表则发热", en: "Wind-heat at the surface brings fever" } }
+        ],
+        tongue: { zh: "舌红，苔薄黄", en: "Red tongue, thin yellow coating" },
+        pulse: { zh: "脉浮数", en: "Floating, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "湿热蕴肤，浸淫作痒", en: "Damp-heat smolders in the skin and steeps it into itching" },
+        tags: ["通道受阻·湿", "降不及"], loc: "全身",
+        organ: { zh: "脾·肺", en: "Spleen & lung" },
+        nature: { zh: "湿热", en: "Damp-heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "过食肥甘辛辣，或外感湿热，湿热内蕴、外发肌肤", en: "Excess rich pungent food, or contracted damp-heat, smolders within and erupts in the skin" },
+          { zh: "湿热蕴蒸肌肤，浸淫不解（通道受阻·湿 + 热壅）", en: "Damp-heat steams the skin and steeps it unremittingly (damp obstructing the pathway with heat congesting)" },
+          { zh: "故瘙痒而皮损渗液、糜烂、结痂，或起水疱、缠绵难愈、多发于下肢阴部等湿盛之处", en: "Hence itching with weeping, eroded, crusting lesions, or blisters, lingering and hard to heal, mostly in damp-prone areas such as the lower limbs and genitals" },
+          { zh: "兼口苦口黏、身重、大便黏滞、小便黄，舌红苔黄腻脉滑数——龙胆泻肝、萆薢渗湿所主之湿热痒", en: "With a bitter sticky mouth, heavy body, sticky stool, dark urine; red tongue, yellow greasy coating, slippery rapid pulse — the damp-heat itch governed by Long Dan Xie Gan Tang and Bi Xie Shen Shi Tang" }
+        ],
+        companions: [
+          { id: "kounian", note: { zh: "湿浊上泛", en: "Damp turbidity floods upward" } },
+          { id: "shenzhong", note: { zh: "湿性重浊则身重", en: "Damp is heavy — a heavy body" } },
+          { id: "dabiannianzhi", note: { zh: "湿热下注", en: "Damp-heat pours downward" } },
+          { id: "niaohuang", note: { zh: "湿热灼津", en: "Damp-heat scorches the fluids" } },
+          { id: "kouku", note: { zh: "湿热熏蒸", en: "Damp-heat steams upward" } }
+        ],
+        tongue: { zh: "舌红，苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      },
+      {
+        id: "d4",
+        label: { zh: "阴虚血燥，风从内生", en: "Yin deficiency with dry blood; wind arises from within" },
+        tags: ["阴虚"], loc: "下焦",
+        organ: { zh: "肝肾", en: "Liver & kidney" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "年高、久病、热病伤阴，肝肾阴亏、津血不足", en: "Age, chronic illness, or febrile injury depletes liver-kidney yin and shorts fluids and blood" },
+          { zh: "阴虚血燥，肌肤失于津液濡润，燥胜则风动（燥极生风）", en: "Yin deficiency dries the blood, the skin loses fluid moistening, and dryness prevailing stirs wind (extreme dryness engenders wind)" },
+          { zh: "故皮肤干燥粗糙、脱屑如糠、瘙痒经久不愈、入夜尤甚、搔之易起白屑", en: "Hence dry rough skin flaking like bran, long-unresolved itching, worst at night, scratching raising white scales" },
+          { zh: "兼五心烦热、口干咽燥、腰膝酸软、盗汗，舌红少津少苔脉细数——地黄饮子、六味加减所主之阴虚燥痒", en: "With heat in the five centers, dry mouth and throat, sore weak lower back and knees, night sweats; red tongue with scant fluid and coating, thin rapid pulse — the yin-deficiency dry itch governed by Di Huang Yin Zi and modified Liu Wei Di Huang Wan" }
+        ],
+        companions: [
+          { id: "pifuganzao", note: { zh: "阴虚肌肤失润", en: "Yin deficiency leaves the skin unmoistened" } },
+          { id: "shouzuxinre", note: { zh: "阴虚生内热", en: "Yin deficiency breeds internal heat" } },
+          { id: "kougan", note: { zh: "阴虚津亏", en: "Yin deficiency, fluids depleted" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } },
+          { id: "yaosuan", note: { zh: "肝肾阴亏于下", en: "Liver-kidney yin depleted below" } }
+        ],
+        tongue: { zh: "舌红少津，少苔", en: "Red tongue with scant fluid and coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "身痒是起病急、皮损红赤灼热、遇热搔抓加重（外风湿热实证），还是病久、皮肤干燥脱屑无华、夜间为甚、遇温加重（血虚阴亏内风）？", en: "Is the itching of abrupt onset with red hot lesions, worse with heat and scratching (external wind or damp-heat, excess), or long-standing with dry flaking lustreless skin, worst at night and with warmth (blood-yin deficiency, internal wind)?" },
+      rows: [
+        { side: { zh: "实（风热／湿热）", en: "Excess (wind-heat / damp-heat)" },
+          feats: { zh: "风热者起病急、痒剧、皮损色红灼热、或起风团、遇热甚、脉浮数；湿热者皮损渗液糜烂结痂、缠绵、兼口黏身重便黏尿黄、苔黄腻脉滑数", en: "Wind-heat: abrupt, severe itching, red hot lesions or wheals, worse with heat, floating rapid pulse; damp-heat: weeping eroded crusting lesions, lingering, with sticky mouth, heavy body, sticky stool, dark urine, yellow greasy coating, slippery rapid pulse" } },
+        { side: { zh: "虚（血虚生风／阴虚血燥）", en: "Deficiency (blood-deficiency wind / yin-deficiency dryness)" },
+          feats: { zh: "病久、皮肤干燥脱屑、抓痕血痂、无明显红肿、夜间及冬季为甚；血虚者兼头晕心悸面白舌淡脉细，阴虚者兼五心烦热盗汗腰酸舌红少苔脉细数", en: "Chronic, dry flaking skin, scratch marks and crusts, without marked redness, worst at night and in winter; blood deficiency adds dizziness, palpitations, pale face, pale tongue, thin pulse; yin deficiency adds heat in the five centers, night sweats, sore back, red scant-coated tongue, thin rapid pulse" } }
+      ],
+      line: { zh: "「诸痒皆属于风」，然风有内外虚实：外风（风热、湿热）宜疏风清热、清利湿热以祛邪；内风（血虚、阴虚）宜养血润燥、滋阴息风以治本——「治风先治血，血行风自灭」正为虚证而设。实证误补则湿热愈壅、皮损愈重；虚证误以风药辛燥久投则血愈耗、痒愈甚（此为临床最常见之误）。久痒、肤燥、夜甚者，当想到血虚，勿一味祛风止痒。", en: "'All itching belongs to wind,' yet wind has inner and outer, deficient and excess forms: external wind (wind-heat, damp-heat) — dredge wind, clear heat, drain damp to expel the pathogen; internal wind (blood or yin deficiency) — nourish blood, moisten dryness, enrich yin, extinguish wind to treat the root. 'To treat wind, first treat the blood; when blood moves, wind dies of itself' was framed for the deficient. Supplement an excess and damp-heat clogs more and lesions worsen; keep giving acrid drying wind herbs to a deficiency and blood is consumed further and the itch grows — the commonest clinical error. Long itching with dry skin, worst at night, should bring blood deficiency to mind rather than unrelieved wind-dispelling." }
+    },
+    note: { zh: "安全底线：瘙痒伴皮肤黄染、进行性加重、或全身泛发伴发热、或瘙痒剧烈而无皮损且日久不愈者，须排查肝胆疾病、糖尿病、肾病、血液病及肿瘤等系统性病因，及时就医。虫咬、疥疮、接触过敏所致者，须先明确并去除病因。", en: "Safety floor: itching with jaundice, progressive worsening, generalized eruption with fever, or severe itching without lesions persisting long, warrants investigation for hepatobiliary disease, diabetes, kidney disease, blood disorders, and malignancy — seek medical care. Itching from insect bites, scabies, or contact allergy requires the cause to be identified and removed first." },
+    xm: {
+      internal: [
+        { id: "urticaria", zh: "瘾疹", en: "Urticaria" },
+        { id: "eczema", zh: "湿疮", en: "Eczema" }
+      ],
+      points: [
+        { code: "LI11", zh: "曲池", py: "Quchi" },
+        { code: "SP10", zh: "血海", py: "Xuehai" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" },
+        { code: "GB20", zh: "风池", py: "Fengchi" },
+        { code: "LI4", zh: "合谷", py: "Hegu" }
+      ],
+      formulas: [
+        { py: "dangguiyinzi", zh: "当归饮子", en: "Dang Gui Yin Zi" },
+        { py: "xiaofengsan", zh: "消风散", en: "Xiao Feng San" },
+        { py: "longdanxiegantang", zh: "龙胆泻肝汤", en: "Long Dan Xie Gan Tang" }
+      ]
+    }
+  },
+
+  "pizhen": {
+    id: "pizhen", cat: "pifu",
+    name: { zh: "皮疹", en: "Skin Rash" },
+    aka: { zh: ["风团", "瘾疹", "疹出", "红疹"], en: ["Wheals", "Hives", "Eruption", "Red rash"] },
+    what: {
+      zh: "皮肤出现红色或淡红色的疹点、风团、丘疹，或高出皮面、或平铺不起。疹之为象，是气血与邪相争、外发于肌肤的显露。其机：或风热（风寒）外袭，郁于肌表而发疹（实，起病急、色红、此起彼伏）；或血热内蕴，热迫血分外溢肌肤（实热，疹色深红、灼热）；或气血虚弱、卫外不固，风邪反复侵扰（虚实夹杂，疹色淡、反复发作、遇风冷即起）。风团时起时消、消退无痕者为「瘾疹」；疹出成片、压之不褪色者须警惕血分病变。故辨疹当察其色（红／淡）、形（高起／平塌）、起止（骤起骤消／持续）与兼症。",
+      en: "Red or pale-red papules, wheals, or eruptions on the skin, raised or flat. An eruption is the outward showing of qi and blood contending with a pathogen and issuing into the skin. The mechanism: external wind-heat (or wind-cold) constrained at the surface erupts (excess — abrupt, red, rising and subsiding); blood heat within driving blood to spill into the skin (repletion heat — deep-red hot lesions); or qi-blood weakness with an insecure defense letting wind repeatedly invade (mixed — pale lesions, recurrent, arising with wind or cold). Wheals that come and go without a trace are 'yin zhen' (urticaria); eruptions in sheets that do not blanch under pressure warrant concern for blood-aspect disease. So an eruption is read by its color (red or pale), form (raised or flat), course (sudden and fleeting or persistent), and companions."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "风热袭表，郁而发疹", en: "Wind-heat assails the surface and erupts" },
+        tags: ["出不及", "升太过"], loc: "表",
+        organ: { zh: "肺卫", en: "Lung & defense" },
+        nature: { zh: "风热", en: "Wind-heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "外感风热，客于肌表，营卫不和", en: "External wind-heat lodges at the surface and disharmonizes construction and defense" },
+          { zh: "风热郁于腠理，不得外泄，怫郁于肌肤而发疹（出不及、郁而发疹）", en: "Wind-heat constrained in the interstices cannot vent outward and erupts as a rash (insufficient exit, constraint erupting)" },
+          { zh: "故风团色红、瘙痒、骤起骤消、此起彼伏、遇热加重、得凉稍减", en: "Hence red itchy wheals rising and vanishing suddenly, one after another, worse with heat and eased a little by cool" },
+          { zh: "兼发热恶风、咽痛、口渴，舌红苔薄黄脉浮数——消风散、银翘所主之风热疹", en: "With fever, aversion to wind, sore throat, thirst; red tongue, thin yellow coating, floating rapid pulse — the wind-heat rash governed by Xiao Feng San and Yin Qiao San" }
+        ],
+        companions: [
+          { id: "shenyang", note: { zh: "风动则痒", en: "Stirring wind brings itching" } },
+          { id: "fare", note: { zh: "风热袭表则发热", en: "Wind-heat at the surface brings fever" } },
+          { id: "yantong", note: { zh: "风热上攻咽喉", en: "Wind-heat attacks the throat" } },
+          { id: "ehan", note: { zh: "邪袭卫表", en: "The pathogen assails the defensive exterior" } }
+        ],
+        tongue: { zh: "舌红，苔薄黄", en: "Red tongue, thin yellow coating" },
+        pulse: { zh: "脉浮数", en: "Floating, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "血热内蕴，热迫血溢", en: "Blood heat smolders; heat drives blood to spill" },
+        tags: ["升太过", "降不及"], loc: "全身",
+        organ: { zh: "心·肝", en: "Heart & liver" },
+        nature: { zh: "血热", en: "Blood heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "素体阳盛，或过食辛辣、情志化火，热伏血分", en: "A yang-exuberant make-up, or excess pungent food and emotions turning to fire, lodges heat in the blood aspect" },
+          { zh: "血分有热，热迫血行、外溢肌肤而成疹（血热妄行）", en: "With heat in the blood, it drives the blood outward to spill into the skin as a rash (blood-heat moving recklessly)" },
+          { zh: "故疹色深红或紫红、灼热、压之不易褪色、持续不易消退", en: "Hence deep-red or purple-red hot lesions, slow to blanch under pressure, persisting rather than fading" },
+          { zh: "兼心烦、口渴、身热、便结溲赤，舌红绛苔黄脉数——犀角地黄、凉血消风所主之血热疹", en: "With vexation, thirst, feverishness, bound stool, dark urine; crimson tongue, yellow coating, rapid pulse — the blood-heat rash governed by Xi Jiao Di Huang Tang and blood-cooling wind-dispersing formulas" }
+        ],
+        companions: [
+          { id: "fanzao", note: { zh: "血热扰心则烦", en: "Blood heat harassing the heart brings vexation" } },
+          { id: "kouke", note: { zh: "热盛伤津", en: "Blazing heat injures fluids" } },
+          { id: "bianmi", note: { zh: "热灼肠燥", en: "Heat scorches the intestines dry" } },
+          { id: "niaohuang", note: { zh: "热灼津液", en: "Heat scorches the fluids" } }
+        ],
+        tongue: { zh: "舌红绛，苔黄", en: "Crimson tongue, yellow coating" },
+        pulse: { zh: "脉数", en: "Rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "气血虚弱，卫外不固", en: "Qi and blood weak; the defense is insecure" },
+        tags: ["气虚", "血虚"], loc: "表",
+        organ: { zh: "肺脾", en: "Lung & spleen" },
+        xushi: "虚实夹杂", weight: 2,
+        chain: [
+          { zh: "久病、劳倦、素体虚弱，气血不足，卫气不能固护肌表", en: "Chronic illness, overwork, or a weak constitution shorts qi and blood, and defensive qi cannot secure the surface" },
+          { zh: "卫外不固则风邪易袭，正虚邪恋，故疹反复发作（虚而招邪）", en: "With the defense insecure, wind readily invades; the upright deficient and the pathogen lingering, the rash recurs (deficiency inviting the pathogen)" },
+          { zh: "故风团色淡红或淡白、瘙痒较轻、遇风冷即发、劳累后加重、经年不愈", en: "Hence pale-red or pale-white wheals with milder itching, arising in wind or cold, worse after fatigue, unresolved for years" },
+          { zh: "兼神疲乏力、气短、自汗、易感冒、面白，舌淡脉弱——玉屏风散合当归饮子所主之气血虚疹", en: "With lassitude, shortness of breath, spontaneous sweating, frequent colds, a pale face; pale tongue, weak pulse — the qi-blood-deficiency rash governed by Yu Ping Feng San with Dang Gui Yin Zi" }
+        ],
+        companions: [
+          { id: "zihan", note: { zh: "卫气不固则自汗", en: "Insecure defensive qi brings spontaneous sweating" } },
+          { id: "fali", note: { zh: "气血两亏", en: "Both qi and blood depleted" } },
+          { id: "qiduan", note: { zh: "肺气不足", en: "Lung qi insufficient" } },
+          { id: "mianse", note: { zh: "气血虚则面色无华", en: "Qi-blood deficiency, a lustreless complexion" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉弱", en: "Weak" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "皮疹是色红骤起骤消、遇热加重兼表证（风热实），色深红压之不褪、身热烦渴（血热实），还是色淡反复、遇风冷即发、兼自汗易感神疲（气血虚）？", en: "Is the rash red, sudden and fleeting, worse with heat, with exterior signs (wind-heat excess), deep-red and non-blanching with feverishness and thirst (blood heat), or pale and recurrent, arising in wind or cold, with spontaneous sweating, frequent colds, lassitude (qi-blood deficiency)?" },
+      rows: [
+        { side: { zh: "实（风热／血热）", en: "Excess (wind-heat / blood heat)" },
+          feats: { zh: "风热者疹色红、骤起骤消、痒剧、遇热甚、兼发热咽痛脉浮数；血热者疹色深红紫红、压之不褪、持续、兼身热烦渴便结、舌绛脉数", en: "Wind-heat: red wheals rising and vanishing, severe itch, worse with heat, with fever, sore throat, floating rapid pulse; blood heat: deep-red or purple non-blanching persistent lesions, with feverishness, thirst, bound stool, crimson tongue, rapid pulse" } },
+        { side: { zh: "虚实夹杂（气血虚·卫外不固）", en: "Mixed (qi-blood deficiency, insecure defense)" },
+          feats: { zh: "疹色淡红淡白、痒较轻、遇风冷即发、劳累甚、经年反复，兼神疲气短自汗易感冒，舌淡脉弱", en: "Pale-red or pale-white wheals, milder itch, arising in wind or cold, worse with fatigue, recurring for years, with lassitude, shortness of breath, spontaneous sweating, frequent colds; pale tongue, weak pulse" } }
+      ],
+      line: { zh: "辨疹先察色与起止：色红骤起属风热，宜疏风清热；色深红持续属血热，宜凉血清热；色淡反复遇风冷发属气血虚、卫外不固，宜益气固表兼养血祛风。实证误补则邪郁不解，虚证一味祛风清热则正愈虚、疹愈频发——慢性反复之疹（如慢性荨麻疹）多属后者，扶正固表是关键。", en: "An eruption is read first by color and course: red and sudden is wind-heat — dredge wind and clear heat; deep-red and persistent is blood heat — cool the blood and clear heat; pale and recurrent with wind or cold is qi-blood deficiency with an insecure defense — boost qi, secure the surface, nourish blood, dispel wind. Supplement an excess and the pathogen stays constrained; keep dispelling wind and clearing heat in a deficiency and the upright weakens and the rash recurs more — chronic recurrent eruptions (as in chronic urticaria) are mostly the latter, where supporting the upright and securing the surface is the key." }
+    },
+    note: { zh: "安全底线：皮疹伴呼吸困难、喉头紧缩、面唇肿胀、头晕心慌者，可能为严重过敏反应（血管性水肿／过敏性休克），须立即急救就医。疹色紫暗压之不褪、伴发热者，须排查紫癜、感染性发疹性疾病等。", en: "Safety floor: a rash with difficulty breathing, throat tightness, swelling of the face or lips, dizziness, or palpitations may be severe allergy (angioedema or anaphylaxis) — seek emergency care at once. Purple non-blanching lesions with fever warrant investigation for purpura and infectious exanthems." },
+    xm: {
+      internal: [{ id: "urticaria", zh: "瘾疹", en: "Urticaria" }, { id: "eczema", zh: "湿疮", en: "Eczema" }],
+      points: [
+        { code: "LI11", zh: "曲池", py: "Quchi" },
+        { code: "SP10", zh: "血海", py: "Xuehai" },
+        { code: "GB20", zh: "风池", py: "Fengchi" },
+        { code: "LI4", zh: "合谷", py: "Hegu" },
+        { code: "BL13", zh: "肺俞", py: "Feishu" }
+      ],
+      formulas: [
+        { py: "xiaofengsan", zh: "消风散", en: "Xiao Feng San" },
+        { py: "yupingfengsan", zh: "玉屏风散", en: "Yu Ping Feng San" },
+        { py: "xijiaodihuangtang", zh: "犀角地黄汤", en: "Xi Jiao Di Huang Tang" }
+      ]
+    }
+  },
+
+  "pifuganzao": {
+    id: "pifuganzao", cat: "pifu",
+    name: { zh: "皮肤干燥", en: "Dry Skin" },
+    aka: { zh: ["肌肤甲错", "皮肤粗糙", "脱屑"], en: ["Rough scaly skin", "Skin dryness", "Flaking skin"] },
+    what: {
+      zh: "皮肤干燥少泽、粗糙脱屑，甚则皲裂，或状如鱼鳞（肌肤甲错）。皮肤之润泽，赖津液以濡、营血以养、卫气以温煦。故皮肤干燥之机，核心在「濡养不足」：或血虚不能荣养肌肤（血虚），或阴津亏耗不能濡润（阴虚），或瘀血内阻、新血不生而肌肤失养（瘀，此即「肌肤甲错」之典型）。此症以虚为主，多与身痒相伴而见，冬季及年高者尤著。见「肌肤甲错」而兼两目黯黑者，须想到内有干血。",
+      en: "Dry lustreless skin, rough and flaking, in severe cases cracked, or scaled like fish (jifu jiacuo, 'scaly skin'). The skin's moisture depends on fluids to moisten, constructive blood to nourish, and defensive qi to warm. So the mechanism centres on 'insufficient nourishment': blood deficiency unable to nourish the skin, yin-fluid depletion unable to moisten, or static blood blocking within so fresh blood is not engendered and the skin goes unnourished (stasis — the classic picture of 'scaly skin'). This symptom is chiefly deficiency, usually seen with itching, and is most marked in winter and in the aged. Scaly skin with darkened rings around the eyes should bring dry blood within to mind."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "血虚失荣，肌肤不润", en: "Blood deficiency fails to nourish; the skin is unmoistened" },
+        tags: ["血虚"], loc: "全身",
+        organ: { zh: "肝脾", en: "Liver & spleen" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、失血、脾虚化源不足，营血亏虚", en: "Chronic illness, blood loss, or spleen deficiency shorting the source depletes constructive blood" },
+          { zh: "血主濡之，血虚则肌肤失于荣养（不荣则燥）", en: "Blood moistens; with blood deficient the skin loses its nourishment (no nourishment, hence dryness)" },
+          { zh: "故皮肤干燥少泽、粗糙、脱屑、面色无华、爪甲不荣、毛发干枯", en: "Hence dry lustreless rough flaking skin, a sallow complexion, brittle nails, dry hair" },
+          { zh: "兼头晕心悸、乏力、身痒，舌淡脉细——四物、当归饮子所主之血虚肤燥", en: "With dizziness, palpitations, fatigue, itching; pale tongue, thin pulse — the blood-deficiency dry skin governed by Si Wu Tang and Dang Gui Yin Zi" }
+        ],
+        companions: [
+          { id: "shenyang", note: { zh: "血虚生风则痒", en: "Blood deficiency engendering wind brings itching" } },
+          { id: "touyun", note: { zh: "血虚清窍失养", en: "Blood deficiency leaves the clear orifices unnourished" } },
+          { id: "mianse", note: { zh: "血虚则面色无华", en: "Blood deficiency, a lustreless complexion" } },
+          { id: "tuofa", note: { zh: "发为血之余", en: "Hair is the surplus of blood" } },
+          { id: "muganse", note: { zh: "血虚目失濡养", en: "Blood deficiency leaves the eyes unmoistened" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉细", en: "Thin" }
+      },
+      {
+        id: "d2",
+        label: { zh: "阴津亏耗，肌肤失润", en: "Yin fluids depleted; the skin loses moisture" },
+        tags: ["阴虚"], loc: "下焦",
+        organ: { zh: "肺·肾", en: "Lung & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "热病伤阴、久病、年高、燥邪伤津，阴津亏耗", en: "Febrile injury to yin, chronic illness, age, or dryness injuring fluids depletes the yin fluids" },
+          { zh: "肺主皮毛，肺肾阴亏则津不上承、不能外达濡润肌肤", en: "The lung governs the skin and hair; lung-kidney yin depletion leaves fluids unable to rise and reach outward to moisten it" },
+          { zh: "故皮肤干燥、脱屑如糠、皲裂、瘙痒、入夜为甚、冬季加重", en: "Hence dry skin flaking like bran, cracking, itching, worst at night and in winter" },
+          { zh: "兼口干咽燥、五心烦热、盗汗、大便干结，舌红少津少苔脉细数——增液汤、沙参麦冬所主之阴虚肤燥", en: "With dry mouth and throat, heat in the five centers, night sweats, dry stool; red tongue with scant fluid and coating, thin rapid pulse — the yin-deficiency dry skin governed by Zeng Ye Tang and Sha Shen Mai Dong Tang" }
+        ],
+        companions: [
+          { id: "kougan", note: { zh: "阴虚津亏", en: "Yin deficiency, fluids depleted" } },
+          { id: "shouzuxinre", note: { zh: "阴虚生内热", en: "Yin deficiency breeds internal heat" } },
+          { id: "bianmi", note: { zh: "阴亏肠燥", en: "Yin depletion, dry intestines" } },
+          { id: "shenyang", note: { zh: "燥胜则风动", en: "Dryness prevailing stirs wind" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } }
+        ],
+        tongue: { zh: "舌红少津，少苔", en: "Red tongue with scant fluid and coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "瘀血内阻，肌肤甲错", en: "Static blood blocks within; the skin turns scaly" },
+        tags: ["通道受阻·瘀"], loc: "全身",
+        organ: { zh: "肝", en: "Liver" },
+        nature: { zh: "瘀", en: "Stasis" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "久病入络、外伤、气滞日久，瘀血内停（干血）", en: "Chronic illness entering the network vessels, trauma, or long qi stagnation lodges static blood within ('dry blood')" },
+          { zh: "瘀血不去则新血不生，肌肤失于濡养（瘀阻则不荣）", en: "While static blood remains, fresh blood is not engendered, and the skin goes unnourished (stasis obstructing, hence no nourishment)" },
+          { zh: "故肌肤甲错、粗糙如鳞、色泽晦暗、两目黯黑", en: "Hence scaly rough skin like fish scales, a dull dark cast, and darkened rings around the eyes" },
+          { zh: "兼疼痛固定、舌质紫暗或有瘀斑脉涩——大黄䗪虫丸所主之干血肌肤甲错", en: "With fixed pain; dusky purple tongue or stasis patches, choppy pulse — the dry-blood scaly skin governed by Da Huang Zhe Chong Wan" }
+        ],
+        cite: {
+          zh: "《金匮要略·血痹虚劳》：五劳虚极羸瘦……内有干血，肌肤甲错，两目黯黑。缓中补虚，大黄䗪虫丸主之。",
+          en: "Jingui Yaolüe · Blood Impediment and Vacuity Taxation: In the five taxations with extreme emaciation … dry blood within, scaly skin, and darkened eyes. To relax the middle and supplement vacuity, Da Huang Zhe Chong Wan governs."
+        },
+        companions: [
+          { id: "mianse", note: { zh: "瘀阻则面色晦暗", en: "Stasis obstruction darkens the complexion" } },
+          { id: "xiaoshou", note: { zh: "干血不荣则羸瘦", en: "Dry blood not nourishing brings emaciation" } },
+          { id: "mamu", note: { zh: "瘀阻络脉则麻木", en: "Stasis blocking the vessels brings numbness" } }
+        ],
+        tongue: { zh: "舌质紫暗或有瘀斑", en: "Dusky purple tongue, or with stasis patches" },
+        pulse: { zh: "脉涩", en: "Choppy" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "皮肤干燥是兼头晕心悸面白爪甲不荣（血虚），兼口干咽燥五心烦热盗汗（阴虚），还是肌肤甲错如鳞、色晦暗两目黯黑（瘀血干血）？", en: "Is the dry skin with dizziness, palpitations, pale face, brittle nails (blood deficiency), with dry mouth and throat, heat in the five centers, night sweats (yin deficiency), or scaly like fish with a dull dark cast and darkened eyes (dry blood stasis)?" },
+      rows: [
+        { side: { zh: "虚（血虚／阴虚）", en: "Deficiency (blood / yin)" },
+          feats: { zh: "血虚者干燥脱屑、面色无华、头晕心悸、舌淡脉细；阴虚者干燥皲裂、口干咽燥、五心烦热盗汗、舌红少津脉细数", en: "Blood deficiency: dry flaking skin, sallow face, dizziness, palpitations, pale tongue, thin pulse; yin deficiency: dry cracked skin, dry mouth and throat, heat in the five centers, night sweats, red scant-fluid tongue, thin rapid pulse" } },
+        { side: { zh: "实（瘀血·干血）", en: "Excess (blood stasis, dry blood)" },
+          feats: { zh: "肌肤甲错粗糙如鳞、色泽晦暗、两目黯黑、羸瘦，兼固定疼痛，舌紫暗脉涩", en: "Scaly rough skin like fish scales, dull dark cast, darkened eyes, emaciation, with fixed pain; dusky tongue, choppy pulse" } }
+      ],
+      line: { zh: "皮肤干燥以虚为纲，重在濡养：血虚者养血润燥，阴虚者滋阴生津。然「肌肤甲错」一症为瘀血干血之特征——见之当思仲景大黄䗪虫丸「缓中补虚」之法，攻补兼施、不可纯补。虚燥误以攻伐则阴血更耗；干血纯补而不化瘀，则新血终难生、肤终不润。", en: "Dry skin is guided by deficiency, the emphasis on moistening: blood deficiency — nourish blood and moisten dryness; yin deficiency — enrich yin and engender fluids. Yet 'scaly skin' is the hallmark of dry-blood stasis — seeing it should bring to mind Zhang Ji's Da Huang Zhe Chong Wan, which 'relaxes the middle and supplements vacuity', attacking and supplementing together rather than purely supplementing. Attack a deficiency dryness and yin-blood is spent further; purely supplement dry blood without transforming stasis and fresh blood is never engendered and the skin never moistens." }
+    },
+    xm: {
+      internal: [{ id: "eczema", zh: "湿疮", en: "Eczema" }],
+      points: [
+        { code: "SP10", zh: "血海", py: "Xuehai" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" },
+        { code: "ST36", zh: "足三里", py: "Zusanli" },
+        { code: "BL17", zh: "膈俞", py: "Geshu" },
+        { code: "KI3", zh: "太溪", py: "Taixi" }
+      ],
+      formulas: [
+        { py: "siwutang", zh: "四物汤", en: "Si Wu Tang" },
+        { py: "zengyetang", zh: "增液汤", en: "Zeng Ye Tang" },
+        { py: "dahuangzhechongwan", zh: "大黄䗪虫丸", en: "Da Huang Zhe Chong Wan" }
+      ]
+    }
+  }
+
+});
+
+"use strict";
+/* 第十一纲 · 皮肤外候 · 批次B（痤疮/面色异常/脱发） */
+Object.assign(SYMPTOMS, {
+
+  "cuochuang": {
+    id: "cuochuang", cat: "pifu",
+    name: { zh: "痤疮", en: "Acne" },
+    aka: { zh: ["粉刺", "青春痘", "肺风粉刺"], en: ["Pimples", "Pustules", "Lung-wind acne"] },
+    what: {
+      zh: "颜面、胸背等处生粉刺、丘疹、脓疱、结节，甚则囊肿瘢痕。「肺主皮毛」，颜面为阳明经所过，故痤疮多责之肺胃。其机：或肺经风热，熏蒸颜面（实，疹色红、以额面为主、新起）；或胃肠湿热，蕴蒸肌肤（实，脓疱多、油腻、便秘口臭）；或冲任失调、肝郁化火（多见于女性，随月经周期起伏、以口周下颌为主）；或日久痰瘀互结（结节囊肿、经久不消、色暗）。故辨痤疮当察疹形（丘疹／脓疱／结节囊肿）、部位（额面／口周／胸背）、色泽（红／暗）与兼症。",
+      en: "Comedones, papules, pustules, and nodules on the face, chest, and back, in severe cases cysts and scarring. 'The lung governs the skin and hair,' and the face is traversed by the yangming channel, so acne is mostly charged to lung and stomach. The mechanism: lung-channel wind-heat steaming the face (excess — red lesions, mainly on the forehead and face, of recent onset); gastrointestinal damp-heat smoldering into the skin (excess — many pustules, oiliness, constipation, foul breath); Chong-Ren disharmony with liver constraint turning to fire (mostly in women, waxing and waning with the cycle, around the mouth and jaw); or, over time, phlegm and stasis binding (nodules and cysts, long unresolved, dark in color). So acne is read by lesion form (papule, pustule, nodule/cyst), site (forehead, perioral, chest-back), color (red or dark), and companions."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "肺经风热，熏蒸颜面", en: "Lung-channel wind-heat steams the face" },
+        tags: ["升太过", "出不及"], loc: "上焦",
+        organ: { zh: "肺", en: "Lung" },
+        nature: { zh: "风热", en: "Wind-heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "肺经素有蕴热，复感风邪，或过食辛辣，风热上壅", en: "Heat lodged in the lung channel meeting external wind, or excess pungent food, congests wind-heat upward" },
+          { zh: "肺主皮毛，风热循经上熏颜面，郁于肌肤腠理（热壅肌表）", en: "The lung governs the skin; wind-heat rises along the channel to steam the face and constrains in the skin (heat congesting the surface)" },
+          { zh: "故粉刺、丘疹色红、以额部鼻周为主、或有痒痛、新起为多", en: "Hence red comedones and papules, mainly on the forehead and around the nose, sometimes itchy or tender, usually of recent onset" },
+          { zh: "兼口干、咽干、便秘，舌红苔薄黄脉浮数——枇杷清肺饮所主之肺热痤疮", en: "With dry mouth and throat, constipation; red tongue, thin yellow coating, floating rapid pulse — the lung-heat acne governed by Pi Pa Qing Fei Yin" }
+        ],
+        companions: [
+          { id: "kougan", note: { zh: "肺热伤津", en: "Lung heat injures fluids" } },
+          { id: "yangan", note: { zh: "热灼咽津", en: "Heat scorches the throat's fluids" } },
+          { id: "bianmi", note: { zh: "肺与大肠相表里", en: "Lung and large intestine are paired" } }
+        ],
+        tongue: { zh: "舌红，苔薄黄", en: "Red tongue, thin yellow coating" },
+        pulse: { zh: "脉浮数", en: "Floating, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "胃肠湿热，上蒸肌肤", en: "Gastrointestinal damp-heat steams the skin" },
+        tags: ["通道受阻·湿", "降不及"], loc: "中焦",
+        organ: { zh: "脾胃·大肠", en: "Spleen-stomach & large intestine" },
+        nature: { zh: "湿热", en: "Damp-heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "嗜食肥甘辛辣醇酒，胃肠积热、酿生湿热", en: "A fondness for rich pungent food and alcohol accumulates heat in the gut and breeds damp-heat" },
+          { zh: "湿热蕴结，循阳明经上蒸颜面胸背（湿热熏蒸）", en: "Damp-heat smolders and rises along the yangming channel to steam the face, chest, and back (damp-heat steaming)" },
+          { zh: "故皮疹以脓疱、结节为主、油腻光亮、色红、多发于面颊口周及胸背", en: "Hence chiefly pustules and nodules, oily and shiny, red, on the cheeks, perioral area, chest, and back" },
+          { zh: "兼口臭、口苦、脘腹胀满、大便秘结或黏滞、小便黄，舌红苔黄腻脉滑数——茵陈蒿汤、清胃散所主", en: "With foul breath, bitter mouth, abdominal fullness, bound or sticky stool, dark urine; red tongue, yellow greasy coating, slippery rapid pulse — governed by Yin Chen Hao Tang and Qing Wei San" }
+        ],
+        companions: [
+          { id: "kouku", note: { zh: "湿热熏蒸", en: "Damp-heat steams upward" } },
+          { id: "dabiannianzhi", note: { zh: "湿热下注", en: "Damp-heat pours downward" } },
+          { id: "bianmi", note: { zh: "胃肠积热", en: "Heat accumulating in the gut" } },
+          { id: "kounian", note: { zh: "湿浊上泛", en: "Damp turbidity floods upward" } },
+          { id: "wanpi", note: { zh: "湿热阻中", en: "Damp-heat blocks the middle" } }
+        ],
+        tongue: { zh: "舌红，苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "冲任失调，肝郁化火", en: "Chong-Ren disharmony with liver constraint turning to fire" },
+        tags: ["枢机不利·少阳", "升太过", "阴虚"], loc: "下焦",
+        organ: { zh: "肝·冲任", en: "Liver & Chong-Ren" },
+        xushi: "虚实夹杂", weight: 3,
+        chain: [
+          { zh: "情志不遂、劳倦，肝气郁结、久郁化火；或肾阴不足、冲任失调", en: "Thwarted emotions and overwork constrain liver qi, which over time turns to fire; or kidney yin insufficiency disharmonizes Chong and Ren" },
+          { zh: "冲任隶于肝肾，失调则相火妄动、循经上炎颜面（下虚上实）", en: "Chong and Ren are subordinate to liver and kidney; their disharmony lets ministerial fire stir and flame up the channel to the face (deficient below, excess above)" },
+          { zh: "故痤疮以口周、下颌、两颊为主，随月经周期起伏——经前加重、经后减轻", en: "Hence acne chiefly around the mouth, jaw, and cheeks, waxing and waning with the cycle — worse before menses, easing after" },
+          { zh: "兼月经不调、经前乳胀、烦躁易怒、腰酸，舌红苔薄脉弦细——丹栀逍遥散、二仙汤所主", en: "With irregular menses, premenstrual breast distension, irritability, sore lower back; red tongue, thin coating, wiry thin pulse — governed by Dan Zhi Xiao Yao San and Er Xian Tang" }
+        ],
+        companions: [
+          { id: "jingqianruzhang", note: { zh: "肝郁则乳房胀", en: "Liver constraint brings breast distension" } },
+          { id: "yuejing_buding", note: { zh: "冲任失调则经乱", en: "Chong-Ren disharmony brings an erratic cycle" } },
+          { id: "fanzao", note: { zh: "肝郁化火则烦躁", en: "Liver constraint turning to fire brings vexation" } },
+          { id: "yaosuan", note: { zh: "肝肾不足于下", en: "Liver-kidney insufficiency below" } },
+          { id: "shimian_rushu", note: { zh: "火扰心神则不寐", en: "Fire harassing the spirit brings sleeplessness" } }
+        ],
+        tongue: { zh: "舌红，苔薄", en: "Red tongue, thin coating" },
+        pulse: { zh: "脉弦细", en: "Wiry, thin" }
+      },
+      {
+        id: "d4",
+        label: { zh: "痰瘀互结，凝聚成结", en: "Phlegm and stasis bind into nodules" },
+        tags: ["通道受阻·痰", "通道受阻·瘀"], loc: "全身",
+        organ: { zh: "脾·肝", en: "Spleen & liver" },
+        nature: { zh: "痰瘀", en: "Phlegm-stasis" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "痤疮日久不愈，湿热酿痰、气血瘀滞，痰瘀互结", en: "Long-unresolved acne lets damp-heat brew phlegm and qi-blood congeal, phlegm and stasis binding together" },
+          { zh: "痰瘀凝聚于肌肤，结而不散（有形之邪结聚）", en: "Phlegm and stasis gather in the skin and knot without dispersing (substantive pathogens congealing)" },
+          { zh: "故见结节、囊肿、经久不消、色暗红或紫暗、按之较硬、愈后遗留瘢痕色素", en: "Hence nodules and cysts, long unresolved, dark red or dusky purple, firm to the touch, leaving scars and pigmentation after healing" },
+          { zh: "舌质暗或有瘀点、苔腻脉滑或涩——海藻玉壶汤、桃红四物合二陈所主之痰瘀痤疮", en: "Dusky tongue or stasis spots, greasy coating, slippery or choppy pulse — the phlegm-stasis acne governed by Hai Zao Yu Hu Tang and Tao Hong Si Wu with Er Chen Tang" }
+        ],
+        companions: [
+          { id: "pifuganzao", note: { zh: "瘀阻则肌肤失养", en: "Stasis obstruction leaves the skin unnourished" } },
+          { id: "mianse", note: { zh: "瘀阻则面色晦暗", en: "Stasis obstruction darkens the complexion" } }
+        ],
+        tongue: { zh: "舌质暗或有瘀点，苔腻", en: "Dusky tongue or stasis spots, greasy coating" },
+        pulse: { zh: "脉滑或涩", en: "Slippery or choppy" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "痤疮是新起色红以额面为主（肺热）、脓疱油腻兼口臭便秘（胃肠湿热）、随月经起伏以口周下颌为主（冲任肝郁），还是结节囊肿色暗经久不消（痰瘀）？", en: "Is the acne new and red mainly on the forehead and face (lung heat), pustular and oily with foul breath and constipation (gut damp-heat), waxing with the cycle around the mouth and jaw (Chong-Ren with liver constraint), or dark long-standing nodules and cysts (phlegm-stasis)?" },
+      rows: [
+        { side: { zh: "实（肺热／胃肠湿热／痰瘀）", en: "Excess (lung heat / gut damp-heat / phlegm-stasis)" },
+          feats: { zh: "肺热者丘疹色红居额鼻、口干便秘脉浮数；湿热者脓疱油腻居面颊胸背、口臭便结苔黄腻脉滑数；痰瘀者结节囊肿色暗质硬、舌暗脉涩", en: "Lung heat: red papules on forehead and nose, dry mouth, constipation, floating rapid pulse; damp-heat: oily pustules on cheeks, chest, and back, foul breath, bound stool, yellow greasy coating, slippery rapid pulse; phlegm-stasis: dark firm nodules and cysts, dusky tongue, choppy pulse" } },
+        { side: { zh: "虚实夹杂（冲任失调·肝郁化火）", en: "Mixed (Chong-Ren disharmony, liver constraint with fire)" },
+          feats: { zh: "以口周下颌两颊为主、随月经周期起伏经前加重，兼月经不调经前乳胀烦躁腰酸，舌红脉弦细", en: "Chiefly perioral, jaw, and cheeks, waxing with the cycle and worse before menses, with irregular periods, premenstrual breast distension, irritability, sore back; red tongue, wiry thin pulse" } }
+      ],
+      line: { zh: "痤疮辨证，部位与周期是两把钥匙：额鼻为主、新起色红者多肺热，宜清宣肺热；面颊胸背脓疱油腻、兼便秘口臭者多胃肠湿热，宜清热利湿通腑；口周下颌、随经起伏者多冲任肝郁，宜疏肝调冲任（此型单用清热往往无效，必须调周）；结节囊肿色暗日久者痰瘀互结，宜化痰散结活血。纯实误补则热郁愈壅；冲任失调型久投苦寒则脾阳受损、阴血更亏而疹愈顽。", en: "In acne, site and cycle are the two keys: forehead and nose, new and red, is mostly lung heat — clear and diffuse it; oily pustules on cheeks, chest, and back with constipation and foul breath is gut damp-heat — clear heat, drain damp, free the bowels; perioral and jaw lesions waxing with the cycle is Chong-Ren with liver constraint — dredge the liver and regulate Chong and Ren (clearing heat alone usually fails here; the cycle must be regulated); dark long-standing nodules and cysts are phlegm-stasis — transform phlegm, disperse knots, invigorate blood. Supplement a pure excess and constrained heat congests more; give long bitter-cold to the Chong-Ren type and spleen yang is injured, yin-blood depleted further, and the lesions grow more obstinate." }
+    },
+    xm: {
+      internal: [{ id: "acne", zh: "粉刺", en: "Acne" }],
+      points: [
+        { code: "LI11", zh: "曲池", py: "Quchi" },
+        { code: "LI4", zh: "合谷", py: "Hegu" },
+        { code: "ST44", zh: "内庭", py: "Neiting" },
+        { code: "SP10", zh: "血海", py: "Xuehai" },
+        { code: "LR3", zh: "太冲", py: "Taichong" }
+      ],
+      formulas: [
+        { py: "pipaqingfeiyin", zh: "枇杷清肺饮", en: "Pi Pa Qing Fei Yin" },
+        { py: "danzhixiaoyaosan", zh: "丹栀逍遥散", en: "Dan Zhi Xiao Yao San" },
+        { py: "yinchenhaotang", zh: "茵陈蒿汤", en: "Yin Chen Hao Tang" }
+      ]
+    }
+  },
+
+  "mianse": {
+    id: "mianse", cat: "pifu",
+    name: { zh: "面色异常", en: "Abnormal Complexion" },
+    aka: { zh: ["面色萎黄", "面色㿠白", "面色晦暗", "两颧潮红"], en: ["Sallow complexion", "Pale face", "Dull dark face", "Flushed cheeks"] },
+    what: {
+      zh: "面部色泽异于常人——或萎黄、或㿠白、或潮红、或晦暗青紫。「十二经脉，三百六十五络，其血气皆上于面」——面部是气血最丰、最易被望见之处，故面色是气血盛衰、脏腑虚实最直观的外候。望面色，一辨其色（黄／白／红／青／黑），二辨其泽（有神明润／无神枯槁）。得神有光泽者虽病亦轻，晦暗枯槁无华者病重。此症本身不是「病」，而是一面镜子，须与他症合参、印证已推导出的气机方向。",
+      en: "A facial color departing from the normal — sallow, pale, flushed, dull, dark, or bluish. 'The twelve channels and three hundred sixty-five network vessels all send their blood and qi up to the face' — the face is where qi and blood are richest and most visible, so complexion is the most direct outward sign of their abundance or decline and of visceral deficiency or excess. Reading the complexion means reading its hue (yellow, white, red, blue-green, black) and its luster (spirited and moist, or spiritless and withered). A patient with luster is less gravely ill even when sick; a dull withered face without sheen signals grave illness. This symptom is not itself a disease but a mirror — to be weighed with other signs and used to confirm the qi-dynamic direction already derived."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "面色萎黄——脾虚气血不荣", en: "Sallow face — spleen deficiency, qi and blood not nourishing" },
+        tags: ["气虚", "血虚", "升不及"], loc: "中焦",
+        organ: { zh: "脾", en: "Spleen" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "饮食劳倦、久病，脾胃虚弱，气血生化之源不足", en: "Irregular eating, overwork, or chronic illness weakens the spleen-stomach and shorts the source of qi and blood" },
+          { zh: "脾主运化，为气血生化之源；脾虚则气血不足，不能上荣于面（化源之亏）", en: "The spleen transforms and is the source of qi and blood; when deficient, qi and blood fall short and cannot rise to nourish the face (a deficit of source)" },
+          { zh: "故面色萎黄不泽、淡黄少华（黄而无光为脾虚，黄而鲜明如橘为湿热发黄，须别）", en: "Hence a sallow lustreless face, pale-yellow without sheen (dull yellow is spleen deficiency; a bright tangerine yellow is damp-heat jaundice — these must be distinguished)" },
+          { zh: "兼纳呆、便溏、乏力、气短，舌淡脉弱——归脾、四君所主之脾虚萎黄", en: "With poor appetite, loose stools, fatigue, shortness of breath; pale tongue, weak pulse — the spleen-deficiency sallowness governed by Gui Pi Tang and Si Jun Zi Tang" }
+        ],
+        companions: [
+          { id: "fali", note: { zh: "脾虚则神疲", en: "Spleen deficiency brings lassitude" } },
+          { id: "nadai", note: { zh: "脾虚纳少", en: "Spleen deficiency, reduced intake" } },
+          { id: "biantang", note: { zh: "脾虚则便溏", en: "Spleen deficiency brings loose stools" } },
+          { id: "touyun", note: { zh: "气血不荣清窍", en: "Qi and blood fail to nourish the orifices" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉弱", en: "Weak" }
+      },
+      {
+        id: "d2",
+        label: { zh: "面色㿠白／苍白——阳虚或血虚", en: "Pale or white face — yang or blood deficiency" },
+        tags: ["阳虚", "血虚"], loc: "全身",
+        organ: { zh: "心脾肾", en: "Heart, spleen & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "阳气虚衰或营血亏虚，气血不能充盈上荣于面", en: "Declining yang or depleted constructive blood leaves qi and blood unable to fill and rise to the face" },
+          { zh: "阳虚则寒、血脉收引，血不上荣，故面色㿠白虚浮（白而虚浮属阳虚水泛）", en: "Yang deficiency brings cold and contracts the vessels so blood does not rise — hence a pale puffy face (white and puffy is yang deficiency with water flooding)" },
+          { zh: "血虚则血海不充，故面色淡白无华（白而枯槁属血虚）", en: "Blood deficiency leaves the sea of blood unfilled — hence a pale lustreless face (white and withered is blood deficiency)" },
+          { zh: "阳虚兼畏寒肢冷、便溏尿清，舌淡胖脉沉迟；血虚兼头晕心悸、爪甲不荣，舌淡脉细", en: "Yang deficiency adds aversion to cold, cold limbs, loose stools, clear urine, pale swollen tongue, deep slow pulse; blood deficiency adds dizziness, palpitations, brittle nails, pale tongue, thin pulse" }
+        ],
+        companions: [
+          { id: "zhileng", note: { zh: "阳虚不温四末", en: "Deficient yang fails to warm the extremities" } },
+          { id: "xinji", note: { zh: "血不养心", en: "Blood fails to nourish the heart" } },
+          { id: "touyun", note: { zh: "血虚清窍失养", en: "Blood deficiency leaves the clear orifices unnourished" } },
+          { id: "fali", note: { zh: "阳气不足则神疲", en: "Insufficient yang brings lassitude" } },
+          { id: "pifuganzao", note: { zh: "血虚肌肤失荣", en: "Blood deficiency leaves the skin unnourished" } }
+        ],
+        tongue: { zh: "舌淡（阳虚兼胖）", en: "Pale tongue (swollen if yang deficient)" },
+        pulse: { zh: "脉沉迟或细弱", en: "Deep slow, or thin weak" }
+      },
+      {
+        id: "d3",
+        label: { zh: "两颧潮红——阴虚火旺", en: "Flushed cheeks — yin deficiency with effulgent fire" },
+        tags: ["阴虚", "升太过"], loc: "下焦",
+        organ: { zh: "肾·肝", en: "Kidney & liver" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、劳伤、热病后期，阴液亏耗，虚火内生", en: "Chronic illness, taxation, or the late stage of febrile disease depletes yin and breeds deficient fire" },
+          { zh: "阴不制阳，虚火上炎，浮越于面（虚火上浮）", en: "Yin cannot restrain yang, deficient fire flames up and floats to the face (deficient fire floating up)" },
+          { zh: "故两颧潮红、时作时止、午后及夜间为甚——与实热之满面通红、持续不退有别", en: "Hence flushed cheeks that come and go, worst in the afternoon and at night — unlike the whole-face redness of repletion heat, which is constant" },
+          { zh: "兼五心烦热、潮热盗汗、口干咽燥，舌红少苔脉细数——知柏地黄所主之阴虚面赤", en: "With heat in the five centers, tidal fever, night sweats, dry mouth and throat; red tongue, scant coating, thin rapid pulse — the yin-deficiency flush governed by Zhi Bai Di Huang Wan" }
+        ],
+        companions: [
+          { id: "chaore", note: { zh: "阴虚内热", en: "Yin deficiency with internal heat" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } },
+          { id: "shouzuxinre", note: { zh: "阴虚生内热", en: "Yin deficiency breeds internal heat" } },
+          { id: "kougan", note: { zh: "阴虚津亏", en: "Yin deficiency, fluids depleted" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d4",
+        label: { zh: "面色晦暗青紫——瘀血或阳虚寒凝", en: "Dull dark or bluish face — blood stasis or yang deficiency with cold" },
+        tags: ["通道受阻·瘀", "阳虚"], loc: "全身",
+        organ: { zh: "肝·肾", en: "Liver & kidney" },
+        nature: { zh: "瘀", en: "Stasis" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "久病入络、气滞寒凝，血行瘀滞；或肾阳虚衰，寒凝血脉", en: "Chronic illness entering the vessels, qi stagnation or cold congelation congeals the blood; or declining kidney yang congeals the vessels with cold" },
+          { zh: "瘀血阻络，气血不能上荣于面，浊色外显（瘀则色晦）", en: "Static blood blocks the vessels, qi and blood cannot rise to the face, and a turbid color shows (stasis darkens the hue)" },
+          { zh: "故面色晦暗无泽、或青紫、口唇色暗、眼周黧黑", en: "Hence a dull lustreless face, sometimes bluish-purple, with dark lips and blackish rings around the eyes" },
+          { zh: "兼固定疼痛、肌肤甲错，舌质紫暗或有瘀斑脉涩——血府逐瘀所主之瘀血面色", en: "With fixed pain and scaly skin; dusky purple tongue or stasis patches, choppy pulse — the blood-stasis complexion governed by Xue Fu Zhu Yu Tang" }
+        ],
+        companions: [
+          { id: "pifuganzao", note: { zh: "瘀血则肌肤甲错", en: "Blood stasis brings scaly skin" } },
+          { id: "tongjing", note: { zh: "瘀阻胞宫则痛经", en: "Stasis in the uterus brings dysmenorrhea" } },
+          { id: "xintong", note: { zh: "瘀阻心脉则痛", en: "Stasis in the heart vessels brings pain" } },
+          { id: "zhileng", note: { zh: "阳虚寒凝", en: "Yang deficiency with cold congelation" } }
+        ],
+        tongue: { zh: "舌质紫暗或有瘀斑", en: "Dusky purple tongue, or with stasis patches" },
+        pulse: { zh: "脉涩", en: "Choppy" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "面色之辨，先分色（黄／白／红／暗），再察泽（润有神／枯无华）：萎黄属脾虚、㿠白属阳虚或血虚、颧红属阴虚、晦暗青紫属瘀血。有光泽者病轻，枯槁无华者病重。", en: "Complexion is read first by hue (yellow, white, red, dark), then by luster (moist and spirited, or withered and dull): sallow is spleen deficiency, pale is yang or blood deficiency, flushed cheeks are yin deficiency, dull or bluish is blood stasis. Luster means milder illness; a withered dull face means grave illness." },
+      rows: [
+        { side: { zh: "虚（脾虚萎黄／阳血虚㿠白／阴虚颧红）", en: "Deficiency (sallow, pale, or flushed)" },
+          feats: { zh: "萎黄兼纳呆便溏乏力；㿠白虚浮兼畏寒肢冷（阳虚），淡白枯槁兼头晕心悸（血虚）；两颧潮红时作时止、午后夜间甚兼盗汗五心热（阴虚）", en: "Sallow with poor appetite, loose stools, fatigue; pale and puffy with aversion to cold and cold limbs (yang deficiency), pale and withered with dizziness and palpitations (blood deficiency); flushed cheeks coming and going, worst in the afternoon and at night with night sweats (yin deficiency)" } },
+        { side: { zh: "实（瘀血晦暗／实热满面通红）", en: "Excess (dark stasis / full-face repletion heat)" },
+          feats: { zh: "晦暗青紫、唇暗眼黑、兼固定痛肌肤甲错、舌紫脉涩（瘀血）；满面通红持续不退、兼壮热烦渴脉洪数（实热）", en: "Dull bluish face with dark lips and blackish eye rings, fixed pain, scaly skin, dusky tongue, choppy pulse (stasis); constant whole-face redness with high fever, thirst, surging rapid pulse (repletion heat)" } }
+      ],
+      line: { zh: "面色是气血脏腑的镜子，不作独立辨证依据，而用于印证已推导出的气机方向——色与症相合则方向可信，色与症相悖则须回头审视。两处最易误：①黄而晦暗无光为脾虚，黄而鲜明如橘皮为湿热发黄，切勿混同；②两颧潮红时作时止为阴虚虚火，满面通红持续不退为实热，一虚一实、治法迥异。久病面色由晦转润，是佳兆。", en: "Complexion is a mirror of qi, blood, and the organs — not an independent basis for diagnosis, but a way to confirm the qi-dynamic direction already derived: when hue and symptoms agree the direction holds; when they conflict, go back and re-examine. Two common errors: ① dull lustreless yellow is spleen deficiency, while a bright tangerine-peel yellow is damp-heat jaundice — never confuse them; ② flushed cheeks coming and going are deficient fire, while constant whole-face redness is repletion heat — one deficient, one excess, treated in wholly different ways. In chronic illness, a face turning from dull to moist is a good sign." }
+    },
+    note: { zh: "安全底线：面色突然苍白伴大汗淋漓、四肢厥冷、脉微欲绝者为亡阳危候；面色青紫伴呼吸困难、胸痛者须警惕心肺急症；面色鲜黄如橘、伴身黄目黄尿黄者为黄疸，须查肝胆。以上均须立即就医。", en: "Safety floor: sudden pallor with profuse sweating, cold limbs, and a faint fading pulse is yang collapse; a bluish face with difficulty breathing or chest pain warrants concern for cardiopulmonary emergency; a bright tangerine-yellow face with yellow eyes, body, and urine is jaundice requiring hepatobiliary investigation. All demand immediate medical care." },
+    xm: {
+      internal: [],
+      points: [
+        { code: "ST36", zh: "足三里", py: "Zusanli" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" },
+        { code: "CV4", zh: "关元", py: "Guanyuan" },
+        { code: "BL20", zh: "脾俞", py: "Pishu" },
+        { code: "SP10", zh: "血海", py: "Xuehai" }
+      ],
+      formulas: [
+        { py: "guipitang", zh: "归脾汤", en: "Gui Pi Tang" },
+        { py: "bazhentang", zh: "八珍汤", en: "Ba Zhen Tang" },
+        { py: "xuefuzhuyutang", zh: "血府逐瘀汤", en: "Xue Fu Zhu Yu Tang" }
+      ]
+    }
+  },
+
+  "tuofa": {
+    id: "tuofa", cat: "pifu",
+    name: { zh: "脱发", en: "Hair Loss" },
+    aka: { zh: ["发落", "斑秃", "油风", "白发"], en: ["Alopecia", "Falling hair", "Patchy baldness", "Premature graying"] },
+    what: {
+      zh: "头发脱落稀疏，或成片脱落（斑秃），或伴早白。「发为血之余」「肾其华在发」——发之荣枯，赖精血以充养。故脱发之机，核心在「精血不足，发失所养」（虚，最常见）：或肝肾精血亏虚（久病、年高、房劳），或心脾两虚、气血不足（思虑劳倦）。此外血热生风（骤然成片脱落）、湿热熏蒸（油腻脱发）亦可致发落（实）。故脱发首辨虚实缓急：渐进稀疏、伴腰酸耳鸣者多肝肾亏；突然成片、伴烦躁者多血热风动；头皮油腻、脱发伴屑多者多湿热。",
+      en: "Thinning or falling hair, sometimes in patches (alopecia areata), sometimes with premature graying. 'Hair is the surplus of blood'; 'the kidney's bloom is in the hair' — its flourishing or withering depends on essence and blood. So the mechanism centres on 'insufficient essence and blood, the hair unnourished' (deficiency, the commonest): liver-kidney essence-blood depletion (chronic illness, age, sexual exhaustion), or heart-spleen deficiency with insufficient qi and blood (brooding and overwork). Blood heat engendering wind (sudden patchy loss) and damp-heat steaming (greasy hair loss) also cause it (excess). So hair loss is first sorted by deficiency-excess and pace: gradual thinning with sore back and tinnitus is mostly liver-kidney depletion; sudden patchy loss with irritability is mostly blood-heat wind; an oily scalp with heavy dandruff is mostly damp-heat."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "肝肾精血亏虚，发失所养", en: "Liver-kidney essence-blood depletion; hair loses nourishment" },
+        tags: ["阴虚", "血虚", "入不及"], loc: "下焦",
+        organ: { zh: "肝肾", en: "Liver & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "年高、久病、房劳、多产，肝肾亏虚，精血不足", en: "Age, chronic illness, sexual exhaustion, or many births depletes liver and kidney and shorts essence and blood" },
+          { zh: "肾藏精、其华在发，肝藏血、发为血之余；精血亏则发失濡养（不荣则落）", en: "The kidney stores essence and blooms in the hair; the liver stores blood and hair is its surplus. Depleted essence and blood leave the hair unnourished (no nourishment, hence falling)" },
+          { zh: "故头发渐进稀疏脱落、干枯无泽、易断、伴早白", en: "Hence gradually thinning falling hair, dry and lustreless, brittle, with premature graying" },
+          { zh: "兼腰膝酸软、头晕耳鸣、健忘、齿摇，舌淡红脉沉细——七宝美髯丹、六味所主之肝肾虚脱发", en: "With sore weak lower back and knees, dizziness, tinnitus, forgetfulness, loose teeth; pale-red tongue, deep thin pulse — the liver-kidney-deficiency hair loss governed by Qi Bao Mei Ran Dan and Liu Wei Di Huang Wan" }
+        ],
+        companions: [
+          { id: "yaosuan", note: { zh: "肝肾亏虚于下", en: "Liver-kidney depletion below" } },
+          { id: "erming", note: { zh: "肾虚耳窍失养", en: "Kidney deficiency leaves the ears unnourished" } },
+          { id: "jianwang", note: { zh: "肾精不充髓海", en: "Kidney essence fails to fill the sea of marrow" } },
+          { id: "touyun", note: { zh: "精血不足则眩", en: "Insufficient essence and blood bring dizziness" } },
+          { id: "yatong", note: { zh: "肾虚齿摇", en: "Kidney deficiency loosens the teeth" } }
+        ],
+        tongue: { zh: "舌淡红，苔少", en: "Pale-red tongue, scant coating" },
+        pulse: { zh: "脉沉细", en: "Deep, thin" }
+      },
+      {
+        id: "d2",
+        label: { zh: "心脾两虚，气血不荣", en: "Heart-spleen dual deficiency; qi and blood do not nourish" },
+        tags: ["气虚", "血虚"], loc: "中焦",
+        organ: { zh: "心脾", en: "Heart & spleen" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "思虑过度、劳倦、饮食失节，心脾两虚，气血生化不足", en: "Excessive brooding, overwork, or irregular eating leaves heart and spleen deficient and shorts the generation of qi and blood" },
+          { zh: "气血不足则不能上荣头发（发为血之余，血不足则发落）", en: "Insufficient qi and blood cannot rise to nourish the hair (hair is the surplus of blood; when blood falls short, hair falls)" },
+          { zh: "故脱发弥漫稀疏、发质细软、面色萎黄", en: "Hence diffuse thinning with fine soft hair and a sallow face" },
+          { zh: "兼心悸失眠、健忘、乏力、纳呆，舌淡脉细弱——归脾汤所主之心脾虚脱发", en: "With palpitations, insomnia, forgetfulness, fatigue, poor appetite; pale tongue, thin weak pulse — the heart-spleen-deficiency hair loss governed by Gui Pi Tang" }
+        ],
+        companions: [
+          { id: "xinji", note: { zh: "心血不足则悸", en: "Insufficient heart blood brings palpitations" } },
+          { id: "shimian_rushu", note: { zh: "心血不足则不寐", en: "Insufficient heart blood brings sleeplessness" } },
+          { id: "fali", note: { zh: "气血两亏", en: "Both qi and blood depleted" } },
+          { id: "mianse", note: { zh: "气血不荣则面色萎黄", en: "Qi and blood not nourishing, a sallow face" } },
+          { id: "nadai", note: { zh: "脾虚纳少", en: "Spleen deficiency, reduced intake" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉细弱", en: "Thin, weak" }
+      },
+      {
+        id: "d3",
+        label: { zh: "血热生风，发根不固", en: "Blood heat engenders wind; the roots are insecure" },
+        tags: ["升太过", "血虚"], loc: "上焦",
+        organ: { zh: "心·肝", en: "Heart & liver" },
+        nature: { zh: "血热·风", en: "Blood heat with wind" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "情志化火、过食辛辣，血热内蕴；热极生风", en: "Emotions turning to fire or excess pungent food lodges heat in the blood; extreme heat engenders wind" },
+          { zh: "血热则发根不固，风动则发落（风盛则动）", en: "Blood heat loosens the roots and stirring wind makes hair fall (when wind prevails there is movement)" },
+          { zh: "故突然成片脱落（斑秃）、头皮光滑、进展迅速，多有情志刺激诱因", en: "Hence sudden patchy loss (alopecia areata) with smooth scalp, progressing fast, usually after emotional stress" },
+          { zh: "兼心烦易怒、失眠多梦、口干，舌红脉弦数——凉血消风、四物合二至所主", en: "With vexation, irritability, insomnia and dreaming, dry mouth; red tongue, wiry rapid pulse — governed by blood-cooling wind-dispersing formulas and Si Wu with Er Zhi Wan" }
+        ],
+        companions: [
+          { id: "fanzao", note: { zh: "血热扰心则烦", en: "Blood heat harassing the heart brings vexation" } },
+          { id: "shimian_rushu", note: { zh: "热扰心神则不寐", en: "Heat harassing the spirit brings sleeplessness" } },
+          { id: "duomeng", note: { zh: "火扰魂不安", en: "Fire unsettles the ethereal soul" } },
+          { id: "kougan", note: { zh: "热伤津液", en: "Heat injures fluids" } }
+        ],
+        tongue: { zh: "舌红，苔薄黄", en: "Red tongue, thin yellow coating" },
+        pulse: { zh: "脉弦数", en: "Wiry, rapid" }
+      },
+      {
+        id: "d4",
+        label: { zh: "湿热熏蒸，发根濡浸", en: "Damp-heat steams and steeps the roots" },
+        tags: ["通道受阻·湿", "升太过"], loc: "上焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        nature: { zh: "湿热", en: "Damp-heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "嗜食肥甘厚味，脾胃湿热内生，循经上蒸巅顶", en: "A fondness for rich greasy food breeds spleen-stomach damp-heat, which rises along the channel to the vertex" },
+          { zh: "湿热熏蒸头皮，发根为湿浊所浸而不固（湿热蒸腐）", en: "Damp-heat steams the scalp and the roots, steeped in turbidity, lose their hold (damp-heat steaming and rotting)" },
+          { zh: "故头皮油腻、头发黏腻、脱屑瘙痒、脱发多见于头顶前额（脂溢性脱发）", en: "Hence an oily scalp, greasy hair, flaking and itching, with loss mainly at the vertex and forehead (seborrheic alopecia)" },
+          { zh: "兼口苦口黏、身重、便黏，舌红苔黄腻脉滑数——祛湿健发汤、萆薢渗湿所主", en: "With a bitter sticky mouth, heavy body, sticky stool; red tongue, yellow greasy coating, slippery rapid pulse — governed by damp-dispelling hair-strengthening formulas and Bi Xie Shen Shi Tang" }
+        ],
+        companions: [
+          { id: "kounian", note: { zh: "湿浊上泛", en: "Damp turbidity floods upward" } },
+          { id: "touzhong", note: { zh: "湿蒙清窍则头重", en: "Damp clouding the orifices brings head heaviness" } },
+          { id: "dabiannianzhi", note: { zh: "湿热下注", en: "Damp-heat pours downward" } },
+          { id: "shenyang", note: { zh: "湿热蕴肤则痒", en: "Damp-heat in the skin brings itching" } },
+          { id: "shenzhong", note: { zh: "湿性重浊则身重", en: "Damp is heavy — a heavy body" } }
+        ],
+        tongue: { zh: "舌红，苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "脱发是渐进稀疏干枯早白兼腰酸耳鸣（肝肾虚），弥漫细软兼心悸失眠乏力（心脾虚），突然成片兼烦躁（血热风动），还是头皮油腻脱屑（湿热）？", en: "Is the hair loss gradual thinning, dry with premature graying, with sore back and tinnitus (liver-kidney deficiency), diffuse and fine with palpitations, insomnia, fatigue (heart-spleen deficiency), sudden and patchy with irritability (blood-heat wind), or with an oily flaking scalp (damp-heat)?" },
+      rows: [
+        { side: { zh: "虚（肝肾亏／心脾虚）", en: "Deficiency (liver-kidney / heart-spleen)" },
+          feats: { zh: "肝肾虚者渐进稀疏干枯早白、腰膝酸软头晕耳鸣健忘、脉沉细；心脾虚者弥漫细软面色萎黄、心悸失眠乏力纳呆、脉细弱", en: "Liver-kidney: gradual thinning, dry with graying, sore back, dizziness, tinnitus, forgetfulness, deep thin pulse; heart-spleen: diffuse fine hair, sallow face, palpitations, insomnia, fatigue, poor appetite, thin weak pulse" } },
+        { side: { zh: "实（血热风动／湿热）", en: "Excess (blood-heat wind / damp-heat)" },
+          feats: { zh: "血热者突然成片脱落头皮光滑进展快、烦躁易怒失眠、舌红脉弦数；湿热者头皮油腻发黏脱屑瘙痒、口苦身重便黏、苔黄腻脉滑数", en: "Blood heat: sudden patchy loss with smooth scalp, fast progression, irritability, insomnia, red tongue, wiry rapid pulse; damp-heat: oily greasy scalp with flaking and itching, bitter mouth, heavy body, sticky stool, yellow greasy coating, slippery rapid pulse" } }
+      ],
+      line: { zh: "脱发以精血不足为本，先辨缓急虚实：渐进而虚者补肝肾、益心脾以填精养血（须久服方效，非旬日之功）；骤发成片者多血热风动，宜凉血息风；头皮油腻者湿热熏蒸，宜清热祛湿——此型误用滋腻补血则湿愈盛、发愈落，是临床常见之误。虚者若一味祛风清热，则精血愈亏。", en: "Hair loss is rooted in insufficient essence and blood; first sort pace and deficiency-excess: gradual and deficient — supplement liver and kidney, boost heart and spleen, fill essence and nourish blood (this requires long treatment, not a matter of days); sudden and patchy is mostly blood-heat wind — cool the blood and extinguish wind; an oily scalp is damp-heat steaming — clear heat and dispel damp. Using rich blood-nourishing herbs in this last type makes the damp worse and the hair fall faster, a common clinical error. In the deficient, unrelieved wind-dispelling and heat-clearing depletes essence and blood further." }
+    },
+    xm: {
+      internal: [],
+      points: [
+        { code: "GV20", zh: "百会", py: "Baihui" },
+        { code: "BL23", zh: "肾俞", py: "Shenshu" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" },
+        { code: "SP10", zh: "血海", py: "Xuehai" },
+        { code: "ST36", zh: "足三里", py: "Zusanli" }
+      ],
+      formulas: [
+        { py: "qibaomeirandan", zh: "七宝美髯丹", en: "Qi Bao Mei Ran Dan" },
+        { py: "guipitang", zh: "归脾汤", en: "Gui Pi Tang" },
+        { py: "siwutang", zh: "四物汤", en: "Si Wu Tang" }
+      ]
+    }
+  }
+
+});
+
+"use strict";
+/* 补漏 · 视物模糊/耳聋/鼻衄（头面五官）· 声嘶（胸胁心肺）· 消瘦（肢体）· 悲伤欲哭（神志） */
+Object.assign(SYMPTOMS, {
+
+  "shiwumohu": {
+    id: "shiwumohu", cat: "toumian",
+    name: { zh: "视物模糊", en: "Blurred Vision" },
+    aka: { zh: ["视物昏花", "眼花", "视力减退"], en: ["Dim vision", "Fuzzy sight", "Declining eyesight"] },
+    what: {
+      zh: "视物不清、昏蒙如雾，或视力渐减。「目受血而能视」「五脏六腑之精气皆上注于目」——目之明视，全赖精血津液上承濡养，尤以肝血、肾精为要。故视物模糊之机，核心在「精血不能上荣于目」：或肝血不足（血虚），或肝肾阴亏、精不上承（阴虚，年高者多），或脾虚清阳不升、精微不能上输（气虚）。此外肝火上炎、痰湿上蒙亦可致视昏（实，多兼目赤或头重）。此症以虚为主，须与目眩（视物旋转）相别——模糊为「看不清」，目眩为「天旋地转」。",
+      en: "Unclear, misty vision, or gradually declining eyesight. 'The eyes receive blood and can see'; 'the essential qi of all five zang and six fu pours upward into the eyes' — clear sight depends wholly on essence, blood, and fluids rising to nourish them, above all liver blood and kidney essence. So the mechanism centres on 'essence and blood failing to rise and nourish the eyes': liver blood insufficiency, liver-kidney yin depletion with essence not rising (common in the aged), or spleen deficiency with clear yang unrisen so the refined essence is not conveyed upward. Liver fire flaming up and phlegm-damp clouding above can also dim the sight (excess, usually with red eyes or head heaviness). This symptom is chiefly deficiency, and must be distinguished from dizzy vision — blurring is 'cannot see clearly', while muxuan is 'the world spinning'."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "肝血不足，目失所养", en: "Liver blood insufficient; the eyes lose nourishment" },
+        tags: ["血虚"], loc: "上焦",
+        organ: { zh: "肝", en: "Liver" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、失血、劳瞻竭视，肝血亏虚", en: "Chronic illness, blood loss, or long straining of the eyes depletes liver blood" },
+          { zh: "肝开窍于目，目得血而能视；血虚则目失濡养（不荣则昏）", en: "The liver opens into the eyes, which receive blood to see; with blood deficient the eyes lose nourishment (no nourishment, hence dimness)" },
+          { zh: "故视物模糊、久视加重、眼干涩、夜间视物更差", en: "Hence blurred vision, worse on prolonged use, with dry gritty eyes and poorer night vision" },
+          { zh: "兼头晕、面白、爪甲不荣、失眠、肢麻，舌淡脉细——四物、杞菊地黄所主之血虚视昏", en: "With dizziness, a pale face, lustreless nails, insomnia, numb limbs; pale tongue, thin pulse — the blood-deficiency dim vision governed by Si Wu Tang and Qi Ju Di Huang Wan" }
+        ],
+        companions: [
+          { id: "muganse", note: { zh: "血虚目失濡润", en: "Blood deficiency leaves the eyes unmoistened" } },
+          { id: "muxuan", note: { zh: "肝血不养目", en: "Liver blood fails to nourish the eyes" } },
+          { id: "touyun", note: { zh: "血虚清窍失养", en: "Blood deficiency leaves the clear orifices unnourished" } },
+          { id: "mamu", note: { zh: "血虚不荣则麻", en: "Blood deficiency not nourishing — numbness" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉细", en: "Thin" }
+      },
+      {
+        id: "d2",
+        label: { zh: "肝肾阴亏，精不上承", en: "Liver-kidney yin depleted; essence does not rise" },
+        tags: ["阴虚", "升不及", "入不及"], loc: "下焦",
+        organ: { zh: "肝肾", en: "Liver & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "年高、久病、房劳，肝肾精血亏耗", en: "Age, chronic illness, or sexual exhaustion depletes liver-kidney essence and blood" },
+          { zh: "五脏六腑之精皆上注于目；肾精亏则精不上承、目失涵养（升不及）", en: "The essence of all organs pours up into the eyes; kidney-essence depletion leaves it unable to rise, and the eyes lose their nourishment (insufficient ascent)" },
+          { zh: "故视物昏花渐进加重、眼前如有黑花飞舞、老年尤著", en: "Hence progressively dimming vision with dark specks floating before the eyes, marked in the aged" },
+          { zh: "兼腰膝酸软、头晕耳鸣、健忘、五心烦热，舌红少苔脉细数——明目地黄、驻景丸所主", en: "With sore weak lower back and knees, dizziness, tinnitus, forgetfulness, heat in the five centers; red tongue, scant coating, thin rapid pulse — governed by Ming Mu Di Huang Wan and Zhu Jing Wan" }
+        ],
+        companions: [
+          { id: "yaosuan", note: { zh: "肝肾亏虚于下", en: "Liver-kidney depletion below" } },
+          { id: "erming", note: { zh: "肾虚耳窍失养", en: "Kidney deficiency leaves the ears unnourished" } },
+          { id: "muganse", note: { zh: "阴亏目失濡润", en: "Yin depletion leaves the eyes unmoistened" } },
+          { id: "jianwang", note: { zh: "肾精不充髓海", en: "Kidney essence fails to fill the sea of marrow" } },
+          { id: "tuofa", note: { zh: "精血亏则发落", en: "Depleted essence and blood bring hair loss" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "脾虚清阳不升，精微不布", en: "Spleen deficiency; clear yang unrisen, essence unconveyed" },
+        tags: ["气虚", "升不及"], loc: "中焦",
+        organ: { zh: "脾", en: "Spleen" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "饮食劳倦、久病，脾胃虚弱，运化失职", en: "Irregular eating, overwork, or chronic illness weakens the spleen-stomach and its transformation" },
+          { zh: "脾主升清，脾虚则水谷精微不能上输于目（升不及）", en: "The spleen upbears the clear; when deficient, the refined essence of food cannot be conveyed up to the eyes (insufficient ascent)" },
+          { zh: "故视物模糊、劳累后加重、休息或食后稍减、眼睑重坠欲垂", en: "Hence blurred vision, worse after fatigue and eased by rest or eating, with heavy drooping eyelids" },
+          { zh: "兼纳呆、便溏、乏力、面色萎黄，舌淡脉弱——益气聪明汤、补中益气所主", en: "With poor appetite, loose stools, fatigue, a sallow face; pale tongue, weak pulse — governed by Yi Qi Cong Ming Tang and Bu Zhong Yi Qi Tang" }
+        ],
+        companions: [
+          { id: "fali", note: { zh: "脾虚则神疲", en: "Spleen deficiency brings lassitude" } },
+          { id: "nadai", note: { zh: "脾虚纳少", en: "Spleen deficiency, reduced intake" } },
+          { id: "shihoukunjuan", note: { zh: "清阳不升", en: "Clear yang fails to rise" } },
+          { id: "mianse", note: { zh: "脾虚则面色萎黄", en: "Spleen deficiency, a sallow face" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉弱", en: "Weak" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "视物模糊是兼头晕面白爪甲不荣（肝血虚）、腰酸耳鸣五心烦热（肝肾阴亏），还是劳累加重兼纳呆便溏乏力（脾虚清阳不升）？", en: "Is the blurring with dizziness, pale face, lustreless nails (liver blood deficiency), with sore back, tinnitus, heat in the five centers (liver-kidney yin depletion), or worse with fatigue plus poor appetite, loose stools, tiredness (spleen deficiency, clear yang unrisen)?" },
+      rows: [
+        { side: { zh: "虚（肝血虚／肝肾阴亏）", en: "Deficiency (liver blood / liver-kidney yin)" },
+          feats: { zh: "肝血虚者久视加重、眼干、夜视差、头晕面白舌淡脉细；肝肾阴亏者渐进加重、眼前黑花、腰酸耳鸣五心热、舌红少苔脉细数", en: "Liver blood: worse on prolonged use, dry eyes, poor night vision, dizziness, pale face, pale tongue, thin pulse; liver-kidney yin: progressive, floating specks, sore back, tinnitus, heat in the five centers, red scant-coated tongue, thin rapid pulse" } },
+        { side: { zh: "虚（脾虚清阳不升）", en: "Deficiency (spleen, clear yang unrisen)" },
+          feats: { zh: "劳累后加重、休息食后稍减、眼睑重坠，兼纳呆便溏乏力面萎黄，舌淡脉弱", en: "Worse after fatigue, eased by rest or eating, heavy drooping lids, with poor appetite, loose stools, fatigue, sallow face; pale tongue, weak pulse" } }
+      ],
+      line: { zh: "视物模糊以虚为纲，重在「使精血上承于目」：肝血虚者养血明目，肝肾阴亏者滋补肝肾、益精明目，脾虚者益气升阳、输精于目。三者同为虚，别在兼症之所属。久视伤血、年高精亏，故此症调养重于速效——切忌一味清肝泻火，反伤精血。", en: "Blurred vision is guided by deficiency, the emphasis on 'letting essence and blood rise to the eyes': liver blood — nourish blood and brighten the eyes; liver-kidney yin — enrich them, boost essence, brighten the eyes; spleen deficiency — boost qi, raise yang, convey essence upward. All three are deficiency, distinguished by which companions appear. Prolonged looking injures blood and age depletes essence, so this symptom calls for cultivation over quick results — never unrelieved liver-clearing and fire-draining, which injures essence and blood instead." }
+    },
+    note: { zh: "安全底线：视力突然下降、视野缺损、眼痛剧烈伴头痛呕吐、或见闪光飞蚊骤增者，须立即眼科就诊，排查视网膜脱离、青光眼急性发作、视神经病变等急症。糖尿病患者视物模糊须查眼底。", en: "Safety floor: sudden vision loss, visual field defects, severe eye pain with headache and vomiting, or a sudden increase in flashes and floaters requires immediate ophthalmic care to exclude retinal detachment, acute glaucoma, and optic neuropathy. Diabetic patients with blurred vision need a fundus examination." },
+    xm: {
+      internal: [],
+      points: [
+        { code: "BL2", zh: "攒竹", py: "Cuanzhu" },
+        { code: "GB20", zh: "风池", py: "Fengchi" },
+        { code: "GB37", zh: "光明", py: "Guangming" },
+        { code: "LR3", zh: "太冲", py: "Taichong" },
+        { code: "KI3", zh: "太溪", py: "Taixi" }
+      ],
+      formulas: [
+        { py: "qijudihuangwan", zh: "杞菊地黄丸", en: "Qi Ju Di Huang Wan" },
+        { py: "siwutang", zh: "四物汤", en: "Si Wu Tang" },
+        { py: "buzhongyiqitang", zh: "补中益气汤", en: "Bu Zhong Yi Qi Tang" }
+      ]
+    }
+  },
+
+  "erlong": {
+    id: "erlong", cat: "toumian",
+    name: { zh: "耳聋", en: "Hearing Loss" },
+    aka: { zh: ["听力减退", "重听", "耳背"], en: ["Deafness", "Hard of hearing", "Reduced hearing"] },
+    what: {
+      zh: "听力减退，甚则听觉丧失。「肾开窍于耳」，而少阳经脉循行入耳。耳聋之机与耳鸣同源而程度不同：实者暴聋——肝胆火盛、痰火上壅、或风邪外袭，壅塞清窍（起病急、多伴耳鸣如潮、胀闷）；虚者渐聋——肾精亏虚、脾虚清阳不升，耳窍失养（渐进、久病年高、多伴腰酸头晕）。故耳聋首辨暴渐虚实：暴聋多实、宜清宜通；渐聋多虚、宜补宜养。暴聋属急症，须及时诊治，迁延则难复。",
+      en: "Reduced hearing, in severe cases its loss. 'The kidney opens into the ears,' and the shaoyang channel courses into them. The mechanism shares its source with tinnitus but differs in degree: excess gives sudden deafness — liver-gallbladder fire, phlegm-fire congesting upward, or external wind blocking the clear orifice (abrupt, usually with surging tinnitus and fullness); deficiency gives gradual deafness — kidney-essence depletion or spleen deficiency with clear yang unrisen, leaving the ear unnourished (progressive, in chronic illness and age, with sore back and dizziness). So deafness is first sorted by sudden versus gradual, excess versus deficiency: sudden is mostly excess — clear and free it; gradual is mostly deficiency — supplement and nourish. Sudden deafness is an emergency requiring prompt care; delay makes recovery hard."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "肝胆火盛，上壅耳窍（暴聋）", en: "Liver-gallbladder fire congests the ear (sudden deafness)" },
+        tags: ["升太过", "枢机不利·少阳"], loc: "上焦",
+        organ: { zh: "肝胆", en: "Liver & gallbladder" },
+        nature: { zh: "火", en: "Fire" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "情志暴怒、气郁化火，肝胆之火循经上炎", en: "Sudden rage or constrained qi turning to fire sends liver-gallbladder fire flaming up the channel" },
+          { zh: "少阳经脉入耳，火盛则壅塞清窍、气闭不通（升太过、壅塞）", en: "The shaoyang channel enters the ear; blazing fire congests the clear orifice and shuts the qi (excessive ascent with congestion)" },
+          { zh: "故突发耳聋、耳鸣如潮如雷、耳内胀闷、按之不减、多因怒诱发", en: "Hence sudden deafness with surging or thunderous tinnitus and aural fullness not eased by pressure, usually triggered by anger" },
+          { zh: "兼头痛面赤、口苦咽干、烦躁易怒、便秘尿黄，舌红苔黄脉弦数——龙胆泻肝汤所主之暴聋", en: "With headache, red face, bitter mouth, dry throat, irritability, constipation, dark urine; red tongue, yellow coating, wiry rapid pulse — the sudden deafness governed by Long Dan Xie Gan Tang" }
+        ],
+        companions: [
+          { id: "erming", note: { zh: "同源而程度轻者为鸣", en: "The same source in milder degree is ringing" } },
+          { id: "kouku", note: { zh: "肝胆火盛", en: "Blazing liver-gallbladder fire" } },
+          { id: "toutong", note: { zh: "火性上炎则头痛", en: "Fire flaming up brings headache" } },
+          { id: "fanzao", note: { zh: "肝火扰心则烦", en: "Liver fire harassing the heart brings vexation" } },
+          { id: "muchi", note: { zh: "肝火上炎目窍", en: "Liver fire flames up to the eyes" } }
+        ],
+        tongue: { zh: "舌红，苔黄", en: "Red tongue, yellow coating" },
+        pulse: { zh: "脉弦数", en: "Wiry, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "痰火郁结，蒙蔽清窍", en: "Phlegm-fire knots and clouds the clear orifice" },
+        tags: ["通道受阻·痰", "升太过"], loc: "上焦",
+        organ: { zh: "脾·肝", en: "Spleen & liver" },
+        nature: { zh: "痰火", en: "Phlegm-fire" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "嗜食肥甘、脾失健运，痰浊内生，郁久化火", en: "Rich food and failed spleen transformation breed phlegm turbidity, which over time turns to fire" },
+          { zh: "痰火上壅，蒙蔽耳窍，清阳被遏（通道受阻·痰）", en: "Phlegm-fire congests upward, clouds the ear, and fetters the clear yang (pathway obstructed by phlegm)" },
+          { zh: "故耳聋耳鸣、耳中胀闷如塞、听音不清、头重昏蒙", en: "Hence deafness and tinnitus with a stuffed blocked feeling, unclear hearing, a heavy clouded head" },
+          { zh: "兼胸闷痰多、口苦口黏、恶心，舌红苔黄腻脉滑数——清气化痰丸所主之痰火耳聋", en: "With chest oppression, copious phlegm, a bitter sticky mouth, nausea; red tongue, yellow greasy coating, slippery rapid pulse — the phlegm-fire deafness governed by Qing Qi Hua Tan Wan" }
+        ],
+        companions: [
+          { id: "erming", note: { zh: "痰火上扰耳窍", en: "Phlegm-fire harasses the ear" } },
+          { id: "touzhong", note: { zh: "痰蒙清窍则头重", en: "Phlegm clouding the orifices brings head heaviness" } },
+          { id: "ketan", note: { zh: "痰之有形之征", en: "Substantive evidence of phlegm" } },
+          { id: "kounian", note: { zh: "痰湿上泛", en: "Phlegm-damp floods upward" } },
+          { id: "xiongmen", note: { zh: "痰阻胸阳", en: "Phlegm blocks the chest yang" } }
+        ],
+        tongue: { zh: "舌红，苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "肾精亏虚，耳窍失养（渐聋）", en: "Kidney essence depleted; the ear loses nourishment (gradual deafness)" },
+        tags: ["阴虚", "入不及"], loc: "下焦",
+        organ: { zh: "肾", en: "Kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "年高、久病、房劳，肾精亏虚", en: "Age, chronic illness, or sexual exhaustion depletes kidney essence" },
+          { zh: "肾开窍于耳，精亏则髓海不足、耳窍失于濡养（入不及、不荣则聋）", en: "The kidney opens into the ears; essence depletion leaves the sea of marrow insufficient and the ear unnourished (insufficient entry, no nourishment hence deafness)" },
+          { zh: "故听力渐减、日久加重、耳鸣如蝉声细微、夜静尤甚、按之鸣声稍减", en: "Hence gradually declining hearing worsening over years, with a faint cicada-like ringing, worst in the quiet of night and eased a little by pressure" },
+          { zh: "兼腰膝酸软、头晕、健忘、齿摇发脱，舌淡红脉沉细——耳聋左慈丸所主之肾虚渐聋", en: "With sore weak lower back and knees, dizziness, forgetfulness, loose teeth and falling hair; pale-red tongue, deep thin pulse — the kidney-deficiency gradual deafness governed by Er Long Zuo Ci Wan" }
+        ],
+        companions: [
+          { id: "erming", note: { zh: "肾虚耳窍失养", en: "Kidney deficiency leaves the ear unnourished" } },
+          { id: "yaosuan", note: { zh: "肾虚腰府失养", en: "Kidney deficiency leaves the lumbar mansion unnourished" } },
+          { id: "jianwang", note: { zh: "肾精不充髓海", en: "Kidney essence fails to fill the sea of marrow" } },
+          { id: "tuofa", note: { zh: "肾其华在发", en: "The kidney blooms in the hair" } },
+          { id: "touyun", note: { zh: "髓海不足则眩", en: "An insufficient sea of marrow brings dizziness" } }
+        ],
+        tongue: { zh: "舌淡红，苔少", en: "Pale-red tongue, scant coating" },
+        pulse: { zh: "脉沉细", en: "Deep, thin" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "耳聋是突发、鸣声如潮如雷、胀闷按之不减、多因怒诱发（实火痰火），还是渐进、鸣声如蝉细微、按之稍减、兼腰酸健忘（肾精亏虚）？", en: "Is the deafness sudden with surging or thunderous ringing, fullness not eased by pressure, triggered by anger (repletion fire or phlegm-fire), or gradual with faint cicada-like ringing eased a little by pressure, with sore back and forgetfulness (kidney-essence depletion)?" },
+      rows: [
+        { side: { zh: "实（肝胆火／痰火·暴聋）", en: "Excess (liver fire / phlegm-fire, sudden)" },
+          feats: { zh: "突发、鸣声洪大如潮如雷、胀闷拒按、怒后加重；肝火者兼头痛面赤口苦便秘脉弦数，痰火者兼胸闷痰多口黏苔黄腻脉滑数", en: "Sudden, loud surging tinnitus, fullness refusing pressure, worse after anger; liver fire adds headache, red face, bitter mouth, constipation, wiry rapid pulse; phlegm-fire adds chest oppression, copious phlegm, sticky mouth, yellow greasy coating, slippery rapid pulse" } },
+        { side: { zh: "虚（肾精亏虚·渐聋）", en: "Deficiency (kidney essence, gradual)" },
+          feats: { zh: "渐进加重、鸣声细微如蝉、夜静尤甚、按之稍减，兼腰膝酸软头晕健忘齿摇发脱，舌淡红脉沉细", en: "Gradual, faint cicada-like ringing worst in quiet night, eased a little by pressure, with sore back, dizziness, forgetfulness, loose teeth, falling hair; pale-red tongue, deep thin pulse" } }
+      ],
+      line: { zh: "耳聋与耳鸣同源，辨证同法，唯程度有别：「暴聋多实、渐聋多虚；鸣声洪大拒按多实，细微喜按多虚」。实者清肝泻火、化痰开窍以通之，虚者补肾填精、益气升清以养之。暴聋误补则火郁愈闭，渐聋误攻则精气愈亏。", en: "Deafness shares its source and its diagnostic method with tinnitus, differing only in degree: 'sudden is mostly excess, gradual mostly deficiency; loud ringing refusing pressure is mostly excess, faint ringing welcoming it mostly deficiency.' The excess — clear the liver, drain fire, transform phlegm, open the orifice; the deficient — supplement the kidney, fill essence, boost qi, raise the clear. Supplement a sudden deafness and the fire is shut in tighter; attack a gradual one and essence and qi deplete further." }
+    },
+    note: { zh: "安全底线：突发性耳聋属耳科急症，发病后应尽早（黄金期通常在两周内）就诊治疗，迁延日久听力恢复困难。伴眩晕呕吐、面瘫、剧烈头痛者，须排查中枢病变。", en: "Safety floor: sudden hearing loss is an ENT emergency; treatment should begin as early as possible (the window is usually within two weeks), as delay makes recovery difficult. Accompanying vertigo with vomiting, facial palsy, or severe headache warrants investigation for central pathology." },
+    xm: {
+      internal: [{ id: "tinnitus", zh: "耳鸣耳聋", en: "Tinnitus & Deafness" }],
+      points: [
+        { code: "TE17", zh: "翳风", py: "Yifeng" },
+        { code: "TE21", zh: "耳门", py: "Ermen" },
+        { code: "GB2", zh: "听会", py: "Tinghui" },
+        { code: "GB20", zh: "风池", py: "Fengchi" },
+        { code: "KI3", zh: "太溪", py: "Taixi" }
+      ],
+      formulas: [
+        { py: "longdanxiegantang", zh: "龙胆泻肝汤", en: "Long Dan Xie Gan Tang" },
+        { py: "erlongzuocwan", zh: "耳聋左慈丸", en: "Er Long Zuo Ci Wan" },
+        { py: "qingqihuatanwan", zh: "清气化痰丸", en: "Qing Qi Hua Tan Wan" }
+      ]
+    }
+  },
+
+  "binv": {
+    id: "binv", cat: "toumian",
+    name: { zh: "鼻衄", en: "Nosebleed" },
+    aka: { zh: ["鼻出血", "流鼻血"], en: ["Epistaxis", "Bleeding nose"] },
+    what: {
+      zh: "血自鼻孔而出。鼻为肺窍，又为阳明经脉所过。鼻衄之机，总在「火热迫血妄行」或「气不摄血」：实者多因肺经热盛、胃热炽盛、肝火上逆，热伤鼻络、血溢脉外（血色鲜红、量多、势急）；虚者因脾气虚弱不能统血，或阴虚火旺、虚火灼络（血色淡红或鲜红、量少、反复渗血）。故鼻衄首辨虚实：新起量多色鲜、兼里热表证者多实火；反复少量、兼神疲或阴虚象者多虚。血证须审因论治，不可见血止血。",
+      en: "Blood issuing from the nostrils. The nose is the lung's orifice and is traversed by the yangming channel. The mechanism lies in 'fire-heat driving blood recklessly' or 'qi failing to contain blood': the excess arise from blazing lung heat, exuberant stomach heat, or liver fire ascending, scorching the nasal vessels so blood spills out (fresh-red, copious, forceful); the deficient from spleen-qi weakness unable to contain blood, or yin deficiency with effulgent fire scorching the vessels (pale or fresh-red, scant, recurrently oozing). So nosebleed is first sorted by deficiency-excess: new, copious, bright blood with interior or exterior heat is mostly repletion fire; recurrent scant bleeding with lassitude or yin-deficiency signs is mostly deficiency. Bleeding patterns must be treated by cause, not merely stanched."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "肺经热盛，灼伤鼻络", en: "Blazing lung heat scorches the nasal vessels" },
+        tags: ["升太过", "降不及"], loc: "上焦",
+        organ: { zh: "肺", en: "Lung" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "外感风热燥邪，或肺经素有蕴热，热壅于肺", en: "External wind-heat or dryness, or heat long lodged in the lung channel, congests the lung" },
+          { zh: "肺开窍于鼻，热循经上灼鼻络，血热妄行（热迫血溢）", en: "The lung opens into the nose; heat rises along the channel to scorch its vessels and drives blood recklessly (heat forcing blood to spill)" },
+          { zh: "故鼻衄血色鲜红、量不多、鼻腔干燥灼热", en: "Hence fresh-red bleeding, not copious, with a dry hot nasal cavity" },
+          { zh: "兼咳嗽少痰、口干咽燥、身热，舌红苔薄黄脉数——桑菊饮加减、黄芩汤所主之肺热鼻衄", en: "With a scanty-phlegm cough, dry mouth and throat, feverishness; red tongue, thin yellow coating, rapid pulse — the lung-heat nosebleed governed by modified Sang Ju Yin and Huang Qin Tang" }
+        ],
+        companions: [
+          { id: "bisai", note: { zh: "热壅鼻窍", en: "Heat congests the nasal orifice" } },
+          { id: "kesou", note: { zh: "肺失清肃则咳", en: "The lung failing to clear brings cough" } },
+          { id: "yangan", note: { zh: "热灼咽津", en: "Heat scorches the throat's fluids" } },
+          { id: "kougan", note: { zh: "热盛伤津", en: "Blazing heat injures fluids" } }
+        ],
+        tongue: { zh: "舌红，苔薄黄", en: "Red tongue, thin yellow coating" },
+        pulse: { zh: "脉数", en: "Rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "胃热炽盛，血随火升", en: "Exuberant stomach heat; blood rises with the fire" },
+        tags: ["升太过", "降不及"], loc: "中焦",
+        organ: { zh: "胃", en: "Stomach" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "过食辛辣炙煿醇酒，胃中积热，火热内炽", en: "Excess pungent roasted food and alcohol accumulates heat in the stomach and blazes within" },
+          { zh: "阳明经脉上行于鼻，胃火循经上冲，迫血妄行（火性炎上）", en: "The yangming channel ascends to the nose; stomach fire surges up it and drives blood recklessly (fire flames upward)" },
+          { zh: "故鼻衄量多、血色深红、势急如涌、来势凶猛", en: "Hence copious deep-red bleeding, forceful, welling up fast" },
+          { zh: "兼口渴引饮、口臭、齿龈肿痛、便秘、身热，舌红苔黄燥脉洪数——玉女煎、犀角地黄所主之胃热鼻衄", en: "With strong thirst, foul breath, swollen painful gums, constipation, feverishness; red tongue, dry yellow coating, surging rapid pulse — the stomach-heat nosebleed governed by Yu Nu Jian and Xi Jiao Di Huang Tang" }
+        ],
+        companions: [
+          { id: "kouke", note: { zh: "胃热伤津则渴", en: "Stomach heat injuring fluids brings thirst" } },
+          { id: "yatong", note: { zh: "胃火上攻齿龈", en: "Stomach fire attacks the gums" } },
+          { id: "bianmi", note: { zh: "胃肠积热", en: "Heat accumulating in the gut" } },
+          { id: "kouchuang", note: { zh: "胃火上炎", en: "Stomach fire flames upward" } }
+        ],
+        tongue: { zh: "舌红，苔黄燥", en: "Red tongue, dry yellow coating" },
+        pulse: { zh: "脉洪数", en: "Surging, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "脾不统血／阴虚火旺", en: "Spleen failing to contain blood / yin deficiency with fire" },
+        tags: ["气虚", "阴虚"], loc: "全身",
+        organ: { zh: "脾·肾", en: "Spleen & kidney" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "劳倦思虑伤脾，气虚不能统血；或久病阴亏、虚火内生", en: "Overwork and brooding injure the spleen so qi cannot contain blood; or chronic illness depletes yin and breeds deficient fire" },
+          { zh: "气不摄血则血溢脉外；虚火上炎则灼伤鼻络（不摄／虚火灼络）", en: "Qi failing to hold blood lets it spill; deficient fire flaming up scorches the nasal vessels" },
+          { zh: "故鼻衄反复发作、量少、渗血不止、血色淡红（气虚）或鲜红（阴虚）", en: "Hence recurrent scant oozing that will not stop, pale-red (qi deficiency) or fresh-red (yin deficiency)" },
+          { zh: "气虚兼神疲乏力面白便溏、舌淡脉弱（归脾汤）；阴虚兼颧红盗汗五心烦热、舌红少苔脉细数（知柏地黄）", en: "Qi deficiency adds lassitude, pale face, loose stools, pale tongue, weak pulse (Gui Pi Tang); yin deficiency adds flushed cheeks, night sweats, heat in the five centers, red scant-coated tongue, thin rapid pulse (Zhi Bai Di Huang Wan)" }
+        ],
+        companions: [
+          { id: "fali", note: { zh: "气虚则神疲", en: "Qi deficiency brings lassitude" } },
+          { id: "mianse", note: { zh: "失血则面色无华", en: "Blood loss leaves the face lustreless" } },
+          { id: "shouzuxinre", note: { zh: "阴虚生内热", en: "Yin deficiency breeds internal heat" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } },
+          { id: "biantang", note: { zh: "脾虚则便溏", en: "Spleen deficiency brings loose stools" } }
+        ],
+        tongue: { zh: "舌淡（气虚）或红少苔（阴虚）", en: "Pale (qi deficiency) or red with scant coating (yin deficiency)" },
+        pulse: { zh: "脉弱或细数", en: "Weak, or thin and rapid" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "鼻衄是新起量多色鲜红或深红、势急、兼身热口渴便秘（实火），还是反复少量渗血、兼神疲面白（气虚）或颧红盗汗（阴虚）？", en: "Is the nosebleed new, copious, bright or deep red, forceful, with feverishness, thirst, constipation (repletion fire), or recurrent scant oozing with lassitude and a pale face (qi deficiency) or flushed cheeks and night sweats (yin deficiency)?" },
+      rows: [
+        { side: { zh: "实（肺热／胃热）", en: "Excess (lung heat / stomach heat)" },
+          feats: { zh: "肺热者血鲜红量不多、鼻干灼热、兼咳嗽咽干身热脉数；胃热者血深红量多势急、兼口渴口臭龈肿便秘、舌苔黄燥脉洪数", en: "Lung heat: fresh-red, not copious, dry hot nose, with cough, dry throat, feverishness, rapid pulse; stomach heat: deep-red, copious, forceful, with thirst, foul breath, swollen gums, constipation, dry yellow coating, surging rapid pulse" } },
+        { side: { zh: "虚（脾不统血／阴虚火旺）", en: "Deficiency (spleen not containing / yin deficiency with fire)" },
+          feats: { zh: "反复少量渗血不止；气虚者血色淡红兼神疲乏力面白便溏舌淡脉弱，阴虚者血鲜红兼颧红盗汗五心热舌红少苔脉细数", en: "Recurrent scant oozing; qi deficiency: pale-red blood with lassitude, pale face, loose stools, pale tongue, weak pulse; yin deficiency: fresh-red blood with flushed cheeks, night sweats, heat in the five centers, red scant-coated tongue, thin rapid pulse" } }
+      ],
+      line: { zh: "鼻衄审因论治：实火者清热泻火、凉血止血（肺热清肺、胃热清胃、肝火清肝）；虚者益气摄血或滋阴降火。实证误补则火愈炽、血愈涌；虚证误以苦寒直折则脾阳伤、阴愈亏、衄愈反复——「治血必治其所以动血之因」。急救时可先局部压迫、冷敷，血止后再图其本。", en: "Nosebleed is treated by cause: repletion fire — clear heat, drain fire, cool blood, stanch bleeding (clear the lung, stomach, or liver as the case may be); deficiency — boost qi to contain blood, or enrich yin and downbear fire. Supplement an excess and the fire blazes and the bleeding wells more; break a deficiency with bitter-cold and spleen yang is injured, yin depleted further, and the bleeding recurs — 'to treat bleeding, treat what set the blood moving.' In an acute episode, apply local pressure and cold first; once stanched, address the root." }
+    },
+    note: { zh: "安全底线：鼻衄量大不止、反复大量出血、或伴头晕心慌面色苍白者，须立即就医止血。反复鼻衄伴牙龈出血、皮下瘀斑者，须查血液系统疾病；单侧持续鼻衄伴涕中带血、耳鸣鼻塞者，须排查鼻咽部肿瘤。高血压患者鼻衄须测血压。", en: "Safety floor: heavy unstanched or repeated major bleeding, or bleeding with dizziness, palpitations, and pallor, requires immediate medical care. Recurrent nosebleeds with gum bleeding and bruising warrant investigation for blood disorders; persistent one-sided bleeding with blood-streaked nasal discharge, tinnitus, or blockage warrants exclusion of nasopharyngeal tumor. Hypertensive patients should have blood pressure checked." },
+    xm: {
+      internal: [],
+      points: [
+        { code: "LI4", zh: "合谷", py: "Hegu" },
+        { code: "LI20", zh: "迎香", py: "Yingxiang" },
+        { code: "GV23", zh: "上星", py: "Shangxing" },
+        { code: "LU11", zh: "少商", py: "Shaoshang" },
+        { code: "SP1", zh: "隐白", py: "Yinbai" }
+      ],
+      formulas: [
+        { py: "sangjuyin", zh: "桑菊饮", en: "Sang Ju Yin" },
+        { py: "yunvjian", zh: "玉女煎", en: "Yu Nu Jian" },
+        { py: "guipitang", zh: "归脾汤", en: "Gui Pi Tang" }
+      ]
+    }
+  },
+
+  "shengsi": {
+    id: "shengsi", cat: "xiongxie",
+    name: { zh: "声音嘶哑", en: "Hoarseness" },
+    aka: { zh: ["声嘶", "失音", "喑哑"], en: ["Voice loss", "Husky voice", "Aphonia"] },
+    what: {
+      zh: "声音低沉沙哑，甚则不能出声（失音）。「喉为肺之门户」，声由气发、赖肺气之宣与肾精之充。声嘶之机，古人概括为「金实不鸣」与「金破不鸣」两端：**金实不鸣**——外邪（风寒、风热）或痰热壅遏肺窍，气道不利，声不得出（实，起病急、病程短、多伴表证或咽痛）；**金破不鸣**——肺肾阴虚、津液不能上承，或气虚不能鼓动，声带失养（虚，病程长、反复、劳累后加重、久用嗓者多）。故声嘶首辨新久虚实，这两句话即是纲领。",
+      en: "A low husky voice, in severe cases voiceless (aphonia). 'The throat is the lung's gateway'; sound issues from qi and depends on the lung's diffusion and kidney essence to fill it. The classical formulation gives two poles: **'a solid bell does not ring'** — external pathogens (wind-cold, wind-heat) or phlegm-heat congesting the lung orifice so the airway is impeded and sound cannot issue (excess — abrupt, short course, usually with exterior signs or sore throat); **'a cracked bell does not ring'** — lung-kidney yin deficiency with fluids unable to rise, or qi too weak to drive, leaving the vocal cords unnourished (deficiency — long course, recurrent, worse with fatigue, common in heavy voice users). So hoarseness is first sorted by newness and deficiency-excess, and these two phrases are the guiding thread."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "风寒／风热袭肺，金实不鸣", en: "Wind-cold or wind-heat assails the lung — 'a solid bell does not ring'" },
+        tags: ["出不及", "降不及"], loc: "表",
+        organ: { zh: "肺", en: "Lung" },
+        nature: { zh: "风邪", en: "Wind" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "外感风寒或风热，邪犯肺卫，壅遏肺窍", en: "External wind-cold or wind-heat assails the lung-defense and congests the lung orifice" },
+          { zh: "肺气被遏，宣降失职，气道不利，声不得出（邪实壅塞·金实不鸣）", en: "Lung qi is fettered, diffusion and downbearing fail, the airway is impeded, and sound cannot issue (repletion congestion — 'a solid bell does not ring')" },
+          { zh: "故起病急骤、声音嘶哑或骤然失音、病程短", en: "Hence abrupt onset with hoarseness or sudden voicelessness, of short course" },
+          { zh: "风寒者兼恶寒无汗、鼻塞流清涕、苔薄白脉浮紧；风热者兼咽痛口干、苔薄黄脉浮数——三拗汤、疏风清热所主", en: "Wind-cold adds chills, no sweating, nasal congestion with clear discharge, thin white coating, floating tight pulse; wind-heat adds sore throat, dry mouth, thin yellow coating, floating rapid pulse — governed by San Ao Tang and wind-dredging heat-clearing formulas" }
+        ],
+        companions: [
+          { id: "yantong", note: { zh: "风热上攻咽喉", en: "Wind-heat attacks the throat" } },
+          { id: "bisai", note: { zh: "邪犯肺窍", en: "The pathogen assails the lung orifice" } },
+          { id: "kesou", note: { zh: "肺失宣降则咳", en: "The lung failing to diffuse brings cough" } },
+          { id: "ehan", note: { zh: "邪袭卫表", en: "The pathogen assails the defensive exterior" } }
+        ],
+        tongue: { zh: "舌苔薄白或薄黄", en: "Thin white or thin yellow coating" },
+        pulse: { zh: "脉浮紧或浮数", en: "Floating tight, or floating rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "痰热壅肺，气道不利", en: "Phlegm-heat congests the lung; the airway is impeded" },
+        tags: ["通道受阻·痰", "降不及"], loc: "上焦",
+        organ: { zh: "肺", en: "Lung" },
+        nature: { zh: "痰热", en: "Phlegm-heat" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "外邪入里化热，或素有痰热，痰热壅结肺系", en: "An external pathogen entering and turning to heat, or preexisting phlegm-heat, congests the lung system" },
+          { zh: "痰热阻塞气道，肺气不利，声道被壅（有形之邪壅塞）", en: "Phlegm-heat blocks the airway, lung qi is impeded, and the voice passage is congested (a substantive pathogen congesting)" },
+          { zh: "故声音嘶哑重浊、咳嗽痰黄稠、咽喉不利、或有异物感", en: "Hence a heavy husky voice, cough with thick yellow phlegm, throat discomfort, sometimes a foreign-body sensation" },
+          { zh: "兼口渴、胸闷、便结，舌红苔黄腻脉滑数——清金化痰汤所主之痰热声嘶", en: "With thirst, chest oppression, bound stool; red tongue, yellow greasy coating, slippery rapid pulse — the phlegm-heat hoarseness governed by Qing Jin Hua Tan Tang" }
+        ],
+        companions: [
+          { id: "ketan", note: { zh: "痰热壅肺", en: "Phlegm-heat congests the lung" } },
+          { id: "kesou", note: { zh: "痰阻气道则咳", en: "Phlegm blocking the airway brings cough" } },
+          { id: "meiheqi", note: { zh: "痰气交阻咽喉", en: "Phlegm and qi bind in the throat" } },
+          { id: "xiongmen", note: { zh: "痰阻胸阳", en: "Phlegm blocks the chest yang" } }
+        ],
+        tongue: { zh: "舌红，苔黄腻", en: "Red tongue, yellow greasy coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "肺肾阴虚，金破不鸣", en: "Lung-kidney yin deficiency — 'a cracked bell does not ring'" },
+        tags: ["阴虚", "升不及"], loc: "下焦",
+        organ: { zh: "肺肾", en: "Lung & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、久咳、劳伤、过用声，肺肾阴亏、津液耗损", en: "Chronic illness, long cough, taxation, or overuse of the voice depletes lung-kidney yin and consumes fluids" },
+          { zh: "阴津不能上承濡润咽喉声道，声带失养（虚损不荣·金破不鸣）", en: "Yin fluids cannot rise to moisten the throat and voice passage, and the cords go unnourished (deficiency detriment — 'a cracked bell does not ring')" },
+          { zh: "故声音嘶哑日久、时轻时重、劳累或多言后加重、休息稍减、咽干灼痛", en: "Hence long-standing hoarseness waxing and waning, worse after fatigue or much talking, eased by rest, with a dry burning throat" },
+          { zh: "兼干咳少痰、五心烦热、盗汗、腰膝酸软，舌红少苔脉细数——百合固金汤所主之阴虚声嘶", en: "With a dry scanty-phlegm cough, heat in the five centers, night sweats, sore weak lower back and knees; red tongue, scant coating, thin rapid pulse — the yin-deficiency hoarseness governed by Bai He Gu Jin Tang" }
+        ],
+        companions: [
+          { id: "yangan", note: { zh: "阴虚咽失濡润", en: "Yin deficiency leaves the throat unmoistened" } },
+          { id: "kesou", note: { zh: "肺阴虚则干咳", en: "Lung yin deficiency brings a dry cough" } },
+          { id: "chaore", note: { zh: "阴虚内热", en: "Yin deficiency with internal heat" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } },
+          { id: "yaosuan", note: { zh: "肾阴亏于下", en: "Kidney yin depleted below" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "声嘶是起病急、病程短、兼表证或痰黄（金实不鸣·实），还是日久反复、劳累多言后加重、兼咽干盗汗腰酸（金破不鸣·虚）？", en: "Is the hoarseness abrupt and short-lived with exterior signs or yellow phlegm ('a solid bell does not ring', excess), or long-standing and recurrent, worse after fatigue or talking, with a dry throat, night sweats, sore back ('a cracked bell does not ring', deficiency)?" },
+      rows: [
+        { side: { zh: "实（金实不鸣：外邪／痰热）", en: "Excess ('solid bell': external pathogen / phlegm-heat)" },
+          feats: { zh: "起病急、病程短、声嘶或骤然失音；外邪者兼恶寒或咽痛脉浮，痰热者兼咳痰黄稠胸闷苔黄腻脉滑数", en: "Abrupt, short course, hoarse or suddenly voiceless; external pathogen adds chills or sore throat with a floating pulse; phlegm-heat adds thick yellow phlegm, chest oppression, yellow greasy coating, slippery rapid pulse" } },
+        { side: { zh: "虚（金破不鸣：肺肾阴虚）", en: "Deficiency ('cracked bell': lung-kidney yin)" },
+          feats: { zh: "日久反复、时轻时重、劳累多言后加重休息减、咽干灼痛，兼干咳五心烦热盗汗腰酸，舌红少苔脉细数", en: "Long-standing, waxing and waning, worse after fatigue or talking and eased by rest, dry burning throat, with dry cough, heat in the five centers, night sweats, sore back; red tongue, scant coating, thin rapid pulse" } }
+      ],
+      line: { zh: "「金实不鸣」宜宣散：疏风散邪、清热化痰以开壅；「金破不鸣」宜滋养：滋阴润肺、益气养声以填虚。实证误补则邪壅愈闭、声愈不出；虚证误以辛散苦寒则津愈伤、声愈嘶——新病多实、久病多虚，是最简明的一尺。教师、歌者等用声职业者，节声养息与治疗同等重要。", en: "'A solid bell does not ring' calls for diffusing: dredge wind, dispel the pathogen, clear heat, transform phlegm to open the congestion. 'A cracked bell does not ring' calls for nourishing: enrich yin, moisten the lung, boost qi to restore the voice. Supplement an excess and the congestion shuts tighter and the voice is lost further; give acrid-dispersing or bitter-cold to a deficiency and fluids are injured and the hoarseness worsens — new disease mostly excess, chronic mostly deficiency, is the plainest measure. For teachers, singers, and other voice professionals, resting the voice matters as much as treatment." }
+    },
+    note: { zh: "安全底线：声嘶持续超过两周不愈、进行性加重、伴吞咽困难或颈部肿块、痰中带血者，须及时喉镜检查，排除喉部肿瘤等器质病变，尤其长期吸烟饮酒者。", en: "Safety floor: hoarseness lasting beyond two weeks, progressively worsening, or with difficulty swallowing, a neck mass, or blood-streaked sputum requires prompt laryngoscopy to exclude laryngeal tumor and other organic disease — especially in long-term smokers and drinkers." },
+    xm: {
+      internal: [{ id: "sorethroat", zh: "咽喉肿痛", en: "Sore Throat" }],
+      points: [
+        { code: "LU7", zh: "列缺", py: "Lieque" },
+        { code: "KI6", zh: "照海", py: "Zhaohai" },
+        { code: "LI4", zh: "合谷", py: "Hegu" },
+        { code: "CV23", zh: "廉泉", py: "Lianquan" },
+        { code: "LU10", zh: "鱼际", py: "Yuji" }
+      ],
+      formulas: [
+        { py: "sanaotang", zh: "三拗汤", en: "San Ao Tang" },
+        { py: "baihegujintang", zh: "百合固金汤", en: "Bai He Gu Jin Tang" },
+        { py: "qingjinhuatantang", zh: "清金化痰汤", en: "Qing Jin Hua Tan Tang" }
+      ]
+    }
+  },
+
+  "xiaoshou": {
+    id: "xiaoshou", cat: "zhiti",
+    name: { zh: "消瘦", en: "Weight Loss" },
+    aka: { zh: ["形体消瘦", "羸瘦", "体重下降"], en: ["Emaciation", "Wasting", "Losing weight"] },
+    what: {
+      zh: "形体日渐瘦削，肌肉减少。「脾主肌肉」——形体之充盛，赖脾胃运化水谷精微以充养肌肉。消瘦之机，核心在「化源不足或耗损太过」：或脾胃虚弱、纳运无力，精微不生（虚，食少而瘦）；或胃热炽盛、消谷善饥，消耗太过（实热，食多反瘦——中消）；或虫积、久病、癌肿等耗伤（正虚邪耗）。故消瘦首问食量：食少而瘦者多脾虚，食多而瘦者须警惕消渴（中消）或甲亢，不食而瘦、进行性消瘦者须排查器质病变。此症本身常是他病之果，须审因。",
+      en: "A body growing steadily thinner with loss of muscle. 'The spleen governs the flesh' — bodily fullness depends on the spleen-stomach transforming food essence to fill the flesh. The mechanism centres on 'an insufficient source or excessive consumption': spleen-stomach weakness with feeble intake and transformation so essence is not engendered (deficiency — eating little and thin); exuberant stomach heat rapidly digesting grain with ready hunger, consuming too much (repletion heat — eating much yet growing thin, 'middle wasting'); or parasites, chronic illness, or malignancy consuming the body. So the first question in emaciation is appetite: eating little and thin is mostly spleen deficiency; eating much yet thin warrants concern for wasting-thirst (middle wasting) or hyperthyroidism; not eating with progressive wasting warrants investigation for organic disease. This symptom is often the result of another illness and must be traced to its cause."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "脾胃虚弱，化源不足", en: "Spleen-stomach weakness; the source falls short" },
+        tags: ["气虚", "升不及"], loc: "中焦",
+        organ: { zh: "脾胃", en: "Spleen & stomach" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "饮食失节、劳倦思虑、久病，脾胃虚弱，纳运无力", en: "Irregular eating, overwork and brooding, or chronic illness weakens the spleen-stomach and its intake and transformation" },
+          { zh: "脾主运化、主肌肉；脾虚则水谷精微不生，肌肉失于充养（化源之亏）", en: "The spleen transforms and governs the flesh; when deficient, food essence is not engendered and the flesh loses its filling (a deficit of source)" },
+          { zh: "故形体消瘦、食少纳呆、食后腹胀、肌肉松软无力", en: "Hence a thin body, poor appetite and reduced intake, post-meal fullness, soft weak muscles" },
+          { zh: "兼神疲乏力、便溏、面色萎黄，舌淡脉弱——参苓白术散、香砂六君所主之脾虚消瘦", en: "With lassitude, loose stools, a sallow face; pale tongue, weak pulse — the spleen-deficiency emaciation governed by Shen Ling Bai Zhu San and Xiang Sha Liu Jun Zi Tang" }
+        ],
+        companions: [
+          { id: "nadai", note: { zh: "脾虚纳少", en: "Spleen deficiency, reduced intake" } },
+          { id: "fali", note: { zh: "脾虚则神疲", en: "Spleen deficiency brings lassitude" } },
+          { id: "biantang", note: { zh: "脾虚则便溏", en: "Spleen deficiency brings loose stools" } },
+          { id: "mianse", note: { zh: "脾虚则面色萎黄", en: "Spleen deficiency, a sallow face" } },
+          { id: "fuzhang", note: { zh: "脾虚则食后腹胀", en: "Spleen deficiency brings post-meal fullness" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉弱", en: "Weak" }
+      },
+      {
+        id: "d2",
+        label: { zh: "胃热炽盛，消谷善饥（中消）", en: "Exuberant stomach heat with rapid digestion (middle wasting)" },
+        tags: ["升太过", "降太过"], loc: "中焦",
+        organ: { zh: "胃", en: "Stomach" },
+        nature: { zh: "热", en: "Heat" },
+        xushi: "实", weight: 3,
+        chain: [
+          { zh: "素体阳盛、过食肥甘辛辣，胃火炽盛", en: "A yang-exuberant make-up or excess rich pungent food blazes stomach fire" },
+          { zh: "胃火亢盛则腐熟太过，消谷善饥；火盛耗伤津血、灼烁肌肉（消耗太过）", en: "Blazing stomach fire over-rots the grain, bringing ready hunger; blazing fire consumes fluids and blood and scorches the flesh (excessive consumption)" },
+          { zh: "故食多易饥而形体反瘦、口渴喜冷饮、口臭", en: "Hence eating much with ready hunger yet growing thinner, thirst for cold drinks, foul breath" },
+          { zh: "兼大便干结、小便频多、心烦，舌红苔黄燥脉滑数——玉女煎、白虎加人参所主之中消", en: "With dry stool, frequent copious urination, vexation; red tongue, dry yellow coating, slippery rapid pulse — the middle wasting governed by Yu Nu Jian and Bai Hu Jia Ren Shen Tang" }
+        ],
+        companions: [
+          { id: "yiji", note: { zh: "胃火消谷则善饥", en: "Stomach fire rapidly digesting brings ready hunger" } },
+          { id: "kouke", note: { zh: "热盛伤津则渴", en: "Blazing heat injuring fluids brings thirst" } },
+          { id: "bianmi", note: { zh: "热灼肠燥", en: "Heat scorches the intestines dry" } },
+          { id: "niaopin", note: { zh: "津液下泄则尿多", en: "Fluids draining down bring copious urine" } }
+        ],
+        tongue: { zh: "舌红，苔黄燥", en: "Red tongue, dry yellow coating" },
+        pulse: { zh: "脉滑数", en: "Slippery, rapid" }
+      },
+      {
+        id: "d3",
+        label: { zh: "气阴两虚，正气耗损", en: "Qi and yin both deficient; the upright is consumed" },
+        tags: ["气虚", "阴虚"], loc: "全身",
+        organ: { zh: "肺脾肾", en: "Lung, spleen & kidney" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "久病、大病之后、劳伤过度，气阴耗损，正气日衰", en: "Chronic or grave illness, or excessive taxation, consumes qi and yin and the upright wanes daily" },
+          { zh: "气虚则不能生化充养，阴虚则形体失于濡润（正虚不荣）", en: "Qi deficiency cannot engender and fill; yin deficiency leaves the body unmoistened (the upright deficient, no nourishment)" },
+          { zh: "故形体日渐消瘦、羸弱、皮肤干燥、毛发枯槁", en: "Hence a body wasting day by day, frail, with dry skin and withered hair" },
+          { zh: "兼神疲气短、五心烦热、盗汗、口干，舌红少苔或淡红脉细数无力——生脉散、大补元煎所主", en: "With lassitude, shortness of breath, heat in the five centers, night sweats, dry mouth; red scant-coated or pale-red tongue, thin rapid forceless pulse — governed by Sheng Mai San and Da Bu Yuan Jian" }
+        ],
+        companions: [
+          { id: "fali", note: { zh: "气虚则神疲", en: "Qi deficiency brings lassitude" } },
+          { id: "chaore", note: { zh: "阴虚内热", en: "Yin deficiency with internal heat" } },
+          { id: "daohan", note: { zh: "虚热蒸津", en: "Deficient heat steams the fluids out" } },
+          { id: "pifuganzao", note: { zh: "阴虚肌肤失润", en: "Yin deficiency leaves the skin unmoistened" } },
+          { id: "qiduan", note: { zh: "肺气不足", en: "Lung qi insufficient" } }
+        ],
+        tongue: { zh: "舌红少苔或淡红", en: "Red with scant coating, or pale-red" },
+        pulse: { zh: "脉细数无力", en: "Thin, rapid, forceless" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "消瘦第一问是食量：食少而瘦兼便溏乏力（脾虚），食多易饥反瘦兼口渴多饮多尿（胃热中消），还是食少神疲兼五心烦热盗汗（气阴两虚）？", en: "The first question in emaciation is appetite: eating little and thin with loose stools and fatigue (spleen deficiency), eating much with ready hunger yet thinner, with thirst and copious urination (stomach heat, middle wasting), or eating little with lassitude, heat in the five centers, night sweats (qi-yin deficiency)?" },
+      rows: [
+        { side: { zh: "虚（脾胃虚弱／气阴两虚）", en: "Deficiency (spleen-stomach / qi-yin)" },
+          feats: { zh: "脾虚者食少纳呆食后腹胀便溏乏力面萎黄、舌淡脉弱；气阴虚者形羸皮肤干燥毛发枯、神疲五心热盗汗口干、脉细数无力", en: "Spleen deficiency: poor appetite, post-meal fullness, loose stools, fatigue, sallow face, pale tongue, weak pulse; qi-yin deficiency: frail body, dry skin, withered hair, lassitude, heat in the five centers, night sweats, dry mouth, thin rapid forceless pulse" } },
+        { side: { zh: "实（胃热炽盛·中消）", en: "Excess (stomach heat, middle wasting)" },
+          feats: { zh: "食多易饥而反瘦、口渴喜冷饮口臭、便结尿频多，舌红苔黄燥脉滑数", en: "Eating much with ready hunger yet growing thin, thirst for cold drinks, foul breath, bound stool, frequent copious urine; red tongue, dry yellow coating, slippery rapid pulse" } }
+      ],
+      line: { zh: "消瘦先问食量、再辨虚实：食少而瘦者脾虚，宜健脾益气、助其化源；食多反瘦者胃热，宜清胃泻火、养阴生津（此即消渴中消，须查血糖）；久病羸瘦者气阴两虚，宜益气养阴、缓图收功。脾虚误用寒凉则中阳更败，胃热误补则火愈炽。**进行性消瘦而无明显诱因者，务必先排查器质病变，勿单以证候论治。**", en: "Emaciation asks first about appetite, then sorts deficiency-excess: eating little and thin is spleen deficiency — fortify the spleen, boost qi, aid the source; eating much yet thin is stomach heat — clear the stomach, drain fire, nourish yin, engender fluids (this is the middle wasting of xiaoke; check blood glucose); frailty in chronic illness is qi-yin deficiency — boost qi and nourish yin, seeking gradual gains. Cold herbs in spleen deficiency fail the middle yang further; supplementing stomach heat blazes it more. **Progressive weight loss without clear cause must first be investigated for organic disease rather than treated by pattern alone.**" }
+    },
+    note: { zh: "安全底线：短期内体重明显下降（如半年内下降超过原体重10%）、伴发热盗汗、纳差乏力、或伴咳嗽咯血、便血、腹块者，须及时全面检查，排除肿瘤、结核、甲亢、糖尿病、慢性感染等器质性疾病，不可延误。", en: "Safety floor: marked weight loss over a short period (such as more than 10% of body weight within six months), with fever and night sweats, poor appetite and fatigue, or with cough and hemoptysis, blood in the stool, or an abdominal mass, requires prompt full investigation to exclude malignancy, tuberculosis, hyperthyroidism, diabetes, and chronic infection — this must not be delayed." },
+    xm: {
+      internal: [{ id: "xiaoke", zh: "消渴", en: "Wasting-Thirst" }, { id: "fatigue", zh: "虚劳", en: "Vacuity Taxation" }],
+      points: [
+        { code: "ST36", zh: "足三里", py: "Zusanli" },
+        { code: "CV12", zh: "中脘", py: "Zhongwan" },
+        { code: "BL20", zh: "脾俞", py: "Pishu" },
+        { code: "BL21", zh: "胃俞", py: "Weishu" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" }
+      ],
+      formulas: [
+        { py: "shenlingbaizhusan", zh: "参苓白术散", en: "Shen Ling Bai Zhu San" },
+        { py: "yunvjian", zh: "玉女煎", en: "Yu Nu Jian" },
+        { py: "shengmaisan", zh: "生脉散", en: "Sheng Mai San" }
+      ]
+    }
+  },
+
+  "beishang": {
+    id: "beishang", cat: "shuimian",
+    name: { zh: "悲伤欲哭", en: "Tearfulness" },
+    aka: { zh: ["脏躁", "无故悲泣", "情绪易泣"], en: ["Visceral agitation", "Weeping without cause", "Easily moved to tears"] },
+    what: {
+      zh: "无明显缘由而悲伤欲哭、情绪低落难以自控，甚则哭笑无常、精神恍惚。此即《金匮》「脏躁」之象。「悲则气消」——悲为肺志，久悲耗气；而心主神明、肝藏魂，心肝阴血不足则神魂失养、情志失控。故悲伤欲哭之机，核心在「心肝阴血亏虚，神失所养」（虚，最常见，妇人尤多），或兼肝郁化火、痰热扰神（实）。此症与情绪低落（抑郁）有别：情绪低落以「不想动、无兴趣」为主，脏躁以「悲哭不能自主、精神恍惚」为特征。甘麦大枣汤是其代表方。",
+      en: "Sorrow and a wish to weep without clear cause, low mood beyond one's control, in severe cases erratic weeping and laughing with a dazed spirit. This is the picture of 'visceral agitation' (zang zao) in the Jingui. 'Sorrow disperses qi' — sorrow is the lung's emotion, and prolonged sorrow consumes qi; the heart governs the spirit and the liver stores the ethereal soul, so when heart-liver yin and blood fall short, spirit and soul lose nourishment and the emotions escape control. The mechanism centres on 'heart-liver yin-blood depletion leaving the spirit unnourished' (deficiency, the commonest, especially in women), sometimes with liver constraint turning to fire or phlegm-heat harassing the spirit (excess). It differs from low mood (depression): low mood is chiefly 'not wanting to move, no interest', while visceral agitation is marked by 'weeping beyond one's control and a dazed spirit'. Gan Mai Da Zao Tang is its representative formula."
+    },
+    dirs: [
+      {
+        id: "d1",
+        label: { zh: "心肝阴血亏虚，神失所养（脏躁）", en: "Heart-liver yin-blood depletion; the spirit unnourished (visceral agitation)" },
+        tags: ["血虚", "阴虚"], loc: "上焦",
+        organ: { zh: "心·肝", en: "Heart & liver" },
+        xushi: "虚", weight: 3,
+        chain: [
+          { zh: "思虑过度、忧愁悲伤日久、产后失血、更年之期，心肝阴血亏耗", en: "Excessive brooding, long grief, postpartum blood loss, or the menopausal transition depletes heart-liver yin and blood" },
+          { zh: "心藏神、肝藏魂，阴血不足则神魂失于濡养、浮越不安（不荣则躁）", en: "The heart stores the spirit and the liver the ethereal soul; insufficient yin-blood leaves them unnourished and adrift (no nourishment, hence agitation)" },
+          { zh: "故无故悲伤欲哭、不能自主、精神恍惚、心中烦乱、呵欠频作", en: "Hence sorrow and weeping without cause and beyond control, a dazed spirit, inner turmoil, frequent yawning" },
+          { zh: "兼失眠多梦、心悸、五心烦热，舌红少苔脉细数——甘麦大枣汤所主之脏躁", en: "With insomnia and dreaming, palpitations, heat in the five centers; red tongue, scant coating, thin rapid pulse — the visceral agitation governed by Gan Mai Da Zao Tang" }
+        ],
+        cite: {
+          zh: "《金匮要略·妇人杂病》：妇人脏躁，喜悲伤欲哭，象如神灵所作，数欠伸，甘麦大枣汤主之。",
+          en: "Jingui Yaolüe · Miscellaneous Diseases of Women: In a woman with visceral agitation, given to sorrow and weeping as if possessed, with frequent yawning and stretching — Gan Mai Da Zao Tang governs."
+        },
+        companions: [
+          { id: "shimian_rushu", note: { zh: "心神失养则不寐", en: "The spirit unnourished brings sleeplessness" } },
+          { id: "xinji", note: { zh: "心血不足则悸", en: "Insufficient heart blood brings palpitations" } },
+          { id: "duomeng", note: { zh: "魂不守舍则多梦", en: "The ethereal soul unmoored brings dreaming" } },
+          { id: "qingxudiluo", note: { zh: "情志失调之邻证", en: "A neighboring pattern of emotional derangement" } },
+          { id: "shouzuxinre", note: { zh: "阴虚生内热", en: "Yin deficiency breeds internal heat" } }
+        ],
+        tongue: { zh: "舌红少苔", en: "Red tongue with scant coating" },
+        pulse: { zh: "脉细数", en: "Thin, rapid" }
+      },
+      {
+        id: "d2",
+        label: { zh: "肝郁气滞，情志不遂", en: "Liver constraint with qi stagnation; emotions thwarted" },
+        tags: ["出不及", "枢机不利·少阳"], loc: "中焦",
+        organ: { zh: "肝", en: "Liver" },
+        xushi: "实", weight: 2,
+        chain: [
+          { zh: "情志不遂、所愿不得，肝失条达，气机郁滞", en: "Emotions thwarted and wishes unmet leave the liver unable to course freely and the qi dynamic constrained" },
+          { zh: "肝主疏泄、调畅情志；气郁则情志不得宣达，郁而生悲（气郁则情滞）", en: "The liver dredges and harmonizes the emotions; constrained qi leaves them unable to vent, and constraint breeds sorrow" },
+          { zh: "故悲伤欲哭、时欲太息、胸胁胀闷、情绪随境遇起伏、哭后稍舒", en: "Hence sorrow and weeping, frequent sighing, chest-flank fullness, mood tracking circumstance, and some relief after crying" },
+          { zh: "兼咽中如物梗阻、月经不调，苔薄脉弦——逍遥散、半夏厚朴汤所主之肝郁悲哭", en: "With a lump-in-the-throat sensation, irregular menses; thin coating, wiry pulse — the liver-constraint tearfulness governed by Xiao Yao San and Ban Xia Hou Po Tang" }
+        ],
+        companions: [
+          { id: "shantaixi", note: { zh: "气郁则善太息", en: "Constrained qi brings frequent sighing" } },
+          { id: "xiezhang", note: { zh: "肝气郁于胁", en: "Liver qi constrained in the flanks" } },
+          { id: "meiheqi", note: { zh: "气郁痰凝于咽", en: "Constrained qi and phlegm knot in the throat" } },
+          { id: "qingxudiluo", note: { zh: "肝郁则情绪低落", en: "Liver constraint brings low mood" } },
+          { id: "yuejing_buding", note: { zh: "肝郁则经乱", en: "Liver constraint brings an erratic cycle" } }
+        ],
+        tongue: { zh: "舌苔薄白", en: "Thin white coating" },
+        pulse: { zh: "脉弦", en: "Wiry" }
+      },
+      {
+        id: "d3",
+        label: { zh: "心脾两虚，气血不足", en: "Heart-spleen dual deficiency; qi and blood insufficient" },
+        tags: ["气虚", "血虚"], loc: "中焦",
+        organ: { zh: "心脾", en: "Heart & spleen" },
+        xushi: "虚", weight: 2,
+        chain: [
+          { zh: "思虑过度、劳倦伤脾，心脾两虚，气血生化不足", en: "Excessive brooding and overwork injure the spleen; heart and spleen both deficient, the generation of qi and blood falls short" },
+          { zh: "「悲则气消」，久悲耗气；气血不足则心神失养（气血不荣）", en: "'Sorrow disperses qi'; long sorrow consumes it, and insufficient qi and blood leave the heart-spirit unnourished" },
+          { zh: "故悲伤欲哭、神疲倦怠、少气懒言、遇事易感伤流泪", en: "Hence sorrow and weeping with lassitude, scant qi, disinclination to speak, and ready tears at small things" },
+          { zh: "兼心悸失眠、健忘、纳呆、面色萎黄，舌淡脉细弱——归脾汤所主之心脾虚悲", en: "With palpitations, insomnia, forgetfulness, poor appetite, a sallow face; pale tongue, thin weak pulse — the heart-spleen-deficiency sorrow governed by Gui Pi Tang" }
+        ],
+        companions: [
+          { id: "fali", note: { zh: "气血两亏", en: "Both qi and blood depleted" } },
+          { id: "jianwang", note: { zh: "心脾虚则健忘", en: "Heart-spleen deficiency brings forgetfulness" } },
+          { id: "xinji", note: { zh: "心血不足则悸", en: "Insufficient heart blood brings palpitations" } },
+          { id: "shimian_yixing", note: { zh: "心神失养则易醒", en: "The spirit unnourished brings light waking" } },
+          { id: "nadai", note: { zh: "脾虚纳少", en: "Spleen deficiency, reduced intake" } }
+        ],
+        tongue: { zh: "舌淡，苔薄白", en: "Pale tongue, thin white coating" },
+        pulse: { zh: "脉细弱", en: "Thin, weak" }
+      }
+    ],
+    bianbie: {
+      key: { zh: "悲伤欲哭是不能自主、精神恍惚、呵欠频作兼五心烦热（脏躁·阴血虚），随境遇起伏兼胸胁胀善太息（肝郁气滞），还是神疲少气、遇事易泣兼心悸健忘纳呆（心脾两虚）？", en: "Is the tearfulness beyond control with a dazed spirit and frequent yawning plus heat in the five centers (visceral agitation, yin-blood deficiency), tracking circumstance with chest-flank fullness and sighing (liver constraint), or with lassitude, scant qi, ready tears, palpitations, forgetfulness, poor appetite (heart-spleen deficiency)?" },
+      rows: [
+        { side: { zh: "虚（脏躁·阴血虚／心脾两虚）", en: "Deficiency (visceral agitation / heart-spleen)" },
+          feats: { zh: "脏躁者悲哭不能自主、精神恍惚、数欠伸、失眠心悸五心烦热、舌红少苔脉细数；心脾虚者神疲少气遇事易泣、心悸健忘纳呆面萎黄、舌淡脉细弱", en: "Visceral agitation: uncontrollable weeping, dazed spirit, frequent yawning, insomnia, palpitations, heat in the five centers, red scant-coated tongue, thin rapid pulse; heart-spleen: lassitude, scant qi, ready tears, palpitations, forgetfulness, poor appetite, sallow face, pale tongue, thin weak pulse" } },
+        { side: { zh: "实（肝郁气滞）", en: "Excess (liver constraint)" },
+          feats: { zh: "悲哭随境遇情绪起伏、哭后稍舒、时欲太息、胸胁胀闷、咽中梗阻感、月经不调，苔薄脉弦", en: "Weeping tracking circumstance and mood, some relief after crying, frequent sighing, chest-flank fullness, lump-in-the-throat sensation, irregular menses; thin coating, wiry pulse" } }
+      ],
+      line: { zh: "悲伤欲哭当先别脏躁与郁证：脏躁以「不能自主、精神恍惚、数欠伸」为特征，属阴血亏虚、神失所养，宜甘润缓急、养心安神（甘麦大枣汤之甘润，正为「肝苦急，急食甘以缓之」而设）；肝郁者随境起伏、胸胁胀满，宜疏肝解郁。虚证误用香燥疏泄则阴血更耗、悲哭愈甚——此为最常见之误；实证纯补则气愈郁。此症多见于更年期妇女及长期精神紧张者，情志调摄与药物同等重要。", en: "Tearfulness first distinguishes visceral agitation from constraint patterns: visceral agitation is marked by 'weeping beyond control, a dazed spirit, frequent yawning', belonging to yin-blood depletion with the spirit unnourished — use sweet moistening herbs to relax urgency and quiet the spirit (the sweetness of Gan Mai Da Zao Tang answers exactly to 'the liver suffers from urgency; quickly eat sweet to relax it'). Liver constraint tracks circumstance with chest-flank fullness — dredge the liver and free the constraint. Using aromatic drying dispersing herbs in the deficient consumes yin-blood further and worsens the weeping — the commonest error; purely supplementing an excess constrains the qi more. This symptom is common in menopausal women and those under long strain, where tending the emotions matters as much as medicine." }
+    },
+    note: { zh: "安全底线：若悲伤欲哭持续加重、伴明显兴趣丧失、自责自罪、睡眠饮食显著改变，或出现轻生念头者，属抑郁症范畴，须及时寻求精神心理专业帮助，不可仅以脏躁论治。", en: "Safety floor: if tearfulness persists and deepens with marked loss of interest, self-blame, significant changes in sleep and appetite, or any thoughts of self-harm, it falls within the scope of depressive disorder and requires prompt professional mental health care — it must not be treated as visceral agitation alone." },
+    xm: {
+      internal: [{ id: "depression", zh: "郁证", en: "Depression" }, { id: "menopause", zh: "绝经前后诸证", en: "Menopausal Syndrome" }],
+      points: [
+        { code: "HT7", zh: "神门", py: "Shenmen" },
+        { code: "PC6", zh: "内关", py: "Neiguan" },
+        { code: "GV20", zh: "百会", py: "Baihui" },
+        { code: "LR3", zh: "太冲", py: "Taichong" },
+        { code: "SP6", zh: "三阴交", py: "Sanyinjiao" }
+      ],
+      formulas: [
+        { py: "ganmaidazaotang", zh: "甘麦大枣汤", en: "Gan Mai Da Zao Tang" },
+        { py: "xiaoyaosan", zh: "逍遥散", en: "Xiao Yao San" },
+        { py: "guipitang", zh: "归脾汤", en: "Gui Pi Tang" }
+      ]
+    }
+  }
+
+});
+
+/* 同步总目上线标记 */
+ROSTER.forEach(function (r) { if (SYMPTOMS[r.id]) r.built = true; });
+
+"use strict";
 /* ============================================================
    第十纲 · 舌脉验证（校准工具）
    定位：不求全，只取常见。舌脉不是用来对号入座找证型的，
@@ -10738,6 +12112,8 @@ const POINT_WHITELIST = [
   "LU11", "ST6", "ST7", "HT8", "CV24"
 ,
   "PC4", "BL21", "LU6", "GV1", "GB39", "GB21", "SI3", "BL10", "BL60"
+,
+  "TE21"
 ];
 
 /* 方药模块真实键映射（症状模块引用键 → 方药模块 pg-f_{key} 的 key）
@@ -10780,6 +12156,7 @@ const FORMULA_MAP = {
   "pingweisan": "pingweisan",
   "qijudihuangwan": "qijudihuang",
   "qingweisan": "qingweisan",
+  "sangjuyin": "sangju",
   "shaoyaogancaotang": "shaoyaogancaotang",
   "shashenmaidongtang": "shashenmaidong",
   "shenlingbaizhusan": "shenlingbaizhu",
@@ -10808,11 +12185,13 @@ const FORMULA_MAP = {
   "xiebaisan": "xiebaisan",
   "xuefuzhuyutang": "xuefuzhuyu",
   "yiguanjian": "yiguanjian",
+  "yinchenhaotang": "yinchenhaotang",
   "yinqiaosan": "yinqiaosan",
   "yiweitang": "yiweitang",
   "youguiwan": "yougui",
   "yunvjian": "yunvjian",
   "yupingfengsan": "yupingfeng",
+  "zengyetang": "zengyetang",
   "zhenwutang": "zhenwutang",
   "zhibaidihuangwan": "zhibaidihuang",
   "zhizichitang": "zhizichi",
