@@ -57,6 +57,7 @@ header{position:sticky;top:0;z-index:100;background:var(--pri);color:#fff;displa
 .qr-item.qr-off{color:var(--ink-soft)}
 .qr-item.qr-off i,.chip-planned i{font-style:normal;font-size:11px;background:var(--pri-soft);color:var(--ink-soft);border-radius:6px;padding:1px 6px;margin-left:6px}
 .qr-ft span{font-size:12px;color:var(--ink-soft)}
+.qr-loose span{color:var(--ink-soft);font-size:12px;margin-left:6px;opacity:.75}
 .qr-alias{padding:10px 14px;border-bottom:1px solid var(--pri-soft);background:var(--pri-soft)}
 .qr-alias-h{font-size:12px;color:var(--pri-deep);font-weight:700;margin-bottom:4px}
 .qr-none{padding:14px;color:var(--ink-soft)}
@@ -11447,7 +11448,7 @@ ROSTER.forEach(function (r) { if (SYMPTOMS[r.id]) r.built = true; });
     pizhen:          ["起疹子", "出疹子", "风团", "荨麻疹", "皮疹瘙痒"],
     pifuganzao:      ["皮肤干", "起皮", "干燥脱屑", "皮肤粗糙"],
     cuochuang:       ["长痘", "痘痘", "青春痘", "痤疮"],
-    mianse:          ["脸色差", "脸色不好", "面色发黄", "气色差"],
+    mianse:          ["脸色差", "脸色不好", "面色发黄", "气色差", "脸发黄", "脸色苍白", "脸色暗"],
     tuofa:           ["掉头发", "脱头发", "头发少", "头发稀", "斑秃脱发"],
 
     /* ── 妇科 ── */
@@ -13052,6 +13053,19 @@ const ASHI_WHITELIST = [
   }
 
   /* ---------- 搜索 ---------- */
+  /* 中文顺序匹配：查询串的每个字按顺序出现在目标里即算命中。
+     用于兜底"掉发"这类简写 —— 在"掉头发"中 掉…发 顺序存在。
+     仅在精确子串无结果时启用，避免误命中过多。 */
+  function looseCJK(needle, hay) {
+    if (!needle || !hay) return false;
+    var i = 0;
+    for (var j = 0; j < hay.length && i < needle.length; j++) {
+      if (hay.charAt(j) === needle.charAt(i)) i++;
+    }
+    return i === needle.length;
+  }
+  function hasCJK(str) { return /[\u4e00-\u9fff]/.test(str); }
+
   function doSearch(q) {
     q = q.trim();
     var box = document.getElementById("qres");
@@ -13107,6 +13121,22 @@ const ASHI_WHITELIST = [
       found = true;
       h += '<a class="qr-item qr-ft" href="#sym-' + esc(s.id) + '"><b>' + esc(pick(s.name)) + '</b><span>…' + esc(getLang() === "zh" ? "全文命中" : "full-text match") + '</span></a>';
     });
+
+    /* 兜底：精确匹配无果且为中文查询时，用顺序匹配再找一轮（如"掉发"→脱发） */
+    if (!found && hasCJK(q) && q.length >= 2) {
+      ROSTER.forEach(function (r) {
+        var s2 = SYMPTOMS[r.id];
+        if (!s2) return;
+        var pool = [r.zh];
+        if (s2.aka && s2.aka.zh) pool = pool.concat(s2.aka.zh);
+        var ok = pool.some(function (x) { return looseCJK(q, x); });
+        if (ok) {
+          found = true;
+          h += '<a class="qr-item qr-loose" href="#sym-' + esc(r.id) + '"><b>' + esc(symName(r.id)) +
+               '</b><span>' + esc(getLang() === "zh" ? "近似匹配" : "close match") + '</span></a>';
+        }
+      });
+    }
 
     if (!found) h = '<div class="qr-none">' + esc(t("noresult")) + '</div>';
     box.innerHTML = h;
