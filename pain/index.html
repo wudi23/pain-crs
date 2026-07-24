@@ -328,9 +328,16 @@ async function startCheckout(mod){
   var priceId = mod==='allaccess' ? PRICE_ALLACCESS : PRICE_PAIN;
   var moduleId = mod==='allaccess' ? 'allaccess' : MODULE_ID;
   try{
-    var resp=await fetch(EDGE_FN_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPABASE_ANON},
+    var __sess = sb ? (await sb.auth.getSession()).data.session : null;
+    var __tk = __sess && __sess.access_token;
+    if(!__tk){ openAuthModal(); return; }
+    var resp=await fetch(EDGE_FN_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+__tk},
       body:JSON.stringify({user_id:currentUser.id,module_id:moduleId,price_id:priceId,return_url:window.location.href.split('?')[0]})});
     var j=await resp.json();
+    if(j && j.already){
+      alert(LANG==='zh' ? '您已拥有该内容，刷新页面即可解锁。' : 'You already own this. Refresh to unlock.');
+      location.reload(); return;
+    }
     if(j.error) throw new Error(j.error);
     window.location.href=j.url;
   }catch(err){ alert((LANG==='zh'?'结账出错：':'Checkout error: ')+err.message); }
@@ -351,6 +358,12 @@ async function startCheckout(mod){
 /* 离线/测试用：模拟给某 email 开权限，验证解锁行为。
    用法（浏览器控制台）：grantAccessLocal('foo@bar.com', ['allaccess']) 然后 refreshLocks() */
 function grantAccessLocal(email, mods){
+  /* 仅本地开发可用；生产环境禁用，避免误导 UI 锁状态 */
+  var h = location.hostname;
+  if (!(h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:')) {
+    console.warn('[pain] grantAccessLocal 已在生产环境禁用');
+    return 'disabled in production';
+  }
   ACCESS.email = email || 'test@local';
   ACCESS.purchases = mods || [];
   ACCESS.loaded = true;
@@ -983,6 +996,18 @@ function __painUpdBack(){
     var i=h.indexOf('#');
     openLegal(i>=0 ? h.slice(i) : '');
   }, true);
+})();
+</script>
+<script>
+/* 生产环境移除访问测试面板（仅本地开发保留） */
+(function(){
+  var h = location.hostname;
+  if (h === 'localhost' || h === '127.0.0.1' || location.protocol === 'file:') return;
+  function strip(){
+    document.querySelectorAll('[data-devonly]').forEach(function(el){ el.remove(); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', strip);
+  else strip();
 })();
 </script>
 </body></html>
