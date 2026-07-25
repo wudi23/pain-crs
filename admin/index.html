@@ -219,12 +219,26 @@ async function callApi(payload){
 }
 
 /* ================= 权限门 ================= */
-function kickOut(){ window.location.href = "/"; }
+// 不再静默跳回主页：退出登录、停在登录表单并显示原因（真正的拦截在服务端）
+async function showLoginWithMsg(msg){
+  try { await sb.auth.signOut(); } catch(e) {}
+  $("pageAdmin").classList.add("hidden");
+  $("btnLogout").classList.add("hidden");
+  $("pageLogin").classList.remove("hidden");
+  showMsg("loginMsg", msg, false);
+}
 
 async function enterAdmin(){
-  // 服务端二次验证：list 返回 403 即非管理员，跳回首页
+  // 服务端验证：403 可能是"token 过期"或"非管理员"，先刷新 session 重试一次
   var r = await callApi({ action: "list" });
-  if (r.status === 403) { kickOut(); return; }
+  if (r.status === 403) {
+    try { await sb.auth.refreshSession(); } catch(e) {}
+    r = await callApi({ action: "list" });
+  }
+  if (r.status === 403) {
+    await showLoginWithMsg("登录已过期或该账号无管理员权限，请用管理员邮箱重新登录。");
+    return;
+  }
   if (r.status !== 200) {
     showMsg("loginMsg", "服务端验证失败：" + (r.data.error || ("HTTP " + r.status)), false);
     return;
@@ -379,7 +393,10 @@ $("btnLogin").addEventListener("click", async function(){
     var r = await sb.auth.signInWithPassword({ email: email, password: pass });
     if (r.error) { showMsg("loginMsg", "登录失败：" + r.error.message, false); return; }
     var em = (r.data && r.data.user && r.data.user.email || "").toLowerCase();
-    if (em !== ADMIN_EMAIL) { kickOut(); return; }   // 前端快速拦截（真正拦截在服务端）
+    if (em !== ADMIN_EMAIL) {
+      await showLoginWithMsg("该账号（" + em + "）不是管理员账号，已退出。请用管理员邮箱登录。");
+      return;
+    }
     showMsg("loginMsg", "登录成功，正在验证管理员身份…", true);
     await enterAdmin();
   } catch(e) {
@@ -429,7 +446,7 @@ $("btnGrant").addEventListener("click", async function(){
   } else if (r.data.error === "already_active") {
     showMsg("grantMsg", "该用户此模块已有未过期的权限，无需重复授权", false);
   } else if (r.status === 403) {
-    kickOut();
+    await showLoginWithMsg("登录已过期，请重新登录。");
   } else {
     showMsg("grantMsg", "授权失败：" + (r.data.error || r.status), false);
   }
@@ -451,7 +468,7 @@ $("tblBody").addEventListener("click", async function(ev){
   if (r.status === 200 && r.data.ok) {
     refreshList();
   } else if (r.status === 403) {
-    kickOut();
+    await showLoginWithMsg("登录已过期，请重新登录。");
   } else {
     window.alert("撤销失败：" + (r.data.error || r.status));
   }
@@ -463,7 +480,11 @@ $("tblBody").addEventListener("click", async function(ev){
     var sess = await sb.auth.getSession();
     var user = sess && sess.data && sess.data.session ? sess.data.session.user : null;
     if (user) {
-      if ((user.email || "").toLowerCase() !== ADMIN_EMAIL) { kickOut(); return; }
+      var uem = (user.email || "").toLowerCase();
+      if (uem !== ADMIN_EMAIL) {
+        await showLoginWithMsg("浏览器当前登录的账号（" + uem + "）不是管理员账号，已退出。请用管理员邮箱登录。");
+        return;
+      }
       showMsg("loginMsg", "已登录，正在验证管理员身份…", true);
       await enterAdmin();
     }
